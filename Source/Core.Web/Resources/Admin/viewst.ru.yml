@@ -1,0 +1,73 @@
+ru:
+  Admin:
+    Views:
+      Role:
+        Index:
+          Title: "Роли"
+          Role: "Роль"
+          Remove: "[Удалить]"
+          Users: "[Пользователи]"
+          New: "Новая Роль"
+        New:
+          Title: "Новая Роль"
+          Save: "Сохранить"
+          Cancel: "Отмена"
+        Edit:
+          Title: "Редактировать роль \"{0}\""
+          Save: "Сохранить"
+          Cancel: "Отмена"
+        Remove:
+          Title: "Удалить роль \"{0}\""
+          AreYouSure: "Вы действительно хотите удалить роль \"{0}\"?"
+        Users:
+          Title: "Пользователи роли \"{0}\""
+          All: "Все"
+          Save: "Сохранить"
+          Cancel: "Отмена"
+      User:
+        Index:
+          Title: "Пользователи"
+          User: "Пользователь"
+          Status: "Статус"
+          Remove: "[Удалить]"
+          Roles: "[Роли]"
+          New: "Новый Пользователь"
+        New:
+          Title: "Новый Пользователь"
+          Save: "Сохранить"
+          Cancel: "Отмена"
+        Edit:
+          Title: "Редактировать пользователя \"{0}\""
+          Save: "Сохранить"
+          Cancel: "Отмена"
+        Remove:
+          Title: "Удалить пользователя \"{0}\""
+          AreYouSure: "Вы действительно хотите удалить пользователя \"{0}\"?"
+        Roles:
+          Title: "Роли пользователя \"{0}\""
+          All: "Все"
+          Save: "Сохранить"
+          Cancel: "Отмена"
+      Permission:
+        Index:
+          Title: "Права Доступа"
+          Operation: "Действие"
+          BulkChanges: "Массовое изменение"
+          Filter: "Фильтр:"
+          Reset: "Сброс"
+          HideUsers: "скрыть пользователей"
+          HideRoles: "скрыть роли"
+          Apply: "Применить"
+          Processing: "Обработка"
+      Shared:
+        TopLinks:
+         LoggedInAs: "Авторизован как"
+         LogOut: "Выйти"
+         ViewSite: "Сайт"
+        MainMenu:
+          Home: "Главная"
+          Dashboard: "Рабочий стол"
+          Users: "Пользователи"
+          Roles: "Роли"
+          Permissions: "Права доступа"
+          Blogs: "Блоги"

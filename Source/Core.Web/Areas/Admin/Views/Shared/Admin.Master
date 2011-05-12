@@ -1,0 +1,38 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<%@ Import Namespace="Framework.MVC.Extensions" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>
+     <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
+    </title>
+
+    <%: Html.CssPackInclude("admin/admin") %>    
+     <%: Html.JavascriptPackInclude("base") %>
+     <%: Html.JavascriptPackInclude("ajax") %>
+     <%: Html.JavascriptPackInclude("fckeditor")%>
+     <%= Html.CssInclude("admin/jqGridCss/ui.jqgrid.css")%>
+     <%= Html.CssInclude("admin/jqGridCss/blitzer/jquery-ui-1.8.12.custom.css")%>
+     <%= Html.JavascriptInclude("jqGrid/jquery.jqGrid.js")%>
+
+    <asp:ContentPlaceHolder id="HeadContent" runat="server">    
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+  <div id="page">
+    <div id="header">
+      <%= Html.PartialWithScope(MVC.Admin.Shared.Views.TopLinks)%>
+      <%= Html.PartialWithScope(MVC.Admin.Shared.Views.MainMenu)%>
+      <div id="header_bottom"><div></div></div>
+    </div>
+    <div id="main">
+      <div id="messages"><%: Html.Messages() %></div>
+      <div id="content">
+        <asp:ContentPlaceHolder id="MainContent" runat="server" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

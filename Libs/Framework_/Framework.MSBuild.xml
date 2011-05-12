@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Framework.MSBuild</name>
+    </assembly>
+    <members>
+        <member name="T:Framework.MSBuild.Database.ConfigureDatabase">
+            <summary>
+            Reads database configuration from config specified.
+            </summary>
+        </member>
+        <member name="M:Framework.MSBuild.Database.ConfigureDatabase.Execute">
+            <summary>
+            When overridden in a derived class, executes the task.
+            </summary>
+            <returns>
+            true if the task successfully executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:Framework.MSBuild.Database.ConfigureDatabase.ConfigPath">
+            <summary>
+            Gets or sets database config path.
+            </summary>
+            <value>The config path.</value>
+        </member>
+        <member name="P:Framework.MSBuild.Database.ConfigureDatabase.Environment">
+            <summary>
+            Gets or sets the environment.
+            </summary>
+            <value>The environment.</value>
+        </member>
+        <member name="P:Framework.MSBuild.Database.ConfigureDatabase.ApplicationRoot">
+            <summary>
+            Gets or sets the application root.
+            </summary>
+            <value>The application root.</value>
+        </member>
+        <member name="P:Framework.MSBuild.Database.ConfigureDatabase.ConnectionString">
+            <summary>
+            Gets or sets the connection string.
+            </summary>
+            <value>The connection string.</value>
+        </member>
+        <member name="P:Framework.MSBuild.Database.ConfigureDatabase.Dialect">
+            <summary>
+            Gets or sets the dialect.
+            </summary>
+            <value>The dialect.</value>
+        </member>
+    </members>
+</doc>

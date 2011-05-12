@@ -1,0 +1,278 @@
+/* Common blocks */
+
+html, body {
+  height:100%;
+}
+
+/* Forms */
+
+fieldset {
+  border: 0;
+  margin: 1em 0 0 0;
+}
+
+input {
+  border: 1px solid #cccccc;
+  float: left;
+}
+
+input[type=checkbox] {
+  margin:0 2px 0 0;
+  padding:0;  
+}
+
+input[type=file] {
+  border: none;
+}
+
+textarea {
+  height: 200px;
+}
+
+.checkbox-label {
+  cursor: pointer;
+}
+
+.watermark {
+  color: #999 !important;
+}
+
+input.input-validation-error, select.input-validation-error {
+  background:#F79992;
+  border-color:#CE6F6F;
+  color:#9C2F2F;
+}
+
+label.label-validation-error {
+  color:#9C2F2F;
+}
+.buttons-row {
+  margin-top: 1em;
+}
+
+.button {
+  float: right;
+  margin-left: 0.5em;
+  padding: 0.5em 1em;
+  border: 0;
+  background-color: #024769;
+  color: #FFF !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+a.button {
+  text-decoration: none;
+}
+
+a.button:hover, a.button:focus {
+  color: #FFF6BF;
+}
+
+.submit-button {
+  background-color: #2C5700;
+}
+
+.text-button {
+  padding-right: 0.5em;
+}
+
+.text-button .icon {
+  float: left;
+  margin-right: 0.5em;
+}
+
+.hidden-submit {
+  width:0;
+  height:0;
+  border:0;
+  padding:0;
+  margin:0;
+}
+
+.tooltip {
+  float:left;
+  width:16px;
+  height:16px;
+  margin-left:-20px;
+  margin-top:0.8em;
+}
+
+.validation-summary-errors ul, .validation-summary-errors li
+{
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+.validation-summary-errors li
+{
+    list-style-position: outside;
+    padding: .8em; 
+    margin-bottom: 1em; 
+    background: #FBE3E4;
+    border: 2px solid #FBC2C4;
+}
+
+.image-uploader {
+  height: 100px;
+  padding: 10px 0;      
+}
+
+.image-uploader .upload-button {
+  float: left;
+}
+
+.image-uploader .ui-progressbar {
+  width: 200px;
+  float: left;
+  clear: left;
+}
+
+.image-uploader img.preview {
+  float: right;
+}
+
+.swfupload-button { 
+  font-family: Arial, Helvetica, sans-serif; 
+  font-size: 14px; 
+}
+
+/* Tabs */
+
+ul.tabs {
+  float: left;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.tabs li {
+  float: left;
+  list-style: none;
+  padding: 0.5em 1em;
+  margin-right: 1px;
+  background-color: #EFD279;
+}
+
+ul.tabs li.active {
+  background-color: #95CBE9;
+  font-weight: bold;
+}
+
+.tab-content {
+  float: left;
+  width: 100%;
+  background-color: #95CBE9;
+}
+
+/* Icons */
+
+.icon {
+  display: block;
+  width:18px;
+  height:18px;
+  background-repeat: no-repeat;
+}
+
+.icon-logo {
+  background-image: url('../images/icons/logo.png');
+  background-position: 1px 1px;
+}
+
+.icon-close {
+  background-image: url('../images/icons/close.png');
+  background-position: 1px 1px;
+}
+
+.icon-toggle {
+  background-image: url('../images/icons/toggle.png');
+  background-position: 1px 1px;
+}
+
+.icon-profile {
+  background-image: url('../images/icons/profile.png');
+  background-position: 1px 1px;
+}
+
+.icon-members {
+  background-image: url('../images/icons/members.png');
+  background-position: 1px 1px;
+}
+
+.icon-settings {
+  background-image: url('../images/icons/settings.png');
+  background-position: 1px 1px;
+}
+
+.icon-plus {
+  background-image: url('../images/icons/plus.png');
+  background-position: 1px 1px;
+}
+
+.icon-user-settings {
+  background-image: url('../images/icons/user-settings.png');
+  background-position: 1px 1px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* Content */
+
+#header .button {
+  margin-left: 5px;
+  padding: 2px;
+  background-color: #EFD279;
+}
+
+#header .text-button {
+  padding: 2px 5px 2px 2px;
+  color: #024769;
+}
+
+#header .button a {
+  display:block;
+  width:18px;
+  height:18px;
+}
+
+#header .top-menu {
+  float: left;
+  margin: 0 5em;
+  padding: 0;
+}
+
+#header .top-menu li {
+  list-style-type: none;
+  float: left;
+  margin: 0 0.5em;
+}
+
+#header hr {
+  margin-top: 0.5em;
+}
+
+#content .form {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: #F9F1FF;
+}
+
+#content .form input[type=text],
+#content .form input[type=password],
+#content .form input[type=file],
+#content .form textarea,
+#content .form select {
+    width: 100%;
+}
+
+#content .form div.wrapper {
+ padding-right: 10px;
+}
+
+#footer .copyright {
+  float:right;
+}

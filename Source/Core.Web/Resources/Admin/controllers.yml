@@ -1,0 +1,19 @@
+Admin:
+  Controllers:
+    User:
+      UserGroups: "[User groups]"
+      Remove: "[Remove]"
+      Admin:
+        Models:
+          UserStatus:
+            Active: "Active"
+            Locked: "Locked"
+            Deleted: "Deleted"
+    UserGroup:
+      Users: "[Users]"
+      Remove: "[Remove]"
+    Role:
+      Users: "[Users]"
+      UserGroups: "[User groups]"
+      Permissions: "[Permissions]"
+      Remove: "[Remove]"

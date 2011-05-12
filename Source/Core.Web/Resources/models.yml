@@ -1,0 +1,5 @@
+﻿Models:
+  Login:
+    UsernameOrEmail: "Email or Nickname"
+    Password: "Password"
+    RememberMe: "Remember me"

@@ -1,0 +1,5 @@
+ru:
+  Admin:
+    Controllers:
+      Home:
+        Foo: "Bar"

@@ -1,0 +1,21 @@
+ru:
+  Admin:
+    Models:
+      UserStatus:
+        Active: "Активный"
+        Locked: "Заблокирован"
+        Deleted: "Удалён"
+      RoleViewModel:
+        Name: "Имя"
+      UserViewModel:
+        Email: "Email"
+        Nickname: "Псевдоним"
+        Password: "Пароль"
+        Name: "Имя"
+        Avatar: "Аватар"
+        Notes: "О себе"
+        Status: "Статус"
+      PermissionLevel:
+        NotDefined: "Не задано"
+        Allow: "Разрешить"
+        Deny: "Запретить"

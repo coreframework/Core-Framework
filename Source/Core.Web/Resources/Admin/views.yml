@@ -1,0 +1,110 @@
+Admin:
+  Views:
+    Module:
+      Index:
+       Install: "Install"
+       Uninstall: "Uninstall"
+      Install:
+       Title: "Install module \"{0}\""
+       AreYouSure: "Are you sure want to install module \"{0}\"?"
+      Uninstall:
+       Title: "Uninstall module \"{0}\""
+       AreYouSure: "Are you sure want to uninstall module \"{0}\"?"
+    User:
+      Index:
+        Title: "Users Listing"
+        User: "User"
+        Status: "Status"
+        Remove: "[Remove]"
+        UserGroups: "[User groups]"
+        New: "New User"
+      New:
+        Title: "New User"
+        Save: "Save"
+        Cancel: "Cancel"
+      Edit:
+        Title: "Edit user \"{0}\""
+        Save: "Save"
+        Cancel: "Cancel"
+      Remove:
+        Title: "Remove user \"{0}\""
+        AreYouSure: "Are you sure want to remove user \"{0}\"?"
+      UserGroups:
+        Title: "UserGroups assigned to user \"{0}\""
+        All: "All"
+        Save: "Save"
+        Cancel: "Cancel"
+    UserGroup:
+      Index:
+        Title: "User groups Listing"
+        UserGroup: "User group"
+        Remove: "[Remove]"
+        Users: "[Users]"
+        New: "New User group"
+      New:
+        Title: "New User group"
+        Save: "Save"
+        Cancel: "Cancel"
+      Edit:
+        Title: "Edit user group \"{0}\""
+        Save: "Save"
+        Cancel: "Cancel"
+      Remove:
+        Title: "Remove user group \"{0}\""
+        AreYouSure: "Are you sure want to remove user group \"{0}\"?"
+        Remove: "Remove"
+        Cancel: "Cancel"
+      Users:
+        Title: "Users assigned to user group \"{0}\""
+        All: "All"
+        Save: "Save"
+        Cancel: "Cancel"
+    Shared:
+      TopLinks:
+       LoggedInAs: "Logged in as"
+       LogOut: "Log out"
+       ViewSite: "View Site"
+      MainMenu:
+        Home: "Home"
+        Users: "Users"
+        UserGroups: "User groups"
+        Modules: "Modules"
+        Widgets: "Widgets"
+        Content Pages: "Content Pages"
+        Roles: "Roles"
+    Role:
+      Index:
+       Role: "Role"
+       Permissions: "Permissions"
+       Users: "Users"
+       Title: "Roles"
+       New: "New Role"
+      New:
+        Title: "New Role"
+        Save: "Save"
+        Cancel: "Cancel"
+      Edit:
+        Title: "Edit role \"{0}\""
+        Save: "Save"
+        Cancel: "Cancel"
+      Remove:
+        Title: "Remove role \"{0}\""
+        AreYouSure: "Are you sure want to remove role \"{0}\"?"
+        Remove: "Remove"
+        Cancel: "Cancel"
+      Users:
+        Title: "Users assigned to role \"{0}\""
+        All: "All"
+        Save: "Save"
+        Cancel: "Cancel"
+      UserGroups:
+        Title: "UserGroups assigned to role \"{0}\""
+        All: "All"
+        Save: "Save"
+        Cancel: "Cancel"
+      Permissions:
+       Permissions: "Permissions"
+       Operation: "Operation"
+       SelectPermissionSection: "Please select permission section to setup permissions for role."
+    
+

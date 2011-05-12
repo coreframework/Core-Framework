@@ -1,0 +1,23 @@
+development:
+  platform: sqlserver
+  host: wd-server-5
+  database: CoreFramework_v3
+  username: corev3
+  password: corev3
+  properties:
+    hibernate.cache.use_second_level_cache: true
+    hibernate.cache.provider_class: NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache
+
+test:
+  platform: sqlserver
+  host: chernogrebela
+  database: core_modules
+  username: coreLite
+  password: coreLite
+  properties:
+    hibernate.cache.use_second_level_cache: true
+    hibernate.cache.provider_class: NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache
+
+production:
+  platform: sqlite
+  database: App_Data\production.sqlite

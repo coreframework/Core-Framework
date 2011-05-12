@@ -1,0 +1,23 @@
+﻿using Core.Web.NHibernate.Models;
+using FluentNHibernate.Mapping;
+
+namespace Core.Web.NHibernate.Mappings
+{
+    public class PageWidgetMapping : ClassMap<PageWidget>
+    {
+        public PageWidgetMapping()
+        {
+            Cache.Region("PageWidgets").ReadWrite();
+            Table("PageWidgets");
+            Id(pageWidget => pageWidget.Id);
+            Map(pageWidget => pageWidget.InstanceId);
+            Map(pageWidget => pageWidget.WidgetIdentifier);
+            Map(pageWidget => pageWidget.ColumnNumber);
+            Map(pageWidget => pageWidget.OrderNumber);
+            References(pageWidget => pageWidget.Page);
+            HasOne(pageWidget => pageWidget.Settings).PropertyRef(pageWidgetSettings => pageWidgetSettings.Widget).
+                Cascade.All().LazyLoad();
+            References(pageWidget => pageWidget.User).Column("UserId").Nullable();
+        }
+    }
+}

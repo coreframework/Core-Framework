@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<%@ Import Namespace="Framework.MVC.Extensions" %>
+
+<script runat="server">
+  
+    protected override void OnInit(EventArgs e) 
+    {
+        base.OnInit(e);
+ 
+        if (ViewData.ModelMetadata.HideSurroundingHtml) 
+        {
+            Content.Visible = false;
+        }
+        else 
+        {
+            Controls.Remove(Data);
+            if (DataPlaceholder != null)
+            {
+                DataPlaceholder.Controls.Add(Data);
+            }
+        }
+    }
+  
+</script>
+
+<asp:ContentPlaceHolder runat="server" id="Data" />
+<asp:ContentPlaceHolder runat="server" id="Content">  
+  <div>
+    <asp:ContentPlaceHolder runat="server" id="Label">
+      <%: Html.CustomLabelForModel() %> <%: !String.IsNullOrEmpty(ViewData.ModelMetadata.TemplateHint) ? String.Format("({0})", ViewData.ModelMetadata.TemplateHint) : String.Empty %>
+    </asp:ContentPlaceHolder>
+    <br />
+    <asp:PlaceHolder runat="server" id="DataPlaceholder" />  
+    <asp:ContentPlaceHolder runat="server" ID="Validation">
+   <%--   <%: Html.ValidationTooltipForModel(Links.Content.Images.icons.tooltip_png) %>--%>
+    </asp:ContentPlaceHolder>
+  </div>
+</asp:ContentPlaceHolder>

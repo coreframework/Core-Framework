@@ -1,0 +1,86 @@
+Views:
+    Pages:
+      Show:
+       WidgetNotFound: "Widget is not found"
+       Remove: "remove"
+       Edit: "edit"
+       RemoveConfirmation: "This widget will be removed, ok?"
+       Add: "Add"
+       Manage: "Manage"
+       Widget: "Widget"
+       PageSettings: "Change Page Common Settings"
+       PageLayout: "Change Page Layout"
+       PageLookAndFeel: "Change Page Look and Feel"
+       CSS: "Change Page CSS"
+       Permissions: "Permissions"
+      PageLookAndFeelSettings:
+       LookAndFeel: "Look and Feel"
+      PageLookAndFeelForm:
+       Successful: "Your request processed successfully."
+       Error: "Error"
+      PageCommonSettings:
+       CommonSettings: "Common Settings"
+      PageCSSSettings:
+       CSS: "CSS"
+       CurrentPageInformation: "Your current page information is as follows"
+       PageClass: "Page class"
+       WidgetClasses: "Widget Classes"
+       PageRule: "Add a CSS rule for this page."
+       AllWidgetsRule: "Add a CSS rule for all widgets on this page."
+      PageCSSForm:
+       Successful: "Your request processed successfully."
+       Error: "Error"
+       PageRule: "Add a CSS rule for this page."
+       AllWidgetsRule: "Add a CSS rule for all widgets on this page."
+      PagePermissions:
+       Role: "Role"
+    Shared:
+      Widgets:
+        WidgetSettings:
+            CommonSettings: "Common Settings"
+            Common: "Common"
+            LookAndFeel: "Look and Feel"
+            CSS: "CSS"
+            Permissions: "Permissions"
+            Save: "Save"
+        WidgetLookAndFeelSettings:
+            LookAndFeel: "Look and Feel"
+        WidgetLookAndFeelForm:
+            Successful: "Your request processed successfully."
+            Error: "Error"
+        WidgetCSSSettings:
+            CSS: "CSS"
+            CurrentWidgetInformation: "Your current widget information is as follows"
+            WidgetID: "Widget ID"
+            WidgetClasses: "Widget Classes"
+            WidgetRule: "Add a CSS rule for just this widget."
+            AllWidgetsRule: "Add a CSS rule for all widgets like this one."
+        WidgetCSSForm:
+            Successful: "Your request processed successfully."
+            Error: "Error"
+            WidgetRule: "Add a CSS rule for just this widget."
+            AllWidgetsRule: "Add a CSS rule for all widgets like this one."
+        WidgetContentHolder: 
+             RemoveConfirmation: "This widget will be removed, ok?"
+             Remove: "remove"
+             Edit: "edit"
+        WidgetPermissions: 
+             Role: "Role"
+             Permissions: "Permissions"
+      Layouts:
+        ChangeLayout:
+            ChangeLayout: "Click on any of the layout template to change it on the page"
+            Successful: "Your request processed successfully."
+            Error: "Error"
+        LayoutSettings:
+            Successful: "Your request processed successfully."
+            Error: "Error"
+      Users:
+        UserPanel:
+            SignIn: "Sign in"
+    Users:
+      NewUserSession:
+          Title: "Sign in"
+          SignIn: "Sign in"
+
+

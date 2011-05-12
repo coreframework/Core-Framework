@@ -1,0 +1,34 @@
+# SQLite sample
+development:
+  platform: sqlite
+  database: App_Data\development.sqlite
+
+test:
+  platform: sqlite
+  database: App_Data\test.sqlite
+
+production:
+  platform: sqlite
+  database: App_Data\production.sqlite
+  
+ # MSSQL sample
+development:
+  platform: sqlserver
+  host: database_host
+  database: dev_database_name
+  username: database_username
+  password: database_password
+  
+test:
+  platform: sqlserver
+  host: database_host
+  database: test_database_name
+  username: database_username
+  password: database_password
+  
+production:
+  platform: sqlserver
+  host: database_host
+  database: prod_database_name
+  username: database_username
+  password: database_password

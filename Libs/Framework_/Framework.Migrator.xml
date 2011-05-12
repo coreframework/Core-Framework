@@ -1,0 +1,809 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Framework.Migrator</name>
+    </assembly>
+    <members>
+        <member name="T:Framework.Migrator.Extensions.TransformationProviderExtension">
+            <summary>
+            Extends <see cref="T:ECM7.Migrator.Framework.ITransformationProvider"/> functionality to provide fluent migration interface.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Extensions.TransformationProviderExtension.AddTable(ECM7.Migrator.Framework.ITransformationProvider,System.String,System.Action{Framework.Migrator.Fluent.Table})">
+            <summary>
+            New table definition.
+            </summary>
+            <example>
+                Database.AddTable("Users", t => {
+                    t.PrimaryKey();                 // Adds long field named Id and makes it identity primary key.
+                    t.String("Login");              // Adds String field named Login.
+                    t.String("Password");           // Adds String field named Password.
+                    t.String("FullName").Null();    // Adds nullable String field named FullName.
+                });
+            </example>
+            <param name="transformationProvider">The transformation provider.</param>
+            <param name="tableName">Name of the table.</param>
+            <param name="tableDefinition">The table definition expressions.</param>
+        </member>
+        <member name="M:Framework.Migrator.Extensions.TransformationProviderExtension.ChangeTable(ECM7.Migrator.Framework.ITransformationProvider,System.String,System.Action{Framework.Migrator.Fluent.ChangeTable})">
+            <summary>
+            New table expression.
+            </summary>
+            <example>
+                Database.ChangeTable("Roles", t => {
+                    t.ChangeColumn("Description").Text;     // Changes description field data type.
+                    t.RemoveColumn("Name");                 // Removes name field.
+                    t.Integer("Priority");                  // Adds priority integer field.
+                });
+            </example>
+            <param name="transformationProvider">The transformation provider.</param>
+            <param name="tableName">Name of the table.</param>
+            <param name="tableDefinition">The table change expressions.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.AddColumn">
+            <summary>
+            Adds new column to existing table.
+            </summary>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.Column">
+            <summary>
+            Provides fluent interface for column building.
+            </summary>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.IMigrationPart">
+            <summary>
+            Logical separated migration part.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.IMigrationPart.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Executes migration part.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.IColumn">
+            <summary>
+            Specifies interface for database objects containing column. F.e., table column, foreign key, primary key.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.IColumn.GetColumn">
+            <summary>
+            Gets the column specification.
+            </summary>
+            <returns>Column specification.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.Column"/> class.
+            </summary>
+            <param name="columnColumnColumnName">Name of the column.</param>
+            <param name="tableColumnName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.#ctor(System.Data.DbType,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.Column"/> class.
+            </summary>
+            <param name="columnType">Column type.</param>
+            <param name="columnName">Name of the column.</param>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.AddProperty(ECM7.Migrator.Framework.ColumnProperty)">
+            <summary>
+            Adds column property.
+            </summary>
+            <param name="property">The column property.</param>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.RemoveProperty(ECM7.Migrator.Framework.ColumnProperty)">
+            <summary>
+            Removes column property.
+            </summary>
+            <param name="property">The column property.</param>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Null">
+            <summary>
+            Makes the column nullable.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.PrimaryKey">
+            <summary>
+            Makes the column primary key.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Identity">
+            <summary>
+            Makes the column identity.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Unique">
+            <summary>
+            Makes the column unique.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Length(System.Int32)">
+            <summary>
+            Sets the length for column.
+            </summary>
+            <param name="columnLength">Length of the column.</param>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Scale(System.Int32)">
+            <summary>
+            Sets the scale for column.
+            </summary>
+            <param name="columnScale">Scale of the column.</param>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Default(System.Object)">
+            <summary>
+            Sets the column default value.
+            </summary>
+            <param name="columnDefaultValue">The column default value.</param>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Type(System.Data.DbType)">
+            <summary>
+            Sets the column type.
+            </summary>
+            <param name="columnType">Type of the column.</param>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Integer">
+            <summary>
+            Sets column type to Integer (32 bit integer number).
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Long">
+            <summary>
+            Sets column type to Long (64 bit integer number).
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.String">
+            <summary>
+            Sets column type to String.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Text">
+            <summary>
+            Sets column type to Text.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.DateTime">
+            <summary>
+            Sets column type to DateTime.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Bool">
+            <summary>
+            Sets column type to Bool.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Double">
+            <summary>
+            Sets column type to Double.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Decimal">
+            <summary>
+            Sets column type to Decimal.
+            </summary>
+            <returns>column instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Implementation of this method is speicific to operation kind (add column, change column, remove column).
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Column.GetColumn">
+            <summary>
+            Gets the column specification.
+            </summary>
+            <returns>Column specification.</returns>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.TableName">
+            <summary>
+            Gets the name of the table.
+            </summary>
+            <value>The name of the table.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.Name">
+            <summary>
+            Gets the name of column.
+            </summary>
+            <value>The name of column.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.ColumnType">
+            <summary>
+            Gets the column type.
+            </summary>
+            <value>The column type.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.ColumnLength">
+            <summary>
+            Gets the column length.
+            </summary>
+            <value>The column length.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.ColumnScale">
+            <summary>
+            Gets the column scale.
+            </summary>
+            <value>The column scale.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.IsNullable">
+            <summary>
+            Gets a value indicating whether the column is nullable.
+            </summary>
+            <value>
+                <c>true</c> if column is nullable; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.IsPrimaryKey">
+            <summary>
+            Gets a value indicating whether the column is primary key.
+            </summary>
+            <value>
+                <c>true</c> if the column is primary key; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.IsIdentity">
+            <summary>
+            Gets a value indicating whether the column is identity.
+            </summary>
+            <value>
+                <c>true</c> if the column is identity; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.IsUnique">
+            <summary>
+            Gets a value indicating whether the column is unique.
+            </summary>
+            <value><c>true</c> if the column is unique; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.DefaultValue">
+            <summary>
+            Gets the column default value.
+            </summary>
+            <value>The default value.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Column.ColumnProperties">
+            <summary>
+            Gets the column properties.
+            </summary>
+            <value>The column properties.</value>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddColumn.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.AddColumn"/> class.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="tableColumnName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddColumn.#ctor(System.Data.DbType,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.AddColumn"/> class.
+            </summary>
+            <param name="columnType">Type of the column.</param>
+            <param name="columnName">Name of the column.</param>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddColumn.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Adds new column to existing table.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.AddForeignKey">
+            <summary>
+            Adds foreign key to new or existing table.
+            </summary>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.ForeignKey">
+            <summary>
+            <para>
+            Provides fluent interface for foreign key building. Reference is the name of relationship.
+            Names of primary key table and column, foreign key column is generated by comvention using reference name,
+            but can be overrided.
+            </para>
+            <list type="bullet">
+                <listheader>
+                    <term>By default:</term>
+                </listheader>
+                <item>
+                    <term>Primary key table</term>
+                    <description>Reference name in singular form.</description>
+                </item>
+                <item>
+                    <term>Primary key column</term>
+                    <description>Default primary key name - Id.</description>
+                </item>
+                <item>
+                    <term>Foreign key column</term>
+                    <description>Reference name in singular form + Id.</description>
+                </item>
+                <item>
+                    <term>Foreign key name</term>
+                    <description>FK_ + Foreign Key Table + _ + Reference name in singular form.</description>
+                </item>
+            </list>
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.ForeignKey"/> class.
+            </summary>
+            <param name="reference">The reference.</param>
+            <param name="foreignKeyTable">The foreign key table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.Column(System.String)">
+            <summary>
+            Changes the name of foreign key column.
+            </summary>
+            <param name="columnName">Name of foreign key column.</param>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.Table(System.String)">
+            <summary>
+            Changes the name of primary key table.
+            </summary>
+            <param name="tableName">Name of primary key table.</param>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.PrimaryKey(System.String)">
+            <summary>
+            Changes the name of primary key column.
+            </summary>
+            <param name="columnName">Name of primary key column.</param>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.Named(System.String)">
+            <summary>
+            Changes the name of constraint.
+            </summary>
+            <param name="foreignKeyName">Name of constraint.</param>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.OnChange(ECM7.Migrator.Framework.ForeignKeyConstraint)">
+            <summary>
+            Changes the constraint behaviour for update and delete.
+            </summary>
+            <param name="foreignKeyConstraint">Constraint behaviour.</param>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.Type(System.Data.DbType)">
+            <summary>
+            Sets the data type of foreign key column.
+            </summary>
+            <param name="foreignKeyColumnType">Data type of foreign key column.</param>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.NotRequired">
+            <summary>
+            Makes foreign key column not required.
+            </summary>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.WithoutColumn">
+            <summary>
+            Avoids foreign key column adding or removing.
+            </summary>
+            <returns>foreign key instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Implementation of this method is speicific to operation kind (add foreign key and remove foreign key).
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ForeignKey.GetColumn">
+            <summary>
+            Gets the column specification.
+            </summary>
+            <returns>Column specification.</returns>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.Reference">
+            <summary>
+            Gets the name of relationship.
+            </summary>
+            <value>The name of relationship.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.ForeignKeyTable">
+            <summary>
+            Gets the name of foreign key table.
+            </summary>
+            <value>The name of foreign key table.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.ForeignKeyColumn">
+            <summary>
+            Gets the name of foreign key column.
+            </summary>
+            <value>The name of foreign key column.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.PrimaryKeyTable">
+            <summary>
+            Gets the name of primary key table.
+            </summary>
+            <value>The name of primary key table.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.PrimaryKeyColumn">
+            <summary>
+            Gets the name of primary key column.
+            </summary>
+            <value>The name of primary key column.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.Name">
+            <summary>
+            Gets the name of constraint.
+            </summary>
+            <value>The name of constraint.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.IsRequired">
+            <summary>
+            Gets a value indicating whether foreign key column is required.
+            </summary>
+            <value>
+                <c>true</c> if foreign key column is required; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.GenerateColumn">
+            <summary>
+            Gets a value indicating whether foreign key column must be generated.
+            </summary>
+            <value>
+                <c>true</c> if foreign key column must be generated; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.Constraint">
+            <summary>
+            Gets the constraint behaviour.
+            </summary>
+            <value>The constraint.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.ForeignKey.ColumnType">
+            <summary>
+            Gets the data type of foreign key column.
+            </summary>
+            <value>The data type of foreign key column.</value>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddForeignKey.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.AddForeignKey"/> class.
+            </summary>
+            <param name="reference">The reference.</param>
+            <param name="foreignKeyTable">The foreign key table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddForeignKey.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Adds foreign key and foreign key column if specified.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.AddTable">
+            <summary>
+            Provides fluent interface for new table definition.
+            </summary>
+            <example>
+                Database.AddTable("Users", t => {
+                    t.PrimaryKey();                 // Adds long field named Id and makes it identity primary key.
+                    t.String("Login");              // Adds String field named Login.
+                    t.String("Password");           // Adds String field named Password.
+                    t.String("FullName").Null();    // Adds nullable String field named FullName.
+                });
+            </example>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.Table">
+            <summary>
+            Provides fluent interface for table manipulation.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.Table"/> class.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.AddColumn(System.String)">
+            <summary>
+            Adds the column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.AddColumn(System.Data.DbType,System.String)">
+            <summary>
+            Adds the column with name and type specified.
+            </summary>
+            <param name="type">Type of the column.</param>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Integer(System.String)">
+            <summary>
+            Adds Integer column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Long(System.String)">
+            <summary>
+            Adds Long column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.String(System.String)">
+            <summary>
+            Adds String column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Text(System.String)">
+            <summary>
+            Adds Text column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.DateTime(System.String)">
+            <summary>
+            Adds DateTime column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Bool(System.String)">
+            <summary>
+            Adds Bool column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Double(System.String)">
+            <summary>
+            Adds Double column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Decimal(System.String)">
+            <summary>
+            Adds Decimal column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.PrimaryKey(System.Data.DbType,System.String)">
+            <summary>
+            Add column with name and type specified and makes it primary key.
+            </summary>
+            <param name="columnType">Type of the column.</param>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.PrimaryKey(System.String)">
+            <summary>
+            Add column with name specified and default primary key type (Long) and makes it primary key.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.PrimaryKey">
+            <summary>
+            Add column with default primary key name (Id) and default primary key type (Long) and makes it primary key.
+            </summary>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.ForeignKey(System.String)">
+            <summary>
+            Adds foreigns key.
+            </summary>
+            <param name="reference">The relationship name.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.Table.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Table is composite object. Migrate method executes all inner migration parts (column, keys, constraint manipulation).
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Table.Name">
+            <summary>
+            Gets the name of table.
+            </summary>
+            <value>The name of table.</value>
+        </member>
+        <member name="P:Framework.Migrator.Fluent.Table.Parts">
+            <summary>
+            Gets the parts of table definition or modification.
+            </summary>
+            <value>The parts of table definition or modification.</value>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddTable.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.AddTable"/> class.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddTable.AddColumn(System.String)">
+            <summary>
+            Adds the column with name specified. Adds column definition to columns list to generate add table statement.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddTable.ForeignKey(System.String)">
+            <summary>
+            Adds foreigns key. Adds foreign key column definition to columns list to generate add table statement and avoid column generation by foreign key.
+            </summary>
+            <param name="reference">The relationship name.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.AddTable.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Adds new table with columns specified and executes all inner migration parts (column, keys, constraint manipulation).
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.ChangeColumn">
+            <summary>
+            Changes existing column.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeColumn.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.ChangeColumn"/> class.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeColumn.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Changes existing column.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.ChangeTable">
+            <summary>
+            Provides fluent interface for change table expressions.
+            </summary>
+            <example>
+                Database.ChangeTable("Roles", t => {
+                    t.ChangeColumn("Description").Text;     // Changes description field data type.
+                    t.RemoveColumn("Name");                 // Removes name field.
+                    t.Integer("Priority");                  // Adds priority integer field.
+                });
+            </example>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeTable.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.ChangeTable"/> class.
+            </summary>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeTable.AddColumn(System.String)">
+            <summary>
+            Adds the column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeTable.ChangeColumn(System.String)">
+            <summary>
+            Changes the column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeTable.RemoveColumn(System.String)">
+            <summary>
+            Removes the column with name specified.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.ChangeTable.RemoveForeignKey(System.String)">
+            <summary>
+            Removes the foreign key with name specified.
+            </summary>
+            <param name="reference">Name of the relationship.</param>
+            <returns>table instance.</returns>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.Defaults">
+            <summary>
+            Containts default conventions.
+            </summary>
+        </member>
+        <member name="F:Framework.Migrator.Fluent.Defaults.PrimaryKeyName">
+            <summary>
+            Default primary key name.
+            </summary>
+        </member>
+        <member name="F:Framework.Migrator.Fluent.Defaults.PrimaryKeyType">
+            <summary>
+            Default primary key data type.
+            </summary>
+        </member>
+        <member name="F:Framework.Migrator.Fluent.Defaults.ColumnSize">
+            <summary>
+            Default column size.
+            </summary>
+        </member>
+        <member name="F:Framework.Migrator.Fluent.Defaults.MaxStringLength">
+            <summary>
+            Maximum string field length.
+            </summary>
+        </member>
+        <member name="F:Framework.Migrator.Fluent.Defaults.ForeignKeyNameTemplate">
+            <summary>
+            Template for foreign key constraint name.
+            </summary>
+        </member>
+        <member name="F:Framework.Migrator.Fluent.Defaults.ForeignKeyColumnTemplate">
+            <summary>
+            Template for foreign key column name.
+            </summary>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.RemoveColumn">
+            <summary>
+            Removes table column.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.RemoveColumn.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.RemoveColumn"/> class.
+            </summary>
+            <param name="columnName">Name of the column.</param>
+            <param name="tableName">Name of the table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.RemoveColumn.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Removes table column.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.Fluent.RemoveForeignKey">
+            <summary>
+            Removes foreign key.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.RemoveForeignKey.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Migrator.Fluent.RemoveForeignKey"/> class.
+            </summary>
+            <param name="reference">The reference.</param>
+            <param name="foreignKeyTable">The foreign key table.</param>
+        </member>
+        <member name="M:Framework.Migrator.Fluent.RemoveForeignKey.Migrate(ECM7.Migrator.Framework.ITransformationProvider)">
+            <summary>
+            Removes foreign key and foreign key column if specified.
+            </summary>
+            <param name="database">The database.</param>
+        </member>
+        <member name="T:Framework.Migrator.MigratorUtility">
+            <summary>
+            Provides helper methods for migrator.
+            </summary>
+        </member>
+        <member name="M:Framework.Migrator.MigratorUtility.GetDialect(Framework.Core.Configuration.DatabasePlatform)">
+            <summary>
+            Gets migrator dialect for specified <paramref name="platform"/>.
+            </summary>
+            <param name="platform">Database platform.</param>
+            <returns>Migrator dialect for specified <paramref name="platform"/>.</returns>
+        </member>
+    </members>
+</doc>

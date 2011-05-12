@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Framework.Facilities.Tests</name>
+    </assembly>
+    <members>
+        <member name="T:Framework.Facilities.Tests.Extensions.ControllerExtensions">
+            <summary>
+            Provides extension methods to generate controller context stubs.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.Tests.Extensions.ControllerExtensions.SetControllerContext(System.Web.Mvc.Controller)">
+            <summary>
+            Generates default controller context stub.
+            </summary>
+            <param name="controller">The controller.</param>
+        </member>
+        <member name="M:Framework.Facilities.Tests.Extensions.ControllerExtensions.SetControllerContext(System.Web.Mvc.Controller,System.Web.Routing.RouteData)">
+            <summary>
+            Sets controller context with route data specified.
+            </summary>
+            <param name="controller">The controller.</param>
+            <param name="routeData">The route data.</param>
+        </member>
+        <member name="M:Framework.Facilities.Tests.Extensions.ControllerExtensions.SetControllerContext(System.Web.Mvc.Controller,System.Web.HttpCookieCollection)">
+            <summary>
+            Sets controller context with cookies specified.
+            </summary>
+            <param name="controller">The controller.</param>
+            <param name="requestCookies">The request cookies.</param>
+        </member>
+        <member name="M:Framework.Facilities.Tests.Extensions.ControllerExtensions.SetControllerContext(System.Web.Mvc.Controller,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Sets controller context with form values specified.
+            </summary>
+            <param name="controller">The controller.</param>
+            <param name="formValues">The form values.</param>
+        </member>
+        <member name="M:Framework.Facilities.Tests.Extensions.ControllerExtensions.SetControllerContext(System.Web.Mvc.Controller,System.Collections.Generic.Dictionary{System.String,System.String},System.Web.HttpCookieCollection,System.Web.Routing.RouteData)">
+            <summary>
+            Sets controller context with form values, cookies and route data specified.
+            </summary>
+            <param name="controller">The controller.</param>
+            <param name="formValues">The form values.</param>
+            <param name="requestCookies">The request cookies.</param>
+            <param name="routeData">The route data.</param>
+        </member>
+        <member name="T:Framework.Facilities.Tests.Helpers.HttpContextMock">
+            <summary>
+            <see cref="T:System.Web.HttpContextBase"/> mock.
+            </summary>
+        </member>
+        <member name="F:Framework.Facilities.Tests.Helpers.HttpContextMock.UserName">
+            <summary>
+            User name for <see cref="P:System.Web.HttpContext.User"/>.
+            </summary>
+        </member>
+        <member name="F:Framework.Facilities.Tests.Helpers.HttpContextMock.Role">
+            <summary>
+            Role for <see cref="P:System.Web.HttpContext.User"/>.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.Tests.Helpers.HttpContextMock.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Facilities.Tests.Helpers.HttpContextMock"/> class. 
+            </summary>
+            <remarks>
+            <para>
+            Stubed http context will contains:
+            <ul>
+                <li><see cref="P:System.Web.HttpContext.Request"/>;</li>
+                <li><see cref="P:System.Web.HttpContext.Response"/>;</li>
+                <li><see cref="P:System.Web.HttpContext.Server"/>;</li>
+                <li><see cref="P:System.Web.HttpContext.Session"/>;</li>
+                <li><see cref="P:System.Web.HttpContext.Items"/>;</li>
+                <li><see cref="P:System.Web.HttpContext.User"/>;</li>
+                <li><see cref="P:System.Web.HttpRequest.Form"/>;</li>
+                <li><see cref="P:System.Web.HttpRequest.Cookies"/>;</li>
+                <li><see cref="P:System.Web.HttpRequest.QueryString"/>;</li>
+                <li><see cref="P:System.Web.HttpResponse.Cookies"/>.</li>
+            </ul>
+            </para>
+            <para>
+            See <see cref="F:Framework.Facilities.Tests.Helpers.HttpContextMock.UserName"/> and <see cref="F:Framework.Facilities.Tests.Helpers.HttpContextMock.Role"/> for context user details.
+            </para>
+            </remarks>
+            <returns>
+            Default http context mock.
+            </returns>
+        </member>
+    </members>
+</doc>

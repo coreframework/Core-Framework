@@ -1,0 +1,20 @@
+Application:
+  Admin:
+    TitlePrefix: "BlogUs Administrative Suite | "
+    TitlePostfix: ""
+Messages:
+  UnknownError: "Some error has been occured. Please try again."
+  ValidationError: "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
+  CouldNotFoundEntity: "Could not found entity with id specified."
+  RoleCreated: "Role has been created successfully. Select users for assignment."
+  RoleUpdated: "Role has been updates successfully."
+  RoleDeleted: "Role has been deleted successfully."
+  RoleUsersUpdated: "Users assigned to role has been updated."
+  UserCreated: "User has been created successfully. Select roles for assignment."
+  UserUpdated: "User has been updates successfully."
+  UserDeleted: "User has been deleted successfully."
+  UserRolesUpdated: "Roles assigned to user has been updated."
+  PermissionChanged: "Permissions changes has been applied successfully."
+  UnknownOperation: "Posted data is incorrect. Please specify operation."
+  UnknownUser: "Posted data is incorrect. Please specify user."
+  UnknownRole: "Posted data is incorrect. Please specify role."

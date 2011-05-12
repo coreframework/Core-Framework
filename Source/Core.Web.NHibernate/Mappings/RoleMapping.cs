@@ -1,0 +1,23 @@
+﻿using Core.Web.NHibernate.Models;
+using FluentNHibernate.Mapping;
+
+namespace Core.Web.NHibernate.Mappings
+{
+    public class RoleMapping : ClassMap<Role>
+    {
+        public RoleMapping()
+        {
+            Cache.Region("Roles").ReadWrite();
+            Table("Roles");
+            Id(role => role.Id);
+            Map(role => role.Name).Length(255);
+            Map(role => role.IsSystemRole);
+            Map(role => role.NotAssignableRole);
+            Map(role => role.NotPermissible);
+            HasManyToMany(role => role.Users).Table("UsersToRoles").ParentKeyColumn("RoleId")
+                .ChildKeyColumn("UserId").Cascade.SaveUpdate().LazyLoad();
+            HasManyToMany(role => role.UserGroups).Table("UserGroupsToRoles").ParentKeyColumn("RoleId")
+                .ChildKeyColumn("UserGroupId").Cascade.SaveUpdate().LazyLoad();
+        }
+    }
+}

@@ -1,0 +1,68 @@
+/* User menu control */
+
+#header .user-menu {
+  float:right;
+}
+
+#header .user-menu a.profile {
+  float: right;
+}
+
+/* Registration */
+
+#content .registration-form 
+{
+  background-color: #DE9D7F;
+}
+
+/* Profile */
+
+#delete_account {
+  float: left;
+  margin-left: 0px;
+  background-color: #9C2F2F;
+}
+
+#delete_confirmation
+{
+  display: none;
+}
+
+#content .people .vcard
+{
+  background-color: #95CBE9;
+  text-align: center;
+  padding-bottom: 0.5em;
+}
+
+#content .people .vcard .logo
+{
+  margin: 1em 1em 0 1em;
+}
+
+#content .profile .vcard
+{
+  background-color: #DE9D7F;
+}
+
+#content .profile .vcard .logo
+{
+  float: left;
+  margin: 1em;  
+}
+
+#content .profile .vcard .details
+{
+  float: left;
+  margin: 1em;
+}
+
+#content .profile .vcard dt
+{
+  font-weight: bold;
+}
+
+#content .profile .blogs
+{
+  margin: 1em;
+}

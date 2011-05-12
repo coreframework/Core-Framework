@@ -1,0 +1,56 @@
+﻿javascripts:
+  base:
+    - jquery-1.4.1.js
+    - jquery.watermark.js
+    - jquery.qtip-1.0.0.js
+    - jquery.corner.js
+    - jquery.form.js
+    - jquery.blockUI.js
+    - framework.js
+    - application.js
+  upload:
+    - swfupload.js
+    - jquery-asyncUpload-0.1.js
+  fckeditor:
+    - fck/fckeditor.js
+  ajax:
+    - MicrosoftAjax.js
+    - MicrosoftMvcAjax.js 
+  jquery-ui:
+    - jquery-ui/jquery.ui.core.js
+    - jquery-ui/jquery.ui.widget.js
+    - jquery-ui/jquery.ui.mouse.js
+    - jquery-ui/jquery.ui.position.js
+    - jquery-ui/jquery.ui.button.js
+    - jquery-ui/jquery.ui.progressbar.js
+    - jquery-ui/jquery.ui.datepicker.js
+
+  jquery-ui-dialog:
+    - jquery-ui/jquery.ui.draggable.js
+    - jquery-ui/jquery.ui.resizable.js
+    - jquery-ui/jquery.ui.dialog.js
+stylesheets:
+  screen:
+    - blueprint/reset.css
+    - blueprint/typography.css
+    - blueprint/forms.css
+    - blueprint/grid.css
+    - blueprint/plugins/fancy-type.css
+    - screen.css
+    - accounts/accounts.css
+    - blogs/blogs.css
+  print:
+    - blueprint/print.css
+    - print.css
+  ie:
+    - blueprint/ie.css
+    - ie.css
+  jquery-ui/jquery-ui:
+    - jquery-ui/jquery.ui.core.css
+    - jquery-ui/jquery.ui.progressbar.css
+    - jquery-ui/jquery.ui.resizable.css
+    - jquery-ui/jquery.ui.dialog.css
+    - jquery-ui/jquery.ui.theme.css
+    - jquery-ui/jquery.ui.datepicker.css
+  admin/admin:
+    - admin/main.css
