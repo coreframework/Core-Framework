@@ -300,12 +300,6 @@
     <Content Include="Areas\Admin\Views\Role\Remove.aspx" />
     <Content Include="Areas\Admin\Views\Role\UserGroups.aspx" />
     <Content Include="Areas\Admin\Views\Role\Users.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Boolean.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\ImageUpload.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\List.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\MultilineText.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Password.aspx" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\String.aspx" />
     <Content Include="Areas\Admin\Views\Shared\Grid.ascx" />
     <Content Include="Areas\Admin\Views\Shared\MainMenu.ascx" />
     <Content Include="Areas\Admin\Views\Shared\TopLinks.ascx" />
@@ -914,7 +908,9 @@
     <Content Include="Views\Shared\Widgets\WidgetSettings.ascx" />
     <Content Include="Views\Shared\Widgets\WidgetsList.ascx" />
     <Content Include="Views\Users\NewUserSession.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -947,7 +943,6 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />
     <Content Include="Areas\Admin\Views\Web.config" />
-    <Content Include="Areas\Admin\Views\Shared\EditorTemplates\Template.Master" />
     <None Include="Config\asset_packages.yml" />
     <None Include="Config\database.yml" />
     <None Include="Config\sample.database.yml" />

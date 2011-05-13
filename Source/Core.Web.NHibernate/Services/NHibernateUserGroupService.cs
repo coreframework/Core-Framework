@@ -28,7 +28,7 @@ namespace Core.Web.NHibernate.Services
             {
                 return baseQuery;
             }
-            return baseQuery.Where(userGroup => userGroup.Name.StartsWith(searchString));
+            return baseQuery.Where(userGroup => userGroup.Name.Contains(searchString));
         }
     }
 }

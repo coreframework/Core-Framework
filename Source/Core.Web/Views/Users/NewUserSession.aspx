@@ -9,12 +9,27 @@
         <div class="form login-form">
             <% using (Html.BeginForm(MVC.Users.CreateUserSession(), FormMethod.Post))
                {%>
-            <fieldset style="padding:1.4em">
+            <fieldset style="padding: 1.4em">
                 <legend>
                     <%: Html.Translate(".Title")%></legend>
-                <%: Html.EditorFor(model => model.UsernameOrEmail) %>
-                <%: Html.EditorFor(model => model.Password) %>
-                <%: Html.EditorFor(model => model.RememberMe) %>
+                <div>
+                    <label>
+                        <%:Html.Translate(".UsernameOrEmail")%>
+                    </label>
+                    <%: Html.TextBoxFor(model => model.UsernameOrEmail) %>
+                </div>
+                <div>
+                    <label>
+                        <%:Html.Translate(".Password")%>
+                    </label>
+                    <%: Html.PasswordFor(model => model.Password)%>
+                </div>
+                <p>
+                    <label>
+                        <%:Html.Translate(".RememberMe")%>
+                    </label>
+                    <%: Html.CheckBoxFor(model => model.RememberMe) %>
+                </p>
                 <p>
                     <%: Html.HiddenSubmit(Html.Translate(".SignIn")) %>
                     <%: Html.LinkSubmitButton(Html.Translate(".SignIn"))%>

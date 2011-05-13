@@ -30,7 +30,7 @@ Admin:
         Title: "Remove user \"{0}\""
         AreYouSure: "Are you sure want to remove user \"{0}\"?"
       UserGroups:
-        Title: "UserGroups assigned to user \"{0}\""
+        Title: "User Groups assigned to user \"{0}\""
         All: "All"
         Save: "Save"
         Cancel: "Cancel"
@@ -99,7 +99,7 @@ Admin:
         Save: "Save"
         Cancel: "Cancel"
       UserGroups:
-        Title: "UserGroups assigned to role \"{0}\""
+        Title: "User Groups assigned to role \"{0}\""
         All: "All"
         Save: "Save"
         Cancel: "Cancel"

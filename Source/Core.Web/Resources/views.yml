@@ -82,5 +82,8 @@ Views:
       NewUserSession:
           Title: "Sign in"
           SignIn: "Sign in"
+          UsernameOrEmail: "Username or Email"
+          Password: "Password"
+          RememberMe: "Remember me"
 
 

@@ -22,5 +22,11 @@ namespace Core.Web.Helpers
         {
             return url.RouteUrl("Root");
         }
+
+        public static string EncodeForSEO(this UrlHelper helper, string unencodedUrl)
+        {
+            return helper.Encode(unencodedUrl.Replace(' ', '-'));
+        }
+
     }
 }

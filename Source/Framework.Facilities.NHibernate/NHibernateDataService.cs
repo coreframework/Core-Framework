@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Castle.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
-
+using FluentNHibernate.Data;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -136,7 +136,15 @@ namespace Framework.Facilities.NHibernate
         /// <returns><c>true</c> if instance instance has been saved successfully; otherwise, <c>false</c>.</returns>
         public virtual bool Save(TEntity entity)
         {
-            Session.SaveOrUpdate(entity);
+            if (entity is Entity && (entity as Entity).Id > 0)
+            {
+                Session.Merge(entity);
+            }
+            else
+            {
+                Session.SaveOrUpdate(entity);
+            }
+
             Session.Flush();
             return true;
         }

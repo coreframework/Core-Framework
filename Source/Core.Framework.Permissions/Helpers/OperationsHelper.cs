@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Core.Framework.Permissions.Models;
 
@@ -24,8 +25,9 @@ namespace Core.Framework.Permissions.Helpers
 
                 if (description != null)
                 {
+                    var operationDescription = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;  
                     yield return new PermissionOperation { Key = (int) value,
-                                                           Title = Enum.GetName(typeof(TEnum), value),
+                                                           Title = operationDescription!=null?operationDescription.Description:Enum.GetName(typeof(TEnum), value),
                                                            Area = description.Area,
                                                            OperationLevel = description.OperationLevel,
                                                            GuestDefaultAcess = description.GuestDefaultAcess,

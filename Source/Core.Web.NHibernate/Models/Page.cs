@@ -100,10 +100,11 @@ namespace Core.Web.NHibernate.Models
         /// <value>The permission title.</value>
         public virtual string PermissionTitle { get; set; }
 
+
         /// <summary>
-        /// Gets or sets the permission groups.
+        /// Gets or sets the object permission operations.
         /// </summary>
-        /// <value>The permission groups.</value>
+        /// <value>The object permission operations.</value>
         public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
 
         #endregion

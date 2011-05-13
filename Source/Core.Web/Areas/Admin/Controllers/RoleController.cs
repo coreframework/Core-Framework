@@ -49,9 +49,9 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
             columns.Add(new GridColumnViewModel { Name = "Role", Index = "Name" });
-            columns.Add(new GridColumnViewModel { Name = "Users", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "User groups", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Permissions", Width = 150, Align = "center", Sortable = false });
+            columns.Add(new GridColumnViewModel { Name = "Users list", Width = 150, Align = "center", Sortable = false });
+            columns.Add(new GridColumnViewModel { Name = "User groups list", Width = 150, Align = "center", Sortable = false });
+            columns.Add(new GridColumnViewModel { Name = "Role permissions", Width = 150, Align = "center", Sortable = false });
             columns.Add(new GridColumnViewModel { Name = "Remove", Width = 150, Align = "center", Sortable = false });
             columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
             GridViewModel model = new GridViewModel

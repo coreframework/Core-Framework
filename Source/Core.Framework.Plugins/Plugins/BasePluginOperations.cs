@@ -5,10 +5,10 @@ namespace Core.Framework.Plugins.Plugins
 {
     public enum BasePluginOperations
     {
-        [OperationDescription(PermissionArea.Modules, PermissionOperationLevel.Type)]
+        [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
         Manage = 1,
 
-        [OperationDescription(PermissionArea.Modules, PermissionOperationLevel.Type)]
+        [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
         ShowInControlPanel = 2
     }
 }

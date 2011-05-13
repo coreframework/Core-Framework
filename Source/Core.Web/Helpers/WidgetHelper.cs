@@ -121,6 +121,14 @@ namespace Core.Web.Helpers
                 {
                     builder.AppendFormat("font-size:{0}{1};", settings.LookAndFeelSettings.FontSizeValue, settings.LookAndFeelSettings.FontSizeUnit);
                 }
+                if (settings.LookAndFeelSettings.WidthValue.HasValue && !String.IsNullOrEmpty(settings.LookAndFeelSettings.WidthUnit))
+                {
+                    builder.AppendFormat("width:{0}{1};", settings.LookAndFeelSettings.WidthValue, settings.LookAndFeelSettings.WidthUnit);
+                }
+                if (settings.LookAndFeelSettings.HeightValue.HasValue && !String.IsNullOrEmpty(settings.LookAndFeelSettings.HeightUnit))
+                {
+                    builder.AppendFormat("height:{0}{1};", settings.LookAndFeelSettings.HeightValue, settings.LookAndFeelSettings.HeightUnit);
+                }
             }
             return builder.ToString();
         }

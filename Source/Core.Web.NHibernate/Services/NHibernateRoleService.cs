@@ -28,7 +28,7 @@ namespace Core.Web.NHibernate.Services
             {
                 return baseQuery;
             }
-            return baseQuery.Where(role => role.Name.StartsWith(searchString));
+            return baseQuery.Where(role => role.Name.Contains(searchString));
         }
     }
 }

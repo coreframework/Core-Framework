@@ -479,12 +479,12 @@ namespace Core.Web.Controllers
                 }
                 else
                 {
-                    if (!permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.Id))
+                    page = pageService.Find((long) model.Id); 
+
+                    if (!permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.Id,IsPageOwner(page),PermissionOperationLevel.Object))
                     {
                         throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
                     }
-
-                    page = pageService.Find((long) model.Id);
                 }
              
                 if (pageService.Save(model.MapTo(page)))

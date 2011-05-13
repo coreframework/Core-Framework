@@ -1,7 +1,7 @@
 Admin:
   Controllers:
     User:
-      UserGroups: "[User groups]"
+      UserGroups: "[User groups list]"
       Remove: "[Remove]"
       Admin:
         Models:
@@ -10,10 +10,10 @@ Admin:
             Locked: "Locked"
             Deleted: "Deleted"
     UserGroup:
-      Users: "[Users]"
+      Users: "[Users list]"
       Remove: "[Remove]"
     Role:
-      Users: "[Users]"
-      UserGroups: "[User groups]"
-      Permissions: "[Permissions]"
+      Users: "[Users list]"
+      UserGroups: "[User groups list]"
+      Permissions: "[Role permissions]"
       Remove: "[Remove]"

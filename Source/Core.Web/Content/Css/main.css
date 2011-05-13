@@ -342,6 +342,6 @@ ul.list-menu li li {padding-left:10px;}
 
 table.permissions-grid {border:1px solid #aaaaaa;width:100%;border-collapse:collapse;}
 table.permissions-grid th {background-color:#DEDEDE;padding:3px;}
-table.permissions-grid td {padding:3px; border:1px solid #aaaaaa;}
+table.permissions-grid td {padding:4px 3px; border:1px solid #aaaaaa;}
 table.permissions-grid td.chbx {text-align:center;}
-
+table.permissions-grid td.chbx input {float:none;}

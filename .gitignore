@@ -1,6 +1,7 @@
 
 /Source/_ReSharper.Core
 /Source/Core.ContentPages/obj
+/Source/Core.ContentPages/bin
 /Source/Core.ContentPages.Migrations/bin
 /Source/Core.ContentPages.Migrations/obj
 /Source/Core.ContentPages.NHibernate/bin
@@ -40,3 +41,7 @@
 /Source/Framework.MVC/StyleCop.Cache
 /Source/Framework.Migrator/StyleCop.Cache
 /Source/Core.5.0.ReSharper.user
+/Source/Core.5.1.ReSharper.user
+/Source/Core.Web/Core.Web.csproj.user
+/Source/Core.Web/Core.Web.Publish.xml
+

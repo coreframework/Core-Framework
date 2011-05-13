@@ -8,8 +8,6 @@
 
         ControlPanel = 3,
 
-        Content = 4,
-
-        Modules = 5
+        Content = 4
     }
 }

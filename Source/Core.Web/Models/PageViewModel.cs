@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
@@ -141,9 +142,11 @@ namespace Core.Web.Models
         /// <returns></returns>
         public Page MapTo(Page to)
         {
+            UrlHelper urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             to.Title = Title;
-            to.Url = Url;
+            to.Url = Url = urlHelper.EncodeForSEO(Url);
             to.ParentPageId = ParentPageId == 0 ? null : ParentPageId;
+
             return to;
         }
 

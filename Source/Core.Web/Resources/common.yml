@@ -1,5 +1,13 @@
 Actions:
     Save:"Save"
+Messages:
+  EmailShouldBeUnique: "The email address you entered is already in use."
+  NicknameShouldBeUnique: "The nickname you entered is already in use."
+  RegistraionCompleted: "You have been registered successfully."
+  RegistrationDataUpdated: "Your registration data has been updated."
+  AccountHasBeenDeleted: "Your account has been deleted."
+  InvalidUserCredentials: "User with specified details could not be located in the system."
+  ProfileHasBeenUpdated: "Profile has been updated successfully."
      
 
 

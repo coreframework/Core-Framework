@@ -15,6 +15,10 @@ namespace Core.Web.NHibernate.Mappings
             Map(lookAndFeelSetting => lookAndFeelSetting.FontSizeValue);
             Map(lookAndFeelSetting => lookAndFeelSetting.FontSizeUnit);
             Map(lookAndFeelSetting => lookAndFeelSetting.Color);
+            Map(lookAndFeelSetting => lookAndFeelSetting.WidthValue);
+            Map(lookAndFeelSetting => lookAndFeelSetting.WidthUnit);
+            Map(lookAndFeelSetting => lookAndFeelSetting.HeightValue);
+            Map(lookAndFeelSetting => lookAndFeelSetting.HeightUnit);
             Map(lookAndFeelSetting => lookAndFeelSetting.OtherStyles);            
         }
     }
