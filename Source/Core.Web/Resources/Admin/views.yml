@@ -64,6 +64,7 @@ Admin:
        LoggedInAs: "Logged in as"
        LogOut: "Log out"
        ViewSite: "View Site"
+       SignIn: "Sign in"
       MainMenu:
         Home: "Home"
         Users: "Users"

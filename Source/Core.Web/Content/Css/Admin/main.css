@@ -1190,3 +1190,45 @@ label.label-validation-error {
   display: inline !important;
   margin-right: 10px;
 }
+
+.user-menu 
+{
+	font-size:150%;
+	font-weight:bold;
+}
+
+.user-menu .button {
+  float: right;
+  margin-left: 0.5em;
+  padding: 0.5em 1em;
+  border: 0;
+  background-color: #024769;
+  color: #FFF !important;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.user-menu .button {
+  margin-left: 5px;
+  padding: 2px;
+  background-color: #EFD279;
+}
+
+.user-menu .button a {
+  display:block;
+  width:18px;
+  height:18px;
+}
+
+.user-menu .button .icon {
+  display: block;
+  width:18px;
+  height:18px;
+  background-repeat: no-repeat;
+}
+
+.user-menu .button .icon-close {
+  background-image: url('../../images/icons/close.png');
+  background-position: 1px 1px;
+}
+
