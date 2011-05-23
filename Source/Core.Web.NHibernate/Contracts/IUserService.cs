@@ -8,18 +8,63 @@ namespace Core.Web.NHibernate.Contracts
     public interface IUserService : IDataService<User>
     {
         /// <summary>
-        /// Gets the account by username.
+        /// Determines whether email used by specified user is unique.
+        /// </summary>
+        /// <param name="id">The user id.</param>
+        /// <param name="email">The user email.</param>
+        /// <returns>
+        ///     <c>true</c> if email used by specified user is unique; otherwise, <c>false</c>.
+        /// </returns>
+        bool IsEmailUnique(long id, String email);
+
+        /// <summary>
+        /// Determines whether user with specified email already exists.
+        /// </summary>
+        /// <param name="email">The email for validation.</param>
+        /// <returns>
+        ///     <c>true</c> if email is unique; otherwise, <c>false</c>.
+        /// </returns>
+        bool IsEmailUnique(String email);
+
+        /// <summary>
+        /// Determines whether username used by specified user is unique.
+        /// </summary>
+        /// <param name="id">The user id.</param>
+        /// <param name="username">The user username.</param>
+        /// <returns>
+        ///     <c>true</c> if username used by specified user is unique; otherwise, <c>false</c>.
+        /// </returns>
+        bool IsUsernameUnique(long id, String username);
+
+        /// <summary>
+        /// Determines whether user with specified username already exists.
+        /// </summary>
+        /// <param name="username">The username for validation.</param>
+        /// <returns>
+        ///     <c>true</c> if username is unique; otherwise, <c>false</c>.
+        /// </returns>
+        bool IsUsernameUnique(String username);
+
+        /// <summary>
+        /// Gets the user by email.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>User with email specified or <c>null</c>.</returns>
+        User FindByEmail(String email);
+
+        /// <summary>
+        /// Gets the user by username.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns>Account with username specified or null.</returns>
+        /// <returns>User with username specified or null.</returns>
         User FindByUsername(String username);
 
         /// <summary>
-        /// Gets the account by email or username.
+        /// Gets the user by email or username.
         /// </summary>
         /// <param name="emailOrUsername">The email or username.</param>
         /// <returns>
-        /// Account with specified email or username or <c>null</c>.
+        /// User with specified email or username or <c>null</c>.
         /// </returns>
         User FindByEmailOrUsername(String emailOrUsername);
 
@@ -31,12 +76,12 @@ namespace Core.Web.NHibernate.Contracts
         void SetPassword(User user, String password);
 
         /// <summary>
-        /// Determines whether <paramref name="account"/> password is valid for <paramref name="account"/>.
+        /// Determines whether <paramref name="user"/> password is valid for <paramref name="user"/>.
         /// </summary>
-        /// <param name="account">The account.</param>
+        /// <param name="user">The user.</param>
         /// <param name="password">The password.</param>
         /// <returns>
-        ///     <c>true</c> if <paramref name="account"/> password is valid; otherwise <c>false</c>.
+        ///     <c>true</c> if <paramref name="user"/> password is valid; otherwise <c>false</c>.
         /// </returns>
         bool VerifyPassword(User user, String password);
 

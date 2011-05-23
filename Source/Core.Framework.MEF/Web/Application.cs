@@ -87,7 +87,7 @@ namespace Core.Framework.MEF.Web
             var composer = new Composer();
 
             GetDirectoryCatalogs()
-                .ForEach(catalog => composer.AddCatalog(catalog));
+                .ForEach(composer.AddCatalog);
 
             composer.AddExportProvider(
                 new DynamicInstantiationExportProvider(),

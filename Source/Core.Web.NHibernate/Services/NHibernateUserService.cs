@@ -51,12 +51,91 @@ namespace Core.Web.NHibernate.Services
 
         #region IUserService members
 
+        /// <summary>
+        /// Determines whether email used by specified user is unique.
+        /// </summary>
+        /// <param name="id">The user id.</param>
+        /// <param name="email">The user email.</param>
+        /// <returns>
+        ///     <c>true</c> if email used by specified user is unique; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsEmailUnique(long id, String email)
+        {
+            var query = from a in CreateQuery()
+                        where a.Email == email && a.Id != id
+                        select a;
+
+            return query.Count() == 0;
+        }
 
         /// <summary>
-        /// Gets the account by username.
+        /// Determines whether user with specified email already exists.
+        /// </summary>
+        /// <param name="email">The email for validation.</param>
+        /// <returns>
+        ///     <c>true</c> if email is unique; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsEmailUnique(String email)
+        {
+            var query = from a in CreateQuery()
+                        where a.Email == email
+                        select a;
+
+            return query.Count() == 0;
+        }
+
+        /// <summary>
+        /// Determines whether username used by specified user is unique.
+        /// </summary>
+        /// <param name="id">The user id.</param>
+        /// <param name="username">The user username.</param>
+        /// <returns>
+        ///     <c>true</c> if username used by specified user is unique; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsUsernameUnique(long id, String username)
+        {
+            var query = from a in CreateQuery()
+                        where a.Username == username && a.Id != id
+                        select a;
+
+            return query.Count() == 0;
+        }
+
+        /// <summary>
+        /// Determines whether user with specified username already exists.
+        /// </summary>
+        /// <param name="username">The username for validation.</param>
+        /// <returns>
+        ///     <c>true</c> if username is unique; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsUsernameUnique(String username)
+        {
+            var query = from a in CreateQuery()
+                        where a.Username == username
+                        select a;
+
+            return query.Count() == 0;
+        }
+
+        /// <summary>
+        /// Gets the user by email.
+        /// </summary>
+        /// <param name="email">The email.</param>
+        /// <returns>User with email specified or null.</returns>
+        public User FindByEmail(String email)
+        {
+            var query = from a in CreateQuery()
+                        where a.Email == email
+                        select a;
+
+            return query.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets the user by username.
         /// </summary>
         /// <param name="username">The username.</param>
-        /// <returns>Account with username specified or null.</returns>
+        /// <returns>User with username specified or null.</returns>
         public User FindByUsername(String username)
         {
             var query = from user in CreateQuery()
@@ -67,11 +146,11 @@ namespace Core.Web.NHibernate.Services
         }
 
         /// <summary>
-        /// Gets the account by email or username.
+        /// Gets the user by email or username.
         /// </summary>
         /// <param name="emailOrUsername">The email or username.</param>
         /// <returns>
-        /// Account with specified email or username or <c>null</c>.
+        /// User with specified email or username or <c>null</c>.
         /// </returns>
         public User FindByEmailOrUsername(String emailOrUsername)
         {
@@ -85,7 +164,7 @@ namespace Core.Web.NHibernate.Services
         /// <summary>
         /// Encrypts <paramref name="user"/> password using <see cref="EncryptionMode"/>.
         /// </summary>
-        /// <param name="user">The account to process.</param>
+        /// <param name="user">The user to process.</param>
         /// <param name="password">The password.</param>
         public void SetPassword(User user, String password)
         {
@@ -96,12 +175,12 @@ namespace Core.Web.NHibernate.Services
         }
 
         /// <summary>
-        /// Determines whether <paramref name="account"/> password is valid for <paramref name="account"/>.
+        /// Determines whether <paramref name="user"/> password is valid for <paramref name="user"/>.
         /// </summary>
         /// <param name="user">The user.</param>
         /// <param name="password">The password.</param>
         /// <returns>
-        ///     <c>true</c> if <paramref name="account"/> password is valid; otherwise <c>false</c>.
+        ///     <c>true</c> if <paramref name="user"/> password is valid; otherwise <c>false</c>.
         /// </returns>
         public bool VerifyPassword(User user, String password)
         {

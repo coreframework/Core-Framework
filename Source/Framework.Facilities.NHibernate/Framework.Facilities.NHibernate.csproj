@@ -144,6 +144,12 @@
     <Reference Include="NHibernate">
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\..\Libs\NHibernate\Castle\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Caches.SysCache">
+      <HintPath>..\..\Libs\NHibernate\Cache\NHibernate.Caches.SysCache\NHibernate.Caches.SysCache.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate.Linq">
       <HintPath>..\..\Libs\NHibernate\NHibernate.Linq.dll</HintPath>
     </Reference>

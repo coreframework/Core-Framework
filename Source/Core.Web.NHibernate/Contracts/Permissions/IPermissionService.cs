@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Core.Framework.Permissions.Contracts;
-using Core.Framework.Permissions.Models;
-using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Permissions;
 using Framework.Core.Services;
 

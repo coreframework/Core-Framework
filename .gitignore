@@ -49,4 +49,7 @@
 /Source/Core.Navigation.Migrations/bin
 /Source/Core.Navigation.Migrations/obj
 /Build
+/Source/Core.Web.Tests/bin
+/Source/Core.Web.Tests/obj
+/Source/Core.Web.Tests/Core.Web.Tests.csproj.user
 
