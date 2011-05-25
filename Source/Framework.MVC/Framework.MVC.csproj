@@ -161,6 +161,7 @@
     <Compile Include="Extensions\FileUploadExtensions.cs" />
     <Compile Include="Extensions\FormCollectionExtensions.cs" />
     <Compile Include="Extensions\LabelExtensions.cs" />
+    <Compile Include="Extensions\RadioExtensions.cs" />
     <Compile Include="Extensions\ResourcesExtensions.cs" />
     <Compile Include="Extensions\RoutesExtensions.cs" />
     <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />

@@ -133,7 +133,7 @@ namespace Framework.MVC.Extensions
                     {
                         text = html.Translate(description.Description);
                     }
-                    items.Add(new SelectListItem { Text = text, Value = ((int)value).ToString(), Selected = value.Equals(selectedValue) });
+                    items.Add(new SelectListItem { Text = text, Value = value.ToString() });
                 }
             }
 

@@ -21,5 +21,10 @@ namespace Framework.Core
         /// ActionResultMessage constant
         /// </summary>
         public const String ActionResultMessage = "ActionResultMessage";
+
+        /// <summary>
+        /// PageModeCookieName constant
+        /// </summary>
+        public const String PageModeCookieName = "PageModeCookie";
     }
 }

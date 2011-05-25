@@ -1,7 +1,6 @@
 ﻿using Castle.Windsor;
 using Core.Web.NHibernate;
 using Framework.Core;
-using Framework.Core.DomainModel;
 using Framework.Core.Services;
 using Framework.Facilities.NHibernate;
 using NUnit.Framework;

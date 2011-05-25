@@ -85,6 +85,8 @@ namespace Core.Web.Models
 
         public bool IsPageOwner { get; set; }
 
+        public PageMode PageMode { get; set; }
+
         #endregion
 
         #region IMappedModel members
@@ -105,6 +107,7 @@ namespace Core.Web.Models
             var pageAccess = permissionService.GetAccess(from.Operations, HttpContext.Current.CorePrincipal(), typeof(Page), from.Id, IsPageOwner);
             Access = pageAccess;
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
+            PageMode = PageHelper.GetCurrentUserPageMode();
 
             foreach (var widget in from.Widgets.OrderBy(wd => wd.OrderNumber))
             {

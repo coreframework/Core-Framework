@@ -1,41 +1,25 @@
 ﻿using System.Collections.Generic;
-using Core.Web.Helpers.HtmlExtensions.MenuTreeView;
-using Core.Web.NHibernate.Models;
 
 namespace Core.Web.Models
 {
-    public class NavigationMenuModel : IComposite<NavigationMenuModel>
+    public class NavigationMenuModel
     {
         /// <summary>
-        /// Gets or sets the page.
+        /// Gets or sets the menu items.
         /// </summary>
-        /// <value>The page.</value>
-        public Page Page { get; set; }
+        /// <value>The menu items.</value>
+        public IEnumerable<NavigationMenuItemModel> MenuItems { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether this instance is current.
+        /// Gets or sets the page mode.
         /// </summary>
-        /// <value>
-        /// 	<c>true</c> if this instance is current; otherwise, <c>false</c>.
-        /// </value>
-        public bool IsCurrent { get; set; }
+        /// <value>The page mode.</value>
+        public PageMode PageMode { get; set; }
 
         /// <summary>
-        /// Gets or sets the parent.
+        /// Gets or sets a value indicating whether [manage access].
         /// </summary>
-        /// <value>The parent.</value>
-        public NavigationMenuModel Parent { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value indicating whether [remove access].
-        /// </summary>
-        /// <value><c>true</c> if [remove access]; otherwise, <c>false</c>.</value>
-        public bool RemoveAccess { get; set; }
-
-        /// <summary>
-        /// Gets or sets the children.
-        /// </summary>
-        /// <value>The children.</value>
-        public IEnumerable<NavigationMenuModel> Children { get; set; }
+        /// <value><c>true</c> if [manage access]; otherwise, <c>false</c>.</value>
+        public bool ManageAccess { get; set; }
     }
 }

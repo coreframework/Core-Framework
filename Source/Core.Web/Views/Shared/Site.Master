@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-    <div class="container" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
+    <div class="container <%=PageHelper.GetCurrentUserPageMode() == PageMode.View ? "view-mode" : "edit-mode" %>" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
         <div class="inner-container" style="<%= Model is PageViewModel ? PageHelper.GetPageInnerHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
             <div id="wrapper">
                 <div id="header">
@@ -36,6 +36,7 @@
                         <%=Html.ActionLink("Core Framework",MVC.Home.Index()) %>
                     </div>
                     <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel) %>
+                    <%: Html.Partial(MVC.Shared.Views.Pages.PageModePanel, new PageModeModel {PageMode = PageHelper.GetCurrentUserPageMode(), PageUrl = Model is PageViewModel ? ((PageViewModel)Model).Url : String.Empty }) %>
                     <div class="clear">
                     </div>
                 </div>

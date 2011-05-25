@@ -78,6 +78,7 @@
     <Compile Include="Controllers\PagesControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AbstractServiceTest.cs" />
+    <Compile Include="Services\PermissionServiceTest.cs" />
     <Compile Include="Services\PermissionsCommonServiceTest.cs" />
     <Compile Include="Helpers\PasswordHelperTest.cs" />
     <Compile Include="Services\UserServiceTest.cs" />

@@ -48,6 +48,12 @@ namespace T4MVC {
                 public readonly string Layout = "~/Views/Shared/Layouts/Layout.ascx";
                 public readonly string LayoutSettings = "~/Views/Shared/Layouts/LayoutSettings.ascx";
             }
+            static readonly _Pages s_Pages = new _Pages();
+            public _Pages Pages { get { return s_Pages; } }
+            public partial class _Pages{
+                public readonly string PageModeForm = "~/Views/Shared/Pages/PageModeForm.ascx";
+                public readonly string PageModePanel = "~/Views/Shared/Pages/PageModePanel.ascx";
+            }
             static readonly _Users s_Users = new _Users();
             public _Users Users { get { return s_Users; } }
             public partial class _Users{

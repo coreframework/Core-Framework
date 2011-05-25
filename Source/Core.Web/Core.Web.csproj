@@ -251,17 +251,20 @@
     <Compile Include="Models\CoreWidgetInstance.cs" />
     <Compile Include="Models\LayoutSettingsModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\NavigationMenuItemModel.cs" />
     <Compile Include="Models\NavigationMenuModel.cs" />
     <Compile Include="Models\Objects\WidgetInfo.cs" />
     <Compile Include="Models\PageCSSModel.cs" />
     <Compile Include="Models\PageLookAndFeelModel.cs" />
     <Compile Include="Models\CorePageSettings.cs" />
+    <Compile Include="Models\PageModeModel.cs" />
     <Compile Include="Models\PermissionsModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\Routes\DefaultRouteRegistrar.cs" />
     <Compile Include="Models\WidgetCSSModel.cs" />
     <Compile Include="Models\WidgetHolderViewModel.cs" />
     <Compile Include="Models\WidgetLookAndFeelModel.cs" />
+    <Compile Include="Modules\PageModeModule.cs" />
     <Compile Include="Navigation.BreadcrumbsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -897,6 +900,7 @@
     <Content Include="Views\Shared\Layouts\Layout.ascx" />
     <Content Include="Views\Shared\Layouts\ChangeLayout.ascx" />
     <Content Include="Views\Shared\Layouts\LayoutSettings.ascx" />
+    <Content Include="Views\Shared\Pages\PageModePanel.ascx" />
     <Content Include="Views\Shared\Users\UserPanel.ascx" />
     <Content Include="Views\Shared\Widgets\WidgetCommonSettings.ascx" />
     <Content Include="Views\Shared\Widgets\WidgetContentHolder.ascx" />

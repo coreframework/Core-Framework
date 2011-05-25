@@ -57,6 +57,11 @@ namespace Core.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangePageMode() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangePageMode);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult ChangeLayout() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLayout);
         }
@@ -193,6 +198,7 @@ namespace Core.Web.Controllers {
             public readonly string RemovePage = "RemovePage";
             public readonly string CreateNewPage = "CreateNewPage";
             public readonly string UpdatePagePosition = "UpdatePagePosition";
+            public readonly string ChangePageMode = "ChangePageMode";
             public readonly string ChangeLayout = "ChangeLayout";
             public readonly string ShowChangeLayoutForm = "ShowChangeLayoutForm";
             public readonly string ShowLayoutSettingsForm = "ShowLayoutSettingsForm";
@@ -270,6 +276,12 @@ namespace Core.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdatePagePosition);
             callInfo.RouteValueDictionary.Add("pageId", pageId);
             callInfo.RouteValueDictionary.Add("orderNumber", orderNumber);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangePageMode(Core.Web.Models.PageMode pageMode) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangePageMode);
+            callInfo.RouteValueDictionary.Add("pageMode", pageMode);
             return callInfo;
         }
 

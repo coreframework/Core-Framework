@@ -81,6 +81,7 @@ namespace Core.Web.Controllers
         /// </summary>
         /// <param name="url">The URL.</param>
         /// <returns>Page details.</returns>
+        [HttpGet]
         public virtual ActionResult Show(String url)
         {
             var page = pageService.FindByUrl(url);
@@ -143,6 +144,14 @@ namespace Core.Web.Controllers
         #endregion
 
         #region Layouts
+
+        [HttpPost]
+        public virtual ActionResult ChangePageMode(PageMode pageMode)
+        {
+            PageHelper.ChangePageMode(pageMode);
+
+            return null;
+        }
 
         /// <summary>
         /// Changes the layout.

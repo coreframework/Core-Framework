@@ -2,17 +2,24 @@
 <%@ Import Namespace="Core.Web.Helpers" %>
 <%@ Import Namespace="Core.Framework.Plugins.Widgets" %>
 <%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
+<%@ Import Namespace="Core.Web.Models" %>
 <div class="widget <%=Model.Settings != null ? Model.Settings.CustomCSSClasses : String.Empty %>" id="<%=WidgetHelper.GetWidgetClientId(Model.Id) %>">
     <%=Html.Hidden("pageWidgetId", Model.Id) %>
     <%=Html.Hidden("column", Model.Column) %>
     <%=Html.Hidden("order", Model.Order) %>
-    <div class="widget-head">
+    <%if(PageHelper.GetCurrentUserPageMode() == PageMode.Edit)
+      {%><div class="widget-head">
         <h3>
             <%:Model.Widget != null ? Model.Widget.Title : Html.Translate(".WidgetNotFound")%>
         </h3>
-        <%if (Model.PageAccess[(int)PageOperations.Update] && (Model.Widget == null || !(Model.Widget is BaseWidget) || Model.Access[((BaseWidget)Model.Widget).ManageOperationCode] || Model.Access[((BaseWidget)Model.Widget).PermissionOperationCode]))
+        <%
+          if (Model.PageAccess[(int) PageOperations.Update] &&
+              (Model.Widget == null || !(Model.Widget is BaseWidget) ||
+               Model.Access[((BaseWidget) Model.Widget).ManageOperationCode] ||
+               Model.Access[((BaseWidget) Model.Widget).PermissionOperationCode]))
           {
-              if (Model.Widget == null || !(Model.Widget is BaseWidget) || Model.Access[((BaseWidget)Model.Widget).ManageOperationCode])
+              if (Model.Widget == null || !(Model.Widget is BaseWidget) ||
+                  Model.Access[((BaseWidget) Model.Widget).ManageOperationCode])
               {%>
 
             <%=Ajax.ActionLink("remove",
@@ -35,6 +42,8 @@
            <%
           }%>
     </div>
+    <%
+      }%>
     <div class="widget-content" style="<%: WidgetHelper.GetWidgetHolderStyles(Model.Settings) %>">
         <div style="<%: (Model.Settings != null && !String.IsNullOrEmpty(Model.Settings.LookAndFeelSettings.OtherStyles)) ? Model.Settings.LookAndFeelSettings.OtherStyles : String.Empty %>">
             <%if (Model.Widget != null)

@@ -8,6 +8,7 @@ using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Permissions.Operations;
+using Framework.Core;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
 
@@ -281,49 +282,75 @@ namespace Core.Web.Helpers
         /// Gets the navigation menu.
         /// </summary>
         /// <returns></returns>
-        public static IEnumerable<NavigationMenuModel> GetNavigationMenu(PageViewModel currentPage,ICorePrincipal user)
+        public static NavigationMenuModel GetNavigationMenu(PageViewModel currentPage,ICorePrincipal user)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
-
             var pages = pageService.GetAllowedPagesByOperation(user,(int)PageOperations.View).OrderBy(page=>page.OrderNumber);
-
             var pagesToRemove = pageService.GetAllowedPagesByOperation(user, (int)PageOperations.Delete).OrderBy(page => page.OrderNumber);
-
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            var pageMode = GetCurrentUserPageMode();
+            var menuItems = new List<NavigationMenuItemModel>();
 
             bool addNewPagesAccess = permissionService.IsAllowed((int) PageOperations.AddNewPages, user, typeof (Page), null,
                                                   PermissionOperationLevel.Type);
 
-            List<NavigationMenuModel> items = pages.Select(page => new NavigationMenuModel { Page = page, IsCurrent = currentPage != null && page.Id == currentPage.Id, RemoveAccess = pagesToRemove.FirstOrDefault(item => item.Id == page.Id) != null }).ToList();
+            List<NavigationMenuItemModel> items = pages.Select(page => new NavigationMenuItemModel
+                                                                       {
+                                                                           Page = page,
+                                                                           IsCurrent = currentPage != null && page.Id == currentPage.Id,
+                                                                           RemoveAccess = pagesToRemove.FirstOrDefault(item => item.Id == page.Id) != null,
+                                                                           PageMode = pageMode
+                                                                       }).ToList();
 
             foreach (var item in items)
             {
                 if (item.Page.ParentPageId == null)
                 {
-                    item.Children = Flatten(item, items, 2, addNewPagesAccess);
-                    yield return item;
+                    item.Children = Flatten(item, items, 2, addNewPagesAccess, pageMode);
+                    menuItems.Add(item);
                 }
             }
-            if (addNewPagesAccess)
-                yield return new NavigationMenuModel();
+            if (addNewPagesAccess && pageMode==PageMode.Edit)
+                menuItems.Add(new NavigationMenuItemModel
+                                  {
+                                      PageMode = pageMode
+                                  });
+
+            return new NavigationMenuModel
+                       {
+                           MenuItems = menuItems,
+                           ManageAccess = addNewPagesAccess,
+                           PageMode = pageMode
+                       };
         }
 
-        public static List<NavigationMenuModel> Flatten(NavigationMenuModel root, List<NavigationMenuModel> items,int level, bool addNewPagesAccess)
+        public static List<NavigationMenuItemModel> Flatten(NavigationMenuItemModel root, List<NavigationMenuItemModel> items,int level, bool addNewPagesAccess, PageMode pageMode)
         {
-            var flattened = new List<NavigationMenuModel>{};
+            var flattened = new List<NavigationMenuItemModel>{};
 
             var children = items.Where(item => item.Page.ParentPageId!=null && item.Page.ParentPageId == root.Page.Id).ToList();
            
             foreach (var child in children)
             {
-                child.Children = Flatten(child, items, level + 1, addNewPagesAccess);
+                child.Children = Flatten(child, items, level + 1, addNewPagesAccess, pageMode);
                 flattened.Add(child);
             }
 
-            if (level <= 3 && addNewPagesAccess)
-                flattened.Add(new NavigationMenuModel { Parent = root });
+            if (level <= 3 && addNewPagesAccess && pageMode == PageMode.Edit)
+                flattened.Add(new NavigationMenuItemModel { Parent = root, PageMode = pageMode });
 
             return flattened;
+        }
+
+        public static PageMode GetCurrentUserPageMode()
+        {
+            return (PageMode)HttpContext.Current.Items[typeof(PageMode)];
+        }
+
+        public static void ChangePageMode(PageMode pageMode)
+        {
+            HttpContext.Current.Response.Cookies.Add(new HttpCookie(Constants.PageModeCookieName, pageMode.ToString()));
+            HttpContext.Current.Items[typeof (PageMode)] = pageMode;
         }
     }
 }

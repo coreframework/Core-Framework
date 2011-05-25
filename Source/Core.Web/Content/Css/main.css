@@ -71,6 +71,14 @@ legend      { font-weight: bold; font-size:1.2em; }
 	font-size:75%
 }
 
+.fleft {
+	float:left;
+}
+
+.fright {
+	float:right;
+}
+
 .container {
   position: relative;
   min-height: 100%;
@@ -111,6 +119,11 @@ h2.header {margin:10px 0;}
 	border:1px solid #D4B4F0;
 }
 
+.view-mode .widget
+{
+	border-color:rgba(0, 0, 0, 0);
+}
+
 .widget {
     margin: 0;
     -moz-border-radius: 4px;
@@ -142,6 +155,12 @@ h2.header {margin:10px 0;}
 
 .buttons {margin-top:10px;}
 h2.settings-header {margin-bottom:10px;}
+
+.page-mode-block {
+	float:right;
+	margin-right:30px;
+	display:inline;
+}
 
 .text-400 {width:400px}
 .text-282 {width:272px}
