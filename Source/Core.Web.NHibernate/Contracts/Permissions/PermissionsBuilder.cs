@@ -105,7 +105,6 @@ namespace Core.Web.NHibernate.Contracts.Permissions
         public IPermissionsBuilder For(Role role)
         {
             rule.Role = role;
-            rule.Scope = PermissionScope.Role;
             return this;
         }
 

@@ -17,7 +17,7 @@ namespace Core.ContentPages.Migrations
             Database.AddTable("ContentPageWidgets", t =>
             {
                 t.PrimaryKey();
-                t.ForeignKey("ContentPage").Table("ContentPages");
+                t.ForeignKey("ContentPage").Table("ContentPages").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
 

@@ -13,7 +13,7 @@ namespace Core.Web.NHibernate.Mappings.Widgets
             Id(listMenuWidget => listMenuWidget.Id);
             Map(listMenuWidget => listMenuWidget.Orientation).CustomType(typeof(Orientation));
             HasManyToMany(post => post.Pages)
-             .Table("ListMenuWidgets_Pages")
+             .Table("ListMenuWidgetPages")
              .ParentKeyColumn("ListMenuWidgetId")
              .ChildKeyColumn("PageId")
              .Cascade.SaveUpdate()

@@ -15,7 +15,7 @@ namespace Core.Web.NHibernate.Helpers
 
         private const int SaltLength = 32;
 
-        private static readonly Dictionary<PasswordMode, HashAlgorithm> hasAlgorithmMapping = new Dictionary<PasswordMode, HashAlgorithm>
+        private static readonly Dictionary<PasswordMode, HashAlgorithm> hashAlgorithmMapping = new Dictionary<PasswordMode, HashAlgorithm>
         {
             { PasswordMode.MD5, new MD5CryptoServiceProvider() },
             { PasswordMode.SHA1, new SHA1Managed() },
@@ -44,9 +44,9 @@ namespace Core.Web.NHibernate.Helpers
         {
             PasswordHash result;
 
-            if (hasAlgorithmMapping.ContainsKey(mode))
+            if (hashAlgorithmMapping.ContainsKey(mode))
             {
-                HashAlgorithm algorithm = hasAlgorithmMapping[mode];
+                HashAlgorithm algorithm = hashAlgorithmMapping[mode];
 
                 var saltBytes = new byte[SaltLength];
                 RandomNumberGenerator.Create().GetBytes(saltBytes);
@@ -86,9 +86,9 @@ namespace Core.Web.NHibernate.Helpers
         {
             PasswordHash result;
 
-            if (hasAlgorithmMapping.ContainsKey(mode))
+            if (hashAlgorithmMapping.ContainsKey(mode))
             {
-                HashAlgorithm algorithm = hasAlgorithmMapping[mode];
+                HashAlgorithm algorithm = hashAlgorithmMapping[mode];
 
                 var saltBytes = Convert.FromBase64String(salt);
                 var passwordBytes = Encoding.UTF8.GetBytes(plainText);

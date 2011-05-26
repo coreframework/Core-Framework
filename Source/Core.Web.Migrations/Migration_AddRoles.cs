@@ -1,0 +1,35 @@
+﻿using ECM7.Migrator.Framework;
+using Framework.Migrator.Extensions;
+
+namespace Core.Web.Migrations
+{
+    /// <summary>
+    /// Adds Roles table.
+    /// </summary>
+    [Migration(5)]
+    public class MigrationAddRoles : Migration
+    {
+        /// <summary>
+        /// Executes migration.
+        /// </summary>
+        public override void Up()
+        {
+            Database.AddTable("Roles", t =>
+            {
+                t.PrimaryKey();
+                t.String("Name");
+                t.Bool("IsSystemRole");
+                t.Bool("NotAssignableRole");
+                t.Bool("NotPermissible");
+            });
+        }
+
+       /// <summary>
+        /// Rollbacks migration.
+        /// </summary>
+        public override void Down()
+        {
+            Database.RemoveTable("Roles");
+        }
+    }
+}

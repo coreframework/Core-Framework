@@ -30,16 +30,6 @@ namespace T4MVC.Admin {
             public readonly string Grid = "~/Areas/Admin/Views/Shared/Grid.ascx";
             public readonly string MainMenu = "~/Areas/Admin/Views/Shared/MainMenu.ascx";
             public readonly string TopLinks = "~/Areas/Admin/Views/Shared/TopLinks.ascx";
-            static readonly _EditorTemplates s_EditorTemplates = new _EditorTemplates();
-            public _EditorTemplates EditorTemplates { get { return s_EditorTemplates; } }
-            public partial class _EditorTemplates{
-                public readonly string Boolean = "~/Areas/Admin/Views/Shared/EditorTemplates/Boolean.aspx";
-                public readonly string ImageUpload = "~/Areas/Admin/Views/Shared/EditorTemplates/ImageUpload.aspx";
-                public readonly string List = "~/Areas/Admin/Views/Shared/EditorTemplates/List.aspx";
-                public readonly string MultilineText = "~/Areas/Admin/Views/Shared/EditorTemplates/MultilineText.aspx";
-                public readonly string Password = "~/Areas/Admin/Views/Shared/EditorTemplates/Password.aspx";
-                public readonly string String = "~/Areas/Admin/Views/Shared/EditorTemplates/String.aspx";
-            }
         }
     }
 

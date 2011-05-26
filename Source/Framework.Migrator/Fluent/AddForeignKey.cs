@@ -41,7 +41,8 @@ namespace Framework.Migrator.Fluent
                 database.AddColumn(ForeignKeyTable, GetColumn());
             }
 
-            database.AddForeignKey(Name, ForeignKeyTable, ForeignKeyColumn, PrimaryKeyTable, PrimaryKeyColumn, Constraint);
+            database.AddForeignKey(Name, ForeignKeyTable,
+                                   new[] {ForeignKeyColumn}, PrimaryKeyTable, new[] {PrimaryKeyColumn}, DeleteConstraint, UpdateConstraint);
         }
 
         #endregion

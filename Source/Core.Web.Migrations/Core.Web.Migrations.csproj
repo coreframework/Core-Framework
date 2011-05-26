@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{985C1140-7C95-4C1A-A279-0E7E7716C8C8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core.Web.Migrations</RootNamespace>
+    <AssemblyName>Core.Web.Migrations</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ECM7.Migrator">
+      <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.dll</HintPath>
+    </Reference>
+    <Reference Include="ECM7.Migrator.Framework">
+      <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Migration_InsertDefaultRecords.cs" />
+    <Compile Include="Migration_AddEntityTypes.cs" />
+    <Compile Include="Migration_AddLookAndFeelSettings.cs" />
+    <Compile Include="Migration_AddPageWidgetSettings.cs" />
+    <Compile Include="Migration_AddPageWidgets.cs" />
+    <Compile Include="Migration_AddPageSettings.cs" />
+    <Compile Include="Migration_AddPageLayoutTemplates.cs" />
+    <Compile Include="Migration_AddPageLayoutRows.cs" />
+    <Compile Include="Migration_AddPageLayouts.cs" />
+    <Compile Include="Migration_AddPageColumnWidthValues.cs" />
+    <Compile Include="Migration_AddPageLayoutColums.cs" />
+    <Compile Include="Migration_AddMigrations.cs" />
+    <Compile Include="Migration_AddPermissions.cs" />
+    <Compile Include="Migration_AddUserGroups.cs" />
+    <Compile Include="Migration_AddUserGroupsMembers.cs" />
+    <Compile Include="Migration_AddUserGroupsToRoles.cs" />
+    <Compile Include="Migration_AddUsersToRoles.cs" />
+    <Compile Include="Migration_AddWidgets.cs" />
+    <Compile Include="Migration_AddPlugins.cs" />
+    <Compile Include="Migration_AddRoles.cs" />
+    <Compile Include="Migration_AddUsers.cs" />
+    <Compile Include="Migration_AddPages.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Web.NHibernate\Core.Web.NHibernate.csproj">
+      <Project>{7C4A374D-775B-4C2D-AAF3-3E9B94011AE9}</Project>
+      <Name>Core.Web.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Migrator\Framework.Migrator.csproj">
+      <Project>{06ADA971-CAD6-42DC-8E42-AD242B594784}</Project>
+      <Name>Framework.Migrator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

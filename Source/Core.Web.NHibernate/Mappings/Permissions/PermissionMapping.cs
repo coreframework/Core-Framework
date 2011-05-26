@@ -1,5 +1,4 @@
 ﻿using Core.Web.NHibernate.Models.Permissions;
-using Core.Web.NHibernate.Models.Static;
 using FluentNHibernate.Mapping;
 
 namespace Core.Web.NHibernate.Mappings.Permissions
@@ -17,7 +16,6 @@ namespace Core.Web.NHibernate.Mappings.Permissions
             Cache.Region("Permissions").ReadWrite();
             Table("Permissions");
             Id(permission => permission.Id);
-            Map(permission => permission.Scope).CustomType(typeof(PermissionScope));
             Map(permission => permission.EntityId);
             Map(permission => permission.Permissions);
             References(permission => permission.Role);

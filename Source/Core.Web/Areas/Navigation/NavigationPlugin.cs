@@ -71,7 +71,7 @@ namespace Core.Web.Areas.Navigation
 
         public override Assembly GetPluginMigrationsAssembly()
         {
-            return null;
+            return Assembly.Load("Core.Navigation.Migrations");
         }
 
         //TODO: kill it!!!

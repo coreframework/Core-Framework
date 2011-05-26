@@ -81,7 +81,6 @@ namespace Core.Web.Helpers
                                              {
                                                  Role = role,
                                                  EntityId = model.EntityId,
-                                                 Scope = PermissionScope.Role,
                                                  EntityType = entityType,
                                              };
                     }

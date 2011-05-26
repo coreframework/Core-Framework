@@ -1028,6 +1028,10 @@
       <Project>{7EE54877-FD43-4458-BB95-15B93164BA80}</Project>
       <Name>Core.Framework.Plugins</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Navigation.Migrations\Core.Navigation.Migrations.csproj">
+      <Project>{7EDB58EA-ACE9-429A-8458-BC4F32DA732D}</Project>
+      <Name>Core.Navigation.Migrations</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Web.NHibernate\Core.Web.NHibernate.csproj">
       <Project>{7C4A374D-775B-4C2D-AAF3-3E9B94011AE9}</Project>
       <Name>Core.Web.NHibernate</Name>

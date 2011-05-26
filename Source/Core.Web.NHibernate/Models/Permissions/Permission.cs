@@ -4,8 +4,6 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using Core.Web.NHibernate.Models.Static;
 using Framework.Core.DomainModel;
 
 namespace Core.Web.NHibernate.Models.Permissions
@@ -23,12 +21,7 @@ namespace Core.Web.NHibernate.Models.Permissions
             Role = new Role();
             EntityType = new EntityType();
         }
-        /// <summary>
-        /// Gets or sets the level of this permission.
-        /// </summary>
-        /// <value>The permission level.</value>
-        public virtual PermissionScope Scope { get; set; }
-
+        
         /// <summary>
         /// Gets or sets the entity this permission applies to (for entity-specific operations).
         /// </summary>

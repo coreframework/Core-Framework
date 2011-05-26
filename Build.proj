@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+		<Platform Condition=" '$(Platform)' == '' And '$(PROCESSOR_ARCHITEW6432)' == 'AMD64'">AnyCPU</Platform>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<Environment Condition=" '$(Environment)' == '' ">Test</Environment>
+		<Project>Core</Project>		
+		<SolutionPath>$(MSBuildProjectDirectory)</SolutionPath>
+		<SourcePath>$(SolutionPath)\Source</SourcePath>
+		<ApplicationRoot>$(SourcePath)\$(Project).Web</ApplicationRoot>
+		<LibsPath>$(SolutionPath)\Libs</LibsPath>
+		<ToolsPath>$(SolutionPath)\Tools</ToolsPath>
+		<MSBuildCommunityTasksPath>$(ToolsPath)\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
+		<MigratorTasksPath>$(ToolsPath)\Migrator</MigratorTasksPath>
+		<FrameworkTasksPath>$(ToolsPath)\FrameworkTasks</FrameworkTasksPath>
+		<BuildPath>$(SolutionPath)\Build</BuildPath>
+
+		<Major>1</Major>
+		<Minor>0</Minor>
+		<Build>0</Build>
+		<Revision>1</Revision>
+		<Version>1</Version>
+		
+    <!-- filename postfix for NUnit result files -->
+    <NUnitPostfix>-Results.xml</NUnitPostfix>
+    <!-- NUnit report xsl transformation file -->
+    <NUnitReportXsl>$(ToolsPath)\NUnit\NUnitReport.xsl</NUnitReportXsl>
+	</PropertyGroup>
+	
+	<Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+	<Import Project="$(MigratorTasksPath)\Migrator.Targets" />
+	<Import Project="$(FrameworkTasksPath)\Framework.Targets" />
+	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v10.0\Microsoft.TextTemplating.targets" />
+	
+	<ItemGroup>
+		<Clean Include="$(BuildPath)" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <!-- set metadata <Group>Build</Group> for task projects -->
+    <!-- set metadata <Group>Tests</Group> for NUnit projects -->
+
+    <VSPprojects Include="$(SourcePath)\Core.Web\Core.Web.csproj">
+      <Group>Build</Group>
+    </VSPprojects>
+		
+    <VSPprojects Include="$(SourcePath)\Core.Web.Migrations\Core.Web.Migrations.csproj">
+      <Group>Database</Group>
+    </VSPprojects>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <NUnitReportXslFile Include="$(NUnitReportXsl)">
+      <project>$(Project)</project>
+      <configuration>$(Configuration)</configuration>
+      <msbuildFilename>$(MSBuildProjectFullPath)</msbuildFilename>
+      <msbuildBinpath>$(MSBuildBinPath)</msbuildBinpath>
+      <xslFile>$(NUnitReportXsl)</xslFile>
+    </NUnitReportXslFile>
+  </ItemGroup>
+	
+	<!-- Cleans the entire build directory and cleans up vs projects. -->
+	<Target Name="Clean">
+    <Message Text="=======================================================================================" />
+    <Message Text="Clean &quot;$(Project)&quot;, configuration &quot;$(Configuration)&quot;"/>
+    <Message Text="=======================================================================================" />
+
+    <!-- Clean the entire build directory. -->
+    <RemoveDir Directories="@(Clean)" />
+
+    <!-- Call all VS projects to clean up. -->
+    <MSBuild Projects="@(VSPprojects)" Targets="Clean" Properties="Configuration=$(Configuration)" />
+	</Target>
+	
+	<!-- Builds the VS projects of one build group, copy .dll, .pdb, .xml to the output directory -->
+	<Target Name="Build" DependsOnTargets="Clean">
+    <Message Text="=======================================================================================" />
+    <Message Text="Build &quot;$(Project)&quot;, configuration &quot;$(Configuration)&quot;."/>
+    <Message Text="=======================================================================================" />
+
+		<!-- Build all projects with $(BuildGroup) specified -->
+    <MSBuild Projects="@(VSPprojects)" Condition="'%(Group)'=='Build'" Properties="Configuration=$(Configuration);Platform=$(Platform);OutputPath=$(BuildPath);Version=$(Version);" >
+      <Output TaskParameter="TargetOutputs" ItemName="TargetOutputs"/>
+    </MSBuild>
+	</Target>
+	
+	<!-- Reads database configuration from main application. -->
+	<Target Name="ConfigureDatabase">
+		<ConfigureDatabase ApplicationRoot="$(ApplicationRoot)" ConfigPath="Config\database.yml" Environment="$(Environment)">
+			<Output TaskParameter="ConnectionString" PropertyName="ConnectionString" />
+			<Output TaskParameter="Dialect" PropertyName="Dialect" />
+		</ConfigureDatabase>
+		
+		<Message Text="Database: $(Dialect) - $(ConnectionString)" />
+	</Target>	
+	
+	<Target Name="BuildMigrations">
+		<!-- Build all projects with $(BuildGroup) specified -->
+		<MSBuild Projects="@(VSPprojects)" Condition="'%(Group)'=='Database'" Properties="Configuration=$(Configuration);Platform=$(Platform);OutputPath=$(BuildPath)" >
+			<Output TaskParameter="TargetOutputs" ItemName="DatabaseOutput"/>
+		</MSBuild>
+			
+		<Message Text="Built: @(MigrationAssemblies)"/>
+	</Target>
+	
+	<Target Name="Migrate" DependsOnTargets="ConfigureDatabase;BuildMigrations">
+		<Message Text="Migrating: @(MigrationAssemblies)"/>
+		
+		<CreateProperty Value="-1"  Condition="'$(SchemaVersion)'==''">
+				<Output TaskParameter="Value" PropertyName="SchemaVersion"/>
+		</CreateProperty>
+
+		<Migrate Dialect="$(Dialect)" Connectionstring="$(ConnectionString)" Migrations="@(DatabaseOutput)" To="$(SchemaVersion)"/>
+	</Target>
+</Project>

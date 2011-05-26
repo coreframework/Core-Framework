@@ -264,7 +264,6 @@ namespace Core.Web.Helpers
                                           {
                                               Id = model.ResourceId
                                           },
-                                      Scope = PermissionScope.Role,
                                   };
                 if (model.OperationIds!=null)
                 {

@@ -59,7 +59,9 @@ namespace Framework.Migrator.Fluent
 
         private bool generateColumn = true;
 
-        private ForeignKeyConstraint constraint = ForeignKeyConstraint.NoAction;
+        private ForeignKeyConstraint _deleteConstraint = ForeignKeyConstraint.NoAction;
+        
+        private ForeignKeyConstraint _updateConstraint = ForeignKeyConstraint.NoAction;
 
         private DbType columnType = Defaults.PrimaryKeyType;
 
@@ -155,9 +157,9 @@ namespace Framework.Migrator.Fluent
         }
 
         /// <summary>
-        /// Gets the name of constraint.
+        /// Gets the name of DeleteConstraint.
         /// </summary>
-        /// <value>The name of constraint.</value>
+        /// <value>The name of DeleteConstraint.</value>
         public String Name
         {
             get
@@ -211,18 +213,34 @@ namespace Framework.Migrator.Fluent
         }
 
         /// <summary>
-        /// Gets the constraint behaviour.
+        /// Gets the DeleteConstraint behaviour.
         /// </summary>
-        /// <value>The constraint.</value>
-        public ForeignKeyConstraint Constraint
+        /// <value>The DeleteConstraint.</value>
+        public ForeignKeyConstraint DeleteConstraint
         {
             get
             {
-                return constraint;
+                return _deleteConstraint;
             }
             private set
             {
-                constraint = value;
+                _deleteConstraint = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets the UpdateConstraint behaviour.
+        /// </summary>
+        /// <value>The UpdateConstraint.</value>
+        public ForeignKeyConstraint UpdateConstraint
+        {
+            get
+            {
+                return _updateConstraint;
+            }
+            private set
+            {
+                _updateConstraint = value;
             }
         }
 
@@ -280,9 +298,9 @@ namespace Framework.Migrator.Fluent
         }
 
         /// <summary>
-        /// Changes the name of constraint.
+        /// Changes the name of DeleteConstraint.
         /// </summary>
-        /// <param name="foreignKeyName">Name of constraint.</param>
+        /// <param name="foreignKeyName">Name of DeleteConstraint.</param>
         /// <returns>foreign key instance.</returns>
         public ForeignKey Named(String foreignKeyName)
         {
@@ -291,13 +309,24 @@ namespace Framework.Migrator.Fluent
         }
 
         /// <summary>
-        /// Changes the constraint behaviour for update and delete.
+        /// Changes the DeleteConstraint behaviour for delete.
         /// </summary>
-        /// <param name="foreignKeyConstraint">Constraint behaviour.</param>
+        /// <param name="foreignKeyConstraint">DeleteConstraint behaviour.</param>
         /// <returns>foreign key instance.</returns>
-        public ForeignKey OnChange(ForeignKeyConstraint foreignKeyConstraint)
+        public ForeignKey OnDelete(ForeignKeyConstraint foreignKeyConstraint)
         {
-            Constraint = foreignKeyConstraint;
+            DeleteConstraint = foreignKeyConstraint;
+            return this;
+        }
+
+        /// <summary>
+        /// Changes the DeleteConstraint behaviour for delete.
+        /// </summary>
+        /// <param name="foreignKeyConstraint">DeleteConstraint behaviour.</param>
+        /// <returns>foreign key instance.</returns>
+        public ForeignKey OnUpdate(ForeignKeyConstraint foreignKeyConstraint)
+        {
+            UpdateConstraint = foreignKeyConstraint;
             return this;
         }
 

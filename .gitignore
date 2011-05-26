@@ -44,4 +44,9 @@
 /Source/Core.5.1.ReSharper.user
 /Source/Core.Web/Core.Web.csproj.user
 /Source/Core.Web/Core.Web.Publish.xml
+/Source/Core.Web.Migrations/bin
+/Source/Core.Web.Migrations/obj
+/Source/Core.Navigation.Migrations/bin
+/Source/Core.Navigation.Migrations/obj
+/Build
 
