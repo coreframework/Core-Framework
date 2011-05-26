@@ -18,6 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Framework.MVC.T4MVC;
 using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -254,14 +255,6 @@ namespace System.Web.Mvc {
     }
 }
 
-   
-[GeneratedCode("T4MVC", "2.0")]   
-public interface IT4MVCActionResult {   
-    string Area { get; set; }   
-    string Controller { get; set; }   
-    string Action { get; set; }   
-    RouteValueDictionary RouteValueDictionary { get; set; }   
-}   
   
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

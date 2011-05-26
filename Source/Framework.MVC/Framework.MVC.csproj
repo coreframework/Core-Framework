@@ -189,6 +189,7 @@
     <Compile Include="Resources\YamlResourcesInstaller.cs" />
     <Compile Include="Routing\HttpVerbConstraint.cs" />
     <Compile Include="Metadata\Attributes\EmailAttribute.cs" />
+    <Compile Include="T4MVC\IT4MVCActionResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AssemblyInfo.template" />

@@ -95,14 +95,14 @@
     <Compile Include="AdminController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContentPageController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ContentViewerWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ContentViewerWidgetHelper.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
-    <Compile Include="ContentPageController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="ContentPagePlugin.cs" />
     <Compile Include="Controllers\ContentPageController.cs" />
     <Compile Include="Controllers\ContentViewerWidgetController.cs" />

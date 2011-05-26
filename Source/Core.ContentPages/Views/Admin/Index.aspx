@@ -23,7 +23,7 @@
                    <%:Html.RouteLink("View", new { controller = "ContentPage", action = "ShowById", id = page.Id })%>
                    <%:Html.RouteLink("Edit", new { controller = "ContentPage", action = "Edit", id = page.Id })%>
                   
-                 <% using (Html.BeginForm1(ContentPagesMVC.ContentPage.Remove(page.Id), FormMethod.Post))
+                 <% using (Html.BeginForm(ContentPagesMVC.ContentPage.Remove(page.Id), FormMethod.Post))
                     { %>
                         <%: Html.LinkSubmitButton("Remove")%>
                       

@@ -52,6 +52,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Framework.MVC.T4MVC;
 using <#=T4MVCNamespace #>;
 <#foreach (var referencedNamespace in ReferencedNamespaces) { #>
 using <#=referencedNamespace #>;

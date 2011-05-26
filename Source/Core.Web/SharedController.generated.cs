@@ -18,6 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Framework.MVC.T4MVC;
 using T4MVC;
 namespace T4MVC {
     public class SharedController {
@@ -51,7 +52,6 @@ namespace T4MVC {
             static readonly _Pages s_Pages = new _Pages();
             public _Pages Pages { get { return s_Pages; } }
             public partial class _Pages{
-                public readonly string PageModeForm = "~/Views/Shared/Pages/PageModeForm.ascx";
                 public readonly string PageModePanel = "~/Views/Shared/Pages/PageModePanel.ascx";
             }
             static readonly _Users s_Users = new _Users();

@@ -34,7 +34,7 @@ const string ActionResultInterfaceName = "IT4MVCActionResult";
 
 // If true, the T4MVC action result interface will be generated
 // If false, the namespace of the interface must be referenced in the 'ReferencedNamespaces' setting
-const bool GenerateActionResultInterface = true;
+const bool GenerateActionResultInterface = false;
 
 // If true, use lower case tokens in routes for the area, controller and action names
 const bool UseLowercaseRoutes = false;

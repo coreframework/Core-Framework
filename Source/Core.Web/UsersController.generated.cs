@@ -18,6 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
+using Framework.MVC.T4MVC;
 using T4MVC;
 namespace Core.Web.Controllers {
     public partial class UsersController {
