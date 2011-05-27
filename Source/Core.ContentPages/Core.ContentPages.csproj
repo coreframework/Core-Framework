@@ -29,9 +29,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Core.Web\Areas\ContentPage\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -74,6 +74,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web" />
@@ -139,6 +140,7 @@
     <ProjectReference Include="..\Core.Framework.MEF.ServiceLocation\Core.Framework.MEF.ServiceLocation.csproj">
       <Project>{1A8F39D8-9D23-4518-B483-D7D2ADF3457D}</Project>
       <Name>Core.Framework.MEF.ServiceLocation</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Core.Framework.MEF\Core.Framework.MEF.csproj">
       <Project>{A9E75C6E-5446-4A42-A9F3-84B0BE3859C0}</Project>
@@ -148,6 +150,7 @@
     <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
       <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
       <Name>Core.Framework.Permissions</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Core.Framework.Plugins\Core.Framework.Plugins.csproj">
       <Project>{7EE54877-FD43-4458-BB95-15B93164BA80}</Project>
@@ -157,14 +160,17 @@
     <ProjectReference Include="..\Framework.Core\Framework.Core.csproj">
       <Project>{8548D8D8-F616-42B6-9271-DB8E600CF652}</Project>
       <Name>Framework.Core</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Framework.Facilities.NHibernate\Framework.Facilities.NHibernate.csproj">
       <Project>{832BAE45-2032-40A6-B889-1FF854885536}</Project>
       <Name>Framework.Facilities.NHibernate</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Framework.MVC\Framework.MVC.csproj">
       <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
       <Name>Framework.MVC</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

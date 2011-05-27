@@ -70,7 +70,7 @@ namespace Framework.Core.Configuration
             foreach (var database in databases)
             {
                 application.DatabaseConfiguration[database.Key] = ParseConfiguration(database.Value, application);
-                if( currentEnvironment.Equals(database.Key))
+                if (currentEnvironment!=null && currentEnvironment.Equals(database.Key))
                 {
                     databaseConfiguration = application.DatabaseConfiguration[database.Key];
                 }

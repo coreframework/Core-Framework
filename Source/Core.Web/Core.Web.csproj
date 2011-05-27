@@ -26,7 +26,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -357,7 +357,54 @@
     <Content Include="Content\Css\screen.css" />
     <Content Include="Content\Error\403.htm" />
     <Content Include="Content\Error\Error.htm" />
+    <Content Include="Content\Images\Admin\add_tab.png" />
+    <Content Include="Content\Images\Admin\avatar_32x32.png" />
+    <Content Include="Content\Images\Admin\avatar_96x96.png" />
+    <Content Include="Content\Images\Admin\brown_bottom_line.gif" />
+    <Content Include="Content\Images\Admin\buttons_background.png" />
+    <Content Include="Content\Images\Admin\calendar_down.gif" />
+    <Content Include="Content\Images\Admin\collapse.png" />
+    <Content Include="Content\Images\Admin\draft_page.png" />
+    <Content Include="Content\Images\Admin\expand.png" />
+    <Content Include="Content\Images\Admin\layout.png" />
+    <Content Include="Content\Images\Admin\login_shadow.png" />
+    <Content Include="Content\Images\Admin\metadata_toggle.png" />
+    <Content Include="Content\Images\Admin\minus.png" />
+    <Content Include="Content\Images\Admin\minus_disabled.png" />
+    <Content Include="Content\Images\Admin\minus_grey.png" />
+    <Content Include="Content\Images\Admin\navigation_background.gif" />
+    <Content Include="Content\Images\Admin\navigation_secondary_background.png" />
+    <Content Include="Content\Images\Admin\navigation_secondary_separator.gif" />
+    <Content Include="Content\Images\Admin\navigation_shadow.png" />
+    <Content Include="Content\Images\Admin\navigation_tabs.png" />
+    <Content Include="Content\Images\Admin\new_homepage.png" />
+    <Content Include="Content\Images\Admin\new_layout.png" />
+    <Content Include="Content\Images\Admin\new_snippet.png" />
+    <Content Include="Content\Images\Admin\new_user.png" />
+    <Content Include="Content\Images\Admin\page.png" />
     <Content Include="Content\Images\Admin\plus.png" />
+    <Content Include="Content\Images\Admin\plus_grey.png" />
+    <Content Include="Content\Images\Admin\popup_border_background.png" />
+    <Content Include="Content\Images\Admin\popup_border_bottom_left.png" />
+    <Content Include="Content\Images\Admin\popup_border_bottom_right.png" />
+    <Content Include="Content\Images\Admin\popup_border_top_left.png" />
+    <Content Include="Content\Images\Admin\popup_border_top_right.png" />
+    <Content Include="Content\Images\Admin\shadow.png" />
+    <Content Include="Content\Images\Admin\shadow_grey.png" />
+    <Content Include="Content\Images\Admin\single_form_shadow.png" />
+    <Content Include="Content\Images\Admin\snippet.png" />
+    <Content Include="Content\Images\Admin\spacer.gif" />
+    <Content Include="Content\Images\Admin\spinner.gif" />
+    <Content Include="Content\Images\Admin\status_background.png" />
+    <Content Include="Content\Images\Admin\status_bottom_left.png" />
+    <Content Include="Content\Images\Admin\status_bottom_right.png" />
+    <Content Include="Content\Images\Admin\status_spinner.gif" />
+    <Content Include="Content\Images\Admin\status_top_left.png" />
+    <Content Include="Content\Images\Admin\status_top_right.png" />
+    <Content Include="Content\Images\Admin\tab_close.png" />
+    <Content Include="Content\Images\Admin\vertical_tan_gradient.png" />
+    <Content Include="Content\Images\Admin\view_site.png" />
+    <Content Include="Content\Images\Admin\virtual_page.png" />
     <Content Include="Content\Images\colorpicker\blank.gif" />
     <Content Include="Content\Images\colorpicker\colorpicker_background.png" />
     <Content Include="Content\Images\colorpicker\colorpicker_hex.png" />
@@ -947,16 +994,16 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />
     <Content Include="Areas\Admin\Views\Web.config" />
-    <None Include="Config\asset_packages.yml" />
-    <None Include="Config\database.yml" />
-    <None Include="Config\sample.database.yml" />
-    <None Include="Resources\Admin\common.yml" />
-    <None Include="Resources\Admin\controllers.yml" />
-    <None Include="Resources\Admin\models.yml" />
-    <None Include="Resources\Admin\views.yml" />
-    <None Include="Resources\common.yml" />
-    <None Include="Resources\models.yml" />
-    <None Include="Resources\views.yml" />
+    <Content Include="Config\asset_packages.yml" />
+    <Content Include="Config\database.yml" />
+    <Content Include="Config\sample.database.yml" />
+    <Content Include="Resources\Admin\common.yml" />
+    <Content Include="Resources\Admin\controllers.yml" />
+    <Content Include="Resources\Admin\models.yml" />
+    <Content Include="Resources\Admin\views.yml" />
+    <Content Include="Resources\common.yml" />
+    <Content Include="Resources\models.yml" />
+    <Content Include="Resources\views.yml" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.cfm" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.php" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.pl" />

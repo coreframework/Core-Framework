@@ -29,7 +29,7 @@ namespace Core.Web.Areas.Navigation.Helpers
             if (widget!=null)
             {
                 var allowedPages = pageService.GetAllowedPagesByOperation(user, (int)PageOperations.View);
-                widget.Pages = widget.Pages.Where(page => allowedPages.Contains(page));
+                widget.Pages = widget.Pages.Where(page => allowedPages.FirstOrDefault(p=>page.Id==p.Id)!=null);
             }
             
             return widget;

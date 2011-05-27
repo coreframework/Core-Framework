@@ -4,7 +4,7 @@
 		<Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
 		<Platform Condition=" '$(Platform)' == '' And '$(PROCESSOR_ARCHITEW6432)' == 'AMD64'">AnyCPU</Platform>
 		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<Environment Condition=" '$(Environment)' == '' ">Test</Environment>
+		<Environment Condition=" '$(Environment)' == '' ">Development</Environment>
 		<Project>Core</Project>		
 		<SolutionPath>$(MSBuildProjectDirectory)</SolutionPath>
 		<SourcePath>$(SolutionPath)\Source</SourcePath>
