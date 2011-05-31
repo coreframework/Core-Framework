@@ -54,15 +54,37 @@ namespace Core.Web.NHibernate.Services
             return query.Count() + 1;
         }
 
+        public Page GetFirstAllowedPage(ICorePrincipal user, Int32 operationCode)
+        {
+            var criteria = GetAllowedPagesCriteria(user, operationCode);
+
+            criteria.Add(Restrictions.IsNull("pages.ParentPageId"));
+
+            return (Page) criteria.SetCacheable(true).SetMaxResults(1).AddOrder(Order.Asc("pages.OrderNumber")).UniqueResult();
+        }
+
         public IEnumerable<Page> GetAllowedPagesByOperation(ICorePrincipal user, Int32 operationCode)
         {
-            var criteria = Session.CreateCriteria<Page>("pages").CreateAlias("User", "pageUser", JoinType.LeftOuterJoin);
+            var criteria = GetAllowedPagesCriteria(user, operationCode);
+
+            return criteria.SetCacheable(true).List<Page>();
+        }
+
+        /// <summary>
+        /// Gets the allowed pages criteria.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="operationCode">The operation code.</param>
+        /// <returns></returns>
+        private ICriteria GetAllowedPagesCriteria(ICorePrincipal user, Int32 operationCode)
+        {
+            ICriteria criteria = Session.CreateCriteria<Page>("pages").CreateAlias("User", "pageUser", JoinType.LeftOuterJoin);
 
             if (user != null)
             {
                 if (user.IsInRole(SystemRoles.Administrator.ToString()))
-                    return GetAll();
-                
+                    return criteria;
+
                 var rolesSubQuery = DetachedCriteria.For<Role>()
                                .CreateAlias("Users", "user")
                                .Add(Restrictions.Eq("user.id", user.PrincipalId))
@@ -84,9 +106,9 @@ namespace Core.Web.NHibernate.Services
                                           Restrictions.Or(Subqueries.PropertyIn("Role.Id", rolesSubQuery), Subqueries.PropertyIn("Role.Id", userGroupsRolesSubQuery)),
                                           Restrictions.Eq("Role.Id", (Int64)SystemRoles.User)),
 
-                                          Restrictions.And( Restrictions.IsNotNull("pageUser.id"), Restrictions.And(Restrictions.Eq("pageUser.id", user.PrincipalId), Restrictions.Eq("Role.Id", (Int64)SystemRoles.Owner)))
+                                          Restrictions.And(Restrictions.IsNotNull("pageUser.id"), Restrictions.And(Restrictions.Eq("pageUser.id", user.PrincipalId), Restrictions.Eq("Role.Id", (Int64)SystemRoles.Owner)))
                                           )).Add(
-                                          
+
                                           Restrictions.Eq(Projections.SqlProjection(String.Format("Permissions & {0} as result", operationCode), new[] { "result" }, new IType[] { NHibernateUtil.Int32 }), operationCode))
                                 .SetProjection(Projections.Id());
 
@@ -103,7 +125,7 @@ namespace Core.Web.NHibernate.Services
                 criteria.Add(Subqueries.Exists(permissionsSubQuery));
             }
 
-            return criteria.SetCacheable(true).List<Page>();
+            return criteria;
         }
 
         #endregion

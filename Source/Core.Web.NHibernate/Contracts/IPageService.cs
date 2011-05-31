@@ -36,5 +36,13 @@ namespace Core.Web.NHibernate.Contracts
         /// <param name="operationCode">The operation code.</param>
         /// <returns></returns>
         IEnumerable<Page> GetAllowedPagesByOperation(ICorePrincipal user, Int32 operationCode);
+
+        /// <summary>
+        /// Gets the first allowed page.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="operationCode">The operation code.</param>
+        /// <returns></returns>
+        Page GetFirstAllowedPage(ICorePrincipal user, Int32 operationCode);
     }
 }
