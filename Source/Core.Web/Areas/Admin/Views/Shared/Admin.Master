@@ -34,5 +34,9 @@
       </div>
     </div>
   </div>
+  <script type="text/javascript" language="javascript">
+      var currentPath = '<%=HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath %>'
+      jqGridInclude();
+  </script>
 </body>
 </html>

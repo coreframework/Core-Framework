@@ -1,6 +1,5 @@
-function jqGridInclude()
-{
-    var pathtojsfiles = "/core/Scripts/jqGrid/js/"; // need to be ajusted
+function jqGridInclude() {
+    var pathtojsfiles = currentPath + "/Scripts/jqGrid/js/"; // need to be ajusted
     // set include to false if you do not want some modules to be included
     var combineIntoOne = false; 
     var combinedInclude = new Array();
@@ -64,4 +63,3 @@ function jqGridInclude()
         oHead.appendChild(oScript);        
     };
 };
-jqGridInclude();

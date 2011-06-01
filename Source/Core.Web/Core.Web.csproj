@@ -71,6 +71,10 @@
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FredCK.FCKeditorV2, Version=2.6.3.25168, Culture=neutral, PublicKeyToken=4f86767c9b519a06, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\FCKEditor\FredCK.FCKeditorV2.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\Libs\log4net\log4net.dll</HintPath>
     </Reference>
