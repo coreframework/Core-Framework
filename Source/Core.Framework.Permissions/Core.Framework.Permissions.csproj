@@ -34,6 +34,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
@@ -50,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\IPermissionCommonService.cs" />
+    <Compile Include="Contracts\IPermissionsHelper.cs" />
+    <Compile Include="Extensions\AuthenticationExtensions.cs" />
     <Compile Include="Helpers\OperationDescriptionAttribute.cs" />
     <Compile Include="Helpers\OperationsHelper.cs" />
     <Compile Include="Helpers\PermissionsHelper.cs" />
@@ -57,10 +62,13 @@
     <Compile Include="Models\BaseEntityOperations.cs" />
     <Compile Include="Models\ICorePrincipal.cs" />
     <Compile Include="Models\IPermissable.cs" />
+    <Compile Include="Models\IPermissionModel.cs" />
     <Compile Include="Models\IPermissionOperation.cs" />
+    <Compile Include="Models\IRole.cs" />
     <Compile Include="Models\PermissionArea.cs" />
     <Compile Include="Models\PermissionOperationLevel.cs" />
     <Compile Include="Models\PermissionOperation.cs" />
+    <Compile Include="Models\PermissionsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

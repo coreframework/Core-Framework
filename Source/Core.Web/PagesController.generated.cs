@@ -387,7 +387,7 @@ namespace Core.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ApplyPagePermissions(Core.Web.Models.PermissionsModel model) {
+        public override System.Web.Mvc.ActionResult ApplyPagePermissions(Core.Framework.Permissions.Models.PermissionsModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPagePermissions);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
@@ -429,7 +429,7 @@ namespace Core.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ApplyWidgetPermissions(Core.Web.Models.PermissionsModel model) {
+        public override System.Web.Mvc.ActionResult ApplyWidgetPermissions(Core.Framework.Permissions.Models.PermissionsModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ApplyWidgetPermissions);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

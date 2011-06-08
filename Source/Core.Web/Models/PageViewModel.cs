@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Core.Framework.Permissions.Contracts;
+using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;

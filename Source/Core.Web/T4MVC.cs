@@ -1615,7 +1615,54 @@ namespace Links {
                 private const string URLPATH = "~/Content/Images/Admin";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string add_tab_png = Url("add_tab.png");
+                public static readonly string avatar_32x32_png = Url("avatar_32x32.png");
+                public static readonly string avatar_96x96_png = Url("avatar_96x96.png");
+                public static readonly string brown_bottom_line_gif = Url("brown_bottom_line.gif");
+                public static readonly string buttons_background_png = Url("buttons_background.png");
+                public static readonly string calendar_down_gif = Url("calendar_down.gif");
+                public static readonly string collapse_png = Url("collapse.png");
+                public static readonly string draft_page_png = Url("draft_page.png");
+                public static readonly string expand_png = Url("expand.png");
+                public static readonly string layout_png = Url("layout.png");
+                public static readonly string login_shadow_png = Url("login_shadow.png");
+                public static readonly string metadata_toggle_png = Url("metadata_toggle.png");
+                public static readonly string minus_png = Url("minus.png");
+                public static readonly string minus_disabled_png = Url("minus_disabled.png");
+                public static readonly string minus_grey_png = Url("minus_grey.png");
+                public static readonly string navigation_background_gif = Url("navigation_background.gif");
+                public static readonly string navigation_secondary_background_png = Url("navigation_secondary_background.png");
+                public static readonly string navigation_secondary_separator_gif = Url("navigation_secondary_separator.gif");
+                public static readonly string navigation_shadow_png = Url("navigation_shadow.png");
+                public static readonly string navigation_tabs_png = Url("navigation_tabs.png");
+                public static readonly string new_homepage_png = Url("new_homepage.png");
+                public static readonly string new_layout_png = Url("new_layout.png");
+                public static readonly string new_snippet_png = Url("new_snippet.png");
+                public static readonly string new_user_png = Url("new_user.png");
+                public static readonly string page_png = Url("page.png");
                 public static readonly string plus_png = Url("plus.png");
+                public static readonly string plus_grey_png = Url("plus_grey.png");
+                public static readonly string popup_border_background_png = Url("popup_border_background.png");
+                public static readonly string popup_border_bottom_left_png = Url("popup_border_bottom_left.png");
+                public static readonly string popup_border_bottom_right_png = Url("popup_border_bottom_right.png");
+                public static readonly string popup_border_top_left_png = Url("popup_border_top_left.png");
+                public static readonly string popup_border_top_right_png = Url("popup_border_top_right.png");
+                public static readonly string shadow_png = Url("shadow.png");
+                public static readonly string shadow_grey_png = Url("shadow_grey.png");
+                public static readonly string single_form_shadow_png = Url("single_form_shadow.png");
+                public static readonly string snippet_png = Url("snippet.png");
+                public static readonly string spacer_gif = Url("spacer.gif");
+                public static readonly string spinner_gif = Url("spinner.gif");
+                public static readonly string status_background_png = Url("status_background.png");
+                public static readonly string status_bottom_left_png = Url("status_bottom_left.png");
+                public static readonly string status_bottom_right_png = Url("status_bottom_right.png");
+                public static readonly string status_spinner_gif = Url("status_spinner.gif");
+                public static readonly string status_top_left_png = Url("status_top_left.png");
+                public static readonly string status_top_right_png = Url("status_top_right.png");
+                public static readonly string tab_close_png = Url("tab_close.png");
+                public static readonly string vertical_tan_gradient_png = Url("vertical_tan_gradient.png");
+                public static readonly string view_site_png = Url("view_site.png");
+                public static readonly string virtual_page_png = Url("virtual_page.png");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

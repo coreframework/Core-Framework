@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
+using Core.Framework.Permissions.Models;
 using Framework.Core.DomainModel;
 
 namespace Core.Web.NHibernate.Models.Permissions
@@ -11,7 +13,7 @@ namespace Core.Web.NHibernate.Models.Permissions
     /// <summary>
     /// Allow or deny some operation for specified user or role.
     /// </summary>
-    public class Permission : Entity
+    public class Permission : Entity, IPermissionModel
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Permission"/> class.
@@ -45,5 +47,14 @@ namespace Core.Web.NHibernate.Models.Permissions
         /// </summary>
         /// <value>The permissions.</value>
         public virtual long Permissions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the role id.
+        /// </summary>
+        /// <value>The role id.</value>
+        public virtual long RoleId
+        {
+            get { return Role.Id; }
+        }
     }
 }

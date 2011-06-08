@@ -6,7 +6,7 @@ using Core.Web.NHibernate.Models.Permissions;
 
 namespace Core.Web.Models
 {
-    public class PermissionsModel
+    public class PermissionsModel2
     {
         /// <summary>
         /// Gets or sets the page id.
@@ -37,6 +37,5 @@ namespace Core.Web.Models
         /// </summary>
         /// <value>The roles.</value>
         public IEnumerable<Role> Roles { get; set; }
-
     }
 }

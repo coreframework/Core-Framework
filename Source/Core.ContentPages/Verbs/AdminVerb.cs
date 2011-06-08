@@ -9,7 +9,7 @@ using Microsoft.Practices.ServiceLocation;
 namespace Core.ContentPages.Verbs
 {
     /// <summary>
-    /// Provides a navigational test verb.
+    /// Provides a navigational admin verb.
     /// </summary>
     [Export(typeof(IActionVerb)), ExportMetadata("Category", "AdminModules")]
     public class AdminVerb : IActionVerb

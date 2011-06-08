@@ -8,7 +8,7 @@ using FluentNHibernate.Data;
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
-    public class Role : Entity, IPermissible
+    public class Role : Entity, IRole, IPermissible
     {
         #region Fields
 

@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PermissionsModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Framework.Permissions.Models.PermissionsModel>" %>
 <%@ Import Namespace="Core.Web.Helpers.HtmlExtensions" %>
 
 <% using (Ajax.BeginForm("ApplyPagePermissions", "Pages", new AjaxOptions() { OnComplete = "completePermissionsUpdates" }))
@@ -23,7 +23,7 @@
                 </td>
                 <%foreach (var operation in Model.Operations) {%>
                     <td class="chbx">
-                         <%=Html.OperationCheckbox("actions",role.Id,operation.Key,Model.Permissions.Where(permission=>permission.Role==role))%>
+                         <%=Html.OperationCheckbox("actions", role.Id, operation.Key, Model.Permissions.Where(permission => permission.RoleId == role.Id))%>
                     </td>
                 <%}%>
                </tr>

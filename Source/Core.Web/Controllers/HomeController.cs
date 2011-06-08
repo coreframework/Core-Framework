@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Core.Framework.Permissions.Extensions;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Permissions.Operations;

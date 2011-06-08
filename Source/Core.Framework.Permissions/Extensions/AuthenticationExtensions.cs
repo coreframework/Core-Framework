@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Core.Framework.Permissions.Models;
 
-namespace Core.Web.Helpers
+namespace Core.Framework.Permissions.Extensions
 {
     /// <summary>
     /// Extension methods for authentication control.

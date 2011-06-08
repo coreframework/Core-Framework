@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Framework.Permissions.Models;
+using NHibernate;
 
 namespace Core.Framework.Permissions.Contracts
 {
@@ -73,5 +74,19 @@ namespace Core.Framework.Permissions.Contracts
         /// <param name="type">The type.</param>
         /// <param name="entityId">The entity id.</param>
         void SetupDefaultRolePermissions(IEnumerable<IPermissionOperation> operations, Type type, long entityId);
+
+        /// <summary>
+        /// Gets the permissions criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <param name="user">The user.</param>
+        /// <param name="operationCode">The operation code.</param>
+        /// <param name="permissibleObjectType">Type of the permissible object.</param>
+        /// <param name="permissibleIdPropertyName">Name of the permissible id property.</param>
+        /// <param name="permissibleOwnerPropertyName">Name of the permissible owner property.</param>
+        /// <returns></returns>
+        ICriteria AttachPermissionsCriteria(ICriteria criteria, ICorePrincipal user, int operationCode,
+                                         Type permissibleObjectType, String permissibleIdPropertyName,
+                                         String permissibleOwnerPropertyName);
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Extensions;
 using Core.Framework.Plugins.Web;
 using Core.Web.Areas.Navigation.Helpers;
 using Core.Web.Areas.Navigation.Models;
 using Core.Web.Areas.Navigation.Widgets;
-using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
 using Microsoft.Practices.ServiceLocation;

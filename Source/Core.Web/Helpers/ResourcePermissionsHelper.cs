@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
-using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Models.Permissions;
@@ -11,7 +11,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Helpers
 {
-    public class ResourcePermissionsHelper
+    public class ResourcePermissionsHelper: IPermissionsHelper
     {
         /// <summary>
         /// Binds the page permissions model.
@@ -20,7 +20,7 @@ namespace Core.Web.Helpers
         /// <param name="entityType">Type of the entity.</param>
         /// <param name="includeEntityNull"></param>
         /// <returns></returns>
-        public static PermissionsModel BindPermissionsModel(long entityId, Type entityType, bool includeEntityNull)
+        public PermissionsModel BindPermissionsModel(long entityId, Type entityType, bool includeEntityNull)
         {
             var roleService = ServiceLocator.Current.GetInstance<IRoleService>();
             var permissionsService = ServiceLocator.Current.GetInstance<IPermissionService>();
@@ -49,8 +49,9 @@ namespace Core.Web.Helpers
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="type">The type.</param>
-        public static void SaveResourcePermissions(PermissionsModel model, Type type)
+        public bool ApplyPermissions(PermissionsModel model, Type type)
         {
+            var result = true;
             var roleService = ServiceLocator.Current.GetInstance<IRoleService>();
             var permissionsService = ServiceLocator.Current.GetInstance<IPermissionService>();
             var entityTypeService = ServiceLocator.Current.GetInstance<IEntityTypeService>();
@@ -65,8 +66,7 @@ namespace Core.Web.Helpers
                 var operations =
                     permissibleItem.Operations.Where(
                         operation =>
-                        operation.OperationLevel != PermissionOperationLevel.Type &&
-                        operation.Area == PermissionArea.Applications).ToList();
+                        operation.OperationLevel != PermissionOperationLevel.Type).ToList();
 
                 var roles = roleService.GetAll();
                 var permissions = permissionsService.GetResourcePermissions(type, model.EntityId, false);
@@ -96,9 +96,11 @@ namespace Core.Web.Helpers
                             rolePermission.Permissions = (rolePermission.Permissions | operation.Key);
                         }
                     }
-                    permissionsService.Save(rolePermission);
+                    result = result && permissionsService.Save(rolePermission);
                 }
             }
+
+            return result;
         }
 
         /// <summary>

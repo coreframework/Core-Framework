@@ -72,6 +72,7 @@ Admin:
         Modules: "Modules"
         Widgets: "Widgets"
         Content Pages: "Content Pages"
+        Forms: "Forms"
         Roles: "Roles"
     Role:
       Index:

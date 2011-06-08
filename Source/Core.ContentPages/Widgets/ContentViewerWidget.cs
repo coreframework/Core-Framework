@@ -60,5 +60,4 @@ namespace Core.ContentPages.Widgets
             get { return ContentWidgetSaveSettingsVerb.Instance; }
         }
     }
-
 }

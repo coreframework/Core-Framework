@@ -53,4 +53,11 @@
 /Source/Core.Web.Tests/obj
 /Source/Core.Web.Tests/Core.Web.Tests.csproj.user
 /Source/Core.Web/Content/UserImages
+/Source/Core.Forms.Migrations/bin
+/Source/Core.Forms.Migrations/obj
+/Source/Core.Forms/bin
+/Source/Core.Forms/obj
+/Source/Core.Forms.NHibernate/bin
+/Source/Core.Forms.NHibernate/obj
+/Source/Core.Web/Areas/Forms
 

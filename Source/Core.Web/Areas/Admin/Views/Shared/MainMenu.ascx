@@ -9,6 +9,7 @@
 <%@ Import Namespace="Core.Framework.Permissions.Contracts" %>
 <%@ Import Namespace="Core.Web.NHibernate.Models" %>
 <%@ Import Namespace="Core.Web.Controllers" %>
+<%@ Import Namespace="Core.Framework.Permissions.Extensions" %>
 <% 
    Dictionary<string, IEnumerable<IMenuItem>> menuItems = new Dictionary<string, IEnumerable<IMenuItem>>();
    menuItems.Add("Home", new IMenuItem[] {new ActionLink<AdminHomeController>("Home", c => c.Index()),});

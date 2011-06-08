@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using Core.Framework.Permissions.Contracts;
+using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;

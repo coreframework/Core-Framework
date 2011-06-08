@@ -174,7 +174,6 @@
     <Compile Include="Areas\Admin\Models\UserGroupToRoleAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserGroupToUserAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserGroupViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\UserListingModel.cs" />
     <Compile Include="Areas\Admin\Models\UserToRoleAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserToUserGroupAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
@@ -208,10 +207,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="CoreWebInstaller.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AuthenticationExtensions.cs" />
     <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Helpers\HtmlExtensions\HtmlExtensions.cs">
       <SubType>Code</SubType>
@@ -222,21 +221,6 @@
     <Compile Include="Helpers\JsonModelBinder.cs" />
     <Compile Include="Helpers\Layouts\LayoutHelper.cs" />
     <Compile Include="Helpers\PagedList\DynamicQueryable.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\PagedList\IPagedList.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\PagedList\JqGridData.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\PagedList\JqGridExtensions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\PagedList\PagedList.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Helpers\PagedList\PagerBuilder.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Helpers\PageHelper.cs" />
@@ -262,7 +246,6 @@
     <Compile Include="Models\PageLookAndFeelModel.cs" />
     <Compile Include="Models\CorePageSettings.cs" />
     <Compile Include="Models\PageModeModel.cs" />
-    <Compile Include="Models\PermissionsModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\Routes\DefaultRouteRegistrar.cs" />
     <Compile Include="Models\WidgetCSSModel.cs" />
