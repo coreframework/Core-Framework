@@ -53,6 +53,14 @@ namespace Core.Forms
             }
         }
 
+        public override string ResourcesDirectory
+        {
+            get
+            {
+                return "Forms/Resources";
+            }
+        }
+
         public override string Description
         {
             get 
