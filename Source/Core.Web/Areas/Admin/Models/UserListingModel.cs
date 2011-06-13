@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Core.Web.Helpers.PagedList;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Core.Web.Helpers.HtmlExtensions;

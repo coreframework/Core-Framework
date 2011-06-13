@@ -12,6 +12,7 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Helpers;
 using Framework.MVC.Extensions;
+using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;

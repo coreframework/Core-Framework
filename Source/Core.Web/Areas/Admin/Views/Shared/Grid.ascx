@@ -1,5 +1,6 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Areas.Admin.Models.GridViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Framework.MVC.Grids.GridViewModel>" %>
 <%@ Import Namespace="Core.Web.Areas.Admin.Models" %>
+<%@ Import Namespace="Framework.MVC.Grids" %>
 <div style="margin-top: 20px; margin-left: 20px;">
     <div class="form_area">
         <label>

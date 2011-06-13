@@ -7,13 +7,14 @@ using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
-using Core.Web.Helpers.PagedList;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.MVC.Extensions;
+using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
+using System.Linq.Dynamic;
 
 namespace Core.Web.Areas.Admin.Controllers
 {

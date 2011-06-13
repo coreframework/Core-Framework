@@ -41,6 +41,8 @@ namespace Framework.MVC.Helpers
 
         private const String ErrorMessages = "ErrorMessages";
 
+        private String[] mainAreas = new string[] { "Admin", "Navigation" };
+
         #endregion
 
         /// <summary>
@@ -136,7 +138,7 @@ namespace Framework.MVC.Helpers
 
             // Removes redudant chains.
             var modelScope = chains.SkipWhile(x => !Areas.Equals(x) && !Models.Equals(x));
-            if (Areas.Equals(modelScope.First()))
+            if (modelScope.Count() > 0 && Areas.Equals(modelScope.First()))
             {
                 modelScope = modelScope.Skip(1);
             }
