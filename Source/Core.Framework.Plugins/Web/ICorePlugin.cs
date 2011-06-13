@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 using Castle.Windsor;
-using Core.Framework.MEF.ServiceLocation;
 
 namespace Core.Framework.Plugins.Web
 {
@@ -21,6 +20,12 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The title.</value>
         String Title { get;}
+
+        /// <summary>
+        /// Gets the resources directory.
+        /// </summary>
+        /// <value>The resources directory.</value>
+        String ResourcesDirectory { get; }
 
         /// <summary>
         /// Gets the description.

@@ -9,7 +9,7 @@
             <thead>
             <tr>
                 <th style="width:90%;">Title</th>
-                <th>Actions</th>
+                <th><%=Html.Translate(".Actions")%></th>
             </tr>
             </thead>
             <tbody>

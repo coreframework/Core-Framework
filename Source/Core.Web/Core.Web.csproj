@@ -161,8 +161,6 @@
     <Compile Include="Areas\Admin\Helpers\RouteLink.cs" />
     <Compile Include="Areas\Admin\Models\AssignedUserGroupModel.cs" />
     <Compile Include="Areas\Admin\Models\AssignedUserModel.cs" />
-    <Compile Include="Areas\Admin\Models\GridColumnViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\GridViewModel.cs" />
     <Compile Include="Areas\Admin\Models\PermissionOperationsModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginListingModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginViewModel.cs" />
@@ -220,9 +218,6 @@
     <Compile Include="Helpers\HtmlExtensions\MenuTreeView\TreeViewHtmlHelper.cs" />
     <Compile Include="Helpers\JsonModelBinder.cs" />
     <Compile Include="Helpers\Layouts\LayoutHelper.cs" />
-    <Compile Include="Helpers\PagedList\DynamicQueryable.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Helpers\PageHelper.cs" />
     <Compile Include="Helpers\ResourcePermissionsHelper.cs" />
     <Compile Include="Helpers\PluginHelper.cs" />

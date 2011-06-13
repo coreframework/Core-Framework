@@ -42,6 +42,14 @@ namespace Core.Web.Areas.Navigation
             }
         }
 
+        public override string ResourcesDirectory
+        {
+            get
+            {
+                return null;
+            }
+        }
+
         public override string Description
         {
             get

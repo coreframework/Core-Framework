@@ -53,6 +53,14 @@ namespace Core.ContentPages
             }
         }
 
+        public override string ResourcesDirectory
+        {
+            get
+            {
+                return "ContentPage/Resources";
+            }
+        }
+
         public override string Description
         {
             get 

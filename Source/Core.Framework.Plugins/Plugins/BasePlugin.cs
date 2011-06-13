@@ -15,6 +15,12 @@ namespace Core.Framework.Plugins.Plugins
         public abstract string Title { get; }
 
         /// <summary>
+        /// Gets the resources directory.
+        /// </summary>
+        /// <value>The resources directory.</value>
+        public abstract string ResourcesDirectory { get; }
+
+        /// <summary>
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>

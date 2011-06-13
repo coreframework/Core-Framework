@@ -1,0 +1,11 @@
+Views:
+  Admin:
+    Index:
+      Actions: "Actions"
+      User: "User"
+      Status: "Status"
+      Remove: "[Remove]"
+      UserGroups: "[User groups]"
+      New: "New User"
+    
+
