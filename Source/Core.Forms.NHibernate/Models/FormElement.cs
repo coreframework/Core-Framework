@@ -12,13 +12,25 @@ namespace Core.Forms.NHibernate.Models
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public virtual String Name { get; set; }
+        public virtual String Title { get; set; }
 
         /// <summary>
         /// Gets or sets the type of element.
         /// </summary>
         /// <value>The type.</value>
-        public virtual Int32 Type { get; set; }
+        public virtual FormElementType Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the values.
+        /// </summary>
+        /// <value>The values.</value>
+        public virtual String ElementValues { get; set; }
+
+        /// <summary>
+        /// Gets or sets the order number.
+        /// </summary>
+        /// <value>The order number.</value>
+        public virtual Int32 OrderNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this element is required.

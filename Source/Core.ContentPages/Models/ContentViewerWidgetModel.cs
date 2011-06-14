@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Core.ContentPages.NHibernate.Contracts;
 using Core.ContentPages.NHibernate.Models;

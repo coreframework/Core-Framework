@@ -16,6 +16,7 @@ namespace Core.Forms.NHibernate
 
             // Register data services.
             container.Register(Component.For<IFormService>().ImplementedBy<NHibernateFormService>().LifeStyle.Transient);
+            container.Register(Component.For<IFormElementService>().ImplementedBy<NHibernateFormElementService>().LifeStyle.Transient);
         }
     }
 }

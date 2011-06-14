@@ -38,7 +38,7 @@ namespace Core.ContentPages.Controllers
             {
                 var widget = ContentViewerWidgetHelper.BindWidgetModel(instance);
 
-                if (widget!=null)
+                if (widget!=null )
                     return PartialView(widget);
             }
             return Content("Select existing web content");

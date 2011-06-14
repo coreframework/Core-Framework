@@ -28,6 +28,9 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string EditForm = "~/Views/Admin/EditForm.aspx";
+            public readonly string EditFormElement = "~/Views/Admin/EditFormElement.aspx";
+            public readonly string FormElements = "~/Views/Admin/FormElements.aspx";
             public readonly string FormPermissions = "~/Views/Admin/FormPermissions.aspx";
             public readonly string FormsList = "~/Views/Admin/FormsList.aspx";
         }

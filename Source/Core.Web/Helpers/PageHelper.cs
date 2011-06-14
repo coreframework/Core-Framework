@@ -10,6 +10,7 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Core;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
 

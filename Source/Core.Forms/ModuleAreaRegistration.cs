@@ -18,11 +18,14 @@ namespace Core.Forms
             context.MapRoute("Admin.Forms", "admin/forms", FormsMVC.Forms.ShowAll(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/form-{formId}/permissions", FormsMVC.Forms.ShowPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/forms/apply-permissions", FormsMVC.Forms.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-            
-            /*    context.MapRoute("Admin.ViewContentPage", "admin/content-pages/view-{id}", new { controller = "ContentPage", action = "ShowById", id = "" });
-            context.MapRoute("Admin.EditContentPage", "admin/content-pages/edit-{id}", new { controller = "ContentPage", action = "Edit", id = "" });
-            context.MapRoute("Admin.NewContentPage", "admin/content-pages/new", new { controller = "ContentPage", action = "New", id = "" });
-            context.MapRoute("Admin.RemoveContentPage", "admin/content-pages/remove-{id}", ContentPagesMVC.ContentPage.Remove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });*/
+
+            context.MapRoute(null, "admin/form-{formId}/form-elements", FormsMVC.Forms.ShowFormElements(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/forms/update-form-elements-positions", FormsMVC.Forms.UpdateFormElementPosition());
+
+            context.MapRoute(null, "admin/forms/edit-{formId}", FormsMVC.Forms.Edit(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.SaveForm", "admin/forms/save", FormsMVC.Forms.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/forms/new", FormsMVC.Forms.New());
+            context.MapRoute(null, "admin/form-{formId}/new-element", FormsMVC.Forms.NewElement());
 
             //widget routs
             context.MapRoute(null, String.Empty, FormsMVC.FormsBuilderWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

@@ -171,6 +171,7 @@
     <Compile Include="DomainModel\GenericEntity.cs" />
     <Compile Include="DomainModel\IMappedModel.cs" />
     <Compile Include="DomainModel\IPersistent.cs" />
+    <Compile Include="Extensions\ListExtentions.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\Images\DefaultImageUtility.cs" />
     <Compile Include="Helpers\Images\IImageUtility.cs" />

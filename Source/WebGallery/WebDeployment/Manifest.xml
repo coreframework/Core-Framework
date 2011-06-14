@@ -1,0 +1,11 @@
+﻿<?xml version = "1.0"?>
+<MSDeploy.iisApp>
+	<iisApp path="CoreFramework" managedRuntimeVersion="v4.0"/>
+	<dbfullsql path="install.sql" />
+	<setAcl path="CoreFramework/Logs" setAclResourceType="Directory" setAclAccess="Modify" />
+    <setAcl path="CoreFramework/Content/Css" setAclResourceType="Directory" setAclAccess="Modify" />
+	<setAcl path="CoreFramework/Content/UserImages" setAclResourceType="Directory" setAclAccess="Modify" />
+    <setAcl path="CoreFramework/Scripts" setAclResourceType="Directory" setAclAccess="Modify" /> 	
+	<setAcl path="CoreFramework/web.config" setAclResourceType="File" setAclAccess="Read,Write" /> 
+	<setAcl path="CoreFramework/Config/database.yml" setAclResourceType="File" setAclAccess="Read,Write" /> 
+</MSDeploy.iisApp>

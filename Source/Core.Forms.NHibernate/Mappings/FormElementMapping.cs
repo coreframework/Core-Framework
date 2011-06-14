@@ -13,10 +13,12 @@ namespace Core.Forms.NHibernate.Mappings
             Cache.Region("Forms_FormElements").ReadWrite();
             Table("Forms_FormElements");
             Id(formElement => formElement.Id);
-            Map(formElement => formElement.Name).Length(255);
-            Map(formElement => formElement.Type);
+            Map(formElement => formElement.Title).Length(255);
+            Map(formElement => formElement.ElementValues);
+            Map(formElement => formElement.Type).CustomType(typeof(FormElementType));
+            Map(formElement => formElement.OrderNumber);
             Map(formElement => formElement.IsRequired);
-            References(form => form.Form).Column("FormId").Nullable();
+            References(form => form.Form).Column("FormId");
         }
     }
 }

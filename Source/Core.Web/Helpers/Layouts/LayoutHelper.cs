@@ -1,5 +1,6 @@
 ﻿using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
 

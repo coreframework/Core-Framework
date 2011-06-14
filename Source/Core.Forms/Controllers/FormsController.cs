@@ -1,8 +1,11 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Core.Forms.Helpers;
+using Core.Forms.Models;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
 using Core.Forms.NHibernate.Permissions.Operations;
@@ -88,6 +91,11 @@ namespace Core.Forms.Controllers
             return View("Admin/FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
         }
 
+        /// <summary>
+        /// Applies the permissions action.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         [HttpPost]
         public virtual ActionResult ApplyPermissions(PermissionsModel model)
         {
@@ -104,6 +112,89 @@ namespace Core.Forms.Controllers
             }
 
             return Content(Url.Action("ShowAll"));
+        }
+
+        /// <summary>
+        /// New form action.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public virtual ActionResult New()
+        {
+            return View("Admin/EditForm", new FormViewModel());
+        }
+
+        /// <summary>
+        /// Edit form action.
+        /// </summary>
+        /// <param name="formId">The form id.</param>
+        /// <returns></returns>
+        [HttpGet]
+        public virtual ActionResult Edit(long formId)
+        {
+            var form = _formsService.Find(formId);
+
+            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+            }
+
+            return View("Admin/EditForm", new FormViewModel().MapFrom(form));
+        }
+
+        [HttpPost]
+        public virtual ActionResult Save(FormViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var form = new Form();
+                if (model.Id > 0)
+                {
+                     form = _formsService.Find(model.Id);
+
+                     if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                     {
+                         throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                     }
+                }
+                else
+                {
+                    form.UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?) null;
+                }
+
+                if (_formsService.Save(model.MapTo(form)))
+                {
+                    return RedirectToAction(FormsMVC.Forms.ShowAll());
+                }
+            }
+
+            return View("Admin/EditForm", model);
+        }
+
+        public virtual ActionResult ShowFormElements(long formId)
+        {
+            var form = _formsService.Find(formId);
+
+            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+            }
+
+            return View("Admin/FormElements", form.FormElements.OrderBy(el=>el.OrderNumber));
+        }
+
+        [HttpPost]
+        public virtual ActionResult UpdateFormElementPosition(long formElementId, int orderNumber)
+        {
+            //check permissions inside UpdateFormElementsPositions widget
+            FormsHelper.UpdateFormElementsPositions(formElementId, this.CorePrincipal(), orderNumber);
+            return null;
+        }
+
+        [HttpGet]
+        public virtual ActionResult NewElement(long formId)
+        {
+            return View("Admin/EditFormElement", new FormElementViewModel());
         }
 
         #endregion

@@ -9,8 +9,7 @@
            var sBasePath = '<%= ResolveUrl("~/Scripts/fck/") %>';
            var oFCKeditor = new FCKeditor('FckArea');
            oFCKeditor.Config.Enabled = true;
-           oFCKeditor.Config.UserFilesPath = '/Content/UserImages';
-           oFCKeditor.Config.UserFilesAbsolutePath = '/Content/UserImages';
+
 
            oFCKeditor.Height = '500';
            oFCKeditor.BasePath = sBasePath;

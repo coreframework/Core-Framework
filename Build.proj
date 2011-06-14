@@ -4,7 +4,7 @@
 		<Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
 		<Platform Condition=" '$(Platform)' == '' And '$(PROCESSOR_ARCHITEW6432)' == 'AMD64'">AnyCPU</Platform>
 		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-		<Environment Condition=" '$(Environment)' == '' ">Development</Environment>
+		<Environment Condition=" '$(Environment)' == '' ">test</Environment>
 		<Project>Core</Project>		
 		<SolutionPath>$(MSBuildProjectDirectory)</SolutionPath>
 		<SourcePath>$(SolutionPath)\Source</SourcePath>
@@ -31,7 +31,6 @@
 	<Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
 	<Import Project="$(MigratorTasksPath)\Migrator.Targets" />
 	<Import Project="$(FrameworkTasksPath)\Framework.Targets" />
-	<Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\TextTemplating\v10.0\Microsoft.TextTemplating.targets" />
 	
 	<ItemGroup>
 		<Clean Include="$(BuildPath)" />

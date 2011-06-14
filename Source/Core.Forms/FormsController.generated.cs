@@ -41,6 +41,31 @@ namespace Core.Forms.Controllers {
         public System.Web.Mvc.ActionResult ApplyPermissions() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Edit() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Save() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Save);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ShowFormElements() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ShowFormElements);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult UpdateFormElementPosition() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.UpdateFormElementPosition);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult NewElement() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.NewElement);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsController Actions { get { return FormsMVC.Forms; } }
@@ -57,6 +82,12 @@ namespace Core.Forms.Controllers {
             public readonly string ShowAll = "ShowAll";
             public readonly string ShowPermissions = "ShowPermissions";
             public readonly string ApplyPermissions = "ApplyPermissions";
+            public readonly string New = "New";
+            public readonly string Edit = "Edit";
+            public readonly string Save = "Save";
+            public readonly string ShowFormElements = "ShowFormElements";
+            public readonly string UpdateFormElementPosition = "UpdateFormElementPosition";
+            public readonly string NewElement = "NewElement";
         }
 
 
@@ -86,6 +117,42 @@ namespace Core.Forms.Controllers {
         public override System.Web.Mvc.ActionResult ApplyPermissions(Core.Framework.Permissions.Models.PermissionsModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult New() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(long formId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+            callInfo.RouteValueDictionary.Add("formId", formId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Save(Core.Forms.Models.FormViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Save);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ShowFormElements(long formId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowFormElements);
+            callInfo.RouteValueDictionary.Add("formId", formId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UpdateFormElementPosition(long formElementId, int orderNumber) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateFormElementPosition);
+            callInfo.RouteValueDictionary.Add("formElementId", formElementId);
+            callInfo.RouteValueDictionary.Add("orderNumber", orderNumber);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult NewElement(long formId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.NewElement);
+            callInfo.RouteValueDictionary.Add("formId", formId);
             return callInfo;
         }
 

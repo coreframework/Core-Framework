@@ -4,7 +4,7 @@ using Framework.Migrator.Extensions;
 namespace Core.Forms.Migrations
 {
     /// <summary>
-    /// Adds ContentPages table.
+    /// Adds Forms_Forms table.
     /// </summary>
     [Migration(1)]
     public class Migration_AddForms : Migration

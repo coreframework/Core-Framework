@@ -29,7 +29,7 @@
    <div id="actions">
     <ul>
       <li>
-        <%-- <%:Html.RouteLink("Create Content Page", new { controller = "ContentPage", action = "New" })%>--%>
+         <%:Html.RouteLink("Create Form", new { controller = "Forms", action = "New" })%>
       </li>
     </ul>
   </div>
