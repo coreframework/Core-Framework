@@ -37,8 +37,6 @@ namespace Core.Web
 
         #region Properties
 
-        public static IEnumerable<ICorePlugin> Plugins { get; set; }
-
         public static IEnumerable<ICoreWidget> Widgets { get; set; }
 
         public static List<IPermissible> PermissibleObjects { get; set; }
@@ -87,8 +85,6 @@ namespace Core.Web
         {
             base.Compose();
 
-            Plugins = Composer.ResolveAll<ICorePlugin>();
-
             foreach (var plugin in Plugins)
             {
                 plugin.Register(_container);
@@ -96,12 +92,9 @@ namespace Core.Web
 
             Widgets = Composer.ResolveAll<ICoreWidget>();
 
-
             ConfigureApplication();
             ExecuteBootstrapperTasks();
-
             RegisterPermissibleObjects();
-
             RegisterAreas();
 
         }

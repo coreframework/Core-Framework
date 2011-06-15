@@ -11,6 +11,7 @@ using Core.Framework.MEF.Composition;
 using Core.Framework.MEF.Configuration;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.MEF.Extensions;
+using Core.Framework.Plugins.Web;
 
 namespace Core.Framework.MEF.Web
 {
@@ -39,6 +40,13 @@ namespace Core.Framework.MEF.Web
         /// Gets the <see cref="Composer" /> used to compose parts.
         /// </summary>
         public static Composer Composer { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the plugins.
+        /// </summary>
+        /// <value>The plugins.</value>
+        public static IEnumerable<ICorePlugin> Plugins { get; set; }
+
         #endregion
 
         #region Methods
@@ -164,9 +172,8 @@ namespace Core.Framework.MEF.Web
                 return;
 
             Composer.Compose(this);
-
             actionVerbs = Composer.ResolveAll<IActionVerb, IActionVerbMetadata>();
-
+            Plugins = Composer.ResolveAll<ICorePlugin>();
         }
 
         protected virtual void RegisterAreas()

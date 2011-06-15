@@ -83,10 +83,6 @@
       <Project>{1FCA1EA6-B397-4F77-AE18-0277214AE3B7}</Project>
       <Name>Core.Framework.MEF.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Framework.MEF.ServiceLocation\Core.Framework.MEF.ServiceLocation.csproj">
-      <Project>{1A8F39D8-9D23-4518-B483-D7D2ADF3457D}</Project>
-      <Name>Core.Framework.MEF.ServiceLocation</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
       <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
       <Name>Core.Framework.Permissions</Name>

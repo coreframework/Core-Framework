@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Castle.Windsor;
 using Core.Framework.Plugins.Web;
 
@@ -6,6 +7,8 @@ namespace Core.Framework.Plugins.Plugins
 {
     public abstract class BasePlugin : ICorePlugin
     {
+        private String pluginLocation;
+
         #region Properties
 
         /// <summary>
@@ -13,6 +16,18 @@ namespace Core.Framework.Plugins.Plugins
         /// </summary>
         /// <value>The title.</value>
         public abstract string Title { get; }
+
+        public String PluginLocation
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(pluginLocation))
+                {
+                    pluginLocation = Assembly.GetAssembly(GetType()).Location;
+                }
+                return pluginLocation;
+            }
+        }
 
         /// <summary>
         /// Gets the resources directory.

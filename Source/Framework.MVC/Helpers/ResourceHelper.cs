@@ -33,15 +33,21 @@ namespace Framework.MVC.Helpers
         /// </summary>
         public const String ViewScopeKey = "ViewScopeKey";
 
-        private const String Areas = "Areas";
+        /// <summary>
+        /// Areas constant.
+        /// </summary>
+        public const String Areas = "Areas";
+
+        /// <summary>
+        /// Areas built in framework.
+        /// </summary>
+        public static String[] MainAreas = new[] { "admin", "navigation", "views" };
 
         private const String Models = "Models";
 
         private const String Controllers = "Controllers";
 
         private const String ErrorMessages = "ErrorMessages";
-
-        private String[] mainAreas = new string[] { "Admin", "Navigation" };
 
         #endregion
 
@@ -137,13 +143,18 @@ namespace Framework.MVC.Helpers
             chains.Add(modelType.Name);
 
             // Removes redudant chains.
-            var modelScope = chains.SkipWhile(x => !Areas.Equals(x) && !Models.Equals(x));
-            if (modelScope.Count() > 0 && Areas.Equals(modelScope.First()))
+            if (chains.Contains(Areas) || chains.Contains(Models))
             {
-                modelScope = modelScope.Skip(1);
+                var modelScope = chains.SkipWhile(x => !Areas.Equals(x) && !Models.Equals(x));
+                if (modelScope.Count() > 0 && Areas.Equals(modelScope.First()))
+                {
+                    modelScope = modelScope.Skip(1);
+                }
+
+                return Combine(modelScope);
             }
 
-            return Combine(modelScope);
+            return Combine(chains);
         }
 
         /// <summary>

@@ -1,12 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"
     Inherits="System.Web.Mvc.ViewPage<Framework.MVC.Grids.GridViewModel>" %>
+<%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: Html.Translate(".Title") %>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="outset">
-        <%= Html.Partial(MVC.Admin.Shared.Views.Grid, Model)%>
+        <%=Html.JqGrid(model => model.SearchString) %>
     </div>
     <div id="actions">
         <ul>

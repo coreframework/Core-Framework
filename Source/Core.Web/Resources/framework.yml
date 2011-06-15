@@ -1,0 +1,6 @@
+Framework:
+  MVC:
+    Grids:
+      GridViewModel:
+        EnableAutosearch: "Enable autosearch"
+        Search: "Search"

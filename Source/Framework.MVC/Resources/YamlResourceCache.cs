@@ -30,7 +30,10 @@ namespace Framework.MVC.Resources
     {
         #region Fields
 
-        private const String ScopeSeparator = ".";
+        /// <summary>
+        /// Scope separator.
+        /// </summary>
+        public const String ScopeSeparator = ".";
 
         private const String YamlFilesPattern = "*.yml";
 

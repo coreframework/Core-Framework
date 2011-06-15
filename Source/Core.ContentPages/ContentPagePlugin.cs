@@ -57,7 +57,7 @@ namespace Core.ContentPages
         {
             get
             {
-                return "ContentPage/Resources";
+                return "Resources";
             }
         }
 

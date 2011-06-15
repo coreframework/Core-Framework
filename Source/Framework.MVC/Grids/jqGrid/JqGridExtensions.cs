@@ -115,7 +115,7 @@ namespace Framework.MVC.Grids.jqGrid
             var searchWrapper = new TagBuilder("div");
             searchWrapper.AddCssClass("form_area");
             var searchLabel = new TagBuilder("label");
-            searchLabel.SetInnerText("Search");
+            searchLabel.SetInnerText(html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel))));
             searchWrapper.InnerHtml += searchLabel.ToString(TagRenderMode.Normal);
             searchWrapper.InnerHtml += html.TextBoxFor(searchExpression, new { onkeydown = "doSearch(arguments[0]||event)" }).ToHtmlString();
             var searchHelperDiv = new TagBuilder("div");
@@ -130,7 +130,7 @@ namespace Framework.MVC.Grids.jqGrid
             var autoSearchWrapper = new TagBuilder("div");
             autoSearchWrapper.AddCssClass("form_area");
             var autoSearchLabel = new TagBuilder("label");
-            autoSearchLabel.SetInnerText(html.Translate(".EnableAutosearch", ResourceHelper.GetModelScope(typeof(GridViewModel))));
+            autoSearchLabel.SetInnerText(html.Translate("EnableAutosearch", ResourceHelper.GetModelScope(typeof(GridViewModel))));
             autoSearchWrapper.InnerHtml += autoSearchLabel.ToString(TagRenderMode.Normal);
             autoSearchWrapper.InnerHtml += html.CheckBox("autosearch", new { onclick = "enableAutosubmit(this.checked)", style = "width: auto;" }).ToHtmlString();
 
@@ -144,7 +144,7 @@ namespace Framework.MVC.Grids.jqGrid
             var button = new TagBuilder("button");
             button.GenerateId("submitButton");
             button.MergeAttribute("onclick", "gridReload()");
-            button.SetInnerText(html.Translate(".Search", ResourceHelper.GetModelScope(typeof(GridViewModel))));
+            button.SetInnerText(html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel))));
             buttonsWrapper.InnerHtml += button.ToString(TagRenderMode.Normal);
 
             return buttonsWrapper.ToString(TagRenderMode.Normal);

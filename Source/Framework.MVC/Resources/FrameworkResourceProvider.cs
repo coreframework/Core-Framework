@@ -7,10 +7,10 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Resources;
 using System.Threading;
 using System.Web.Compilation;
-
 using Microsoft.Practices.ServiceLocation;
 
 namespace Framework.MVC.Resources
@@ -25,6 +25,8 @@ namespace Framework.MVC.Resources
         private const String ScopeSeparator = ".";
 
         private readonly String scope;
+
+        private IResourceCachesHolder resourceCachesHolder;
 
         #endregion
 
@@ -41,7 +43,7 @@ namespace Framework.MVC.Resources
 
         #endregion
 
-        #region IResourceProvider members
+        #region Properties
 
         /// <summary>
         /// Gets an object to read resource values from a source.
@@ -57,6 +59,22 @@ namespace Framework.MVC.Resources
                 return new FrameworkResourceReader(scope);
             }
         }
+
+        private IResourceCachesHolder ResourceCachesHolder
+        {
+            get
+            {
+                if (resourceCachesHolder == null)
+                {
+                    resourceCachesHolder = ServiceLocator.Current.GetInstance<IResourceCachesHolder>();
+                }
+                return resourceCachesHolder;
+            }
+        }
+
+        #endregion
+
+        #region IResourceProvider members
 
         /// <summary>
         /// Returns a resource object for the key and culture.
@@ -78,22 +96,27 @@ namespace Framework.MVC.Resources
             }
 
             String resource = null;
-            var resourceCache = ServiceLocator.Current.GetInstance<IResourceCache>();
-            if (resourceCache != null)
+            var resourceCacheHolder = ServiceLocator.Current.GetInstance<IResourceCachesHolder>();
+            if (resourceCacheHolder != null)
             {
-                // Try to retieve resource for specific culture (en-US).
-                resource = resourceCache.GetResource(GetResourceKey(scope, resourceKey, cultureName));
-
-                // Try to retieve resource for general culture (en).
-                if (resource == null && cultureName.Length > 3)
+                var resourceCache = resourceCacheHolder.GetCache(scope);
+                if (resourceCache != null)
                 {
-                    resource = resourceCache.GetResource(GetResourceKey(scope, resourceKey, cultureName.Substring(0, 2)));
-                }
+                    // Try to retieve resource for specific culture (en-US).
+                    resource = resourceCache.GetResource(GetResourceKey(scope, resourceKey, cultureName));
 
-                // Try to retieve resource for invariant culture (only for production).
-                if (resource == null)
-                {
-                    resource = resourceCache.GetResource(GetResourceKey(scope, resourceKey, null));
+                    // Try to retieve resource for general culture (en).
+                    if (resource == null && cultureName.Length > 3)
+                    {
+                        resource =
+                            resourceCache.GetResource(GetResourceKey(scope, resourceKey, cultureName.Substring(0, 2)));
+                    }
+
+                    // Try to retieve resource for invariant culture (only for production).
+                    if (resource == null)
+                    {
+                        resource = resourceCache.GetResource(GetResourceKey(scope, resourceKey, null));
+                    }
                 }
             }
 
@@ -104,20 +127,26 @@ namespace Framework.MVC.Resources
 
         #region Helper members
 
-        private static String GetResourceKey(String scope, String resourceKey, String cultureName)
+        private String GetResourceKey(String scope, String resourceKey, String cultureName)
         {
             var chains = new List<String>();
-
             if (!String.IsNullOrEmpty(cultureName))
             {
                 chains.Add(cultureName);
             }
-
             if (!String.IsNullOrEmpty(scope))
             {
-                chains.Add(scope);
+                IEnumerable<String> scopeChains = scope.Split(YamlResourceCache.ScopeSeparator.ToCharArray());
+                String area = scopeChains.FirstOrDefault();
+                if (area != null && ResourceCachesHolder.ContainsCache(area))
+                {
+                    chains.Add(String.Join(YamlResourceCache.ScopeSeparator, scopeChains.Skip(1)));   
+                }
+                else
+                {
+                    chains.Add(scope);    
+                }
             }
-
             chains.Add(resourceKey);
 
             return String.Join(ScopeSeparator, chains);

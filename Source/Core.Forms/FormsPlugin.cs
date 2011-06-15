@@ -57,7 +57,7 @@ namespace Core.Forms
         {
             get
             {
-                return "Forms/Resources";
+                return null;
             }
         }
 

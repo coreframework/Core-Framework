@@ -22,6 +22,12 @@ namespace Core.Framework.Plugins.Web
         String Title { get;}
 
         /// <summary>
+        /// Gets the plugin directory.
+        /// </summary>
+        /// <value>The plugin directory.</value>
+        String PluginLocation { get; }
+        
+        /// <summary>
         /// Gets the resources directory.
         /// </summary>
         /// <value>The resources directory.</value>

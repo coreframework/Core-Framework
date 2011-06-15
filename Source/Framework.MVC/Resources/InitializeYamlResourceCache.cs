@@ -36,9 +36,8 @@ namespace Framework.MVC.Resources
             {
                 resourcesDirectory = DefaultResourcesDirectory;
             }
-
-            var resourceCache = new YamlResourceCache(application.Environment, Path.Combine(application.RootPath, resourcesDirectory));
-            kernel.Register(Component.For<IResourceCache>().Instance(resourceCache).LifeStyle.Singleton);
+            var resourceCacheHolder = new YamlResourceCacheHolder(application.Environment, Path.Combine(application.RootPath, resourcesDirectory));
+            kernel.Register(Component.For<IResourceCachesHolder>().Instance(resourceCacheHolder).LifeStyle.Singleton);
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"
     Inherits="System.Web.Mvc.ViewPage<Framework.MVC.Grids.GridViewModel>" %>
+<%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
 
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent">
     <%: Html.Translate(".Title") %></asp:Content>
@@ -7,7 +8,7 @@
 </asp:Content>
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
     <div class="outset">
-        <%= Html.Partial(MVC.Admin.Shared.Views.Grid, Model)%>
+        <%=Html.JqGrid(model => model.SearchString) %>
     </div>
     <div id="actions">
         <ul>
