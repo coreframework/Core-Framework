@@ -1134,6 +1134,12 @@ table.index td.note {
 {
   width: 405px;
 }
+.form_area input[type="checkbox"]
+{
+    width:auto !important;
+}
+
+.form_area .editor-field-hidden {display:none;}
 
 input.input-validation-error, select.input-validation-error {
   background-color: #f3c2c2;

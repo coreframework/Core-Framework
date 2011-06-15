@@ -17,6 +17,7 @@
     <MSBuildCommunityTasksPath>$(ToolsPath)\MSBuildCommunityTasks</MSBuildCommunityTasksPath>
     <StyleCopTargets Condition=" '$(StyleCopTargets)' == '' ">$(ToolsPath)\StyleCop\Microsoft.StyleCop.targets</StyleCopTargets>
     <StyleCopTreatErrorsAsWarnings Condition=" '$(StyleCopTreatErrorsAsWarnings)' == '' ">false</StyleCopTreatErrorsAsWarnings>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -29,7 +30,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>

@@ -194,7 +194,7 @@ namespace Core.Forms.Controllers
         [HttpGet]
         public virtual ActionResult NewElement(long formId)
         {
-            return View("Admin/EditFormElement", new FormElementViewModel().MapFrom(new FormElement()));
+            return View("Admin/EditFormElement", new FormElementViewModel());
         }
 
         #endregion
