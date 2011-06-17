@@ -10,7 +10,7 @@
          {%>    
               <div class="form_area">
                  
-                    <%: Html.HiddenFor(model => model.Id) %>  
+                    <%: Html.HiddenFor(model => model.Id) %> 
 
                     <div class="editor-label">
                         <%: Html.LabelFor(model => model.Title) %>

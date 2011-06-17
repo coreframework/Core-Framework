@@ -64,6 +64,12 @@ namespace Core.Forms.Models
         /// <value>The type.</value>
         public FormElementType Type { get; set; }
 
+        /// <summary>
+        /// Gets or sets the form id.
+        /// </summary>
+        /// <value>The form id.</value>
+        public long? FormId { get; set; }
+
         public FormElementViewModel MapFrom(FormElement from)
         {
             Id = from.Id;
@@ -95,6 +101,9 @@ namespace Core.Forms.Models
         {
             to.Id = Id;
             to.Title = Title;
+            to.IsRequired = IsRequired;
+            to.ElementValues = Values;
+            to.Type = Type;
             return to;
         }
     }

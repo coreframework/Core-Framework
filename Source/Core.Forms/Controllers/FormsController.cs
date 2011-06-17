@@ -27,6 +27,8 @@ namespace Core.Forms.Controllers
 
         private readonly IFormService _formsService;
 
+        private readonly IFormElementService _formsElementService;
+
         private readonly IPermissionCommonService _permissionService;
 
         private readonly IPermissionsHelper _permissionsHelper;
@@ -51,6 +53,7 @@ namespace Core.Forms.Controllers
         public FormsController()
         {
             _formsService = ServiceLocator.Current.GetInstance<IFormService>();
+            _formsElementService = ServiceLocator.Current.GetInstance<IFormElementService>();
             _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             _permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
 
@@ -195,6 +198,35 @@ namespace Core.Forms.Controllers
         public virtual ActionResult NewElement(long formId)
         {
             return View("Admin/EditFormElement", new FormElementViewModel().MapFrom(new FormElement()));
+        }
+
+        [HttpPost]
+        public virtual ActionResult SaveElement(FormElementViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var formElement = new FormElement();
+                if (model.Id > 0)
+                {
+                    formElement = _formsElementService.Find(model.Id);
+
+                    if (formElement == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
+                    {
+                        throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    }
+                }
+                else
+                {
+                   // formElement.
+                }
+
+                if (_formsElementService.Save(model.MapTo(formElement)))
+                {
+                    return RedirectToAction(FormsMVC.Forms.ShowFormElements());
+                }
+            }
+
+            return View("Admin/EditFormElement", model);
         }
 
         #endregion
