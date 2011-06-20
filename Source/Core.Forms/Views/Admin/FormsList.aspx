@@ -19,7 +19,8 @@
                     <%:form.Title%>
                 </td>
                 <td>
-                   <%:Html.RouteLink("Permissions", new { controller = "Forms", action = "ShowPermissions", formId = form.Id })%>
+                   <%:Html.RouteLink(Html.Translate(".Permissions"), new { controller = "Forms", action = "ShowPermissions", formId = form.Id })%><br/>
+                   <%:Html.RouteLink(Html.Translate(".Details"), new { controller = "Forms", action = "Edit", formId = form.Id })%><br/>
                 </td>
             </tr>
             <% } %>

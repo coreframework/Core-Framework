@@ -197,27 +197,48 @@ namespace Core.Forms.Controllers
         [HttpGet]
         public virtual ActionResult NewElement(long formId)
         {
-            return View("Admin/EditFormElement", new FormElementViewModel().MapFrom(new FormElement()));
+            var form = _formsService.Find(formId);
+            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+            }
+
+            return View("Admin/EditFormElement", new FormElementViewModel(){FormId = formId}.MapFrom(new FormElement()));
+        }
+
+        [HttpGet]
+        public virtual ActionResult EditElement(long formId, long formElementId)
+        {
+            var formElement = _formsElementService.Find(formElementId);
+
+            if (formElement == null || formElement.Form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+            }
+
+            return View("Admin/EditFormElement", new FormElementViewModel() { FormId = formId }.MapFrom(formElement));
         }
 
         [HttpPost]
-        public virtual ActionResult SaveElement(FormElementViewModel model)
+        public virtual ActionResult SaveElement(long formId, FormElementViewModel model)
         {
             if (ModelState.IsValid)
             {
+                var form = _formsService.Find(formId);
+                if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                {
+                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                }
+
                 var formElement = new FormElement();
                 if (model.Id > 0)
                 {
                     formElement = _formsElementService.Find(model.Id);
-
-                    if (formElement == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
-                    {
-                        throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
-                    }
                 }
                 else
                 {
-                   // formElement.
+                    formElement.Form = form;
+                    formElement.OrderNumber = 1;
                 }
 
                 if (_formsElementService.Save(model.MapTo(formElement)))

@@ -1,0 +1,9 @@
+Views:
+  Admin:
+    FormsList:
+      Permissions: "Permissions"
+      Details: "Details"
+
+     
+    
+

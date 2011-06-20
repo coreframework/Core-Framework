@@ -6,11 +6,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
    <%: Html.ValidationSummary(true) %>
     <div class="form">
-      <% using (Html.BeginForm(FormsMVC.Forms.Save(), FormMethod.Post))
+      <% using (Html.BeginForm(FormsMVC.Forms.SaveElement(), FormMethod.Post))
          {%>    
               <div class="form_area">
                  
-                    <%: Html.HiddenFor(model => model.Id) %> 
+                    <%: Html.Hidden("formId", Model.FormId) %> 
+                    <%: Html.HiddenFor(model=>model.Id) %> 
 
                     <div class="editor-label">
                         <%: Html.LabelFor(model => model.Title) %>
@@ -50,8 +51,8 @@
                </p>
                <script type="text/javascript">
                    jQuery(function () {
-                       $('#Type').change(function(){
-                            curValue = $(this).val();
+                       function checkForm() {
+                         curValue = $('#Type').val();
                             $('#el_validation').removeClass('editor-field-hidden');
                             $('#el_values').removeClass('editor-field-hidden');
                             $('#el_is_required').removeClass('editor-field-hidden');
@@ -72,7 +73,12 @@
                                <% } %>
                                default: alert('default');
                             }
+                       }
+
+                       $('#Type').change(function () {
+                           checkForm();
                        });
+                       checkForm();
                    });
                </script>
           <% }%>

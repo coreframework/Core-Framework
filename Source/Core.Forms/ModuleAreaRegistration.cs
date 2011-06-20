@@ -26,6 +26,8 @@ namespace Core.Forms
             context.MapRoute("Admin.SaveForm", "admin/forms/save", FormsMVC.Forms.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/forms/new", FormsMVC.Forms.New());
             context.MapRoute(null, "admin/form-{formId}/new-element", FormsMVC.Forms.NewElement());
+            context.MapRoute(null, "admin/form-{formId}/edit-element-{formElementId}", FormsMVC.Forms.EditElement());
+            context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", FormsMVC.Forms.SaveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
             //widget routs
             context.MapRoute(null, String.Empty, FormsMVC.FormsBuilderWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

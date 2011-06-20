@@ -66,6 +66,16 @@ namespace Core.Forms.Controllers {
         public System.Web.Mvc.ActionResult NewElement() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.NewElement);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult EditElement() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.EditElement);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SaveElement() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SaveElement);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsController Actions { get { return FormsMVC.Forms; } }
@@ -88,6 +98,8 @@ namespace Core.Forms.Controllers {
             public readonly string ShowFormElements = "ShowFormElements";
             public readonly string UpdateFormElementPosition = "UpdateFormElementPosition";
             public readonly string NewElement = "NewElement";
+            public readonly string EditElement = "EditElement";
+            public readonly string SaveElement = "SaveElement";
         }
 
 
@@ -153,6 +165,20 @@ namespace Core.Forms.Controllers {
         public override System.Web.Mvc.ActionResult NewElement(long formId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.NewElement);
             callInfo.RouteValueDictionary.Add("formId", formId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditElement(long formId, long formElementId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditElement);
+            callInfo.RouteValueDictionary.Add("formId", formId);
+            callInfo.RouteValueDictionary.Add("formElementId", formElementId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SaveElement(long formId, Core.Forms.Models.FormElementViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SaveElement);
+            callInfo.RouteValueDictionary.Add("formId", formId);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
