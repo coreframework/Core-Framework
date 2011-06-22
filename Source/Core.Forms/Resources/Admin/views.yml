@@ -3,7 +3,7 @@ Views:
     FormsList:
       Permissions: "Permissions"
       Details: "Details"
-
-     
+      Actions: "Actions"
+      Title: "Title"
+      CreateForm: "Create Form"
     
-

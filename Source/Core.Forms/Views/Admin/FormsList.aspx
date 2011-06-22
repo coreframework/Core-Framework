@@ -8,8 +8,8 @@
         <table class="index">
             <thead>
             <tr>
-                <th style="width:90%;">Title</th>
-                <th>Actions</th>
+                <th style="width:90%;"><%:Html.Translate(".Title") %></th>
+                <th><%:Html.Translate(".Actions") %></th>
             </tr>
             </thead>
             <tbody>
@@ -30,7 +30,7 @@
    <div id="actions">
     <ul>
       <li>
-         <%:Html.RouteLink("Create Form", new { controller = "Forms", action = "New" })%>
+         <%:Html.RouteLink(Html.Translate(".CreateForm"), new { controller = "Forms", action = "New" })%>
       </li>
     </ul>
   </div>

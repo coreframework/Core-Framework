@@ -20,6 +20,7 @@ namespace Core.Web.Models.Routes
         public void RegisterIgnoreRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.ashx/{*pathInfo}");
             routes.IgnoreRoute("{resource}.ico/{*pathInfo}");
         }
 

@@ -81,6 +81,7 @@
     </Compile>
     <Compile Include="Controllers\FormsBuilderWidgetController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
+    <Compile Include="Extensions\FormElementsExtensions.cs" />
     <Compile Include="FormsBuilderWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -88,7 +89,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="FormsPlugin.cs" />
+    <Compile Include="Helpers\FormsBuilderWidgetHelper.cs" />
     <Compile Include="Helpers\FormsHelper.cs" />
+    <Compile Include="Models\FormBuilderWidgetViewModel.cs" />
     <Compile Include="Models\FormElementViewModel.cs" />
     <Compile Include="Models\FormViewModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
@@ -150,11 +153,20 @@
     <Content Include="Resources\Admin\views.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\views.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\FormsBuilderWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\FormsBuilderWidget\ViewWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Web.config" />
     <Content Include="web.config" />
     <Content Include="web.Debug.config">

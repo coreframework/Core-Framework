@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddFormsBuilderWidgets.cs" />
     <Compile Include="Migration_AddFormElements.cs" />
     <Compile Include="Migration_AddForms.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

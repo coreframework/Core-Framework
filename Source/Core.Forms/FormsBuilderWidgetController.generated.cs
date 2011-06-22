@@ -44,6 +44,11 @@ namespace Core.Forms.Controllers {
         public System.Web.Mvc.ActionResult EditWidget() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.EditWidget);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult UpdateWidget() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.UpdateWidget);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsBuilderWidgetController Actions { get { return FormsMVC.FormsBuilderWidget; } }
@@ -68,6 +73,8 @@ namespace Core.Forms.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string EditWidget = "~/Views/FormsBuilderWidget/EditWidget.ascx";
+            public readonly string ViewWidget = "~/Views/FormsBuilderWidget/ViewWidget.ascx";
         }
     }
 
@@ -87,8 +94,9 @@ namespace Core.Forms.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UpdateWidget() {
+        public override System.Web.Mvc.ActionResult UpdateWidget(Core.Forms.Models.FormBuilderWidgetViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateWidget);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

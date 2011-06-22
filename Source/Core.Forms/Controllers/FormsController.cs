@@ -150,6 +150,7 @@ namespace Core.Forms.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool isNew = false;
                 var form = new Form();
                 if (model.Id > 0)
                 {
@@ -162,11 +163,16 @@ namespace Core.Forms.Controllers
                 }
                 else
                 {
+                    isNew = true;
                     form.UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?) null;
                 }
 
                 if (_formsService.Save(model.MapTo(form)))
                 {
+                    if (isNew)
+                    {
+                        _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormsPluginOperations>(), typeof(Form), form.Id);
+                    }
                     return RedirectToAction(FormsMVC.Forms.ShowAll());
                 }
             }

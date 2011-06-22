@@ -42,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -133,6 +134,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -154,20 +156,47 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Captcha\CaptchaImage.cs" />
+    <Compile Include="Captcha\CaptchaImageHandler.cs" />
     <Compile Include="Controllers\CastleControllerFactory.cs" />
     <Compile Include="Controllers\FrameworkController.cs" />
-    <Compile Include="Extensions\AssetsExtensions.cs" />
-    <Compile Include="Extensions\ButtonExtensions.cs" />
-    <Compile Include="Extensions\FileUploadExtensions.cs" />
-    <Compile Include="Extensions\FormCollectionExtensions.cs" />
-    <Compile Include="Extensions\LabelExtensions.cs" />
-    <Compile Include="Extensions\RadioExtensions.cs" />
-    <Compile Include="Extensions\ResourcesExtensions.cs" />
-    <Compile Include="Extensions\RoutesExtensions.cs" />
-    <Compile Include="Extensions\RouteValueDictionaryExtensions.cs" />
-    <Compile Include="Extensions\SelectExtensions.cs" />
-    <Compile Include="Extensions\UrlExtensions.cs" />
-    <Compile Include="Extensions\ValidationExtensions.cs" />
+    <Compile Include="Extensions\AssetsExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\ButtonExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\CaptchaExtensions.cs" />
+    <Compile Include="Extensions\FileUploadExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\FormCollectionExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\LabelExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\RadioExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\ResourcesExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\RoutesExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\RouteValueDictionaryExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\SelectExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\UrlExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Extensions\ValidationExtensions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Grids\GridColumnViewModel.cs" />
     <Compile Include="Grids\GridViewModel.cs" />
     <Compile Include="Grids\jqGrid\JqGridExtensions.cs" />
