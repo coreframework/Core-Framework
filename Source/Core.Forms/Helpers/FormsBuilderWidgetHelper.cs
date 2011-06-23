@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -6,6 +7,7 @@ using Core.Forms.Models;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
 using Core.Forms.Validation;
+using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Framework.MVC.Captcha;
 using Microsoft.Practices.ServiceLocation;
@@ -124,12 +126,46 @@ namespace Core.Forms.Helpers
             }
         }
 
-        public static bool HandleFormData(FormBuilderWidget model, FormCollection collection)
+        public static bool HandleFormData(FormBuilderWidget model, FormCollection collection, ICorePrincipal user)
         {
             if (model.SaveData)
             {
-                
+                var widgetAnswersService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerService>();
+                var widgetAnswersValueService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerValueService>();
+                var answer = new FormWidgetAnswer
+                                 {
+                                     CreateDate = DateTime.Now,
+                                     FormBuilderWidget = model,
+                                     UserId = user.PrincipalId,
+                                     AnswerValues = new List<FormWidgetAnswerValue>(),
+                                     Title = model.Title
+                                 };
+
+                if (widgetAnswersService.Save(answer))
+                {
+                    //save answer values
+                    foreach (FormElement item in model.Form.FormElements)
+                    {
+                        string elementName = String.Format("{0}_{1}", item.Type, item.Id);
+                        string value = collection[elementName];
+                        if (value != null)
+                        {
+                            widgetAnswersValueService.Save(new FormWidgetAnswerValue
+                            {
+                                Field = item.Title,
+                                Value = value,
+                                Answer = answer
+                            });
+                        }
+                    }
+                }  
             }
+
+            if (model.SendEmail)
+            {
+
+            }
+
             return true;
         }
     }

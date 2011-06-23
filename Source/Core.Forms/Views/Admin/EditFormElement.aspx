@@ -26,6 +26,7 @@
                     <p class="editor-field-hidden" id="el_values">
                         <%:Html.LabelFor(model => model.Values)%>
                         <%:Html.TextBoxFor(model => model.Values)%>
+                        <%:Html.Translate(".SeparateWithComma")%>
                         <%:Html.ValidationMessageFor(model => model.Values)%>
                     </p>
                  
@@ -38,7 +39,7 @@
                         <%: Html.DropDownListFor("RegexTemplate", Model.RegexTemplate, new { })%>
                         <%: Html.ValidationMessageFor(model => model.RegexTemplate)%>
                     </p>
-                      <p>
+                     <p class="editor-field-hidden" id="el_maxLength">
                         <%: Html.LabelFor(model=>model.MaxLength)%>
                         <%: Html.TextBoxFor(model => model.MaxLength)%>
                         <%: Html.ValidationMessageFor(model => model.MaxLength)%>
@@ -57,6 +58,7 @@
                             $('#el_validation').removeClass('editor-field-hidden');
                             $('#el_values').removeClass('editor-field-hidden');
                             $('#el_is_required').removeClass('editor-field-hidden');
+                            $('#el_maxLength').removeClass('editor-field-hidden');
                             switch(curValue)
                             {
                                <% foreach (var formType in Model.Types) {%>
@@ -69,6 +71,9 @@
                                         <% } %>
                                         <%if (!formType.IsValuesEnabled) {%>
                                         $('#el_values').addClass('editor-field-hidden');
+                                        <% } %>
+                                        <%if (!formType.IsMaxLengthEnabled) {%>
+                                        $('#el_maxLength').addClass('editor-field-hidden');
                                         <% } %>
                                     break;
                                <% } %>

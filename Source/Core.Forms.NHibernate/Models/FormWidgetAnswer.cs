@@ -21,6 +21,12 @@ namespace Core.Forms.NHibernate.Models
         public virtual long? UserId { get; set; }
 
         /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        /// <value>The title.</value>
+        public virtual String Title { get; set; }
+
+        /// <summary>
         /// Gets or sets the form builder widget.
         /// </summary>
         /// <value>The form builder widget.</value>

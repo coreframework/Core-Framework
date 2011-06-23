@@ -36,9 +36,8 @@ textarea {
   color: #999 !important;
 }
 
-input.input-validation-error, select.input-validation-error {
-  background:#F79992;
-  border-color:#CE6F6F;
+input.input-validation-error, select.input-validation-error, textarea.input-validation-error {
+  border: 1px solid #A92425;
   color:#9C2F2F;
 }
 

@@ -5,8 +5,6 @@
 <%@ Import Namespace="System.Web.Mvc.Ajax" %>
 <%@ Import Namespace="Core.Forms.Extensions" %>
 <%@ Import Namespace="Core.Forms.NHibernate.Models" %>
-
-
 <div id="<%=String.Format("formHolder{0}", Model.Id)%>" class="widget-form">
    <% using (Ajax.BeginForm(
                         "SubmitWidgetForm",

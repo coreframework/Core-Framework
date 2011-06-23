@@ -46,7 +46,7 @@ namespace Core.Forms.Extensions
             {
                 case FormElementType.TextField:
                     {
-                        builder.Append(model.Title);
+                        builder.Append(html.Encode(model.Title));
                         break;
                     }
                 case FormElementType.TextBox:
@@ -63,8 +63,8 @@ namespace Core.Forms.Extensions
                     }
                 case FormElementType.CheckBox:
                     {
-                        builder.Append(html.CheckBox(elementName, FormCollectionExtensions.BooleanValue(elementValue)));
-                        builder.Append(model.Title);
+                        builder.Append(html.SimpleCheckBox(elementName, FormCollectionExtensions.BooleanValue(elementValue)));
+                        builder.Append(html.Label(elementName, model.Title));
                         break;
                     }
                 case FormElementType.DropDownList:

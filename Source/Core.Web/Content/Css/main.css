@@ -370,5 +370,5 @@ table.permissions-grid td.chbx input {float:none;}
 .widget-form {}
 .widget-form  .form-element {display:block;margin-bottom:10px;clear:left;}
 .widget-form label {display:block;font-weight:normal !important;}
-.widget-form textarea, .widget-form input[type=text], .widget-form select {width:200px; display:block;}
+.widget-form textarea, .widget-form input[type=text], .widget-form select {width:400px; display:block;}
 .widget-form input[type=checkbox] {clear:left;}

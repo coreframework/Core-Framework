@@ -4,25 +4,22 @@ namespace Core.Forms.NHibernate.Models
 {
     public enum FormElementType
     {
-        [ElementTypeDescription(false, true, true)]
+        [ElementTypeDescription(IsRequiredEnabled = true, IsValidationEnabled = true, IsMaxLengthEnabled = true)]
         TextBox = 1,
 
-        [ElementTypeDescription(false, true, true)]
+        [ElementTypeDescription(IsRequiredEnabled = true, IsValidationEnabled = true, IsMaxLengthEnabled = true)]
         TextArea = 2,
 
-        [ElementTypeDescription(true, true, false)]
+        [ElementTypeDescription(IsValuesEnabled = true, IsRequiredEnabled = true)]
         DropDownList = 3,
 
-        [ElementTypeDescription(true, false, false)]
+        [ElementTypeDescription(IsValuesEnabled = true)]
         RadioButtons = 4,
 
-        [ElementTypeDescription(false, false, false)]
         CheckBox = 5,
 
-        [ElementTypeDescription(false, false, false)]
         TextField = 6,
 
-        [ElementTypeDescription(false, false, false)]
         Captcha = 7
     }
 }

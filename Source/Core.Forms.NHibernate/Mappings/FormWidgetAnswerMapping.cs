@@ -18,6 +18,8 @@ namespace Core.Forms.NHibernate.Mappings
             Id(formWidgetAnswer => formWidgetAnswer.Id);
             Map(formWidgetAnswer => formWidgetAnswer.CreateDate);
             Map(formWidgetAnswer => formWidgetAnswer.UserId);
+            Map(formWidgetAnswer => formWidgetAnswer.Title);
+            References(formWidgetAnswer => formWidgetAnswer.FormBuilderWidget).Column("FormWidgetId");
 
             HasMany(form => form.AnswerValues).KeyColumn("FormAnswerId")
               .Table("Forms_FormAnswerValues")

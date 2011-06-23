@@ -167,6 +167,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Extensions\CaptchaExtensions.cs" />
+    <Compile Include="Extensions\CheckBoxExtensions.cs" />
     <Compile Include="Extensions\FileUploadExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

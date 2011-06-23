@@ -100,6 +100,7 @@ namespace Core.Forms.Models
                     elementType.IsRequiredEnabled = description.IsRequiredEnabled;
                     elementType.IsValidationEnabled = description.IsValidationEnabled;
                     elementType.IsValuesEnabled = description.IsValuesEnabled;
+                    elementType.IsMaxLengthEnabled = description.IsMaxLengthEnabled;
                 }
 
                 Types.Add(elementType);

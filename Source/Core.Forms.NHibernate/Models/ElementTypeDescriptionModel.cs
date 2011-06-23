@@ -34,5 +34,12 @@ namespace Core.Forms.NHibernate.Models
         /// </value>
         public bool IsRequiredEnabled { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is max length enabled.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is max length enabled; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsMaxLengthEnabled { get; set; }
     }
 }

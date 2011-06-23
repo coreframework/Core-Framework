@@ -7,6 +7,7 @@ using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
 using Core.Forms.Widgets;
 using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Extensions;
 using Core.Framework.Plugins.Web;
 using Microsoft.Practices.ServiceLocation;
 
@@ -101,7 +102,7 @@ namespace Core.Forms.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    FormsBuilderWidgetHelper.HandleFormData(model, collection);
+                    FormsBuilderWidgetHelper.HandleFormData(model, collection, this.CorePrincipal());
                 }
                 else
                 {
