@@ -33,5 +33,6 @@ namespace Core.Forms.NHibernate.Models
         /// 	<c>true</c> if this instance is required enabled; otherwise, <c>false</c>.
         /// </value>
         public bool IsRequiredEnabled { get; set; }
+
     }
 }

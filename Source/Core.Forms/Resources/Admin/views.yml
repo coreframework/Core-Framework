@@ -6,4 +6,8 @@ Views:
       Actions: "Actions"
       Title: "Title"
       CreateForm: "Create Form"
-    
+    EditForm:
+      ViewFormElements: "View form elements"
+    FormElements:
+      Edit: "Edit"
+      Delete: "Delete"

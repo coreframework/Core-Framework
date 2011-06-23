@@ -47,5 +47,20 @@ namespace Framework.MVC.Extensions
             }
             return value;
         }
+
+        /// <summary>
+        /// Parse boolean value posted throught http-form.
+        /// </summary>
+        /// <param name="formValue">The form value to parse.</param>
+        /// <returns>Parse boolean value or <see cref="bool"/> default value.</returns>
+        public static bool BooleanValue(String formValue)
+        {
+            bool value = default(bool);
+            if (!String.IsNullOrEmpty(formValue))
+            {
+                bool.TryParse(formValue, out value);
+            }
+            return value;
+        }
     }
 }

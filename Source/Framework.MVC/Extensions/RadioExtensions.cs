@@ -89,14 +89,18 @@ namespace Framework.MVC.Extensions
         /// <param name="items">The items.</param>
         /// <param name="selected">The selected object.</param>
         /// <returns>An HTML radio group.</returns>
-        public static MvcHtmlString RadioList(this HtmlHelper html, String groupName, IDictionary<String, String> items, object selected)
+        public static MvcHtmlString RadioList(this HtmlHelper html, String groupName, IDictionary<String, String> items, String selected)
         {
             var builder = new StringBuilder();
 
             foreach (var item in items)
             {
-                String checkedString = item.Value.Equals(selected) ? "checked='checked'" : String.Empty;
-                builder.Append(String.Format("<div><input type='radio' name='{0}' id='{1}' value='{1}' {3}/><label for='{1}'>{2}</label></div>", groupName, item.Key, item.Value, checkedString));
+                if (String.IsNullOrEmpty(selected))
+                {
+                    selected = item.Key;
+                }
+                String checkedString = item.Key.Equals(selected) ? "checked='checked'" : String.Empty;
+                builder.Append(String.Format("<div><input type='radio' name='{0}' id='{1}' value='{1}' {3}/>{2}</div>", groupName, item.Key, item.Value, checkedString));
             }
 
             return MvcHtmlString.Create(builder.ToString());

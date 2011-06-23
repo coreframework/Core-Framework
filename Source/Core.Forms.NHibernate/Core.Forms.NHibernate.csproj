@@ -85,23 +85,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IFormWidgetAnswerService.cs" />
+    <Compile Include="Contracts\IFormWidgetAnswerValueService.cs" />
     <Compile Include="Contracts\IFormBuilderWidgetService.cs" />
     <Compile Include="Contracts\IFormElementService.cs" />
     <Compile Include="Contracts\IFormService.cs" />
     <Compile Include="CoreFormsNHibernateModule.cs" />
     <Compile Include="Helpers\ElementTypeDescriptionAttribute.cs" />
+    <Compile Include="Mappings\FormWidgetAnswerValueMapping.cs" />
     <Compile Include="Mappings\FormBuilderWidgetMapping.cs" />
     <Compile Include="Mappings\FormElementMapping.cs" />
     <Compile Include="Mappings\FormMapping.cs" />
+    <Compile Include="Mappings\FormWidgetAnswerMapping.cs" />
     <Compile Include="Mappings\FormWidgetMapping.cs" />
     <Compile Include="Models\ElementTypeDescriptionModel.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\FormBuilderWidget.cs" />
     <Compile Include="Models\FormElement.cs" />
     <Compile Include="Models\FormElementType.cs" />
-    <Compile Include="Models\FormWidget.cs" />
+    <Compile Include="Models\FormWidgetAnswer.cs" />
+    <Compile Include="Models\FormWidgetAnswerValue.cs" />
+    <Compile Include="Models\RegexTemplate.cs" />
     <Compile Include="Permissions\Operations\FormOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateFormWidgetAnswerValueService.cs" />
+    <Compile Include="Services\NHibernateFormWidgetAnswerService.cs" />
     <Compile Include="Services\NHibernateFormBuilderWidgetService.cs" />
     <Compile Include="Services\NHibernateFormElementService.cs" />
     <Compile Include="Services\NHibernateFormService.cs" />

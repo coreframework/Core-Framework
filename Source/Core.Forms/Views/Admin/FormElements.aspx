@@ -14,6 +14,7 @@
                 <th>Title</th>
                 <th>Type</th>
                 <th>Required</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,10 @@
                 </td>
                  <td>
                   <%:formElement.IsRequired%>
+                </td>
+                 <td>
+                   <%:Html.RouteLink(Html.Translate(".Edit"), new { controller = "Forms", action = "EditElement", formElementId = formElement.Id, formId = formElement.Form.Id })%><br/>
+                   <%:Html.RouteLink(Html.Translate(".Delete"), new { controller = "Forms", action = "Edit", formElementId = formElement.Id, formId = formElement.Form.Id })%><br/>
                 </td>
             </tr>
             <% } %>

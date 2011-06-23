@@ -49,6 +49,11 @@ namespace Core.Forms.Controllers {
         public System.Web.Mvc.ActionResult UpdateWidget() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.UpdateWidget);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SubmitWidgetForm() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SubmitWidgetForm);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsBuilderWidgetController Actions { get { return FormsMVC.FormsBuilderWidget; } }
@@ -65,6 +70,7 @@ namespace Core.Forms.Controllers {
             public readonly string ViewWidget = "ViewWidget";
             public readonly string EditWidget = "EditWidget";
             public readonly string UpdateWidget = "UpdateWidget";
+            public readonly string SubmitWidgetForm = "SubmitWidgetForm";
         }
 
 
@@ -97,6 +103,13 @@ namespace Core.Forms.Controllers {
         public override System.Web.Mvc.ActionResult UpdateWidget(Core.Forms.Models.FormBuilderWidgetViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateWidget);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SubmitWidgetForm(long instanceId, System.Web.Mvc.FormCollection collection) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SubmitWidgetForm);
+            callInfo.RouteValueDictionary.Add("instanceId", instanceId);
+            callInfo.RouteValueDictionary.Add("collection", collection);
             return callInfo;
         }
 

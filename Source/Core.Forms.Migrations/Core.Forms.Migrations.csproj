@@ -66,6 +66,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddFormAnswerValues.cs" />
+    <Compile Include="Migration_AddFormWidgetAnswers.cs" />
     <Compile Include="Migration_AddFormsBuilderWidgets.cs" />
     <Compile Include="Migration_AddFormElements.cs" />
     <Compile Include="Migration_AddForms.cs" />

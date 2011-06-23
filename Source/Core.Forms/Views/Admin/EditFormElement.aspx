@@ -13,35 +13,36 @@
                     <%: Html.Hidden("formId", Model.FormId) %> 
                     <%: Html.HiddenFor(model=>model.Id) %> 
 
-                    <div class="editor-label">
+                    <p>
                         <%: Html.LabelFor(model => model.Title) %>
-                    </div>
-                    <div class="editor-field">
                         <%: Html.TextBoxFor(model => model.Title) %>
                         <%: Html.ValidationMessageFor(model => model.Title) %>
-                    </div>
-
-                    <div class="editor-label">
+                    </p>
+                    <p>
                         <%: Html.LabelFor(model => model.Type)%>
-                    </div>
-                    <div class="editor-field">
                         <%: Html.DropDownListFor("Type", Model.Type, new {}) %>
                         <%: Html.ValidationMessageFor(model => model.Type) %>
-                    </div>
-                    <div class="editor-field editor-field-hidden" id="el_values">
+                    </p>
+                    <p class="editor-field-hidden" id="el_values">
                         <%:Html.LabelFor(model => model.Values)%>
                         <%:Html.TextBoxFor(model => model.Values)%>
                         <%:Html.ValidationMessageFor(model => model.Values)%>
-                    </div>
+                    </p>
                  
-                    <div class="editor-field editor-field-hidden" id="el_is_required">
+                    <p class="editor-field-hidden" id="el_is_required">
                         <%:Html.CheckBoxFor(model => model.IsRequired)%>
                         <%:Html.LabelFor(model => model.IsRequired)%>
-                    </div>
-                    <div class="editor-field editor-field-hidden" id="el_validation">
-                        <%: Html.DropDownListFor("ValidationRegexTemplate", Model.ValidationRegexTemplate, new { })%>
-                        <%: Html.ValidationMessageFor(model => model.ValidationRegexTemplate) %>
-                    </div>
+                    </p>
+                    <p class="editor-field-hidden" id="el_validation">
+                        <%: Html.LabelFor(model => model.RegexTemplate)%>
+                        <%: Html.DropDownListFor("RegexTemplate", Model.RegexTemplate, new { })%>
+                        <%: Html.ValidationMessageFor(model => model.RegexTemplate)%>
+                    </p>
+                      <p>
+                        <%: Html.LabelFor(model=>model.MaxLength)%>
+                        <%: Html.TextBoxFor(model => model.MaxLength)%>
+                        <%: Html.ValidationMessageFor(model => model.MaxLength)%>
+                    </p>
 
                    <%: Html.AntiForgeryToken()%>
              </div>

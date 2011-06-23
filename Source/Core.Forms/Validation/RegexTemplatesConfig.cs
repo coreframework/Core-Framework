@@ -1,21 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Forms.NHibernate.Models;
 
 namespace Core.Forms.Validation
 {
     public class RegexTemplatesConfig
     {
-        public Dictionary<RegexTemplates, String> ValidationTemplates = new Dictionary<RegexTemplates, String>
+        #region Fields
+
+        public static Dictionary<RegexTemplate, String> ValidationTemplates = new Dictionary<RegexTemplate, String>
                                                                             {
-            {RegexTemplates.PositivIntValue, "^[1-9]\\d{0,6}$"},
-            {RegexTemplates.IntValue, "^(-)?\\d{1,6}$"},
-            {RegexTemplates.DoubleValue, "^(-)?\\d{1,6}$"},
-            {RegexTemplates.MoneyValue, @"^[0-9]{1,7}([\.][0-9]{1,2})?$"},
-            {RegexTemplates.Email, "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"},
-            {RegexTemplates.Url, "(http://)?([/\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"},
-            {RegexTemplates.UrlPart, "^[a-zA-Z0-9-_\\.]+$"},
-            {RegexTemplates.AlphaNumeric, "^[a-zA-Z0-9]+$"},
-            {RegexTemplates.Phone, @"^((\d+)*(\+)*(\s)*(\-)*(\d+)*(\\)*(\/)*)*(\(((\d+)*(\+)*(\s)*(\-)*(\d+)*(\\)*(\/)*)*\))*((\d+)*(\+)*(\s)*(\-)*(\.+)*(\d+)*(\\)*(\/)*)*$"},
+            {RegexTemplate.PositiveIntValue, "^[1-9]\\d{0,6}$"},
+            {RegexTemplate.IntValue, "^(-)?\\d{1,6}$"},
+            {RegexTemplate.DoubleValue, "^(-)?\\d{1,6}$"},
+            {RegexTemplate.MoneyValue, @"^[0-9]{1,7}([\.][0-9]{1,2})?$"},
+            {RegexTemplate.Email, "\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*"},
+            {RegexTemplate.Url, "(http://)?([/\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?"},
+            {RegexTemplate.UrlPart, "^[a-zA-Z0-9-_\\.]+$"},
+            {RegexTemplate.AlphaNumeric, "^[a-zA-Z0-9]+$"},
+            {RegexTemplate.Phone, @"^((\d+)*(\+)*(\s)*(\-)*(\d+)*(\\)*(\/)*)*(\(((\d+)*(\+)*(\s)*(\-)*(\d+)*(\\)*(\/)*)*\))*((\d+)*(\+)*(\s)*(\-)*(\.+)*(\d+)*(\\)*(\/)*)*$"},
         };
+
+        #endregion
     }
 }

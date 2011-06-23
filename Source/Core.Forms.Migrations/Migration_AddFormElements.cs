@@ -22,6 +22,8 @@ namespace Core.Forms.Migrations
                 t.Bool("IsRequired").Default(0);
                 t.Text("ElementValues").Null();
                 t.Integer("OrderNumber");
+                t.Integer("RegexTemplate");
+                t.Long("MaxLength").Null();
                 t.ForeignKey("FormElementForm").Table("Forms_Forms").Column("FormId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

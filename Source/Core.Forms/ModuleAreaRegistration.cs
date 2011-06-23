@@ -31,6 +31,7 @@ namespace Core.Forms
 
             //widget routs
             context.MapRoute(null, String.Empty, FormsMVC.FormsBuilderWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "form-widget/submit-form", FormsMVC.FormsBuilderWidget.SubmitWidgetForm(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, String.Empty, FormsMVC.FormsBuilderWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "form-widget/update", FormsMVC.FormsBuilderWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }

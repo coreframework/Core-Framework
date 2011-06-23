@@ -39,16 +39,12 @@ namespace Framework.MVC.Extensions
         /// <summary>
         /// Captchas the text box.
         /// </summary>
-        /// <param name="helper">The helper.</param>
+        /// <param name="html">The HTML helper.</param>
         /// <param name="name">The name of textbox.</param>
         /// <returns>Captcha text box.</returns>
-        public static string CaptchaTextBox(this HtmlHelper helper, string name)
+        public static string CaptchaTextBox(this HtmlHelper html, string name)
         {
-            return
-                String.Format(
-                    @"<input type=""text"" id=""{0}"" name=""{0}"" value="""" maxlength=""{1}"" autocomplete=""off"" />",
-                    name,
-                    Captcha.CaptchaImage.TextLength);
+            return System.Web.Mvc.Html.InputExtensions.TextBox(html, name, null, new { maxlength = Captcha.CaptchaImage.TextLength, autocomplete = "off" }).ToHtmlString();
         }
 
         /// <summary>
@@ -83,7 +79,7 @@ namespace Framework.MVC.Extensions
             stringBuilder.Append("\" />");
             stringBuilder.AppendLine();
             stringBuilder.Append("<img src=\"");
-            stringBuilder.Append("core/captcha.ashx?guid=" + image.UniqueId);
+            stringBuilder.Append("captcha.ashx?guid=" + image.UniqueId);
             stringBuilder.Append("\" alt=\"CAPTCHA\" width=\"");
             stringBuilder.Append(width);
             stringBuilder.Append("\" height=\"");

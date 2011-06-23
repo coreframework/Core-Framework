@@ -18,6 +18,8 @@ namespace Core.Forms.NHibernate.Mappings
             Map(formElement => formElement.Type).CustomType(typeof(FormElementType));
             Map(formElement => formElement.OrderNumber);
             Map(formElement => formElement.IsRequired);
+            Map(formElement => formElement.MaxLength);
+            Map(formElement => formElement.RegexTemplate).CustomType(typeof(RegexTemplate));
             References(form => form.Form).Column("FormId");
         }
     }

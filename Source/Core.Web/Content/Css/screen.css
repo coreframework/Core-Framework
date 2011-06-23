@@ -13,7 +13,6 @@ fieldset {
 
 input {
   border: 1px solid #cccccc;
-  float: left;
 }
 
 input[type=checkbox] {

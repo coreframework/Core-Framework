@@ -131,6 +131,11 @@ namespace Framework.MVC.Captcha
         #region Fields
 
         /// <summary>
+        /// Captcha image guid key.
+        /// </summary>
+        public const String CaptchaImageGuidKey = "captcha-guid";
+
+        /// <summary>
         /// Contains random font families.
         /// </summary>
         private static readonly string[] RandomFontFamily = { "arial", "arial black", "comic sans ms", "courier new", "estrangelo edessa", "franklin gothic medium", "georgia", "lucida console", "lucida sans unicode", "mangal", "microsoft sans serif", "palatino linotype", "sylfaen", "tahoma", "times new roman", "trebuchet ms", "verdana" };

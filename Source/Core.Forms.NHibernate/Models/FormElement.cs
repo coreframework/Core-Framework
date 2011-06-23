@@ -45,5 +45,17 @@ namespace Core.Forms.NHibernate.Models
         /// </summary>
         /// <value>The form.</value>
         public virtual Form Form { get; set; }
+
+        /// <summary>
+        /// Gets or sets the length of the max.
+        /// </summary>
+        /// <value>The length of the max.</value>
+        public virtual long? MaxLength { get; set; }
+
+        /// <summary>
+        /// Gets or sets the regex template.
+        /// </summary>
+        /// <value>The regex template.</value>
+        public virtual RegexTemplate RegexTemplate { get; set; }
     }
 }

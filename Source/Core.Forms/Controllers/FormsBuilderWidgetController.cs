@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Forms.Helpers;
 using Core.Forms.Models;
@@ -88,10 +89,30 @@ namespace Core.Forms.Controllers
             return PartialView("EditWidget", model);
         }
 
-     /*   public virtual ActionResult ApplyWidgetForm(long instanceId, FormCollection collection)
+        [HttpPost]
+        public virtual ActionResult SubmitWidgetForm(long instanceId, FormCollection collection)
         {
-            
-        }*/
+            var widgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
+            var model = widgetService.Find(instanceId);
+
+            if (model!=null)
+            {
+                FormsBuilderWidgetHelper.Validate(model, collection, ModelState);
+
+                if (ModelState.IsValid)
+                {
+                    FormsBuilderWidgetHelper.HandleFormData(model, collection);
+                }
+                else
+                {
+                    ViewData[String.Format("FormCollection{0}", model.Id)] = collection;
+                }
+
+                return PartialView("ViewWidget", model);
+            }
+
+            return Content("Hello");
+        }
 
         #endregion
     }

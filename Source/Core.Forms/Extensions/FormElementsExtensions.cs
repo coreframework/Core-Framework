@@ -15,17 +15,33 @@ namespace Core.Forms.Extensions
 
         public const Int32 CaptchaDefaultHeight = 40; 
 
-        public const Int32 CaptchaDefaultWidth = 120; 
+        public const Int32 CaptchaDefaultWidth = 120;
+
+        public const String FormElementNameFormat = "{0}_{1}";
+
+        public const char ElementValuesSeparator = ',';
 
         #endregion
 
         #region Extensions
 
-        public static MvcHtmlString FormElementRenderer(this HtmlHelper html, FormElement model)
+        /// <summary>
+        /// Renders html depends on model's type (i.e. textbox, radion buttons)
+        /// </summary>
+        /// <param name="html">The HTML.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="collection">The collection.</param>
+        /// <returns></returns>
+        public static MvcHtmlString FormElementRenderer(this HtmlHelper html, FormElement model, FormCollection collection)
         {
             var builder = new StringBuilder();
 
-            var elementName = String.Format("{0}_{1}", model.Type, model.Id);
+            var elementName = String.Format(FormElementNameFormat, model.Type, model.Id);
+            var elementValue = String.Empty;
+            if (collection!=null && collection[elementName]!=null)
+            {
+                elementValue = collection[elementName];
+            }
             switch (model.Type)
             {
                 case FormElementType.TextField:
@@ -33,52 +49,40 @@ namespace Core.Forms.Extensions
                         builder.Append(model.Title);
                         break;
                     }
-
                 case FormElementType.TextBox:
                     {
                         builder.Append(html.Label(elementName, model.Title));
-                        builder.Append(html.TextBox(elementName));
+                        builder.Append(html.TextBox(elementName, elementValue));
                         break;
                     }
                 case FormElementType.TextArea:
                     {
                         builder.Append(html.Label(elementName, model.Title));
-                        builder.Append(html.TextArea(elementName));
+                        builder.Append(html.TextArea(elementName, elementValue));
                         break;
                     }
                 case FormElementType.CheckBox:
                     {
-                        builder.Append(html.CheckBox(elementName));
-                        builder.Append(html.Label(elementName));
+                        builder.Append(html.CheckBox(elementName, FormCollectionExtensions.BooleanValue(elementValue)));
+                        builder.Append(model.Title);
                         break;
                     }
                 case FormElementType.DropDownList:
                     {
-                        var values = model.ElementValues.Trim().Split(',');
-                        var selectedList = values.Select(item => new SelectListItem() {Text = item, Value = item}).ToList();
-
                         builder.Append(html.Label(elementName, model.Title));
-                        builder.Append(html.DropDownList(elementName, selectedList));
+                        builder.Append(html.DropDownList(elementName, ParseElementValuesForDropDown(model.ElementValues, elementValue)));
                         break;
                     }
                 case FormElementType.RadioButtons:
                     {
-                        var values = model.ElementValues.Trim().Split(',');
-                        var result = new Dictionary<String, String>();
-
-                        var index = 0;
-                        foreach (var item in values)
-                        {
-                            result.Add(String.Format("{0}_{1}", elementName, index), item);
-                            index++;
-                        }
-
-                        builder.Append(html.RadioList(model.Id.ToString(), result, null));
+                        builder.Append((model.Title));
+                        builder.Append(html.RadioList(elementName, ParseElementValuesForRadioButtons(model.ElementValues, elementName), elementValue));
                         break;
                     }
                 case FormElementType.Captcha:
                     {
                         builder.Append(html.CaptchaImage(CaptchaDefaultHeight, CaptchaDefaultWidth));
+                        builder.Append(html.Label(elementName,""));
                         builder.Append(html.CaptchaTextBox(elementName));
                         break;
                     }
@@ -86,8 +90,54 @@ namespace Core.Forms.Extensions
                 default:
                     break;
             }
+
+            builder.Append(html.ValidationMessage(elementName));
         
             return MvcHtmlString.Create(builder.ToString());
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        /// <summary>
+        /// Parses the element values for radio buttons.
+        /// </summary>
+        /// <param name="values">The values.</param>
+        /// <param name="elementName">Name of the element.</param>
+        /// <returns></returns>
+        private static Dictionary<String, String> ParseElementValuesForRadioButtons(String values, String elementName)
+        {
+            var valuesArray = values.Trim().Split(ElementValuesSeparator);
+            var result = new Dictionary<String, String>();
+
+            for (var i=0; i<valuesArray.Length; i++)
+            {
+                if (!String.IsNullOrEmpty(valuesArray[i]))
+                {
+                    result.Add(String.Format("{0}_{1}", elementName, i), valuesArray[i]);
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Parses the element values for drop down list.
+        /// </summary>
+        /// <param name="values">The values.</param>
+        /// <param name="selectedValue">The selected value.</param>
+        /// <returns></returns>
+        private static IEnumerable<SelectListItem> ParseElementValuesForDropDown(String values, String selectedValue)
+        {
+            var valuesArray = values.Trim().Split(ElementValuesSeparator);
+
+            var result = new List<SelectListItem> {new SelectListItem {Text = @"Please select", Value = ""}};
+            result.AddRange(from item in valuesArray
+                            where !String.IsNullOrEmpty(item)
+                            select new SelectListItem {Text = item, Value = item, Selected = item.Equals(selectedValue)});
+
+            return result;
         }
 
         #endregion

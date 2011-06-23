@@ -364,3 +364,11 @@ table.permissions-grid th {background-color:#DEDEDE;padding:3px;}
 table.permissions-grid td {padding:4px 3px; border:1px solid #aaaaaa;}
 table.permissions-grid td.chbx {text-align:center;}
 table.permissions-grid td.chbx input {float:none;}
+
+/*forms*/
+
+.widget-form {}
+.widget-form  .form-element {display:block;margin-bottom:10px;clear:left;}
+.widget-form label {display:block;font-weight:normal !important;}
+.widget-form textarea, .widget-form input[type=text], .widget-form select {width:200px; display:block;}
+.widget-form input[type=checkbox] {clear:left;}
