@@ -1,5 +1,6 @@
 Controllers:
   FormsBuilderWidget:
-    SuccessFormSubmit: "Form has been successfully submit."
+    Messages:
+      SuccessFormSubmit: "Form has been successfully submit."
     
     

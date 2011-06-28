@@ -34,7 +34,12 @@ namespace Framework.MVC.Extensions
         /// <returns>Area name or <c>null</c> for default area.</returns>
         public static String AreaName(this RouteData routeData)
         {
-            return routeData.Values[AreaNameKey] as String;
+            object areaName = routeData.Values[AreaNameKey];
+            if (String.IsNullOrEmpty(areaName as String))
+            {
+                routeData.DataTokens.TryGetValue(AreaNameKey, out areaName);
+            }
+            return areaName as String;
         }
 
         /// <summary>
