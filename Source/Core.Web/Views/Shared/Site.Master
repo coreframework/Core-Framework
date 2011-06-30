@@ -8,21 +8,18 @@
     <title>
         <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>
-    <%= Html.CssInclude("main.css")%>
-    <%= Html.CssInclude("grid.css")%>
-    <%= Html.CssInclude("screen.css")%>
-    <%= Html.CssInclude("inettuts.js.css")%>
-    <%: Html.JavascriptPackInclude("base") %>
-    <%= Html.JavascriptInclude("MicrosoftAjax.js")%>
-    <%= Html.JavascriptInclude("MicrosoftMvcAjax.js")%>
-    <%= Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
-    <%= Html.JavascriptInclude("inettuts.js")%>
+    <%: Html.CssPackInclude("base")%>
     <%= Html.CssInclude("jquery-ui/jquery-ui-1.8.11.custom.css")%>
-    <%= Html.JavascriptInclude("colorpicker.js")%>
-    <%= Html.JavascriptInclude("json2.js")%>
-    <%= Html.CssInclude("colorpicker.css")%>
-    <%= Html.JavascriptInclude("superfish.js")%>
-    <%= Html.JavascriptInclude("jquery.json-2.2.min.js")%>
+
+    <%: Html.JavascriptPackInclude("base") %>
+    <%: Html.JavascriptPackInclude("ajaxmvc")%>
+    <%= Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
+    <%: Html.JavascriptPackInclude("custom")%>
+
+    <% if(Model as PageViewModel != null && !String.IsNullOrEmpty(((PageViewModel)Model).CssFileName)) { %>
+        <%= AssetsExtensions.CssHelper(HttpContext.Current, HttpContext.Current.Request.ApplicationPath + "/styles.cssx?common=" + ((PageViewModel)Model).CssFileName, null)%>
+    <%}%>
+
     <style id="pageAdditionalStyles" type="text/css">
         <%= Model is PageViewModel && ((PageViewModel)Model).Settings != null ? ((PageViewModel)Model).Settings.CustomCSS : String.Empty%>
     </style>

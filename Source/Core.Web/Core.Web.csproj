@@ -209,6 +209,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\CssHandler.cs" />
     <Compile Include="Helpers\HtmlExtensions\HtmlExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

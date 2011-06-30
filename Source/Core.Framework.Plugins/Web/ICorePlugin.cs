@@ -26,7 +26,13 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The plugin directory.</value>
         String PluginLocation { get; }
-        
+
+        /// <summary>
+        /// Gets the plugin directory.
+        /// </summary>
+        /// <value>The plugin directory.</value>
+        String PluginDirectory { get; }
+
         /// <summary>
         /// Gets the resources directory.
         /// </summary>
@@ -60,5 +66,25 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <returns></returns>
         Assembly GetPluginMigrationsAssembly();
+
+        /// <summary>
+        /// Gets the Plugin config path.
+        /// </summary>
+        String ConfigPath { get; }
+
+        /// <summary>
+        /// Gets the Plugin images path.
+        /// </summary>
+        String ImagesPath { get; }
+
+        /// <summary>
+        /// Gets the Plugin CSS path.
+        /// </summary>
+        String CssPath { get; }
+
+        /// <summary>
+        /// Gets the Plugin CSS pack.
+        /// </summary>
+        String CssPack { get; }
     }
 }

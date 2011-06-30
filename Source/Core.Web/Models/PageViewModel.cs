@@ -10,9 +10,11 @@ using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
 using Core.Web.Helpers;
+using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Microsoft.Practices.ServiceLocation;
+using Core.Framework.MEF.Extensions;
 
 namespace Core.Web.Models
 {
@@ -34,6 +36,7 @@ namespace Core.Web.Models
         public PageViewModel()
         {
             permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            PagePlugins = new List<ICorePlugin>();
         }
 
         #endregion
@@ -88,6 +91,10 @@ namespace Core.Web.Models
 
         public PageMode PageMode { get; set; }
 
+        public String CssFileName { get; set; }
+
+        public List<ICorePlugin> PagePlugins { get; set; }
+
         #endregion
 
         #region IMappedModel members
@@ -134,6 +141,16 @@ namespace Core.Web.Models
                                         currentPrincipal != null && widget1.User != null && widget1.User.PrincipalId == currentPrincipal.PrincipalId) : null,
                                     PageAccess = pageAccess
                                 });
+                if (!PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                {
+                    PagePlugins.Add(coreWidget.Plugin);
+                }
+            }
+            var plugins = ServiceLocator.Current.GetInstance<IPluginService>().FindPluginsByIdentifiers(PagePlugins.Select(t => t.Identifier).ToList());
+            if (plugins.Count() > 0)
+            {
+                plugins.ForEach(t => { CssFileName += t.Id + "_"; });
+                CssFileName = CssFileName.Remove(CssFileName.Length - 1);
             }
 
             return this;

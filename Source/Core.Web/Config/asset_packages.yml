@@ -6,8 +6,17 @@
     - jquery.corner.js
     - jquery.form.js
     - jquery.blockUI.js
+    - jquery.json-2.2.min.js
     - framework.js
     - application.js
+  ajaxmvc:
+    - MicrosoftAjax.js
+    - MicrosoftMvcAjax.js
+  custom:
+    - inettuts.js
+    - colorpicker.js
+    - json2.js
+    - superfish.js
   upload:
     - swfupload.js
     - jquery-asyncUpload-0.1.js
@@ -30,6 +39,12 @@
     - jquery-ui/jquery.ui.resizable.js
     - jquery-ui/jquery.ui.dialog.js
 stylesheets:
+  base:
+    - main.css
+    - grid.css
+    - screen.css
+    - inettuts.js.css
+    - colorpicker.css
   screen:
     - blueprint/reset.css
     - blueprint/typography.css

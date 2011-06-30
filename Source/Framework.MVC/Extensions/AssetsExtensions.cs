@@ -5,12 +5,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-
+using Core.Framework.Plugins.Web;
 using Framework.Core;
 using Framework.MVC.Helpers;
 
@@ -41,7 +43,14 @@ namespace Framework.MVC.Extensions
         /// </summary>
         public const String AssetPackagesConfigPath = "~/Config/asset_packages.yml";
 
+        /// <summary>
+        /// Virtual path for directory with css files (~/Content/Css/).
+        /// </summary>
+        public const String PluginCssPath = "~/Content/Css/Plugin/";
+
         private const String TimeSpampFormat = "yyyyMMddhhmmss";
+
+        private const String CssExtension = ".css";
 
         #endregion
 
@@ -137,6 +146,67 @@ namespace Framework.MVC.Extensions
         public static MvcHtmlString JavascriptPackInclude(this HtmlHelper html, String packageName, Object htmlAttributes)
         {
             return MvcHtmlString.Create(JavascriptPackHelper(html.ViewContext.HttpContext, packageName, new RouteValueDictionary(htmlAttributes)));
+        }
+
+        /// <summary>
+        /// CSSs the widget pack helper.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="plugins">The plugins.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <returns>HTML markup for including css-file specified in plugins.</returns>
+        public static String CssPluginPackHelper(HttpContext context, IEnumerable<ICorePlugin> plugins, String fileName, RouteValueDictionary htmlAttributes)
+        {
+            if (String.IsNullOrEmpty(fileName) || plugins == null || plugins.Count() == 0)
+            {
+                return String.Empty;
+            }
+            var cssServerPath = context.Server.MapPath(PluginCssPath);
+            var file = Math.Abs(fileName.GetHashCode()) + CssExtension;
+            return AssetsHelper.BuildPluginsCssPack(Environment.Test, plugins, context.Request.PhysicalApplicationPath, cssServerPath, file);
+        }
+
+        /// <summary>
+        /// CSSs the widget pack helper.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="plugins">The plugins.</param>
+        /// <param name="fileName">Name of the file.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <returns>HTML markup for including css-file specified in plugins.</returns>
+        public static String CssPluginPackHelper(HttpContextBase context, IEnumerable<ICorePlugin> plugins, String fileName, RouteValueDictionary htmlAttributes)
+        {
+            if (String.IsNullOrEmpty(fileName) || plugins == null || plugins.Count() == 0)
+            {
+                return string.Empty;
+            }
+            var environment = GetEnvironment();
+            var cssServerPath = context.Server.MapPath(PluginCssPath);
+            var file = Math.Abs(fileName.GetHashCode()) + CssExtension;
+            var filePath = AssetsHelper.BuildPluginsCssPack(environment, plugins, context.Request.PhysicalApplicationPath, cssServerPath, file);
+            return filePath;
+        }
+
+        /// <summary>
+        /// CSSs the helper.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="path">The Css href path.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <returns>Full css link.</returns>
+        public static String CssHelper(HttpContext context, String path, RouteValueDictionary htmlAttributes)
+        {
+            var builder = new TagBuilder("link");
+            builder.Attributes["href"] = path;
+            builder.Attributes["rel"] = "stylesheet";
+            builder.Attributes["type"] = "text/css";
+            builder.Attributes["media"] = "screen, projection";
+            if (htmlAttributes != null)
+            {
+                builder.MergeAttributes(htmlAttributes, true);
+            }
+            return builder.ToString(TagRenderMode.SelfClosing);
         }
 
         #endregion

@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Reflection;
+using System.Web;
 using Castle.Windsor;
 using Core.Forms.Permissions.Operations;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
+using Framework.MVC.Helpers;
 
 namespace Core.Forms
 {
@@ -15,7 +17,19 @@ namespace Core.Forms
     [Export(typeof(IPermissible))]
     public class FormsPlugin: BasePlugin, IPermissible
     {
-         #region Singleton
+        #region Constants
+
+        private const String CssPackPlugin = "base1";
+
+        private const String Config = @"Config\asset_packages.yml";
+
+        private const String ImagesPlugin = @"Content\";
+
+        private const String CssPlugin = @"Content\Css\";
+
+        #endregion
+        
+        #region Singleton
 
         private static FormsPlugin _instance;
 
@@ -80,7 +94,7 @@ namespace Core.Forms
 
         public override void Install()
         {
-            
+            AssetsHelper.BuildPluginCssPack(this, HttpContext.Current.Request.PhysicalApplicationPath);
         }
 
         public override void Uninstall()
@@ -92,6 +106,43 @@ namespace Core.Forms
         {
              return Assembly.Load("Core.Forms.Migrations");
         }
+
+        /// <summary>
+        /// Gets the config path. Default String.Empty.
+        /// [Example: @"Config\asset_packages.yml"]
+        /// </summary>
+        public override string ConfigPath
+        {
+            get { return Config; }
+        }
+
+        /// <summary>
+        /// Gets the images path. Default String.Empty.
+        /// [Example: @"Content/"] "Content" - folder that contains images folder.
+        /// </summary>
+        public override string ImagesPath
+        {
+            get { return ImagesPlugin; }
+        }
+
+        /// <summary>
+        /// Gets the CSS path. Default String.Empty.
+        /// [Example: @"Content\Css\"]
+        /// </summary>
+        public override string CssPath
+        {
+            get { return CssPlugin; }
+        }
+
+        /// <summary>
+        /// Gets the CSS pack which placed in the config. Default String.Empty.
+        /// [Example: "base1"]
+        /// </summary>
+        public override string CssPack
+        {
+            get { return CssPackPlugin; }
+        }
+
 
         public static string GetPluginIdentifier()
         {

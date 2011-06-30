@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using Castle.Windsor;
 using Core.Framework.Plugins.Web;
@@ -7,7 +8,19 @@ namespace Core.Framework.Plugins.Plugins
 {
     public abstract class BasePlugin : ICorePlugin
     {
+        #region Constants
+
+        public const String PluginCssPackage = "plugin_package.css";
+
+        #endregion
+
+        #region Fields
+
         private String pluginLocation;
+
+        private String pluginDirectory;
+
+        #endregion
 
         #region Properties
 
@@ -26,6 +39,25 @@ namespace Core.Framework.Plugins.Plugins
                     pluginLocation = Assembly.GetAssembly(GetType()).Location;
                 }
                 return pluginLocation;
+            }
+        }
+
+        /// <summary>
+        /// Gets the plugin directory.
+        /// </summary>
+        public String PluginDirectory
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(pluginDirectory))
+                {
+                    var file = new FileInfo(PluginLocation);
+                    if (file.Exists)
+                    {
+                        pluginDirectory = file.Directory.ToString();
+                    }
+                }
+                return pluginDirectory;
             }
         }
 
@@ -62,6 +94,42 @@ namespace Core.Framework.Plugins.Plugins
         /// </summary>
         /// <returns></returns>
         public abstract Assembly GetPluginMigrationsAssembly();
+
+        /// <summary>
+        /// Gets the config path. Default String.Empty.
+        /// [Example: @"Config\asset_packages.yml"]
+        /// </summary>
+        public virtual string ConfigPath
+        {
+            get { return String.Empty; }
+        }
+
+        /// <summary>
+        /// Gets the images path. Default String.Empty.
+        /// [Example: @"Content\Images\"]
+        /// </summary>
+        public virtual string ImagesPath
+        {
+            get { return String.Empty; }
+        }
+
+        /// <summary>
+        /// Gets the CSS path. Default String.Empty.
+        /// [Example: @"Content\Css\"]
+        /// </summary>
+        public virtual string CssPath
+        {
+            get { return String.Empty; }
+        }
+
+        /// <summary>
+        /// Gets the CSS pack which placed in the config. Default String.Empty.
+        /// [Example: "base1"]
+        /// </summary>
+        public virtual string CssPack
+        {
+            get { return String.Empty; }
+        }
 
         /// <summary>
         /// Gets or sets the identifier.
