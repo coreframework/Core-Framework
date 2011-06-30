@@ -1,0 +1,5 @@
+﻿stylesheets:
+  base1:
+    - forms.css
+  base2:
+    - forms2.css
