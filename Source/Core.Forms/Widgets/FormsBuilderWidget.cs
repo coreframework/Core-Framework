@@ -30,19 +30,9 @@ namespace Core.Forms.Widgets
 
         #endregion
 
-        public override string Title
-        {
-            get { return "Forms Builder"; }
-        }
-
         public override ICorePlugin Plugin
         {
             get { return FormsPlugin.Instance; }
-        }
-
-        public override string Identifier
-        {
-            get { return "23333"; }
         }
 
         public override IWidgetActionVerb ViewAction

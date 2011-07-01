@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Identifier>5224B396-44E1-11E0-B8AF-801ADFD72185</Identifier>
+  <Title>Navigation</Title>
+  <ResourcesDirectory></ResourcesDirectory>
+  <Description>Navigation</Description>
+  <CssJsConfigPath></CssJsConfigPath>
+  <ImagesPath></ImagesPath>
+  <CssPath></CssPath>
+  <CssPack></CssPack>
+  <WidgetSettings>
+    <WidgetSetting>
+      <Key>Core.Web.Areas.Navigation.Widgets.NBreadcrumbsWidget</Key>
+      <Identifier>4224B396-44E1-11E0-B8AF-801ADFD92185</Identifier>
+      <Title>Breadcrumbs</Title>
+    </WidgetSetting>
+    <WidgetSetting>
+      <Key>Core.Web.Areas.Navigation.Widgets.NListMenuWidget</Key>
+      <Identifier>5224B396-44E1-11E0-B8AF-801ADFD92i85</Identifier>
+      <Title>List Menu</Title>
+    </WidgetSetting>
+    <WidgetSetting>
+      <Key>Core.Web.Areas.Navigation.Widgets.NSiteMapWidget</Key>
+      <Identifier>5224B396-44E1-11E0-B8AF-801ADFD92185</Identifier>
+      <Title>Site Map</Title>
+    </WidgetSetting>
+  </WidgetSettings>
+</PluginSetting>

@@ -19,19 +19,13 @@ namespace Core.Forms
     {
         #region Constants
 
-        private const String CssPackPlugin = "base1";
-
-        private const String Config = @"Config\asset_packages.yml";
-
-        private const String ImagesPlugin = @"Content\";
-
-        private const String CssPlugin = @"Content\Css\";
+        private const String FormsConfig = @"Config\PluginConfig.xml";
 
         #endregion
         
         #region Singleton
 
-        private static FormsPlugin _instance;
+        private static FormsPlugin instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -41,7 +35,7 @@ namespace Core.Forms
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new FormsPlugin());
+                    return instance ?? (instance = new FormsPlugin());
                 }
             }
         }
@@ -52,35 +46,6 @@ namespace Core.Forms
         {
             PermissionTitle = Title;
             Operations = OperationsHelper.GetOperations<FormsPluginOperations>();
-        }
-
-        public override string Identifier
-        {
-            get { return GetPluginIdentifier(); }
-        }
-
-        public override string Title
-        {
-            get
-            {
-                return "Forms";
-            }
-        }
-
-        public override string ResourcesDirectory
-        {
-            get
-            {
-                return "Resources";
-            }
-        }
-
-        public override string Description
-        {
-            get 
-            { 
-                return "Allow managing Web Forms";
-            }
         }
 
         /// <summary>
@@ -108,45 +73,12 @@ namespace Core.Forms
         }
 
         /// <summary>
-        /// Gets the config path. Default String.Empty.
+        /// Gets the Identifiers config path. Default String.Empty.
         /// [Example: @"Config\asset_packages.yml"]
         /// </summary>
-        public override string ConfigPath
+        public override string PluginConfigPath
         {
-            get { return Config; }
-        }
-
-        /// <summary>
-        /// Gets the images path. Default String.Empty.
-        /// [Example: @"Content/"] "Content" - folder that contains images folder.
-        /// </summary>
-        public override string ImagesPath
-        {
-            get { return ImagesPlugin; }
-        }
-
-        /// <summary>
-        /// Gets the CSS path. Default String.Empty.
-        /// [Example: @"Content\Css\"]
-        /// </summary>
-        public override string CssPath
-        {
-            get { return CssPlugin; }
-        }
-
-        /// <summary>
-        /// Gets the CSS pack which placed in the config. Default String.Empty.
-        /// [Example: "base1"]
-        /// </summary>
-        public override string CssPack
-        {
-            get { return CssPackPlugin; }
-        }
-
-
-        public static string GetPluginIdentifier()
-        {
-            return "123"; 
+            get { return FormsConfig; }
         }
 
         #region IPermissible members

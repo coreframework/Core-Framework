@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Identifier>123</Identifier>
+  <Title>Forms</Title>
+  <ResourcesDirectory>Resources</ResourcesDirectory>
+  <Description>Allow managing Web Forms.</Description>
+  <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
+  <ImagesPath>Content\</ImagesPath>
+  <CssPath>Content\Css\</CssPath>
+  <CssPack>base1</CssPack>
+  <WidgetSettings>
+    <WidgetSetting>
+      <Key>Core.Forms.Widgets.FormsBuilderWidget</Key>
+      <Identifier>23333</Identifier>
+      <Title>Forms Builder</Title>
+    </WidgetSetting>
+  </WidgetSettings>
+</PluginSetting>

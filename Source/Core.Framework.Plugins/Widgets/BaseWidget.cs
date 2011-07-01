@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
+using Core.Framework.Plugins.Configs;
 using Core.Framework.Plugins.Web;
+using System.Linq;
 
 namespace Core.Framework.Plugins.Widgets
 {
     public abstract class BaseWidget : ICoreWidget, IPermissible
     {
+        #region Fields
+
+        private IWidgetSetting widgetSetting;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public abstract string Title { get;}
+        public virtual string Title 
+        {
+            get { return WidgetSetting.Title; }
+        }
 
         /// <summary>
         /// Gets or sets the plugin.
@@ -26,7 +37,10 @@ namespace Core.Framework.Plugins.Widgets
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public abstract string Identifier { get; }
+        public virtual string Identifier
+        {
+            get { return WidgetSetting.Identifier; }
+        }
 
         /// <summary>
         /// Gets the view action.
@@ -70,6 +84,17 @@ namespace Core.Framework.Plugins.Widgets
         /// <value>The add to page operation code.</value>
         public virtual Int32 PermissionOperationCode { get { return (Int32)BaseWidgetOperations.Permissions; } }
 
+        /// <summary>
+        /// Gets the widget setting.
+        /// </summary>
+        public IWidgetSetting WidgetSetting
+        {
+            get
+            {
+                return widgetSetting ?? (widgetSetting = Plugin.PluginSetting.WidgetSettings.Where(t => t.Key == GetType().FullName).SingleOrDefault() ?? new WidgetSetting());
+            }
+        }
+
         #endregion
 
         #region Constructor
@@ -78,7 +103,6 @@ namespace Core.Framework.Plugins.Widgets
         {
             PermissionTitle = Title;
             Operations = OperationsHelper.GetOperations<BaseWidgetOperations>();
-
         }
 
         #endregion

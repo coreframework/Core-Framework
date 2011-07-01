@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Reflection;
+using System.Web;
 using Castle.Windsor;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
@@ -10,6 +11,20 @@ namespace Core.Web.Areas.Navigation
     [Export(typeof(ICorePlugin))]
     public class NavigationPlugin : BasePlugin
     {
+        #region Constants
+
+        private const String NavigationConfig = @"Config\PluginConfig.xml";
+
+        private const String NavigationVirtualPath = "~/Areas/Navigation/";
+
+        #endregion
+
+        #region Fields
+
+        private String pluginDirectory = string.Empty;
+
+        #endregion
+
         #region Singleton
 
         private static NavigationPlugin _instance;
@@ -29,32 +44,24 @@ namespace Core.Web.Areas.Navigation
 
         #endregion
 
-        public override string Identifier
-        {
-            get { return GetPluginIdentifier(); }
-        }
-
-        public override string Title
+        //TODO Remove virtual for this property from BASE class, when plugin move out from web project !!!
+        public override String PluginDirectory
         {
             get
             {
-                return "Navigation";
+                if (String.IsNullOrEmpty(pluginDirectory) && HttpContext.Current != null)
+                {
+                    pluginDirectory = HttpContext.Current.Server.MapPath(NavigationVirtualPath);
+                }
+                return pluginDirectory;
             }
         }
 
-        public override string ResourcesDirectory
+        public override string PluginConfigPath
         {
             get
             {
-                return null;
-            }
-        }
-
-        public override string Description
-        {
-            get
-            {
-                return "Navigation";
+                return NavigationConfig;
             }
         }
 
@@ -80,12 +87,6 @@ namespace Core.Web.Areas.Navigation
         public override Assembly GetPluginMigrationsAssembly()
         {
             return Assembly.Load("Core.Navigation.Migrations");
-        }
-
-        //TODO: kill it!!!
-        public static string GetPluginIdentifier()
-        {
-            return "5224B396-44E1-11E0-B8AF-801ADFD72185";
         }
     }
 }

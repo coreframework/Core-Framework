@@ -15,6 +15,12 @@ namespace Core.ContentPages
     [Export(typeof(IPermissible))]
     public class ContentPagePlugin : BasePlugin, IPermissible
     {
+        #region Constants
+
+        private const String ContentPageConfig = @"Config\PluginConfig.xml";
+
+        #endregion
+
         #region Singleton
 
         private static ContentPagePlugin _instance;
@@ -38,35 +44,6 @@ namespace Core.ContentPages
         {
             PermissionTitle = Title;
             Operations = OperationsHelper.GetOperations<ContentPagePluginOperations>();
-        }
-
-        public override string Identifier
-        {
-            get { return GetPluginIdentifier(); }
-        }
-
-        public override string Title
-        {
-            get
-            {
-                return "Content Pages";
-            }
-        }
-
-        public override string ResourcesDirectory
-        {
-            get
-            {
-                return "Resources";
-            }
-        }
-
-        public override string Description
-        {
-            get 
-            { 
-                return "Allow managing Content Pages";
-            }
         }
 
         /// <summary>
@@ -93,10 +70,13 @@ namespace Core.ContentPages
             return Assembly.Load("Core.ContentPages.Migrations");
         }
 
-        //TODO: kill it!!!
-        public static string GetPluginIdentifier()
+
+        /// <summary>
+        /// Gets the Plugin Identifiers config path.
+        /// </summary>
+        public override string PluginConfigPath
         {
-            return "0"; 
+            get { return ContentPageConfig; }
         }
 
         #region IPermissible members

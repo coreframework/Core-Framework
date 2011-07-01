@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Xml.Linq;
 using Castle.Windsor;
 
 namespace Core.Framework.Plugins.Web
@@ -32,6 +33,11 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The plugin directory.</value>
         String PluginDirectory { get; }
+
+        /// <summary>
+        /// Gets the plugin identifiers config.
+        /// </summary>
+        IPluginSetting PluginSetting { get; }
 
         /// <summary>
         /// Gets the resources directory.
@@ -68,9 +74,14 @@ namespace Core.Framework.Plugins.Web
         Assembly GetPluginMigrationsAssembly();
 
         /// <summary>
-        /// Gets the Plugin config path.
+        /// Gets the Plugin Css and JS config path.
         /// </summary>
-        String ConfigPath { get; }
+        String CssJsConfigPath { get; }
+
+        /// <summary>
+        /// Gets the Plugin Identifiers config path.
+        /// </summary>
+        String PluginConfigPath { get; }
 
         /// <summary>
         /// Gets the Plugin images path.

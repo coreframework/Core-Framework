@@ -30,25 +30,14 @@ namespace Core.Web.Areas.Navigation.Widgets
 
         #endregion
 
-        public override string Title
-        {
-            get { return "Breadcrumbs"; }
-        }
-
         public override ICorePlugin Plugin
         {
             get { return NavigationPlugin.Instance; }
         }
 
-        public override string Identifier
-        {
-            get { return "4224B396-44E1-11E0-B8AF-801ADFD92185"; }
-        }
-
         public override IWidgetActionVerb ViewAction
         {
             get { return BreadcrumbsViewerVerb.Instance; }
-
         }
 
         public override IWidgetActionVerb EditAction

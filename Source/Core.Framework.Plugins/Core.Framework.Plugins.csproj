@@ -67,9 +67,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configs\PluginSetting.cs" />
+    <Compile Include="Configs\WidgetSetting.cs" />
+    <Compile Include="Constants\Constants.cs" />
     <Compile Include="Plugins\BasePlugin.cs" />
     <Compile Include="Plugins\BasePluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\IPluginSetting.cs" />
+    <Compile Include="Web\IWidgetSetting.cs" />
     <Compile Include="Widgets\BaseWidget.cs" />
     <Compile Include="Web\ICorePlugin.cs" />
     <Compile Include="Web\ICoreWidget.cs" />

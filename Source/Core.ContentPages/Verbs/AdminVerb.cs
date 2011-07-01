@@ -48,7 +48,7 @@ namespace Core.ContentPages.Verbs
         /// <value>The controller plugin identifier.</value>
         public string ControllerPluginIdentifier
         {
-            get { return ContentPagePlugin.GetPluginIdentifier(); }
+            get { return ContentPagePlugin.Instance.Identifier; }
         }
 
         /// <summary>

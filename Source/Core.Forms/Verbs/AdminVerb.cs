@@ -46,7 +46,7 @@ namespace Core.Forms.Verbs
         /// <value>The controller plugin identifier.</value>
         public string ControllerPluginIdentifier
         {
-            get { return FormsPlugin.GetPluginIdentifier(); }
+            get { return FormsPlugin.Instance.Identifier; }
         }
 
         /// <summary>

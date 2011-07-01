@@ -30,19 +30,9 @@ namespace Core.Web.Areas.Navigation.Widgets
 
         #endregion
 
-        public override string Title
-        {
-            get { return "List Menu"; }
-        }
-
         public override ICorePlugin Plugin
         {
             get { return NavigationPlugin.Instance; }
-        }
-
-        public override string Identifier
-        {
-            get { return "5224B396-44E1-11E0-B8AF-801ADFD92i85"; }
         }
 
         public override IWidgetActionVerb ViewAction

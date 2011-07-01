@@ -30,19 +30,9 @@ namespace Core.ContentPages.Widgets
 
         #endregion
 
-        public override string Title
-        {
-            get { return "Web Content"; }
-        }
-
         public override ICorePlugin Plugin
         {
             get { return ContentPagePlugin.Instance; }
-        }
-
-        public override string Identifier
-        {
-            get { return "123456"; }
         }
 
         public override IWidgetActionVerb ViewAction

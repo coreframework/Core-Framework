@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using Core.Framework.Plugins.Plugins;
+using Core.Framework.Plugins.Constants;
 using Core.Framework.Plugins.Web;
 using Framework.Core.Helpers.Yaml;
 using Yahoo.Yui.Compressor;
@@ -263,14 +263,14 @@ namespace Framework.MVC.Helpers
         /// </returns>
         public static String BuildPluginCssPack(ICorePlugin corePlugin, String applicationServerPath)
         {
-            if (String.IsNullOrEmpty(corePlugin.ConfigPath) || String.IsNullOrEmpty(corePlugin.CssPath) || String.IsNullOrEmpty(corePlugin.CssPack))
+            if (String.IsNullOrEmpty(corePlugin.CssJsConfigPath) || String.IsNullOrEmpty(corePlugin.CssPath) || String.IsNullOrEmpty(corePlugin.CssPack))
             {
                 return string.Empty;
             }
 
             var pluginCssServerPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.CssPath);
-            var pluginPackageCssServerPath = Path.Combine(pluginCssServerPath, BasePlugin.PluginCssPackage);
-            var configPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.ConfigPath);
+            var pluginPackageCssServerPath = Path.Combine(pluginCssServerPath, Constants.PluginCssPackage);
+            var configPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.CssJsConfigPath);
             var files = GetPluginCssPackFiles(corePlugin.CssPack, configPath);
 
             if (!File.Exists(pluginPackageCssServerPath) || File.GetLastWriteTimeUtc(pluginPackageCssServerPath) < GetMaxLastModifyDate(Path.Combine(corePlugin.PluginDirectory, corePlugin.CssPath), files))
@@ -350,13 +350,13 @@ namespace Framework.MVC.Helpers
                 var output = new StringBuilder();
                 foreach (var plugin in corePlugins)
                 {
-                    if (String.IsNullOrEmpty(plugin.ConfigPath) || String.IsNullOrEmpty(plugin.CssPath) || String.IsNullOrEmpty(plugin.CssPack))
+                    if (String.IsNullOrEmpty(plugin.CssJsConfigPath) || String.IsNullOrEmpty(plugin.CssPath) || String.IsNullOrEmpty(plugin.CssPack))
                     {
                         continue;
                     }
 
-                    var pluginPackageCssServerPath = Path.Combine(plugin.PluginDirectory, plugin.CssPath, BasePlugin.PluginCssPackage);
-                    var configPath = Path.Combine(plugin.PluginDirectory, plugin.ConfigPath);
+                    var pluginPackageCssServerPath = Path.Combine(plugin.PluginDirectory, plugin.CssPath, Constants.PluginCssPackage);
+                    var configPath = Path.Combine(plugin.PluginDirectory, plugin.CssJsConfigPath);
                     var files = GetPluginCssPackFiles(plugin.CssPack, configPath);
 
                     if (!File.Exists(pluginPackageCssServerPath) || File.GetLastWriteTimeUtc(pluginPackageCssServerPath) < GetMaxLastModifyDate(Path.Combine(plugin.PluginDirectory, plugin.CssPath), files))

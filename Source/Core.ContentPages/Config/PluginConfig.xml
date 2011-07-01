@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Identifier>0</Identifier>
+  <Title>Content Pages</Title>
+  <ResourcesDirectory>Resources</ResourcesDirectory>
+  <Description>Allow managing Content Pages.</Description>
+  <CssJsConfigPath></CssJsConfigPath>
+  <ImagesPath></ImagesPath>
+  <CssPath></CssPath>
+  <CssPack></CssPack>
+  <WidgetSettings>
+    <WidgetSetting>
+      <Key>Core.ContentPages.Widgets.ContentViewerWidget</Key>
+      <Identifier>123456</Identifier>
+      <Title>Web Content</Title>
+    </WidgetSetting>
+  </WidgetSettings>
+</PluginSetting>

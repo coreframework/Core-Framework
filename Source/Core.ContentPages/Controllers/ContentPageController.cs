@@ -30,7 +30,7 @@ namespace Core.ContentPages.Controllers
 
         public override string ControllerPluginIdentifier
         {
-            get { return ContentPagePlugin.GetPluginIdentifier(); }
+            get { return ContentPagePlugin.Instance.Identifier; }
         }
 
         #endregion

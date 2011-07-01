@@ -175,6 +175,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Config\PluginConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Admin\New.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>ASPXCodeBehind</SubType>

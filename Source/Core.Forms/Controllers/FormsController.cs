@@ -43,7 +43,7 @@ namespace Core.Forms.Controllers
         /// <value>The controller plugin identifier.</value>
         public override string ControllerPluginIdentifier
         {
-            get { return FormsPlugin.GetPluginIdentifier(); }
+            get { return FormsPlugin.Instance.Identifier; }
         }
 
         #endregion

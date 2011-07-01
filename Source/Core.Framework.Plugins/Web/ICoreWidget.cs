@@ -38,5 +38,10 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The save settings action.</value>
         IWidgetActionVerb SaveAction { get; }
+
+        /// <summary>
+        /// Gets the widget setting.
+        /// </summary>
+        IWidgetSetting WidgetSetting { get; }
     }
 }

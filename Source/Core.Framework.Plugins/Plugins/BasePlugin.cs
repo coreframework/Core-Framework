@@ -1,34 +1,44 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
+using System.Xml.Serialization;
 using Castle.Windsor;
+using Core.Framework.Plugins.Configs;
 using Core.Framework.Plugins.Web;
 
 namespace Core.Framework.Plugins.Plugins
 {
     public abstract class BasePlugin : ICorePlugin
     {
-        #region Constants
-
-        public const String PluginCssPackage = "plugin_package.css";
-
-        #endregion
-
         #region Fields
 
         private String pluginLocation;
 
         private String pluginDirectory;
 
+        private IPluginSetting pluginConfig;
+
         #endregion
 
         #region Properties
 
         /// <summary>
+        /// Gets or sets the identifier.
+        /// </summary>
+        /// <value>The identifier.</value>
+        public virtual string Identifier
+        {
+            get { return PluginSetting.Identifier; }
+        }
+
+        /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public abstract string Title { get; }
+        public virtual string Title
+        {
+            get { return PluginSetting.Title; }
+        }
 
         public String PluginLocation
         {
@@ -45,7 +55,7 @@ namespace Core.Framework.Plugins.Plugins
         /// <summary>
         /// Gets the plugin directory.
         /// </summary>
-        public String PluginDirectory
+        public virtual String PluginDirectory
         {
             get
             {
@@ -62,16 +72,30 @@ namespace Core.Framework.Plugins.Plugins
         }
 
         /// <summary>
+        /// Gets the plugin identifiers config.
+        /// </summary>
+        public IPluginSetting PluginSetting
+        {
+            get { return pluginConfig ?? (pluginConfig = GetSettings(Path.Combine(PluginDirectory, PluginConfigPath))); }
+        }
+
+        /// <summary>
         /// Gets the resources directory.
         /// </summary>
         /// <value>The resources directory.</value>
-        public abstract string ResourcesDirectory { get; }
+        public virtual string ResourcesDirectory
+        {
+            get { return PluginSetting.ResourcesDirectory; }
+        }
 
         /// <summary>
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        public abstract string Description { get; }
+        public virtual string Description
+        {
+            get { return PluginSetting.Description; }
+        }
 
         /// <summary>
         /// Registers the specified container.
@@ -99,9 +123,17 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the config path. Default String.Empty.
         /// [Example: @"Config\asset_packages.yml"]
         /// </summary>
-        public virtual string ConfigPath
+        public virtual string CssJsConfigPath
         {
-            get { return String.Empty; }
+            get { return PluginSetting.CssJsConfigPath; }
+        }
+
+        /// <summary>
+        /// Gets the Plugin Identifiers config path.
+        /// </summary>
+        public virtual string PluginConfigPath
+        {
+            get { return string.Empty; }
         }
 
         /// <summary>
@@ -110,7 +142,7 @@ namespace Core.Framework.Plugins.Plugins
         /// </summary>
         public virtual string ImagesPath
         {
-            get { return String.Empty; }
+            get { return PluginSetting.ImagesPath; }
         }
 
         /// <summary>
@@ -119,7 +151,7 @@ namespace Core.Framework.Plugins.Plugins
         /// </summary>
         public virtual string CssPath
         {
-            get { return String.Empty; }
+            get { return PluginSetting.CssPath; }
         }
 
         /// <summary>
@@ -128,16 +160,36 @@ namespace Core.Framework.Plugins.Plugins
         /// </summary>
         public virtual string CssPack
         {
-            get { return String.Empty; }
+            get { return PluginSetting.CssPack; }
         }
-
-        /// <summary>
-        /// Gets or sets the identifier.
-        /// </summary>
-        /// <value>The identifier.</value>
-        public abstract string Identifier { get; }
 
         #endregion
 
+        #region Methods
+
+        /// <summary>
+        /// Reads the XML config.
+        /// </summary>
+        /// <param name="configPath">The config path.</param>
+        /// <returns></returns>
+        private static IPluginSetting GetSettings(String configPath)
+        {
+            try
+            {
+                PluginSetting doc;
+                var serializer = new XmlSerializer(typeof(PluginSetting));
+                using (var reader = new FileStream(configPath,FileMode.Open))
+                {
+                    doc = serializer.Deserialize(reader) as PluginSetting;
+                }
+                return doc ?? new PluginSetting();
+            }
+            catch (Exception)
+            {
+                return new PluginSetting();
+            }
+        }
+
+        #endregion
     }
 }

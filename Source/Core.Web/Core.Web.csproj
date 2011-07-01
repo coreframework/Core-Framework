@@ -299,6 +299,9 @@
     <Content Include="Areas\Admin\Views\User\Remove.aspx" />
     <Content Include="Areas\Admin\Views\User\UserGroups.aspx" />
     <Content Include="Areas\Admin\Views\Widget\Index.aspx" />
+    <Content Include="Areas\Navigation\Config\PluginConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\Navigation\Content\Css\navigation.css" />
     <Content Include="Areas\Navigation\Views\Breadcrumbs\EditWidget.ascx" />
     <Content Include="Areas\Navigation\Views\Breadcrumbs\ViewWidget.ascx" />
