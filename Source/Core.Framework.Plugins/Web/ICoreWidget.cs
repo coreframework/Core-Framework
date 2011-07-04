@@ -43,5 +43,11 @@ namespace Core.Framework.Plugins.Web
         /// Gets the widget setting.
         /// </summary>
         IWidgetSetting WidgetSetting { get; }
+
+        /// <summary>
+        /// Removes the specified core widget instance.
+        /// </summary>
+        /// <param name="coreWidgetInstance">The core widget instance.</param>
+        void Remove(ICoreWidgetInstance coreWidgetInstance);
     }
 }

@@ -235,12 +235,12 @@ namespace Core.Web.NHibernate.Services.Permissions
             }
         }
 
-        public ICriteria AttachPermissionsCriteria(ICriteria criteria, ICorePrincipal user, int operationCode, Type permissibleObjectType, String permissibleIdPropertyName, String permissibleOwnerPropertyName)
+        public AbstractCriterion GetPermissionsCriteria(ICorePrincipal user, int operationCode, Type permissibleObjectType, String permissibleIdPropertyName, String permissibleOwnerPropertyName)
         {
             if (user != null)
             {
                 if (user.IsInRole(SystemRoles.Administrator.ToString()))
-                    return criteria;
+                    return null;
 
                 var rolesSubQuery = DetachedCriteria.For<Role>()
                                .CreateAlias("Users", "user")
@@ -270,7 +270,7 @@ namespace Core.Web.NHibernate.Services.Permissions
                                           Restrictions.Eq(Projections.SqlProjection(String.Format("Permissions & {0} as result", operationCode), new[] { "result" }, new IType[] { NHibernateUtil.Int32 }), operationCode))
                                 .SetProjection(Projections.Id());
 
-                criteria.Add(Subqueries.Exists(permissionsSubQuery));
+               return Subqueries.Exists(permissionsSubQuery);
             }
             else
             {
@@ -280,10 +280,8 @@ namespace Core.Web.NHibernate.Services.Permissions
                                 Restrictions.Eq(Projections.SqlProjection(String.Format("Permissions & {0} as result", operationCode), new[] { "result" }, new IType[] { NHibernateUtil.Int32 }), operationCode))
                                .SetProjection(Projections.Id());
 
-                criteria.Add(Subqueries.Exists(permissionsSubQuery));
+                return Subqueries.Exists(permissionsSubQuery);
             }
-
-            return criteria;
         }
     }
 }

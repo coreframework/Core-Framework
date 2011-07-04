@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
 
 namespace Core.Forms.NHibernate.Models
 {
     public class FormWidgetAnswer: Entity
     {
+        #region Fields
+
+        private IEnumerable<FormWidgetAnswerValue> _answerValues;
+
+        #endregion
+
         #region Properties
 
         public FormWidgetAnswer()
         {
-            AnswerValues = new List<FormWidgetAnswerValue>();
+            _answerValues = new List<FormWidgetAnswerValue>();
+            User = new BaseUser();
         }
 
         /// <summary>
@@ -20,10 +28,10 @@ namespace Core.Forms.NHibernate.Models
         public virtual DateTime CreateDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the user id.
+        /// Gets or sets the user.
         /// </summary>
-        /// <value>The user id.</value>
-        public virtual long? UserId { get; set; }
+        /// <value>The user.</value>
+        public virtual BaseUser User { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
@@ -41,7 +49,10 @@ namespace Core.Forms.NHibernate.Models
         /// Gets or sets the answer values.
         /// </summary>
         /// <value>The answer values.</value>
-        public virtual IEnumerable<FormWidgetAnswerValue> AnswerValues { get; set; }
+        public virtual IEnumerable<FormWidgetAnswerValue> AnswerValues
+        {
+            get { return _answerValues; }
+        }
 
         #endregion
     }

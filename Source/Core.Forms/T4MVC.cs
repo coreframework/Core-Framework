@@ -23,6 +23,7 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class FormsMVC {
+    public static Core.Forms.Controllers.FormAnswersController FormAnswers = new Core.Forms.Controllers.T4MVC_FormAnswersController();
     public static Core.Forms.Controllers.FormsBuilderWidgetController FormsBuilderWidget = new Core.Forms.Controllers.T4MVC_FormsBuilderWidgetController();
     public static Core.Forms.Controllers.FormsController Forms = new Core.Forms.Controllers.T4MVC_FormsController();
     public static T4MVC.AdminController Admin = new T4MVC.AdminController();
@@ -69,6 +70,17 @@ public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResul
     public string Action { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
+    public T4MVC_JsonResult(string area, string controller, string action): base()  {
+        this.InitMVCT4Result(area, controller, action);
+    }
+    
+    public string Area { get; set; }
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -84,6 +96,15 @@ namespace Links {
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string forms_css = Url("forms.css");
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Templates {
+            private const string URLPATH = "~/Content/Templates";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string FormsAnswerTemplate_txt = Url("FormsAnswerTemplate.txt");
+            public static readonly string FormsAnswerValueTemplate_txt = Url("FormsAnswerValueTemplate.txt");
         }
     
     }

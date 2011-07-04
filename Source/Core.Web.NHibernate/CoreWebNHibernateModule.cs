@@ -8,6 +8,7 @@ using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Helpers;
 using Core.Web.NHibernate.Services;
+using Core.Web.NHibernate.Services.Common;
 using Core.Web.NHibernate.Services.Permissions;
 using Core.Web.NHibernate.Services.Widgets;
 using Framework.Core.Modules;
@@ -53,6 +54,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<IEntityTypeService>().ImplementedBy<NHibernateEntityTypeService>().LifeStyle.Transient);
             container.Register(Component.For<IPermissionService>().ImplementedBy<NHibernatePermissionService>().LifeStyle.Transient);
             container.Register(Component.For<IPermissionCommonService>().ImplementedBy<PermissionCommonService>().LifeStyle.Transient);
+            container.Register(Component.For<IPageCommonService>().ImplementedBy<PageCommonService>().LifeStyle.Transient);
             container.Register(Component.For<IAuthenticationHelper>().ImplementedBy<FormsAuthenticationHelper>().LifeStyle.Transient);
         }
 

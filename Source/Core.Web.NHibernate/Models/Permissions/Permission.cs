@@ -36,6 +36,8 @@ namespace Core.Web.NHibernate.Models.Permissions
         /// <value>The entity id.</value>
         public virtual long? EntityId { get; set; }
 
+        public virtual long? InstanceId { get; set; }
+
         /// <summary>
         /// Gets or sets the role this permission belongs to.
         /// </summary>

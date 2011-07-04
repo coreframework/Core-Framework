@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Configs;
@@ -104,6 +103,15 @@ namespace Core.Framework.Plugins.Widgets
         {
             PermissionTitle = Title;
             Operations = OperationsHelper.GetOperations<BaseWidgetOperations>();
+        }
+
+        #endregion
+
+        #region Methods
+
+        public virtual void Remove(ICoreWidgetInstance coreWidgetInstance)
+        {
+            
         }
 
         #endregion

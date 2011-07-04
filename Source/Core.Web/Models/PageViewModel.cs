@@ -122,28 +122,38 @@ namespace Core.Web.Models
                 PageWidget widget1 = widget;
                 ICoreWidget coreWidget =
                     (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == widget1.WidgetIdentifier);
-                Widgets.Add(new WidgetHolderViewModel
-                                {
-                                    Id = widget.Id,
-                                    Column = widget.ColumnNumber,
-                                    Order = widget.OrderNumber,
-                                    WidgetInstance = new CoreWidgetInstance
-                                                         {
-                                                             InstanceId = widget.InstanceId,
-                                                             WidgetIdentifier = widget.WidgetIdentifier,
-                                                             PageSettings = new CorePageSettings { PageId = from.Id }
-                                                         },
-                                    Settings = widget1.Settings,
-                                    Widget = new WidgetHelper().IsWidgetEnabled(widget.WidgetIdentifier) ? coreWidget : null,
-                                    Access = coreWidget is BaseWidget ?
-                                        permissionService.GetAccess(((BaseWidget)coreWidget).Operations,
-                                        HttpContext.Current.CorePrincipal(), coreWidget.GetType(), widget1.EntityId,
-                                        currentPrincipal != null && widget1.User != null && widget1.User.PrincipalId == currentPrincipal.PrincipalId) : null,
-                                    PageAccess = pageAccess
-                                });
-                if (!PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                if (coreWidget != null)
                 {
-                    PagePlugins.Add(coreWidget.Plugin);
+                    Widgets.Add(new WidgetHolderViewModel
+                                    {
+                                        Id = widget.Id,
+                                        Column = widget.ColumnNumber,
+                                        Order = widget.OrderNumber,
+                                        WidgetInstance = new CoreWidgetInstance
+                                                             {
+                                                                 InstanceId = widget.InstanceId,
+                                                                 WidgetIdentifier = widget.WidgetIdentifier,
+                                                                 PageSettings = new CorePageSettings {PageId = from.Id}
+                                                             },
+                                        Settings = widget1.Settings,
+                                        Widget =
+                                            new WidgetHelper().IsWidgetEnabled(widget.WidgetIdentifier)
+                                                ? coreWidget
+                                                : null,
+                                        Access = coreWidget is BaseWidget
+                                                     ? permissionService.GetAccess(
+                                                         ((BaseWidget) coreWidget).Operations,
+                                                         HttpContext.Current.CorePrincipal(), coreWidget.GetType(),
+                                                         widget1.EntityId,
+                                                         currentPrincipal != null && widget1.User != null &&
+                                                         widget1.User.PrincipalId == currentPrincipal.PrincipalId)
+                                                     : null,
+                                        PageAccess = pageAccess
+                                    });
+                    if (!PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                    {
+                        PagePlugins.Add(coreWidget.Plugin);
+                    }
                 }
             }
             var plugins = ServiceLocator.Current.GetInstance<IPluginService>().FindPluginsByIdentifiers(PagePlugins.Select(t => t.Identifier).ToList());

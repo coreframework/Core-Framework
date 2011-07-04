@@ -50,11 +50,17 @@
       <HintPath>..\..\Libs\Castle\Castle.Windsor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Dynamic">
+      <HintPath>..\..\Libs\jqGrid\Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -80,9 +86,13 @@
     <Compile Include="AdminController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\FormAnswersController.cs" />
     <Compile Include="Controllers\FormsBuilderWidgetController.cs" />
     <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Extensions\FormElementsExtensions.cs" />
+    <Compile Include="FormAnswersController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="FormsBuilderWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -107,6 +117,7 @@
     </Compile>
     <Compile Include="Validation\RegexTemplatesConfig.cs" />
     <Compile Include="Verbs\AdminVerb.cs" />
+    <Compile Include="Verbs\FormsAnswersAdminVerb.cs" />
     <Compile Include="Verbs\Widgets\FormsBuilderWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\FormsBuilderWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\FormsBuilderWidgetViewerVerb.cs" />
@@ -182,6 +193,15 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\FormAnswers\FormAnswerDetails.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\FormAnswers\FormAnswers.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\FormAnswers\FormsAnswersList.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\FormsBuilderWidget\EditWidget.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

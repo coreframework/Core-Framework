@@ -17,14 +17,16 @@ namespace Core.Forms.NHibernate.Mappings
             Table("Forms_FormWidgetAnswers");
             Id(formWidgetAnswer => formWidgetAnswer.Id);
             Map(formWidgetAnswer => formWidgetAnswer.CreateDate);
-            Map(formWidgetAnswer => formWidgetAnswer.UserId);
             Map(formWidgetAnswer => formWidgetAnswer.Title);
+            References(formWidgetAnswer => formWidgetAnswer.User).Column("UserId");
             References(formWidgetAnswer => formWidgetAnswer.FormBuilderWidget).Column("FormWidgetId");
 
             HasMany(form => form.AnswerValues).KeyColumn("FormAnswerId")
-              .Table("Forms_FormAnswerValues")
-              .LazyLoad()
-              .Cascade.AllDeleteOrphan();
+           .Table("Forms_FormAnswerValues")
+           .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+           .Inverse()
+           .LazyLoad()
+           .Cascade.AllDeleteOrphan();
         }
     }
 }

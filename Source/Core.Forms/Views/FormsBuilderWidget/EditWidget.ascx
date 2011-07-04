@@ -10,7 +10,7 @@
     <input type="hidden" id="Id" name="Id" value="<%= Html.Encode(Model.Id) %>" />
     <fieldset>
         <%:Html.LabelFor(model => model.Title)%>
-        <%:Html.TextBoxFor(model => model.Title, new { Class = "colorPicker text-400 text ui-widget-content ui-corner-all" })%>
+        <%:Html.TextBoxFor(model => model.Title, new { Class = "text-400 text ui-widget-content ui-corner-all" })%>
         <%:Html.ValidationMessageFor(model=>model.Title) %>
 
         <label><%: Html.Translate(".Form") %></label>
@@ -21,7 +21,7 @@
          <label class="checkbx-label"><%: Html.Translate(".SendEmail") %></label>
 
         <%:Html.LabelFor(model => model.SenderEmail)%>
-        <%:Html.TextBoxFor(model => model.SenderEmail, new { Class = "colorPicker text-400 text ui-widget-content ui-corner-all" })%>
+        <%:Html.TextBoxFor(model => model.SenderEmail, new { Class = "text-400 text ui-widget-content ui-corner-all" })%>
         <%:Html.ValidationMessageFor(model=>model.SenderEmail) %>
 
          <%:Html.CheckBoxFor(model => model.SaveData)%>

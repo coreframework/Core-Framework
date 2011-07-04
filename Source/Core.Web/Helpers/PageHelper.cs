@@ -108,7 +108,15 @@ namespace Core.Web.Helpers
                     );
 
                     page.RemoveWidget(pageWidget);
-                    pageService.Save(page);
+                    if (pageService.Save(page))
+                    {
+                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => widget.Identifier == pageWidget.WidgetIdentifier);
+
+                        if (currentWidget!=null)
+                        {
+                            currentWidget.Remove(new CoreWidgetInstance{InstanceId = pageWidget.InstanceId});
+                        }
+                    }
                 }
             }
         }

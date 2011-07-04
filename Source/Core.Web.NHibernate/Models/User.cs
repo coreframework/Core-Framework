@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
-using System.Security.Principal;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
-using FluentNHibernate.Data;
 
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
-    public class User : Entity, ICorePrincipal, IPermissible
+    public class User : BaseUser, IPermissible
     {
         #region Constructor
 
@@ -31,12 +29,6 @@ namespace Core.Web.NHibernate.Models
         /// </summary>
         /// <value>The roles assigned to.</value>
         public virtual IList<Role> Roles { get; set; }
-
-        /// <summary>
-        /// Gets or sets the username.
-        /// </summary>
-        /// <value>The username.</value>
-        public virtual String Username { get; set; }
 
         /// <summary>
         /// Gets or sets the email.
@@ -79,40 +71,13 @@ namespace Core.Web.NHibernate.Models
         #region ICorePrincipal members
 
         /// <summary>
-        /// Gets the identity of the current principal.
-        /// </summary>
-        /// <value>Identity value.</value>
-        /// <returns>
-        /// The <see cref="T:System.Security.Principal.IIdentity"/> object associated with the current principal.
-        /// </returns>
-        public virtual IIdentity Identity
-        {
-            get
-            {
-                return new GenericIdentity(Username);
-            }
-        }
-
-        /// <summary>
-        /// Gets the principal id.
-        /// </summary>
-        /// <value>The principal id.</value>
-        public virtual long PrincipalId
-        {
-            get
-            {
-                return Id;
-            }
-        }
-
-        /// <summary>
         /// Determines whether the current principal belongs to the specified role.
         /// </summary>
         /// <returns>
         /// true if the current principal is a member of the specified role; otherwise, false.
         /// </returns>
         /// <param name="role">The name of the role for which to check membership. </param>
-        public virtual bool IsInRole(String role)
+        public override bool IsInRole(String role)
         {
             return !String.IsNullOrEmpty(role) && Roles.Where(r => r.Name == role).Any();
         }

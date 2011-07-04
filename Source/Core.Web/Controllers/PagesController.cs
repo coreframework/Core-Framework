@@ -732,7 +732,6 @@ namespace Core.Web.Controllers
         {
             var widgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             PageWidget pageWidget = widgetService.Find(model.EntityId);
-
             if (pageWidget != null)
             {
                 ICoreWidget coreWidget =
@@ -740,9 +739,11 @@ namespace Core.Web.Controllers
                 ICorePrincipal currentPrincipal = this.CorePrincipal();
                 bool isOwner = currentPrincipal != null && pageWidget.User != null &&
                                currentPrincipal.PrincipalId == pageWidget.User.PrincipalId;
+
                 if (coreWidget != null && coreWidget is BaseWidget && _permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidget.Id, isOwner, PermissionOperationLevel.Object))
                 {
                     _permissionHelper.ApplyPermissions(model, coreWidget.GetType());
+                    
                     if (_permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidget.Id, isOwner, PermissionOperationLevel.Object))
                     {
                         return Content(Url.Action(MVC.Pages.Show(pageWidget.Page.Url)));

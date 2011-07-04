@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Core.Forms.Helpers;
 using Core.Forms.Permissions.Operations;
 using Core.Forms.Verbs.Widgets;
 using Core.Framework.Permissions.Helpers;
@@ -55,6 +56,11 @@ namespace Core.Forms.Widgets
         public override IWidgetActionVerb SaveAction
         {
             get { return FormsBuilderWidgetSaveSettingsVerb.Instance; }
+        }
+
+        public override void Remove(ICoreWidgetInstance coreWidgetInstance)
+        {
+            FormsBuilderWidgetHelper.Remove(coreWidgetInstance);
         }
     }
 }

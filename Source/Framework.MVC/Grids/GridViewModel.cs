@@ -23,6 +23,7 @@ namespace Framework.MVC.Grids
         {
             Columns = new List<GridColumnViewModel>();
             IsAsc = true;
+            SearchEnable = true;
         }
 
         #endregion
@@ -70,6 +71,12 @@ namespace Framework.MVC.Grids
         /// </summary>
         /// <value>The grid title.</value>
         public String GridTitle { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [search enable].
+        /// </summary>
+        /// <value><c>true</c> if [search enable]; otherwise, <c>false</c>.</value>
+        public bool SearchEnable { get; set; }
 
         #endregion
     }

@@ -16,7 +16,7 @@ namespace Core.Framework.Plugins.Widgets
         [Description("Add to page")]
         AddToPage = 4,
 
-        [OperationDescription(PermissionArea.Applications, PermissionOperationLevel.ObjectType, OwnerDefaultAcess = true)]
+        [OperationDescription(PermissionArea.Content, PermissionOperationLevel.ObjectType, OwnerDefaultAcess = true)]
         Permissions = 8
     }
 }

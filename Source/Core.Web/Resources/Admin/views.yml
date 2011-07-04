@@ -74,6 +74,7 @@ Admin:
         Content Pages: "Content Pages"
         Forms: "Forms"
         Roles: "Roles"
+        FormsAnswers: "Forms Answers"
     Role:
       Index:
        Role: "Role"

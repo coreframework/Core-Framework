@@ -8,6 +8,10 @@ namespace Core.Forms.Permissions.Operations
     {
         [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
         [Description("Manage forms")]
-        ManageForms = 1
+        ManageForms = 1,
+
+        [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
+        [Description("Manage forms answers")]
+        ManageFormsAnswers = 2
     }
 }

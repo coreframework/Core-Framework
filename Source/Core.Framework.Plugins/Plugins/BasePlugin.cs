@@ -22,8 +22,6 @@ namespace Core.Framework.Plugins.Plugins
 
         #region Properties
 
-        public const String Areas = "Areas";
-
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>

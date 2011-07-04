@@ -29,6 +29,12 @@ namespace Core.Forms
             context.MapRoute(null, "admin/form-{formId}/edit-element-{formElementId}", FormsMVC.Forms.EditElement());
             context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", FormsMVC.Forms.SaveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
+            context.MapRoute("Admin.FormsAnswers", "admin/forms-answers", FormsMVC.FormAnswers.ShowAll(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/forms-answers/DynamicGridData", FormsMVC.FormAnswers.FormAnswersDynamicGridData());
+
+            context.MapRoute("Admin.FormAnswers", "admin/form-answers/{formWidgetId}", FormsMVC.FormAnswers.ShowAnswers());
+            context.MapRoute(null, "admin/forms-answer-details/{answerId}", FormsMVC.FormAnswers.ShowAnswerDetails());
+
             //widget routs
             context.MapRoute(null, String.Empty, FormsMVC.FormsBuilderWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "form-widget/submit-form", FormsMVC.FormsBuilderWidget.SubmitWidgetForm(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

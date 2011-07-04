@@ -14,7 +14,15 @@ namespace Core.Forms.NHibernate.Mappings
             Map(formBuilderWidget => formBuilderWidget.SaveData);
             Map(formBuilderWidget => formBuilderWidget.SendEmail);
             Map(formBuilderWidget => formBuilderWidget.SenderEmail);
-            References(form => form.Form).Column("FormId");
+            References(formBuilderWidget => formBuilderWidget.User).Column("UserId");
+            References(formBuilderWidget => formBuilderWidget.Form).Column("FormId");
+
+            HasMany(formBuilderWidget => formBuilderWidget.Answers).KeyColumn("FormWidgetId")
+             .Table("Forms_FormsBuilderWidgets")
+             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+             .Inverse()
+             .LazyLoad()
+             .Cascade.AllDeleteOrphan();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Castle.Facilities.NHibernateIntegration;
+﻿using System;
+using System.Linq;
+using Castle.Facilities.NHibernateIntegration;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
 using Framework.Facilities.NHibernate;
@@ -14,6 +16,11 @@ namespace Core.Forms.NHibernate.Services
 
         #region Helper Methods
 
+        public IQueryable<FormWidgetAnswer> GetAnswersQuery(long formWidgetId, string searchString)
+        {
+            var baseQuery = CreateQuery();
+            return baseQuery.Where(answer => answer.FormBuilderWidget.Id == formWidgetId);
+        }
 
         #endregion
     }

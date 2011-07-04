@@ -42,9 +42,11 @@ namespace Core.Forms.NHibernate.Services
             ICriteria criteria = Session.CreateCriteria<Form>("forms");
             
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-
-            return permissionCommonService.AttachPermissionsCriteria(criteria, user, operationCode, typeof (Form),
-                                                                     "forms.Id", "forms.UserId");
+            var permissionCriteria = permissionCommonService.GetPermissionsCriteria(user, operationCode, typeof (Form),
+                                                                                    "forms.Id", "forms.UserId");
+            if (permissionCriteria != null)
+                criteria.Add(permissionCriteria);
+            return criteria;
         }
 
         #endregion

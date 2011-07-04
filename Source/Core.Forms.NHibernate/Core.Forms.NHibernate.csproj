@@ -92,6 +92,7 @@
     <Compile Include="Contracts\IFormService.cs" />
     <Compile Include="CoreFormsNHibernateModule.cs" />
     <Compile Include="Helpers\ElementTypeDescriptionAttribute.cs" />
+    <Compile Include="Mappings\BaseUserMapping.cs" />
     <Compile Include="Mappings\FormWidgetAnswerValueMapping.cs" />
     <Compile Include="Mappings\FormBuilderWidgetMapping.cs" />
     <Compile Include="Mappings\FormElementMapping.cs" />

@@ -79,8 +79,11 @@ namespace Core.Web.NHibernate.Services
             ICriteria criteria = Session.CreateCriteria<Page>("pages").CreateAlias("User", "pageUser", JoinType.LeftOuterJoin);
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
 
-            return permissionCommonService.AttachPermissionsCriteria(criteria, user, operationCode, typeof(Page),
-                                                                    "pages.Id", "pageUser.Id");
+            var permissionCriteria = permissionCommonService.GetPermissionsCriteria(user, operationCode, typeof (Page),
+                                                                                    "pages.Id", "pageUser.Id");
+            if (permissionCriteria!=null)
+                criteria.Add(permissionCriteria);
+            return criteria;
         }
 
         #endregion

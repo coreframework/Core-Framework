@@ -7,6 +7,7 @@ namespace Core.Web.NHibernate.Contracts
     public interface IRoleService : IDataService<Role>
     {
         int GetCount(IQueryable<Role> baseQuery);
+
         IQueryable<Role> GetSearchQuery(string searchString);
     }
 }

@@ -145,8 +145,7 @@ namespace Core.Forms.Helpers
                                  {
                                      CreateDate = DateTime.Now,
                                      FormBuilderWidget = model,
-                                     UserId = user.PrincipalId,
-                                     AnswerValues = new List<FormWidgetAnswerValue>(),
+                                     User = new BaseUser {Id = user.PrincipalId},
                                      Title = model.Title
                                  };
 
@@ -216,6 +215,20 @@ namespace Core.Forms.Helpers
             }
 
             return String.Empty;
+        }
+
+        /// <summary>
+        /// Removes the specified core widget instance.
+        /// </summary>
+        /// <param name="coreWidgetInstance">The core widget instance.</param>
+        public static void Remove(ICoreWidgetInstance coreWidgetInstance)
+        {
+            if (coreWidgetInstance != null && coreWidgetInstance.InstanceId != null && coreWidgetInstance.InstanceId>0)
+            {
+                var widgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
+                var widget = widgetService.Find((long) coreWidgetInstance.InstanceId);
+                widgetService.Delete(widget);
+            }
         }
     }
 }

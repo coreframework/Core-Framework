@@ -48,6 +48,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -69,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IPageCommonService.cs" />
     <Compile Include="Contracts\IPermissionCommonService.cs" />
     <Compile Include="Contracts\IPermissionsHelper.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
@@ -77,6 +81,7 @@
     <Compile Include="Helpers\PermissionsHelper.cs" />
     <Compile Include="Helpers\PermissionsAttribute.cs" />
     <Compile Include="Models\BaseEntityOperations.cs" />
+    <Compile Include="Models\BaseUser.cs" />
     <Compile Include="Models\ICorePrincipal.cs" />
     <Compile Include="Models\IPermissable.cs" />
     <Compile Include="Models\IPermissionModel.cs" />

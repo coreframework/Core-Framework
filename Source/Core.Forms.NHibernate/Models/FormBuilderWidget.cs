@@ -1,10 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
 
 namespace Core.Forms.NHibernate.Models
 {
     public class FormBuilderWidget: Entity
     {
+        #region Fields
+
+        private readonly IList<FormWidgetAnswer> _answers;
+
+        #endregion
+
         #region Properties
 
         /// <summary>
@@ -36,6 +44,21 @@ namespace Core.Forms.NHibernate.Models
         /// </summary>
         /// <value>The form.</value>
         public virtual Form Form { get; set; }
+
+        /// <summary>
+        /// Gets or sets the answers.
+        /// </summary>
+        /// <value>The answers.</value>
+        public virtual IEnumerable<FormWidgetAnswer> Answers
+        {
+            get { return _answers; }
+        }
+
+        /// <summary>
+        /// Gets or sets the user id.
+        /// </summary>
+        /// <value>The user id.</value>
+        public virtual BaseUser User { get; set; }
 
         #endregion
     }
