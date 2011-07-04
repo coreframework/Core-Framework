@@ -163,7 +163,7 @@ namespace Core.Forms.Helpers
 
             if (model.SendEmail)
             {
-
+                FormsMailer.SendFormAnswerEmail(model, new FormWidgetAnswer());
             }
 
             return true;

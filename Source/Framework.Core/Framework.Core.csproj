@@ -190,6 +190,9 @@
     <Compile Include="Services\IGenericDataService.cs" />
     <Compile Include="Services\IService.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Utilities\Email\MailConfiguration.cs" />
+    <Compile Include="Utilities\Email\EmailSender.cs" />
+    <Compile Include="Utilities\Email\MailTemplate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AssemblyInfo.template" />

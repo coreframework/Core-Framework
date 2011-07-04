@@ -91,6 +91,7 @@
     <Compile Include="FormsPlugin.cs" />
     <Compile Include="Helpers\FormsBuilderWidgetHelper.cs" />
     <Compile Include="Helpers\FormsHelper.cs" />
+    <Compile Include="Helpers\FormsMailer.cs" />
     <Compile Include="Models\FormBuilderWidgetViewModel.cs" />
     <Compile Include="Models\FormElementViewModel.cs" />
     <Compile Include="Models\FormViewModel.cs" />
@@ -155,7 +156,7 @@
     <Content Include="Content\Css\forms.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\close.png">
+    <Content Include="Content\Templates\FormsTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Admin\views.yml">
