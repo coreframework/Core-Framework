@@ -262,8 +262,8 @@ namespace Core.Web.NHibernate.Services.Permissions
                                  Add(Restrictions.Or(Restrictions.Or(
                                           Restrictions.Or(Subqueries.PropertyIn("Role.Id", rolesSubQuery), Subqueries.PropertyIn("Role.Id", userGroupsRolesSubQuery)),
                                           Restrictions.Eq("Role.Id", (Int64)SystemRoles.User)),
-                                          
-                                          !String.IsNullOrEmpty(permissibleOwnerPropertyName)?Restrictions.And(Restrictions.IsNotNull("pageUser.id"), Restrictions.And(Restrictions.Eq("pageUser.id", user.PrincipalId), Restrictions.Eq("Role.Id", (Int64)SystemRoles.Owner))):null
+
+                                          !String.IsNullOrEmpty(permissibleOwnerPropertyName) ? Restrictions.And(Restrictions.IsNotNull(permissibleOwnerPropertyName), Restrictions.And(Restrictions.Eq(permissibleOwnerPropertyName, user.PrincipalId), Restrictions.Eq("Role.Id", (Int64)SystemRoles.Owner))) : null
 
                                           )).Add(
 

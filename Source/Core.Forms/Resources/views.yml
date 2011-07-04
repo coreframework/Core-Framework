@@ -2,6 +2,8 @@ Views:
   FormsBuilderWidget:
     EditWidget:
       Form: "Form"
+      SendEmail: "Send Email"
+      SaveData: "Save Data"
     ViewWidget:
       Submit: "Submit"
     

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Core.Forms.Permissions.Operations;
 using Core.Forms.Verbs.Widgets;
+using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
@@ -26,6 +28,11 @@ namespace Core.Forms.Widgets
                     return _instance ?? (_instance = new FormsBuilderWidget());
                 }
             }
+        }
+
+        private FormsBuilderWidget()
+        {
+            Operations = OperationsHelper.GetOperations<FormsBuilderWidgetOperations>();
         }
 
         #endregion

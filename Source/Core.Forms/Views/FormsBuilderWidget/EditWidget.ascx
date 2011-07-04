@@ -17,15 +17,15 @@
         <%:Html.DropDownListFor(model => model.FormId, new SelectList(Model.Forms, "Id", "Title", Model.FormId), "Please select", new { Class = "select-400 text ui-widget-content ui-corner-all" })%>
         <%:Html.ValidationMessageFor(model=>model.FormId) %><br/>
 
-         <%:Html.CheckBoxFor(model => model.SaveData)%>
-         <label class="checkbx-label">Save data</label><br/>
-
          <%:Html.CheckBoxFor(model => model.SendEmail)%>
-         <label class="checkbx-label">Send email</label><br/>
+         <label class="checkbx-label"><%: Html.Translate(".SendEmail") %></label>
 
         <%:Html.LabelFor(model => model.SenderEmail)%>
         <%:Html.TextBoxFor(model => model.SenderEmail, new { Class = "colorPicker text-400 text ui-widget-content ui-corner-all" })%>
         <%:Html.ValidationMessageFor(model=>model.SenderEmail) %>
+
+         <%:Html.CheckBoxFor(model => model.SaveData)%>
+         <label class="checkbx-label"><%: Html.Translate(".SaveData") %></label>
 
     </fieldset>
     <%:Html.AntiForgeryToken()%>

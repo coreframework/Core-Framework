@@ -9,6 +9,8 @@ using Core.Forms.Widgets;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Plugins.Web;
+using Framework.MVC.Extensions;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Forms.Controllers
@@ -68,6 +70,7 @@ namespace Core.Forms.Controllers
                     if (exWidget != null)
                         widget = exWidget;
                 }
+
                 return PartialView(new FormBuilderWidgetViewModel().MapFrom(widget));
             }
 
@@ -82,6 +85,10 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult UpdateWidget(FormBuilderWidgetViewModel model)
         {
+            if (model.SendEmail && String.IsNullOrEmpty(model.SenderEmail))
+            {
+                ModelState.AddModelError("SenderEmail", @"The Email Field is required.");
+            }
             if (ModelState.IsValid)
             {
                 model = FormsBuilderWidgetHelper.SaveFormBuilderWidget(model);
@@ -90,6 +97,12 @@ namespace Core.Forms.Controllers
             return PartialView("EditWidget", model);
         }
 
+        /// <summary>
+        /// Submits the widget form.
+        /// </summary>
+        /// <param name="instanceId">The instance id.</param>
+        /// <param name="collection">The collection.</param>
+        /// <returns></returns>
         [HttpPost]
         public virtual ActionResult SubmitWidgetForm(long instanceId, FormCollection collection)
         {
@@ -103,6 +116,8 @@ namespace Core.Forms.Controllers
                 if (ModelState.IsValid)
                 {
                     FormsBuilderWidgetHelper.HandleFormData(model, collection, this.CorePrincipal());
+                    TempData["Success"] = HttpContext.Translate("Messages.SuccessFormSubmit",
+                                                                ResourceHelper.GetControllerScope(this));
                 }
                 else
                 {
@@ -112,7 +127,7 @@ namespace Core.Forms.Controllers
                 return PartialView("ViewWidget", model);
             }
 
-            return Content("Hello");
+            return Content("Error");
         }
 
         #endregion

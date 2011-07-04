@@ -2,9 +2,9 @@
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
-namespace Core.Framework.Plugins.Widgets
+namespace Core.Forms.Permissions.Operations
 {
-    public enum BaseWidgetOperations
+    public enum FormsBuilderWidgetOperations
     {
         [OperationDescription(PermissionArea.Applications, PermissionOperationLevel.ObjectType, GuestDefaultAcess = true, OwnerDefaultAcess = true, UserDefaultAccess = true)]
         View = 1,
@@ -17,6 +17,9 @@ namespace Core.Framework.Plugins.Widgets
         AddToPage = 4,
 
         [OperationDescription(PermissionArea.Applications, PermissionOperationLevel.ObjectType, OwnerDefaultAcess = true)]
-        Permissions = 8
+        Permissions = 8,
+
+        [OperationDescription(PermissionArea.Applications, PermissionOperationLevel.ObjectType, OwnerDefaultAcess = true)]
+        ViewAnswers = 16
     }
 }

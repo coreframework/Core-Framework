@@ -239,6 +239,15 @@ namespace Framework.Core.Utilities.Email
         /// <summary>
         /// Initializes a new instance of the <see cref="MailTemplate"/> class.
         /// </summary>
+        /// <param name="bodyTemplate">The body template.</param>
+        public MailTemplate(string bodyTemplate)
+        {
+            ReadTemplates(bodyTemplate);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MailTemplate"/> class.
+        /// </summary>
         /// <param name="templateDirectory">The template directory.</param>
         /// <param name="bodyTemplate">The body template.</param>
         public MailTemplate(string templateDirectory, string bodyTemplate)

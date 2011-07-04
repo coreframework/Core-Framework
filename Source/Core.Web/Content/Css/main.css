@@ -88,6 +88,7 @@ legend      { font-weight: bold; font-size:1.2em; }
   background-color:#fff;
   margin: 0 auto;
 }
+.field-validation-error {display:block;}
 
 .inner-container {
   padding: 0 1em;
@@ -169,8 +170,9 @@ h2.settings-header {margin-bottom:10px;}
 .ui-widget-content .form_area label {display:block;}
 .ui-widget-content .form_area input {}
 .ui-widget-content form input.text, .ui-widget-content form select.text, .ui-widget-content form textarea.text {margin-bottom:12px; padding:0.4em; float:left;}
+.ui-widget-content form input[type=checkbox] {float:left;clear:left;}
 
-.ui-widget-content .form_area .checkbx-label {display:inline;}
+.ui-widget-content .form_area .checkbx-label {display:block; margin-bottom:5px;}
 /*menu*/
 
 .menu, .menu * {

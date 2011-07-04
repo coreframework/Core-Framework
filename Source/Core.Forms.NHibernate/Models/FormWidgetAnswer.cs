@@ -8,6 +8,11 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Properties
 
+        public FormWidgetAnswer()
+        {
+            AnswerValues = new List<FormWidgetAnswerValue>();
+        }
+
         /// <summary>
         /// Gets or sets the create date.
         /// </summary>

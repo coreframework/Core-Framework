@@ -126,12 +126,21 @@ namespace Core.Forms.Helpers
             }
         }
 
+        /// <summary>
+        /// Handles the form data.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="collection">The collection.</param>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
         public static bool HandleFormData(FormBuilderWidget model, FormCollection collection, ICorePrincipal user)
         {
-            if (model.SaveData)
+            bool result = true;
+            if (model.SaveData || model.SendEmail)
             {
+                //bind model
+
                 var widgetAnswersService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerService>();
-                var widgetAnswersValueService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerValueService>();
                 var answer = new FormWidgetAnswer
                                  {
                                      CreateDate = DateTime.Now,
@@ -141,32 +150,72 @@ namespace Core.Forms.Helpers
                                      Title = model.Title
                                  };
 
-                if (widgetAnswersService.Save(answer))
+                //save answer values
+                foreach (FormElement item in model.Form.FormElements)
                 {
-                    //save answer values
-                    foreach (FormElement item in model.Form.FormElements)
+                    if (item.Type != FormElementType.Captcha)
                     {
                         string elementName = String.Format("{0}_{1}", item.Type, item.Id);
                         string value = collection[elementName];
                         if (value != null)
                         {
-                            widgetAnswersValueService.Save(new FormWidgetAnswerValue
+                            if (item.Type==FormElementType.RadioButtons)
                             {
-                                Field = item.Title,
-                                Value = value,
-                                Answer = answer
-                            });
+                                value = GetRadioButtonValue(item.ElementValues, elementName, value);
+                            }
+
+                            if (!String.IsNullOrEmpty(value))
+                            {
+                                ((List<FormWidgetAnswerValue>) answer.AnswerValues).Add(new FormWidgetAnswerValue
+                                                                                        {
+                                                                                            Field = item.Title,
+                                                                                            Value = value,
+                                                                                            Answer = answer
+                                                                                        });
+                            }
                         }
                     }
-                }  
+                }
+
+                //send email
+                if (model.SendEmail)
+                {
+                    result = FormsMailer.SendFormAnswerEmail(model, answer);
+                }
+
+                //save answer
+                if (model.SaveData)
+                {
+                    result = result && widgetAnswersService.Save(answer);
+                }
             }
 
-            if (model.SendEmail)
+            return result;
+        }
+
+        /// <summary>
+        /// Gets the radio button value.
+        /// </summary>
+        /// <param name="values">The values.</param>
+        /// <param name="elementName">Name of the element.</param>
+        /// <param name="selectedElementName">Name of the selected element.</param>
+        /// <returns></returns>
+        private static String GetRadioButtonValue(String values, String elementName, String selectedElementName)
+        {
+            var valuesArray = values.Trim().Split(',');
+            var result = new Dictionary<String, String>();
+
+            for (var i = 0; i < valuesArray.Length; i++)
             {
-                FormsMailer.SendFormAnswerEmail(model, new FormWidgetAnswer());
+                if (!String.IsNullOrEmpty(valuesArray[i]))
+                {
+                    if (selectedElementName.Equals(String.Format("{0}_{1}", elementName, i)))
+                        return valuesArray[i];
+                    result.Add(String.Format("{0}_{1}", elementName, i), valuesArray[i]);
+                }
             }
 
-            return true;
+            return String.Empty;
         }
     }
 }

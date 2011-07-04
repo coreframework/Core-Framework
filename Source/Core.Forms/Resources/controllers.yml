@@ -1,0 +1,5 @@
+Controllers:
+  FormsBuilderWidget:
+    SuccessFormSubmit: "Form has been successfully submit."
+    
+    

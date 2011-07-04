@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
+using Core.Forms.NHibernate.Permissions.Operations;
+using Core.Framework.Permissions.Extensions;
+using Core.Framework.Permissions.Models;
 using Framework.Core.DomainModel;
+using Framework.MVC.Metadata.Attributes;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Forms.Models
@@ -13,6 +18,7 @@ namespace Core.Forms.Models
         #region Fields
 
         private List<Form> _forms;
+        private ICorePrincipal _user;
 
         #endregion
 
@@ -24,7 +30,7 @@ namespace Core.Forms.Models
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        [Required]
+        [StringLength(255), Required]
         public string Title { get; set; }
 
         /// <summary>
@@ -43,7 +49,17 @@ namespace Core.Forms.Models
         /// Gets or sets the sender email.
         /// </summary>
         /// <value>The sender email.</value>
+        [StringLength(255), Email]
         public String SenderEmail { get; set; }
+
+        /// <summary>
+        /// Gets or sets the user.
+        /// </summary>
+        /// <value>The user.</value>
+        public ICorePrincipal User
+        {
+            get { return _user ?? (_user = HttpContext.Current.CorePrincipal()); }
+        }
 
         /// <summary>
         /// Gets the forms.
@@ -56,7 +72,7 @@ namespace Core.Forms.Models
                 if (_forms == null)
                 {
                     var formService = ServiceLocator.Current.GetInstance<IFormService>();
-                    _forms = (List<Form>)formService.GetAll();
+                    _forms = (List<Form>) formService.GetAllowedFormsByOperation(User, (int) FormOperations.AddToWidget);
                 }
                 return _forms;
             }

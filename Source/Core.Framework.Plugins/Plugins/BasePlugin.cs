@@ -22,6 +22,8 @@ namespace Core.Framework.Plugins.Plugins
 
         #region Properties
 
+        public const String Areas = "Areas";
+
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
@@ -40,6 +42,10 @@ namespace Core.Framework.Plugins.Plugins
             get { return PluginSetting.Title; }
         }
 
+        /// <summary>
+        /// Gets the plugin's full location.
+        /// </summary>
+        /// <value>The plugin's full location.</value>
         public String PluginLocation
         {
             get
@@ -53,9 +59,10 @@ namespace Core.Framework.Plugins.Plugins
         }
 
         /// <summary>
-        /// Gets the plugin directory.
+        /// Gets the plugin's directory.
         /// </summary>
-        public virtual String PluginDirectory
+        /// <value>The plugin's directory.</value>
+		public virtual String PluginDirectory
         {
             get
             {
