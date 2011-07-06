@@ -22,6 +22,8 @@ namespace Core.Web.Areas.Admin.Helpers
 
         private readonly String title;
 
+        private readonly String imageUrl;
+
         private readonly Expression<Action<T>> action;
 
         #endregion
@@ -37,6 +39,19 @@ namespace Core.Web.Areas.Admin.Helpers
         {
             this.title = title;
             this.action = action;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ActionLink&lt;T&gt;"/> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="imageUrl">The image URL.</param>
+        /// <param name="action">The action accessor.</param>
+        public ActionLink(String title, String imageUrl, Expression<Action<T>> action)
+        {
+            this.title = title;
+            this.action = action;
+            this.imageUrl = imageUrl;
         }
 
         #endregion
@@ -56,6 +71,18 @@ namespace Core.Web.Areas.Admin.Helpers
         }
 
         /// <summary>
+        /// Gets the image.
+        /// </summary>
+        /// <value>The image.</value>
+        public string Image
+        {
+            get 
+            {
+                return imageUrl;
+            }
+        }
+
+        /// <summary>
         /// Gets the URL.
         /// </summary>
         /// <param name="url">The URL helper.</param>
@@ -63,6 +90,18 @@ namespace Core.Web.Areas.Admin.Helpers
         public String GetUrl(UrlHelper url)
         {
             return url.Action(action);
+        }
+
+        /// <summary>
+        /// Gets the image URL.
+        /// </summary>
+        /// <param name="urlHelper">The URL helper.</param>
+        /// <returns>
+        /// Menu item image url.
+        /// </returns>
+        public string GetImageUrl(UrlHelper urlHelper)
+        {
+            return urlHelper.Content(Image);
         }
 
         /// <summary>

@@ -46,7 +46,7 @@ namespace Core.Web.Areas.Admin.Controllers
             columns.Add(new GridColumnViewModel { Name = "User", Index = "Username" });
             columns.Add(new GridColumnViewModel { Name = "Status", Index = "Status" });
             columns.Add(new GridColumnViewModel { Name = "User groups", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Remove", Width = 150, Align = "center", Sortable = false });
+            columns.Add(new GridColumnViewModel { Name = "Remove", Width = 30, Align = "center" ,Sortable = false });
             columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
             GridViewModel model = new GridViewModel
             {
@@ -82,9 +82,9 @@ namespace Core.Web.Areas.Admin.Controllers
                             String.Format("<a href=\"{0}\">{1}</a>",
                                 Url.Action(MVC.Admin.User.UserGroups(user.Id)),
                                 HttpContext.Translate("UserGroups", ResourceHelper.GetControllerScope(this))),
-                            String.Format("<a href=\"{0}\">{1}</a>",
-                                Url.Action(MVC.Admin.User.Remove(user.Id)),
-                                HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this)))}
+                            String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                Url.Action(MVC.Admin.User.Remove(user.Id))/*,
+                                HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this))*/)}
                     }).ToArray()
             };
             return Json(jsonData);

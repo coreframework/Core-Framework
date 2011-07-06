@@ -95,16 +95,27 @@ namespace Framework.MVC.Grids.jqGrid
         /// <returns>Html-markup for jq grid.</returns>
         public static MvcHtmlString JqGrid<TValue>(this HtmlHelper<GridViewModel> html, Expression<Func<GridViewModel, TValue>> searchExpression)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
+            var filterWrapper = new TagBuilder("div");
+            filterWrapper.AddCssClass("e_table_top clrfix");
+
             var searchWrapper = new TagBuilder("div");
-            searchWrapper.Attributes.Add("style", "margin-top: 20px; margin-left: 20px;");
+            searchWrapper.AddCssClass("filter_l clrfix");
+
             searchWrapper.InnerHtml += GenerateSearch(html, searchExpression);
             searchWrapper.InnerHtml += GenerateAutoSearch(html);
             searchWrapper.InnerHtml += GenerateSearchButtons(html);
-            builder.Append(searchWrapper.ToString(TagRenderMode.Normal));
+
+            filterWrapper.InnerHtml += searchWrapper.ToString(TagRenderMode.Normal);
+            
+            builder.Append(filterWrapper.ToString(TagRenderMode.Normal));
+
             builder.Append(GenerateGrid());
+
             builder.Append(GeneratePager());
+            
             builder.Append(GenerateScript(html));
+            
             MvcHtmlString result = MvcHtmlString.Create(builder.ToString());
 
             return result;
@@ -113,22 +124,18 @@ namespace Framework.MVC.Grids.jqGrid
         private static String GenerateSearch<TValue>(HtmlHelper<GridViewModel> html, Expression<Func<GridViewModel, TValue>> searchExpression)
         {
             var searchWrapper = new TagBuilder("div");
-            searchWrapper.AddCssClass("form_area");
+            searchWrapper.AddCssClass("filter_i");
             var searchLabel = new TagBuilder("label");
-            searchLabel.SetInnerText(html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel))));
+            searchLabel.SetInnerText(String.Format("{0}:", html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel)))));
             searchWrapper.InnerHtml += searchLabel.ToString(TagRenderMode.Normal);
             searchWrapper.InnerHtml += html.TextBoxFor(searchExpression, new { onkeydown = "doSearch(arguments[0]||event)" }).ToHtmlString();
-            var searchHelperDiv = new TagBuilder("div");
-            searchHelperDiv.Attributes.Add("style", "visibility: hidden; width: 10px; height: 10px");
-            searchWrapper.InnerHtml += searchHelperDiv.ToString(TagRenderMode.Normal);
-
             return searchWrapper.ToString(TagRenderMode.Normal);
         }
 
         private static String GenerateAutoSearch<TModel>(HtmlHelper<TModel> html)
         {
             var autoSearchWrapper = new TagBuilder("div");
-            autoSearchWrapper.AddCssClass("form_area");
+            autoSearchWrapper.AddCssClass("filter_i");
             var autoSearchLabel = new TagBuilder("label");
             autoSearchLabel.SetInnerText(html.Translate("EnableAutosearch", ResourceHelper.GetModelScope(typeof(GridViewModel))));
             autoSearchWrapper.InnerHtml += autoSearchLabel.ToString(TagRenderMode.Normal);
@@ -139,13 +146,19 @@ namespace Framework.MVC.Grids.jqGrid
 
         private static String GenerateSearchButtons<TModel>(HtmlHelper<TModel> html)
         {
-            var buttonsWrapper = new TagBuilder("p");
-            buttonsWrapper.AddCssClass("buttons");
-            var button = new TagBuilder("button");
+            var buttonsWrapper = new TagBuilder("div");
+            buttonsWrapper.AddCssClass("btn2 clrfix");
+            var em = new TagBuilder("em");
+            var strong = new TagBuilder("strong");
+            var button = new TagBuilder("input");
+            button.AddCssClass("button");
+            button.Attributes["type"] = "button";
+            button.Attributes["value"] = html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel)));
             button.GenerateId("submitButton");
             button.MergeAttribute("onclick", "gridReload()");
-            button.SetInnerText(html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel))));
+            buttonsWrapper.InnerHtml += em.ToString(TagRenderMode.Normal);
             buttonsWrapper.InnerHtml += button.ToString(TagRenderMode.Normal);
+            buttonsWrapper.InnerHtml += strong.ToString(TagRenderMode.Normal);
 
             return buttonsWrapper.ToString(TagRenderMode.Normal);
         }

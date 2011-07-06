@@ -15,11 +15,11 @@
      <%= Html.JavascriptInclude("jquery-1.5.1.min.js")%>
      <%: Html.JavascriptPackInclude("adminui") %>
      <%: Html.JavascriptPackInclude("ajax") %>
-     <%: Html.JavascriptPackInclude("fckeditor")%>
+     <%: Html.JavascriptPackInclude("fckeditor")%> 
      <%: Html.JavascriptPackInclude("admincustom")%>
 
-     <%--<%= Html.CssInclude("admin/jqGridCss/ui.jqgrid.css")%>
-     <%= Html.CssInclude("admin/jqGridCss/blitzer/jquery-ui-1.8.12.custom.css")%>--%>
+     <%--<%= Html.CssInclude("admin/jqGridCss/ui.jqgrid.css")%>--%>
+    <%-- <%= Html.CssInclude("admin/jqGridCss/blitzer/jquery-ui-1.8.12.custom.css")%>--%>
      <%= Html.JavascriptInclude("jqGrid/jquery.jqGrid.js")%>
 
     <asp:ContentPlaceHolder id="HeadContent" runat="server">    

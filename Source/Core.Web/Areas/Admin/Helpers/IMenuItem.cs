@@ -22,11 +22,24 @@ namespace Core.Web.Areas.Admin.Helpers
         String Title { get; }
 
         /// <summary>
+        /// Gets the image.
+        /// </summary>
+        /// <value>The image.</value>
+        String Image { get; }
+
+        /// <summary>
         /// Gets the URL.
         /// </summary>
         /// <param name="urlHelper">The URL helper.</param>
         /// <returns>Menu item link.</returns>
         String GetUrl(UrlHelper urlHelper);
+
+        /// <summary>
+        /// Gets the image URL.
+        /// </summary>
+        /// <param name="urlHelper">The URL helper.</param>
+        /// <returns>Menu item image url.</returns>
+        String GetImageUrl(UrlHelper urlHelper);
 
         /// <summary>
         /// Determines whether this item corresponds to current page.

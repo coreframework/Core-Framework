@@ -9,6 +9,7 @@ namespace Core.Web.Areas.Admin.Helpers
         #region Fields
 
         private readonly String title;
+        private readonly String image;
         private readonly String routeName;
         
         #endregion
@@ -18,6 +19,13 @@ namespace Core.Web.Areas.Admin.Helpers
         public RouteLink(String title, String routeName)
         {
             this.title = title;
+            this.routeName = routeName;
+        }
+
+        public RouteLink(String title,String image, String routeName)
+        {
+            this.title = title;
+            this.image = image;
             this.routeName = routeName;
         }
 
@@ -38,6 +46,18 @@ namespace Core.Web.Areas.Admin.Helpers
         }
 
         /// <summary>
+        /// Gets the image.
+        /// </summary>
+        /// <value>The image.</value>
+        public string Image
+        {
+            get
+            {
+                return image;
+            }
+        }
+
+        /// <summary>
         /// Gets the URL.
         /// </summary>
         /// <param name="url">The URL helper.</param>
@@ -45,6 +65,18 @@ namespace Core.Web.Areas.Admin.Helpers
         public String GetUrl(UrlHelper url)
         {
             return url.RouteUrl(routeName);
+        }
+
+        /// <summary>
+        /// Gets the image URL.
+        /// </summary>
+        /// <param name="urlHelper">The URL helper.</param>
+        /// <returns>
+        /// Menu item image url.
+        /// </returns>
+        public string GetImageUrl(UrlHelper urlHelper)
+        {
+            return urlHelper.Content(Image);
         }
 
         /// <summary>

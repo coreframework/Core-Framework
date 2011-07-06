@@ -70,7 +70,10 @@ namespace Core.Web.Areas.Admin.Helpers
             {
                 var h3 = new TagBuilder("h3");
                 var em = new TagBuilder("em");
-                em.AddCssClass("bg5");
+                if (!String.IsNullOrEmpty(firstItem.Image))
+                {
+                    em.Attributes["style"] = String.Format("background: url(\"{0}\") no-repeat scroll 5px 50% transparent;", firstItem.GetImageUrl(url));
+                }
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = firstItem.GetUrl(url);
                 link.InnerHtml = html.Translate(String.Format(".{0}", title));
@@ -88,8 +91,6 @@ namespace Core.Web.Areas.Admin.Helpers
                 em.InnerHtml = link.ToString();
                 h3.InnerHtml = em.ToString();
                 sectionContent.Append(h3.ToString());
-
-                //sectionContent.Append(title);
             }
 
             //if (isCurrent)
@@ -113,7 +114,10 @@ namespace Core.Web.Areas.Admin.Helpers
             {
                 var itemTag = new TagBuilder("li");
                 var em = new TagBuilder("em");
-                em.AddCssClass("bg2");
+                if (!String.IsNullOrEmpty(item.Image))
+                {
+                    em.Attributes["style"] = String.Format("background: url(\"{0}\") no-repeat scroll 5px 50% transparent;", item.GetImageUrl(url));
+                }
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = item.GetUrl(url);
                 link.InnerHtml = (new TagBuilder("spam") { InnerHtml = html.Translate(String.Format(".{0}", item.Title)) }).ToString();
