@@ -44,8 +44,8 @@ namespace Core.Web.Areas.Admin.Helpers
                 }
             }
 
-            var menu = new TagBuilder("ul");
-            menu.Attributes["id"] = "navigation";
+            var menu = new TagBuilder("div");
+            menu.Attributes["id"] = "accordion";//"navigation";
             menu.InnerHtml = RenderSectionsList(html, url, items, activeSection);
             return MvcHtmlString.Create(menu.ToString());
         }
@@ -56,39 +56,50 @@ namespace Core.Web.Areas.Admin.Helpers
             foreach (var section in items)
             {
                 var isCurrent = activeSection.Equals(section.Key);
-                var sectionTag = new TagBuilder("li");
-                if (isCurrent)
-                {
-                    sectionTag.Attributes["class"] = "current";
-                }
-                sectionTag.InnerHtml = RenderSection(html, url, section.Key, section.Value, isCurrent);
-                buffer.Append(sectionTag.ToString());
+                buffer.Append(RenderSection(html, url, section.Key, section.Value, isCurrent));
             }
             return buffer.ToString(); 
         }
 
         private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent)
         {
+            /* <h3><em class="bg1"><a href="#">Level 1</a></em></h3> */
             var sectionContent = new StringBuilder();
             var firstItem = items.FirstOrDefault();
             if (firstItem != null)
             {
+                var h3 = new TagBuilder("h3");
+                var em = new TagBuilder("em");
+                em.AddCssClass("bg5");
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = firstItem.GetUrl(url);
                 link.InnerHtml = html.Translate(String.Format(".{0}", title));
-                sectionContent.Append(link.ToString());
+                em.InnerHtml = link.ToString();
+                h3.InnerHtml = em.ToString();
+                sectionContent.Append(h3.ToString());
             }
             else
             {
-                sectionContent.Append(title);
+                var h3 = new TagBuilder("h3");
+                var em = new TagBuilder("em");
+                var link = new TagBuilder("a");
+                link.Attributes["href"] = "javascript:void(0)";
+                link.InnerHtml = html.Translate(String.Format(".{0}", title));
+                em.InnerHtml = link.ToString();
+                h3.InnerHtml = em.ToString();
+                sectionContent.Append(h3.ToString());
+
+                //sectionContent.Append(title);
             }
 
-            if (isCurrent)
+            //if (isCurrent)
             {
+                var divSectionItems = new TagBuilder("div");
                 var sectionItems = new TagBuilder("ul");
                 sectionItems.Attributes["id"] = "nav_sub";
                 sectionItems.InnerHtml = RenderMenuItems(html, url, items);
-                sectionContent.Append(sectionItems.ToString());
+                divSectionItems.InnerHtml = sectionItems.ToString();
+                sectionContent.Append(divSectionItems.ToString());
             }
 
             return sectionContent.ToString();
@@ -101,15 +112,18 @@ namespace Core.Web.Areas.Admin.Helpers
             foreach (var item in items)
             {
                 var itemTag = new TagBuilder("li");
+                var em = new TagBuilder("em");
+                em.AddCssClass("bg2");
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = item.GetUrl(url);
                 link.InnerHtml = (new TagBuilder("spam") { InnerHtml = html.Translate(String.Format(".{0}", item.Title)) }).ToString();
                 if (item.IsCurrent(html.ViewContext.RequestContext))
                 {
-                    link.Attributes["class"] = "current";
+                    itemTag.Attributes["class"] = "active";
                 }
 
-                itemTag.InnerHtml = link.ToString();
+                em.InnerHtml = link.ToString();
+                itemTag.InnerHtml = em.ToString();
 
                 itemsContent.Append(itemTag.ToString());
             }

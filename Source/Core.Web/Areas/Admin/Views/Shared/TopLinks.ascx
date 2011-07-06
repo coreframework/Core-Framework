@@ -1,16 +1,18 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<dynamic>" %>
-<%@ Import Namespace="Framework.MVC.Extensions" %>
-<div id="site_links">
-    <div class="user-menu">
+<div id="site_links" class="right_side clrfix">
         <% if (Request.IsAuthenticated)
            { %>
-        <span class="button"><a class="icon icon-close" href="<%= Url.Action(MVC.Users.DeleteUserSession()) %>">
-        </a></span>
-        <%: Page.User.Identity.Name %>
-        <% }
-           else
-           { %>
-        <%: Html.ActionLink(Html.Translate(".SignIn"), MVC.Users.NewUserSession()) %>
+			    <span><%: Page.User.Identity.Name %></span>
+                <div class="btn_login">
+                    <em></em>
+                        <%: Html.LinkButton("Sign Out", MVC.Users.DeleteUserSession())%>
+                    <strong></strong>
+                </div>
+        <% } else { %>
+                <div class="btn_login">
+                    <em></em>
+                        <%: Html.Submit(Html.Translate(".SignIn"), MVC.Users.NewUserSession())%>
+                    <strong></strong>
+                </div>
         <% } %>
-    </div>
 </div>

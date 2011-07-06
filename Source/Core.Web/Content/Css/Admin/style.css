@@ -1,0 +1,246 @@
+/**
+* @project Core Framework Admin
+*/
+
+@import "reset.css";
+
+/*** Branding ***/ 
+body {font:normal 12px Arial, Helvetica, sans-serif;color:#000;background:url(../../images/admin/bg.gif) repeat-x #16294f;width:100%;height:100%;}
+html {height:100%;}
+
+/**
+* @section Links
+*/
+a:link{text-decoration:none; color:#0052b8;}
+a:visited{text-decoration:underline; color:#0052b8;}
+a:hover{text-decoration:underline; color:#0052b8;}
+a:active{text-decoration:none; color:#0052b8;}
+
+/**
+* @section Headings
+*/
+h1, h2, h3, h4, h5, h6 {color:#000;font-weight:normal;margin-top:0;padding-top:0}
+h1 {font-size:24px;color:#000000;font-weight:bold;margin-bottom:16px;}
+h2 {font-size:17px;color:#000000;font-weight:bold;margin-bottom:16px;}
+h3 {font-size:13px;color:#000000;font-weight:bold;}
+h4 {font-size:16px;color:#000000}
+h5 {font-size:14px;}
+h6 {font-size:12px;}
+
+/**
+* @section Typography
+*/
+p {margin-bottom:8px;}
+
+ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
+
+.content_i ol {margin:10px 5px 10px 0; list-style:decimal; counter-reset:list_item;}
+	.content_i ol li {font-size:12px; display:block; margin-bottom:5px;}
+	.content_i ol li:before  {content:counter(list_item)'.'; counter-increment:list_item; color:#989898; padding-right:7px;}
+		
+/**
+* Custom Buttons
+* @section buttons
+*/
+.button {background-color:transparent; background-repeat:no-repeat; background-position:0 0; cursor:pointer; margin:0; padding:0; border:0;}	
+.btn_login {cursor:pointer;}
+	.btn_login em {width:2px;height:25px;background:url(../../images/admin/btn_login_left.png) no-repeat 0 0;float:left}
+	.btn_login input {background:url(../../images/admin/btn_login_content.png) repeat-x 0 0;height:25px;float:left;padding:0 10px 5px;color:#484848;font-size:12px;font-family:Arial;font-weight:bold;}
+	.btn_login strong {width:2px;height:25px;background:url(../../images/admin/btn_login_right.png) no-repeat 0 0;float:left}
+.btn1 {cursor:pointer;*display:inline-block;*zoom:1;height:27px;}
+	.btn1 em {width:4px;height:27px;background:url(../../images/admin/btn_pu_left.png) no-repeat 0 0;float:left}
+	.btn1 input {background:url(../../images/admin/btn_pu_content.png) repeat-x 0 0;height:27px;float:left;padding:4px 10px 5px;color:#f9f9f9;font-size:13px;font-family:Arial;font-weight:bold;*display:inline;*zoom:1;*padding-left:0;*padding-right:0}
+	.btn1 strong {width:4px;height:27px;background:url(../../images/admin/btn_pu_right.png) no-repeat 0 0;float:left}
+	.btn1:hover em, .btn1:hover input, .btn1:hover strong {background-position: 0 -27px} 
+	.btn1:active em, .btn1:active input, .btn1:active strong {background-position:0 -27px} 
+	.btn1_disabled em, .btn1_disabled input, .btn1_disabled strong {background-position:0 -54px;color:#a6a6a6} 
+	.btn1_disabled:hover em, .btn1_disabled:hover input, .btn1_disabled:hover strong {background-position: 0 -54px;cursor:default;color:#a6a6a6} 
+.btn2 {cursor:pointer;}
+	.btn2 em {width:3px;height:24px;background:url(../../images/admin/btn2_left.png) no-repeat 0 0;float:left}
+	.btn2 input {background:url(../../images/admin/btn2_center.png) repeat-x 0 0;height:24px;float:left;padding:4px 7px 5px;color:#484848;font-size:13px;font-family:Arial;font-weight:bold;*display:inline;*zoom:1;*padding-left:0;*padding-right:0}
+	.btn2 strong {width:3px;height:24px;background:url(../../images/admin/btn2_right.png) no-repeat 0 0;float:left}
+	
+	
+/**
+* @section Main Layouts
+* @subsection Two Column Layout
+*/
+#wrapper {width:100%;min-width:1000px;min-height:100%;height:auto !important;height:100%;}
+	#middle {width:100%;padding:0 0 49px;height:1%;position:relative;}
+		#middle:after {content:'.';display:block;clear:both;visibility:hidden;height:0;}
+		#container {	width:100%;float:left;overflow:hidden;}
+			#content {padding:0 0 0 220px;background:#fff;margin:0 14px;}
+		#sideLeft {float:left;width:222px;margin-left:-100%;position:relative;padding-left:14px;}
+			.sidebar_i {background:url(../../images/admin/sidebar_bg.gif) repeat-y 0 0;}
+#footer {margin:-49px 14px 0;min-width:1000px;height:49px;}
+
+
+/**
+* @section Main Layouts
+* @subsection Header
+*/
+#header {height: 82px;margin:0 14px;position:relative}
+	#header .logo {position:absolute;top:14px;left:9px}
+	#header .right_side {position:absolute;top:12px;right:0}
+		#header span {color:#72bffb;font-size:12px;float:left;margin:4px 10px 0 0 }
+		#header .btn_login {float:left;}
+	.breadcrumbs {height:32px;background:url(../../images/admin/breadcrumbs_bg.gif) repeat-x 0 0;top:50px;position:absolute;width:100%;}
+		.breadcrumbs ul {margin:6px 0 0 10px}
+			.breadcrumbs ul li {background:url(../../images/admin/breadcrumbs_sep.png) no-repeat 0 5px;padding-left:9px;margin-left:7px;float:left;color:#fff}
+				.breadcrumbs ul li:first-child {background:none;padding:0;margin:0;}
+				.breadcrumbs ul li a{color:#5fa6de}
+					.breadcrumbs ul li a:hover{}
+
+
+/**
+* @section Main Layouts
+* @subsection Footer
+*/
+.footer_i {position:relative;}
+	.footer_i .copyright {position:absolute;top:15px;left:5px;color:#6ca2d0;font-size:11px;}
+	.footer_i .f_links {position:absolute;top:15px;right:5px;color:#6ca2d0;font-size:11px;}
+		.footer_i .f_links a {color:#6ca2d0;text-decoration:underline;padding:0 5px;}
+			.footer_i .f_links a:hover {text-decoration:none}
+
+
+/**
+* @section Content Page
+*/
+.top_b {height:1px;border-bottom:1px solid #e2e2e2;padding-top:1px;}
+.content_i {padding:28px 20px}
+	.e_table_area {margin-top:16px}
+		.e_table_top {background:url(../../images/admin/e_table_top_bg.gif) repeat-x 0 0;height:24px;padding:6px 0 4px}
+			.filter_l {float:left;margin-left:8px;}
+				.filter_i {float:left;position:relative;margin-right:13px;padding-right:15px}
+					.filter_i label {color:#474747;}
+					.filter_i input[type=text] {padding:1px 20px 1px 4px;width:72px;height:19px;border:1px solid #a6a6a6;}
+					.datepicker {position:relative;float:left;margin:0;padding:0;height:21px;}
+					img.ui-datepicker-trigger {background:url(../../images/admin/calendar.gif) no-repeat 0 0;height:20px;width:19px;cursor:pointer;position:absolute;right:17px;top:1px;}
+					img.ui-datepicker-trigger:hover {background-position:0 -20px;}
+						#ui-datepicker-div {background:#fff;border:1px solid #a6a6a6;}
+							.ui-datepicker-header {position:relative;padding:5px 0}
+								.ui-datepicker-title {text-align:center;margin-bottom:5px;}
+								.ui-icon {position:absolute;top:8px;cursor:pointer;font-size:10px;}
+								.ui-icon-circle-triangle-w {left:3px;}
+								.ui-icon-circle-triangle-e {right:3px;}
+							table.ui-datepicker-calendar {}
+							table.ui-datepicker-calendar td {padding:5px;}
+					.filter_i em {position:absolute;right:0;top:6px;}
+				.filter_l .btn2 {float:left;}
+			.filter_r {float:right;margin-right:8px;}
+		table.e_table {width:100%}
+			table.e_table tr {vertical-align:top;}
+			table.e_table th, table.e_table td {text-align:left;}
+			table.e_table th {background:url(../../images/admin/e_table_th_bg.gif) repeat-x 0 0;height:33px;color:#fff;font-size:13px;vertical-align:middle} 
+				table.e_table th span {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px 1px;margin-right:6px;}
+				table.e_table th:first-child span {background:none}
+			table.e_table td {border-bottom:#e7e7e7 solid 1px;padding:8px 0 3px 8px;color:#474747;}
+				table.e_table td a {text-decoration:none}
+					table.e_table td a:hover {text-decoration:underline}
+			table.e_table tr:hover td {background:#cde6fc;color:#000000}
+			em.delete {background:url(../../images/admin/delete_ico.gif) no-repeat 0 0;height:11px;width:10px;display:block}
+				em.delete:hover, table.e_table tr:hover em.delete {background-position:0 -11px;}
+		.e_table_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
+		.e_table_bottom .btn1 {float:left;margin-right:5px;}
+	.info_block {margin-top:16px;}
+		.tabs{margin:auto;overflow:hidden;height:auto;}
+			ul.i-tab {list-style:none;overflow:hidden;height:auto;}
+				ul.i-tab li {float:left;margin-left:3px;z-index:1;position:relative}
+					ul.i-tab li em {float:left;background:url(../../images/admin/tab_all_left.gif) repeat-x 0 0;width:6px;height:24px}
+					ul.i-tab li span {float:left;background:url(../../images/admin/tab_all_center.gif) repeat-x 0 0;padding:4px 10px 5px;}
+					@media all and (min-width:0){ul.i-tab li span { padding:5px 10px 5px \0/; }} /* IE9 hack */
+					ul.i-tab li strong {float:left;background:url(../../images/admin/tab_all_right.gif) repeat-x 0 0;width:7px;height:24px}
+					ul.i-tab li:hover {cursor:pointer}
+					ul.i-tab li.active {z-index:200}
+						ul.i-tab li.active em, ul.i-tab li.active span, ul.i-tab li.active strong {background-position: 0 -24px;font-weight:bold}
+			.tabs_b {height:1px;border-top:1px solid #b4b4b4;z-index:100;position:relative;margin-top:-1px;}
+			.tab-content {list-style:none;margin:0px;padding:12px 0 4px 3px;}
+				.tab-content li.tabs_cont {display:block;display:none;font-size:12px;font-family:Arial}
+					.tab-content li li {display:block !important}
+					.tabs_cont .form_i {clear:both;margin-bottom:6px;padding-top:4px;}
+					.tabs_cont .form_i label.r_lable {float:left;margin-left:6px;}
+					.tabs_cont .form_i input[type=radio] {margin:0;padding:0;float:left;}
+		.t_buttons  {clear:both;height:27px;}
+		.t_buttons .btn1 {float:left;margin-right:5px;margin-top:20px;}
+		.i_form {background:url(../../images/admin/i_form_bg) repeat-x 0 0 #ecedef;padding:15px 0 20px 20px;}
+			.cols {width:100%;position:relative;} 
+				.colls_i {float:left;width:30%;margin-left:20px}
+				.colls_i:first-child {margin-left:0px}
+				/* .fst_col {float:left;width:33.3%}
+				.snd_col {float:left;width:33.3%}
+				.trd_col {float:left;width:33.3%} */
+					.r_chb {position:relative;float:left;}
+						.r_chb label {color:#313131;font-size:11px}
+					.r_chb_w {}
+					.r_chb_w h3{float:left;margin-right:24px;}
+				.cols h3 {margin-bottom:10px;font-size:13px;}
+				.cols .i_form_i {width:90%;margin-bottom:10px}
+				.cols .i_form_i label {color:#474747;font-size:12px;font-weight:bold}
+					.cols .i_form_i label span {color:#0f5cbb;}
+				.cols .i_form_i input[type=text] {width:100%;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;}
+				/* .cols .i_form_i input[type=text]:active {background:#dff0ff} */
+				.cols .i_form_i input[type=text].inputHighlighted{background-color:#dff0ff;border:1px solid #747474}
+				.cols .i_form_i select {width:100%}
+				.cols .disabled_i label {color:#afafaf;}
+				.cols .disabled_i input[type=text]  {border:1px solid #d6d6d6;background:#fff;}
+				.cols .not_valid_i label {color:#c00202;}
+				.cols .not_valid_i input[type=text] {border:1px solid #af2929;background:url(../../images/admin/not_valid_ico.gif) no-repeat 3px 3px #fff;}
+				.cols .wth_flg input {float:left;}
+			.i_buttons  {clear:both;height:27px;}
+			.i_buttons  .btn1 {float:left;margin-right:5px;clear:both;height:27px;}
+			.i_buttons  span {float:left;margin-top:6px;}
+				.i_buttons  span a{text-decoration:underline;}
+					.i_buttons  span a:hover{text-decoration:none;}
+			
+
+/**
+* @section Sidebar
+*/		
+.sidebar_i {width:222px;}
+	
+		#accordion  h3 {background:url(../../images/admin/sidebar_h.gif) repeat-x 0 0;margin-right:3px;padding:7px 0 6px;border-bottom:1px solid #c3c4c6}
+			#accordion  h3 a {color:#000;text-decoration:none;font-size:13px;}
+			#accordion  h3 a:hover {text-decoration:none}
+		#accordion em {font-style:normal;padding:4px 0 4px 29px}
+		#accordion ul {}
+			#accordion ul li {padding:4px 0;border-bottom:1px solid #dfe0e2}
+				#accordion ul li a {font-size:11px;color:#000;}
+					#accordion ul li:hover {background:url(../../images/admin/accordion_li_hover.gif) repeat-x;cursor:pointer} /* TODO! redirect */
+					#accordion ul li:hover a {color:#fff;text-decoration:none;}
+				#accordion ul li.active {background:#fff;}
+					#accordion ul li.active a {font-weight:bold}
+				#accordion ul li.active:hover {background:#fff}
+				#accordion ul li.active:hover a {color:#000;}
+		#accordion .bg1 {background:url(../../images/admin/ico1.png) 5px 50% no-repeat;}
+		#accordion .bg2 {background:url(../../images/admin/ico2.png) 5px 50% no-repeat;}
+		#accordion .bg3 {background:url(../../images/admin/ico3.png) 5px 50% no-repeat;}
+		#accordion .bg4 {background:url(../../images/admin/ico4.png) 5px 50% no-repeat;}
+		#accordion .bg5 {background:url(../../images/admin/ico5.png) 5px 50% no-repeat;}
+		#accordion .bg6 {background:url(../../images/admin/ico6.png) 5px 50% no-repeat;}
+		#accordion .bg7 {background:url(../../images/admin/ico7.png) 5px 50% no-repeat;}
+		#accordion .bg8 {background:url(../../images/admin/ico8.png) 5px 50% no-repeat;}
+		
+		.ui-accordion {width:100%;}
+			.ui-accordion .ui-accordion-header {cursor:pointer;position:relative;/* margin-top: 1px; */zoom:1;}
+			.ui-accordion .ui-accordion-li-fix {display:inline;}
+			/* .ui-accordion .ui-accordion-header-active {border-bottom:0 !important; } */
+			.ui-accordion .ui-accordion-header a {/* display: block; font-size: 1em; padding: .5em .5em .5em .7em;  */}
+			.ui-accordion-icons .ui-accordion-header a {/* padding-left: 2.2em;  */}
+			.ui-accordion .ui-accordion-header .ui-icon {position:absolute;right: .5em;top: 50%;margin:0;padding:0;background:url(../../images/admin/acordion_v.png) no-repeat 0 0;width:9px;height:5px;}
+			.ui-accordion .ui-accordion-content {/* padding:1em 2.2em;border-top:0;margin-top:-2px; */position:relative;/* top:1px;margin-bottom:2px; */overflow: auto;display:none;zoom:1;margin-right:3px;}
+			.ui-accordion .ui-accordion-content-active {display:block;}
+			.ui-accordion h3.ui-state-active .ui-icon {background:url(../../images/admin/acordion_n.png) no-repeat 0 0;}
+
+					
+
+
+
+
+
+
+
+	
+		
+		
+		
+		

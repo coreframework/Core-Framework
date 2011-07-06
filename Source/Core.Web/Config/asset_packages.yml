@@ -1,6 +1,6 @@
 ﻿javascripts:
   base:
-    - jquery-1.4.1.js
+    - jquery-1.5.1.js
     - jquery.watermark.js
     - jquery.qtip-1.0.0.js
     - jquery.corner.js
@@ -17,6 +17,15 @@
     - colorpicker.js
     - json2.js
     - superfish.js
+  adminui:
+    - Admin/jquery.ui.core.js
+    - Admin/jquery.ui.widget.js
+    - Admin/jquery.ui.accordion.js
+    - Admin/jquery.ui.datepicker.js
+    - Admin/jquery.dd.js
+  admincustom:
+    - Admin/scripts.js
+    - Admin/highlight-active-input.js
   upload:
     - swfupload.js
     - jquery-asyncUpload-0.1.js
@@ -67,5 +76,6 @@ stylesheets:
     - jquery-ui/jquery.ui.dialog.css
     - jquery-ui/jquery.ui.theme.css
     - jquery-ui/jquery.ui.datepicker.css
-  admin/admin:
-    - admin/main.css
+  admin:
+    - admin/style.css
+    - admin/dd.css

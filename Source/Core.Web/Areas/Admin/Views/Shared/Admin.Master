@@ -1,7 +1,5 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
-<%@ Import Namespace="Framework.MVC.Extensions" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -9,34 +7,73 @@
      <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>
 
-    <%: Html.CssPackInclude("admin/admin") %>    
-     <%: Html.JavascriptPackInclude("base") %>
+     <%= Html.CssInclude("admin/style.css") %>
+     <%= Html.CssInclude("admin/dd.css") %>
+     <!--[if lte IE 6]><%= Html.CssInclude("admin/style_ie.css") %><![endif]-->
+
+<%--     <%: Html.JavascriptPackInclude("base") %>--%>
+     <%= Html.JavascriptInclude("jquery-1.5.1.min.js")%>
+     <%: Html.JavascriptPackInclude("adminui") %>
      <%: Html.JavascriptPackInclude("ajax") %>
      <%: Html.JavascriptPackInclude("fckeditor")%>
-     <%= Html.CssInclude("admin/jqGridCss/ui.jqgrid.css")%>
-     <%= Html.CssInclude("admin/jqGridCss/blitzer/jquery-ui-1.8.12.custom.css")%>
+     <%: Html.JavascriptPackInclude("admincustom")%>
+
+     <%--<%= Html.CssInclude("admin/jqGridCss/ui.jqgrid.css")%>
+     <%= Html.CssInclude("admin/jqGridCss/blitzer/jquery-ui-1.8.12.custom.css")%>--%>
      <%= Html.JavascriptInclude("jqGrid/jquery.jqGrid.js")%>
 
     <asp:ContentPlaceHolder id="HeadContent" runat="server">    
     </asp:ContentPlaceHolder>
 </head>
 <body>
-  <div id="page">
-    <div id="header">
-      <%= Html.PartialWithScope(MVC.Admin.Shared.Views.TopLinks)%>
-      <%= Html.PartialWithScope(MVC.Admin.Shared.Views.MainMenu)%>
-      <div id="header_bottom"><div></div></div>
-    </div>
-    <div id="main">
+<%--  <div id="page">
+      
       <div id="messages"><%: Html.Messages() %></div>
-      <div id="content">
-        <asp:ContentPlaceHolder id="MainContent" runat="server" />
-      </div>
+  </div>--%>
+
+    <div id="wrapper">
+	    <div id="header">
+		    <img src="<%= HttpContext.Current.Request.ApplicationPath %>/Content/images/admin/logo.png" width="145" height="19" alt="" title="" class="logo" />
+            <%= Html.PartialWithScope(MVC.Admin.Shared.Views.TopLinks)%>
+		    <div class="breadcrumbs">
+			    <ul>          
+				    <li><a href="#">Home</a></li>
+				    <li><a href="#">Users</a></li>
+				    <li>Customer Management</li>
+			    </ul>
+		    </div>
+	    </div>
+	    <div id="middle">
+
+		    <div id="container">
+			    <div id="content" class="clrfix">
+				    <div class="top_b"></div>
+                    <div class="content_i">
+                        <asp:ContentPlaceHolder id="MainContent" runat="server" />
+                    </div>
+			    </div>
+		    </div>
+
+		    <div class="sidebar" id="sideLeft">
+			    <div class="sidebar_i">
+                    <%= Html.PartialWithScope(MVC.Admin.Shared.Views.MainMenu)%>
+			    </div>
+		    </div>
+	    </div>
+
     </div>
-  </div>
+
+    <div id="footer">
+	    <div class="footer_i">
+		    <div class="copyright">&copy; 2011 Core Framework</div>
+		    <div class="f_links"><a href="#">Terms & conditions</a> l <a href="#">Privacy Policy</a></div>
+	    </div>
+    </div>
+
   <script type="text/javascript" language="javascript">
       var currentPath = '<%=HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + HttpRuntime.AppDomainAppVirtualPath %>'
       jqGridInclude();
   </script>
+
 </body>
 </html>
