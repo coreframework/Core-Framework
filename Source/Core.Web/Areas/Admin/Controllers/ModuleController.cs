@@ -2,7 +2,7 @@
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
@@ -11,6 +11,7 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
 using Core.Web.NHibernate.Models;
+using Framework.MVC.Controllers;
 using Framework.MVC.Extensions;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
@@ -21,7 +22,7 @@ namespace Core.Web.Areas.Admin.Controllers
     /// Handles module administration operation requests.
     /// </summary>
     [Permissions((int)BaseEntityOperations.Manage, typeof(Plugin))]
-    public partial class ModuleController : Controller
+    public partial class ModuleController : FrameworkController
     {
         #region Fields
 
@@ -99,7 +100,7 @@ namespace Core.Web.Areas.Admin.Controllers
             if (pluginEntity.Status.Equals(PluginStatus.NotInstalled))
             {
                 ICorePlugin corePlugin =
-                    MvcApplication.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
+                    Application.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
                 if (corePlugin == null)
                 {
                     throw new HttpException((int) HttpStatusCode.NotFound,
@@ -130,7 +131,7 @@ namespace Core.Web.Areas.Admin.Controllers
             if (!pluginEntity.Status.Equals(PluginStatus.NotInstalled))
             {
                 ICorePlugin corePlugin =
-                    MvcApplication.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
+                    Application.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
                 if (corePlugin == null)
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound,

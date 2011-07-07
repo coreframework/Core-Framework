@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Web.Mvc;
+using Framework.Core.Controllers;
 
 namespace Core.Framework.MEF.Web
 {
-    public abstract class CoreWidgetController: Controller
+    public abstract class CoreWidgetController: BaseController
     {
         public abstract String ControllerWidgetIdentifier { get; }
     }

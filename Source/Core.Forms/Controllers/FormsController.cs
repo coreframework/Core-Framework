@@ -21,7 +21,7 @@ namespace Core.Forms.Controllers
 {
     [Export(typeof(IController)), ExportMetadata("Name", "Forms")]
     [Permissions((int)FormsPluginOperations.ManageForms, typeof(FormsPlugin))]
-    public partial class FormsController : CoreController
+    public partial class FormsController : CorePluginController
     {
         #region Fields
 

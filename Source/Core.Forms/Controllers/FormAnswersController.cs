@@ -19,7 +19,7 @@ namespace Core.Forms.Controllers
 {
     [Export(typeof(IController)), ExportMetadata("Name", "FormAnswers")]
     [Permissions((int)FormsPluginOperations.ManageFormsAnswers, typeof(FormsPlugin))]
-    public partial class FormAnswersController : CoreController
+    public partial class FormAnswersController : CorePluginController
     {
         #region Fields
 

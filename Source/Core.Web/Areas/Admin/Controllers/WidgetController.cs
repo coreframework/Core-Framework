@@ -5,6 +5,7 @@ using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
+using Framework.MVC.Controllers;
 using Framework.MVC.Extensions;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
@@ -12,7 +13,7 @@ using Microsoft.Practices.ServiceLocation;
 namespace Core.Web.Areas.Admin.Controllers
 {
     [Permissions((int)BaseEntityOperations.Manage, typeof(Plugin))]
-    public partial class WidgetController : Controller
+    public partial class WidgetController : FrameworkController
     {
         #region Fields
 

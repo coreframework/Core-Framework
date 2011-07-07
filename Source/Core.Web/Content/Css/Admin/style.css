@@ -121,7 +121,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 						#ui-datepicker-div {background:#fff;border:1px solid #a6a6a6;}
 							.ui-datepicker-header {position:relative;padding:5px 0}
 								.ui-datepicker-title {text-align:center;margin-bottom:5px;}
-								.ui-icon {position:absolute;top:8px;cursor:pointer;font-size:10px;}
+								.ui-icon {cursor:pointer;font-size:10px;}
 								.ui-icon-circle-triangle-w {left:3px;}
 								.ui-icon-circle-triangle-e {right:3px;}
 							table.ui-datepicker-calendar {}
@@ -160,8 +160,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 				table.ui-jqgrid-htable td a {text-decoration:none}
 					table.ui-jqgrid-htable td a:hover {text-decoration:underline}
 			table.ui-jqgrid-htable tr:hover td {background:#cde6fc;color:#000000}
-			em.delete {background:url(../../images/admin/delete_ico.gif) no-repeat 0 0;height:11px;width:10px;display:block}
-				em.delete:hover, table.ui-jqgrid-htable tr:hover em.delete {background-position:0 -11px;}
+			table.ui-jqgrid-htable tr:hover em.delete {background-position:0 -11px;}
 		.ui-jqgrid-htable_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
 		.ui-jqgrid-htable_bottom .btn1 {float:left;margin-right:5px;}
         .ui-widget-header { display: none; }	
@@ -176,14 +175,35 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 				table.ui-jqgrid-btable td a {text-decoration:none}
 					table.ui-jqgrid-btable td a:hover {text-decoration:underline}
 			table.ui-jqgrid-btable tr:hover td {background:#cde6fc;color:#000000}
-			em.delete {background:url(../../images/admin/delete_ico.gif) no-repeat 0 0;height:11px;width:10px;display:block}
-				em.delete:hover, table.ui-jqgrid-btable tr:hover em.delete {background-position:0 -11px;}
+			table.ui-jqgrid-btable tr:hover em.delete {background-position:0 -11px;}
 		.ui-jqgrid-btable_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
 		.ui-jqgrid-btable_bottom .btn1 {float:left;margin-right:5px;}
         .ui-widget-header { display: none; }	
         .ui-jqgrid-resize-mark { display: none; }	
 
 			table.ui-pg-table tr {background:url(../../images/admin/e_table_th_bg.gif) repeat-x 0 0;height:33px;color:#fff;font-size:13px;vertical-align:middle} 
+        /* loading */
+        .ui-jqgrid .loading {position: absolute; top: 45%;left: 50%;width: auto;z-index:101;padding: 6px; margin: 5px;text-align: center;font-weight: bold;display: none;border-width: 2px !important;}
+        .ui-jqgrid .jqgrid-overlay {display:none;z-index:100;}
+        * html .jqgrid-overlay {width: expression(this.parentNode.offsetWidth+'px');height: expression(this.parentNode.offsetHeight+'px');}
+        * .jqgrid-overlay iframe {position:absolute;top:0;left:0;z-index:-1;width: expression(this.parentNode.offsetWidth+'px');height: expression(this.parentNode.offsetHeight+'px');}
+        /* end loading div */
+
+        /* Pager*/
+        .ui-jqgrid .ui-jqgrid-pager { border-left: 0px none !important;border-right: 0px none !important; border-bottom: 0px none !important; margin: 0px !important; padding: 0px !important; position: relative; height: 33px;white-space: nowrap;overflow: hidden;}
+        .ui-jqgrid .ui-pager-control {position: relative;}
+        .ui-jqgrid .ui-pg-table {position: relative; padding-bottom:2px;}
+        .ui-jqgrid .ui-pg-table td {font-weight:normal; vertical-align:middle; padding:1px; overflow:hidden;}
+        .ui-jqgrid .ui-pg-button  { height:19px !important;}
+        .ui-jqgrid .ui-pg-button span { display: block; margin: 1px; float:left;}
+        .ui-jqgrid .ui-pg-button:hover { padding: 0px; }
+        .ui-jqgrid .ui-state-disabled:hover {padding:1px;}
+        .ui-jqgrid .ui-pg-input { height:13px;font-size:.8em;}
+        .ui-jqgrid .ui-pg-selbox {font-size:.8em; line-height:18px; display:block; height:18px}
+        .ui-jqgrid .ui-separator {height: 18px; border-left: 1px solid #ccc ; border-right: 1px solid #ccc ; margin: 1px; float: right;}
+        .ui-jqgrid .ui-paging-info {font-weight: normal;height:19px; margin-top:3px;padding-right: 5px;}
+        .ui-jqgrid .ui-jqgrid-pager .ui-pg-div {padding:1px 0;cursor:pointer; float:left;list-style-image:none;list-style-position:outside;list-style-type:none;position:relative;}
+        .ui-jqgrid .ui-jqgrid-pager .ui-pg-div  span.ui-icon {float:left;margin:0 2px;}
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 	.info_block {margin-top:16px;}
@@ -275,17 +295,27 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 			.ui-accordion .ui-accordion-content-active {display:block;}
 			.ui-accordion h3.ui-state-active .ui-icon {background:url(../../images/admin/acordion_n.png) no-repeat 0 0;}
 
+/**
+* @section Content Page
+* @subsection Validation
+*/						
+.error {color:#c00202;background:url(../../images/admin/v_ico_red.gif) no-repeat 14px 10px #fae2e2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+.success {color:#195302;background:url(../../images/admin/v_ico_green.gif) no-repeat 14px 10px #ddf7d2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+.notice {color:#2e2d2d;background:url(../../images/admin/v_ico_yell.gif) no-repeat 14px 10px #fdf3c9;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+.validation_info {color:#003577;background:url(../../images/admin/v_ico_blue.gif) no-repeat 14px 10px #cde6fc;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+
+
 					
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* states and images */
-.ui-icon { width: 16px; height: 16px; background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
-.ui-widget-content .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
+.ui-icon { width: 16px; height: 16px; background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
+.ui-widget-content .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
 .ui-widget-header .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_ffffff_256x240.png); }
-.ui-state-default .ui-icon { background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
-.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
-.ui-state-active .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
-.ui-state-highlight .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
-.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_2e83ff_256x240.png); }
+.ui-state-default .ui-icon { background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
+.ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
+.ui-state-active .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
+.ui-state-highlight .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(../../images/jquery-ui/ui-icons_cd0a01_256x240.png); }
 
 /* positioning */
 .ui-icon-carat-1-n { background-position: 0 0; }
@@ -463,16 +493,6 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 .ui-icon-grip-solid-horizontal { background-position: -48px -224px; }
 .ui-icon-gripsmall-diagonal-se { background-position: -64px -224px; }
 .ui-icon-grip-diagonal-se { background-position: -80px -224px; }
-
-
-.ui-jqgrid .ui-jqgrid-pager .ui-pg-div {
-    cursor: pointer;
-    float: left;
-    list-style: none outside none;
-    margin-top: -17px;
-    padding: 1px 0 1px 10px;
-    position: relative;
-}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 

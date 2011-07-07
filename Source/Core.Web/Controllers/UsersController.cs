@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using Core.Web.Helpers;
 using Core.Web.Models;
 using Core.Web.NHibernate.Helpers;
+using Framework.MVC.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Controllers
@@ -10,7 +11,7 @@ namespace Core.Web.Controllers
     /// <summary>
     /// Handles user sessions requests.
     /// </summary>
-    public partial class UsersController : Controller
+    public partial class UsersController : FrameworkController
     {
         #region Fields
 
@@ -36,7 +37,7 @@ namespace Core.Web.Controllers
         /// <returns>Create new session view.</returns>
         public virtual ActionResult NewUserSession(String returnUrl)
         {
-            return View(new LoginViewModel() { ReturnUrl = returnUrl });
+            return View(new LoginViewModel { ReturnUrl = returnUrl });
         }
 
         /// <summary>

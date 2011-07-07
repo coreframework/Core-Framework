@@ -22,6 +22,11 @@ namespace Framework.Core.Infrastructure
         Notice,
 
         /// <summary>
+        /// Information message.
+        /// </summary>
+        Info,
+
+        /// <summary>
         /// Error message.
         /// </summary>
         Error

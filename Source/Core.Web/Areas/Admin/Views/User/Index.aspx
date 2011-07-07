@@ -15,11 +15,4 @@
     <script type="text/javascript">
         $(function () { $('#New').click(function () { window.location = "<%: Url.Action(MVC.Admin.User.New()) %>"; }); });
     </script>
-<%--    <div id="actions">
-        <ul>
-            <li><a href="<%: Url.Action(MVC.Admin.User.New()) %>">
-                <img src="<%: Links.Content.Images.Admin.plus_png %>" alt="Plus"></a>
-            </li>
-        </ul>
-    </div>--%>
 </asp:Content>

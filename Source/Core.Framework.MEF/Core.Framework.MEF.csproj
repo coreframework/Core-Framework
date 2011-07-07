@@ -96,11 +96,10 @@
     <Compile Include="Throw\Throw.cs" />
     <Compile Include="Web\Application.cs" />
     <Compile Include="Web\AreaViewEngine.cs" />
-    <Compile Include="Web\CoreController.cs" />
     <Compile Include="Web\ImportControllerFactory.cs" />
     <Compile Include="Web\IPluginHelper.cs" />
     <Compile Include="Web\IWidgetHelper.cs" />
-    <Compile Include="Web\PluginController.cs" />
+    <Compile Include="Web\CorePluginController.cs" />
     <Compile Include="Web\CoreWidgetController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +110,10 @@
     <ProjectReference Include="..\Core.Framework.Plugins\Core.Framework.Plugins.csproj">
       <Project>{7EE54877-FD43-4458-BB95-15B93164BA80}</Project>
       <Name>Core.Framework.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj">
+      <Project>{8548D8D8-F616-42B6-9271-DB8E600CF652}</Project>
+      <Name>Framework.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

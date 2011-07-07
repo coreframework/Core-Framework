@@ -11,6 +11,7 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Helpers;
+using Framework.MVC.Controllers;
 using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
@@ -20,7 +21,7 @@ using System.Linq.Dynamic;
 namespace Core.Web.Areas.Admin.Controllers
 {
     [Permissions((int)BaseEntityOperations.Manage, typeof(User))]
-    public partial class UserController : Controller
+    public partial class UserController : FrameworkController
     {
         #region Fields
 
@@ -42,13 +43,35 @@ namespace Core.Web.Areas.Admin.Controllers
 
         public virtual ActionResult Index()
         {
-            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
-            columns.Add(new GridColumnViewModel { Name = "User", Index = "Username" });
-            columns.Add(new GridColumnViewModel { Name = "Status", Index = "Status" });
-            columns.Add(new GridColumnViewModel { Name = "User groups", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Remove", Width = 30, Align = "center" ,Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
-            GridViewModel model = new GridViewModel
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "User", Index = "Username"
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Status", Index = "Status"
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "User groups",
+                                                                 Width = 150,
+                                                                 Align = "center",
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 10,
+                                                                 Align = "center",
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", Sortable = false, Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
             {
                 DataUrl = Url.Action(MVC.Admin.User.DynamicGridData()),
                 DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.User.Edit())),
@@ -66,7 +89,7 @@ namespace Core.Web.Areas.Admin.Controllers
             int pageSize = rows;
             IQueryable<User> searchQuery = userService.GetSearchQuery(search);
             int totalRecords = userService.GetCount(searchQuery);
-            int totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var users = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
             var jsonData = new
             {
@@ -111,11 +134,11 @@ namespace Core.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 UserHelper.Save(model);
-//                Success(Translate("Messages.UserCreated"));
+                Success(Translate("Messages.UserCreated"));
                 return RedirectToAction(MVC.Admin.User.Index());
             }
 
-//            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
             return View("New", model);
         }
 
@@ -154,11 +177,11 @@ namespace Core.Web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 UserHelper.Update(user, model);
-//                Success(Translate("Messages.UserUpdated"));
+                Success(Translate("Messages.UserUpdated"));
                 return RedirectToAction(MVC.Admin.User.Index());
             }
 
-//            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
             return View("Edit", model);
         }
 
@@ -190,7 +213,7 @@ namespace Core.Web.Areas.Admin.Controllers
             if (user != null)
             {
                 userService.Delete(user);
-//                Success(Translate("Messages.UserDeleted"));
+                Success(Translate("Messages.UserDeleted"));
             }
 
             return RedirectToAction(MVC.Admin.User.Index());
@@ -230,11 +253,11 @@ namespace Core.Web.Areas.Admin.Controllers
 
             if (UserHelper.UpdateUserGroupToUsersAssignment(user, model))
             {
-//                Success(Translate("Messages.UserRolesUpdated"));
+                Success(Translate("Messages.UserRolesUpdated"));
                 return RedirectToAction(MVC.Admin.User.Index());
             }
 
-//            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
 
             return View("UserGroups", model);
         }

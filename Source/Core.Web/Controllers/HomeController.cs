@@ -3,11 +3,12 @@ using Core.Framework.Permissions.Extensions;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Permissions.Operations;
+using Framework.MVC.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Controllers
 {
-    public partial class HomeController : Controller
+    public partial class HomeController : FrameworkController
     {
         public virtual ActionResult Index()
         {

@@ -42,10 +42,10 @@ namespace Core.Framework.MEF.Web
                 IController controller = factory.CreatePart();
                 if(controller != null)
                 {
-                    if (controller is CoreController)
+                    if (controller is CorePluginController)
                     {
                         IPluginHelper pluginHelper = ServiceLocator.Current.GetInstance<IPluginHelper>();
-                        if (pluginHelper.IsPluginEnabled(((CoreController)controller).ControllerPluginIdentifier))
+                        if (pluginHelper.IsPluginEnabled(((CorePluginController)controller).ControllerPluginIdentifier))
                         {
                             return controller;
                         }

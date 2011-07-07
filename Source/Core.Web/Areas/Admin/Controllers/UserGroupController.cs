@@ -9,6 +9,7 @@ using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
+using Framework.MVC.Controllers;
 using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
@@ -19,7 +20,7 @@ using System.Linq.Dynamic;
 namespace Core.Web.Areas.Admin.Controllers
 {
     [Permissions((int)BaseEntityOperations.Manage,typeof(UserGroup))]
-    public partial class UserGroupController : Controller
+    public partial class UserGroupController : FrameworkController
     {
         #region Fields
 

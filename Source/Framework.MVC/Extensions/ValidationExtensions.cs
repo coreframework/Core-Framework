@@ -11,8 +11,8 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Framework.Core.Controllers;
 using Framework.Core.Infrastructure;
-using Framework.MVC.Controllers;
 
 namespace Framework.MVC.Extensions
 {
@@ -83,7 +83,7 @@ namespace Framework.MVC.Extensions
         public static MvcHtmlString Messages(this HtmlHelper html)
         {
             var result = new StringBuilder();
-            var messages = html.ViewContext.TempData[FrameworkController.MessagesKey] as Queue<Message>;
+            var messages = html.ViewContext.TempData[BaseController.MessagesKey] as Queue<Message>;
             if (messages != null)
             {
                 while (messages.Any())
@@ -94,6 +94,28 @@ namespace Framework.MVC.Extensions
                     builder.SetInnerText(message.Text);
                     result.Append(builder.ToString(TagRenderMode.Normal));
                 }
+            }
+            return MvcHtmlString.Create(result.ToString());
+        }
+
+        /// <summary>
+        /// Renders message for specific message type.
+        /// </summary>
+        /// <param name="html">The HTML helper instance that this method extends.</param>
+        /// <param name="messageType">Type of the message.</param>
+        /// <param name="message">The message.</param>
+        /// <returns>
+        /// HTML markup for message.
+        /// </returns>
+        public static MvcHtmlString Message(this HtmlHelper html, MessageType messageType, String message)
+        {
+            var result = new StringBuilder();
+            if (!String.IsNullOrEmpty(message))
+            {
+                var builder = new TagBuilder("div");
+                builder.AddCssClass(messageType.ToString().ToLowerInvariant());
+                builder.SetInnerText(message);
+                result.Append(builder.ToString(TagRenderMode.Normal));
             }
             return MvcHtmlString.Create(result.ToString());
         }

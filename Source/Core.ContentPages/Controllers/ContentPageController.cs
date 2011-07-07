@@ -18,7 +18,7 @@ namespace Core.ContentPages.Controllers
     /// </summary>
     [Export(typeof(IController)), ExportMetadata("Name", "ContentPage")]
     [Permissions((int)ContentPagePluginOperations.ManageContentPages, typeof(ContentPagePlugin))]
-    public partial class ContentPageController : CoreController
+    public partial class ContentPageController : CorePluginController
     {
         #region Fields
         

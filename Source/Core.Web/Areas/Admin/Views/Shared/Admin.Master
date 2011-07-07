@@ -49,6 +49,9 @@
 			    <div id="content" class="clrfix">
 				    <div class="top_b"></div>
                     <div class="content_i">
+                        <div class="info_block">
+                            <%: Html.Messages() %>
+                        </div>
                         <asp:ContentPlaceHolder id="MainContent" runat="server" />
                     </div>
 			    </div>
