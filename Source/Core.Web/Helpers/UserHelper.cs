@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
@@ -94,6 +96,41 @@ namespace Core.Web.Helpers
                 if (userGroup.Assigned)
                 {
                     user.UserGroups.Add(userGroupService.Find(userGroup.Id));
+                }
+            }
+
+            return userService.Save(user);
+        }
+        /// <summary>
+        /// Updates the role to users assignment.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="ids">The ids.</param>
+        /// <param name="selids">The selected ids.</param>
+        /// <returns></returns>
+        public static bool UpdateUserGroupToUsersAssignment(User user, IEnumerable<String> ids, IEnumerable<String> selids)
+        {
+            var userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
+            var userService = ServiceLocator.Current.GetInstance<IUserService>();
+
+            var notselids = ids.Where(t => !selids.Contains(t)).ToList();
+
+            var noselected = user.UserGroups.Where(t=>notselids.Contains(t.Id.ToString())).ToList();
+            foreach (var userGroup in noselected)
+            {
+                user.UserGroups.Remove(userGroup);
+            }
+
+            foreach (var selid in selids)
+            {
+                string selid1 = selid;
+                if (!user.UserGroups.Any(t=>t.Id.ToString() == selid1))
+                {
+                    long selectedID;
+                    if (long.TryParse(selid1,out selectedID))
+                    {
+                        user.UserGroups.Add(userGroupService.Find(selectedID));
+                    }
                 }
             }
 

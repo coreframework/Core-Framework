@@ -3,11 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
 	<%: Html.Translate(".Permissions") %>
 </asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
+    <h1><%: Html.Translate(".Permissions") %></h1>
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <h2><%: Html.Translate(".Permissions") %></h2>
-    <br />
 
     <%using (Html.BeginForm(MVC.Admin.Role.Permissions(), FormMethod.Get)) {%>
         <%= Html.OptionGroupDropDownList(

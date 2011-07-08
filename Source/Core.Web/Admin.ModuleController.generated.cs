@@ -33,6 +33,11 @@ namespace Core.Web.Areas.Admin.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult DynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Install() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Install);
         }
@@ -65,6 +70,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
+            public readonly string DynamicGridData = "DynamicGridData";
             public readonly string Install = "Install";
             public readonly string Uninstall = "Uninstall";
             public readonly string ConfirmInstall = "ConfirmInstall";
@@ -89,6 +95,16 @@ namespace Core.Web.Areas.Admin.Controllers {
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
             return callInfo;
         }
 

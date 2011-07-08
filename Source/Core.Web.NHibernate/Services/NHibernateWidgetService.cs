@@ -2,17 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
-using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
-using Core.Web.NHibernate.Models.Permissions;
-using Core.Web.NHibernate.Models.Static;
 using Framework.Facilities.NHibernate;
-using NHibernate;
-using NHibernate.Criterion;
-using NHibernate.SqlCommand;
-using NHibernate.Type;
 
 namespace Core.Web.NHibernate.Services
 {
@@ -51,6 +44,31 @@ namespace Core.Web.NHibernate.Services
                         where widget.Identifier == widgetIdentifier
                         select widget;
             return query.FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets the count.
+        /// </summary>
+        /// <param name="baseQuery">The base query.</param>
+        /// <returns></returns>
+        public int GetCount(IQueryable<Widget> baseQuery)
+        {
+            return baseQuery.Count();
+        }
+
+        /// <summary>
+        /// Gets the search query.
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
+        public IQueryable<Widget> GetSearchQuery(string searchString)
+        {
+            var baseQuery = CreateQuery();
+            if (String.IsNullOrEmpty(searchString))
+            {
+                return baseQuery;
+            }
+            return baseQuery.Where(widget => widget.Title.Contains(searchString) && widget.Plugin.Status == PluginStatus.Installed && widget.Status == WidgetStatus.Enabled);
         }
 
         #endregion

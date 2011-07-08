@@ -1,5 +1,11 @@
 Admin:
   Controllers:
+    Module:
+      Uninstall: "[Uninstall]"
+      Install: "[Install]"
+    Widget:
+      Uninstall: "[Uninstall]"
+      Install: "[Install]"
     User:
       UserGroups: "[User groups list]"
       Remove: "[Remove]"

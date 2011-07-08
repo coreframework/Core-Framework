@@ -18,7 +18,7 @@ namespace Core.Web.Areas.Admin.Models
         /// Gets or sets the email.
         /// </summary>
         /// <value>The email.</value>
-        [Required, StringLength(255), Email]
+        [Required ( ErrorMessage = @"Error"), StringLength(255), Email]
         public String Email { get; set; }
 
         /// <summary>

@@ -56,7 +56,7 @@ function initInputHighlightScript()
 		for(var no=0;no<inputs.length;no++){
 			if(inputs[no].className && inputs[no].className=='doNotHighlightThisInput')continue;
 			
-			if(inputs[no].tagName.toLowerCase()=='textarea' || (inputs[no].tagName.toLowerCase()=='input' && inputs[no].type.toLowerCase()=='text')){
+			if(inputs[no].tagName.toLowerCase()=='textarea' || (inputs[no].tagName.toLowerCase()=='input' && (inputs[no].type.toLowerCase()=='text' || inputs[no].type.toLowerCase()=='password'))){
 				inputs[no].onfocus = highlightActiveInput;
 				inputs[no].onblur = blurActiveInput;
 			}

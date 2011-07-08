@@ -5,6 +5,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%: Html.Translate(".Title") %>
 </asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
+  <h1><%: String.Format(Html.Translate(".Title")) %></h1>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>

@@ -27,6 +27,8 @@ namespace Core.Web.Areas.Admin.Controllers
 
         private readonly IUserService userService;
 
+        private readonly IUserGroupService userGroupService;
+
         #endregion
 
         #region Constructors
@@ -34,6 +36,7 @@ namespace Core.Web.Areas.Admin.Controllers
         public UserController()
         {
             userService = ServiceLocator.Current.GetInstance<IUserService>();
+            userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
         }
         
 
@@ -47,28 +50,30 @@ namespace Core.Web.Areas.Admin.Controllers
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "User", Index = "Username"
+                                                                 Name = "User", 
+                                                                 Index = "Username"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Status", Index = "Status"
+                                                                 Name = "Status", 
+                                                                 Index = "Status"
                                                              },
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = "User groups",
                                                                  Width = 150,
-                                                                 Align = "center",
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
                                                                  Width = 10,
-                                                                 Align = "center",
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Id", Sortable = false, Hidden = true
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
                                                              }
                                                      };
             var model = new GridViewModel
@@ -77,7 +82,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.User.Edit())),
                 DefaultOrderColumn = "Username",
                 GridTitle = "Users",
-                Columns = columns
+                Columns = columns,
             };
             return View(model);
         }
@@ -101,13 +106,14 @@ namespace Core.Web.Areas.Admin.Controllers
                     select new
                     {
                         id = user.Id,
-                        cell = new[] { user.Username, HttpContext.Translate(EnumHelper.Humanize(user.Status), ResourceHelper.GetControllerScope(this)),
-                            String.Format("<a href=\"{0}\">{1}</a>",
-                                Url.Action(MVC.Admin.User.UserGroups(user.Id)),
-                                HttpContext.Translate("UserGroups", ResourceHelper.GetControllerScope(this))),
-                            String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
-                                Url.Action(MVC.Admin.User.Remove(user.Id))/*,
-                                HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this))*/)}
+                        cell = new[] {  user.Username, 
+                                        HttpContext.Translate(EnumHelper.Humanize(user.Status), ResourceHelper.GetControllerScope(this)),
+                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action(MVC.Admin.User.UserGroups(user.Id)),
+                                            HttpContext.Translate("UserGroups", ResourceHelper.GetControllerScope(this))),
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                            Url.Action(MVC.Admin.User.Remove(user.Id))/*,
+                                            HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this))*/)}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -233,7 +239,79 @@ namespace Core.Web.Areas.Admin.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
 
-            return View(UserHelper.BuildAssignmentModel(user));
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Name", 
+                                                                 Index = "Name"
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action(MVC.Admin.User.UserGroupsDynamicGridData()),
+                DefaultOrderColumn = "Name",
+                GridTitle = "User Groups",
+                Columns = columns,
+                MultiSelect = true,
+                IsRowNotClickable = true,
+                SelectedIds = user.UserGroups.Select(t => t.Id)
+            };
+            
+            return View(model);//UserHelper.BuildAssignmentModel(user)
+        }
+
+        [HttpPost]
+        public virtual JsonResult UserGroupsDynamicGridData(int id,int page, int rows, string search, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            var user = userService.Find(id);
+            if (user == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+            IQueryable<UserGroup> searchQuery = userGroupService.GetSearchQuery(search);
+            int totalRecords = userGroupService.GetCount(searchQuery);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var userGroups = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from userGroup in userGroups
+                    select new
+                    {
+                        id = userGroup.Id,
+                        cell = new[] { userGroup.Name }
+                    }).ToArray()
+            };
+            return Json(jsonData);
+        }
+
+        public virtual JsonResult UpdateUserGroups(long id, IEnumerable<string> ids, IEnumerable<string> selids)
+        {
+            var user = userService.Find(id);
+            if (user == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            if (UserHelper.UpdateUserGroupToUsersAssignment(user, ids, selids))
+            {
+                Success(Translate("Messages.UserRolesUpdated"));
+                return Json(true);
+            }
+
+            return Json(Translate("Messages.ValidationError"));
         }
 
         /// <summary>
@@ -243,7 +321,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPut]
-        public virtual ActionResult UpdateUserGroups(long id, UserGroupToUserAssignmentModel model)
+        public virtual ActionResult UpdateUserGroups1(long id, UserGroupToUserAssignmentModel model)
         {
             var user = userService.Find(id);
             if (user == null)

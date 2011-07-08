@@ -5,9 +5,11 @@
     <%: String.Format(Html.Translate(".Title"), Model) %></asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent">
 </asp:Content>
-<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
+<asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
     <h1>
         <%: String.Format(Html.Translate(".Title"), Model) %></h1>
+</asp:Content>
+<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
     <p>
         <%: String.Format(Html.Translate(".AreYouSure"), Model) %></p>
     <% using (Html.BeginForm(MVC.Admin.Role.ConfirmRemove(Model.Id), FormMethod.Post))

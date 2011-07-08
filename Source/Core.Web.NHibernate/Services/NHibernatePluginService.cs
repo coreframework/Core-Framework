@@ -37,6 +37,26 @@ namespace Core.Web.NHibernate.Services
             return CreateQuery().Select(t => t).Where(t => pluginIds.Contains(t.Id)).ToList();
         }
 
+        public int GetCount(IQueryable<Plugin> baseQuery)
+        {
+            return baseQuery.Count();
+        }
+
+        /// <summary>
+        /// Gets the search query.
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
+        public IQueryable<Plugin> GetSearchQuery(string searchString)
+        {
+            var baseQuery = CreateQuery();
+            if (String.IsNullOrEmpty(searchString))
+            {
+                return baseQuery;
+            }
+            return baseQuery.Where(user => user.Title.Contains(searchString));
+        }
+
         #endregion
 
     }

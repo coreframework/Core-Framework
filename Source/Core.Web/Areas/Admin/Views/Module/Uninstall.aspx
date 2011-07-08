@@ -2,14 +2,22 @@
 
 <%@ Import Namespace="Framework.MVC.Extensions" %>
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent"><%: String.Format(Html.Translate(".Title"), Model) %></asp:Content>
+<asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
+  <h1><%: String.Format(Html.Translate(".Title"), Model.Title)%></h1>
+</asp:Content>
 
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
-  <h1><%: String.Format(Html.Translate(".Title"), Model.Title)%></h1>
   <p><%: String.Format(Html.Translate(".AreYouSure"), Model.Title)%></p>
   <% using (Html.BeginForm(MVC.Admin.Module.ConfirmUninstall(Model.Id), FormMethod.Post)) {%>
-    <p class="buttons">
-      <%: Html.Submit("Uninstall") %>
-      <%: Html.ActionLink("Cancel", MVC.Admin.Module.Index()) %>
-    </p>
+    <div class="i_form clrfix">
+		<div class="i_buttons clrfix">
+			<div class="btn1 clrfix">
+                <em></em>
+                <%: Html.Submit("Uninstall",new { @class="button"}) %>
+                <strong></strong>
+		    </div>
+            <span><%: Html.ActionLink("Cancel", MVC.Admin.Module.Index()) %></span>
+        </div>
+    </div>
   <% } %>
 </asp:Content>

@@ -4,19 +4,39 @@
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent">
 </asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
+  <h1><%: String.Format(Html.Translate(".Title")) %></h1>
+</asp:Content>
 
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
-  <h1><%: Html.Translate(".Title") %></h1>
   <% using (Html.BeginForm(MVC.Admin.User.Create(), FormMethod.Post)) {%>
     <%: Html.HttpMethodOverride(HttpVerbs.Put) %>
-    <div class="form_area">
-      <%: Html.EditorFor(model => model.Email) %>
-      <%: Html.EditorFor(model => model.Nickname) %>
-      <%: Html.EditorFor(model => model.Status) %>
-      <%: Html.EditorFor(model => model.Password) %>
+    <div class="i_form clrfix">
+	    <div class="cols clrfix">
+            <div class="fst_col colls_i">
+			    <div class="i_form_i">
+                    <%: Html.EditorFor(model => model.Email) %>
+                    <%: Html.ValidationMessageFor(model=>model.Email) %>
+                </div>
+			    <div class="i_form_i">
+                    <%: Html.EditorFor(model => model.Nickname) %>
+                </div>
+			    <div class="i_form_i">
+                    <%: Html.EditorFor(model => model.Status) %>
+                </div>
+			    <div class="i_form_i">
+                    <%: Html.EditorFor(model => model.Password) %>
+                </div>
+            </div>
+        </div>
+		<div class="i_buttons clrfix">
+			<div class="btn1 clrfix">
+                <em></em>
+                <%: Html.Submit(Html.Translate(".Save"),new { @class="button"})%>
+                <strong></strong>
+            </div>
+			<span><%: Html.ActionLink(Html.Translate(".Cancel"), MVC.Admin.User.Index()) %></span>
+		</div>
     </div>
-    <p class="buttons">
-      <%: Html.Submit(Html.Translate(".Save"))%><%: Html.ActionLink(Html.Translate(".Cancel"), MVC.Admin.User.Index()) %>
-    </p>
-  <% } %>
+    <% } %>
 </asp:Content>

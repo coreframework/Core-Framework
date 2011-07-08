@@ -49,14 +49,21 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
-            columns.Add(new GridColumnViewModel { Name = "Role", Index = "Name" });
-            columns.Add(new GridColumnViewModel { Name = "Users list", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "User groups list", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Role permissions", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Remove", Width = 150, Align = "center", Sortable = false });
-            columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
-            GridViewModel model = new GridViewModel
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel {Name = "Role", Index = "Name"},
+                                                         new GridColumnViewModel
+                                                             {Name = "Users list", Width = 150, Sortable = false},
+                                                         new GridColumnViewModel
+                                                             {Name = "User groups list", Width = 150, Sortable = false},
+                                                         new GridColumnViewModel
+                                                             {Name = "Role permissions", Width = 150, Sortable = false},
+                                                         new GridColumnViewModel
+                                                             {Name = "Remove", Width = 150, Sortable = false},
+                                                         new GridColumnViewModel
+                                                             {Name = "Id", Sortable = false, Hidden = true}
+                                                     };
+            var model = new GridViewModel
             {
                 DataUrl = Url.Action(MVC.Admin.Role.DynamicGridData()),
                 DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.Role.Edit())),
@@ -74,7 +81,7 @@ namespace Core.Web.Areas.Admin.Controllers
             int pageSize = rows;
             IQueryable<Role> searchQuery = roleService.GetSearchQuery(search);
             int totalRecords = roleService.GetCount(searchQuery);
-            int totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var roles = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
             var jsonData = new
             {
@@ -128,11 +135,11 @@ namespace Core.Web.Areas.Admin.Controllers
                 var role = new Role { IsSystemRole = false };
                 roleView.MapTo(role);
                 roleService.Save(role);
-                //                Success(Translate("Messages.RoleCreated"));
+                Success(Translate("Messages.RoleCreated"));
                 return RedirectToAction(MVC.Admin.Role.Users(role.Id));
             }
 
-            //            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
             return View("New", roleView);
         }
 
@@ -172,11 +179,11 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 roleView.MapTo(role);
                 roleService.Save(role);
-                //                Success(Translate("Messages.RoleUpdated"));
+                Success(Translate("Messages.RoleUpdated"));
                 return RedirectToAction(MVC.Admin.Role.Index());
             }
 
-            //            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
             return View("Edit", roleView);
         }
 

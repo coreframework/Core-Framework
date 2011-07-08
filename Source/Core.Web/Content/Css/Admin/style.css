@@ -108,7 +108,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 */
 .top_b {height:1px;border-bottom:1px solid #e2e2e2;padding-top:1px;}
 .content_i {padding:28px 20px}
-	.e_table_area {margin-top:16px}
+	.e_table_area {margin-top:0px}
 		.e_table_top {background:url(../../images/admin/e_table_top_bg.gif) repeat-x 0 0;height:24px;padding:6px 0 4px}
 			.filter_l {float:left;margin-left:8px;}
 				.filter_i {float:left;position:relative;margin-right:13px;padding-right:15px}
@@ -155,6 +155,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 			table.ui-jqgrid-htable th, table.ui-jqgrid-htable td {text-align:left;}
 			table.ui-jqgrid-htable th {background:url(../../images/admin/e_table_th_bg.gif) repeat-x 0 0;height:33px;color:#fff;font-size:13px;vertical-align:middle} 
 				table.ui-jqgrid-htable th div {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px 8px;}
+				    table.ui-jqgrid-htable th div input[type=checkbox] { margin: 0;}
 				table.ui-jqgrid-htable th:first-child span {background:none}
 			table.ui-jqgrid-htable td {border-bottom:#e7e7e7 solid 1px;padding:8px 0 3px 8px;color:#474747;}
 				table.ui-jqgrid-htable td a {text-decoration:none}
@@ -173,6 +174,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 				table.ui-jqgrid-btable th:first-child span {background:none}
 			table.ui-jqgrid-btable td {border-bottom:#e7e7e7 solid 1px;padding:8px 0 3px 8px;color:#474747;}
 				table.ui-jqgrid-btable td a {text-decoration:none}
+				table.ui-jqgrid-btable td input[type=checkbox] {margin:0;}
 					table.ui-jqgrid-btable td a:hover {text-decoration:underline}
 			table.ui-jqgrid-btable tr:hover td {background:#cde6fc;color:#000000}
 			table.ui-jqgrid-btable tr:hover em.delete {background-position:0 -11px;}
@@ -242,13 +244,19 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 				.cols .i_form_i label {color:#474747;font-size:12px;font-weight:bold}
 					.cols .i_form_i label span {color:#0f5cbb;}
 				.cols .i_form_i input[type=text] {width:100%;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;}
+				.cols .i_form_i input[type=password] {width:100%;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;}
 				/* .cols .i_form_i input[type=text]:active {background:#dff0ff} */
 				.cols .i_form_i input[type=text].inputHighlighted{background-color:#dff0ff;border:1px solid #747474}
+				.cols .i_form_i input[type=password].inputHighlighted{background-color:#dff0ff;border:1px solid #747474}
 				.cols .i_form_i select {width:100%}
 				.cols .disabled_i label {color:#afafaf;}
 				.cols .disabled_i input[type=text]  {border:1px solid #d6d6d6;background:#fff;}
 				.cols .not_valid_i label {color:#c00202;}
 				.cols .not_valid_i input[type=text] {border:1px solid #af2929;background:url(../../images/admin/not_valid_ico.gif) no-repeat 3px 3px #fff;}
+				.cols label.label-validation-error {color:#c00202;}
+				.cols .i_form_i label.label-validation-error {color:#c00202;}
+				.cols input[type=text].input-validation-error {border:1px solid #af2929;background:url(../../images/admin/not_valid_ico.gif) no-repeat 99% 3px #fff;}
+				.cols input[type=password].input-validation-error {border:1px solid #af2929;background:url(../../images/admin/not_valid_ico.gif) no-repeat 99% 3px #fff;}
 				.cols .wth_flg input {float:left;}
 			.i_buttons  {clear:both;height:27px;}
 			.i_buttons  .btn1 {float:left;margin-right:5px;clear:both;height:27px;}

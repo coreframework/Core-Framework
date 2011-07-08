@@ -60,7 +60,9 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Users.Remove", "admin/user/{id}/remove", MVC.Admin.User.Remove());
             context.MapRoute("Admin.Users.ConfirmRemove", "admin/user/{id}", MVC.Admin.User.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
             context.MapRoute("Admin.Users.UserGroups", "admin/user/{id}/groups", MVC.Admin.User.UserGroups(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/{id}/groups", MVC.Admin.User.UpdateUserGroups(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
+            context.MapRoute("Admin.Users.UserGroupsDynamicGridData", "admin/user/{id}/groups/UserGroupsDynamicGridData", MVC.Admin.User.UserGroupsDynamicGridData());
+            context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/{id}/groups/UpdateUserGroups", MVC.Admin.User.UpdateUserGroups());
+//            context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/{id}/groups", MVC.Admin.User.UpdateUserGroups(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
 
             context.MapRoute("Admin.UserGroups", "admin/groups", MVC.Admin.UserGroup.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.UserGroups.DynamicGridData", "admin/groups/DynamicGridData", MVC.Admin.UserGroup.DynamicGridData());
@@ -90,12 +92,14 @@ namespace Core.Web.Areas.Admin
             context.MapRoute(null, "admin/apply-permissions", MVC.Admin.Role.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
             context.MapRoute("Admin.Modules", "admin/modules", MVC.Admin.Module.Index());
+            context.MapRoute("Admin.Modules.DynamicGridData", "admin/modules/DynamicGridData", MVC.Admin.Module.DynamicGridData());
             context.MapRoute("Admin.Modules.Install", "admin/modules/{id}/install", MVC.Admin.Module.Install(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Modules.Uninstall", "admin/modules/{id}/uninstall", MVC.Admin.Module.Uninstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Modules.ConfirmInstall", "admin/modules/{id}/install", MVC.Admin.Module.ConfirmInstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Modules.ConfirmUninstall", "admin/modules/{id}/uninstall", MVC.Admin.Module.ConfirmUninstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
             context.MapRoute("Admin.Widgets", "admin/widgets", MVC.Admin.Widget.Index());
+            context.MapRoute("Admin.Widgets.DynamicGridData", "admin/widgets/DynamicGridData", MVC.Admin.Widget.DynamicGridData());
             context.MapRoute("Admin.Widgets.Enable", "admin/widgets/{id}/enable", MVC.Admin.Widget.Enable(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Widgets.Disable", "admin/modules/{id}/disable", MVC.Admin.Widget.Disable(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });          
         }

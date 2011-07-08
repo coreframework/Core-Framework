@@ -42,12 +42,25 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Index()
         {
-            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
-            columns.Add(new GridColumnViewModel { Name = "Name", Index = "Name"});
-            columns.Add(new GridColumnViewModel { Name = "Users list", Width = 150, Align = "center", Sortable = false});
-            columns.Add(new GridColumnViewModel { Name = "Remove", Width = 150, Align = "center", Sortable = false});
-            columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true});
-            GridViewModel model = new GridViewModel
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel {Name = "Name", Index = "Name"},
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Users list",
+                                                                 Width = 150,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Remove",
+                                                                 Width = 150,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {Name = "Id", Sortable = false, Hidden = true}
+                                                     };
+            var model = new GridViewModel
                                       {
                                           DataUrl = Url.Action(MVC.Admin.UserGroup.DynamicGridData()),
                                           DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.UserGroup.Edit())),
@@ -65,7 +78,7 @@ namespace Core.Web.Areas.Admin.Controllers
             int pageSize = rows;
             IQueryable<UserGroup> searchQuery = userGroupService.GetSearchQuery(search);
             int totalRecords = userGroupService.GetCount(searchQuery);
-            int totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var userGroups = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
             var jsonData = new
             {
@@ -108,11 +121,11 @@ namespace Core.Web.Areas.Admin.Controllers
                 var userGroup = new UserGroup();
                 userGroupView.MapTo(userGroup);
                 userGroupService.Save(userGroup);
-                //Success(Translate("Messages.RoleCreated"));
+                Success(Translate("Messages.RoleCreated"));
                 return RedirectToAction(MVC.Admin.UserGroup.Users(userGroup.Id));
             }
 
-            //            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
             return View("New", userGroupView);
         }
 
@@ -152,11 +165,11 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 userGroupView.MapTo(userGroup);
                 userGroupService.Save(userGroup);
-                //                Success(Translate("Messages.RoleUpdated"));
+                Success(Translate("Messages.RoleUpdated"));
                 return RedirectToAction(MVC.Admin.UserGroup.Index());
             }
 
-            //            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
             return View("Edit", userGroupView);
         }
 
@@ -188,7 +201,7 @@ namespace Core.Web.Areas.Admin.Controllers
             if (userGroup != null)
             {
                 userGroupService.Delete(userGroup);
-                //                Success(Translate("Messages.RoleDeleted"));
+                Success(Translate("Messages.RoleDeleted"));
             }
 
             return RedirectToAction(MVC.Admin.UserGroup.Index());
@@ -228,11 +241,11 @@ namespace Core.Web.Areas.Admin.Controllers
 
             if (UserGroupHelper.UpdateUserGroupToUsersAssignment(userGroup, model))
             {
-                //                Success(Translate("Messages.RoleUsersUpdated"));
+                Success(Translate("Messages.RoleUsersUpdated"));
                 return RedirectToAction(MVC.Admin.UserGroup.Index());
             }
 
-            //            Error(Translate("Messages.ValidationError"));
+            Error(Translate("Messages.ValidationError"));
 
             return View("Users", model);
         }

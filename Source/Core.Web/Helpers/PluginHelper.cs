@@ -48,5 +48,27 @@ namespace Core.Web.Helpers
                                    Description = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Description
                                }.MapFrom(plugin)).ToList();
         }
+
+        public static IEnumerable<PluginListModel> GetAvailablePlugins(IQueryable<Plugin> pluginQuery)
+        {
+            IEnumerable<Plugin> plugins = pluginQuery.ToList();
+
+            var registeredPlugins = Application.Plugins;
+
+            return (from plugin in plugins
+                    where registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier) != null
+                    select new PluginListModel
+                               {
+                                   Title = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Title,
+                                   Description = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Description
+                               }.MapFrom(plugin)).ToList();
+        }
+
+        public static int CountAvailablePlugins(IQueryable<Plugin> pluginQuery)
+        {
+            IEnumerable<Plugin> plugins = pluginQuery.ToList();
+            var registeredPlugins = Application.Plugins;
+            return (plugins.Where(plugin => registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier) != null)).Count();
+        }
     }
 }

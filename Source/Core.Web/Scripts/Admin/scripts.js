@@ -45,10 +45,10 @@ $(document).ready(function () {
 	
 	
 	/** set input width */
-	$(".cols .i_form_i input[type=text]").each(function() { 
+    $(".cols .i_form_i input[type=text],.cols .i_form_i input[type=password]").each(function () { 
 		$(this).width($(this).parent().width() - 14);
 	});
-	$(".cols .i_form_i .wth_flg input[type=text]").each(function() { 
+    $(".cols .i_form_i .wth_flg input[type=text],.cols .i_form_i .wth_flg input[type=password]").each(function () { 
 		$(this).width($(this).parent().width() - 56);
 	});
 	

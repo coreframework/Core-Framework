@@ -38,14 +38,20 @@ namespace Framework.MVC.Grids.jqGrid
                     sortname: '{2}',
                     sortorder: '{3}',
                     viewrecords: true,
-                    multiselect: false,
+                    multiselect: {6},
                     width: '100%',
                     height: '100%',
                     autowidth: true,
                     rownumbers: true,
                     caption: '{4}',
+                    loadComplete: function () {{
+                       var selectedIDs = [{8}];
+                       for(var id in selectedIDs) {{ 
+                            grid.setSelection(selectedIDs[id].toString()); 
+                       }}
+                    }},
                     onSelectRow: function (id) {{
-                        if(parseInt(id)) {{
+                        if(parseInt(id) && !{7}) {{
                             location.href = '{5}' + id;
                         }}
                     }}
@@ -155,7 +161,7 @@ namespace Framework.MVC.Grids.jqGrid
             button.Attributes["type"] = "button";
             button.Attributes["value"] = html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel)));
             button.GenerateId("submitButton");
-            button.MergeAttribute("onclick", "gridReload()");
+            button.MergeAttribute("onclick", @"gridReload()");
             buttonsWrapper.InnerHtml += em.ToString(TagRenderMode.Normal);
             buttonsWrapper.InnerHtml += button.ToString(TagRenderMode.Normal);
             buttonsWrapper.InnerHtml += strong.ToString(TagRenderMode.Normal);
@@ -185,18 +191,18 @@ namespace Framework.MVC.Grids.jqGrid
 
         private static String GenerateScript(HtmlHelper<GridViewModel> html)
         {
-            GridViewModel model = html.ViewData.Model;
+            var model = html.ViewData.Model;
             var script = new TagBuilder("script");
-            script.MergeAttribute("type", "text/javascript");
-            script.MergeAttribute("language", "javascript");
-            script.InnerHtml = String.Format(ScriptTemplate, model.DataUrl, GenerateColumnsBlockScript(model.Columns), model.DefaultOrderColumn, model.IsAsc ? "asc" : "desc", model.GridTitle, model.DetailsUrl);
+            script.MergeAttribute("type", @"text/javascript");
+            script.MergeAttribute("language", @"javascript");
+            script.InnerHtml = String.Format(ScriptTemplate, model.DataUrl, GenerateColumnsBlockScript(model.Columns), model.DefaultOrderColumn, model.IsAsc ? "asc" : "desc", model.GridTitle, model.DetailsUrl, model.MultiSelect.ToString().ToLower(), model.IsRowNotClickable.ToString().ToLower(), GetJsArray(model.SelectedIds));
 
             return script.ToString(TagRenderMode.Normal);
         }
 
         private static String GenerateColumnsBlockScript(IEnumerable<GridColumnViewModel> columns)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             foreach (var column in columns)
             {
                 builder.AppendFormat(@"{{name: '{0}', index: '{1}', align: '{2}', resizable: {3},", column.Name, column.Index, column.Align, column.Resizable.ToString().ToLower());
@@ -208,6 +214,20 @@ namespace Framework.MVC.Grids.jqGrid
             }
 
             return builder.ToString();
+        }
+
+        private static String GetJsArray(IEnumerable<long> list)
+        {
+            var temp = new StringBuilder();
+            foreach (var l in list)
+            {
+                temp.Append(l + ",");
+            }
+            if (temp.Length > 0)
+            {
+                temp = temp.Remove(temp.Length - 1, 1);
+            }
+            return temp.ToString();
         }
     }
 }

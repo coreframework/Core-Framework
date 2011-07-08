@@ -22,6 +22,7 @@ namespace Framework.MVC.Grids
         public GridViewModel()
         {
             Columns = new List<GridColumnViewModel>();
+            SelectedIds = new List<long>();
             IsAsc = true;
             SearchEnable = true;
         }
@@ -77,6 +78,30 @@ namespace Framework.MVC.Grids
         /// </summary>
         /// <value><c>true</c> if [search enable]; otherwise, <c>false</c>.</value>
         public bool SearchEnable { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [multi select].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [multi select]; otherwise, <c>false</c>.
+        /// </value>
+        public bool MultiSelect { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [row clickable].
+        /// </summary>
+        /// <value>
+        ///   <c>true</c> if [row clickable]; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsRowNotClickable { get; set; }
+
+        /// <summary>
+        /// Gets or sets the selected ids.
+        /// </summary>
+        /// <value>
+        /// The selected ids.
+        /// </value>
+        public IEnumerable<long> SelectedIds { get; set; }
 
         #endregion
     }

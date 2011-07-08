@@ -3,16 +3,22 @@
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent"><%: String.Format(Html.Translate(".Title"), Model) %></asp:Content>
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent"></asp:Content>
-
-<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
+<asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1><%: String.Format(Html.Translate(".Title"), Model) %></h1>
+</asp:Content>
+<asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
   <p><%: String.Format(Html.Translate(".AreYouSure"), Model) %></p>
   <% using (Html.BeginForm(MVC.Admin.User.ConfirmRemove(Model.Id), FormMethod.Post)) {%>
     <%: Html.HttpMethodOverride(HttpVerbs.Delete) %>
-
-    <p class="buttons">
-      <%: Html.Submit("Remove") %>
-      <%: Html.ActionLink("Cancel", MVC.Admin.User.Index()) %>
-    </p>
+    <div class="i_form clrfix">
+		<div class="i_buttons clrfix">
+			<div class="btn1 clrfix">
+                <em></em>
+                <%: Html.Submit("Remove", new { @class = "button" })%>
+                <strong></strong>
+		    </div>
+            <span><%: Html.ActionLink("Cancel", MVC.Admin.User.Index()) %></span>
+        </div>
+    </div>
   <% } %>
 </asp:Content>
