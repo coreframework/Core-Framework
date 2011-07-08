@@ -70,6 +70,7 @@ Admin:
         Users: "Users"
         UserGroups: "User groups"
         Modules: "Modules"
+        Plugins: "Plugins"
         Widgets: "Widgets"
         Content Pages: "Content Pages"
         Forms: "Forms"

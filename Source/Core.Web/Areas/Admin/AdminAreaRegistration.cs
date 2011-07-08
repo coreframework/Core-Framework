@@ -62,7 +62,6 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Users.UserGroups", "admin/user/{id}/groups", MVC.Admin.User.UserGroups(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Users.UserGroupsDynamicGridData", "admin/user/{id}/groups/UserGroupsDynamicGridData", MVC.Admin.User.UserGroupsDynamicGridData());
             context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/{id}/groups/UpdateUserGroups", MVC.Admin.User.UpdateUserGroups());
-//            context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/{id}/groups", MVC.Admin.User.UpdateUserGroups(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
 
             context.MapRoute("Admin.UserGroups", "admin/groups", MVC.Admin.UserGroup.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.UserGroups.DynamicGridData", "admin/groups/DynamicGridData", MVC.Admin.UserGroup.DynamicGridData());
@@ -73,7 +72,8 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.UserGroups.Remove", "admin/groups/{id}/remove", MVC.Admin.UserGroup.Remove());
             context.MapRoute("Admin.UserGroups.ConfirmRemove", "admin/groups/{id}", MVC.Admin.UserGroup.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
             context.MapRoute("Admin.UserGroups.Users", "admin/groups/{id}/users", MVC.Admin.UserGroup.Users(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.UserGroups.UpdateUsers", "admin/groups/{id}/users", MVC.Admin.UserGroup.UpdateUsers(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
+            context.MapRoute("Admin.UserGroups.UsersDynamicGridData", "admin/groups/{id}/users/UsersDynamicGridData", MVC.Admin.UserGroup.UsersDynamicGridData());
+            context.MapRoute("Admin.UserGroups.UpdateUsers", "admin/groups/{id}/users/UpdateUsers", MVC.Admin.UserGroup.UpdateUsers());
 
             context.MapRoute("Admin.Roles", "admin/roles", MVC.Admin.Role.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.DynamicGridData", "admin/roles/DynamicGridData", MVC.Admin.Role.DynamicGridData());

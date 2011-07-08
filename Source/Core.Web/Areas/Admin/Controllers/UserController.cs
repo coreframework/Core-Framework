@@ -244,7 +244,8 @@ namespace Core.Web.Areas.Admin.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = "Name", 
-                                                                 Index = "Name"
+                                                                 Index = "Name",
+                                                                 Width = 1100
                                                              },
                                                          new GridColumnViewModel
                                                              {
@@ -264,7 +265,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 SelectedIds = user.UserGroups.Select(t => t.Id)
             };
             
-            return View(model);//UserHelper.BuildAssignmentModel(user)
+            return View(model);
         }
 
         [HttpPost]
@@ -312,32 +313,6 @@ namespace Core.Web.Areas.Admin.Controllers
             }
 
             return Json(Translate("Messages.ValidationError"));
-        }
-
-        /// <summary>
-        /// Updates the user groups.
-        /// </summary>
-        /// <param name="id">The id.</param>
-        /// <param name="model">The model.</param>
-        /// <returns></returns>
-        [HttpPut]
-        public virtual ActionResult UpdateUserGroups1(long id, UserGroupToUserAssignmentModel model)
-        {
-            var user = userService.Find(id);
-            if (user == null)
-            {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
-            }
-
-            if (UserHelper.UpdateUserGroupToUsersAssignment(user, model))
-            {
-                Success(Translate("Messages.UserRolesUpdated"));
-                return RedirectToAction(MVC.Admin.User.Index());
-            }
-
-            Error(Translate("Messages.ValidationError"));
-
-            return View("UserGroups", model);
         }
 
         #endregion

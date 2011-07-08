@@ -26,11 +26,6 @@ $(document).ready(function () {
 	});
 	$(".tab-content").height(maxLiHeight);
 	
-	
-	/** enable left sidebar accordion */	
-	$( "#accordion" ).accordion();
-
-	
 	/** enable datepickers */
 	$( "#datepicker" ).datepicker({
 		showOn: "button",

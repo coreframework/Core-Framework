@@ -30,13 +30,9 @@ namespace Core.Web.Areas.Admin.Helpers
             var activeSection = String.Empty;
             foreach (var section in items)
             {
-                foreach (var item in section.Value)
+                if (section.Value.Any(item => item.IsCurrent(html.ViewContext.RequestContext)))
                 {
-                    if (item.IsCurrent(html.ViewContext.RequestContext))
-                    {
-                        activeSection = section.Key;
-                        break;
-                    }
+                    activeSection = section.Key;
                 }
                 if (!String.IsNullOrEmpty(activeSection))
                 {
@@ -53,15 +49,17 @@ namespace Core.Web.Areas.Admin.Helpers
         private static String RenderSectionsList(HtmlHelper html, UrlHelper url, Dictionary<String, IEnumerable<IMenuItem>> items, String activeSection)
         {
             var buffer = new StringBuilder();
+            int number = 0;
             foreach (var section in items)
             {
                 var isCurrent = activeSection.Equals(section.Key);
-                buffer.Append(RenderSection(html, url, section.Key, section.Value, isCurrent));
+                buffer.Append(RenderSection(html, url, section.Key, section.Value, isCurrent, number));
+                number++;
             }
             return buffer.ToString(); 
         }
 
-        private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent)
+        private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent,int number)
         {
             /* <h3><em class="bg1"><a href="#">Level 1</a></em></h3> */
             var sectionContent = new StringBuilder();
@@ -69,6 +67,11 @@ namespace Core.Web.Areas.Admin.Helpers
             if (firstItem != null)
             {
                 var h3 = new TagBuilder("h3");
+                if (isCurrent)
+                {
+                    h3.Attributes["id"] = "active";
+                    h3.Attributes["number"] = number.ToString();
+                }
                 var em = new TagBuilder("em");
                 if (!String.IsNullOrEmpty(firstItem.Image))
                 {
@@ -84,6 +87,11 @@ namespace Core.Web.Areas.Admin.Helpers
             else
             {
                 var h3 = new TagBuilder("h3");
+                if (isCurrent)
+                {
+                    h3.Attributes["id"] = "active";
+                    h3.Attributes["number"] = number.ToString();
+                }
                 var em = new TagBuilder("em");
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = "javascript:void(0)";

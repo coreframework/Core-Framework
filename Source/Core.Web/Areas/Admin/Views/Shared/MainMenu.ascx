@@ -39,13 +39,22 @@
    }
      
    IPluginHelper pluginHelper = ServiceLocator.Current.GetInstance<IPluginHelper>();
+   var usersMenuItem1 = new List<IMenuItem>();
    foreach (var verb in MvcApplication.GetVerbsForCategory("AdminModules"))
    {
        if (pluginHelper.IsPluginEnabled(verb.ControllerPluginIdentifier) && verb.IsAllowed(Context.CorePrincipal()))
        {
-           menuItems.Add(verb.Name, new IMenuItem[] { new RouteLink(verb.Name, "~/Content/images/admin/ico4.png", verb.RouteName) });
+           usersMenuItem1.Add(new[] { new RouteLink(verb.Name, "~/Content/images/admin/ico4.png", verb.RouteName) });
        }
    }
+   menuItems.Add("Plugins", usersMenuItem1);
     
 %>
 <%=Html.RenderMenu(Url, menuItems) %>
+
+<script type="text/javascript">
+    $(function () {
+        /** enable left sidebar accordion */
+        $("#accordion").accordion({ active: parseInt($('#active').attr('number')) });    
+    })
+</script>

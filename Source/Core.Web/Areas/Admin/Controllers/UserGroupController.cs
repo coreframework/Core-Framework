@@ -26,6 +26,8 @@ namespace Core.Web.Areas.Admin.Controllers
 
         private readonly IUserGroupService userGroupService;
 
+        private readonly IUserService userService;
+
         #endregion
 
         #region Constructors
@@ -33,6 +35,7 @@ namespace Core.Web.Areas.Admin.Controllers
         public UserGroupController()
         {
             userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
+            userService = ServiceLocator.Current.GetInstance<IUserService>();
         }
 
         #endregion
@@ -220,18 +223,67 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Name", 
+                                                                 Index = "Username",
+                                                                 Width = 1100
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action(MVC.Admin.UserGroup.UsersDynamicGridData()),
+                DefaultOrderColumn = "Username",
+                GridTitle = "Users",
+                Columns = columns,
+                MultiSelect = true,
+                IsRowNotClickable = true,
+                SelectedIds = userGroup.Users.Select(t => t.Id)
+            };
 
-            return View(UserGroupHelper.BuildAssignmentModel(userGroup));
+
+            return View(model);//View(UserGroupHelper.BuildAssignmentModel(userGroup));
         }
 
-        /// <summary>
-        /// Reassign specified users.
-        /// </summary>
-        /// <param name="id">The user group id.</param>
-        /// <param name="model">The model.</param>
-        /// <returns>Redirects back to user groups list.</returns>
-        [HttpPut]
-        public virtual ActionResult UpdateUsers(long id, UserToUserGroupAssignmentModel model)
+        [HttpPost]
+        public virtual JsonResult UsersDynamicGridData(int id, int page, int rows, string search, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            var userGroup = userGroupService.Find(id);
+            if (userGroup == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+            IQueryable<User> searchQuery = userService.GetSearchQuery(search);
+            int totalRecords = userService.GetCount(searchQuery);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var users = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from usr in users
+                    select new
+                    {
+                        id = usr.Id,
+                        cell = new[] { usr.Username }
+                    }).ToArray()
+            };
+            return Json(jsonData);
+        }
+
+        public virtual JsonResult UpdateUsers(long id, IEnumerable<string> ids, IEnumerable<string> selids)
         {
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
@@ -239,15 +291,13 @@ namespace Core.Web.Areas.Admin.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
 
-            if (UserGroupHelper.UpdateUserGroupToUsersAssignment(userGroup, model))
+            if (UserGroupHelper.UpdateUserGroupToUsersAssignment(userGroup, ids, selids))
             {
-                Success(Translate("Messages.RoleUsersUpdated"));
-                return RedirectToAction(MVC.Admin.UserGroup.Index());
+                Success(Translate("Messages.UserRolesUpdated"));
+                return Json(true);
             }
 
-            Error(Translate("Messages.ValidationError"));
-
-            return View("Users", model);
+            return Json(Translate("Messages.ValidationError"));
         }
 
         #endregion

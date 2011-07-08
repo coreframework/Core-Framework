@@ -76,11 +76,6 @@ namespace Core.Web.Areas.Admin.Controllers {
         public System.Web.Mvc.JsonResult UpdateUserGroups() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.UpdateUserGroups);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult UpdateUserGroups1() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.UpdateUserGroups1);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UserController Actions { get { return MVC.Admin.User; } }
@@ -105,7 +100,6 @@ namespace Core.Web.Areas.Admin.Controllers {
             public readonly string UserGroups = "UserGroups";
             public readonly string UserGroupsDynamicGridData = "UserGroupsDynamicGridData";
             public readonly string UpdateUserGroups = "UpdateUserGroups";
-            public readonly string UpdateUserGroups1 = "UpdateUserGroups1";
         }
 
 
@@ -199,13 +193,6 @@ namespace Core.Web.Areas.Admin.Controllers {
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("ids", ids);
             callInfo.RouteValueDictionary.Add("selids", selids);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult UpdateUserGroups1(long id, Core.Web.Areas.Admin.Models.UserGroupToUserAssignmentModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateUserGroups1);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

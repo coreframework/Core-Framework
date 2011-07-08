@@ -1326,7 +1326,7 @@ $.fn.jqGrid = function( p ) {
 		}
 		if(this.p.multiselect) {
 			this.p.colNames.unshift("<input id='cb_jqg' class='cbox' type='checkbox'/>");
-			this.p.colModel.unshift({name:'cb',width:27,sortable:false,resizable:false,hidedlg:true,search:false,align:'center'});
+			this.p.colModel.unshift({name:'cb',width:27,sortable:false,resizable:false,hidedlg:true,search:false,align:'left'});
 		}
 		var	xReader = {
 			root: "rows",

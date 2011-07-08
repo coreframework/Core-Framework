@@ -16,7 +16,7 @@
             <div class="fst_col colls_i">
 			    <div class="i_form_i">
                     <%: Html.EditorFor(model => model.Email) %>
-                    <%: Html.ValidationMessageFor(model=>model.Email) %>
+                    <%--<%: Html.ValidationMessageFor(model=>model.Email) %>--%>
                 </div>
 			    <div class="i_form_i">
                     <%: Html.EditorFor(model => model.Nickname) %>
