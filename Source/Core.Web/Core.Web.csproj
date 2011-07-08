@@ -337,7 +337,6 @@
     <Content Include="Content\Css\blueprint\reset.css" />
     <Content Include="Content\Css\blueprint\typography.css" />
     <Content Include="Content\Css\colorpicker.css" />
-    <Content Include="Content\Css\grid.css" />
     <Content Include="Content\Css\ie.css" />
     <Content Include="Content\Css\inettuts.js.css" />
     <Content Include="Content\Css\jquery-ui\jquery-ui-1.8.11.custom.css" />

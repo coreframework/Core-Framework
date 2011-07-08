@@ -2,5 +2,6 @@ Controllers:
   FormsBuilderWidget:
     Messages:
       SuccessFormSubmit: "Form has been successfully submit."
+      ValidationError: "Validation errors occurred while processing this form."
     
     

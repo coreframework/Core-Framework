@@ -13,14 +13,10 @@
                                 UpdateTargetId = String.Format("formHolder{0}", Model.Id)
                             }))
        {%>
-    <% if (TempData["Success"] != null)
-       {%>
-        <p><%:Html.Encode(TempData["Success"])%></p>
-      <%}%>
-    <%: Html.ValidationSummary(true) %>
     <input type="hidden" id="instanceId" name="instanceId" value="<%= Html.Encode(Model.Id) %>" />
     <input type="hidden" id="Id" name="Id" value="<%= Html.Encode(Model.Id) %>" />
     <h3><%:Model.Title%></h3>
+    <%:Html.Messages() %>
     <% foreach (FormElement item in Model.Form.FormElements.OrderBy(el => el.OrderNumber))
     {%>
         <div class="form_i">

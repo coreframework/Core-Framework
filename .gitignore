@@ -61,4 +61,11 @@
 /Source/Core.Forms.NHibernate/obj
 /Source/Core.Web/Areas/Forms
 /Source/Core.Web/Content/Css/Plugin
+/Source/Core.Web/Scripts/admincustom_packed.js
+/Source/Core.Web/Scripts/adminui_packed.js
+/Source/Core.Web/Scripts/ajax_packed.js
+/Source/Core.Web/Scripts/ajaxmvc_packed.js
+/Source/Core.Web/Scripts/base_packed.js
+/Source/Core.Web/Scripts/custom_packed.js
+/Source/Core.Web/Scripts/fckeditor_packed.js
 

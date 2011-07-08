@@ -116,11 +116,13 @@ namespace Core.Forms.Controllers
                 if (ModelState.IsValid)
                 {
                     FormsBuilderWidgetHelper.HandleFormData(model, collection, this.CorePrincipal());
-                    TempData["Success"] = HttpContext.Translate("Messages.SuccessFormSubmit",
-                                                                ResourceHelper.GetControllerScope(this));
+                    Success(HttpContext.Translate("Messages.SuccessFormSubmit",
+                                                                ResourceHelper.GetControllerScope(this)));
                 }
                 else
                 {
+                    Error(HttpContext.Translate("Messages.ValidationError",
+                                                                ResourceHelper.GetControllerScope(this)));
                     ViewData[String.Format("FormCollection{0}", model.Id)] = collection;
                 }
 
