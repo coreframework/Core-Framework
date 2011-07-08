@@ -4,11 +4,9 @@
 <%@ Import Namespace="System.Web.Mvc" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <div class="outset">
        <%foreach (var item in Model.AnswerValues) {%>
         <p>
             <%=Html.Encode(item.Field) %>:  <%=Html.Encode(item.Value)%>
         </p>
        <%}%>
-   </div>
 </asp:Content>

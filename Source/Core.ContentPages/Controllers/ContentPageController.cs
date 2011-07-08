@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -7,9 +10,12 @@ using Core.ContentPages.NHibernate.Models;
 using Core.ContentPages.Permissions.Operations;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
+using Framework.MVC.Extensions;
+using Framework.MVC.Grids;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using IContentPageService = Core.ContentPages.NHibernate.Contracts.IContentPageService;
-
+using System.Linq.Dynamic;
 
 namespace Core.ContentPages.Controllers
 {
@@ -56,7 +62,76 @@ namespace Core.ContentPages.Controllers
         
         public virtual ActionResult ShowAll()
         {
-            return View("Admin/Index", contentPageService.GetAll());
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Title", 
+                                                                 Index = "Title",
+                                                                 Width = 400
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 30,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 30,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 30,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action("DynamicGridData","ContentPage"),
+                DefaultOrderColumn = "Title",
+                GridTitle = "Users",
+                Columns = columns,
+                IsRowNotClickable = true
+            };
+            return View("Admin/Index", model);
+        }
+
+        [HttpPost]
+        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            IQueryable<ContentPage> searchQuery = contentPageService.GetSearchQuery(search);
+            int totalRecords = contentPageService.GetCount(searchQuery);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var contentPages = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from contentPage in contentPages
+                    select new
+                    {
+                        id = contentPage.Id,
+                        cell = new[] {  contentPage.Title, 
+                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("ShowById","ContentPage",new { id = contentPage.Id }),"View"),
+                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("Edit","ContentPage",new { id = contentPage.Id }),"Edit"),
+                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("Remove","ContentPage",new { id = contentPage.Id }),"Remove")}
+                    }).ToArray()
+            };
+            return Json(jsonData);
         }
 
         /// <summary>
@@ -141,7 +216,7 @@ namespace Core.ContentPages.Controllers
         /// </summary>
         /// <param name="id">The content page id.</param>
         /// <returns>List of content pages</returns>
-        [HttpPost]
+        //[HttpPost]
         public virtual ActionResult Remove(long id)
         {
             var contentPage = contentPageService.Find(id);

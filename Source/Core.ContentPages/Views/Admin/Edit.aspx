@@ -3,20 +3,36 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<ContentPageViewModel>" %>
 <%@ Import Namespace="System.Web.Mvc" %>
 
+<asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
+  <h1>Edit Content Page</h1>
+</asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
    <%: Html.ValidationSummary(true) %>
-    <div class="form">
       <% using (Html.BeginForm())
          {%>    
-          <div class="form_area">     
+    <div class="i_form clrfix">
+	    <div class="cols clrfix">
+            <div class="fst_col colls_i">
+			    <div class="i_form_i">
               <%:Html.EditorFor(model => model.Title)%>
+                </div>
+			    <div class="i_form_i">
               <%:Html.EditorFor(model => model.Content)%>
+                </div>
+			    <div class="i_form_i">
               <%:Html.AntiForgeryToken()%>
-         </div>
-           <p class="buttons">
-                  <%: Html.Submit("Save")%>
-                    <%:Html.RouteLink("Cancel", new { controller = "ContentPage", action = "ShowAll"})%>
-             </p>
+                </div>
+            </div>
+        </div>
+		<div class="i_buttons clrfix">
+			<div class="btn1 clrfix">
+                <em></em>
+                <%: Html.Submit("Save",new { @class="button"})%>
+                <strong></strong>
+            </div>
+			<span><%:Html.RouteLink("Cancel", new { controller = "ContentPage", action = "ShowAll"})%></span>
+		</div>
+    </div>
           <% }%>
-      </div>
 </asp:Content>

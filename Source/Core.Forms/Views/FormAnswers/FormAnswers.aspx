@@ -5,7 +5,7 @@
 <%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <div class="outset">
+    <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>
    </div>
 </asp:Content>

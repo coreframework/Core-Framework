@@ -57,6 +57,9 @@
       <HintPath>..\..\Libs\Castle\Castle.Windsor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Dynamic">
+      <HintPath>..\..\Libs\jqGrid\Dynamic.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
