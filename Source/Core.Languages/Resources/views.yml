@@ -1,0 +1,8 @@
+Views:
+  FormsBuilderWidget:
+    EditWidget:
+      Form: "Form"
+    ViewWidget:
+      Submit: "Submit"
+    
+    

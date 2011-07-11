@@ -100,6 +100,8 @@
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Modules\LocalizationModule.cs" />
     <Compile Include="Permissions\Operations\LanguageSelectorWidgetOperations.cs" />
+    <Compile Include="LanguagesPlugin.cs" />
+    <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\LanguagesPluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="T4MVC.cs">
@@ -133,6 +135,10 @@
     <Content Include="Views\LanguageSelectorWidget\ViewWidget.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Compile Include="Verbs\Widgets\LanguageSelectorEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\LanguageSelectorSaveSettingsVerb.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -144,6 +150,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Widgets\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Framework.MEF.Contracts\Core.Framework.MEF.Contracts.csproj">

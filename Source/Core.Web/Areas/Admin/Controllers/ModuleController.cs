@@ -179,8 +179,8 @@ namespace Core.Web.Areas.Admin.Controllers
                                             HttpContext.Translate("Messages.CouldNotFoundPlugin",
                                                                   ResourceHelper.GetControllerScope(this)));
                 }
-                corePlugin.Install();
                 CoreMigrator.Current.MigrateUp(corePlugin);
+                corePlugin.Install();
                 pluginEntity.Status = PluginStatus.Installed;
                 pluginService.Save(pluginEntity);
             }
