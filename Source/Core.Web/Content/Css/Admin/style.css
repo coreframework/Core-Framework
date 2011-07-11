@@ -212,6 +212,8 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 		.tabs{margin:auto;overflow:hidden;height:auto;}
 			ul.i-tab {list-style:none;overflow:hidden;height:auto;}
 				ul.i-tab li {float:left;margin-left:3px;z-index:1;position:relative}
+                    ul.i-tab li a {color:#000 !important;}
+                    ul.i-tab li a:hover {text-decoration:none;}
 					ul.i-tab li em {float:left;background:url(../../images/admin/tab_all_left.gif) repeat-x 0 0;width:6px;height:24px}
 					ul.i-tab li span {float:left;background:url(../../images/admin/tab_all_center.gif) repeat-x 0 0;padding:4px 10px 5px;}
 					@media all and (min-width:0){ul.i-tab li span { padding:5px 10px 5px \0/; }} /* IE9 hack */
@@ -219,7 +221,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 					ul.i-tab li:hover {cursor:pointer}
 					ul.i-tab li.active {z-index:200}
 						ul.i-tab li.active em, ul.i-tab li.active span, ul.i-tab li.active strong {background-position: 0 -24px;font-weight:bold}
-			.tabs_b {height:1px;border-top:1px solid #b4b4b4;z-index:100;position:relative;margin-top:-1px;}
+			.tabs_b {height:1px;border-top:1px solid #b4b4b4;z-index:100;position:relative;margin-top:-1px;margin-bottom:15px;}
 			.tab-content {list-style:none;margin:0px;padding:12px 0 4px 3px;}
 				.tab-content li.tabs_cont {display:block;display:none;font-size:12px;font-family:Arial}
 					.tab-content li li {display:block !important}

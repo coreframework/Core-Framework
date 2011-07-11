@@ -8,7 +8,9 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-  <%if (Model.Id > 0) {%>
+ <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model, true, false, false));%>
+
+  <%if (Model.Id> 0) {%>
         <h3><%:Html.RouteLink(Html.Translate(".ViewFormElements"),
                                                 new { controller = "Forms", action = "ShowFormElements", formId = Model.Id })%></h3>
    <% }%>

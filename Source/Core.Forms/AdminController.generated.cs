@@ -33,6 +33,7 @@ namespace T4MVC {
             public readonly string FormElements = "~/Views/Admin/FormElements.aspx";
             public readonly string FormPermissions = "~/Views/Admin/FormPermissions.aspx";
             public readonly string FormsList = "~/Views/Admin/FormsList.aspx";
+            public readonly string FormTabs = "~/Views/Admin/FormTabs.ascx";
         }
     }
 

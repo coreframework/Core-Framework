@@ -1600,7 +1600,6 @@ namespace Links {
             }
         
             public static readonly string colorpicker_css = Url("colorpicker.css");
-            public static readonly string grid_css = Url("grid.css");
             public static readonly string ie_css = Url("ie.css");
             public static readonly string inettuts_js_css = Url("inettuts.js.css");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1638,13 +1637,9 @@ namespace Links {
                 public static readonly string accordion_li_hover_gif = Url("accordion_li_hover.gif");
                 public static readonly string acordion_n_png = Url("acordion_n.png");
                 public static readonly string acordion_v_png = Url("acordion_v.png");
-                public static readonly string add_tab_png = Url("add_tab.png");
-                public static readonly string avatar_32x32_png = Url("avatar_32x32.png");
-                public static readonly string avatar_96x96_png = Url("avatar_96x96.png");
                 public static readonly string bg_gif = Url("bg.gif");
                 public static readonly string breadcrumbs_bg_gif = Url("breadcrumbs_bg.gif");
                 public static readonly string breadcrumbs_sep_png = Url("breadcrumbs_sep.png");
-                public static readonly string brown_bottom_line_gif = Url("brown_bottom_line.gif");
                 public static readonly string btn_login_content_png = Url("btn_login_content.png");
                 public static readonly string btn_login_left_png = Url("btn_login_left.png");
                 public static readonly string btn_login_right_png = Url("btn_login_right.png");
@@ -1654,21 +1649,16 @@ namespace Links {
                 public static readonly string btn2_center_png = Url("btn2_center.png");
                 public static readonly string btn2_left_png = Url("btn2_left.png");
                 public static readonly string btn2_right_png = Url("btn2_right.png");
-                public static readonly string buttons_background_png = Url("buttons_background.png");
                 public static readonly string calendar_gif = Url("calendar.gif");
-                public static readonly string calendar_down_gif = Url("calendar_down.gif");
-                public static readonly string collapse_png = Url("collapse.png");
                 public static readonly string datepicker_bg_png = Url("datepicker_bg.png");
                 public static readonly string dd_arrow_gif = Url("dd_arrow.gif");
                 public static readonly string dd_v_gif = Url("dd_v.gif");
                 public static readonly string dd_v_png = Url("dd_v.png");
                 public static readonly string delete_ico_gif = Url("delete_ico.gif");
-                public static readonly string draft_page_png = Url("draft_page.png");
                 public static readonly string e_table_bottom_bg_gif = Url("e_table_bottom_bg.gif");
                 public static readonly string e_table_th_bg_gif = Url("e_table_th_bg.gif");
                 public static readonly string e_table_th_sep_gif = Url("e_table_th_sep.gif");
                 public static readonly string e_table_top_bg_gif = Url("e_table_top_bg.gif");
-                public static readonly string expand_png = Url("expand.png");
                 public static readonly string flag1_gif = Url("flag1.gif");
                 public static readonly string home_bg_gif = Url("home_bg.gif");
                 public static readonly string i_form_bg_gif = Url("i_form_bg.gif");
@@ -1682,53 +1672,19 @@ namespace Links {
                 public static readonly string ico8_png = Url("ico8.png");
                 public static readonly string icon_arrow_gif = Url("icon-arrow.gif");
                 public static readonly string icon_ok_gif = Url("icon-ok.gif");
-                public static readonly string layout_png = Url("layout.png");
-                public static readonly string login_shadow_png = Url("login_shadow.png");
                 public static readonly string logo_png = Url("logo.png");
-                public static readonly string metadata_toggle_png = Url("metadata_toggle.png");
-                public static readonly string minus_png = Url("minus.png");
-                public static readonly string minus_disabled_png = Url("minus_disabled.png");
-                public static readonly string minus_grey_png = Url("minus_grey.png");
                 public static readonly string msDropDown_gif = Url("msDropDown.gif");
-                public static readonly string navigation_background_gif = Url("navigation_background.gif");
-                public static readonly string navigation_secondary_background_png = Url("navigation_secondary_background.png");
-                public static readonly string navigation_secondary_separator_gif = Url("navigation_secondary_separator.gif");
-                public static readonly string navigation_shadow_png = Url("navigation_shadow.png");
-                public static readonly string navigation_tabs_png = Url("navigation_tabs.png");
-                public static readonly string new_homepage_png = Url("new_homepage.png");
-                public static readonly string new_layout_png = Url("new_layout.png");
-                public static readonly string new_snippet_png = Url("new_snippet.png");
-                public static readonly string new_user_png = Url("new_user.png");
                 public static readonly string not_valid_ico_gif = Url("not_valid_ico.gif");
-                public static readonly string page_png = Url("page.png");
-                public static readonly string plus_png = Url("plus.png");
-                public static readonly string plus_grey_png = Url("plus_grey.png");
-                public static readonly string popup_border_background_png = Url("popup_border_background.png");
-                public static readonly string popup_border_bottom_left_png = Url("popup_border_bottom_left.png");
-                public static readonly string popup_border_bottom_right_png = Url("popup_border_bottom_right.png");
-                public static readonly string popup_border_top_left_png = Url("popup_border_top_left.png");
-                public static readonly string popup_border_top_right_png = Url("popup_border_top_right.png");
-                public static readonly string shadow_png = Url("shadow.png");
-                public static readonly string shadow_grey_png = Url("shadow_grey.png");
                 public static readonly string sidebar_bg_gif = Url("sidebar_bg.gif");
                 public static readonly string sidebar_h_gif = Url("sidebar_h.gif");
-                public static readonly string single_form_shadow_png = Url("single_form_shadow.png");
-                public static readonly string snippet_png = Url("snippet.png");
-                public static readonly string spacer_gif = Url("spacer.gif");
-                public static readonly string spinner_gif = Url("spinner.gif");
-                public static readonly string status_background_png = Url("status_background.png");
-                public static readonly string status_bottom_left_png = Url("status_bottom_left.png");
-                public static readonly string status_bottom_right_png = Url("status_bottom_right.png");
-                public static readonly string status_spinner_gif = Url("status_spinner.gif");
-                public static readonly string status_top_left_png = Url("status_top_left.png");
-                public static readonly string status_top_right_png = Url("status_top_right.png");
                 public static readonly string tab_all_center_gif = Url("tab_all_center.gif");
                 public static readonly string tab_all_left_gif = Url("tab_all_left.gif");
                 public static readonly string tab_all_right_gif = Url("tab_all_right.gif");
-                public static readonly string tab_close_png = Url("tab_close.png");
-                public static readonly string vertical_tan_gradient_png = Url("vertical_tan_gradient.png");
-                public static readonly string view_site_png = Url("view_site.png");
-                public static readonly string virtual_page_png = Url("virtual_page.png");
+                public static readonly string v_ico_blue_gif = Url("v_ico_blue.gif");
+                public static readonly string v_ico_green_gif = Url("v_ico_green.gif");
+                public static readonly string v_ico_red_gif = Url("v_ico_red.gif");
+                public static readonly string v_ico_yell_gif = Url("v_ico_yell.gif");
+                public static readonly string validation_error_gif = Url("validation_error.gif");
                 public static readonly string zaglushka1_jpg = Url("zaglushka1.jpg");
                 public static readonly string zaglushka2_jpg = Url("zaglushka2.jpg");
                 public static readonly string zaglushka3_jpg = Url("zaglushka3.jpg");
@@ -1794,26 +1750,6 @@ namespace Links {
         
             public static readonly string ie_v_png = Url("ie_v.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class jquery_ui {
-                private const string URLPATH = "~/Content/Images/jquery-ui";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string ui_bg_flat_0_aaaaaa_40x100_png = Url("ui-bg_flat_0_aaaaaa_40x100.png");
-                public static readonly string ui_bg_flat_75_ffffff_40x100_png = Url("ui-bg_flat_75_ffffff_40x100.png");
-                public static readonly string ui_bg_glass_55_fbf9ee_1x400_png = Url("ui-bg_glass_55_fbf9ee_1x400.png");
-                public static readonly string ui_bg_glass_65_ffffff_1x400_png = Url("ui-bg_glass_65_ffffff_1x400.png");
-                public static readonly string ui_bg_glass_75_dadada_1x400_png = Url("ui-bg_glass_75_dadada_1x400.png");
-                public static readonly string ui_bg_glass_75_e6e6e6_1x400_png = Url("ui-bg_glass_75_e6e6e6_1x400.png");
-                public static readonly string ui_bg_glass_95_fef1ec_1x400_png = Url("ui-bg_glass_95_fef1ec_1x400.png");
-                public static readonly string ui_bg_highlight_soft_75_cccccc_1x100_png = Url("ui-bg_highlight-soft_75_cccccc_1x100.png");
-                public static readonly string ui_icons_222222_256x240_png = Url("ui-icons_222222_256x240.png");
-                public static readonly string ui_icons_2e83ff_256x240_png = Url("ui-icons_2e83ff_256x240.png");
-                public static readonly string ui_icons_454545_256x240_png = Url("ui-icons_454545_256x240.png");
-                public static readonly string ui_icons_888888_256x240_png = Url("ui-icons_888888_256x240.png");
-                public static readonly string ui_icons_cd0a0a_256x240_png = Url("ui-icons_cd0a0a_256x240.png");
-            }
-        
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class layouts {
                 private const string URLPATH = "~/Content/Images/layouts";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
@@ -1870,6 +1806,10 @@ namespace Links {
             public static readonly string tab_c_png = Url("tab_c.png");
             public static readonly string tab_l_png = Url("tab_l.png");
             public static readonly string tab_r_png = Url("tab_r.png");
+            public static readonly string v_ico_blue_gif = Url("v_ico_blue.gif");
+            public static readonly string v_ico_green_gif = Url("v_ico_green.gif");
+            public static readonly string v_ico_red_gif = Url("v_ico_red.gif");
+            public static readonly string v_ico_yell_gif = Url("v_ico_yell.gif");
             public static readonly string widget_delete_gif = Url("widget_delete.gif");
             public static readonly string widget_edit_gif = Url("widget_edit.gif");
             public static readonly string widget_f_bg_gif = Url("widget_f_bg.gif");

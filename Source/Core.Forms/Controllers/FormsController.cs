@@ -94,11 +94,7 @@ namespace Core.Forms.Controllers
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 30,
-                                                                 Sortable = false
-                                                             },
-                                                         new GridColumnViewModel
-                                                             {
+                                                                 Name = "Actions",
                                                                  Width = 30,
                                                                  Sortable = false
                                                              },
@@ -118,7 +114,7 @@ namespace Core.Forms.Controllers
                 IsRowNotClickable = true
             };
 
-            return View("Admin/FormsList", model);
+            return View("FormsList", model);
         }
 
         [HttpPost]
@@ -143,8 +139,6 @@ namespace Core.Forms.Controllers
                         cell = new[] {  
                                         form.Title, 
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("ShowPermissions","Forms",new { formId = form.Id }),"Permissions"),
-                                        String.Format("<a href=\"{0}\">{1}</a>",
                                             Url.Action("Edit","Forms",new { formId = form.Id }),"Details")}
                     }).ToArray()
             };
@@ -161,7 +155,46 @@ namespace Core.Forms.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
 
-            return View("Admin/FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
+            return View("FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
+        }
+
+        [ChildActionOnly]
+        public virtual ActionResult FormTabs(FormViewModel model, bool activeDetails, bool activeElements, bool activePermissions)
+        {
+            if (model!=null)
+            {
+                var result = new List<MenuItemModel>();
+                var formPermissions = _permissionService.GetAccess(OperationsHelper.GetOperations<FormOperations>(), this.CorePrincipal(),typeof(Form), model.Id, IsFormOwner(model.MapTo(new Form())));
+                if (formPermissions.ContainsKey((int) FormOperations.View))
+                {
+                    result.Add(new MenuItemModel
+                                   {
+                                       Title = "Details",
+                                       IsActive = activeDetails,
+                                       Url = Url.Action("Edit", "Forms", new { formId = model.Id, Area = "Forms" })
+                                   });
+                   
+                    result.Add(new MenuItemModel
+                    {
+                        Title = "Form Elements",
+                        IsActive = activeElements,
+                        Url = Url.Action("ShowFormElements", "Forms", new { formId = model.Id, Area="Forms" })
+                    }); 
+                }
+                if (formPermissions.ContainsKey((int)FormOperations.Permissions))
+                {
+                    result.Add(new MenuItemModel
+                    {
+                        Title = "Permissions",
+                        IsActive = activePermissions,
+                        Url = Url.Action("ShowPermissions", "Forms", new { formId = model.Id, Area = "Forms" })
+                    }); 
+                }
+
+                return PartialView("FormTabs", result);
+            }
+
+            return Content(String.Empty);
         }
 
 
@@ -207,7 +240,7 @@ namespace Core.Forms.Controllers
         [HttpGet]
         public virtual ActionResult New()
         {
-            return View("Admin/EditForm", new FormViewModel());
+            return View("EditForm", new FormViewModel());
         }
 
         /// <summary>
@@ -225,7 +258,7 @@ namespace Core.Forms.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
 
-            return View("Admin/EditForm", new FormViewModel().MapFrom(form));
+            return View("EditForm", new FormViewModel().MapFrom(form));
         }
 
         [HttpPost]
@@ -260,7 +293,7 @@ namespace Core.Forms.Controllers
                 }
             }
 
-            return View("Admin/EditForm", model);
+            return View("EditForm", model);
         }
 
         public virtual ActionResult ShowFormElements(long formId)
@@ -315,7 +348,7 @@ namespace Core.Forms.Controllers
                 IsRowNotClickable = true
             };
 
-            return View("Admin/FormElements", model);//form.FormElements.OrderBy(el => el.OrderNumber));
+            return View("FormElements", model);
         }
 
         [HttpPost]
@@ -375,7 +408,7 @@ namespace Core.Forms.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
 
-            return View("Admin/EditFormElement", new FormElementViewModel(){FormId = formId}.MapFrom(new FormElement()));
+            return View("EditFormElement", new FormElementViewModel {FormId = formId}.MapFrom(new FormElement()));
         }
 
         [HttpGet]
@@ -388,7 +421,7 @@ namespace Core.Forms.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
 
-            return View("Admin/EditFormElement", new FormElementViewModel() { FormId = formId }.MapFrom(formElement));
+            return View("EditFormElement", new FormElementViewModel { FormId = formId }.MapFrom(formElement));
         }
 
         [HttpPost]
@@ -419,7 +452,7 @@ namespace Core.Forms.Controllers
                 }
             }
 
-            return View("Admin/EditFormElement", model);
+            return View("EditFormElement", model);
         }
 
         [HttpPost]

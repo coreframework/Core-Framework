@@ -27,6 +27,14 @@ namespace Core.Framework.MEF.Web
                                         "~/Views/Shared/{0}.aspx"
                                     };
 
+            PartialViewLocationFormats = new[]
+                                    {
+                                        "~/Areas/{1}/Views/{0}.ascx",
+                                        "~/Areas/{1}/Views/{1}/{0}.ascx",
+                                        "~/Views/{1}/{0}.ascx",
+                                        "~/Views/Shared/{0}.ascx"
+                                    };
+
             AreaPartialViewLocationFormats = new[]
                                     {
                                         "~/Areas/{1}/Views/{0}.ascx",

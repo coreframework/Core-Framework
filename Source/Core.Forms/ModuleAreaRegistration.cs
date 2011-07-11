@@ -34,6 +34,8 @@ namespace Core.Forms
             context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", FormsMVC.Forms.SaveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.RemoveFormElement", "admin/forms-element/remove-{id}", FormsMVC.Forms.RemoveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
+            context.MapRoute(null, String.Empty, FormsMVC.Forms.FormTabs(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
             context.MapRoute("Admin.FormsAnswers", "admin/forms-answers", FormsMVC.FormAnswers.ShowAll(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/forms-answers/DynamicGridData", FormsMVC.FormAnswers.FormAnswersDynamicGridData());
 

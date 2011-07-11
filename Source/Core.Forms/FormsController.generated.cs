@@ -33,8 +33,18 @@ namespace Core.Forms.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult DynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult ShowPermissions() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ShowPermissions);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult FormTabs() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.FormTabs);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -60,6 +70,11 @@ namespace Core.Forms.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult ShowFormElements() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ShowFormElements);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult FormElementsDynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.FormElementsDynamicGridData);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -100,13 +115,16 @@ namespace Core.Forms.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string ShowAll = "ShowAll";
+            public readonly string DynamicGridData = "DynamicGridData";
             public readonly string ShowPermissions = "ShowPermissions";
+            public readonly string FormTabs = "FormTabs";
             public readonly string Remove = "Remove";
             public readonly string ApplyPermissions = "ApplyPermissions";
             public readonly string New = "New";
             public readonly string Edit = "Edit";
             public readonly string Save = "Save";
             public readonly string ShowFormElements = "ShowFormElements";
+            public readonly string FormElementsDynamicGridData = "FormElementsDynamicGridData";
             public readonly string UpdateFormElementPosition = "UpdateFormElementPosition";
             public readonly string NewElement = "NewElement";
             public readonly string EditElement = "EditElement";
@@ -132,9 +150,28 @@ namespace Core.Forms.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ActionResult ShowPermissions(long formId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowPermissions);
             callInfo.RouteValueDictionary.Add("formId", formId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult FormTabs(Core.Forms.Models.FormViewModel model, bool activeDetails, bool activeElements, bool activePermissions) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.FormTabs);
+            callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("activeDetails", activeDetails);
+            callInfo.RouteValueDictionary.Add("activeElements", activeElements);
+            callInfo.RouteValueDictionary.Add("activePermissions", activePermissions);
             return callInfo;
         }
 
@@ -170,6 +207,17 @@ namespace Core.Forms.Controllers {
         public override System.Web.Mvc.ActionResult ShowFormElements(long formId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowFormElements);
             callInfo.RouteValueDictionary.Add("formId", formId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult FormElementsDynamicGridData(int formId, int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.FormElementsDynamicGridData);
+            callInfo.RouteValueDictionary.Add("formId", formId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
             return callInfo;
         }
 
