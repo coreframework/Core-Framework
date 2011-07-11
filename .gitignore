@@ -60,4 +60,5 @@
 /Source/Core.Forms.NHibernate/bin
 /Source/Core.Forms.NHibernate/obj
 /Source/Core.Web/Areas/Forms
+/Source/Core.Web/Content/Css/Plugin
 

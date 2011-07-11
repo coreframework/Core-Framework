@@ -10,6 +10,7 @@ Messages:
   RoleUpdated: "Role has been updates successfully."
   RoleDeleted: "Role has been deleted successfully."
   RoleUsersUpdated: "Users assigned to role has been updated."
+  RoleUserGroupsUpdated: "User Groups assigned to role has been updated."
   UserCreated: "User has been created successfully. Select roles for assignment."
   UserUpdated: "User has been updates successfully."
   UserDeleted: "User has been deleted successfully."

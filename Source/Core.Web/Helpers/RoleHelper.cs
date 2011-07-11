@@ -78,6 +78,35 @@ namespace Core.Web.Helpers
             return roleService.Save(role);
         }
 
+        public static bool UpdateRoleToUsersAssignment(Role role, IEnumerable<String> ids, IEnumerable<String> selids)
+        {
+            var roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+            var userService = ServiceLocator.Current.GetInstance<IUserService>();
+
+            var notselids = ids.Where(t => !selids.Contains(t)).ToList();
+
+            var noselected = role.Users.Where(t => notselids.Contains(t.Id.ToString())).ToList();
+            foreach (var user in noselected)
+            {
+                role.Users.Remove(user);
+            }
+
+            foreach (var selid in selids)
+            {
+                string selid1 = selid;
+                if (!role.Users.Any(t => t.Id.ToString() == selid1))
+                {
+                    long selectedID;
+                    if (long.TryParse(selid1, out selectedID))
+                    {
+                        role.Users.Add(userService.Find(selectedID));
+                    }
+                }
+            }
+
+            return roleService.Save(role);
+        }
+
         /// <summary>
         /// Builds the assignment model.
         /// </summary>
@@ -130,6 +159,35 @@ namespace Core.Web.Helpers
                 if (userGroup.Assigned)
                 {
                     role.UserGroups.Add(userGroupService.Find(userGroup.Id));
+                }
+            }
+
+            return roleService.Save(role);
+        }
+
+        public static bool UpdateRoleToUserGroupsAssignment(Role role, IEnumerable<String> ids, IEnumerable<String> selids)
+        {
+            var userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
+            var roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+
+            var notselids = ids.Where(t => !selids.Contains(t)).ToList();
+
+            var noselected = role.UserGroups.Where(t => notselids.Contains(t.Id.ToString())).ToList();
+            foreach (var userGroup in noselected)
+            {
+                role.UserGroups.Remove(userGroup);
+            }
+
+            foreach (var selid in selids)
+            {
+                string selid1 = selid;
+                if (!role.UserGroups.Any(t => t.Id.ToString() == selid1))
+                {
+                    long selectedID;
+                    if (long.TryParse(selid1, out selectedID))
+                    {
+                        role.UserGroups.Add(userGroupService.Find(selectedID));
+                    }
                 }
             }
 

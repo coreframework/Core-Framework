@@ -3,25 +3,25 @@
         <% if (Request.IsAuthenticated)
            { %>
 			    <span><%: Page.User.Identity.Name %></span>
-                <div class="btn_login">
+                <a class="sign" href="<%= Url.Action(MVC.Users.DeleteUserSession()) %>">Sign Out</a>
+<%--                <div class="btn_login">
                     <em></em> 
                         <input type="button" id="SignOut" value="Sign Out" />
-                       <%-- <%: Html.LinkButton("Sign Out", Url.Action(MVC.Users.DeleteUserSession()), new { @id = "SignOutLink", @style = "display:none;" })%>--%>
                     <strong></strong>
-                </div>
+                </div>--%>
         <% } else { %>
-                <div class="btn_login">
+                <a class="sign" href="<%= Url.Action(MVC.Users.NewUserSession()) %>">Sign In</a>
+<%--                <div class="btn_login">
                     <em></em>
                     <input type="button" id="SignIn" value="<%= Html.Translate(".SignIn") %>" />
-                    <%--<%: Html.LinkButton(Html.Translate(".SignIn"), Url.Action(MVC.Users.NewUserSession()),new { @id = "SignInLink", @style="display:none;" })%>--%>
                     <strong></strong>
-                </div>
+                </div>--%>
         <% } %>
 </div>
-
+<%--
 <script type="text/javascript">
     $(function () {
         $('#SignOut').click(function () { window.location = "<%= Url.Action(MVC.Users.DeleteUserSession()) %>"; });
         $('#SignIn').click(function () { window.location = "<%= Url.Action(MVC.Users.NewUserSession()) %>"; });
     });
-</script>
+</script>--%>

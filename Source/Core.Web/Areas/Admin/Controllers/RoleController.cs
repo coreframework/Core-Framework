@@ -26,6 +26,10 @@ namespace Core.Web.Areas.Admin.Controllers
 
         private readonly IRoleService roleService;
 
+        private readonly IUserService userService;
+
+        private readonly IUserGroupService userGroupService;
+
         #endregion
 
         #region Constructorss
@@ -36,6 +40,10 @@ namespace Core.Web.Areas.Admin.Controllers
         public RoleController()
         {
             roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+
+            userService = ServiceLocator.Current.GetInstance<IUserService>();
+
+            userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
         }
 
         #endregion
@@ -234,34 +242,83 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Name", 
+                                                                 Index = "Username",
+                                                                 Width = 1100
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action(MVC.Admin.Role.UsersDynamicGridData()),
+                DefaultOrderColumn = "Username",
+                GridTitle = "Users",
+                Columns = columns,
+                MultiSelect = true,
+                IsRowNotClickable = true,
+                SelectedIds = role.Users.Select(t => t.Id)
+            };
 
-            return View(RoleHelper.BuildRoleToUsersAssignmentModel(role));
+
+            return View(model);
+            //return View(RoleHelper.BuildRoleToUsersAssignmentModel(role));
         }
 
-        /// <summary>
-        /// Reassign specified users.
-        /// </summary>
-        /// <param name="id">The role id.</param>
-        /// <param name="model">The model.</param>
-        /// <returns>Redirects back to roles list.</returns>
-        [HttpPut]
-        public virtual ActionResult UpdateUsers(long id, UserToRoleAssignmentModel model)
+        [HttpPost]
+        public virtual JsonResult UsersDynamicGridData(int id, int page, int rows, string search, string sidx, string sord)
         {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
             var role = roleService.Find(id);
             if (role == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-
-            if (RoleHelper.UpdateRoleToUsersAssignment(role, model))
+            IQueryable<User> searchQuery = userService.GetSearchQuery(search);
+            int totalRecords = userService.GetCount(searchQuery);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var users = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
             {
-                //                Success(Translate("Messages.RoleUsersUpdated"));
-                return RedirectToAction(MVC.Admin.Role.Index());
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from usr in users
+                    select new
+                    {
+                        id = usr.Id,
+                        cell = new[] { usr.Username }
+                    }).ToArray()
+            };
+            return Json(jsonData);
+        }
+
+        public virtual JsonResult UpdateUsers(long id, IEnumerable<string> ids, IEnumerable<string> selids)
+        {
+            var userGroup = roleService.Find(id);
+            if (userGroup == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
 
-            //            Error(Translate("Messages.ValidationError"));
-
-            return View("Users", model);
+            if (RoleHelper.UpdateRoleToUsersAssignment(userGroup, ids, selids))
+            {
+                Success(Translate("Messages.UserRolesUpdated"));
+                return Json(true);
+            }
+            
+            Error(Translate("Messages.ValidationError"));
+            return Json(Translate("Messages.ValidationError"));
         }
 
         /// <summary>
@@ -277,18 +334,68 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Name", 
+                                                                 Index = "Name",
+                                                                 Width = 1100
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action(MVC.Admin.User.UserGroupsDynamicGridData()),
+                DefaultOrderColumn = "Name",
+                GridTitle = "User Groups",
+                Columns = columns,
+                MultiSelect = true,
+                IsRowNotClickable = true,
+                SelectedIds = role.UserGroups.Select(t => t.Id)
+            };
 
-            return View(RoleHelper.BuildRoleToUserGroupsAssignmentModel(role));
+            return View(model);
+
+            //return View(RoleHelper.BuildRoleToUserGroupsAssignmentModel(role));
         }
 
-        /// <summary>
-        /// Reassign specified users.
-        /// </summary>
-        /// <param name="id">The role id.</param>
-        /// <param name="model">The model.</param>
-        /// <returns>Redirects back to roles list.</returns>
-        [HttpPut]
-        public virtual ActionResult UpdateUserGroups(long id, UserGroupToRoleAssignmentModel model)
+        [HttpPost]
+        public virtual JsonResult UserGroupsDynamicGridData(int id, int page, int rows, string search, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            var role = roleService.Find(id);
+            if (role == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+            IQueryable<UserGroup> searchQuery = userGroupService.GetSearchQuery(search);
+            int totalRecords = userGroupService.GetCount(searchQuery);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var userGroups = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from userGroup in userGroups
+                    select new
+                    {
+                        id = userGroup.Id,
+                        cell = new[] { userGroup.Name }
+                    }).ToArray()
+            };
+            return Json(jsonData);
+        }
+
+        public virtual JsonResult UpdateUserGroups(long id, IEnumerable<string> ids, IEnumerable<string> selids)
         {
             var role = roleService.Find(id);
             if (role == null)
@@ -296,15 +403,13 @@ namespace Core.Web.Areas.Admin.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
 
-            if (RoleHelper.UpdateRoleToUserGroupsAssignment(role, model))
+            if (RoleHelper.UpdateRoleToUserGroupsAssignment(role, ids, selids))
             {
-                //                Success(Translate("Messages.RoleUsersUpdated"));
-                return RedirectToAction(MVC.Admin.Role.Index());
+                Success(Translate("Messages.RoleUserGroupsUpdated"));
+                return Json(true);
             }
 
-            //            Error(Translate("Messages.ValidationError"));
-
-            return View("UserGroups", model);
+            return Json(Translate("Messages.ValidationError"));
         }
 
         #region Permissions
