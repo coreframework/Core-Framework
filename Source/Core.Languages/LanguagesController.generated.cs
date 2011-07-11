@@ -23,9 +23,6 @@ using T4MVC;
 namespace Core.Languages.Controllers {
     public partial class LanguagesController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public LanguagesController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected LanguagesController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -34,6 +31,21 @@ namespace Core.Languages.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ShowById() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ShowById);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Edit() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Remove() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LanguagesController Actions { get { return LanguagesMVC.Languages; } }
@@ -47,7 +59,11 @@ namespace Core.Languages.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
+            public readonly string ShowAll = "ShowAll";
+            public readonly string ShowById = "ShowById";
+            public readonly string Edit = "Edit";
+            public readonly string New = "New";
+            public readonly string Remove = "Remove";
         }
 
 
@@ -63,8 +79,44 @@ namespace Core.Languages.Controllers {
     public class T4MVC_LanguagesController: Core.Languages.Controllers.LanguagesController {
         public T4MVC_LanguagesController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+        public override System.Web.Mvc.ActionResult ShowAll() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowAll);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ShowById(long? id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowById);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(long? id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(long? id, Core.Languages.Models.LanguageViewModel languageModel) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("languageModel", languageModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult New() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult New(Core.Languages.Models.LanguageViewModel language) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            callInfo.RouteValueDictionary.Add("language", language);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Remove(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
