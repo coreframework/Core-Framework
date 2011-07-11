@@ -14,8 +14,8 @@ namespace Core.ContentPages.NHibernate.Mappings
             Cache.Region("ContentPages").ReadWrite();
             Table("ContentPages");
             Id(contentPage => contentPage.Id);
-            Map(contentPage => contentPage.Title).Length(255);
-            Map(contentPage => contentPage.Content);
+//            Map(contentPage => contentPage.Title).Length(255);
+//            Map(contentPage => contentPage.Content);
 
             HasMany(page => page.Widgets).KeyColumn("ContentPageId")
             .Table("ContentPageWidgets")

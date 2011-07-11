@@ -95,8 +95,6 @@
     <Compile Include="LanguageSelectorWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LanguageViewModel.cs" />
-    <Compile Include="Modules\LocalizationModule.cs" />
     <Compile Include="LanguagesPlugin.cs" />
     <Compile Include="Models\LanguageViewModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />

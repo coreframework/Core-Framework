@@ -17,7 +17,7 @@ namespace Core.Languages.Controllers
     /// </summary>
     [Export(typeof(IController)), ExportMetadata("Name", "Languages")]
     [Permissions((int)LanguagesPluginOperations.ManageLanguages, typeof(LanguagesPlugin))]
-    public partial class LanguagesController : CoreController
+    public partial class LanguagesController : CorePluginController
     {
         #region Fields
         
