@@ -16,10 +16,12 @@ namespace Core.Forms
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute("Admin.Forms", "admin/forms", FormsMVC.Forms.ShowAll(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.Forms.DynamicGridData", "admin/forms/DynamicGridData", new { controller = "Forms", action = "DynamicGridData", id = "" });
             context.MapRoute(null, "admin/form-{formId}/permissions", FormsMVC.Forms.ShowPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/forms/apply-permissions", FormsMVC.Forms.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
             context.MapRoute(null, "admin/form-{formId}/form-elements", FormsMVC.Forms.ShowFormElements(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/form-{formId}/FormElementsDynamicGridData", new { controller = "Forms", action = "FormElementsDynamicGridData", id = "" });
             context.MapRoute(null, "admin/forms/update-form-elements-positions", FormsMVC.Forms.UpdateFormElementPosition());
 
             context.MapRoute(null, "admin/forms/edit-{formId}", FormsMVC.Forms.Edit(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });

@@ -2,55 +2,62 @@
 <%@ Assembly Name="Core.Forms.NHibernate" %>
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"  Inherits="System.Web.Mvc.ViewPage<Core.Forms.Models.FormElementViewModel>" %>
 <%@ Import Namespace="System.Web.Mvc" %>
+<asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
+  <h1>Edit Form Element</h1>
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
    <%: Html.ValidationSummary(true) %>
-    <div class="form">
       <% using (Html.BeginForm(FormsMVC.Forms.SaveElement(), FormMethod.Post))
          {%>    
-              <div class="form_area">
-                 
+    <div class="i_form clrfix">
+	    <div class="cols clrfix">
+            <div class="fst_col colls_i">
                     <%: Html.Hidden("formId", Model.FormId) %> 
                     <%: Html.HiddenFor(model=>model.Id) %> 
 
-                    <p>
-                        <%: Html.LabelFor(model => model.Title) %>
+			    <div class="i_form_i">
                         <%: Html.TextBoxFor(model => model.Title) %>
                         <%: Html.ValidationMessageFor(model => model.Title) %>
-                    </p>
-                    <p>
+                </div>
+			    <div class="i_form_i">
                         <%: Html.LabelFor(model => model.Type)%>
                         <%: Html.DropDownListFor("Type", Model.Type, new {}) %>
                         <%: Html.ValidationMessageFor(model => model.Type) %>
-                    </p>
-                    <p class="editor-field-hidden" id="el_values">
+                </div>
+			    <div class="i_form_i"  id="el_values">
                         <%:Html.LabelFor(model => model.Values)%>
                         <%:Html.TextBoxFor(model => model.Values)%>
                         <%:Html.Translate(".SeparateWithComma")%>
                         <%:Html.ValidationMessageFor(model => model.Values)%>
-                    </p>
-                 
-                    <p class="editor-field-hidden" id="el_is_required">
+                </div>
+			    <div class="i_form_i"  id="el_is_required">
                         <%:Html.CheckBoxFor(model => model.IsRequired)%>
                         <%:Html.LabelFor(model => model.IsRequired)%>
-                    </p>
-                    <p class="editor-field-hidden" id="el_validation">
+                </div>
+			    <div class="i_form_i"  id="el_validation">
                         <%: Html.LabelFor(model => model.RegexTemplate)%>
                         <%: Html.DropDownListFor("RegexTemplate", Model.RegexTemplate, new { })%>
                         <%: Html.ValidationMessageFor(model => model.RegexTemplate)%>
-                    </p>
-                     <p class="editor-field-hidden" id="el_maxLength">
+                </div>
+			    <div class="i_form_i"  id="el_maxLength">
                         <%: Html.LabelFor(model=>model.MaxLength)%>
                         <%: Html.TextBoxFor(model => model.MaxLength)%>
                         <%: Html.ValidationMessageFor(model => model.MaxLength)%>
-                    </p>
-
+                </div>
                    <%: Html.AntiForgeryToken()%>
-             </div>
-              <p class="buttons">
-                     <%:Html.Submit("Save")%>
-                     <%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowAll" })%>
-               </p>
+            </div>
+        </div>
+		<div class="i_buttons clrfix">
+			<div class="btn1 clrfix">
+                <em></em>
+                <%: Html.Submit("Save",new { @class="button"})%>
+                <strong></strong>
+            </div>
+			<span><%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowAll" })%></span>
+		</div>
+    </div>
+
                <script type="text/javascript">
                    jQuery(function () {
                        function checkForm() {
@@ -88,5 +95,4 @@
                    });
                </script>
           <% }%>
-      </div>
 </asp:Content>

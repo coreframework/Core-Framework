@@ -8,7 +8,6 @@ using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
-using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
@@ -138,7 +137,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-            return View(new PluginViewModel().MapFrom(plugin));
+            return RedirectToAction(MVC.Admin.Module.Index());
         }
 
         /// <summary>
@@ -154,7 +153,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-            return View(new PluginViewModel().MapFrom(plugin));
+            return RedirectToAction(MVC.Admin.Module.Index());
         }
 
         /// <summary>
@@ -185,7 +184,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 pluginEntity.Status = PluginStatus.Installed;
                 pluginService.Save(pluginEntity);
             }
-            return View("Index", PluginHelper.GetAvailablePlugins());
+            return RedirectToAction(MVC.Admin.Module.Index());
         }
 
         /// <summary>
@@ -220,7 +219,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 pluginService.Save(pluginEntity);
             }
 
-            return View("Index", PluginHelper.GetAvailablePlugins());
+            return RedirectToAction(MVC.Admin.Module.Index());
         }
     }
 }

@@ -8,6 +8,7 @@ using Core.Framework.Permissions.Models;
 using Framework.Facilities.NHibernate;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Core.Forms.NHibernate.Services
 {
@@ -47,6 +48,21 @@ namespace Core.Forms.NHibernate.Services
             if (permissionCriteria != null)
                 criteria.Add(permissionCriteria);
             return criteria;
+        }
+
+        public int GetCount(ICriteria baseQuery)
+        {
+            return ((ICriteria) baseQuery.Clone()).SetProjection(Projections.Count("forms.Id")).UniqueResult<int>();
+        }
+
+        public ICriteria GetSearchQuery(String searchString, ICorePrincipal user, Int32 operationCode)
+        {
+            var basecriteria = GetAllowedFormsCriteria(user, operationCode);
+            if (String.IsNullOrEmpty(searchString))
+            {
+                return basecriteria;
+            }
+            return basecriteria.Add(Restrictions.Like("forms.Title", searchString, MatchMode.Anywhere));
         }
 
         #endregion
