@@ -83,9 +83,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\FormAnswersController.cs" />
     <Compile Include="Controllers\FormsBuilderWidgetController.cs" />
     <Compile Include="Controllers\FormsController.cs" />

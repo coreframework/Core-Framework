@@ -26,7 +26,6 @@ public static class FormsMVC {
     public static Core.Forms.Controllers.FormAnswersController FormAnswers = new Core.Forms.Controllers.T4MVC_FormAnswersController();
     public static Core.Forms.Controllers.FormsBuilderWidgetController FormsBuilderWidget = new Core.Forms.Controllers.T4MVC_FormsBuilderWidgetController();
     public static Core.Forms.Controllers.FormsController Forms = new Core.Forms.Controllers.T4MVC_FormsController();
-    public static T4MVC.AdminController Admin = new T4MVC.AdminController();
 }
 
 namespace T4MVC {
