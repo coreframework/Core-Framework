@@ -262,7 +262,8 @@ namespace Core.Web.Areas.Admin.Controllers
                 Columns = columns,
                 MultiSelect = true,
                 IsRowNotClickable = true,
-                SelectedIds = user.UserGroups.Select(t => t.Id)
+                SelectedIds = user.UserGroups.Select(t => t.Id),
+                Title = user.Username
             };
             
             return View(model);

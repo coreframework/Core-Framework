@@ -68,16 +68,13 @@ namespace Core.ContentPages.Controllers
                                                              {
                                                                  Name = "Title", 
                                                                  Index = "Title",
-                                                                 Width = 400
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 30,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 30,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -127,8 +124,8 @@ namespace Core.ContentPages.Controllers
                                             Url.Action("ShowById","ContentPage",new { id = contentPage.Id }),"View"),
                                         String.Format("<a href=\"{0}\">{1}</a>",
                                             Url.Action("Edit","ContentPage",new { id = contentPage.Id }),"Edit"),
-                                        String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Remove","ContentPage",new { id = contentPage.Id }),"Remove")}
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                            Url.Action("Remove","ContentPage",new { id = contentPage.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);

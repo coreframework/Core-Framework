@@ -3,25 +3,8 @@
         <% if (Request.IsAuthenticated)
            { %>
 			    <span><%: Page.User.Identity.Name %></span>
-                <a class="sign" href="<%= Url.Action(MVC.Users.DeleteUserSession()) %>">Sign Out</a>
-<%--                <div class="btn_login">
-                    <em></em> 
-                        <input type="button" id="SignOut" value="Sign Out" />
-                    <strong></strong>
-                </div>--%>
+                <a href="<%= Url.Action(MVC.Users.DeleteUserSession()) %>"><span class="sign">Sign Out</span></a>
         <% } else { %>
                 <a class="sign" href="<%= Url.Action(MVC.Users.NewUserSession()) %>">Sign In</a>
-<%--                <div class="btn_login">
-                    <em></em>
-                    <input type="button" id="SignIn" value="<%= Html.Translate(".SignIn") %>" />
-                    <strong></strong>
-                </div>--%>
         <% } %>
 </div>
-<%--
-<script type="text/javascript">
-    $(function () {
-        $('#SignOut').click(function () { window.location = "<%= Url.Action(MVC.Users.DeleteUserSession()) %>"; });
-        $('#SignIn').click(function () { window.location = "<%= Url.Action(MVC.Users.NewUserSession()) %>"; });
-    });
-</script>--%>

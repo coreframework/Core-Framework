@@ -7,9 +7,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using System.Linq;
+using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Contracts;
+using Core.Framework.Permissions.Extensions;
+using Core.Framework.Permissions.Models;
+using Core.Web.Areas.Admin.Controllers;
+using Core.Web.NHibernate.Models;
 using Framework.MVC.Extensions;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Helpers
 {
@@ -18,15 +26,57 @@ namespace Core.Web.Areas.Admin.Helpers
     /// </summary>
     public static class MenuExtension
     {
+        private static Dictionary<string, IEnumerable<IMenuItem>> InitializeMenu(HttpContext context)
+        {
+            var menuItems = new Dictionary<string, IEnumerable<IMenuItem>>();
+            var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            var user = context.CorePrincipal();
+            bool isUsersAllowed = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(User), null);
+            bool isUserGroupsAllowed = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(UserGroup), null);
+            bool isRolesAllowed = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Role), null);
+            if (isUsersAllowed || isUserGroupsAllowed || isRolesAllowed)
+            {
+                var usersMenuItem = new List<IMenuItem>();
+                if (isUsersAllowed)
+                {
+                    usersMenuItem.Add(new ActionLink<UserController>("Users", "~/Content/images/admin/ico1.png", c => c.Index()) );
+                }
+                if (isUserGroupsAllowed)
+                {
+                    usersMenuItem.Add(new ActionLink<UserGroupController>("UserGroups", "~/Content/images/admin/ico2.png", c => c.Index()) );
+                }
+                if (isUsersAllowed)
+                {
+                    usersMenuItem.Add(new ActionLink<RoleController>("Roles", "~/Content/images/admin/ico3.png", c => c.Index()) );
+                }
+                menuItems.Add("Users", usersMenuItem);
+            }
+            if (permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Plugin), null))
+            {
+                menuItems.Add("Modules", new IMenuItem[] { new ActionLink<ModuleController>("Modules", "~/Content/images/admin/ico5.png", c => c.Index()), new ActionLink<WidgetController>("Widgets", "~/Content/images/admin/ico6.png", c => c.Index()), });
+            }
+
+            var pluginHelper = ServiceLocator.Current.GetInstance<IPluginHelper>();
+            var usersMenuItem1 = (from verb in Application.GetVerbsForCategory("AdminModules")
+                                  where pluginHelper.IsPluginEnabled(verb.ControllerPluginIdentifier) && verb.IsAllowed(context.CorePrincipal())
+                                  select new RouteLink(verb.Name, "~/Content/images/admin/ico3.png", verb.RouteName)).Cast<IMenuItem>().ToList();
+            menuItems.Add("Plugins", usersMenuItem1);
+
+            return menuItems;
+        }
+
         /// <summary>
         /// Renders admin area main menu.
         /// </summary>
         /// <param name="html">The HTML helper instance that this method extends.</param>
         /// <param name="url">The URL helper.</param>
-        /// <param name="items">Menu items.</param>
-        /// <returns>Html markup for admin main menu.</returns>
-        public static MvcHtmlString RenderMenu(this HtmlHelper html, UrlHelper url, Dictionary<String, IEnumerable<IMenuItem>> items)
+        /// <param name="context">The context.</param>
+        /// <returns>
+        /// Html markup for admin main menu.
+        /// </returns>
+        public static MvcHtmlString RenderMenu(this HtmlHelper html, UrlHelper url, HttpContext context)
         {
+            var items = InitializeMenu(context);
             var activeSection = String.Empty;
             foreach (var section in items)
             {

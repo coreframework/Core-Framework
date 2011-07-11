@@ -183,11 +183,9 @@
     </Content>
     <Content Include="Views\Admin\New.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Views\Admin\Edit.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>ASPXCodeBehind</SubType>
     </Content>
     <Content Include="Views\Admin\Show.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

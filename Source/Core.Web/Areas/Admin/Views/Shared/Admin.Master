@@ -12,7 +12,7 @@
      <!--[if lte IE 6]><%= Html.CssInclude("admin/style_ie.css") %><![endif]-->
 
      <%--<%= Html.JavascriptInclude("jquery-1.5.1.min.js")%>--%>
-     <%: Html.JavascriptPackInclude("base")%>
+     <%: Html.JavascriptPackInclude("adminbase")%>
      <%: Html.JavascriptPackInclude("adminui") %>
      <%: Html.JavascriptPackInclude("ajax") %>
      <%: Html.JavascriptPackInclude("fckeditor")%> 
@@ -64,7 +64,7 @@
     <div id="footer">
 	    <div class="footer_i">
 		    <div class="copyright">&copy; 2011 Core Framework</div>
-		    <div class="f_links"><a href="#">Terms & conditions</a> l <a href="#">Privacy Policy</a></div>
+<%--		    <div class="f_links"><a href="#">Terms & conditions</a> l <a href="#">Privacy Policy</a></div>--%>
 	    </div>
     </div>
 

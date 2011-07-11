@@ -103,6 +103,14 @@ namespace Framework.MVC.Grids
         /// </value>
         public IEnumerable<long> SelectedIds { get; set; }
 
+        /// <summary>
+        /// Gets or sets the module title.
+        /// </summary>
+        /// <value>
+        /// The title.
+        /// </value>
+        public String Title { get; set; }
+
         #endregion
     }
 }

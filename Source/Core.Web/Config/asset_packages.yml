@@ -2,6 +2,16 @@
   base:
     - jquery-1.5.1.js
     - jquery.json-2.2.min.js
+  adminbase:
+    - jquery-1.5.1.js
+    - jquery.watermark.js
+    - jquery.qtip-1.0.0.js
+    - jquery.corner.js
+    - jquery.form.js
+    - jquery.blockUI.js
+    - jquery.json-2.2.min.js
+    - framework.js
+    - application.js
   ajaxmvc:
     - MicrosoftAjax.js
     - MicrosoftMvcAjax.js

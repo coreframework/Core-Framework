@@ -172,7 +172,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 			table.ui-jqgrid-btable th {background:url(../../images/admin/e_table_th_bg.gif) repeat-x 0 0;height:33px;color:#fff;font-size:13px;vertical-align:middle} 
 				table.ui-jqgrid-btable th div {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px 8px;}
 				table.ui-jqgrid-btable th:first-child span {background:none}
-			table.ui-jqgrid-btable td {border-bottom:#e7e7e7 solid 1px;padding:8px 20px 3px 8px;color:#474747;}
+			table.ui-jqgrid-btable td {border-bottom:#e7e7e7 solid 1px;padding:8px 0px 3px 8px;color:#474747;}
 				table.ui-jqgrid-btable td a {text-decoration:none}
 				table.ui-jqgrid-btable td input[type=checkbox] {margin:0;}
 					table.ui-jqgrid-btable td a:hover {text-decoration:underline}
@@ -506,6 +506,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 .sign { color: white !important; font-size: 14px; font-weight: bold;  padding-right: 5px;}
+#alertmod { display: none;}
 
 
 
