@@ -320,10 +320,10 @@ namespace Core.Web.Controllers
                 isSuccessed = pageSettingService.Save(pageSetting);
                 model.SettingId = pageSetting.Id;
             }
-
-            TempData.Add(Constants.ActionResult, isSuccessed);
-            String resultMessage = isSuccessed ? ".Successful" : ".Error";
-            TempData.Add(Constants.ActionResultMessage, resultMessage);
+            if (isSuccessed)
+                Success(Translate("Messages.Success"));
+            else
+                Error(Translate("Messages.UnknownError"));
             return PartialView(MVC.Pages.Views.PageLookAndFeelForm, model);
         }
 
@@ -508,6 +508,7 @@ namespace Core.Web.Controllers
                     TempData["Success"] = true;
                 }
             }
+            else Error(Translate("Messages.ValidationError"));
 
             return PartialView(MVC.Pages.Views.PageCommonSettings, model);
         }
@@ -559,9 +560,11 @@ namespace Core.Web.Controllers
                 isSuccessed = pageSettingService.Save(pageSettings);
                 model.SettingId = pageSettings.Id;
             }
-            TempData.Add(Constants.ActionResult, isSuccessed);
-            String resultMessage = isSuccessed ? ".Successful" : ".Error";
-            TempData.Add(Constants.ActionResultMessage, resultMessage);
+
+            if (isSuccessed)
+                Success(Translate("Messages.Success"));
+            else
+                Error(Translate("Messages.UnknownError"));
 
             return PartialView(MVC.Pages.Views.PageCSSForm, model);
         }
@@ -652,10 +655,11 @@ namespace Core.Web.Controllers
                 isSuccessed = widgetSettingService.Save(widgetSetting);
                 model.SettingId = widgetSetting.Id;
             }
-            TempData.Add(Constants.ActionResult, isSuccessed);
-            String resultMessage = isSuccessed ? ".Successful" : ".Error";
-            TempData.Add(Constants.ActionResultMessage, resultMessage);
-
+            if (isSuccessed)
+                Success(Translate("Messages.Success"));
+            else
+                Error(Translate("Messages.UnknownError"));
+        
             return PartialView(MVC.Shared.Views.Widgets.WidgetLookAndFeelForm, model);
         }
 
@@ -694,9 +698,10 @@ namespace Core.Web.Controllers
                 isSuccessed = isSuccessed && pageSettingService.Save(pageSettings);
                 model.PageCssModel.SettingId = pageSettings.Id;
             }
-            TempData.Add(Constants.ActionResult, isSuccessed);
-            String resultMessage = isSuccessed ? ".Successful" : ".Error";
-            TempData.Add(Constants.ActionResultMessage, resultMessage);
+            if (isSuccessed)
+                Success(Translate("Messages.Success"));
+            else
+                Error(Translate("Messages.UnknownError"));
 
             return PartialView(MVC.Shared.Views.Widgets.WidgetCSSForm, model);
         }

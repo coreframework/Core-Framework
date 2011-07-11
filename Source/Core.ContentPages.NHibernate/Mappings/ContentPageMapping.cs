@@ -15,6 +15,12 @@ namespace Core.ContentPages.NHibernate.Mappings
             Id(contentPage => contentPage.Id);
             Map(contentPage => contentPage.Title).Length(255);
             Map(contentPage => contentPage.Content);
+
+            HasMany(page => page.Widgets).KeyColumn("ContentPageId")
+            .Table("ContentPageWidgets")
+            .Inverse()
+            .LazyLoad()
+            .Cascade.All();
         }
     }
 }

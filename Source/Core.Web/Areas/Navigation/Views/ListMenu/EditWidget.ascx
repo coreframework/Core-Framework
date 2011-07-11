@@ -5,14 +5,16 @@
     <%: Html.ValidationSummary(true) %>
     <input type="hidden" id="widgetId" name="widgetId" value="<%= Html.Encode(Model.Id) %>" />
     <input type="hidden" id="Id" name="Id" value="<%= Html.Encode(Model.Id) %>" />
-    <fieldset>
+    <div class="form_i">
        <%:Html.Label("Select pages to display") %>
        <%=Html.RenderTree(Model.PagesTree, "list-menu",
                                       model =>Html.Partial(MVC.Navigation.ListMenu.Views.ListMenuPageItem,model).ToString())%>
-        <%:Html.LabelFor(model=>model.Orientation) %>
-        <%:Html.DropDownListFor("Orientation", Model.Orientation, new { @Class = "select-400 text ui-widget-content ui-corner-all" })%>
+    </div>
+    <div class="form_i">
+        <%:Html.LabelFor(model=>model.Orientation) %><br/>
+        <%:Html.DropDownListFor("Orientation", Model.Orientation, new {})%>
         <%:Html.ValidationMessageFor(model=>model.Orientation) %>
-    </fieldset>
+    </div>
     <%:Html.AntiForgeryToken()%>
 </div>
 

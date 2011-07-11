@@ -4,36 +4,36 @@
 <% using (Ajax.BeginForm("ApplyPagePermissions", "Pages", new AjaxOptions() { OnComplete = "completePermissionsUpdates" }))
    { %>
    <%:Html.HiddenFor(model=>model.EntityId) %>
-    <table class="permissions-grid">
-        <thead>
-            <th>
-                <%=Html.Translate(".Role") %>
-            </th>
-            <%foreach (var operation in Model.Operations) {%>
+     <div class="form_area overflow_x_a">
+        <table class="permissions-grid">
+            <thead>
                 <th>
-                    <%=Html.Encode(operation.Title)%>
+                    <%=Html.Translate(".Role") %>
                 </th>
-            <%} %>
-        </thead>
-        <tbody>
-            <%foreach (var role in Model.Roles) {%>
-             <tr>
-                <td>
-                    <%=Html.Encode(role.Name) %>
-                </td>
                 <%foreach (var operation in Model.Operations) {%>
-                    <td class="chbx">
-                         <%=Html.OperationCheckbox("actions", role.Id, operation.Key, Model.Permissions.Where(permission => permission.RoleId == role.Id))%>
+                    <th>
+                        <%=Html.Encode(operation.Title)%>
+                    </th>
+                <%} %>
+            </thead>
+            <tbody>
+                <%foreach (var role in Model.Roles) {%>
+                 <tr>
+                    <td>
+                        <%=Html.Encode(role.Name) %>
                     </td>
-                <%}%>
-               </tr>
-            <%} %>
-        </tbody>
-    </table>
-    <div class="ui-dialog-buttonpane">
-        <div class="ui-dialog-buttonset">
-            <%: Html.Submit("Save", new { Class = "ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" })%>
-        </div>
+                    <%foreach (var operation in Model.Operations) {%>
+                        <td class="chbx">
+                             <%=Html.OperationCheckbox("actions", role.Id, operation.Key, Model.Permissions.Where(permission => permission.RoleId == role.Id))%>
+                        </td>
+                    <%}%>
+                   </tr>
+                <%} %>
+            </tbody>
+        </table>
+    </div>
+     <div class="p_footer clrfix">
+	    <div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button" })%><strong></strong></div>
     </div>
 <%} %>
 <script type="text/javascript">

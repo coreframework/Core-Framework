@@ -4,40 +4,32 @@
     <%: Html.Translate(".Title")%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <%: Html.ValidationSummary(true) %>
-    <div class="span-12 prepend-6 prepend-top">
-        <div class="form login-form">
+    <div class="login-form">
+     <div class="form_area">
             <% using (Html.BeginForm(MVC.Users.CreateUserSession(), FormMethod.Post))
                {%>
-            <fieldset style="padding: 1.4em">
-                <legend>
-                    <%: Html.Translate(".Title")%></legend>
-                <div>
-                    <label>
-                        <%:Html.Translate(".UsernameOrEmail")%>
-                    </label>
-                    <%: Html.TextBoxFor(model => model.UsernameOrEmail) %>
+                <h3><%: Html.Translate(".Title")%></h3>
+                <%: Html.ValidationSummary(true) %>
+                <div class="form_i">
+                    <label><%:Html.Translate(".UsernameOrEmail")%></label><br/>
+                    <%: Html.TextBoxFor(model => model.UsernameOrEmail, new { Class = "inp_txt w_365" })%>
                 </div>
-                <div>
-                    <label>
-                        <%:Html.Translate(".Password")%>
-                    </label>
-                    <%: Html.PasswordFor(model => model.Password)%>
+                <div class="form_i">
+                    <label><%:Html.Translate(".Password")%></label><br/>
+                    <%: Html.PasswordFor(model => model.Password, new { Class = "inp_txt w_365" })%>
                 </div>
-                <p>
-                    <label>
-                        <%:Html.Translate(".RememberMe")%>
-                    </label>
+                 <div class="form_i">
                     <%: Html.CheckBoxFor(model => model.RememberMe) %>
-                </p>
+                    <label><%:Html.Translate(".RememberMe")%></label>
+                </div>
                 <p>
-                    <%: Html.HiddenSubmit(Html.Translate(".SignIn")) %>
-                    <%: Html.LinkSubmitButton(Html.Translate(".SignIn"))%>
+                    <div class="btn1"><em></em><%: Html.Submit(Html.Translate(".SignIn"), new { Class = "button" })%><strong></strong></div>
                 </p>
                 <%: Html.HiddenFor(model => model.ReturnUrl) %>
                 <%: Html.AntiForgeryToken() %>
-            </fieldset>
+          
             <% } %>
+            <div class="clear"></div>
         </div>
     </div>
 </asp:Content>

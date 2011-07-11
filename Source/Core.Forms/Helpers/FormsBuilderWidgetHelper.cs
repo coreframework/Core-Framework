@@ -24,8 +24,17 @@ namespace Core.Forms.Helpers
         public static FormBuilderWidgetViewModel SaveFormBuilderWidget(FormBuilderWidgetViewModel model)
         {
             var widgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
-            var contentViewer = model.MapTo(new FormBuilderWidget());
-            widgetService.Save(contentViewer);
+            var widget = new FormBuilderWidget();
+            if (model.Id>0)
+                widget = widgetService.Find(model.Id);
+
+            var contentViewer = model.MapTo(widget);
+
+            if (widget!=null)
+            {
+                widgetService.Save(contentViewer);
+            }
+          
             return new FormBuilderWidgetViewModel().MapFrom(contentViewer);
         }
 

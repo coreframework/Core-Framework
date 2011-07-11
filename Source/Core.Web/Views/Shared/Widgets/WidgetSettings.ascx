@@ -26,12 +26,13 @@
 <script type="text/javascript">
     $(function () {
         $(".tabs").tabs({
-            ajaxOptions: {
+            ajaxOptions: { cache: false,
                 error: function (xhr, status, index, anchor) {
                     $(anchor.hash).html(
-						"Couldn't load this tab. We'll try to fix this as soon as possible");
+                    "Couldn't load this tab. We'll try to fix this as soon as possible");
                 }
             }
         });
     });
 </script>
+

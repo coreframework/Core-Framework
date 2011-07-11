@@ -16,6 +16,14 @@ namespace Core.Forms.NHibernate.Models
         #region Properties
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FormBuilderWidget"/> class.
+        /// </summary>
+        public FormBuilderWidget()
+        {
+            _answers = new List<FormWidgetAnswer>();
+        }
+
+        /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>

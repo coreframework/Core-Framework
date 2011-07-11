@@ -15,7 +15,7 @@ namespace Core.Forms.Helpers
 
         private const String FormsAnswerValueTemplate = "FormsAnswerValueTemplate.txt";
 
-        private const String FormsTemplatesDirectory = "Content\\Templates\\";
+        private const String FormsTemplatesDirectory = "\\Content\\Templates\\";
 
         private const String FormsEmailSubjectTemplate = "{0}: {1}";
 

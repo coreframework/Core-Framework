@@ -315,6 +315,8 @@ namespace Links {
                       
         public static readonly string colorpicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/colorpicker.min.js") ? Url("colorpicker.min.js") : Url("colorpicker.js");
                       
+        public static readonly string ddsmoothmenu_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ddsmoothmenu.min.js") ? Url("ddsmoothmenu.min.js") : Url("ddsmoothmenu.js");
+                      
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class fck {
             private const string URLPATH = "~/Scripts/fck";
@@ -1465,11 +1467,11 @@ namespace Links {
         
         }
     
-        public static readonly string jquery_1_4_1_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.1-vsdoc.min.js") ? Url("jquery-1.4.1-vsdoc.min.js") : Url("jquery-1.4.1-vsdoc.js");
+        public static readonly string jquery_1_5_1_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.5.1-vsdoc.min.js") ? Url("jquery-1.5.1-vsdoc.min.js") : Url("jquery-1.5.1-vsdoc.js");
                       
-        public static readonly string jquery_1_4_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.1.min.js") ? Url("jquery-1.4.1.min.js") : Url("jquery-1.4.1.js");
+        public static readonly string jquery_1_5_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.5.1.min.js") ? Url("jquery-1.5.1.min.js") : Url("jquery-1.5.1.js");
                       
-        public static readonly string jquery_1_4_1_min_js = Url("jquery-1.4.1.min.js");
+        public static readonly string jquery_1_5_1_min_js = Url("jquery-1.5.1.min.js");
         public static readonly string jquery_asyncUpload_0_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-asyncUpload-0.1.min.js") ? Url("jquery-asyncUpload-0.1.min.js") : Url("jquery-asyncUpload-0.1.js");
                       
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1609,9 +1611,8 @@ namespace Links {
                 public static readonly string jquery_ui_1_8_11_custom_css = Url("jquery-ui-1.8.11.custom.css");
             }
         
-            public static readonly string main_css = Url("main.css");
-            public static readonly string print_css = Url("print.css");
-            public static readonly string screen_css = Url("screen.css");
+            public static readonly string reset_css = Url("reset.css");
+            public static readonly string styles_css = Url("styles.css");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1628,6 +1629,7 @@ namespace Links {
             private const string URLPATH = "~/Content/Images";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string add_new_bg_gif = Url("add_new_bg.gif");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Admin {
                 private const string URLPATH = "~/Content/Images/Admin";
@@ -1733,6 +1735,15 @@ namespace Links {
                 public static readonly string zaglushka4_png = Url("zaglushka4.png");
             }
         
+            public static readonly string bg_main_png = Url("bg_main.png");
+            public static readonly string btn_add_new_page_gif = Url("btn_add_new_page.gif");
+            public static readonly string btn_pu_content_png = Url("btn_pu_content.png");
+            public static readonly string btn_pu_left_png = Url("btn_pu_left.png");
+            public static readonly string btn_pu_right_png = Url("btn_pu_right.png");
+            public static readonly string btn2_c_gif = Url("btn2_c.gif");
+            public static readonly string btn2_l_gif = Url("btn2_l.gif");
+            public static readonly string btn2_r_gif = Url("btn2_r.gif");
+            public static readonly string close_ico_png = Url("close_ico.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class colorpicker {
                 private const string URLPATH = "~/Content/Images/colorpicker";
@@ -1766,6 +1777,13 @@ namespace Links {
                 public static readonly string slider_png = Url("slider.png");
             }
         
+            public static readonly string curr_bg_gif = Url("curr_bg.gif");
+            public static readonly string curr_c_bg_gif = Url("curr_c_bg.gif");
+            public static readonly string footer_bg_gif = Url("footer_bg.gif");
+            public static readonly string footer_menu_sep_gif = Url("footer_menu_sep.gif");
+            public static readonly string header_bg_gif = Url("header_bg.gif");
+            public static readonly string ico_open_png = Url("ico_open.png");
+            public static readonly string ico_right_png = Url("ico_right.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class icons {
                 private const string URLPATH = "~/Content/Images/icons";
@@ -1774,6 +1792,7 @@ namespace Links {
                 public static readonly string close_png = Url("close.png");
             }
         
+            public static readonly string ie_v_png = Url("ie_v.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class jquery_ui {
                 private const string URLPATH = "~/Content/Images/jquery-ui";
@@ -1813,6 +1832,18 @@ namespace Links {
                 public static readonly string Layout6_png = Url("Layout6.png");
             }
         
+            public static readonly string li_del_gif = Url("li_del.gif");
+            public static readonly string logo_gif = Url("logo.gif");
+            public static readonly string logo_core_png = Url("logo_core.png");
+            public static readonly string mode_body_png = Url("mode_body.png");
+            public static readonly string mode_left_png = Url("mode_left.png");
+            public static readonly string mode_right_png = Url("mode_right.png");
+            public static readonly string mode_sep_png = Url("mode_sep.png");
+            public static readonly string nav_del_gif = Url("nav_del.gif");
+            public static readonly string nav_del_bg_png = Url("nav_del_bg.png");
+            public static readonly string nav_r_gif = Url("nav_r.gif");
+            public static readonly string nav_r_bg_png = Url("nav_r_bg.png");
+            public static readonly string nav_sub_bg_active_gif = Url("nav_sub_bg_active.gif");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class navigation {
                 private const string URLPATH = "~/Content/Images/navigation";
@@ -1825,6 +1856,25 @@ namespace Links {
                 public static readonly string plus_png = Url("plus.png");
             }
         
+            public static readonly string new_page_ico_png = Url("new_page_ico.png");
+            public static readonly string o_sep_png = Url("o_sep.png");
+            public static readonly string popup_close_gif = Url("popup_close.gif");
+            public static readonly string t_sep_png = Url("t_sep.png");
+            public static readonly string tab_active_c_png = Url("tab_active_c.png");
+            public static readonly string tab_active_l_png = Url("tab_active_l.png");
+            public static readonly string tab_active_r_png = Url("tab_active_r.png");
+            public static readonly string tab_all_center_gif = Url("tab_all_center.gif");
+            public static readonly string tab_all_left_gif = Url("tab_all_left.gif");
+            public static readonly string tab_all_right_gif = Url("tab_all_right.gif");
+            public static readonly string tab_bg_gif = Url("tab_bg.gif");
+            public static readonly string tab_c_png = Url("tab_c.png");
+            public static readonly string tab_l_png = Url("tab_l.png");
+            public static readonly string tab_r_png = Url("tab_r.png");
+            public static readonly string widget_delete_gif = Url("widget_delete.gif");
+            public static readonly string widget_edit_gif = Url("widget_edit.gif");
+            public static readonly string widget_f_bg_gif = Url("widget_f_bg.gif");
+            public static readonly string widget_img_jpg = Url("widget_img.jpg");
+            public static readonly string widget_t_bg_gif = Url("widget_t_bg.gif");
         }
     
         public static readonly string swfupload_license_txt = Url("swfupload license.txt");

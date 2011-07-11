@@ -35,6 +35,11 @@
                 <td>
                    <%:Html.RouteLink(Html.Translate(".Permissions"), new { controller = "Forms", action = "ShowPermissions", formId = form.Id })%><br/>
                    <%:Html.RouteLink(Html.Translate(".Details"), new { controller = "Forms", action = "Edit", formId = form.Id })%><br/>
+                   <% using (Html.BeginForm(FormsMVC.Forms.Remove(form.Id), FormMethod.Post))
+                    { %>
+                        <%: Html.LinkSubmitButton("Remove")%>
+                      
+                   <% } %>
                 </td>
             </tr>
             <% } %>

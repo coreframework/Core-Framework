@@ -22,7 +22,6 @@ namespace Core.Web.Migrations
                 t.Double("FontSizeValue").Null();
                 t.String("FontSizeUnit").Length(50).Null();
                 t.String("Color").Length(7).Null();
-                t.Text("Content").Null();
                 t.Double("WidthValue").Null();
                 t.String("WidthUnit").Length(50).Null();
                 t.Double("HeightValue").Null();

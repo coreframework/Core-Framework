@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.Collections.Generic.IEnumerable<Core.Web.NHibernate.Models.Widget>>" %>
-<div>
-    Click on any of the item to add it to your page
-    <br/>
-    <br/>
+<%@ Import Namespace="Framework.Core.Infrastructure" %>
+
+<%:Html.Message(MessageType.Info, Html.Translate(".AddWidget")) %>
+<div class="form_area">
     <ul class="widgets">
         <%foreach (var item in Model) {%>
            <li>
@@ -13,7 +13,7 @@
 </div>
 <script type="text/javascript">
     function addWidget(content) {
-        $('#tblLayoutHolder td.column').first().prepend(content.get_data());
+        $('#tblLayoutHolder table td.column').first().prepend(content.get_data());
         iNettutsInit();
      }
      function addLinkCss(content) {

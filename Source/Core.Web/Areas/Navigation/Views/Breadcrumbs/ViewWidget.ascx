@@ -2,8 +2,9 @@
 
 <ul class="breadcrumbs">
     <%foreach (var item in Model) {%>
-        <li <%=item==Model.Last()?"class=\"last\"":""%>>
+        <li>
             <%=Html.ActionLink(Html.Encode(item.Title), item.IsHomePage?MVC.Home.Index():MVC.Pages.Show(item.Url))%>
+            <%=item != Model.Last() ? "&raquo;" : ""%>
         </li>
     <% }%>
 </ul>

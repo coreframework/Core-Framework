@@ -33,6 +33,11 @@ namespace Framework.MVC.Extensions
         /// </summary>
         public const String DefaultToolTipImage = "~/Content/images/icons/tooltip.png";
 
+        /// <summary>
+        /// Validation message Css template.
+        /// </summary>
+        public const String ValidationMessageCssTemplate = "validation_{0}";
+
         #endregion
 
         #region Extensions
@@ -90,7 +95,7 @@ namespace Framework.MVC.Extensions
                 {
                     var message = messages.Dequeue();
                     var builder = new TagBuilder("div");
-                    builder.AddCssClass(message.MessageType.ToString().ToLowerInvariant());
+                    builder.AddCssClass(String.Format(ValidationMessageCssTemplate, message.MessageType.ToString().ToLowerInvariant()));
                     builder.SetInnerText(message.Text);
                     result.Append(builder.ToString(TagRenderMode.Normal));
                 }
@@ -113,7 +118,7 @@ namespace Framework.MVC.Extensions
             if (!String.IsNullOrEmpty(message))
             {
                 var builder = new TagBuilder("div");
-                builder.AddCssClass(messageType.ToString().ToLowerInvariant());
+                builder.AddCssClass(String.Format(ValidationMessageCssTemplate, messageType.ToString().ToLowerInvariant()));
                 builder.SetInnerText(message);
                 result.Append(builder.ToString(TagRenderMode.Normal));
             }

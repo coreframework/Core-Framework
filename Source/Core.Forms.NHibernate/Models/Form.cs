@@ -15,6 +15,12 @@ namespace Core.Forms.NHibernate.Models
     [Export(typeof(IPermissible))]
     public class Form: Entity, IPermissible
     {
+        #region Fields
+
+        private readonly IList<FormElement> _formElements;
+
+        #endregion
+
         #region Constructor
 
         /// <summary>
@@ -24,6 +30,8 @@ namespace Core.Forms.NHibernate.Models
         {
             PermissionTitle = "Forms";
             Operations = OperationsHelper.GetOperations<FormOperations>();
+
+            _formElements = new List<FormElement>();
         }
 
         #endregion
@@ -46,7 +54,10 @@ namespace Core.Forms.NHibernate.Models
         /// Gets or sets the form elements.
         /// </summary>
         /// <value>The form elements.</value>
-        public virtual IEnumerable<FormElement> FormElements { get; set; }
+        public virtual IEnumerable<FormElement> FormElements
+        {
+            get { return _formElements; }
+        }
 
         #endregion
 

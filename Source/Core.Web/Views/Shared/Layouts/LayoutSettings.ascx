@@ -1,18 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.ChangeLayoutModel>" %>
 <%@ Import Namespace="Core.Web.Helpers.Layouts" %>
 <%@ Import Namespace="Core.Web.NHibernate.Models" %>
-<div class="ui-widget">
-    <div class="ui-state-highlight ui-corner-all" style="padding: 0pt 0.7em; display: none;">
-        <p id="successedResult" style="display: none;">
-            <span class="ui-icon ui-icon-info" style="float: left; margin-right: 0.3em;"></span>
-            <%:Html.Translate(".Successful")%>
-        </p>
-        <p id="notSuccessedResult" style="display: none;">
-            <span class="ui-icon ui-icon-alert" style="float: left; margin-right: 0.3em;"></span>
-            <%:Html.Translate(".Error")%>
-        </p>
-    </div>
-</div>
 <div class="form_area">
     <fieldset>
         <%
@@ -24,8 +12,7 @@
                 <label style="display: inline">
                     Row
                     <%=rowIndex++ %>:</label>
-                <input type="text" class="columnWidthSliderAmount" style="border: 0; color: #f6931f;
-                    font-weight: bold;" />
+                <input type="text" class="columnWidthSliderAmount"/>
             </p>
             <div id="columnWidthSlider_<%=row.Id %>" class="columnWidthSlider" rowid="<%=row.Id %>">
             </div>
@@ -113,16 +100,12 @@ slide: function( event, ui ) {
     </fieldset>
     <%:Html.AntiForgeryToken()%>
 </div>
-<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-    <div class="ui-dialog-buttonset">
-        <button type="button" role="button" aria-disabled="false" class="save ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
-            <span class="ui-button-text">Save</span>
-        </button>
-    </div>
+ <div class="p_footer clrfix">
+	<div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button change-layout-btn" })%><strong></strong></div>
 </div>
 <script type="text/javascript">
     $(function () {
-        $('.save', $('.form_area').parent()).click(function () {
+        $('.change-layout-btn', $('.form_area').parent()).click(function () {
             var postData = { 
                 LayoutId: <%=Model.CurrentLayout.Id %>,
                 RowsSetting: [] 
@@ -147,14 +130,14 @@ slide: function( event, ui ) {
                 dataType: 'json',
                 data: $.toJSON(postData),
                 success: function (result) {
-                    $('#layoutSettings #successedResult').parent().show();
+                    $('#successedResult').show();
                     if(result.IsSuccessed) {
-                        $('#layoutSettings #notSuccessedResult').hide();
-                        $('#layoutSettings #successedResult').show();
+                        $('#notSuccessedResult').hide();
+                        $('#successedResult').show();
                     }
                     else {
-                        $('#layoutSettings #successedResult').hide();
-                        $('#layoutSettings #notSuccessedResult').show();
+                        $('#successedResult').hide();
+                        $('#notSuccessedResult').show();
                     }
                 }
             });

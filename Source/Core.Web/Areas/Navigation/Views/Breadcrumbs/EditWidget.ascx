@@ -3,11 +3,11 @@
     <%: Html.ValidationSummary(true) %>
     <input type="hidden" id="widgetId" name="widgetId" value="<%= Html.Encode(Model.Id) %>" />
     <input type="hidden" id="Id" name="Id" value="<%= Html.Encode(Model.Id) %>" />
-    <fieldset>
+    <div class="form_i">
         <%:Html.CheckBoxFor(model => model.ShowHomePage)%>
         <label class="checkbx-label">Show Home Page</label>
         <%:Html.ValidationMessageFor(model => model.ShowHomePage)%>
-    </fieldset>
+    </div>
     <%:Html.AntiForgeryToken()%>
 </div>
 

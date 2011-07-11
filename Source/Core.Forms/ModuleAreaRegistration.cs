@@ -27,9 +27,12 @@ namespace Core.Forms
             context.MapRoute(null, "admin/forms/edit-{formId}", FormsMVC.Forms.Edit(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.SaveForm", "admin/forms/save", FormsMVC.Forms.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/forms/new", FormsMVC.Forms.New());
+            context.MapRoute("Admin.RemoveForm", "admin/forms/remove-{id}", FormsMVC.Forms.Remove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            
             context.MapRoute(null, "admin/form-{formId}/new-element", FormsMVC.Forms.NewElement());
             context.MapRoute(null, "admin/form-{formId}/edit-element-{formElementId}", FormsMVC.Forms.EditElement());
             context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", FormsMVC.Forms.SaveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.RemoveFormElement", "admin/forms-element/remove-{id}", FormsMVC.Forms.RemoveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
             context.MapRoute("Admin.FormsAnswers", "admin/forms-answers", FormsMVC.FormAnswers.ShowAll(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/forms-answers/DynamicGridData", FormsMVC.FormAnswers.FormAnswersDynamicGridData());

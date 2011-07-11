@@ -1,6 +1,2 @@
-﻿.form_area{
-}
-
-.form-element { background: url('../images/close.png')}
-
-.asd { background: url('../images/close.png');}
+﻿.widget-form h3 {margin-bottom:15px;color:#000;}
+.widget-form input[type=text], .widget-form textarea {width:460px;}

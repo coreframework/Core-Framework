@@ -1,8 +1,46 @@
-.container {
-	height:100%;
-}
+/**
+* @bugfix IE HasLayot adding
+* @affected IE6, IE7
+* @css-for IE6, IE7
+* @valid no
+*/
+.clrfix {$zoom:1;}
 
-.clear {
-	clear:both;
-	height:1px;
-}
+
+/**
+* @bugfix IE inline-blocks support
+* @affected IE6, IE7
+* @css-for IE6, IE7
+* @valid no
+*/
+selector  {$zoom:1; $display:inline;}
+
+/**
+* @bugfix IE all versions custom fixes
+* @affected IE
+* @css-for IE
+* @valid yes
+*/
+
+
+
+
+/**
+* @bugfix IE7 and older custom fixes
+* @affected IE7-
+* @css-for IE7-
+* @valid yes
+*/
+
+
+
+/**
+* @bugfix IE6 only custom fixes
+* @affected IE6
+* @css-for IE6
+* @valid yes
+*/
+
+/*
+*html selector {}
+*/

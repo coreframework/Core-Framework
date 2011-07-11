@@ -164,6 +164,19 @@ namespace Core.Forms.Controllers
             return View("Admin/FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
         }
 
+
+        [HttpPost]
+        public virtual ActionResult Remove(long id)
+        {
+            var form = _formsService.Find(id);
+            if (form != null)
+            {
+                _formsService.Delete(form);
+            }
+
+            return RedirectToAction("ShowAll");
+        }
+
         /// <summary>
         /// Applies the permissions action.
         /// </summary>
@@ -407,6 +420,18 @@ namespace Core.Forms.Controllers
             }
 
             return View("Admin/EditFormElement", model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult RemoveElement(long id)
+        {
+            var formElement = _formsElementService.Find(id);
+            if (formElement != null)
+            {
+                _formsElementService.Delete(formElement);
+            }
+
+            return RedirectToAction("ShowFormElements", new { formId = formElement.Form.Id});
         }
 
         #endregion

@@ -1,8 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<WidgetLookAndFeelModel>" %>
 <%@ Import Namespace="Core.Web.Models" %>
 <div>
-    <h2 class="settings-header">
-        <%=Html.Translate(".LookAndFeel") %></h2>
     <% Html.RenderPartial(MVC.Shared.Views.Widgets.WidgetLookAndFeelForm, Model); %>
 </div>
 <script type="text/javascript">
@@ -23,7 +21,10 @@
             },
             onChange: function ($input, hex, rgb) {
                 var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
-                $('.widget-content', $widget).css($input.attr('Attr'), $input.val());
+                try {
+                    $('.widget-content', $widget).css($input.attr('Attr'), $input.val());
+                }
+                catch (err) { }
             }
         });
         $('select[attr=font-family]').change(function () {
@@ -52,14 +53,17 @@
             var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
             var $stylesHolder = $('.widget-content div', $widget).first();
             $stylesHolder.removeAttr('style');
-            var styles = $(this).val().split(";");
-            var i;
-            for (i = 0; i < styles.length; i++) {
-                var styleParts = styles[i].split(":");
-                if (styleParts.length == 2) {
-                    $stylesHolder.css($.trim(styleParts[0]), $.trim(styleParts[1]));
+            try {
+                var styles = $(this).val().split(";");
+                var i;
+                for (i = 0; i < styles.length; i++) {
+                    var styleParts = styles[i].split(":");
+                    if (styleParts.length == 2) {
+                        $stylesHolder.css($.trim(styleParts[0]), $.trim(styleParts[1]));
+                    }
                 }
             }
+            catch (err) { }
         });
         $('.reset', $('.form_area').parent()).click(function () {
             $('.form_area').find(':input').each(function () {
@@ -82,7 +86,7 @@
     function changeTwinFieldAttribute(attrName) {
         var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
         var value = parseFloat($('input[attr=' + attrName + ']').val());
-        var unit = $('select[attr='+attrName+']').val();
+        var unit = $('select[attr=' + attrName + ']').val();
         if (value && unit) {
             $('.widget-content', $widget).css(attrName, value + unit);
         } else {

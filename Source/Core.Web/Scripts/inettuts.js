@@ -10,8 +10,8 @@ var iNettuts = {
     settings: {
         columns: '.column',
         widgetSelector: '.widget',
-        handleSelector: '.widget-head',
-        contentSelector: '.widget-content',
+        handleSelector: '.widget_title',
+        contentSelector: '.widget_content',
         pageWidgetIdSelector: '#pageWidgetId',
         columnNumberSelector: '#column',
         orderNumberSelector: '#order',
@@ -105,12 +105,14 @@ var iNettuts = {
             $(this).parent().css({
                 width: $(this).parent().width() + 'px'
             });
+            $(this).bind('mousemove', function () { $(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('50px'); });
         }).mouseup(function () {
             if (!$(this).parent().hasClass('dragging')) {
                 $(this).parent().css({ width: '' });
             } else {
                 $(settings.columns).sortable('disable');
             }
+            $(this).unbind('mousemove');
         });
 
         $(settings.columns).sortable({
@@ -126,7 +128,7 @@ var iNettuts = {
             //containment: 'document',
             start: function (e, ui) {
                 $(ui.helper).addClass('dragging');
-                $(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('50px');
+                //$(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('50px');
                 $(settings.columns).addClass('column-placeholder');
             },
             stop: function (e, ui) {

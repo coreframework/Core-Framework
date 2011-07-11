@@ -1,6 +1,9 @@
 Actions:
     Save:"Save"
 Messages:
+  UnknownError: "Some error has been occured. Please try again."
+  ValidationError: "Validation errors occurred while processing this form."
+  Success: "Your request processed successfully."
   EmailShouldBeUnique: "The email address you entered is already in use."
   NicknameShouldBeUnique: "The nickname you entered is already in use."
   RegistraionCompleted: "You have been registered successfully."

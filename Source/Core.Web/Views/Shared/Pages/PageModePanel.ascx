@@ -1,10 +1,10 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PageModeModel>" %>
-<div class="page-mode-block">
+<div class="mode clrfix">
     <%:Html.RadioListFor("pageMode", Model.PageMode, new { onchange = "changePageMode($(this).val());" })%>
 </div>
 <script type="text/javascript">
     $(function () {
-        $(".page-mode-block").buttonset();
+        $(".mode").buttonset();
     });
     function changePageMode(newPageMode) {
         $.ajax({

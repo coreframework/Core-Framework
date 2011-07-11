@@ -2,19 +2,35 @@
 <%@ Import Namespace="Core.Web.Helpers.HtmlExtensions.MenuTreeView" %>
 <%@ Import Namespace="Core.Web.Models" %>
 
- <%=Html.RenderTree(Model.MenuItems,"menu pages-menu",
-     model=>Html.Partial(MVC.Pages.Views.NavigationMenuItem,model).ToString())%>
+<div class="pages clrfix">
+    <div class="pages-menu" id="pagesMenu">
+     <%=Html.RenderTree(Model.MenuItems, "clrfix",
+         model=>Html.Partial(MVC.Pages.Views.NavigationMenuItem, model).ToString())%>
+    </div>
+</div>
+<div class="clear"></div>
 
  <script type="text/javascript">
      jQuery(function () {
-         $('ul.pages-menu').superfish();
-         $('a.add-page').parent('li').addClass('last');
+         $('a.add-page').parent('li').addClass('add_new');
+         $('div.btn2').parent('li').addClass('add_new');
+         $('.pages-menu ul:first').children('li.add_new').removeClass('add_new').addClass('add_new_pg');
+     });
+
+     jQuery(function () {
+         ddsmoothmenu.init({
+             mainmenuid: "pagesMenu", //menu DIV id
+             orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+             classname: 'pages-menu', //class added to menu's outer DIV
+             contentsource: "markup",
+             arrowimages: { down: ['downarrowclass', '<%:Links.Content.Images.ico_open_png %>', 17], right: ['rightarrowclass', '<%:Links.Content.Images.ico_right_png %>'] }
+         });
      });
 </script>
 <%if (Model.PageMode==PageMode.Edit && Model.ManageAccess) {%>
     <script type="text/javascript">
      jQuery(function () {
-         $("ul.pages-menu,ul.pages-menu ul,ul.pages-menu ul ul").sortable(
+         $("div.pages-menu ul, div.pages-menu ul ul,div.pages-menu ul ul ul").sortable(
                 {
                     items: "li:not(.last)",
                     stop: function (e, ui) {
@@ -31,7 +47,7 @@
                     }
                 }
             );
-         $("ul.pages-menu, ul.pages-menu ul, ul.pages-menu ul ul").disableSelection();
+           $("div.pages-menu ul, div.pages-menu ul ul,div.pages-menu ul ul ul").disableSelection();
      });
      function updateNavigationMenu(item) {
             $(item).parents('li').first().animate({
@@ -52,7 +68,7 @@
                                         dialog.dialog();
                                     }
                                 );
-            dialog.dialog({ width: 450, resizable: false, modal: true });
+            dialog.dialog({ width: 500, resizable: false, modal: true });
             return false;
         }
     </script>

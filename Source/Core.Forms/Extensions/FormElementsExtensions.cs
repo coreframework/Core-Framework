@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
+using System.Web.UI;
 using Core.Forms.NHibernate.Models;
 using Framework.MVC.Extensions;
 using System.Web.Mvc.Html;
@@ -52,12 +53,14 @@ namespace Core.Forms.Extensions
                 case FormElementType.TextBox:
                     {
                         builder.Append(html.Label(elementName, model.Title));
+                        builder.Append("<br/>");
                         builder.Append(html.TextBox(elementName, elementValue));
                         break;
                     }
                 case FormElementType.TextArea:
                     {
                         builder.Append(html.Label(elementName, model.Title));
+                        builder.Append("<br/>");
                         builder.Append(html.TextArea(elementName, elementValue));
                         break;
                     }
@@ -70,12 +73,14 @@ namespace Core.Forms.Extensions
                 case FormElementType.DropDownList:
                     {
                         builder.Append(html.Label(elementName, model.Title));
+                        builder.Append("<br/>");
                         builder.Append(html.DropDownList(elementName, ParseElementValuesForDropDown(model.ElementValues, elementValue)));
                         break;
                     }
                 case FormElementType.RadioButtons:
                     {
-                        builder.Append((model.Title));
+                        builder.Append(html.Label(elementName, model.Title));
+                        builder.Append("<br/>");
                         builder.Append(html.RadioList(elementName, ParseElementValuesForRadioButtons(model.ElementValues, elementName), elementValue));
                         break;
                     }
@@ -83,6 +88,7 @@ namespace Core.Forms.Extensions
                     {
                         builder.Append(html.CaptchaImage(CaptchaDefaultHeight, CaptchaDefaultWidth));
                         builder.Append(html.Label(elementName,""));
+                        builder.Append("<br/>");
                         builder.Append(html.CaptchaTextBox(elementName));
                         break;
                     }
@@ -91,6 +97,7 @@ namespace Core.Forms.Extensions
                     break;
             }
 
+            builder.Append("<br/>");
             builder.Append(html.ValidationMessage(elementName));
         
             return MvcHtmlString.Create(builder.ToString());

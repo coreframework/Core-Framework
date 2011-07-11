@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentNHibernate.Data;
 
 namespace Core.ContentPages.NHibernate.Models
@@ -18,6 +19,12 @@ namespace Core.ContentPages.NHibernate.Models
         /// </summary>
         /// <value>The content.</value>
         public virtual String Content { get; set; }
+
+        /// <summary>
+        /// Gets or sets the widgets.
+        /// </summary>
+        /// <value>The widgets.</value>
+        public virtual IEnumerable<ContentPageWidget> Widgets { get; set; }
 
         #endregion
     }

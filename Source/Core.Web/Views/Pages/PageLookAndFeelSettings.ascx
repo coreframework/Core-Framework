@@ -1,10 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PageLookAndFeelModel>" %>
 
-<div style="height:440px">
-    <h2 class="settings-header">
-        <%=Html.Translate(".LookAndFeel") %></h2>
-    <% Html.RenderPartial(MVC.Pages.Views.PageLookAndFeelForm, Model); %>
-</div>
+<% Html.RenderPartial(MVC.Pages.Views.PageLookAndFeelForm, Model); %>
 <script type="text/javascript">
     $(function () {
         updateLookAndFeelForm();

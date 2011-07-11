@@ -34,6 +34,8 @@ Views:
        AllWidgetsRule: "Add a CSS rule for all widgets on this page."
       PagePermissions:
        Role: "Role"
+      NavigationMenu:
+       AddNewPage: "Add New Page" 
     Shared:
       Widgets:
         WidgetSettings:
@@ -67,6 +69,8 @@ Views:
         WidgetPermissions: 
              Role: "Role"
              Permissions: "Permissions"
+        WidgetsList:
+             AddWidget: "Click on any of the item to add it to your page"
       Layouts:
         ChangeLayout:
             ChangeLayout: "Click on any of the layout template to change it on the page"
@@ -77,7 +81,9 @@ Views:
             Error: "Error"
       Users:
         UserPanel:
-            SignIn: "Sign in"
+            SignIn: "Sign In"
+            SignOut: "Sign Out"
+            ControlPanel: "Control Panel"
     Users:
       NewUserSession:
           Title: "Sign in"

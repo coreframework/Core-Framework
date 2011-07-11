@@ -11,9 +11,9 @@
       {%>
         <%=Html.Partial(MVC.Pages.Views.ManagePageMenu, Model)%>
     <% }%>
-    <table id="tblLayoutHolder" style="width: 100%; height: 100%">
+    <div id="tblLayoutHolder">
         <%Html.RenderPartial(MVC.Shared.Views.Layouts.Layout, Model);%>
-    </table>
+    </div>
     <%if (Model.Access[(int)PageOperations.Update] && Model.PageMode==PageMode.Edit)
       {%>
         <script type="text/javascript">

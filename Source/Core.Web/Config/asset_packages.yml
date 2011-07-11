@@ -1,22 +1,15 @@
 ﻿javascripts:
   base:
     - jquery-1.5.1.js
-    - jquery.watermark.js
-    - jquery.qtip-1.0.0.js
-    - jquery.corner.js
-    - jquery.form.js
-    - jquery.blockUI.js
     - jquery.json-2.2.min.js
-    - framework.js
-    - application.js
   ajaxmvc:
     - MicrosoftAjax.js
     - MicrosoftMvcAjax.js
   custom:
     - inettuts.js
     - colorpicker.js
+    - ddsmoothmenu.js
     - json2.js
-    - superfish.js
   adminui:
     - Admin/jquery.ui.core.js
     - Admin/jquery.ui.widget.js
@@ -49,9 +42,7 @@
     - jquery-ui/jquery.ui.dialog.js
 stylesheets:
   base:
-    - main.css
-    - grid.css
-    - screen.css
+    - styles.css
     - inettuts.js.css
     - colorpicker.css
   screen:
@@ -79,3 +70,4 @@ stylesheets:
   admin:
     - admin/style.css
     - admin/dd.css
+

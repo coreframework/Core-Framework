@@ -19,10 +19,12 @@ namespace Core.Forms.NHibernate.Mappings
             Map(form => form.Title).Length(255);
             Map(form => form.UserId);
 
-            HasMany(form => form.FormElements).KeyColumn("FormId")
-              .Table("Forms_FormElements")
-              .LazyLoad()
-              .Cascade.AllDeleteOrphan();
+            HasMany(formBuilderWidget => formBuilderWidget.FormElements).KeyColumn("FormId")
+           .Table("Forms_FormElements")
+           .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+           .Inverse()
+           .LazyLoad()
+           .Cascade.AllDeleteOrphan();
         }
     }
 }

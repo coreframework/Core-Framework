@@ -8,12 +8,14 @@
     <title>
         <asp:ContentPlaceHolder ID="TitleContent" runat="server" />
     </title>
+    <!--[if lte IE 9]>
+		 <%: Html.CssInclude("ie.css")%>
+	<![endif]-->
     <%: Html.CssPackInclude("base")%>
-    <%= Html.CssInclude("jquery-ui/jquery-ui-1.8.11.custom.css")%>
-
+    <%: Html.CssInclude("jquery-ui/jquery-ui-1.8.11.custom.css")%>
     <%: Html.JavascriptPackInclude("base") %>
     <%: Html.JavascriptPackInclude("ajaxmvc")%>
-    <%= Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
+    <%: Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
     <%: Html.JavascriptPackInclude("custom")%>
 
     <% if(Model as PageViewModel != null && !String.IsNullOrEmpty(((PageViewModel)Model).CssFileName)) { %>
@@ -25,28 +27,28 @@
     </style>
 </head>
 <body>
-    <div class="container <%=PageHelper.GetCurrentUserPageMode() == PageMode.View ? "view-mode" : "edit-mode" %>" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
-        <div class="inner-container" style="<%= Model is PageViewModel ? PageHelper.GetPageInnerHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
-            <div id="wrapper">
-                <div id="header">
-                    <div class="logo">
-                        <%=Html.ActionLink("Core Framework",MVC.Home.Index()) %>
-                    </div>
-                    <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel) %>
-                    <%: Html.Partial(MVC.Shared.Views.Pages.PageModePanel, new PageModeModel {PageMode = PageHelper.GetCurrentUserPageMode(), PageUrl = Model is PageViewModel ? ((PageViewModel)Model).Url : String.Empty }) %>
-                    <div class="clear">
-                    </div>
-                </div>
-                <div id="content">
-                    <%Html.RenderAction(MVC.Pages.Index(Model as PageViewModel)); %>
-                    <div class="clear">
-                    </div>
-                    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
-                </div>
-                <div class="clear">
-                </div>
-            </div>
+<div class="container <%=PageHelper.GetCurrentUserPageMode() == PageMode.View ? "view-mode" : "edit-mode" %>" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
+   	<div class="header">
+		<div class="header_i clrfix">
+            <a href="<%=Url.Action(MVC.Home.Index())%>">
+			    <img src="<%:Links.Content.Images.logo_core_png %>" width="174" height="10" alt="" title="" class="core_logo" />
+            </a>
+			<div class="right_top clrfix">
+                <%: Html.Partial(MVC.Shared.Views.Pages.PageModePanel, new PageModeModel
+                                                                              {
+                                                                                  PageMode = PageHelper.GetCurrentUserPageMode(),
+                                                                                  PageUrl = Model is PageViewModel ? ((PageViewModel)Model).Url : String.Empty
+                                                                              }) %>
+                <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel) %>
+			</div>
+		</div>
+	</div>
+    <div class="wrapper">
+		<div class="content">
+           <%Html.RenderAction(MVC.Pages.Index(Model as PageViewModel)); %>
+           <asp:ContentPlaceHolder ID="MainContent" runat="server" />
         </div>
-    </div>
+    </div> 
+</div>
 </body>
 </html>

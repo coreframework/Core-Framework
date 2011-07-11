@@ -38,6 +38,11 @@ namespace Core.Forms.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Remove() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult ApplyPermissions() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
         }
@@ -76,6 +81,11 @@ namespace Core.Forms.Controllers {
         public System.Web.Mvc.ActionResult SaveElement() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.SaveElement);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult RemoveElement() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.RemoveElement);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsController Actions { get { return FormsMVC.Forms; } }
@@ -91,6 +101,7 @@ namespace Core.Forms.Controllers {
         public class ActionNamesClass {
             public readonly string ShowAll = "ShowAll";
             public readonly string ShowPermissions = "ShowPermissions";
+            public readonly string Remove = "Remove";
             public readonly string ApplyPermissions = "ApplyPermissions";
             public readonly string New = "New";
             public readonly string Edit = "Edit";
@@ -100,6 +111,7 @@ namespace Core.Forms.Controllers {
             public readonly string NewElement = "NewElement";
             public readonly string EditElement = "EditElement";
             public readonly string SaveElement = "SaveElement";
+            public readonly string RemoveElement = "RemoveElement";
         }
 
 
@@ -123,6 +135,12 @@ namespace Core.Forms.Controllers {
         public override System.Web.Mvc.ActionResult ShowPermissions(long formId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowPermissions);
             callInfo.RouteValueDictionary.Add("formId", formId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Remove(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
@@ -179,6 +197,12 @@ namespace Core.Forms.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SaveElement);
             callInfo.RouteValueDictionary.Add("formId", formId);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RemoveElement(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RemoveElement);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
