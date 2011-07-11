@@ -23,47 +23,6 @@
         $(function () { $('#New').click(function () { window.location = "<%: Url.Action("NewElement","Forms") %>"; }); });
     </script>
 
-<%--     <div class="outset">
-        <table class="index">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Type</th>
-                <th>Required</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <% foreach (var formElement in Model){ %>
-            <tr>
-                <td>
-                    <%=Html.Hidden("formElementId", formElement.Id)%>
-                    <%:formElement.Title%>
-                </td>
-                <td>
-                  <%:formElement.Type%>
-                </td>
-                 <td>
-                  <%:formElement.IsRequired%>
-                </td>
-                 <td>
-                   <%:Html.RouteLink(Html.Translate(".Edit"), new { controller = "Forms", action = "EditElement", formElementId = formElement.Id, formId = formElement.Form.Id })%><br/>
-                   <%:Html.RouteLink(Html.Translate(".Delete"), new { controller = "Forms", action = "Edit", formElementId = formElement.Id, formId = formElement.Form.Id })%><br/>
-                </td>
-            </tr>
-            <% } %>
-            </tbody>
-        </table>
-    </div>
-   <div id="actions">
-    <ul>
-      <li>
-         <%:Html.RouteLink("Add new element", new { controller = "Forms", action = "NewElement" })%>
-      </li>
-    </ul>
-  </div>--%>
-
     <script type="text/javascript">
         jQuery(function () {
             var fixHelper = function (e, ui) {

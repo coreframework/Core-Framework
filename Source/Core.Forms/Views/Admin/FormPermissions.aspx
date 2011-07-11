@@ -9,26 +9,28 @@
    <% using (Ajax.BeginForm("ApplyPermissions", "Forms", new {area = "Forms"}, new AjaxOptions() { OnComplete = "completePermissionsUpdates"}))
        { %>
        <%:Html.HiddenFor(model=>model.EntityId) %>
-          <div class="outset">
-            <table class="index">
-                <thead>
-                    <th>
-                        Role
-                    </th>
-                    <%foreach (var operation in Model.Operations) {%>
-                        <th>
-                            <%=Html.Encode(operation.Title)%>
-                        </th>
-                    <%} %>
-                </thead>
+          <div class="e_table_area">
+            <table class="e_table">
                 <tbody>
+                    <tr>
+                        <th>
+                            <span></span>
+                            Role
+                        </th>
+                        <%foreach (var operation in Model.Operations) {%>
+                            <th>
+                                <span></span>
+                                <%=Html.Encode(operation.Title)%>
+                            </th>
+                        <%} %>
+                    </tr>
                     <%foreach (var role in Model.Roles) {%>
                      <tr>
                         <td>
                             <%=Html.Encode(role.Name) %>
                         </td>
                         <%foreach (var operation in Model.Operations) {%>
-                            <td class="chbx">
+                            <td class="chbx" style="width: 100px;">
                                 <input type="checkbox" <%=Model.Permissions.Where(permission=>permission.RoleId==role.Id && (permission.Permissions & operation.Key) == operation.Key).Count()>0?"checked=\"checked\"":"" %> value="<%=String.Format("{0}_{1}", role.Id, operation.Key) %>" name="actions">
                             </td>
                         <%}%>
@@ -36,14 +38,12 @@
                     <%} %>
                 </tbody>
             </table>
+		    <div class="e_table_bottom clrfix">
+			    <div class="btn1 clrfix">
+                    <em></em><%: Html.Submit("Save",new { @class="button"})%><strong></strong>
+                </div>
+		    </div>
         </div>
-        <div id="actions">
-          <ul>
-          <li>
-             <%: Html.Submit("Save")%>
-          </li>
-        </ul>
-       </div>
     <%} %>
     <script type="text/javascript">
         function completePermissionsUpdates(content) {
