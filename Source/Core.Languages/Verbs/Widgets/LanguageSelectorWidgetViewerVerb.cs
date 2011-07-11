@@ -1,23 +1,23 @@
 ﻿using System;
 using Core.Framework.Plugins.Web;
 
-namespace Core.Forms.Verbs.Widgets
+namespace Core.Languages.Verbs.Widgets
 {
-    public class FormsBuilderWidgetViewerVerb : IWidgetActionVerb
+    public class LanguageSelectorWidgetViewerVerb : IWidgetActionVerb
     {
         #region Singleton
 
-        private static FormsBuilderWidgetViewerVerb _instance;
+        private static LanguageSelectorWidgetViewerVerb _instance;
 
         private static readonly Object SyncRoot = new Object();
 
-        public static FormsBuilderWidgetViewerVerb Instance
+        public static LanguageSelectorWidgetViewerVerb Instance
         {
             get
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new FormsBuilderWidgetViewerVerb());
+                    return _instance ?? (_instance = new LanguageSelectorWidgetViewerVerb());
                 }
             }
         }
@@ -33,12 +33,12 @@ namespace Core.Forms.Verbs.Widgets
 
         public string Controller
         {
-            get { return "FormsBuilderWidget"; }
+            get { return "LanguageSelectorWidget"; }
         }
 
         public string Area
         {
-            get { return "Forms"; }
+            get { return "Languages"; }
         }
 
         #endregion

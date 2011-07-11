@@ -3,8 +3,12 @@
 <div class="tabs">
     <ul>
     <%if(Model.Widget == null || !(Model.Widget is BaseWidget) || Model.Access[((BaseWidget)Model.Widget).ManageOperationCode])
-      {%>
+      {
+          if (Model.Widget != null && Model.Widget.EditAction != null)
+          {%>
         <li><a href="#common"><%:Html.Translate(".Common")%></a></li>
+        <%
+          }%>
         <li><a href="<%=Url.Action(MVC.Pages.ShowWidgetLookAndFeel(Model.Id))%>"><%:Html.Translate(".LookAndFeel")%></a></li>
         <li><a href="<%=Url.Action(MVC.Pages.ShowWidgetCSS(Model.Id))%>"><%:Html.Translate(".CSS")%></a></li>
         <%
@@ -14,7 +18,7 @@
         <%
         }%>
     </ul>
-    <%if (Model.Widget == null || !(Model.Widget is BaseWidget) || Model.Access[((BaseWidget)Model.Widget).ManageOperationCode])
+    <%if ((Model.Widget == null || !(Model.Widget is BaseWidget) || Model.Access[((BaseWidget)Model.Widget).ManageOperationCode]) && Model.Widget != null && Model.Widget.EditAction != null)
       {%>
     <div id="common">
         <%

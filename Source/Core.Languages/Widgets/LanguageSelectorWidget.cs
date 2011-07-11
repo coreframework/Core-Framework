@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Web;
+using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
+using Core.Languages.Permissions.Operations;
+using Core.Languages.Verbs.Widgets;
 
 namespace Core.Languages.Widgets
 {
@@ -30,36 +30,31 @@ namespace Core.Languages.Widgets
             }
         }
 
-        #endregion
-
-        public override string Title
+        private LanguageSelectorWidget()
         {
-            get { return "Language selector"; }
+            Operations = OperationsHelper.GetOperations<LanguageSelectorWidgetOperations>();
         }
+
+        #endregion
 
         public override ICorePlugin Plugin
         {
             get { return LanguagesPlugin.Instance; }
         }
 
-        public override string Identifier
-        {
-            get { return "123456sadf"; }
-        }
-
         public override IWidgetActionVerb ViewAction
         {
-            get { return ContentWidgetViewerVerb.Instance; }
+            get { return LanguageSelectorWidgetViewerVerb.Instance; }
 
         }
         public override IWidgetActionVerb EditAction
         {
-            get { return ContentWidgetEditorVerb.Instance; }
+            get { return null; }
         }
 
         public override IWidgetActionVerb SaveAction
         {
-            get { return ContentWidgetSaveSettingsVerb.Instance; }
+            get { return null; }
         }
     }
 }

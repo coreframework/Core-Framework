@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Reflection;
+using System.Web;
 using Castle.Windsor;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
@@ -11,17 +12,24 @@ using Core.Framework.Plugins.Web;
 using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Languages
 {
     [Export(typeof(ICorePlugin))]
     [Export(typeof(IPermissible))]
-    public class LanguagesPlugin : BasePlugin, IPermissible
+    public class LanguagesPlugin: BasePlugin, IPermissible
     {
+        #region Constants
+
+        private const String LanguagesConfig = @"Config\PluginConfig.xml";
+
+        #endregion
+        
         #region Singleton
 
-        private static LanguagesPlugin _instance;
+        private static LanguagesPlugin instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -31,7 +39,7 @@ namespace Core.Languages
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new LanguagesPlugin());
+                    return instance ?? (instance = new LanguagesPlugin());
                 }
             }
         }
@@ -42,35 +50,6 @@ namespace Core.Languages
         {
             PermissionTitle = Title;
             Operations = OperationsHelper.GetOperations<LanguagesPluginOperations>();
-        }
-
-        public override string Identifier
-        {
-            get { return GetPluginIdentifier(); }
-        }
-
-        public override string Title
-        {
-            get
-            {
-                return "Languages";
-            }
-        }
-
-        public override string ResourcesDirectory
-        {
-            get
-            {
-                return "Resources";
-            }
-        }
-
-        public override string Description
-        {
-            get 
-            { 
-                return "Allow managing Languages";
-            }
         }
 
         /// <summary>
@@ -84,6 +63,7 @@ namespace Core.Languages
 
         public override void Install()
         {
+            AssetsHelper.BuildPluginCssPack(this, HttpContext.Current.Request.PhysicalApplicationPath);
             CultureInfo currentCultureInfo = CultureInfo.CurrentCulture;
             Language currentLanguage = new Language
                                            {
@@ -104,9 +84,13 @@ namespace Core.Languages
             return Assembly.Load("Core.Languages.Migrations");
         }
 
-        public static string GetPluginIdentifier()
+        /// <summary>
+        /// Gets the Identifiers config path. Default String.Empty.
+        /// [Example: @"Config\asset_packages.yml"]
+        /// </summary>
+        public override string PluginConfigPath
         {
-            return "1235"; 
+            get { return LanguagesConfig; }
         }
 
         #region IPermissible members

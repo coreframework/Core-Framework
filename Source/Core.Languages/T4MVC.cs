@@ -23,6 +23,8 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class LanguagesMVC {
+    public static Core.Languages.Controllers.LanguagesController Languages = new Core.Languages.Controllers.T4MVC_LanguagesController();
+    public static Core.Languages.Controllers.LanguageSelectorWidgetController LanguageSelectorWidget = new Core.Languages.Controllers.T4MVC_LanguageSelectorWidgetController();
 }
 
 namespace T4MVC {
@@ -53,6 +55,19 @@ namespace System.Web.Mvc {
 
   
 
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
+    public T4MVC_ActionResult(string area, string controller, string action): base()  {
+        this.InitMVCT4Result(area, controller, action);
+    }
+     
+    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Area { get; set; }
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -62,6 +77,14 @@ namespace Links {
         private const string URLPATH = "~/Content";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Css {
+            private const string URLPATH = "~/Content/Css";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string languages_css = Url("languages.css");
+        }
+    
     }
 
 }
