@@ -2,7 +2,9 @@
 <%@ Assembly Name="Core.Forms.NHibernate" %>
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"
     Inherits="System.Web.Mvc.ViewPage<Framework.MVC.Grids.GridViewModel>" %>
-<%@ Import Namespace="Framework.MVC.Grids.jqGrid" %><%@ Import Namespace="System.Web.Mvc" %>
+<%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
+<%@ Import Namespace="System.Web.Mvc" %>
+
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>Forms</h1>
 </asp:Content>

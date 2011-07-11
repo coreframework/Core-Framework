@@ -309,9 +309,9 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 * @section Content Page
 * @subsection Validation
 */						
-.error {color:#c00202;background:url(../../images/admin/v_ico_red.gif) no-repeat 14px 10px #fae2e2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
-.success {color:#195302;background:url(../../images/admin/v_ico_green.gif) no-repeat 14px 10px #ddf7d2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
-.notice {color:#2e2d2d;background:url(../../images/admin/v_ico_yell.gif) no-repeat 14px 10px #fdf3c9;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+.validation_error {color:#c00202;background:url(../../images/admin/v_ico_red.gif) no-repeat 14px 10px #fae2e2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+.validation_success {color:#195302;background:url(../../images/admin/v_ico_green.gif) no-repeat 14px 10px #ddf7d2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
+.validation_notice {color:#2e2d2d;background:url(../../images/admin/v_ico_yell.gif) no-repeat 14px 10px #fdf3c9;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
 .validation_info {color:#003577;background:url(../../images/admin/v_ico_blue.gif) no-repeat 14px 10px #cde6fc;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
 
 

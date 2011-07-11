@@ -159,26 +159,27 @@ namespace Core.Forms.Controllers
         }
 
         [ChildActionOnly]
-        public virtual ActionResult FormTabs(FormViewModel model, bool activeDetails, bool activeElements, bool activePermissions)
+        public virtual ActionResult FormTabs(long formId, bool activeDetails, bool activeElements, bool activePermissions)
         {
-            if (model!=null)
+            var form = _formsService.Find(formId);
+            if (form != null)
             {
                 var result = new List<MenuItemModel>();
-                var formPermissions = _permissionService.GetAccess(OperationsHelper.GetOperations<FormOperations>(), this.CorePrincipal(),typeof(Form), model.Id, IsFormOwner(model.MapTo(new Form())));
+                var formPermissions = _permissionService.GetAccess(OperationsHelper.GetOperations<FormOperations>(), this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form));
                 if (formPermissions.ContainsKey((int) FormOperations.View))
                 {
                     result.Add(new MenuItemModel
                                    {
                                        Title = "Details",
                                        IsActive = activeDetails,
-                                       Url = Url.Action("Edit", "Forms", new { formId = model.Id, Area = "Forms" })
+                                       Url = Url.Action("Edit", "Forms", new { formId = form.Id, Area = "Forms" })
                                    });
                    
                     result.Add(new MenuItemModel
                     {
                         Title = "Form Elements",
                         IsActive = activeElements,
-                        Url = Url.Action("ShowFormElements", "Forms", new { formId = model.Id, Area="Forms" })
+                        Url = Url.Action("ShowFormElements", "Forms", new { formId = form.Id, Area = "Forms" })
                     }); 
                 }
                 if (formPermissions.ContainsKey((int)FormOperations.Permissions))
@@ -187,7 +188,7 @@ namespace Core.Forms.Controllers
                     {
                         Title = "Permissions",
                         IsActive = activePermissions,
-                        Url = Url.Action("ShowPermissions", "Forms", new { formId = model.Id, Area = "Forms" })
+                        Url = Url.Action("ShowPermissions", "Forms", new { formId = form.Id, Area = "Forms" })
                     }); 
                 }
 
@@ -348,11 +349,13 @@ namespace Core.Forms.Controllers
                 IsRowNotClickable = true
             };
 
+            ViewData["formId"] = formId;
+
             return View("FormElements", model);
         }
 
         [HttpPost]
-        public virtual JsonResult FormElementsDynamicGridData(int formId,int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult FormElementsDynamicGridData(int formId, int page, int rows, string search, string sidx, string sord)
         {
             var form = _formsService.Find(formId);
 

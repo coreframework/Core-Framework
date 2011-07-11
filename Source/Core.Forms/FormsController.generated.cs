@@ -138,6 +138,12 @@ namespace Core.Forms.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string EditForm = "~/Views/Forms/EditForm.aspx";
+            public readonly string EditFormElement = "~/Views/Forms/EditFormElement.aspx";
+            public readonly string FormElements = "~/Views/Forms/FormElements.aspx";
+            public readonly string FormPermissions = "~/Views/Forms/FormPermissions.aspx";
+            public readonly string FormsList = "~/Views/Forms/FormsList.aspx";
+            public readonly string FormTabs = "~/Views/Forms/FormTabs.ascx";
         }
     }
 
@@ -166,9 +172,9 @@ namespace Core.Forms.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult FormTabs(Core.Forms.Models.FormViewModel model, bool activeDetails, bool activeElements, bool activePermissions) {
+        public override System.Web.Mvc.ActionResult FormTabs(long formId, bool activeDetails, bool activeElements, bool activePermissions) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.FormTabs);
-            callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("formId", formId);
             callInfo.RouteValueDictionary.Add("activeDetails", activeDetails);
             callInfo.RouteValueDictionary.Add("activeElements", activeElements);
             callInfo.RouteValueDictionary.Add("activePermissions", activePermissions);

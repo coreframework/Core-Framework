@@ -1,13 +1,4 @@
-/** set tabs */
-$(function() {
-	$('ul.i-tab li:first').addClass ('active');
-	$('ul.tab-content li.tabs_cont:first').css ('display', 'block');
-	$('ul.i-tab').delegate('li:not(.active)', 'click', function() {
-		$(this).addClass('active').siblings().removeClass('active')
-			.parents('.tabs').find('ul.tab-content li.tabs_cont').hide()
-			.eq($(this).index()).fadeIn('slow');
-	})
-});
+
 
 /** custom select with flags */
 function showvalue(arg) {

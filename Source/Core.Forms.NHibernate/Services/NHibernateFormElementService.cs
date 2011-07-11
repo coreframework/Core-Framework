@@ -25,7 +25,7 @@ namespace Core.Forms.NHibernate.Services
             var baseQuery = CreateQuery();
             if (String.IsNullOrEmpty(searchString))
             {
-                return baseQuery;
+                return baseQuery.Where(formElement => formElement.Form.Id == formId);
             }
             return baseQuery.Where(formElement => formElement.Form.Id == formId && formElement.Title.Contains(searchString));
         }

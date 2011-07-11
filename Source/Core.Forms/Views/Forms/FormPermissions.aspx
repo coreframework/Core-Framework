@@ -5,7 +5,7 @@
 <%@ Import Namespace="System.Web.Mvc.Ajax" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+ <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.EntityId, false, false, true));%>
    <% using (Ajax.BeginForm("ApplyPermissions", "Forms", new {area = "Forms"}, new AjaxOptions() { OnComplete = "completePermissionsUpdates"}))
        { %>
        <%:Html.HiddenFor(model=>model.EntityId) %>
