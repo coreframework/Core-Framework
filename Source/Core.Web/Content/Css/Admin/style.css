@@ -315,6 +315,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 .validation_info {color:#003577;background:url(../../images/admin/v_ico_blue.gif) no-repeat 14px 10px #cde6fc;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px;}
 
 .editor-field-hidden {display:none;}
+.field-validation-error {color:#c00202;font-size:11px;}
 					
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* states and images */

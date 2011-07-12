@@ -22,6 +22,7 @@ namespace Core.Forms.Migrations
                 t.Bool("SendEmail");
                 t.String("SenderEmail").Length(255).Null();
                 t.ForeignKey("FormsBuilder").Table("Forms_Forms").Column("FormId").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("FormsBuilderWidgetUser").Table("Users").Column("UserId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
             });
         }
 
@@ -31,6 +32,7 @@ namespace Core.Forms.Migrations
         public override void Down()
         {
             Database.ChangeTable("Forms_FormsBuilderWidgets", t => t.RemoveForeignKey("FormsBuilder").Table("Forms_Forms"));
+            Database.ChangeTable("Forms_FormsBuilderWidgets", t => t.RemoveForeignKey("FormsBuilderWidgetUser").Table("Users"));
             Database.RemoveTable("Forms_FormsBuilderWidgets");
         }
     }

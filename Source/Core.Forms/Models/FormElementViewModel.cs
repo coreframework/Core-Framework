@@ -4,20 +4,17 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Core.Forms.NHibernate.Helpers;
 using Core.Forms.NHibernate.Models;
-using Core.Forms.Validation;
 using Framework.Core.DomainModel;
 
 namespace Core.Forms.Models
 {
     public class FormElementViewModel : IMappedModel<FormElement, FormElementViewModel>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FormElementViewModel"/> class.
-        /// </summary>
-        public FormElementViewModel()
-        {
-           
-        }
+        #region Fields
+
+        List<ElementTypeDescriptionModel> _types;
+
+        #endregion
 
         /// <summary>
         /// Gets or sets the id.
@@ -50,7 +47,10 @@ namespace Core.Forms.Models
         /// Gets or sets the types.
         /// </summary>
         /// <value>The types.</value>
-        public List<ElementTypeDescriptionModel> Types { get; set; }
+        public List<ElementTypeDescriptionModel> Types
+        {
+            get { return _types ?? (_types = BindElementTypes()); }
+        }
 
         /// <summary>
         /// Gets or sets the validation regex template.
@@ -80,12 +80,34 @@ namespace Core.Forms.Models
         {
             Id = from.Id;
             Title = from.Title;
-            Types = new List<ElementTypeDescriptionModel>();
             RegexTemplate = from.RegexTemplate;
             MaxLength = from.MaxLength;
             Type = from.Type;
             Values = from.ElementValues;
             IsRequired = from.IsRequired;
+
+            return this;
+        }
+
+        public FormElement MapTo(FormElement to)
+        {
+            to.Id = Id;
+            to.Title = Title;
+            to.IsRequired = IsRequired;
+            to.ElementValues = Values;
+            to.Type = Type;
+            to.RegexTemplate = RegexTemplate;
+            to.MaxLength = MaxLength;
+            return to;
+        }
+
+        /// <summary>
+        /// Binds the element types.
+        /// </summary>
+        /// <returns></returns>
+        private static List<ElementTypeDescriptionModel> BindElementTypes()
+        {
+            var result = new List<ElementTypeDescriptionModel>();
 
             foreach (var value in Enum.GetValues(typeof(FormElementType)))
             {
@@ -103,22 +125,9 @@ namespace Core.Forms.Models
                     elementType.IsMaxLengthEnabled = description.IsMaxLengthEnabled;
                 }
 
-                Types.Add(elementType);
+                result.Add(elementType);
             }
- 
-            return this;
-        }
-
-        public FormElement MapTo(FormElement to)
-        {
-            to.Id = Id;
-            to.Title = Title;
-            to.IsRequired = IsRequired;
-            to.ElementValues = Values;
-            to.Type = Type;
-            to.RegexTemplate = RegexTemplate;
-            to.MaxLength = MaxLength;
-            return to;
+            return result;
         }
     }
 }

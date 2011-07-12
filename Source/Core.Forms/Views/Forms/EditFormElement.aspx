@@ -17,6 +17,7 @@
                     <%: Html.HiddenFor(model=>model.Id) %> 
 
 			    <div class="i_form_i">
+                        <%: Html.LabelFor(model => model.Title)%>
                         <%: Html.TextBoxFor(model => model.Title) %>
                         <%: Html.ValidationMessageFor(model => model.Title) %>
                 </div>
