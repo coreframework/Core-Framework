@@ -111,7 +111,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                         String.Format("<a href=\"{0}\">{1}</a>",
                                             Url.Action(MVC.Admin.User.UserGroups(user.Id)),
                                             HttpContext.Translate("UserGroups", ResourceHelper.GetControllerScope(this))),
-                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                        String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action(MVC.Admin.User.Remove(user.Id))/*,
                                             HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this))*/)}
                     }).ToArray()

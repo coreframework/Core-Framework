@@ -88,7 +88,7 @@ namespace Core.Web.Areas.Admin.Helpers
         /// </returns>
         public bool IsCurrent(RequestContext context)
         {
-            return ((Route)RouteTable.Routes[routeName]).DataTokens["area"] == ((Route)context.RouteData.Route).DataTokens["area"];
+            return RouteTable.Routes[routeName].Equals(context.RouteData.Route);
         }
 
         #endregion

@@ -103,8 +103,8 @@ namespace Core.Web.Areas.Admin
 
             context.MapRoute("Admin.Widgets", "admin/widgets", MVC.Admin.Widget.Index());
             context.MapRoute("Admin.Widgets.DynamicGridData", "admin/widgets/DynamicGridData", MVC.Admin.Widget.DynamicGridData());
-            context.MapRoute("Admin.Widgets.Enable", "admin/widgets/{id}/enable", MVC.Admin.Widget.Enable(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-            context.MapRoute("Admin.Widgets.Disable", "admin/modules/{id}/disable", MVC.Admin.Widget.Disable(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });          
+            context.MapRoute("Admin.Widgets.Enable", "admin/widgets/{id}/enable", MVC.Admin.Widget.Enable());
+            context.MapRoute("Admin.Widgets.Disable", "admin/widgets/{id}/disable", MVC.Admin.Widget.Disable());          
         }
 
         #region Helper Methods

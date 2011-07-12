@@ -5,10 +5,10 @@
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>Edit Form</h1>
+ <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.Id, true, false, false));%>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.Id, true, false, false));%>
 
    <%: Html.ValidationSummary(true) %>
       <% using (Html.BeginForm(FormsMVC.Forms.Save(), FormMethod.Post))

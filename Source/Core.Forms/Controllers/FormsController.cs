@@ -141,7 +141,7 @@ namespace Core.Forms.Controllers
                         id = form.Id,
                         cell = new[] {  
                                         form.Title, 
-                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("Edit","Forms",new { formId = form.Id }),"Details")}
                     }).ToArray()
             };
@@ -231,9 +231,13 @@ namespace Core.Forms.Controllers
                     _permissionsHelper.ApplyPermissions(model, typeof(Form));
                 }
                 if (_permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                {
+                    Success("Successfully apply permissions.");
                     return Content(Url.Action("ShowPermissions", "Forms", new { formId = form.Id }));
+                }
+                Error(String.Format("Could not apply permissions to Form Entity: {0}", model.EntityId));
             }
-
+            Error(String.Format("Could not found Form Entity: {0}",model.EntityId));
             return Content(Url.Action("ShowAll"));
         }
 
@@ -400,10 +404,11 @@ namespace Core.Forms.Controllers
                                         String.Format("{0}<input id=\"formElementId\" type=\"hidden\" value={1} />",formElement.Title,formElement.Id), 
                                         formElement.Type.ToString(), 
                                         formElement.IsRequired.ToString(), 
-                                        allowManage?String.Format("<a href=\"{0}\">{1}</a>",
+                                        allowManage?String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("EditElement","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }),"Edit"):String.Empty,
-                                        allowManage?String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                        allowManage?String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("RemoveElement","Forms",new { id = formElement.Id})):String.Empty}
+
                     }).ToArray()
             };
             return Json(jsonData);
@@ -467,10 +472,12 @@ namespace Core.Forms.Controllers
 
                 if (_formsElementService.Save(model.MapTo(formElement)))
                 {
+                    Success("Sucessfully save form element.");
                     return RedirectToAction(FormsMVC.Forms.ShowFormElements());
                 }
             }
 
+            Error("Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing.");
             return View("EditFormElement", model);
         }
 
@@ -495,9 +502,11 @@ namespace Core.Forms.Controllers
                     if (element.Id != formElement.Id)
                         _formsElementService.Save(element);
                 }
+                Success("Sucessfully remove form element.");
                 return RedirectToAction("ShowFormElements", new { formId = formElement.Form.Id });
             }
 
+            Error("Some error has been occured. Please try again.");
             return Content(String.Empty);
         }
 

@@ -5,9 +5,6 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
     <h1><%: Html.Translate(".Permissions") %></h1>
-</asp:Content>
-
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
     <%using (Html.BeginForm(MVC.Admin.Role.Permissions(), FormMethod.Get)) {%>
         <%= Html.OptionGroupDropDownList(
@@ -32,7 +29,10 @@
         </script>
      <%}%>
 
-    <br /> <br />
+</asp:Content>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <%if (Model.OperationsModel != null && Model.OperationsModel.Operations != null)
       {%>
         <% Html.RenderPartial(MVC.Admin.Role.Views.PermissionOperations, Model.OperationsModel);%>

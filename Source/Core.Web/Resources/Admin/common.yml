@@ -9,6 +9,7 @@ Messages:
   RoleCreated: "Role has been created successfully. Select users for assignment."
   RoleUpdated: "Role has been updates successfully."
   RoleDeleted: "Role has been deleted successfully."
+  SuccessfullyApplyPermissions: "Permissions has been updated successfully."
   RoleUsersUpdated: "Users assigned to role has been updated."
   RoleUserGroupsUpdated: "User Groups assigned to role has been updated."
   UserCreated: "User has been created successfully. Select roles for assignment."

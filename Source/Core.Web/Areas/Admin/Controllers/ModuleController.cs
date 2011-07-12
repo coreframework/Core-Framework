@@ -185,7 +185,10 @@ namespace Core.Web.Areas.Admin.Controllers
                 pluginEntity.Status = PluginStatus.Installed;
                 pluginService.Save(pluginEntity);
                 corePlugin.Start();
+                Success(Translate(".InstallPlugin"));
+                return RedirectToAction(MVC.Admin.Module.Index());
             }
+            Error(Translate(".UnknownError"));
             return RedirectToAction(MVC.Admin.Module.Index());
         }
 
@@ -219,8 +222,10 @@ namespace Core.Web.Areas.Admin.Controllers
 
                 pluginEntity.Status = PluginStatus.NotInstalled;
                 pluginService.Save(pluginEntity);
+                Success(Translate(".UninstallPlugin"));
+                return RedirectToAction(MVC.Admin.Module.Index());
             }
-
+            Error(Translate(".UnknownError"));
             return RedirectToAction(MVC.Admin.Module.Index());
         }
     }

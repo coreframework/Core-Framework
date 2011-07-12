@@ -3,9 +3,13 @@ Admin:
     Module:
       Uninstall: "[Uninstall]"
       Install: "[Install]"
+      InstallPlugin: "Successfuly install plugin."
+      UninstallPlugin: "Successfuly uninstall plugin."
     Widget:
       Uninstall: "[Uninstall]"
       Install: "[Install]"
+      InstallWidget: "Successfuly install widget."
+      UninstallWidget: "Successfuly uninstall widget."
     User:
       UserGroups: "[User groups list]"
       Remove: "[Remove]"

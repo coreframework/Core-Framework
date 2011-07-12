@@ -3,9 +3,12 @@
 <%@ Assembly Name="Core.Framework.Permissions" %>
 <%@ Page Title="" Language="C#"  MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Framework.Permissions.Models.PermissionsModel>" %>
 <%@ Import Namespace="System.Web.Mvc.Ajax" %>
+<asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
+    <h1> Form Permissions</h1>
+ <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.EntityId, false, false, true));%>
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
- <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.EntityId, false, false, true));%>
    <% using (Ajax.BeginForm("ApplyPermissions", "Forms", new {area = "Forms"}, new AjaxOptions() { OnComplete = "completePermissionsUpdates"}))
        { %>
        <%:Html.HiddenFor(model=>model.EntityId) %>

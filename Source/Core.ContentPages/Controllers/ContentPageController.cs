@@ -68,18 +68,21 @@ namespace Core.ContentPages.Controllers
                                                              {
                                                                  Name = "Title", 
                                                                  Index = "Title",
+                                                                 Width = 400
                                                              },
                                                          new GridColumnViewModel
                                                              {
+                                                                 Width = 20,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
+                                                                 Width = 20,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 30,
+                                                                 Width = 10,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -120,11 +123,11 @@ namespace Core.ContentPages.Controllers
                     {
                         id = contentPage.Id,
                         cell = new[] {  contentPage.Title, 
-                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("ShowById","ContentPage",new { id = contentPage.Id }),"View"),
-                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("Edit","ContentPage",new { id = contentPage.Id }),"Edit"),
-                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                        String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","ContentPage",new { id = contentPage.Id }))}
                     }).ToArray()
             };
@@ -176,9 +179,11 @@ namespace Core.ContentPages.Controllers
             {
                 ContentPage contentPage = contentPageService.Find((long) id);
                 contentPageService.Save(contentPageModel.MapTo(contentPage));
+                Success("Sucessfully save content page.");
                 return RedirectToAction("ShowAll");
             }
 
+            Error("Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing.");
             return View("Admin/Edit", contentPageModel);
         }
 
@@ -202,9 +207,11 @@ namespace Core.ContentPages.Controllers
             if (ModelState.IsValid)
             {
                 contentPageService.Save(contentPage.MapTo(new ContentPage()));
+                Success("Sucessfully save content page.");
                 return RedirectToAction("ShowAll");
             }
 
+            Error("Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing.");
             return View("Admin/New", contentPage);
         }
 
@@ -220,9 +227,12 @@ namespace Core.ContentPages.Controllers
             var contentPage = contentPageService.Find(id);
             if (contentPage != null)
             {
+                Success("Sucessfully remove content page.");
                 contentPageService.Delete(contentPage);
+                return RedirectToAction("ShowAll");
             }
 
+            Error("Some error has been occured. Please try again.");
             return RedirectToAction("ShowAll");
         }
 

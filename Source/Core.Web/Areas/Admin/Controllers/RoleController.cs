@@ -223,9 +223,10 @@ namespace Core.Web.Areas.Admin.Controllers
             if (role != null)
             {
                 roleService.Delete(role);
-                //                Success(Translate("Messages.RoleDeleted"));
+                Success(Translate("Messages.RoleDeleted"));
             }
 
+            Success(Translate("Messages.UnknownError"));
             return RedirectToAction(MVC.Admin.Role.Index());
         }
 
@@ -449,6 +450,7 @@ namespace Core.Web.Areas.Admin.Controllers
             }
 
             RoleHelper.ApplyRolePermissions(model);
+            Success(Translate("Messages.SuccessfullyApplyPermissions"));
             return RedirectToAction(MVC.Admin.Role.Permissions(model.RoleId, String.Format("{0}_{1}", model.ResourceId,(int)model.Area)));
         }
 

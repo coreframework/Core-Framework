@@ -10,10 +10,42 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>Form Elements</h1>
+   <%Html.RenderAction(FormsMVC.Forms.FormTabs((ViewData["Form"] is FormViewModel)?(ViewData["Form"] as FormViewModel).Id:0, false, true, false));%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-   <%Html.RenderAction(FormsMVC.Forms.FormTabs((ViewData["Form"] is FormViewModel)?(ViewData["Form"] as FormViewModel).Id:0, false, true, false));%>
+            <% foreach (var formElement in Model){ %>
+            <tr>
+                <td>
+                    <%=Html.Hidden("formElementId", formElement.Id)%>
+                    <%:formElement.Title%>
+                </td>
+                <td>
+                  <%:formElement.Type%>
+                </td>
+                 <td>
+                  <%:formElement.IsRequired%>
+                </td>
+                 <td>
+                   <%:Html.RouteLink(Html.Translate(".Edit"), new { controller = "Forms", action = "EditElement", formElementId = formElement.Id, formId = formElement.Form.Id })%><br/>
+                     <% using (Html.BeginForm(FormsMVC.Forms.RemoveElement(formElement.Id), FormMethod.Post))
+                    { %>
+                        <%: Html.LinkSubmitButton(Html.Translate(".Delete"))%>
+                      
+                   <% } %>
+                </td>
+            </tr>
+            <% } %>
+            </tbody>
+        </table>
+    </div>--%>
+<%--
+   <div id="actions">
+    <ul>
+      <li>
+         <%:Html.RouteLink("Add new element", new { controller = "Forms", action = "NewElement" })%>
+      </li>
+    </ul>
+  </div>--%>
     <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>
         <%if (ViewData["Form"] is FormViewModel && ((FormViewModel)ViewData["Form"]).AllowManage)  {%>
@@ -27,6 +59,9 @@
         </script>
         <% }%>
     </div>
+    <script type="text/javascript">
+        jQuery(function () { $('#New').click(function () { window.location = "<%: Url.Action("NewElement","Forms",new { formId = (Int64)ViewData["formId"]}) %>"; }); });
+    </script>
     <script type="text/javascript">
         jQuery(function () {
             var fixHelper = function (e, ui) {

@@ -89,16 +89,16 @@ namespace Core.Web.Areas.Admin.Controllers
                 page,
                 records = totalRecords,
                 rows = (
-                           plugins.Select(plugin => new
+                           plugins.Select(widget => new
                            {
                                id = "not_clickabe",
                                cell = new[]
                                                                        {
-                                                                            plugin.Title, 
-                                                                            plugin.Plugin.Title,
-                                                                            plugin.Status.ToString(),
-                                                                            plugin.Status.Equals(WidgetStatus.Disabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Install(plugin.Id)),HttpContext.Translate("Install", ResourceHelper.GetControllerScope(this))) :
-                                                                            plugin.Status.Equals(WidgetStatus.Enabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Uninstall(plugin.Id)),HttpContext.Translate("Uninstall", ResourceHelper.GetControllerScope(this))) : 
+                                                                            widget.Title, 
+                                                                            widget.Plugin.Title,
+                                                                            widget.Status.ToString(),
+                                                                            widget.Status.Equals(WidgetStatus.Disabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Enable(widget.Id)),HttpContext.Translate("Install", ResourceHelper.GetControllerScope(this))) :
+                                                                            widget.Status.Equals(WidgetStatus.Enabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Disable(widget.Id)),HttpContext.Translate("Uninstall", ResourceHelper.GetControllerScope(this))) : 
                                                                             String.Empty,
                                                                        }
                            }).ToArray())
@@ -111,7 +111,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">The widget id.</param>
         /// <returns>List of registered widgets.</returns>
-        [HttpPost]
+        //[HttpPost]
         public virtual ActionResult Enable(long id)
         {
             Widget widgetEntity = widgetService.Find(id);
@@ -123,9 +123,11 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 widgetEntity.Status = WidgetStatus.Enabled;
                 widgetService.Save(widgetEntity);
+                Success(Translate(".InstallWidget"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
-            return View("Index",widgetService.GetInstalledWidgets());
+            Error(Translate(".UnknownError"));
+            return View("Index", widgetService.GetInstalledWidgets());
         }
 
         /// <summary>
@@ -133,7 +135,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">The widget id.</param>
         /// <returns>List of registered widgets.</returns>
-        [HttpPost]
+        //[HttpPost]
         public virtual ActionResult Disable(long id)
         {
             Widget widgetEntity = widgetService.Find(id);
@@ -145,8 +147,10 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 widgetEntity.Status = WidgetStatus.Disabled;
                 widgetService.Save(widgetEntity);
+                Success(Translate(".UninstallWidget"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
+            Error(Translate(".UnknownError"));
             return View("Index", widgetService.GetInstalledWidgets());
         }
 

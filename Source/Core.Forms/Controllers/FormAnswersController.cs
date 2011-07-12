@@ -81,7 +81,7 @@ namespace Core.Forms.Controllers
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
             columns.Add(new GridColumnViewModel { Name = "Form", Index = "Title" });
-            columns.Add(new GridColumnViewModel { Name = "Answers", Width = 150, Align = "center" });
+            columns.Add(new GridColumnViewModel { Name = "Answers", Width = 50});
             columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
             var model = new GridViewModel
                             {
