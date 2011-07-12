@@ -4,11 +4,14 @@ using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Reflection;
 using System.Web;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
+using Core.Languages.Modules;
 using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
@@ -19,14 +22,14 @@ namespace Core.Languages
 {
     [Export(typeof(ICorePlugin))]
     [Export(typeof(IPermissible))]
-    public class LanguagesPlugin: BasePlugin, IPermissible
+    public class LanguagesPlugin : BasePlugin, IPermissible
     {
         #region Constants
 
         private const String LanguagesConfig = @"Config\PluginConfig.xml";
 
         #endregion
-        
+
         #region Singleton
 
         private static LanguagesPlugin instance;
@@ -69,14 +72,20 @@ namespace Core.Languages
                                            {
                                                Title = currentCultureInfo.NativeName,
                                                Code = currentCultureInfo.TwoLetterISOLanguageName,
-                                               Culture = currentCultureInfo.Name
+                                               Culture = currentCultureInfo.Name,
+                                               IsDefault = true
                                            };
             ServiceLocator.Current.GetInstance<ILanguageService>().Save(currentLanguage);
         }
 
         public override void Uninstall()
         {
-           
+
+        }
+
+        public override void Start()
+        {
+            Application.RegisterHttpModule(typeof(LocalizationModule));
         }
 
         public override Assembly GetPluginMigrationsAssembly()

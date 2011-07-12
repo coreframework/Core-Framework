@@ -7,10 +7,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
 using Core.Framework.MEF.Composition;
 using Core.Framework.MEF.Configuration;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.MEF.Extensions;
+using Core.Framework.Plugins.Modules;
 using Core.Framework.Plugins.Web;
 
 namespace Core.Framework.MEF.Web
@@ -24,7 +27,7 @@ namespace Core.Framework.MEF.Web
 #pragma warning disable 649
         [ImportMany]
         private IEnumerable<Lazy<IRouteRegistrar, IRouteRegistrarMetadata>> routeRegistrars;
-       
+
         [ImportMany]
         private IEnumerable<Lazy<AreaRegistration, IRouteRegistrarMetadata>> routeAreaRegistrars;
 
@@ -33,6 +36,9 @@ namespace Core.Framework.MEF.Web
         [Import]
         private ImportControllerFactory controllerFactory;
 #pragma warning restore 649
+
+        protected static WindsorContainer _container;
+
         #endregion
 
         #region Properties
@@ -46,6 +52,8 @@ namespace Core.Framework.MEF.Web
         /// </summary>
         /// <value>The plugins.</value>
         public static IEnumerable<ICorePlugin> Plugins { get; set; }
+
+        public static bool ModulesChanged { get; set; }
 
         #endregion
 
@@ -79,6 +87,7 @@ namespace Core.Framework.MEF.Web
             // Register MVC routes.
             RegisterRoutes();
 
+            StartPlugins();
         }
 
         /// <summary>
@@ -240,11 +249,26 @@ namespace Core.Framework.MEF.Web
         public static IEnumerable<IActionVerb> GetVerbsForCategory(string category)
         {
             Throw.Throw.IfArgumentNullOrEmpty(category, "category");
-            
+
             return actionVerbs
                 .Where(l => l.Metadata.Category.Equals(category, StringComparison.InvariantCultureIgnoreCase))
                 .Select(l => l.Value);
         }
+
+        public static void RegisterHttpModule(Type moduleType)
+        {
+            _container.Register(Component.For<IPluginHttpModule>().ImplementedBy(moduleType));
+            ModulesChanged = true;
+        }
+
+        public static void StartPlugins()
+        {
+            foreach (var corePlugin in Plugins)
+            {
+                corePlugin.Start();
+            }
+        }
+
         #endregion
     }
 }

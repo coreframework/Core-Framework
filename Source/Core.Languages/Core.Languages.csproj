@@ -99,6 +99,7 @@
     <Compile Include="Modules\LocalizationModule.cs" />
     <Compile Include="LanguagesPlugin.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
+    <Compile Include="Modules\LocalizationModule.cs" />
     <Compile Include="Permissions\Operations\LanguageSelectorWidgetOperations.cs" />
     <Compile Include="Permissions\Operations\LanguagesPluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -39,6 +39,11 @@ namespace Core.Languages.Controllers {
         public System.Web.Mvc.ActionResult ViewWidget() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LanguageSelectorWidgetController Actions { get { return LanguagesMVC.LanguageSelectorWidget; } }
@@ -53,6 +58,7 @@ namespace Core.Languages.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string ViewWidget = "ViewWidget";
+            public readonly string ChangeLanguage = "ChangeLanguage";
         }
 
 
@@ -72,6 +78,12 @@ namespace Core.Languages.Controllers {
         public override System.Web.Mvc.ActionResult ViewWidget(Core.Framework.Plugins.Web.ICoreWidgetInstance instance) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
             callInfo.RouteValueDictionary.Add("instance", instance);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangeLanguage(string cultureCode) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("cultureCode", cultureCode);
             return callInfo;
         }
 

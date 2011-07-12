@@ -82,6 +82,7 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="NHibernate">
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
     </Reference>
@@ -106,7 +107,8 @@
     <Reference Include="System.Data.DataSetExtensions">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -246,6 +248,7 @@
     <Compile Include="Models\WidgetCSSModel.cs" />
     <Compile Include="Models\WidgetHolderViewModel.cs" />
     <Compile Include="Models\WidgetLookAndFeelModel.cs" />
+    <Compile Include="Modules\ContainerHttpModule.cs" />
     <Compile Include="Modules\PageModeModule.cs" />
     <Compile Include="Navigation.BreadcrumbsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>

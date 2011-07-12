@@ -183,6 +183,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 corePlugin.Install();
                 pluginEntity.Status = PluginStatus.Installed;
                 pluginService.Save(pluginEntity);
+                corePlugin.Start();
             }
             return RedirectToAction(MVC.Admin.Module.Index());
         }

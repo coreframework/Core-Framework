@@ -81,9 +81,9 @@ namespace Framework.MVC.Extensions
         /// <param name="forName">Name of input related to.</param>
         /// <param name="labelText">The label text.</param>
         /// <returns>HTML markup containing label specified.</returns>
-        public static MvcHtmlString Label(this HtmlHelper html, String forName, String labelText)
+        public static MvcHtmlString CustomLabel(this HtmlHelper html, String forName, String labelText)
         {
-            return Label(html, forName, labelText, (object)null);
+            return CustomLabel(html, forName, labelText, (object)null);
         }
 
         /// <summary>
@@ -94,9 +94,9 @@ namespace Framework.MVC.Extensions
         /// <param name="labelText">The label text.</param>
         /// <param name="htmlAttributes">The HTML attributes.</param>
         /// <returns>HTML markup containing label specified.</returns>
-        public static MvcHtmlString Label(this HtmlHelper html, String forName, String labelText, Object htmlAttributes)
+        public static MvcHtmlString CustomLabel(this HtmlHelper html, String forName, String labelText, Object htmlAttributes)
         {
-            return Label(html, forName, labelText, new RouteValueDictionary(htmlAttributes));
+            return CustomLabel(html, forName, labelText, new RouteValueDictionary(htmlAttributes));
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Framework.MVC.Extensions
         /// <param name="labelText">The label text.</param>
         /// <param name="htmlAttributes">The HTML attributes.</param>
         /// <returns>HTML markup containing label specified.</returns>
-        public static MvcHtmlString Label(this HtmlHelper html, String forName, String labelText, IDictionary<String, object> htmlAttributes)
+        public static MvcHtmlString CustomLabel(this HtmlHelper html, String forName, String labelText, IDictionary<String, object> htmlAttributes)
         {
             var tagBuilder = new TagBuilder("label");
             tagBuilder.MergeAttributes(htmlAttributes);
@@ -158,7 +158,7 @@ namespace Framework.MVC.Extensions
         public static MvcHtmlString LabelFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, String labelText, IDictionary<String, Object> htmlAttributes)
         {
             string inputName = ExpressionHelper.GetExpressionText(expression);
-            return html.Label(inputName, labelText, htmlAttributes);
+            return html.CustomLabel(inputName, labelText, htmlAttributes);
         }
 
         /// <summary>

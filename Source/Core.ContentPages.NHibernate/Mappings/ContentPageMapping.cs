@@ -1,7 +1,5 @@
-﻿using System;
-using Core.ContentPages.NHibernate.Models;
+﻿using Core.ContentPages.NHibernate.Models;
 using FluentNHibernate.Mapping;
-using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.ContentPages.NHibernate.Mappings
@@ -25,7 +23,7 @@ namespace Core.ContentPages.NHibernate.Mappings
             .LazyLoad()
             .Cascade.All();
             HasMany(contentPage => contentPage.CurrentContentPageLocales).KeyColumn("ContentPageId")
-            .Table("ContentPageLocales").ApplyFilter<CultureFilter>(String.Format("Culture = {0}", CultureFilter.FilterParamNameForQuery))
+            .Table("ContentPageLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
             .Inverse()
             .LazyLoad()

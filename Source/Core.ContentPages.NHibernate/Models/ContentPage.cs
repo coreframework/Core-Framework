@@ -48,7 +48,7 @@ namespace Core.ContentPages.NHibernate.Models
         {
             get
             {
-                if(_currentLocales.Count == 0 && _currentContentPageLocales.Count == 1)
+                if(_currentLocales.Count == 0 && _currentContentPageLocales.Count > 0)
                 {
                     _currentLocales = _currentContentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
@@ -86,16 +86,28 @@ namespace Core.ContentPages.NHibernate.Models
             {
                 if (_currentLocale == null)
                 {
-                    if (CurrentLocales != null && CurrentLocales.Count == 1)
+                    //2 - max locales number: current locale and default locale
+                    if (CurrentLocales != null && CurrentLocales.Count > 0 && CurrentLocales.Count <= 2)
                     {
-                        _currentLocale = (ContentPageLocale)CurrentLocales[0];
+                        if (CurrentLocales.Count == 1)
+                        {
+                            _currentLocale = (ContentPageLocale) CurrentLocales[0];
+                        }
+                        else if (!CurrentLocales[0].Culture.Equals(CultureHelper.DefaultCultureName))
+                        {
+                            _currentLocale = (ContentPageLocale) CurrentLocales[0];
+                        }
+                        else
+                        {
+                            _currentLocale = (ContentPageLocale)CurrentLocales[1];
+                        }
                     }
                     else
                     {
                         _currentLocale = new ContentPageLocale
                                              {
                                                  ContentPage = this,
-                                                 Culture = "en-GB"
+                                                 Culture = CultureHelper.DefaultCultureName
                                              };
                     }
                 }

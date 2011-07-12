@@ -68,6 +68,11 @@ namespace Core.Framework.Plugins.Web
         void Uninstall();
 
         /// <summary>
+        /// Starts this instance.
+        /// </summary>
+        void Start();
+
+        /// <summary>
         /// Gets the plugin migrations assembly.
         /// </summary>
         /// <returns></returns>

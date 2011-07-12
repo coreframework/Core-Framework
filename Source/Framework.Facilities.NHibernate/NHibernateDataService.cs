@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Castle.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
 using FluentNHibernate.Data;
@@ -88,7 +89,7 @@ namespace Framework.Facilities.NHibernate
                 {
                     session = sessionManager.OpenSession(Alias);
                 }
-                session.EnableFilter("CultureFilter").SetParameter(CultureFilter.FilterParamName, "en-GB");
+                session.EnableFilter("CultureFilter").SetParameter(CultureFilter.FilterParamName, Thread.CurrentThread.CurrentCulture.Name);
 
                 return session;
             }

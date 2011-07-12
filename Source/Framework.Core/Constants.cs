@@ -26,5 +26,15 @@ namespace Framework.Core
         /// PageModeCookieName constant
         /// </summary>
         public const String PageModeCookieName = "PageModeCookie";
+
+        /// <summary>
+        /// CultureCookieName constant
+        /// </summary>
+        public const String CultureCookieName = "CultureCookie";
+
+        /// <summary>
+        /// Default culture constant.
+        /// </summary>
+        public const String DefaultCulture = "DefaultCulture";
     }
 }

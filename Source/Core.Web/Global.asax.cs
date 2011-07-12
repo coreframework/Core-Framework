@@ -25,8 +25,6 @@ namespace Core.Web
     {
         #region Fields
 
-        private static WindsorContainer _container;
-
         private static IApplication _application;
 
         private static ILogger _logger = NullLogger.Instance;

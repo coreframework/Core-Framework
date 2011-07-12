@@ -16,6 +16,7 @@ namespace Core.Languages.NHibernate.Mappings
             Map(language => language.Title).Length(255);
             Map(language => language.Code).Length(3);
             Map(language => language.Culture).Length(10);
+            Map(language => language.IsDefault);
         }
     }
 }

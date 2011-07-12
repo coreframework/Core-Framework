@@ -8,7 +8,6 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1><%: String.Format(Html.Translate(".Title"), Model.Title) %></h1>
 </asp:Content>
-
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
     <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>

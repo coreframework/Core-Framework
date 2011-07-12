@@ -31,7 +31,7 @@ namespace Core.Languages
 //
             //widget routs
             context.MapRoute(null, String.Empty, LanguagesMVC.LanguageSelectorWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-            //context.MapRoute(null, "language-selector-widget/submit-form", LanguagesMVC.LanguageSelectorWidget.SubmitWidgetForm(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "language-selector-widget/change-language", LanguagesMVC.LanguageSelectorWidget.ChangeLanguage(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
     }
 }

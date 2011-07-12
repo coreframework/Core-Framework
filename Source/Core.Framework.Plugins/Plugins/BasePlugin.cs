@@ -119,6 +119,14 @@ namespace Core.Framework.Plugins.Plugins
         public abstract void Uninstall();
 
         /// <summary>
+        /// Starts this instance.
+        /// </summary>
+        public virtual void Start()
+        {
+            
+        }
+
+        /// <summary>
         /// Gets the plugin migrations assembly.
         /// </summary>
         /// <returns></returns>

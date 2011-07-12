@@ -20,6 +20,7 @@ namespace Core.Languages.Migrations
                 t.String("Title").Length(255);
                 t.String("Code").Length(3);
                 t.String("Culture").Length(10);
+                t.Bool("IsDefault").Bool();
             });
         }
 
