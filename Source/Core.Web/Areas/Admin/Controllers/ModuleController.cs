@@ -8,6 +8,7 @@ using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
+using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
@@ -137,7 +138,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-            return RedirectToAction(MVC.Admin.Module.Index());
+            return View(new PluginViewModel().MapFrom(plugin));
         }
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-            return RedirectToAction(MVC.Admin.Module.Index());
+            return View(new PluginViewModel().MapFrom(plugin));
         }
 
         /// <summary>

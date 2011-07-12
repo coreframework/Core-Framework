@@ -1,0 +1,10 @@
+Views:
+  Admin:
+    New:
+      Title: "Languages"
+      Save: "Save"
+      Cancel: "Cancel"
+    Edit:
+      Title: "Edit language \"{0}\""
+      Save: "Save"
+      Cancel: "Cancel"

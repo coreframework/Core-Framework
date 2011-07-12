@@ -76,6 +76,7 @@ Admin:
         Forms: "Forms"
         Roles: "Roles"
         FormsAnswers: "Forms Answers"
+        Languages: "Languages"
     Role:
       Index:
        Role: "Role"

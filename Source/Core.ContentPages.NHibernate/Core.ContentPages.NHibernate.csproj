@@ -81,9 +81,11 @@
     <Compile Include="Contracts\IContentPageService.cs" />
     <Compile Include="Contracts\IContentPageWidgetService.cs" />
     <Compile Include="CoreContentPagesNHibernateModule.cs" />
+    <Compile Include="Mappings\ContentPageLocaleMapping.cs" />
     <Compile Include="Mappings\ContentPageMapping.cs" />
     <Compile Include="Mappings\ContentPageWidgetMapping.cs" />
     <Compile Include="Models\ContentPage.cs" />
+    <Compile Include="Models\ContentPageLocale.cs" />
     <Compile Include="Models\ContentPageWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NHibernateContentPageService.cs" />

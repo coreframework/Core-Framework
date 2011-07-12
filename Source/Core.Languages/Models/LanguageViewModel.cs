@@ -55,5 +55,25 @@ namespace Core.Languages.Models
 
             return to;
         }
+
+        #region Object members
+
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents this instance.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents this instance.
+        /// </returns>
+        public override String ToString()
+        {
+            if (!String.IsNullOrEmpty(Title))
+            {
+                return Title;
+            }
+
+            return base.ToString();
+        }
+
+        #endregion
     }
 }

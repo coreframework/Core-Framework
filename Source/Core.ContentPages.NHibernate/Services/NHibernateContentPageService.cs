@@ -22,11 +22,11 @@ namespace Core.ContentPages.NHibernate.Services
         public IQueryable<ContentPage> GetSearchQuery(string searchString)
         {
             var baseQuery = CreateQuery();
-            if (String.IsNullOrEmpty(searchString))
-            {
+//            if (String.IsNullOrEmpty(searchString))
+//            {
                 return baseQuery;
-            }
-            return baseQuery.Where(user => user.Title.Contains(searchString));
+//            }
+//            return baseQuery.Where(user => user.Title.Contains(searchString));
         }
     }
 }

@@ -92,7 +92,7 @@ namespace Core.ContentPages.Controllers
             var model = new GridViewModel
             {
                 DataUrl = Url.Action("DynamicGridData","ContentPage"),
-                DefaultOrderColumn = "Title",
+                DefaultOrderColumn = "Id",
                 GridTitle = "Users",
                 Columns = columns,
                 IsRowNotClickable = true

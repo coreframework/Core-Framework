@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -8,7 +11,9 @@ using Core.Languages.Models;
 using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
+using Framework.MVC.Grids;
 using Microsoft.Practices.ServiceLocation;
+using System.Linq.Dynamic;
 
 namespace Core.Languages.Controllers
 {
@@ -55,23 +60,67 @@ namespace Core.Languages.Controllers
         
         public virtual ActionResult ShowAll()
         {
-            return View("Admin/Index", languageService.GetAll());
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Title", 
+                                                                 Index = "Title",
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 30,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action("DynamicGridData", "Languages"),
+                DefaultOrderColumn = "Id",
+                GridTitle = "Users",
+                Columns = columns,
+                IsRowNotClickable = true
+            };
+            return View("Admin/Index", model);
         }
 
-        /// <summary>
-        /// Shows language details by id.
-        /// </summary>
-        /// <param name="id">The language id.</param>
-        /// <returns>Language details</returns>
-        public virtual ActionResult ShowById(long? id)
+        [HttpPost]
+        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
         {
-            var language = languageService.Find(id ?? 0);
-            if (language == null)
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            IQueryable<Language> searchQuery = languageService.GetSearchQuery(search);
+            int totalRecords = languageService.GetCount(searchQuery);
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var languages = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
-            }
-
-            return View("Admin/Show", language);
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from language in languages
+                    select new
+                    {
+                        id = language.Id,
+                        cell = new[] {  language.Title, 
+                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("Edit","Languages",new { id = language.Id }),"Edit"),
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                            Url.Action("Remove","Languages",new { id = language.Id }))}
+                    }).ToArray()
+            };
+            return Json(jsonData);
         }
 
         /// <summary>
@@ -121,10 +170,10 @@ namespace Core.Languages.Controllers
         /// <summary>
         /// Saves new language.
         /// </summary>
-        /// <param name="contentPage">The language page.</param>
+        /// <param name="language">The language page.</param>
         /// <returns></returns>
-        [HttpPost, ValidateInput(false)]
-        public virtual ActionResult New(LanguageViewModel language)
+        [HttpPut]
+        public virtual ActionResult Create(LanguageViewModel language)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +190,7 @@ namespace Core.Languages.Controllers
         /// </summary>
         /// <param name="id">The language id.</param>
         /// <returns>List of language pages</returns>
-        [HttpPost]
+        [HttpGet]
         public virtual ActionResult Remove(long id)
         {
             var language = languageService.Find(id);
