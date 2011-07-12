@@ -17,8 +17,6 @@ namespace Core.ContentPages.Migrations
             Database.AddTable("ContentPages", t =>
             {
                 t.PrimaryKey();
-                t.String("Title");
-                t.Text("Content");
                 t.DateTime("CreateDate").Null();
                 t.DateTime("LastModifiedDate").Null();
             });

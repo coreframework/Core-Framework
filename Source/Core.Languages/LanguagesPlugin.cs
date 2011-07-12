@@ -15,6 +15,7 @@ using Core.Languages.Modules;
 using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
+using Framework.Core.Localization;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
@@ -67,12 +68,11 @@ namespace Core.Languages
         public override void Install()
         {
             AssetsHelper.BuildPluginCssPack(this, HttpContext.Current.Request.PhysicalApplicationPath);
-            CultureInfo currentCultureInfo = CultureInfo.CurrentCulture;
             Language currentLanguage = new Language
                                            {
-                                               Title = currentCultureInfo.NativeName,
-                                               Code = currentCultureInfo.TwoLetterISOLanguageName,
-                                               Culture = currentCultureInfo.Name,
+                                               Title = CultureHelper.DefaultCulture.NativeName,
+                                               Code = CultureHelper.DefaultCulture.TwoLetterISOLanguageName,
+                                               Culture = CultureHelper.DefaultCulture.Name,
                                                IsDefault = true
                                            };
             ServiceLocator.Current.GetInstance<ILanguageService>().Save(currentLanguage);
@@ -80,7 +80,7 @@ namespace Core.Languages
 
         public override void Uninstall()
         {
-
+            Application.UnregisterHttpModule(typeof(LocalizationModule));
         }
 
         public override void Start()

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Core.Framework.MEF.Composition;
@@ -15,6 +16,7 @@ using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.MEF.Extensions;
 using Core.Framework.Plugins.Modules;
 using Core.Framework.Plugins.Web;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Framework.MEF.Web
 {
@@ -257,8 +259,19 @@ namespace Core.Framework.MEF.Web
 
         public static void RegisterHttpModule(Type moduleType)
         {
-            _container.Register(Component.For<IPluginHttpModule>().ImplementedBy(moduleType));
+            _container.Register(Component.For<IPluginHttpModule>().ImplementedBy(moduleType).Named(GetHttpModuleComponentName(moduleType)));
             ModulesChanged = true;
+        }
+
+        public static void UnregisterHttpModule(Type moduleType)
+        {
+            _container.Kernel.RemoveComponent(GetHttpModuleComponentName(moduleType));
+            ModulesChanged = true;
+        }
+
+        private static String GetHttpModuleComponentName(Type moduleType)
+        {
+            return String.Format("{0} / {1}", typeof (IHttpHandler).Name, moduleType.Name);
         }
 
         public static void StartPlugins()

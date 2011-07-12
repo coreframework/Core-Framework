@@ -6,7 +6,7 @@ using Framework.Core.Localization;
 
 namespace Core.ContentPages.NHibernate.Models
 {
-    public class ContentPage : Entity
+    public class ContentPage : Entity, ILocalizable
     {
         private IList<ContentPageLocale> _currentContentPageLocales = new List<ContentPageLocale>();
         private IList<ILocale> _currentLocales = new List<ILocale>();
