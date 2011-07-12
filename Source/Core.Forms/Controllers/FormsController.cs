@@ -16,7 +16,10 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
+using Framework.Core.Extensions;
+using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
 using NHibernate;
@@ -254,12 +257,16 @@ namespace Core.Forms.Controllers
         {
             var form = _formsService.Find(formId);
 
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
 
-            return View("EditForm", new FormViewModel().MapFrom(form));
+            bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
+                                                            typeof (Form), form.Id, IsFormOwner(form),
+                                                            PermissionOperationLevel.Object);
+
+            return View("EditForm", new FormViewModel { AllowManage = allowManage}.MapFrom(form));
         }
 
         [HttpPost]
@@ -290,10 +297,11 @@ namespace Core.Forms.Controllers
                     {
                         _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormsPluginOperations>(), typeof(Form), form.Id);
                     }
-                    return RedirectToAction(FormsMVC.Forms.ShowAll());
+                    Success(HttpContext.Translate("Messages.SuccessFormSubmit",
+                                                                ResourceHelper.GetControllerScope(this)));
                 }
             }
-
+            model.AllowManage = true;
             return View("EditForm", model);
         }
 
@@ -348,8 +356,12 @@ namespace Core.Forms.Controllers
                 Columns = columns,
                 IsRowNotClickable = true
             };
+            
+            bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
+                                                            typeof (Form), form.Id, IsFormOwner(form),
+                                                            PermissionOperationLevel.Object);
 
-            ViewData["formId"] = formId;
+            ViewData["Form"] = new FormViewModel {Id = form.Id, AllowManage = allowManage};
 
             return View("FormElements", model);
         }
@@ -363,6 +375,10 @@ namespace Core.Forms.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
+
+            bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
+                                                            typeof (Form), form.Id, IsFormOwner(form),
+                                                            PermissionOperationLevel.Object);
 
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
@@ -384,10 +400,10 @@ namespace Core.Forms.Controllers
                                         String.Format("{0}<input id=\"formElementId\" type=\"hidden\" value={1} />",formElement.Title,formElement.Id), 
                                         formElement.Type.ToString(), 
                                         formElement.IsRequired.ToString(), 
-                                        String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("EditElement","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }),"Edit"),
-                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
-                                            Url.Action("Edit","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }))}
+                                        allowManage?String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("EditElement","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }),"Edit"):String.Empty,
+                                        allowManage?String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                            Url.Action("RemoveElement","Forms",new { id = formElement.Id})):String.Empty}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -446,7 +462,7 @@ namespace Core.Forms.Controllers
                 else
                 {
                     formElement.Form = form;
-                    formElement.OrderNumber = 1;
+                    formElement.OrderNumber = _formsElementService.GetLastOrderNumber(formElement.Form.Id);
                 }
 
                 if (_formsElementService.Save(model.MapTo(formElement)))
@@ -458,16 +474,31 @@ namespace Core.Forms.Controllers
             return View("EditFormElement", model);
         }
 
-        [HttpPost]
         public virtual ActionResult RemoveElement(long id)
         {
             var formElement = _formsElementService.Find(id);
-            if (formElement != null)
+            if (formElement != null && _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
             {
+                var relatedElements = _formsElementService.GetSearchQuery(formElement.Form.Id, String.Empty).ToList();
+                relatedElements.Update(el =>
+                {
+                    el.OrderNumber =
+                       el.OrderNumber > formElement.OrderNumber
+                           ? el.OrderNumber - 1
+                           : el.OrderNumber;
+                });
+
                 _formsElementService.Delete(formElement);
+
+                foreach (var element in relatedElements)
+                {
+                    if (element.Id != formElement.Id)
+                        _formsElementService.Save(element);
+                }
+                return RedirectToAction("ShowFormElements", new { formId = formElement.Form.Id });
             }
 
-            return RedirectToAction("ShowFormElements", new { formId = formElement.Form.Id});
+            return Content(String.Empty);
         }
 
         #endregion

@@ -16,6 +16,8 @@ namespace Core.Forms.Models
 
         public virtual long Id { get; set; }
 
+        public bool AllowManage { get; set; }
+
         public FormViewModel MapFrom(Form from)
         {
             Id = from.Id;

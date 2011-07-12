@@ -32,7 +32,7 @@ namespace Core.Forms
             context.MapRoute(null, "admin/form-{formId}/new-element", FormsMVC.Forms.NewElement());
             context.MapRoute(null, "admin/form-{formId}/edit-element-{formElementId}", FormsMVC.Forms.EditElement());
             context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", FormsMVC.Forms.SaveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-            context.MapRoute("Admin.RemoveFormElement", "admin/forms-element/remove-{id}", FormsMVC.Forms.RemoveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.RemoveFormElement", "admin/forms-element/remove-{id}", FormsMVC.Forms.RemoveElement());
 
             context.MapRoute(null, String.Empty, FormsMVC.Forms.FormTabs(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 

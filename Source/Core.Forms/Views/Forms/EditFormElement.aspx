@@ -54,7 +54,7 @@
                 <%: Html.Submit("Save",new { @class="button"})%>
                 <strong></strong>
             </div>
-			<span><%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowAll" })%></span>
+			<span><%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowFormElements" })%></span>
 		</div>
     </div>
 

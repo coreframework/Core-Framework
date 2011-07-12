@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Core.Forms.NHibernate.Models;
 using Framework.Core.Services;
 
@@ -21,5 +22,12 @@ namespace Core.Forms.NHibernate.Contracts
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
         IQueryable<FormElement> GetSearchQuery(long formId,string searchString);
+
+        /// <summary>
+        /// Gets the last order number.
+        /// </summary>
+        /// <param name="formId">The form id.</param>
+        /// <returns></returns>
+        Int32 GetLastOrderNumber(long? formId);
     }
 }

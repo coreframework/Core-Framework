@@ -26,11 +26,13 @@
                     </div>
                 </div>
 		        <div class="i_buttons clrfix">
+                <%if (Model.AllowManage){%>
 			        <div class="btn1 clrfix">
                         <em></em>
-                        <%: Html.Submit("Save",new { @class="button"})%>
+                        <%:Html.Submit("Save", new {@class = "button"})%>
                         <strong></strong>
                     </div>
+                    <%}%>
 			        <span><%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowAll" })%></span>
 		        </div>
             </div>

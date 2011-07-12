@@ -29,5 +29,14 @@ namespace Core.Forms.NHibernate.Services
             }
             return baseQuery.Where(formElement => formElement.Form.Id == formId && formElement.Title.Contains(searchString));
         }
+
+        public Int32 GetLastOrderNumber(long? formId)
+        {
+            var query = from formElement in CreateQuery()
+                        where formElement.Form.Id == formId
+                        select formElement;
+
+            return query.Count() + 1;
+        }
     }
 }

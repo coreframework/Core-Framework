@@ -173,7 +173,7 @@
     <Content Include="Content\Templates\FormsAnswerTemplate.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Admin\views.yml">
+    <Content Include="Resources\Forms\views.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\views.yml">

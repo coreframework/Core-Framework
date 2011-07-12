@@ -64,7 +64,6 @@
     <div id="footer">
 	    <div class="footer_i">
 		    <div class="copyright">&copy; 2011 Core Framework</div>
-<%--		    <div class="f_links"><a href="#">Terms & conditions</a> l <a href="#">Privacy Policy</a></div>--%>
 	    </div>
     </div>
 
