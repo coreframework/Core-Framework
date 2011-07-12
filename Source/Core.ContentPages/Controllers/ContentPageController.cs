@@ -170,15 +170,16 @@ namespace Core.ContentPages.Controllers
         /// <param name="contentPage">The content page model.</param>
         /// <returns></returns>
         [HttpPost, ValidateInput(false)]
-        public virtual ActionResult Edit(long? id, ContentPageViewModel contentPage)
+        public virtual ActionResult Edit(long? id, ContentPageViewModel contentPageModel)
         {
             if (ModelState.IsValid && id!=null)
             {
-                contentPageService.Save(contentPage.MapTo(new ContentPage{Id = (long) id}));
+                ContentPage contentPage = contentPageService.Find((long) id);
+                contentPageService.Save(contentPageModel.MapTo(contentPage));
                 return RedirectToAction("ShowAll");
             }
 
-            return View("Admin/Edit", contentPage);
+            return View("Admin/Edit", contentPageModel);
         }
 
         /// <summary>

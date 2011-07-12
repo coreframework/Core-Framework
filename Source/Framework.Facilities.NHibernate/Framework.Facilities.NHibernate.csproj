@@ -172,6 +172,7 @@
     <Compile Include="Conventions\PrimaryKeyConvention.cs" />
     <Compile Include="Conventions\ForeignKeyConvention.cs" />
     <Compile Include="Conventions\TableConvention.cs" />
+    <Compile Include="Filters\CultureFilter.cs" />
     <Compile Include="NHibernateDataService.cs" />
     <Compile Include="NHibernateInstaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

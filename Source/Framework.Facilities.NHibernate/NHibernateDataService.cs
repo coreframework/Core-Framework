@@ -10,6 +10,8 @@ using System.Linq;
 using Castle.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
 using FluentNHibernate.Data;
+using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Filters;
 using NHibernate;
 using NHibernate.Linq;
 
@@ -86,6 +88,7 @@ namespace Framework.Facilities.NHibernate
                 {
                     session = sessionManager.OpenSession(Alias);
                 }
+                session.EnableFilter("CultureFilter").SetParameter(CultureFilter.FilterParamName, "en-GB");
 
                 return session;
             }
@@ -142,6 +145,15 @@ namespace Framework.Facilities.NHibernate
             }
             else
             {
+                if (entity is ILocalizable)
+                {
+                    ILocalizable localizableEntity = (ILocalizable) entity;
+                    if (!localizableEntity.CurrentLocales.Contains(localizableEntity.CurrentLocale))
+                    {
+                        localizableEntity.CurrentLocales.Add(localizableEntity.CurrentLocale);
+                    }
+                }
+
                 Session.SaveOrUpdate(entity);
             }
 

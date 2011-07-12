@@ -13,6 +13,7 @@ using FluentNHibernate.Conventions;
 
 using Framework.Core.Configuration;
 using Framework.Facilities.NHibernate.Conventions;
+using Framework.Facilities.NHibernate.Filters;
 using ForeignKeyConvention = Framework.Facilities.NHibernate.Conventions.ForeignKeyConvention;
 
 namespace Framework.Facilities.NHibernate.Castle

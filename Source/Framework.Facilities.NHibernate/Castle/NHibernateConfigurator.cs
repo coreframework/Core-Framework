@@ -19,7 +19,7 @@ using FluentNHibernate.Cfg.Db;
 using Framework.Core;
 using Framework.Core.Configuration;
 using Framework.Core.Helpers;
-
+using Framework.Facilities.NHibernate.Filters;
 using Configuration = NHibernate.Cfg.Configuration;
 
 namespace Framework.Facilities.NHibernate.Castle
@@ -104,6 +104,7 @@ namespace Framework.Facilities.NHibernate.Castle
                                             {
                                                 mapper.Map(m, databaseConfiguration);
                                             }
+                                            m.FluentMappings.Add(typeof(CultureFilter));
                                         });
 
             return fluenty.ExposeConfiguration(ProcessConfiguration).BuildConfiguration().AddProperties(GetNHibernateProperties(databaseConfiguration));

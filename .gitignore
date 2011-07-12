@@ -59,6 +59,13 @@
 /Source/Core.Forms/obj
 /Source/Core.Forms.NHibernate/bin
 /Source/Core.Forms.NHibernate/obj
+/Source/Core.Languages.Migrations/bin
+/Source/Core.Languages.Migrations/obj
+/Source/Core.Languages/bin
+/Source/Core.Languages/obj
+/Source/Core.Languages.NHibernate/bin
+/Source/Core.Languages.NHibernate/obj
+/Source/Core.Web/Areas/Languages
 /Source/Core.Web/Areas/Forms
 /Source/Core.Web/Content/Css/Plugin
 /Source/Core.Web/Scripts/admincustom_packed.js
