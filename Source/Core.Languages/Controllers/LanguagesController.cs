@@ -66,14 +66,16 @@ namespace Core.Languages.Controllers
                                                              {
                                                                  Name = "Title", 
                                                                  Index = "Title",
+                                                                 Width = 400
                                                              },
                                                          new GridColumnViewModel
                                                              {
+                                                                 Width = 15,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 30,
+                                                                 Width = 10,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -114,9 +116,9 @@ namespace Core.Languages.Controllers
                     {
                         id = language.Id,
                         cell = new[] {  language.Title, 
-                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                        String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("Edit","Languages",new { id = language.Id }),"Edit"),
-                                        String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
+                                        String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","Languages",new { id = language.Id }))}
                     }).ToArray()
             };

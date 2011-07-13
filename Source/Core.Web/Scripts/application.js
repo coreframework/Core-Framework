@@ -107,7 +107,7 @@
     $(".tooltip img").error_tool_tip();
 
     // Cross browser rounded corners.
-    $.fix_ui_corners(5);
+    //$.fix_ui_corners(5);
   });
 
   $(function () {

@@ -15,11 +15,11 @@ namespace Core.ContentPages
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
-            context.MapRoute("Admin.ContentPages", "admin/content-pages", new { controller = "ContentPage", action = "ShowAll", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.ContentPages.DynamicGridData", "admin/content-pages/DynamicGridData", new { controller = "ContentPage", action = "DynamicGridData", id = "" });
-            context.MapRoute("Admin.ViewContentPage", "admin/content-pages/view-{id}", new { controller = "ContentPage", action = "ShowById", id = "" });
-            context.MapRoute("Admin.EditContentPage", "admin/content-pages/edit-{id}", new { controller = "ContentPage", action = "Edit", id = "" });
-            context.MapRoute("Admin.NewContentPage", "admin/content-pages/new", new { controller = "ContentPage", action = "New", id = "" });
+            context.MapRoute("Admin.ContentPages", "admin/content-pages", new { controller = "ContentPage", action = "ShowAll", area = AreaName, id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.ContentPages.DynamicGridData", "admin/content-pages/DynamicGridData", new { controller = "ContentPage", action = "DynamicGridData", area = AreaName, id = "" });
+            context.MapRoute("Admin.ViewContentPage", "admin/content-pages/view-{id}", new { controller = "ContentPage", action = "ShowById", area = AreaName, id = "" });
+            context.MapRoute("Admin.EditContentPage", "admin/content-pages/edit-{id}", new { controller = "ContentPage", action = "Edit", area = AreaName, id = "" });
+            context.MapRoute("Admin.NewContentPage", "admin/content-pages/new", new { controller = "ContentPage", action = "New", area = AreaName, id = "" });
             context.MapRoute("Admin.RemoveContentPage", "admin/content-pages/remove-{id}", ContentPagesMVC.ContentPage.Remove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             
             //widget routs

@@ -145,7 +145,7 @@ namespace Framework.MVC.Grids.jqGrid
             var autoSearchLabel = new TagBuilder("label");
             autoSearchLabel.SetInnerText(html.Translate("EnableAutosearch", ResourceHelper.GetModelScope(typeof(GridViewModel))));
             autoSearchWrapper.InnerHtml += autoSearchLabel.ToString(TagRenderMode.Normal);
-            autoSearchWrapper.InnerHtml += html.CheckBox("autosearch", new { onclick = "enableAutosubmit(this.checked)", style = "width: auto;" }).ToHtmlString();
+            autoSearchWrapper.InnerHtml += html.CheckBox("autosearch", new { onclick = "enableAutosubmit(this.checked)", style = "width: auto; border: none;" }).ToHtmlString();
 
             return autoSearchWrapper.ToString(TagRenderMode.Normal);
         }
