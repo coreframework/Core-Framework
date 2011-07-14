@@ -51,6 +51,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<IUserService>().ImplementedBy<NHibernateUserService>().LifeStyle.Transient);
             container.Register(Component.For<IUserGroupService>().ImplementedBy<NHibernateUserGroupService>().LifeStyle.Transient);
             container.Register(Component.For<IRoleService>().ImplementedBy<NHibernateRoleService>().LifeStyle.Transient);
+            container.Register(Component.For<IRoleLocaleService>().ImplementedBy<NHibernateRoleLocaleService>().LifeStyle.Transient);
             container.Register(Component.For<IEntityTypeService>().ImplementedBy<NHibernateEntityTypeService>().LifeStyle.Transient);
             container.Register(Component.For<IPermissionService>().ImplementedBy<NHibernatePermissionService>().LifeStyle.Transient);
             container.Register(Component.For<IPermissionCommonService>().ImplementedBy<PermissionCommonService>().LifeStyle.Transient);

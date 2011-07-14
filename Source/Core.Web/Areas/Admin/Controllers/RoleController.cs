@@ -75,7 +75,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 DataUrl = Url.Action(MVC.Admin.Role.DynamicGridData()),
                 DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.Role.Edit())),
-                DefaultOrderColumn = "Name",
+                DefaultOrderColumn = "Id",
                 GridTitle = "Roles",
                 Columns = columns
             };
@@ -165,7 +165,27 @@ namespace Core.Web.Areas.Admin.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
 
-            return View(new RoleViewModel().MapFrom(role));
+            return View(new RoleLocaleViewModel().MapFrom(role));
+        }
+
+        [HttpPost]
+        public virtual ActionResult ChangeLanguage(long roleId, String culture)
+        {
+            var role = roleService.Find(roleId);
+            if (role == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Role not found");
+            }
+            RoleLocaleViewModel model = new RoleLocaleViewModel().MapFrom(role);
+            model.SelectedCulture = culture;
+            IRoleLocaleService localeService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
+            RoleLocale locale = localeService.GetLocale(roleId, culture);
+            if (locale != null)
+            {
+                model.Name = locale.Name;
+            }
+
+            return PartialView("EditForm", model);
         }
 
         /// <summary>
@@ -175,7 +195,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="roleView">The role view model.</param>
         /// <returns>Redirect back to roles list.</returns>
         [HttpPost]
-        public virtual ActionResult Update(long id, RoleViewModel roleView)
+        public virtual ActionResult Update(long id, RoleLocaleViewModel roleView)
         {
             var role = roleService.Find(id);
             if (role == null)
@@ -185,8 +205,14 @@ namespace Core.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                roleView.MapTo(role);
-                roleService.Save(role);
+                IRoleLocaleService localeService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
+                RoleLocale roleLocale = localeService.GetLocale(id, roleView.SelectedCulture);
+                if (roleLocale == null)
+                {
+                    roleLocale = new RoleLocale { Role = role, Culture = roleView.SelectedCulture };
+                }
+                roleLocale.Name = roleView.Name;
+                localeService.Save(roleLocale);
                 Success(Translate("Messages.RoleUpdated"));
                 return RedirectToAction(MVC.Admin.Role.Index());
             }
@@ -318,7 +344,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 Success(Translate("Messages.UserRolesUpdated"));
                 return Json(true);
             }
-            
+
             Error(Translate("Messages.ValidationError"));
             return Json(Translate("Messages.ValidationError"));
         }
@@ -451,7 +477,7 @@ namespace Core.Web.Areas.Admin.Controllers
 
             RoleHelper.ApplyRolePermissions(model);
             Success(Translate("Messages.SuccessfullyApplyPermissions"));
-            return RedirectToAction(MVC.Admin.Role.Permissions(model.RoleId, String.Format("{0}_{1}", model.ResourceId,(int)model.Area)));
+            return RedirectToAction(MVC.Admin.Role.Permissions(model.RoleId, String.Format("{0}_{1}", model.ResourceId, (int)model.Area)));
         }
 
         #endregion

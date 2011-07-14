@@ -48,6 +48,11 @@ namespace Core.Web.Areas.Admin.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Update() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Update);
         }
@@ -119,6 +124,7 @@ namespace Core.Web.Areas.Admin.Controllers {
             public readonly string New = "New";
             public readonly string Create = "Create";
             public readonly string Edit = "Edit";
+            public readonly string ChangeLanguage = "ChangeLanguage";
             public readonly string Update = "Update";
             public readonly string Remove = "Remove";
             public readonly string ConfirmRemove = "ConfirmRemove";
@@ -139,6 +145,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string Edit = "~/Areas/Admin/Views/Role/Edit.aspx";
+            public readonly string EditForm = "~/Areas/Admin/Views/Role/EditForm.ascx";
             public readonly string Index = "~/Areas/Admin/Views/Role/Index.aspx";
             public readonly string New = "~/Areas/Admin/Views/Role/New.aspx";
             public readonly string PermissionOperations = "~/Areas/Admin/Views/Role/PermissionOperations.ascx";
@@ -185,7 +192,14 @@ namespace Core.Web.Areas.Admin.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Update(long id, Core.Web.Areas.Admin.Models.RoleViewModel roleView) {
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long roleId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("roleId", roleId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Update(long id, Core.Web.Areas.Admin.Models.RoleLocaleViewModel roleView) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("roleView", roleView);

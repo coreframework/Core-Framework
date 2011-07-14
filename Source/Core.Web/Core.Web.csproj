@@ -284,6 +284,7 @@
     <Content Include="Areas\Admin\Views\Module\Install.aspx" />
     <Content Include="Areas\Admin\Views\Module\Uninstall.aspx" />
     <Content Include="Areas\Admin\Views\Role\Edit.aspx" />
+    <Content Include="Areas\Admin\Views\Role\EditForm.ascx" />
     <Content Include="Areas\Admin\Views\Role\Index.aspx" />
     <Content Include="Areas\Admin\Views\Role\New.aspx" />
     <Content Include="Areas\Admin\Views\Role\PermissionOperations.ascx" />

@@ -80,6 +80,7 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Roles.New", "admin/roles/new", MVC.Admin.Role.New());
             context.MapRoute("Admin.Roles.Create", "admin/roles", MVC.Admin.Role.Create(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
             context.MapRoute("Admin.Roles.Edit", "admin/role/{id}", new { controller = "Role", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.Roles.ChangeLanguage", "admin/role/change-language", new { controller = "Role", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Roles.Update", "admin/role/{id}", MVC.Admin.Role.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Roles.Remove", "admin/role/{id}/remove", MVC.Admin.Role.Remove());
             context.MapRoute("Admin.Roles.ConfirmRemove", "admin/role/{id}", MVC.Admin.Role.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
