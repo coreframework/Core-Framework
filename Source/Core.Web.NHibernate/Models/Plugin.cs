@@ -48,6 +48,12 @@ namespace Core.Web.NHibernate.Models
         /// <value>The title.</value>
         public virtual String Title { get; set; }
 
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
+        public virtual String Description { get; set; }
+
         #endregion
 
         #region IPermissible Members

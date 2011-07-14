@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
+using Framework.Core.Localization;
 
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
-    public class Role : Entity, IRole, IPermissible
+    public class Role : Entity, IRole, IPermissible, ILocalizable
     {
         #region Fields
 
         private IList<User> users = new List<User>();
         private IList<UserGroup> userGroups = new List<UserGroup>();
+        private IList<RoleLocale> _currentRoleLocales = new List<RoleLocale>();
+        private IList<ILocale> _currentLocales = new List<ILocale>();
+        private RoleLocale _currentLocale;
 
         #endregion
 
@@ -29,7 +34,14 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the name.
         /// </summary>
         /// <value>The name.</value>
-        public virtual String Name { get; set; }
+        public virtual String Name
+        {
+            get
+            {
+                return ((RoleLocale)CurrentLocale).Name;
+            }
+            set { ((RoleLocale)CurrentLocale).Name = value; }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether this instance is system role.
@@ -53,6 +65,69 @@ namespace Core.Web.NHibernate.Models
         {
             get { return userGroups; }
             set { userGroups = value; }
+        }
+
+        public virtual IList<ILocale> CurrentLocales
+        {
+            get
+            {
+                if (_currentLocales.Count == 0 && _currentRoleLocales.Count > 0)
+                {
+                    _currentLocales = _currentRoleLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                }
+                return _currentLocales;
+            }
+            set
+            {
+                _currentLocales = value;
+            }
+        }
+
+        public virtual IList<RoleLocale> CurrentRoleLocales
+        {
+            get
+            {
+                return CurrentLocales.ToList().ConvertAll(mc => (RoleLocale)mc);
+            }
+            set
+            {
+                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
+            }
+        }
+
+        public virtual ILocale CurrentLocale
+        {
+            get
+            {
+                if (_currentLocale == null)
+                {
+                    //2 - max locales number: current locale and default locale
+                    if (CurrentLocales != null && CurrentLocales.Count > 0 && CurrentLocales.Count <= 2)
+                    {
+                        if (CurrentLocales.Count == 1)
+                        {
+                            _currentLocale = (RoleLocale)CurrentLocales[0];
+                        }
+                        else if (!CurrentLocales[0].Culture.Equals(CultureHelper.DefaultCultureName))
+                        {
+                            _currentLocale = (RoleLocale)CurrentLocales[0];
+                        }
+                        else
+                        {
+                            _currentLocale = (RoleLocale)CurrentLocales[1];
+                        }
+                    }
+                    else
+                    {
+                        _currentLocale = new RoleLocale
+                        {
+                            Role = this,
+                            Culture = CultureHelper.DefaultCultureName
+                        };
+                    }
+                }
+                return _currentLocale;
+            }
         }
 
         #endregion

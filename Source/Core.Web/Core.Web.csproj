@@ -167,6 +167,7 @@
     <Compile Include="Areas\Admin\Models\PluginListingModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleListModel.cs" />
+    <Compile Include="Areas\Admin\Models\RoleLocaleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RolePermissionsItem.cs" />
     <Compile Include="Areas\Admin\Models\RolePermissionsModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Areas\Admin\Models\UserToRoleAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserToUserGroupAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\WidgetViewModel.cs" />
     <Compile Include="Areas\Navigation\Controllers\BreadcrumbsController.cs" />
     <Compile Include="Areas\Navigation\Controllers\ListMenuController.cs" />
     <Compile Include="Areas\Navigation\Controllers\SiteMapController.cs" />
@@ -277,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\AdminHome\Index.aspx" />
+    <Content Include="Areas\Admin\Views\Module\Edit.aspx" />
     <Content Include="Areas\Admin\Views\Module\Index.aspx" />
     <Content Include="Areas\Admin\Views\Module\Install.aspx" />
     <Content Include="Areas\Admin\Views\Module\Uninstall.aspx" />
@@ -301,6 +304,7 @@
     <Content Include="Areas\Admin\Views\User\New.aspx" />
     <Content Include="Areas\Admin\Views\User\Remove.aspx" />
     <Content Include="Areas\Admin\Views\User\UserGroups.aspx" />
+    <Content Include="Areas\Admin\Views\Widget\Edit.aspx" />
     <Content Include="Areas\Admin\Views\Widget\Index.aspx" />
     <Content Include="Areas\Navigation\Config\PluginConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

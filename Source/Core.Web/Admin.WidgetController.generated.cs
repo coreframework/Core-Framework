@@ -38,6 +38,16 @@ namespace Core.Web.Areas.Admin.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Edit() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Update() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Update);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Enable() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Enable);
         }
@@ -61,6 +71,8 @@ namespace Core.Web.Areas.Admin.Controllers {
         public class ActionNamesClass {
             public readonly string Index = "Index";
             public readonly string DynamicGridData = "DynamicGridData";
+            public readonly string Edit = "Edit";
+            public readonly string Update = "Update";
             public readonly string Enable = "Enable";
             public readonly string Disable = "Disable";
         }
@@ -71,6 +83,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Edit = "~/Areas/Admin/Views/Widget/Edit.aspx";
             public readonly string Index = "~/Areas/Admin/Views/Widget/Index.aspx";
         }
     }
@@ -91,6 +104,19 @@ namespace Core.Web.Areas.Admin.Controllers {
             callInfo.RouteValueDictionary.Add("search", search);
             callInfo.RouteValueDictionary.Add("sidx", sidx);
             callInfo.RouteValueDictionary.Add("sord", sord);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Update(long id, Core.Web.Areas.Admin.Models.WidgetViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

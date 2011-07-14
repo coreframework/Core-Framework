@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
+using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.MVC.Controllers;
@@ -104,6 +105,50 @@ namespace Core.Web.Areas.Admin.Controllers
                            }).ToArray())
             };
             return Json(jsonData);
+        }
+
+        /// <summary>
+        /// Render edit form for widget specified.
+        /// </summary>
+        /// <param name="id">The widget id.</param>
+        /// <returns>Widget edit view.</returns>
+        [HttpGet]
+        public virtual ActionResult Edit(long id)
+        {
+            var widget = widgetService.Find(id);
+            if (widget == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            return View(new WidgetViewModel().MapFrom(widget));
+        }
+
+        /// <summary>
+        /// Updates widget details.
+        /// </summary>
+        /// <param name="id">The widget id.</param>
+        /// <param name="model">The widget view model.</param>
+        /// <returns>Redirect back to widgets list.</returns>
+        [HttpPost]
+        public virtual ActionResult Update(long id, WidgetViewModel model)
+        {
+            var widget = widgetService.Find(id);
+            if (widget == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            if (ModelState.IsValid)
+            {
+                model.MapTo(widget);
+                widgetService.Save(widget);
+                Success(Translate("Messages.PluginUpdated"));
+                return RedirectToAction(MVC.Admin.Widget.Index());
+            }
+
+            Error(Translate("Messages.ValidationError"));
+            return View("Edit", model);
         }
 
         /// <summary>

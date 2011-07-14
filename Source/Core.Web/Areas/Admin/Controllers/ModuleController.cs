@@ -124,6 +124,49 @@ namespace Core.Web.Areas.Admin.Controllers
             return Json(jsonData);
         }
 
+        /// <summary>
+        /// Render edit form for plugin specified.
+        /// </summary>
+        /// <param name="id">The plugin id.</param>
+        /// <returns>Plugin edit view.</returns>
+        [HttpGet]
+        public virtual ActionResult Edit(long id)
+        {
+            var plugin = pluginService.Find(id);
+            if (plugin == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            return View(new PluginViewModel().MapFrom(plugin));
+        }
+
+        /// <summary>
+        /// Updates plugin details.
+        /// </summary>
+        /// <param name="id">The plugin id.</param>
+        /// <param name="model">The plugin view model.</param>
+        /// <returns>Redirect back to plugins list.</returns>
+        [HttpPost]
+        public virtual ActionResult Update(long id, PluginViewModel model)
+        {
+            var plugin = pluginService.Find(id);
+            if (plugin == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            if (ModelState.IsValid)
+            {
+                model.MapTo(plugin);
+                pluginService.Save(plugin);
+                Success(Translate("Messages.PluginUpdated"));
+                return RedirectToAction(MVC.Admin.Module.Index());
+            }
+
+            Error(Translate("Messages.ValidationError"));
+            return View("Edit", model);
+        }
 
         /// <summary>
         /// Renders module install confirmation view.

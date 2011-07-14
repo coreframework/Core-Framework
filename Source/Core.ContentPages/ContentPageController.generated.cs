@@ -33,13 +33,18 @@ namespace Core.ContentPages.Controllers {
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ShowById() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ShowById);
+        public System.Web.Mvc.JsonResult DynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Edit() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -60,8 +65,9 @@ namespace Core.ContentPages.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string ShowAll = "ShowAll";
-            public readonly string ShowById = "ShowById";
+            public readonly string DynamicGridData = "DynamicGridData";
             public readonly string Edit = "Edit";
+            public readonly string ChangeLanguage = "ChangeLanguage";
             public readonly string New = "New";
             public readonly string Remove = "Remove";
         }
@@ -84,9 +90,13 @@ namespace Core.ContentPages.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ShowById(long? id) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowById);
-            callInfo.RouteValueDictionary.Add("id", id);
+        public override System.Web.Mvc.JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
             return callInfo;
         }
 
@@ -96,10 +106,17 @@ namespace Core.ContentPages.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(long? id, Core.ContentPages.Models.ContentPageViewModel contentPage) {
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long contentPageId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("contentPageId", contentPageId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(long? id, Core.ContentPages.Models.ContentPageLocaleViewModel contentPageModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("contentPage", contentPage);
+            callInfo.RouteValueDictionary.Add("contentPageModel", contentPageModel);
             return callInfo;
         }
 

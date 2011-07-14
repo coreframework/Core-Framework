@@ -7,7 +7,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Models
 {
-    public class PluginViewModel : IMappedModel<Plugin, PluginViewModel>
+    public class WidgetViewModel : IMappedModel<Widget, WidgetViewModel>
     {
         public IDictionary<String, String> Cultures { get; set; }
         public String SelectedCulture { get; set; }
@@ -19,38 +19,29 @@ namespace Core.Web.Areas.Admin.Models
         public long Id { get; set; }
 
         /// <summary>
-        /// Gets or sets the title.
-        /// </summary>
-        /// <value>The title.</value>
-        public String Title { get; set; }
-
-        /// <summary>
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
-        public String Description { get; set; }
+        public String Title { get; set; }
 
         #region IMappedModel members
 
-        public PluginViewModel MapFrom(Plugin from)
+        public WidgetViewModel MapFrom(Widget from)
         {
             Id = from.Id;
             Title = from.Title;
-            Description = from.Description;
             Cultures = ServiceLocator.Current.GetInstance<ICultureProvider>().GetAvailableLanguages();
-            
+
             return this;
         }
 
-        public Plugin MapTo(Plugin to)
+        public Widget MapTo(Widget to)
         {
             to.Title = Title;
-            to.Description = Description;
 
             return to;
         }
 
         #endregion
-
     }
 }

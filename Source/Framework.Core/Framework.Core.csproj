@@ -187,6 +187,7 @@
     <Compile Include="Infrastructure\Message.cs" />
     <Compile Include="Infrastructure\MessageType.cs" />
     <Compile Include="Localization\CultureHelper.cs" />
+    <Compile Include="Localization\ICultureProvider.cs" />
     <Compile Include="Localization\ILocale.cs" />
     <Compile Include="Localization\ILocalizable.cs" />
     <Compile Include="Modules\IModule.cs" />

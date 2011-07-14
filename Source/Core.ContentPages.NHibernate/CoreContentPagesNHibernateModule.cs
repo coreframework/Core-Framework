@@ -16,6 +16,7 @@ namespace Core.ContentPages.NHibernate
 
             // Register data services.
             container.Register(Component.For<IContentPageService>().ImplementedBy<NHibernateContentPageService>().LifeStyle.Transient);
+            container.Register(Component.For<IContentPageLocaleService>().ImplementedBy<NHibernateContentPageLocaleService>().LifeStyle.Transient);
 
             //Register widget data services. 
             container.Register(Component.For<IContentPageWidgetService>().ImplementedBy<NHibernateContentPageWidgetService>().LifeStyle.Transient);

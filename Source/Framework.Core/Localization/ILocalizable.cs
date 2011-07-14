@@ -5,7 +5,7 @@ namespace Framework.Core.Localization
 {
     public interface ILocalizable
     {
-        Type LocaleType { get; }
+        //Type LocaleType { get; }
         IList<ILocale> CurrentLocales { get; set; }
         ILocale CurrentLocale { get;}
     }

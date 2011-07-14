@@ -6,6 +6,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Core.ContentPages.Models;
+using Core.ContentPages.NHibernate.Contracts;
 using Core.ContentPages.NHibernate.Models;
 using Core.ContentPages.Permissions.Operations;
 using Core.Framework.MEF.Web;
@@ -77,12 +78,7 @@ namespace Core.ContentPages.Controllers
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 20,
-                                                                 Sortable = false
-                                                             },
-                                                         new GridColumnViewModel
-                                                             {
-                                                                 Width = 10,
+                                                                  Width = 10,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -124,30 +120,14 @@ namespace Core.ContentPages.Controllers
                         id = contentPage.Id,
                         cell = new[] {  contentPage.Title, 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("ShowById","ContentPage",new { id = contentPage.Id }),"View"),
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
+                                        String.Format("<a href=\"{0}\">{1}</a>",
                                             Url.Action("Edit","ContentPage",new { id = contentPage.Id }),"Edit"),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","ContentPage",new { id = contentPage.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);
-        }
-
-        /// <summary>
-        /// Shows content page details by id.
-        /// </summary>
-        /// <param name="id">The content page id.</param>
-        /// <returns>Content page details</returns>
-        public virtual ActionResult ShowById(long? id)
-        {
-            var contentPage = contentPageService.Find(id ?? 0);
-            if (contentPage == null)
-            {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
-            }
-
-            return View("Admin/Show", contentPage);
         }
 
         /// <summary>
@@ -163,7 +143,28 @@ namespace Core.ContentPages.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
             }
 
-            return View("Admin/Edit", new ContentPageViewModel().MapFrom(contentPage));
+            return View("Admin/Edit", new ContentPageLocaleViewModel().MapFrom(contentPage));
+        }
+
+        [HttpPost]
+        public virtual ActionResult ChangeLanguage(long contentPageId, String culture)
+        {
+            var contentPage = contentPageService.Find(contentPageId);
+            if (contentPage == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
+            }
+            ContentPageLocaleViewModel model = new ContentPageLocaleViewModel().MapFrom(contentPage);
+            model.SelectedCulture = culture;
+            IContentPageLocaleService localeService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
+            ContentPageLocale locale = localeService.GetLocale(contentPageId, culture);
+            if(locale != null)
+            {
+                model.Title = locale.Title;
+                model.Content = locale.Content;
+            }
+
+            return PartialView("Admin/EditForm", model);
         }
 
         /// <summary>
@@ -173,7 +174,7 @@ namespace Core.ContentPages.Controllers
         /// <param name="contentPage">The content page model.</param>
         /// <returns></returns>
         [HttpPost, ValidateInput(false)]
-        public virtual ActionResult Edit(long? id, ContentPageViewModel contentPageModel)
+        public virtual ActionResult Edit(long? id, ContentPageLocaleViewModel contentPageModel)
         {
             if (ModelState.IsValid && id!=null)
             {

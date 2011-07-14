@@ -136,6 +136,7 @@
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Mappings\Permissions\EntityTypeMapping.cs" />
     <Compile Include="Mappings\Permissions\PermissionMapping.cs" />
+    <Compile Include="Mappings\RoleLocaleMapping.cs" />
     <Compile Include="Mappings\UserGroupMapping.cs" />
     <Compile Include="Mappings\UserMapping.cs" />
     <Compile Include="Mappings\LookAndFeelMapping.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Models\PagePermissionsModel.cs" />
     <Compile Include="Models\Permissions\EntityType.cs" />
     <Compile Include="Models\Permissions\Permission.cs" />
+    <Compile Include="Models\RoleLocale.cs" />
     <Compile Include="Models\Static\PermissionScope.cs" />
     <Compile Include="Models\Static\SystemRoles.cs" />
     <Compile Include="Models\User.cs" />

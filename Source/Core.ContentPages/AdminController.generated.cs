@@ -29,9 +29,9 @@ namespace T4MVC {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string Edit = "~/Views/Admin/Edit.aspx";
+            public readonly string EditForm = "~/Views/Admin/EditForm.ascx";
             public readonly string Index = "~/Views/Admin/Index.aspx";
             public readonly string New = "~/Views/Admin/New.aspx";
-            public readonly string Show = "~/Views/Admin/Show.aspx";
         }
     }
 

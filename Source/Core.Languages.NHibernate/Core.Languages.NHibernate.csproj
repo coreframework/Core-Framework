@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Contracts\ILanguageService.cs" />
     <Compile Include="CoreLanguagesNHibernateModule.cs" />
+    <Compile Include="Helpers\CultureProvider.cs" />
     <Compile Include="Mappings\LanguageMapping.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,7 +85,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="Permissions\Operations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

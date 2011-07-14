@@ -18,6 +18,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(plugin => plugin.Version).Length(255);
             Map(plugin => plugin.CreateDate);
             Map(plugin => plugin.Title);
+            Map(plugin => plugin.Description);
         }
     }
 }

@@ -128,6 +128,7 @@ namespace Core.Web.Areas.Admin
                     var newPlugin = new Plugin
                                         {
                                             Title = plugin1.Title,
+                                            Description = plugin1.Description,
                                             Identifier = plugin1.Identifier,
                                             Status = PluginStatus.NotInstalled,
                                             CreateDate = DateTime.Now

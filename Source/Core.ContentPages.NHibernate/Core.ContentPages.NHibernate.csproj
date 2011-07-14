@@ -78,6 +78,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IContentPageLocaleService.cs" />
     <Compile Include="Contracts\IContentPageService.cs" />
     <Compile Include="Contracts\IContentPageWidgetService.cs" />
     <Compile Include="CoreContentPagesNHibernateModule.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Models\ContentPageLocale.cs" />
     <Compile Include="Models\ContentPageWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateContentPageLocaleService.cs" />
     <Compile Include="Services\NHibernateContentPageService.cs" />
     <Compile Include="Services\NHibernateContentPageWidgetService.cs" />
   </ItemGroup>

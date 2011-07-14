@@ -2,7 +2,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Core.Languages.NHibernate.Contracts;
+using Core.Languages.NHibernate.Helpers;
 using Core.Languages.NHibernate.Services;
+using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Castle;
 
 namespace Core.Languages.NHibernate
@@ -16,10 +18,9 @@ namespace Core.Languages.NHibernate
 
             // Register data services.
             container.Register(Component.For<ILanguageService>().ImplementedBy<NHibernateLanguageService>().LifeStyle.Transient);
-//            container.Register(Component.For<IFormElementService>().ImplementedBy<NHibernateFormElementService>().LifeStyle.Transient);
-//            container.Register(Component.For<IFormBuilderWidgetService>().ImplementedBy<NHibernateFormBuilderWidgetService>().LifeStyle.Transient);
-//            container.Register(Component.For<IFormWidgetAnswerService>().ImplementedBy<NHibernateFormWidgetAnswerService>().LifeStyle.Transient);
-//            container.Register(Component.For<IFormWidgetAnswerValueService>().ImplementedBy<NHibernateFormWidgetAnswerValueService>().LifeStyle.Transient);
+
+            //Register helpers.
+            container.Register(Component.For<ICultureProvider>().ImplementedBy<CultureProvider>().LifeStyle.Transient);
         }
     }
 }

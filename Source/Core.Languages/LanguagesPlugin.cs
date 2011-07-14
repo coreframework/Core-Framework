@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Globalization;
 using System.Reflection;
 using System.Web;
-using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
