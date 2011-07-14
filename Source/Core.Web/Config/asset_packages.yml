@@ -14,7 +14,7 @@
     - jquery.json-2.2.min.js
     - framework.js
     - application.js
-  ajaxmvc:
+  ajax:
     - MicrosoftAjax.js
     - MicrosoftMvcAjax.js
   custom:

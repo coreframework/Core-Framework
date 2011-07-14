@@ -119,9 +119,8 @@ namespace Core.ContentPages.Controllers
                     {
                         id = contentPage.Id,
                         cell = new[] {  contentPage.Title, 
+
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                        String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                        String.Format("<a href=\"{0}\">{1}</a>",
                                             Url.Action("Edit","ContentPage",new { id = contentPage.Id }),"Edit"),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","ContentPage",new { id = contentPage.Id }))}
