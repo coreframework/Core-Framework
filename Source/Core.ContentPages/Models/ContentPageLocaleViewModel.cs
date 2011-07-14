@@ -30,7 +30,7 @@ namespace Core.ContentPages.Models
         {
             to.Title = Title;
             to.Content = Content;
-
+            
             return to;
         }
     }

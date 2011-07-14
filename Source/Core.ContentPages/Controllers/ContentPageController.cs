@@ -178,7 +178,16 @@ namespace Core.ContentPages.Controllers
             if (ModelState.IsValid && id!=null)
             {
                 ContentPage contentPage = contentPageService.Find((long) id);
-                contentPageService.Save(contentPageModel.MapTo(contentPage));
+                IContentPageLocaleService localeService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
+                ContentPageLocale contentPageLocale = localeService.GetLocale(id.Value, contentPageModel.SelectedCulture);
+                if(contentPageLocale == null)
+                {
+                    contentPageLocale = new ContentPageLocale
+                                            {ContentPage = contentPage, Culture = contentPageModel.SelectedCulture};
+                }
+                contentPageLocale.Title = contentPageModel.Title;
+                contentPageLocale.Content = contentPageModel.Content;
+                localeService.Save(contentPageLocale);
                 Success("Sucessfully save content page.");
                 return RedirectToAction("ShowAll");
             }
