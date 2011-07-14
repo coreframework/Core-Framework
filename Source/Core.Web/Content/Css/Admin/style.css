@@ -230,7 +230,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 					.tabs_cont .form_i input[type=radio] {margin:0;padding:0;float:left;}
 		.t_buttons  {clear:both;height:27px;}
 		.t_buttons .btn1 {float:left;margin-right:5px;margin-top:20px;}
-		.i_form {background:url(../../images/admin/i_form_bg) repeat-x 0 0 #ecedef;padding:15px 0 20px 20px;}
+		.i_form {background:url(../../images/admin/i_form_bg.gif) repeat-x 0 0 #ecedef;padding:15px 0 20px 20px;}
 			.cols {width:100%;position:relative;} 
 				.colls_i {float:left;width:30%;margin-left:20px}
 				.colls_i:first-child {margin-left:0px}

@@ -2,6 +2,8 @@
   base:
     - jquery-1.5.1.js
     - jquery.json-2.2.min.js
+    - MicrosoftAjax.js
+    - MicrosoftMvcAjax.js
   adminbase:
     - jquery-1.5.1.js
     - jquery.watermark.js
@@ -34,9 +36,6 @@
     - jquery-asyncUpload-0.1.js
   fckeditor:
     - fck/fckeditor.js
-  ajax:
-    - MicrosoftAjax.js
-    - MicrosoftMvcAjax.js 
   jquery-ui:
     - jquery-ui/jquery.ui.core.js
     - jquery-ui/jquery.ui.widget.js

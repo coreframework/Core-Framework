@@ -169,7 +169,7 @@ namespace Core.Forms.Controllers
             {
                 var result = new List<MenuItemModel>();
                 var formPermissions = _permissionService.GetAccess(OperationsHelper.GetOperations<FormOperations>(), this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form));
-                if (formPermissions.ContainsKey((int) FormOperations.View))
+                if (formPermissions.ContainsKey((int)FormOperations.View) && formPermissions[(int)FormOperations.View])
                 {
                     result.Add(new MenuItemModel
                                    {
@@ -185,7 +185,7 @@ namespace Core.Forms.Controllers
                         Url = Url.Action("ShowFormElements", "Forms", new { formId = form.Id, Area = "Forms" })
                     }); 
                 }
-                if (formPermissions.ContainsKey((int)FormOperations.Permissions))
+                if (formPermissions.ContainsKey((int)FormOperations.Permissions) && formPermissions[(int)FormOperations.Permissions])
                 {
                     result.Add(new MenuItemModel
                     {
@@ -201,12 +201,10 @@ namespace Core.Forms.Controllers
             return Content(String.Empty);
         }
 
-
-        [HttpPost]
         public virtual ActionResult Remove(long id)
         {
             var form = _formsService.Find(id);
-            if (form != null)
+            if (form != null && _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 _formsService.Delete(form);
             }
@@ -248,7 +246,7 @@ namespace Core.Forms.Controllers
         [HttpGet]
         public virtual ActionResult New()
         {
-            return View("EditForm", new FormViewModel());
+            return View("EditForm", new FormViewModel {AllowManage = true});
         }
 
         /// <summary>
@@ -297,14 +295,21 @@ namespace Core.Forms.Controllers
 
                 if (_formsService.Save(model.MapTo(form)))
                 {
-                    if (isNew)
-                    {
-                        _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormsPluginOperations>(), typeof(Form), form.Id);
-                    }
                     Success(HttpContext.Translate("Messages.SuccessFormSubmit",
                                                                 ResourceHelper.GetControllerScope(this)));
+                    if (isNew)
+                    {
+                        _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormOperations>(), typeof(Form), form.Id);
+                        return RedirectToAction(FormsMVC.Forms.Edit(form.Id));
+                    }
                 }
             }
+            else
+            {
+                Error(HttpContext.Translate("Messages.ValidationError",
+                                                                ResourceHelper.GetControllerScope(this)));
+            }
+
             model.AllowManage = true;
             return View("EditForm", model);
         }

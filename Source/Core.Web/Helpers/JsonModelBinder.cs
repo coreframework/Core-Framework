@@ -10,6 +10,7 @@ namespace Core.Web.Helpers
     public class JsonModelBinder : IModelBinder
     {
         #region IModelBinder Members
+
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
             if (controllerContext == null)
@@ -20,6 +21,7 @@ namespace Core.Web.Helpers
             var serializer = new DataContractJsonSerializer(bindingContext.ModelType);
             return serializer.ReadObject(controllerContext.HttpContext.Request.InputStream);
         }
+
         #endregion
     }
 }

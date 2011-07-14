@@ -10,22 +10,23 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>Form Elements</h1>
-   <%Html.RenderAction(FormsMVC.Forms.FormTabs((ViewData["Form"] is FormViewModel)?(ViewData["Form"] as FormViewModel).Id:0, false, true, false));%>
+     <%Html.RenderAction(FormsMVC.Forms.FormTabs((ViewData["Form"] is FormViewModel)?(ViewData["Form"] as FormViewModel).Id:0, false, true, false));%>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>
-        <%if (ViewData["Form"] is FormViewModel && ((FormViewModel)ViewData["Form"]).AllowManage)  {%>
-		<div class="e_table_bottom clrfix">
-			<div class="btn1 clrfix"><em></em>
-            <input id="New" type="button" class="button" value="Add New Element" />
-            <strong></strong></div>
-		</div>
+        <%if (ViewData["Form"] is FormViewModel && ((FormViewModel)ViewData["Form"]).AllowManage) {%>
+        <div class="e_table_bottom clrfix">
+        <div class="btn1 clrfix"><em></em>
+                    <input id="New" type="button" class="button" value="Add New Element" />
+                    <strong></strong></div>
+        </div>
+        <script type="text/javascript">
+            $(function () { $('#New').click(function () { window.location = "<%:Url.Action("NewElement", "Forms")%>"; }); });
+        </script>
         <% }%>
     </div>
-    <script type="text/javascript">
-        jQuery(function () { $('#New').click(function () { window.location = "<%: Url.Action("NewElement","Forms",new { formId = ((FormViewModel)ViewData["Form"]).Id}) %>"; }); });
-    </script>
     <script type="text/javascript">
         jQuery(function () {
             var fixHelper = function (e, ui) {
@@ -51,8 +52,9 @@
                         });
                     }
                 }
-            ).disableSelection();;
-          
+            ).disableSelection(); ;
+
         });
     </script>
 </asp:Content>
+

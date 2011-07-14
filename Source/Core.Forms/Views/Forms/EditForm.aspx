@@ -32,6 +32,9 @@
                         <%:Html.Submit("Save", new {@class = "button"})%>
                         <strong></strong>
                     </div>
+                    <%if (Model.Id > 0) {%>
+                        <span style="margin-right:10px;"><%:Html.ActionLink("Remove", FormsMVC.Forms.Remove(Model.Id))%></span>
+                    <%}%>
                     <%}%>
 			        <span><%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowAll" })%></span>
 		        </div>

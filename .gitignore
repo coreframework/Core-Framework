@@ -76,4 +76,6 @@
 /Source/Core.Web/Scripts/custom_packed.js
 /Source/Core.Web/Scripts/fckeditor_packed.js
 /Source/Core.Web/Scripts/adminbase_packed.js
+/Source/Core.Forms.Tests/bin
+/Source/Core.Forms.Tests/obj
 

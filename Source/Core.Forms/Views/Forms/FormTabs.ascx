@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<Core.Forms.Models.MenuItemModel>>" %>
+﻿<%@ Assembly Name="Core.Forms" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<Core.Forms.Models.MenuItemModel>>" %>
 <div class="tabs clrfix">
 	<ul class="i-tab clrfix">
     <%foreach (var item in Model) {%>
