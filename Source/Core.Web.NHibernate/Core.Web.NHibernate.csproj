@@ -137,6 +137,7 @@
     <Compile Include="Helpers\IAuthenticationHelper.cs" />
     <Compile Include="Helpers\PasswordHash.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Mappings\PageLocaleMapping.cs" />
     <Compile Include="Mappings\Permissions\EntityTypeMapping.cs" />
     <Compile Include="Mappings\Permissions\PermissionMapping.cs" />
     <Compile Include="Mappings\PluginLocaleMapping.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Mappings\Widgets\ListMenuWidgetMapping.cs" />
     <Compile Include="Mappings\Widgets\SiteMapWidgetMapping.cs" />
     <Compile Include="Migrator\CoreMigrator.cs" />
+    <Compile Include="Models\PageLocale.cs" />
     <Compile Include="Models\PagePermissionsModel.cs" />
     <Compile Include="Models\Permissions\EntityType.cs" />
     <Compile Include="Models\Permissions\Permission.cs" />

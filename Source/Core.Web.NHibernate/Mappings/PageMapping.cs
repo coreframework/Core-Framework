@@ -1,5 +1,6 @@
 ﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Web.NHibernate.Mappings
 {
@@ -13,7 +14,6 @@ namespace Core.Web.NHibernate.Mappings
             Cache.Region("Pages").ReadWrite();
             Table("Pages");
             Id(page => page.Id);
-            Map(page => page.Title).Length(255);
             Map(page => page.Url).Length(255);
 
             Map(page => page.ParentPageId);
@@ -38,6 +38,12 @@ namespace Core.Web.NHibernate.Mappings
             .Cascade.AllDeleteOrphan();
 
             HasOne(page => page.Settings).PropertyRef(pageSettings => pageSettings.Page).Cascade.All().LazyLoad();
+            HasMany(page => page.CurrentPageLocales).KeyColumn("PageId")
+            .Table("PageLocales").ApplyFilter<CultureFilter>()
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Inverse()
+            .LazyLoad()
+            .Cascade.All();
 
         }
     }

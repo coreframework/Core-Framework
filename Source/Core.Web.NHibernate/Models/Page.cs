@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Linq;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Permissions.Operations;
 using FluentNHibernate.Data;
+using Framework.Core.Localization;
 
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
-    public class Page : Entity, IPermissible
+    public class Page : Entity, IPermissible, ILocalizable
     { 
         private readonly IList<PageWidget> _widgets;
         private readonly IList<Page> _children;
+        private IList<PageLocale> _currentPageLocales = new List<PageLocale>();
+        private IList<ILocale> _currentLocales = new List<ILocale>();
+        private PageLocale _currentLocale;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Page"/> class.
@@ -29,7 +34,14 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public virtual String Title { get; set; }
+        public virtual String Title
+        {
+            get
+            {
+                return ((PageLocale)CurrentLocale).Title;
+            }
+            set { ((PageLocale)CurrentLocale).Title = value; }
+        }
 
         /// <summary>
         /// Gets or sets the URL.
@@ -106,6 +118,69 @@ namespace Core.Web.NHibernate.Models
         /// </summary>
         /// <value>The object permission operations.</value>
         public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+
+        public virtual IList<ILocale> CurrentLocales
+        {
+            get
+            {
+                if (_currentLocales.Count == 0 && _currentPageLocales.Count > 0)
+                {
+                    _currentLocales = _currentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                }
+                return _currentLocales;
+            }
+            set
+            {
+                _currentLocales = value;
+            }
+        }
+
+        public virtual IList<PageLocale> CurrentPageLocales
+        {
+            get
+            {
+                return CurrentLocales.ToList().ConvertAll(mc => (PageLocale)mc);
+            }
+            set
+            {
+                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
+            }
+        }
+
+        public virtual ILocale CurrentLocale
+        {
+            get
+            {
+                if (_currentLocale == null)
+                {
+                    //2 - max locales number: current locale and default locale
+                    if (CurrentLocales != null && CurrentLocales.Count > 0 && CurrentLocales.Count <= 2)
+                    {
+                        if (CurrentLocales.Count == 1)
+                        {
+                            _currentLocale = (PageLocale)CurrentLocales[0];
+                        }
+                        else if (!CurrentLocales[0].Culture.Equals(CultureHelper.DefaultCultureName))
+                        {
+                            _currentLocale = (PageLocale)CurrentLocales[0];
+                        }
+                        else
+                        {
+                            _currentLocale = (PageLocale)CurrentLocales[1];
+                        }
+                    }
+                    else
+                    {
+                        _currentLocale = new PageLocale
+                        {
+                            Page = this,
+                            Culture = CultureHelper.DefaultCultureName
+                        };
+                    }
+                }
+                return _currentLocale;
+            }
+        }
 
         #endregion
     }
