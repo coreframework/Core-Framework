@@ -59,8 +59,8 @@ namespace Core.Web.Helpers
                     where registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier) != null
                     select new PluginListModel
                                {
-                                   Title = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Title,
-                                   Description = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Description
+//                                   Title = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Title,
+//                                   Description = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Description
                                }.MapFrom(plugin)).ToList();
         }
 

@@ -259,8 +259,13 @@ namespace Core.Framework.MEF.Web
 
         public static void RegisterHttpModule(Type moduleType)
         {
-            _container.Register(Component.For<IPluginHttpModule>().ImplementedBy(moduleType).Named(GetHttpModuleComponentName(moduleType)));
-            ModulesChanged = true;
+            if (!_container.Kernel.HasComponent(GetHttpModuleComponentName(moduleType)))
+            {
+                _container.Register(
+                    Component.For<IPluginHttpModule>().ImplementedBy(moduleType).Named(
+                        GetHttpModuleComponentName(moduleType)));
+                ModulesChanged = true;
+            }
         }
 
         public static void UnregisterHttpModule(Type moduleType)

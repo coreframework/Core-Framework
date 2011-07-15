@@ -43,6 +43,11 @@ namespace Core.Web.Areas.Admin.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Update() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Update);
         }
@@ -82,6 +87,7 @@ namespace Core.Web.Areas.Admin.Controllers {
             public readonly string Index = "Index";
             public readonly string DynamicGridData = "DynamicGridData";
             public readonly string Edit = "Edit";
+            public readonly string ChangeLanguage = "ChangeLanguage";
             public readonly string Update = "Update";
             public readonly string Install = "Install";
             public readonly string Uninstall = "Uninstall";
@@ -96,6 +102,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string Edit = "~/Areas/Admin/Views/Module/Edit.aspx";
+            public readonly string EditForm = "~/Areas/Admin/Views/Module/EditForm.ascx";
             public readonly string Index = "~/Areas/Admin/Views/Module/Index.aspx";
             public readonly string Install = "~/Areas/Admin/Views/Module/Install.aspx";
             public readonly string Uninstall = "~/Areas/Admin/Views/Module/Uninstall.aspx";
@@ -127,10 +134,17 @@ namespace Core.Web.Areas.Admin.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Update(long id, Core.Web.Areas.Admin.Models.PluginViewModel model) {
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long pluginId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("pluginId", pluginId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Update(long id, Core.Web.Areas.Admin.Models.PluginViewModel pluginView) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Update);
             callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("pluginView", pluginView);
             return callInfo;
         }
 

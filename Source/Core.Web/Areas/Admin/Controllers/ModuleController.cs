@@ -78,6 +78,10 @@ namespace Core.Web.Areas.Admin.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = "Actions", Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Sortable = false
                                                              }
                                                      };
             var model = new GridViewModel
@@ -118,6 +122,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                             plugin.Status.Equals(PluginStatus.NotInstalled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Install(plugin.Id)),HttpContext.Translate("Install", ResourceHelper.GetControllerScope(this))) :
                                                                             plugin.Status.Equals(PluginStatus.Installed) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Uninstall(plugin.Id)),HttpContext.Translate("Uninstall", ResourceHelper.GetControllerScope(this))) : 
                                                                             String.Empty,
+                                                                            String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Edit(plugin.Id)),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this)))
                                                                        }
                                                         }).ToArray())
             };
@@ -141,14 +146,35 @@ namespace Core.Web.Areas.Admin.Controllers
             return View(new PluginViewModel().MapFrom(plugin));
         }
 
+        [HttpPost]
+        public virtual ActionResult ChangeLanguage(long pluginId, String culture)
+        {
+            var plugin = pluginService.Find(pluginId);
+            if (plugin == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Plugin not found");
+            }
+            PluginViewModel model = new PluginViewModel().MapFrom(plugin);
+            model.SelectedCulture = culture;
+            IPluginLocaleService localeService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
+            PluginLocale locale = localeService.GetLocale(pluginId, culture);
+            if (locale != null)
+            {
+                model.Title = locale.Title;
+                model.Description = locale.Description;
+            }
+
+            return PartialView("EditForm", model);
+        }
+
         /// <summary>
         /// Updates plugin details.
         /// </summary>
         /// <param name="id">The plugin id.</param>
-        /// <param name="model">The plugin view model.</param>
+        /// <param name="pluginView">The plugin view model.</param>
         /// <returns>Redirect back to plugins list.</returns>
         [HttpPost]
-        public virtual ActionResult Update(long id, PluginViewModel model)
+        public virtual ActionResult Update(long id, PluginViewModel pluginView)
         {
             var plugin = pluginService.Find(id);
             if (plugin == null)
@@ -158,14 +184,21 @@ namespace Core.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                model.MapTo(plugin);
-                pluginService.Save(plugin);
+                IPluginLocaleService localeService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
+                PluginLocale pluginLocale = localeService.GetLocale(id, pluginView.SelectedCulture);
+                if (pluginLocale == null)
+                {
+                    pluginLocale = new PluginLocale { Plugin = plugin, Culture = pluginView.SelectedCulture };
+                }
+                pluginLocale.Title = pluginView.Title;
+                pluginLocale.Description = pluginView.Description;
+                localeService.Save(pluginLocale);
                 Success(Translate("Messages.PluginUpdated"));
                 return RedirectToAction(MVC.Admin.Module.Index());
             }
 
             Error(Translate("Messages.ValidationError"));
-            return View("Edit", model);
+            return View("Edit", pluginView);
         }
 
         /// <summary>
@@ -219,7 +252,7 @@ namespace Core.Web.Areas.Admin.Controllers
                     Application.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
                 if (corePlugin == null)
                 {
-                    throw new HttpException((int) HttpStatusCode.NotFound,
+                    throw new HttpException((int)HttpStatusCode.NotFound,
                                             HttpContext.Translate("Messages.CouldNotFoundPlugin",
                                                                   ResourceHelper.GetControllerScope(this)));
                 }

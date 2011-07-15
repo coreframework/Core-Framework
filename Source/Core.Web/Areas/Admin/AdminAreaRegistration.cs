@@ -96,6 +96,9 @@ namespace Core.Web.Areas.Admin
 
             context.MapRoute("Admin.Modules", "admin/modules", MVC.Admin.Module.Index());
             context.MapRoute("Admin.Modules.DynamicGridData", "admin/modules/DynamicGridData", MVC.Admin.Module.DynamicGridData());
+            context.MapRoute("Admin.Modules.Edit", "admin/modules/{id}", new { controller = "Module", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.Modules.ChangeLanguage", "admin/modules/change-language", new { controller = "Module", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.Modules.Update", "admin/modules/{id}", MVC.Admin.Module.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Modules.Install", "admin/modules/{id}/install", MVC.Admin.Module.Install(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Modules.Uninstall", "admin/modules/{id}/uninstall", MVC.Admin.Module.Uninstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Modules.ConfirmInstall", "admin/modules/{id}/install", MVC.Admin.Module.ConfirmInstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

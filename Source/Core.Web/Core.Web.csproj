@@ -280,6 +280,7 @@
   <ItemGroup>
     <Content Include="Areas\Admin\Views\AdminHome\Index.aspx" />
     <Content Include="Areas\Admin\Views\Module\Edit.aspx" />
+    <Content Include="Areas\Admin\Views\Module\EditForm.ascx" />
     <Content Include="Areas\Admin\Views\Module\Index.aspx" />
     <Content Include="Areas\Admin\Views\Module\Install.aspx" />
     <Content Include="Areas\Admin\Views\Module\Uninstall.aspx" />

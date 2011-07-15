@@ -109,6 +109,7 @@
     <Compile Include="Contracts\IPageLayoutTemplateService.cs" />
     <Compile Include="Contracts\IPageSettingService.cs" />
     <Compile Include="Contracts\IPageWidgetSettingService.cs" />
+    <Compile Include="Contracts\IPluginLocaleService.cs" />
     <Compile Include="Contracts\IRoleLocaleService.cs" />
     <Compile Include="Contracts\IRoleService.cs" />
     <Compile Include="Contracts\IUserGroupService.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Services\NHibernatePageLayoutTemplateService.cs" />
     <Compile Include="Services\NHibernatePageSettingsService.cs" />
     <Compile Include="Services\NHibernatePageWidgetSettingService.cs" />
+    <Compile Include="Services\NHibernatePluginLocaleService.cs" />
     <Compile Include="Services\NHibernateRoleLocaleService.cs" />
     <Compile Include="Services\NHibernateRoleService.cs" />
     <Compile Include="Services\NHibernateUserGroupService.cs" />

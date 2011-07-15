@@ -94,7 +94,7 @@ namespace Core.Web.NHibernate.Models
             }
         }
 
-        public virtual IList<PluginLocale> CurrentRoleLocales
+        public virtual IList<PluginLocale> CurrentPluginLocales
         {
             get
             {

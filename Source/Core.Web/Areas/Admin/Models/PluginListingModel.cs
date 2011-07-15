@@ -60,7 +60,8 @@ namespace Core.Web.Areas.Admin.Models
             Status = from.Status;
             Version = from.Version;
             CreateDate = from.CreateDate;
-            Identifier = from.Identifier;
+            Title = from.Title;
+            Description = from.Description;
 
             return this;
         }

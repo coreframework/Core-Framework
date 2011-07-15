@@ -4,6 +4,7 @@ Admin:
       Index:
        Install: "Install"
        Uninstall: "Uninstall"
+       Edit: "Edit"
       Install:
        Title: "Install module \"{0}\""
        AreYouSure: "Are you sure want to install module \"{0}\"?"

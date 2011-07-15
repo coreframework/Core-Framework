@@ -34,6 +34,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("core_mapper").LifeStyle.Transient);
 
             container.Register(Component.For<IPluginService>().ImplementedBy<NHibernatePluginService>().LifeStyle.Transient);
+            container.Register(Component.For<IPluginLocaleService>().ImplementedBy<NHibernatePluginLocaleService>().LifeStyle.Transient);
             container.Register(Component.For<IWidgetService>().ImplementedBy<NHibernateWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IMigrationService>().ImplementedBy<NHibernateMigrationService>().LifeStyle.Transient);
             container.Register(Component.For<ISchemaInfoService>().ImplementedBy<NHibernateSchemaInfoService>().LifeStyle.Transient);

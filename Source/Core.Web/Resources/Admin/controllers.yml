@@ -3,6 +3,7 @@ Admin:
     Module:
       Uninstall: "[Uninstall]"
       Install: "[Install]"
+      Edit: "[Edit]"
       InstallPlugin: "Successfuly install plugin."
       UninstallPlugin: "Successfuly uninstall plugin."
     Widget:
