@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using Castle.MicroKernel;
 using Framework.Core.Configuration;
 using Microsoft.Practices.ServiceLocation;
 
@@ -40,6 +42,27 @@ namespace Framework.Core.Localization
             {
                 return DefaultCulture.Name;
             }
+        }
+
+        /// <summary>
+        /// Gets the available cultures.
+        /// </summary>
+        /// <returns></returns>
+        public static IDictionary<String, String> GetAvailableCultures()
+        {
+            try
+            {
+                ICultureProvider cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
+                if (cultureProvider != null)
+                {
+                    return cultureProvider.GetAvailableLanguages();
+                }
+            }
+            catch (Exception)
+            {
+            }
+            IDictionary<String, String> cultures = new Dictionary<string, string> { { DefaultCulture.NativeName, DefaultCultureName } };
+            return cultures;
         }
     }
 }

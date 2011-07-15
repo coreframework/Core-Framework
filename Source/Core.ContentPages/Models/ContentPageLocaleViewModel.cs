@@ -18,7 +18,7 @@ namespace Core.ContentPages.Models
         public ContentPageLocaleViewModel MapFrom(ContentPage from)
         {
             ContentPageId = from.Id;
-            Cultures = ServiceLocator.Current.GetInstance<ICultureProvider>().GetAvailableLanguages();
+            Cultures = CultureHelper.GetAvailableCultures();
             SelectedCulture = from.CurrentLocale.Culture;
             Title = from.Title;
             Content = from.Content;

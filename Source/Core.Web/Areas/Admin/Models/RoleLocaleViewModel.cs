@@ -17,7 +17,7 @@ namespace Core.Web.Areas.Admin.Models
         public RoleLocaleViewModel MapFrom(Role from)
         {
             RoleId = from.Id;
-            Cultures = ServiceLocator.Current.GetInstance<ICultureProvider>().GetAvailableLanguages();
+            Cultures = CultureHelper.GetAvailableCultures();
             SelectedCulture = from.CurrentLocale.Culture;
             Name = from.Name;
 

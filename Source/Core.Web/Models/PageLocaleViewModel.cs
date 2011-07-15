@@ -20,7 +20,7 @@ namespace Core.Web.Models
         public PageLocaleViewModel MapFrom(Page from)
         {
             Id = from.Id;
-            Cultures = ServiceLocator.Current.GetInstance<ICultureProvider>().GetAvailableLanguages();
+            Cultures = CultureHelper.GetAvailableCultures();
             SelectedCulture = from.CurrentLocale.Culture;
             Title = from.Title;
             Url = from.Url;

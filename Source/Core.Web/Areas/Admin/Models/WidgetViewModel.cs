@@ -30,7 +30,7 @@ namespace Core.Web.Areas.Admin.Models
         {
             Id = from.Id;
             Title = from.Title;
-            Cultures = ServiceLocator.Current.GetInstance<ICultureProvider>().GetAvailableLanguages();
+            Cultures = CultureHelper.GetAvailableCultures();
 
             return this;
         }
