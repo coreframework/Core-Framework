@@ -123,6 +123,16 @@ namespace Core.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SavePageCommonSettings() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SavePageCommonSettings);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult UpdatePageCommonSettings() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.UpdatePageCommonSettings);
         }
@@ -212,6 +222,8 @@ namespace Core.Web.Controllers {
             public readonly string RemovePageWidget = "RemovePageWidget";
             public readonly string UpdateWidgetsPositions = "UpdateWidgetsPositions";
             public readonly string ShowPageCommonSettings = "ShowPageCommonSettings";
+            public readonly string ChangeLanguage = "ChangeLanguage";
+            public readonly string SavePageCommonSettings = "SavePageCommonSettings";
             public readonly string UpdatePageCommonSettings = "UpdatePageCommonSettings";
             public readonly string ShowPageCSS = "ShowPageCSS";
             public readonly string UpdatePageCSS = "UpdatePageCSS";
@@ -236,6 +248,7 @@ namespace Core.Web.Controllers {
             public readonly string NavigationMenu = "~/Views/Pages/NavigationMenu.ascx";
             public readonly string NavigationMenuItem = "~/Views/Pages/NavigationMenuItem.ascx";
             public readonly string PageCommonSettings = "~/Views/Pages/PageCommonSettings.ascx";
+            public readonly string PageCreateForm = "~/Views/Pages/PageCreateForm.ascx";
             public readonly string PageCSSForm = "~/Views/Pages/PageCSSForm.ascx";
             public readonly string PageCSSSettings = "~/Views/Pages/PageCSSSettings.ascx";
             public readonly string PageLookAndFeelForm = "~/Views/Pages/PageLookAndFeelForm.ascx";
@@ -363,7 +376,20 @@ namespace Core.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UpdatePageCommonSettings(Core.Web.Models.PageViewModel model) {
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long pageId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("pageId", pageId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SavePageCommonSettings(Core.Web.Models.PageViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SavePageCommonSettings);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult UpdatePageCommonSettings(Core.Web.Models.PageLocaleViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdatePageCommonSettings);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

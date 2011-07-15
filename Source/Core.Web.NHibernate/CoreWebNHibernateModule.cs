@@ -40,6 +40,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<IMigrationService>().ImplementedBy<NHibernateMigrationService>().LifeStyle.Transient);
             container.Register(Component.For<ISchemaInfoService>().ImplementedBy<NHibernateSchemaInfoService>().LifeStyle.Transient);
             container.Register(Component.For<IPageService>().ImplementedBy<NHibernatePageService>().LifeStyle.Transient);
+            container.Register(Component.For<IPageLocaleService>().ImplementedBy<NHibernatePageLocaleService>().LifeStyle.Transient);
             container.Register(Component.For<IPageLayoutTemplateService>().ImplementedBy<NHibernatePageLayoutTemplateService>().LifeStyle.Transient);
             container.Register(Component.For<IPageLayoutService>().ImplementedBy<NHibernatePageLayoutService>().LifeStyle.Transient);
             container.Register(Component.For<IPageLayoutRowService>().ImplementedBy<NHibernatePageLayoutRowService>().LifeStyle.Transient);

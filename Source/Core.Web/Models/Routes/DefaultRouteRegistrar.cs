@@ -48,9 +48,11 @@ namespace Core.Web.Models.Routes
             routes.MapRoute(null, "pages/update-widget-css", MVC.Pages.UpdateWidgetCSS());
             routes.MapRoute(null, "pages/update-widget-instance", MVC.Pages.UpdatePageWidgetInstance());
             routes.MapRoute(null, "pages/update-widgets-positions", MVC.Pages.UpdateWidgetsPositions());
+            routes.MapRoute(null, "pages/save-page-settings", MVC.Pages.SavePageCommonSettings());
             routes.MapRoute(null, "pages/update-page-settings", MVC.Pages.UpdatePageCommonSettings());
             routes.MapRoute(null, "pages/apply-permissions", MVC.Pages.ApplyPagePermissions());
             routes.MapRoute(null, "pages/show-page-settings/{pageId}", MVC.Pages.ShowPageCommonSettings());
+            routes.MapRoute(null, "pages/page-change-language", MVC.Pages.ChangeLanguage(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             routes.MapRoute(null, "pages/add-page/{parentPageId}", MVC.Pages.CreateNewPage());
             routes.MapRoute(null, "pages/update-page-position", MVC.Pages.UpdatePagePosition());
             routes.MapRoute(null, "pages/add-widget/{pageId}/{widgetIdentifier}", MVC.Pages.AddWidget());

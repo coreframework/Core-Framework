@@ -107,6 +107,7 @@
     <Compile Include="Contracts\IPageLayoutRowService.cs" />
     <Compile Include="Contracts\IPageLayoutService.cs" />
     <Compile Include="Contracts\IPageLayoutTemplateService.cs" />
+    <Compile Include="Contracts\IPageLocaleService.cs" />
     <Compile Include="Contracts\IPageSettingService.cs" />
     <Compile Include="Contracts\IPageWidgetSettingService.cs" />
     <Compile Include="Contracts\IPluginLocaleService.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Services\NHibernatePageLayoutRowService.cs" />
     <Compile Include="Services\NHibernatePageLayoutService.cs" />
     <Compile Include="Services\NHibernatePageLayoutTemplateService.cs" />
+    <Compile Include="Services\NHibernatePageLocaleService.cs" />
     <Compile Include="Services\NHibernatePageSettingsService.cs" />
     <Compile Include="Services\NHibernatePageWidgetSettingService.cs" />
     <Compile Include="Services\NHibernatePluginLocaleService.cs" />

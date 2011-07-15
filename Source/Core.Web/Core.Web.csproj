@@ -242,6 +242,7 @@
     <Compile Include="Models\NavigationMenuModel.cs" />
     <Compile Include="Models\Objects\WidgetInfo.cs" />
     <Compile Include="Models\PageCSSModel.cs" />
+    <Compile Include="Models\PageLocaleViewModel.cs" />
     <Compile Include="Models\PageLookAndFeelModel.cs" />
     <Compile Include="Models\CorePageSettings.cs" />
     <Compile Include="Models\PageModeModel.cs" />
@@ -982,6 +983,7 @@
     <Content Include="Views\Pages\ManagePageMenu.ascx" />
     <Content Include="Views\Pages\NavigationMenuItem.ascx" />
     <Content Include="Views\Pages\PageCommonSettings.ascx" />
+    <Content Include="Views\Pages\PageCreateForm.ascx" />
     <Content Include="Views\Pages\PageCSSForm.ascx" />
     <Content Include="Views\Pages\PageCSSSettings.ascx" />
     <Content Include="Views\Pages\PageLookAndFeelForm.ascx" />
