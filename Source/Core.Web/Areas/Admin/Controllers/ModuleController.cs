@@ -83,7 +83,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var model = new GridViewModel
             {
                 DataUrl = Url.Action(MVC.Admin.Module.DynamicGridData()),
-                DefaultOrderColumn = "Title",
+                DefaultOrderColumn = "Id",
                 GridTitle = "Modules",
                 Columns = columns
             };

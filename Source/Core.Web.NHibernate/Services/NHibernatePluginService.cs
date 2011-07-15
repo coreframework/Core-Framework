@@ -50,11 +50,11 @@ namespace Core.Web.NHibernate.Services
         public IQueryable<Plugin> GetSearchQuery(string searchString)
         {
             var baseQuery = CreateQuery();
-            if (String.IsNullOrEmpty(searchString))
-            {
+//            if (String.IsNullOrEmpty(searchString))
+//            {
                 return baseQuery;
-            }
-            return baseQuery.Where(user => user.Title.Contains(searchString));
+//            }
+//            return baseQuery.Where(user => user.Title.Contains(searchString));
         }
 
         #endregion

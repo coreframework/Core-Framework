@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Core.Web.NHibernate.Models;
+﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
 
 namespace Core.Web.NHibernate.Mappings
@@ -10,7 +6,7 @@ namespace Core.Web.NHibernate.Mappings
     public class RoleLocaleMapping : ClassMap<RoleLocale>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ContentPageLocaleMapping"/> class.
+        /// Initializes a new instance of the <see cref="PluginLocaleMapping"/> class.
         /// </summary>
         public RoleLocaleMapping()
         {
