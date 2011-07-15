@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using Core.ContentPages.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
@@ -12,7 +13,19 @@ namespace Core.ContentPages.Models
         public IDictionary<String, String> Cultures { get; set; }
         public long ContentPageId { get; set; }
         public String SelectedCulture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the title.
+        /// </summary>
+        /// <value>The title.</value>
+        [Required]
         public String Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        [DataType("FckEditorText"), Required]
         public String Content { get; set; }
 
         public ContentPageLocaleViewModel MapFrom(ContentPage from)
