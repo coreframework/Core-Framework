@@ -307,6 +307,7 @@
     <Content Include="Areas\Admin\Views\User\Remove.aspx" />
     <Content Include="Areas\Admin\Views\User\UserGroups.aspx" />
     <Content Include="Areas\Admin\Views\Widget\Edit.aspx" />
+    <Content Include="Areas\Admin\Views\Widget\EditForm.ascx" />
     <Content Include="Areas\Admin\Views\Widget\Index.aspx" />
     <Content Include="Areas\Navigation\Config\PluginConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

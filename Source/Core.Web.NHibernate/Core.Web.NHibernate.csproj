@@ -114,6 +114,7 @@
     <Compile Include="Contracts\IRoleService.cs" />
     <Compile Include="Contracts\IUserGroupService.cs" />
     <Compile Include="Contracts\IUserService.cs" />
+    <Compile Include="Contracts\IWidgetLocaleService.cs" />
     <Compile Include="Contracts\IWidgetService.cs" />
     <Compile Include="Contracts\IPageWidgetService.cs" />
     <Compile Include="Contracts\IMigrationService.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Mappings\PageSettingsMapping.cs" />
     <Compile Include="Mappings\PageWidgetSettingsMapping.cs" />
     <Compile Include="Mappings\RoleMapping.cs" />
+    <Compile Include="Mappings\WidgetLocaleMapping.cs" />
     <Compile Include="Mappings\WidgetMapping.cs" />
     <Compile Include="Mappings\MigrationMapping.cs" />
     <Compile Include="Mappings\PageMapping.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Models\Static\Orientation.cs" />
     <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\UserStatus.cs" />
+    <Compile Include="Models\WidgetLocale.cs" />
     <Compile Include="Models\WidgetStatus.cs" />
     <Compile Include="Models\Migration.cs" />
     <Compile Include="Models\Page.cs" />
@@ -208,6 +211,7 @@
     <Compile Include="Services\NHibernateRoleService.cs" />
     <Compile Include="Services\NHibernateUserGroupService.cs" />
     <Compile Include="Services\NHibernateUserService.cs" />
+    <Compile Include="Services\NHibernateWidgetLocaleService.cs" />
     <Compile Include="Services\NHibernateWidgetService.cs" />
     <Compile Include="Services\NHibernatePageWidgetService.cs" />
     <Compile Include="Services\NHibernatePageService.cs" />

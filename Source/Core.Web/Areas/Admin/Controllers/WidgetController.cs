@@ -64,11 +64,16 @@ namespace Core.Web.Areas.Admin.Controllers
                                                              {
                                                                  Name = "Actions", Sortable = false
                                                              }
+                                                             ,
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Edit", Sortable = false
+                                                             }
                                                      };
             var model = new GridViewModel
             {
                 DataUrl = Url.Action(MVC.Admin.Widget.DynamicGridData()),
-                DefaultOrderColumn = "Title",
+                DefaultOrderColumn = "Id",
                 GridTitle = "Modules",
                 Columns = columns
             };
@@ -101,6 +106,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                             widget.Status.Equals(WidgetStatus.Disabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Enable(widget.Id)),HttpContext.Translate("Install", ResourceHelper.GetControllerScope(this))) :
                                                                             widget.Status.Equals(WidgetStatus.Enabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Disable(widget.Id)),HttpContext.Translate("Uninstall", ResourceHelper.GetControllerScope(this))) : 
                                                                             String.Empty,
+                                                                            String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Edit(widget.Id)),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this)))
                                                                        }
                            }).ToArray())
             };
@@ -124,6 +130,26 @@ namespace Core.Web.Areas.Admin.Controllers
             return View(new WidgetViewModel().MapFrom(widget));
         }
 
+        [HttpPost]
+        public virtual ActionResult ChangeLanguage(long widgetId, String culture)
+        {
+            var widget = widgetService.Find(widgetId);
+            if (widget == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Widget not found");
+            }
+            WidgetViewModel model = new WidgetViewModel().MapFrom(widget);
+            model.SelectedCulture = culture;
+            IWidgetLocaleService localeService = ServiceLocator.Current.GetInstance<IWidgetLocaleService>();
+            WidgetLocale locale = localeService.GetLocale(widgetId, culture);
+            if (locale != null)
+            {
+                model.Title = locale.Title;
+            }
+
+            return PartialView("EditForm", model);
+        }
+
         /// <summary>
         /// Updates widget details.
         /// </summary>
@@ -141,9 +167,15 @@ namespace Core.Web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                model.MapTo(widget);
-                widgetService.Save(widget);
-                Success(Translate("Messages.PluginUpdated"));
+                IWidgetLocaleService localeService = ServiceLocator.Current.GetInstance<IWidgetLocaleService>();
+                WidgetLocale widgetLocale = localeService.GetLocale(id, model.SelectedCulture);
+                if (widgetLocale == null)
+                {
+                    widgetLocale = new WidgetLocale { Widget = widget, Culture = model.SelectedCulture };
+                }
+                widgetLocale.Title = model.Title;
+                localeService.Save(widgetLocale);
+                Success(Translate("Messages.WidgetUpdated"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
 

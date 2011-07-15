@@ -64,11 +64,11 @@ namespace Core.Web.NHibernate.Services
         public IQueryable<Widget> GetSearchQuery(string searchString)
         {
             var baseQuery = CreateQuery();
-            if (String.IsNullOrEmpty(searchString))
-            {
+//            if (String.IsNullOrEmpty(searchString))
+//            {
                 return baseQuery;
-            }
-            return baseQuery.Where(widget => widget.Title.Contains(searchString) && widget.Plugin.Status == PluginStatus.Installed && widget.Status == WidgetStatus.Enabled);
+//            }
+//            return baseQuery.Where(widget => widget.Title.Contains(searchString) && widget.Plugin.Status == PluginStatus.Installed && widget.Status == WidgetStatus.Enabled);
         }
 
         #endregion

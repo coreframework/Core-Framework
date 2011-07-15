@@ -1,5 +1,6 @@
 ﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Web.NHibernate.Mappings
 {
@@ -14,9 +15,14 @@ namespace Core.Web.NHibernate.Mappings
             Table("Widgets");
             Id(widget => widget.Id);
             Map(widget => widget.Identifier).Length(255);
-            Map(widget => widget.Title).Length(255);
             Map(widget => widget.Status).CustomType(typeof(WidgetStatus));
             References(widget => widget.Plugin);
+            HasMany(widget => widget.CurrentWidgetLocales).KeyColumn("WidgetId")
+            .Table("WidgetLocales").ApplyFilter<CultureFilter>()
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Inverse()
+            .LazyLoad()
+            .Cascade.All();
         }
     }
 }

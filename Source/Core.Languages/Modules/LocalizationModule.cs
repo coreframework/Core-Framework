@@ -4,6 +4,7 @@ using System.Threading;
 using System.Web;
 using Core.Framework.Plugins.Modules;
 using Framework.Core;
+using Framework.Core.Localization;
 
 namespace Core.Languages.Modules
 {
@@ -18,6 +19,11 @@ namespace Core.Languages.Modules
                 CultureInfo cultureInfo = CultureInfo.GetCultureInfo(cultureCookie.Value);
                 Thread.CurrentThread.CurrentCulture = cultureInfo;
                 Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            }
+            else
+            {
+                Thread.CurrentThread.CurrentCulture = CultureHelper.DefaultCulture;
+                Thread.CurrentThread.CurrentUICulture = CultureHelper.DefaultCulture;
             }
         }
     }

@@ -43,6 +43,11 @@ namespace Core.Web.Areas.Admin.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Update() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Update);
         }
@@ -72,6 +77,7 @@ namespace Core.Web.Areas.Admin.Controllers {
             public readonly string Index = "Index";
             public readonly string DynamicGridData = "DynamicGridData";
             public readonly string Edit = "Edit";
+            public readonly string ChangeLanguage = "ChangeLanguage";
             public readonly string Update = "Update";
             public readonly string Enable = "Enable";
             public readonly string Disable = "Disable";
@@ -84,6 +90,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string Edit = "~/Areas/Admin/Views/Widget/Edit.aspx";
+            public readonly string EditForm = "~/Areas/Admin/Views/Widget/EditForm.ascx";
             public readonly string Index = "~/Areas/Admin/Views/Widget/Index.aspx";
         }
     }
@@ -110,6 +117,13 @@ namespace Core.Web.Areas.Admin.Controllers {
         public override System.Web.Mvc.ActionResult Edit(long id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long widgetId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("widgetId", widgetId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
             return callInfo;
         }
 
