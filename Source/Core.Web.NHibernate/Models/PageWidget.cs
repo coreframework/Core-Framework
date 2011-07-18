@@ -18,6 +18,12 @@ namespace Core.Web.NHibernate.Models
         public virtual String WidgetIdentifier { get; set; }
 
         /// <summary>
+        /// Gets or sets the widget.
+        /// </summary>
+        /// <value>The widget.</value>
+        public virtual Widget Widget { get; set; }
+
+        /// <summary>
         /// Gets or sets the page.
         /// </summary>
         /// <value>The page.</value>

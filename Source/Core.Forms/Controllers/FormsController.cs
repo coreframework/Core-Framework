@@ -148,7 +148,11 @@ namespace Core.Forms.Controllers
             return Json(jsonData);
         }
 
-
+        /// <summary>
+        /// Shows the permissions view.
+        /// </summary>
+        /// <param name="formId">The form id.</param>
+        /// <returns></returns>
         public virtual ActionResult ShowPermissions(long formId)
         {
             var form = _formsService.Find(formId);
@@ -161,6 +165,14 @@ namespace Core.Forms.Controllers
             return View("FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
         }
 
+        /// <summary>
+        /// Forms the tabs.
+        /// </summary>
+        /// <param name="formId">The form id.</param>
+        /// <param name="activeDetails">if set to <c>true</c> [active details].</param>
+        /// <param name="activeElements">if set to <c>true</c> [active elements].</param>
+        /// <param name="activePermissions">if set to <c>true</c> [active permissions].</param>
+        /// <returns></returns>
         [ChildActionOnly]
         public virtual ActionResult FormTabs(long formId, bool activeDetails, bool activeElements, bool activePermissions)
         {
@@ -173,14 +185,14 @@ namespace Core.Forms.Controllers
                 {
                     result.Add(new MenuItemModel
                                    {
-                                       Title = "Details",
+                                       Title = HttpContext.Translate("Tabs.Details", "Forms.Controllers"),
                                        IsActive = activeDetails,
                                        Url = Url.Action("Edit", "Forms", new { formId = form.Id, Area = "Forms" })
                                    });
                    
                     result.Add(new MenuItemModel
                     {
-                        Title = "Form Elements",
+                        Title = HttpContext.Translate("Tabs.FormElements", "Forms.Controllers"),
                         IsActive = activeElements,
                         Url = Url.Action("ShowFormElements", "Forms", new { formId = form.Id, Area = "Forms" })
                     }); 
@@ -189,7 +201,7 @@ namespace Core.Forms.Controllers
                 {
                     result.Add(new MenuItemModel
                     {
-                        Title = "Permissions",
+                        Title = HttpContext.Translate("Tabs.Permissions", "Forms.Controllers"),
                         IsActive = activePermissions,
                         Url = Url.Action("ShowPermissions", "Forms", new { formId = form.Id, Area = "Forms" })
                     }); 
@@ -201,6 +213,11 @@ namespace Core.Forms.Controllers
             return Content(String.Empty);
         }
 
+        /// <summary>
+        /// Removes the form by Id.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns></returns>
         public virtual ActionResult Remove(long id)
         {
             var form = _formsService.Find(id);
@@ -235,7 +252,7 @@ namespace Core.Forms.Controllers
                 }
                 Error(String.Format("Could not apply permissions to Form Entity: {0}", model.EntityId));
             }
-            Error(String.Format("Could not found Form Entity: {0}",model.EntityId));
+            Error(String.Format("Could not found Form Entity: {0}", model.EntityId));
             return Content(Url.Action("ShowAll"));
         }
 
@@ -419,7 +436,6 @@ namespace Core.Forms.Controllers
             return Json(jsonData);
         }
 
-
         [HttpPost]
         public virtual ActionResult UpdateFormElementPosition(long formElementId, int orderNumber)
         {
@@ -456,8 +472,12 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult SaveElement(long formId, FormElementViewModel model)
         {
+            FormsHelper.ValidateFormElement(this, model, ModelState);
+
             if (ModelState.IsValid)
             {
+                FormsHelper.UpdateFormElement(model);
+
                 var form = _formsService.Find(formId);
                 if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {

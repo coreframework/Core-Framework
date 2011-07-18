@@ -11,6 +11,7 @@ Admin:
       Install: "[Install]"
       InstallWidget: "Successfuly install widget."
       UninstallWidget: "Successfuly uninstall widget."
+      Edit: "Edit"
     User:
       UserGroups: "[User groups list]"
       Remove: "[Remove]"

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
 using Core.Forms.NHibernate.Permissions.Operations;

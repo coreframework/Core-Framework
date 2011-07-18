@@ -20,3 +20,4 @@ Messages:
   UnknownOperation: "Posted data is incorrect. Please specify operation."
   UnknownUser: "Posted data is incorrect. Please specify user."
   UnknownRole: "Posted data is incorrect. Please specify role."
+  WidgetUpdated: "Widget has been saved successfully."

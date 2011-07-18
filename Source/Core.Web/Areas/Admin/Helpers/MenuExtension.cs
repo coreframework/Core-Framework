@@ -60,7 +60,8 @@ namespace Core.Web.Areas.Admin.Helpers
             var usersMenuItem1 = (from verb in Application.GetVerbsForCategory("AdminModules")
                                   where pluginHelper.IsPluginEnabled(verb.ControllerPluginIdentifier) && verb.IsAllowed(context.CorePrincipal())
                                   select new RouteLink(verb.Name, "~/Content/images/admin/ico3.png", verb.RouteName)).Cast<IMenuItem>().ToList();
-            menuItems.Add("Plugins", usersMenuItem1);
+            if (usersMenuItem1.Count>0)
+                menuItems.Add("Plugins", usersMenuItem1);
 
             return menuItems;
         }

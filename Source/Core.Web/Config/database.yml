@@ -1,7 +1,7 @@
 development:
   platform: sqlserver
   host: chernogrebela
-  database: core_modules666
+  database: corev3
   username: coreLite
   password: coreLite
   properties:
@@ -11,7 +11,7 @@ development:
 test:
   platform: sqlserver
   host: chernogrebela
-  database: core_modules666
+  database: corev3
   username: coreLite
   password: coreLite
   properties:

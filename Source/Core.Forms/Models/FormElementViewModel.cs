@@ -56,7 +56,7 @@ namespace Core.Forms.Models
         /// Gets or sets the validation regex template.
         /// </summary>
         /// <value>The validation regex template.</value>
-        public RegexTemplate RegexTemplate { get; set; }
+        public RegexTemplate? RegexTemplate { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
@@ -96,7 +96,7 @@ namespace Core.Forms.Models
             to.IsRequired = IsRequired;
             to.ElementValues = Values;
             to.Type = Type;
-            to.RegexTemplate = RegexTemplate;
+            if (RegexTemplate != null) to.RegexTemplate = (RegexTemplate) RegexTemplate;
             to.MaxLength = MaxLength;
             return to;
         }

@@ -4,7 +4,13 @@
 <%@ Import Namespace="System.Web.Mvc" %>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
-  <h1>Edit Form</h1>
+  <h1>
+    <%if (Model.Id > 0) {%>
+        <%:Html.Translate(".EditForm") %>
+    <%} else {%>
+         <%:Html.Translate(".NewForm") %>
+    <% }%>
+  </h1>
  <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.Id, true, false, false));%>
 </asp:Content>
 
@@ -19,6 +25,7 @@
                       <%:Html.HiddenFor(model => model.Id)%>     
 			            <div class="i_form_i">
                       <%:Html.EditorFor(model => model.Title)%>
+                      <%:Html.ValidationMessageFor(model => model.Title) %>
                         </div>
 			            <div class="i_form_i">
                       <%:Html.AntiForgeryToken()%>

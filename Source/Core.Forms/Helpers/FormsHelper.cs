@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using Core.Forms.Models;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
 using Core.Forms.NHibernate.Permissions.Operations;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Framework.Core.Extensions;
+using Framework.MVC.Extensions;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Forms.Helpers
@@ -55,6 +60,42 @@ namespace Core.Forms.Helpers
                     formElementService.Save(formElement);
                 }
             }
+        }
+
+        /// <summary>
+        /// Validates the form element.
+        /// </summary>
+        /// <param name="controller">The controller.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="modelState">State of the model.</param>
+        public static void ValidateFormElement(Controller controller, FormElementViewModel model,  ModelStateDictionary modelState)
+        {
+            var currentType = model.Types.Find(type => type.Type == model.Type.ToString());
+
+            if (currentType.IsValuesEnabled && String.IsNullOrEmpty(model.Values))
+            {
+                modelState.AddModelError("Values", controller.HttpContext.Translate("Messages.RequiredErrorMessage", ResourceHelper.GetControllerScope(controller)));
+            }
+        }
+
+        /// <summary>
+        /// Updates the form element.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
+        public static FormElementViewModel UpdateFormElement(FormElementViewModel model)
+        {
+            var currentType = model.Types.Find(type => type.Type == model.Type.ToString());
+            if (currentType!=null)
+            {
+                if (!currentType.IsValuesEnabled)
+                    model.Values = null;
+                if (!currentType.IsMaxLengthEnabled)
+                    model.MaxLength = null;
+                if (!currentType.IsValidationEnabled)
+                    model.RegexTemplate = null;
+            }
+            return model;
         }
     }
 }

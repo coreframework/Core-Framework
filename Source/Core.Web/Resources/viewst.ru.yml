@@ -1,0 +1,95 @@
+ru:
+ Views:
+    Pages:
+      Show:
+       WidgetNotFound: "Виджет не найден"
+       Remove: "удалить"
+       Edit: "редактировать"
+       RemoveConfirmation: "Виджет будет удален, вы согласны?"
+       Add: "Добавить"
+       Manage: "Настройки"
+       Widget: "Виджет"
+       PageSettings: "Изменить общие настройки страницы"
+       PageLayout: "Изменить шаблон страницы"
+       PageLookAndFeel: "Изменить внешний вид страницы"
+       CSS: "Изменить CSS страницы"
+       Permissions: "Права доступа"
+      PageLookAndFeelSettings:
+       LookAndFeel: "Внешний вид"
+      PageLookAndFeelForm:
+       Successful: "Your request processed successfully."
+       Error: "Ошибка"
+      PageCommonSettings:
+       CommonSettings: "Общие настройки"
+      PageCSSSettings:
+       CSS: "CSS"
+       CurrentPageInformation: "Your current page information is as follows"
+       PageClass: "Page class"
+       WidgetClasses: "Widget Classes"
+       PageRule: "Add a CSS rule for this page."
+       AllWidgetsRule: "Add a CSS rule for all widgets on this page."
+      PageCSSForm:
+       Successful: "Your request processed successfully."
+       Error: "Error"
+       PageRule: "Add a CSS rule for this page."
+       AllWidgetsRule: "Add a CSS rule for all widgets on this page."
+      PagePermissions:
+       Role: "Role"
+      NavigationMenu:
+       AddNewPage: "Добавить новую страницу" 
+    Shared:
+      Widgets:
+        WidgetSettings:
+            CommonSettings: "Общие настройки"
+            Common: "Общее"
+            LookAndFeel: "Внешний вид"
+            CSS: "CSS"
+            Permissions: "Права доступа"
+            Save: "Сохранить"
+        WidgetLookAndFeelSettings:
+            LookAndFeel: "Look and Feel"
+        WidgetLookAndFeelForm:
+            Successful: "Your request processed successfully."
+            Error: "Error"
+        WidgetCSSSettings:
+            CSS: "CSS"
+            CurrentWidgetInformation: "Your current widget information is as follows"
+            WidgetID: "Виджет ID"
+            WidgetClasses: "Widget Classes"
+            WidgetRule: "Add a CSS rule for just this widget."
+            AllWidgetsRule: "Add a CSS rule for all widgets like this one."
+        WidgetCSSForm:
+            Successful: "Your request processed successfully."
+            Error: "Error"
+            WidgetRule: "Add a CSS rule for just this widget."
+            AllWidgetsRule: "Add a CSS rule for all widgets like this one."
+        WidgetContentHolder: 
+             RemoveConfirmation: "This widget will be removed, ok?"
+             Remove: "удалить"
+             Edit: "редактировать"
+        WidgetPermissions: 
+             Role: "Role"
+             Permissions: "Права доступа"
+        WidgetsList:
+             AddWidget: "Выберите виджет, чтобы добавить его на страницу"
+      Layouts:
+        ChangeLayout:
+            ChangeLayout: "Выберите шаблон, чтобы применить его на странице"
+            Successful: "Your request processed successfully."
+            Error: "Error"
+        LayoutSettings:
+            Successful: "Your request processed successfully."
+            Error: "Error"
+      Users:
+        UserPanel:
+            SignIn: "Войти"
+            SignOut: "Выйти"
+            ControlPanel: "Панель управления"
+    Users:
+      NewUserSession:
+          Title: "Вход"
+          SignIn: "Вход"
+          UsernameOrEmail: "Имя пользователя или email"
+          Password: "Пароль"
+          RememberMe: "Запомнить меня"
+

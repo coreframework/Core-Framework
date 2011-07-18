@@ -15,7 +15,7 @@ namespace Core.Forms.NHibernate.Mappings
             Id(formElement => formElement.Id);
             Map(formElement => formElement.Title).Length(255);
             Map(formElement => formElement.ElementValues);
-            Map(formElement => formElement.Type).CustomType(typeof(FormElementType));
+            Map(formElement => formElement.Type).CustomType(typeof(FormElementType)).Nullable();
             Map(formElement => formElement.OrderNumber);
             Map(formElement => formElement.IsRequired);
             Map(formElement => formElement.MaxLength);

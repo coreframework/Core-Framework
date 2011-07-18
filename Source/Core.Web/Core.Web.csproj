@@ -1059,6 +1059,7 @@
     <Content Include="Resources\views.yml" />
     <Content Include="Resources\framework.yml" />
     <Content Include="Areas\Navigation\Config\asset_packages.yml" />
+    <None Include="Resources\viewst.ru.yml" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.cfm" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.php" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.pl" />

@@ -11,6 +11,9 @@ Admin:
       Uninstall:
        Title: "Uninstall module \"{0}\""
        AreYouSure: "Are you sure want to uninstall module \"{0}\"?"
+    Widget:
+       Edit:
+        Title: "Edit Widget"   
     User:
       Index:
         Title: "Users Listing"

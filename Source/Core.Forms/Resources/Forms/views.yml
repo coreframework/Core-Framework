@@ -7,7 +7,8 @@ Views:
       Title: "Title"
       CreateForm: "Create Form"
     EditForm:
-      ViewFormElements: "View form elements"
+      NewForm: "New form"
+      EditForm: "Edit form"
     FormElements:
       Edit: "Edit"
       Delete: "Delete"

@@ -14,7 +14,7 @@ namespace Framework.MVC.Grids
     /// </summary>
     public class GridViewModel
     {
-        #region Properties
+        #region Constructor
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GridViewModel"/> class.

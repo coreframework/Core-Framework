@@ -115,17 +115,18 @@ namespace Core.Forms.Extensions
         /// <returns></returns>
         private static Dictionary<String, String> ParseElementValuesForRadioButtons(String values, String elementName)
         {
-            var valuesArray = values.Trim().Split(ElementValuesSeparator);
             var result = new Dictionary<String, String>();
-
-            for (var i=0; i<valuesArray.Length; i++)
+            if (!String.IsNullOrEmpty(values))
             {
-                if (!String.IsNullOrEmpty(valuesArray[i]))
+                string[] valuesArray = values.Trim().Split(ElementValuesSeparator);
+                for (int i = 0; i < valuesArray.Length; i++)
                 {
-                    result.Add(String.Format("{0}_{1}", elementName, i), valuesArray[i]);
+                    if (!String.IsNullOrEmpty(valuesArray[i]))
+                    {
+                        result.Add(String.Format("{0}_{1}", elementName, i), valuesArray[i]);
+                    }
                 }
             }
-
             return result;
         }
 

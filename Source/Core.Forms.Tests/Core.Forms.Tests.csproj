@@ -64,7 +64,7 @@
     <Compile Include="Controllers\FormsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AbstractServiceTest.cs" />
-    <Compile Include="Services\FormService.Test.cs" />
+    <Compile Include="Services\FormServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Forms.NHibernate\Core.Forms.NHibernate.csproj">

@@ -18,6 +18,17 @@ namespace Core.Web.NHibernate.Mappings
             HasOne(pageWidget => pageWidget.Settings).PropertyRef(pageWidgetSettings => pageWidgetSettings.Widget).
                 Cascade.All().LazyLoad();
             References(pageWidget => pageWidget.User).Column("UserId").Nullable();
+
+
+         //   References(pageWidget => pageWidget.Widget, "Identifier").Column("WidgetIdentifier");
+
+         /*   Join("Widgets", m =>
+            {
+                m.Fetch.Join();
+                m.Optional();
+                m.KeyColumn("Identifier");
+                References(pageWidget => pageWidget.Widget).Column("WidgetIdentifier");
+            });*/
         }
     }
 }

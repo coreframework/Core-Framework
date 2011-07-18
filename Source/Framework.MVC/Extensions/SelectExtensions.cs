@@ -102,6 +102,23 @@ namespace Framework.MVC.Extensions
         /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
         /// </returns>
         public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum selectedValue, Object htmlAttributes)
+         where TEnum : struct
+        {
+            return html.DropDownListFor(name, selectedValue, new RouteValueDictionary(htmlAttributes));
+        }
+
+        /// <summary>
+        /// Generate a select element for enum.
+        /// </summary>
+        /// <typeparam name="TEnum">The type of the enum.</typeparam>
+        /// <param name="html">The HTML helper instance that this method extends.</param>
+        /// <param name="name">The select element name.</param>
+        /// <param name="selectedValue">The selected value.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <returns>
+        /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
+        /// </returns>
+        public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum? selectedValue, Object htmlAttributes)
             where TEnum : struct
         {
             return html.DropDownListFor(name, selectedValue, new RouteValueDictionary(htmlAttributes));
@@ -119,6 +136,39 @@ namespace Framework.MVC.Extensions
         /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
         /// </returns>
         public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum selectedValue, IDictionary<String, Object> htmlAttributes)
+          where TEnum : struct
+            {
+                var items = new List<SelectListItem>();
+                foreach (var value in Enum.GetValues(typeof(TEnum)))
+                {
+                    var exclude = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(ExcludeItemAttribute), false).FirstOrDefault();
+                    if (exclude == null)
+                    {
+                        var text = Enum.GetName(typeof(TEnum), value);
+                        var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+                        if (description != null)
+                        {
+                            text = html.Translate(description.Description);
+                        }
+                        items.Add(new SelectListItem { Text = text, Value = value.ToString() });
+                    }
+                }
+
+                return html.DropDownList(name, items, null, htmlAttributes);
+            }
+
+        /// <summary>
+        /// Generate a select element for enum.
+        /// </summary>
+        /// <typeparam name="TEnum">The type of the enum.</typeparam>
+        /// <param name="html">The HTML helper instance that this method extends.</param>
+        /// <param name="name">The select element name.</param>
+        /// <param name="selectedValue">The selected value.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <returns>
+        /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
+        /// </returns>
+        public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum? selectedValue, IDictionary<String, Object> htmlAttributes)
             where TEnum : struct 
         {          
             var items = new List<SelectListItem>();

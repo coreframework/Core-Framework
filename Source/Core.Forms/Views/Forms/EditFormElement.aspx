@@ -4,6 +4,7 @@
 <%@ Import Namespace="System.Web.Mvc" %>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>Edit Form Element</h1>
+   <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.FormId??0, false, true, false));%>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -15,16 +16,15 @@
             <div class="fst_col colls_i">
                     <%: Html.Hidden("formId", Model.FormId) %> 
                     <%: Html.HiddenFor(model=>model.Id) %> 
-
-			    <div class="i_form_i">
-                        <%: Html.LabelFor(model => model.Title)%>
-                        <%: Html.TextBoxFor(model => model.Title) %>
-                        <%: Html.ValidationMessageFor(model => model.Title) %>
-                </div>
 			    <div class="i_form_i">
                         <%: Html.LabelFor(model => model.Type)%>
                         <%: Html.DropDownListFor("Type", Model.Type, new {}) %>
                         <%: Html.ValidationMessageFor(model => model.Type) %>
+                </div>
+                 <div class="i_form_i">
+                        <%: Html.LabelFor(model => model.Title)%>
+                        <%: Html.TextBoxFor(model => model.Title) %>
+                        <%: Html.ValidationMessageFor(model => model.Title) %>
                 </div>
 			    <div class="i_form_i"  id="el_values">
                         <%:Html.LabelFor(model => model.Values)%>

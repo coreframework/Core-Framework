@@ -38,6 +38,7 @@ namespace Core.Web.Areas.Admin.Models
             Title = from.Title;
             Description = from.Description;
             Cultures = CultureHelper.GetAvailableCultures();
+            SelectedCulture = from.CurrentLocale.Culture;
             
             return this;
         }

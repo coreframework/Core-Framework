@@ -10,6 +10,7 @@ using Core.Forms.Widgets;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
+using Core.Framework.Permissions.Models;
 using Framework.MVC.Grids;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.Permissions.Helpers;
@@ -24,8 +25,6 @@ namespace Core.Forms.Controllers
         #region Fields
 
         private readonly IPermissionCommonService _permissionService;
-
-        private readonly IPermissionsHelper _permissionsHelper;
 
         private readonly IFormBuilderWidgetService _formBuilderWidgetService;
 
@@ -52,10 +51,7 @@ namespace Core.Forms.Controllers
         {
             _formBuilderWidgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
             _formWidgetAnswersService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerService>();
-
             _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-            _permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
-
         }
 
         #endregion
@@ -180,7 +176,7 @@ namespace Core.Forms.Controllers
         {
             var model = _formWidgetAnswersService.Find(answerId);
 
-            if (model == null || !_permissionService.IsAllowed((int)FormsBuilderWidgetOperations.ViewAnswers, this.CorePrincipal(), typeof(FormsBuilderWidget), model.FormBuilderWidget.Id))
+            if (model == null || !_permissionService.IsAllowed((int)FormsBuilderWidgetOperations.ViewAnswers, this.CorePrincipal(), typeof(FormsBuilderWidget), model.FormBuilderWidget.Id, IsFormOwner(model.FormBuilderWidget.Form), PermissionOperationLevel.ObjectType))
             {
                 throw new Exception("Answer not found.");
             }

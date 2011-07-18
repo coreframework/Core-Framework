@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -159,7 +160,7 @@ namespace Core.Forms.Helpers
                                  };
 
                 //save answer values
-                foreach (FormElement item in model.Form.FormElements)
+                foreach (FormElement item in model.Form.FormElements.ToList().OrderBy(val=>val.OrderNumber))
                 {
                     if (item.Type != FormElementType.Captcha)
                     {
