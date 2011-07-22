@@ -20,10 +20,10 @@
 		<div class="i_buttons clrfix">
 			<div class="btn1 clrfix">
                 <em></em>
-                <%: Html.Submit(Html.Translate(".Save"),new { @class="button"})%>
+                <%: Html.Submit(Html.Translate("Actions.Save"),new { @class="button"})%>
                 <strong></strong>
             </div>
-			<span><%: Html.ActionLink(Html.Translate(".Cancel"), MVC.Admin.Role.Index()) %></span>
+			<span><%: Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.Role.Index()) %></span>
 		</div>
     </div>
   <% } %>

@@ -18,9 +18,11 @@
         <%=Html.JqGrid(model => model.SearchString) %>
         <%if (ViewData["Form"] is FormViewModel && ((FormViewModel)ViewData["Form"]).AllowManage) {%>
         <div class="e_table_bottom clrfix">
-        <div class="btn1 clrfix"><em></em>
-                    <input id="New" type="button" class="button" value="Add New Element" />
-                    <strong></strong></div>
+            <div class="btn1 clrfix">
+                <strong><em></em>
+                    <input id="New" type="button" class="button" value="<%:Html.Translate("Actions.AddNewElement") %>" />
+                </strong></strong>
+            </div>
         </div>
         <script type="text/javascript">
             $(function () { $('#New').click(function () { window.location = "<%:Url.Action("NewElement", "Forms")%>"; }); });

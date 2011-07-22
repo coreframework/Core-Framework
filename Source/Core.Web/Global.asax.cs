@@ -15,6 +15,7 @@ using Core.Web.NHibernate;
 using Core.Web.NHibernate.Contracts;
 using Framework.Core;
 using Framework.Facilities.NHibernate;
+using Framework.MVC.Metadata;
 using Framework.MVC.Resources;
 using Microsoft.Practices.ServiceLocation;
 using Application = Framework.Core.Application;
@@ -94,6 +95,7 @@ namespace Core.Web
             ExecuteBootstrapperTasks();
             RegisterPermissibleObjects();
             RegisterAreas();
+            ModelMetadataProviders.Current = new MetadataProvider(true, true);
 
         }
 

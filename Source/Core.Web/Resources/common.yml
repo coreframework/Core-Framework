@@ -1,16 +1,22 @@
-Actions:
-    Save:"Save"
 Messages:
   UnknownError: "Some error has been occured. Please try again."
   ValidationError: "Validation errors occurred while processing this form."
   Success: "Your request processed successfully."
   EmailShouldBeUnique: "The email address you entered is already in use."
   NicknameShouldBeUnique: "The nickname you entered is already in use."
-  RegistraionCompleted: "You have been registered successfully."
-  RegistrationDataUpdated: "Your registration data has been updated."
-  AccountHasBeenDeleted: "Your account has been deleted."
   InvalidUserCredentials: "User with specified details could not be located in the system."
-  ProfileHasBeenUpdated: "Profile has been updated successfully."
+  DeleteConfirm "The item will be removed, ok?"
+Actions:
+  View: "View"
+  Edit: "Edit"
+  Save: "Save"
+  Cancel: "Cancel"
+  AddNewPage: "Add new page"
+  AddWidget: "Add widget"
+  Add: "Add"
+  Manage: "Manage"
+  Reset: "Reset"
+  
      
 
 

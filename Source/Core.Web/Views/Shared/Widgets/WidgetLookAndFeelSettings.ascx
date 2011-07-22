@@ -22,14 +22,14 @@
             onChange: function ($input, hex, rgb) {
                 var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
                 try {
-                    $('.widget-content', $widget).css($input.attr('Attr'), $input.val());
+                    $('.widget_content', $widget).css($input.attr('Attr'), $input.val());
                 }
                 catch (err) { }
             }
         });
         $('select[attr=font-family]').change(function () {
             var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
-            $('.widget-content', $widget).css($(this).attr('Attr'), $(this).val());
+            $('.widget_content', $widget).css($(this).attr('Attr'), $(this).val());
         });
         $('input[attr=font-size]').keyup(function () {
             changeTwinFieldAttribute('font-size');
@@ -51,7 +51,7 @@
         });
         $('textarea', $('.form_area')).keyup(function () {
             var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
-            var $stylesHolder = $('.widget-content div', $widget).first();
+            var $stylesHolder = $('.widget_content div', $widget).first();
             $stylesHolder.removeAttr('style');
             try {
                 var styles = $(this).val().split(";");
@@ -76,7 +76,7 @@
                     }
                     if ($(this).hasClass('colorPicker')) {
                         var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
-                        $('.widget-content', $widget).css($(this).attr('Attr'), '');
+                        $('.widget_content', $widget).css($(this).attr('Attr'), '');
                     }
                 }
             });
@@ -88,9 +88,9 @@
         var value = parseFloat($('input[attr=' + attrName + ']').val());
         var unit = $('select[attr=' + attrName + ']').val();
         if (value && unit) {
-            $('.widget-content', $widget).css(attrName, value + unit);
+            $('.widget_content', $widget).css(attrName, value + unit);
         } else {
-            $('.widget-content', $widget).css(attrName, '');
+            $('.widget_content', $widget).css(attrName, '');
         }
     }
     

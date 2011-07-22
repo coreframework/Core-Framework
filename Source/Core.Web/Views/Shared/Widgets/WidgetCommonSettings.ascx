@@ -1,29 +1,29 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.WidgetHolderViewModel>" %>
 
 <% using (Ajax.BeginForm(
-                        Model.Widget.SaveAction.Action,
-                        Model.Widget.SaveAction.Controller,
-                        new { area = Model.Widget.SaveAction.Area },
+                        Model.SystemWidget.SaveAction.Action,
+                        Model.SystemWidget.SaveAction.Controller,
+                        new { area = Model.SystemWidget.SaveAction.Area },
                         new AjaxOptions()
                                 {
-                                    UpdateTargetId = String.Format("widgetHolder{0}", Model.Id),
-                                    OnSuccess = "function(){ updatePageWidgetInstance(this," + Model.Id + "); }"
+                                    UpdateTargetId = String.Format("widgetHolder{0}", Model.Widget.Id),
+                                    OnSuccess = "function(){ updatePageWidgetInstance(this," + Model.Widget.Id + "); }"
                                 }))
    { %>
-    <div id="widgetHolder<%=Model.Id %>">
+    <div id="widgetHolder<%=Model.Widget.Id %>">
         <%Html.RenderAction(
-                                Model.Widget.EditAction.Action,
-                                Model.Widget.EditAction.Controller,
+                                Model.SystemWidget.EditAction.Action,
+                                Model.SystemWidget.EditAction.Controller,
                                 new
                                     {
                                         instance = Model.WidgetInstance,
-                                        area = Model.Widget.EditAction.Area
+                                        area = Model.SystemWidget.EditAction.Area
                                     });%>
     </div>
-    <%if (Model.Widget.SaveAction != null)
+    <%if (Model.SystemWidget.SaveAction != null)
       {%>
          <div class="p_footer clrfix">
-		    <div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button" })%><strong></strong></div>
+		    <div class="btn1"><em></em><%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button" })%><strong></strong></div>
 	     </div>
     <%} %>
 <%} %>
@@ -40,7 +40,7 @@
                 };
                 var url = '<%=Url.Action(MVC.Pages.UpdatePageWidgetInstance()) %>';
                 $.post(url, params, function (data) {
-                    var widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.Id %>]').parents('.widget');
+                    var widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.Widget.Id %>]').parents('.widget');
                     $('.widget_content_i', widget).html($(data).find('.widget_content_i').html());
                 });
             }

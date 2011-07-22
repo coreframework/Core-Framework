@@ -8,7 +8,7 @@
         <input id="SettingId" name="SettingId" type="hidden" value="<%=Model.SettingId %>" />
         <%:Html.HiddenFor(model => model.PageId)%>
         <div class="form_i">
-            <label> Custom CSS</label><br/>
+            <%:Html.LocalizedLabelFor(model=>model.CustomCSS)%><br/>
             <%:Html.TextAreaFor(model => model.CustomCSS, new { Class = "inp_txt", Rows = 15 })%>
         </div>
         <%:Html.AntiForgeryToken()%>
@@ -18,8 +18,8 @@
        </div>
     </div>
      <div class="p_footer clrfix">
-		<div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button" })%><strong></strong></div>
-		<div class="cancel_l"><a class="reset" href="javascript:void(0)">Reset</a></div>
+		<div class="btn1"><em></em><%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button" })%><strong></strong></div>
+		<div class="cancel_l"><a class="reset" href="javascript:void(0)"><%:Html.Translate("Actions.Reset")%></a></div>
 	 </div>
     <% }%>
 </div>

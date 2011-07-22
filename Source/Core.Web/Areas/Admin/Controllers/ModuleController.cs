@@ -14,9 +14,8 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
 using Core.Web.NHibernate.Models;
 using Framework.MVC.Controllers;
-using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
 
@@ -55,29 +54,34 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
-                                                         new GridColumnViewModel
-                                                             {
-                                                                 Name = "Title", Index = "Title"
+                                                         new GridColumnViewModel {
+                                                                 Name = Translate(".Model.Module.Title"),
+                                                                 Index = "Title"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Description", Sortable = false
+                                                                 Name = Translate(".Model.Module.Description"),
+                                                                 Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Version", Index = "Version"
+                                                                 Name = Translate(".Model.Module.Version"),
+                                                                 Index = "Version"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Added", Index = "CreateDate"
+                                                                 Name = Translate(".Model.Module.CreateDate"),
+                                                                 Index = "CreateDate"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Status", Index = "Status"
+                                                                 Name = Translate(".Model.Module.Status"),
+                                                                 Index = "Status"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Actions", Sortable = false
+                                                                 Name = Translate("Actions.Actions"),
+                                                                 Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
@@ -88,7 +92,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 DataUrl = Url.Action(MVC.Admin.Module.DynamicGridData()),
                 DefaultOrderColumn = "Id",
-                GridTitle = "Modules",
+                GridTitle =Translate(".Modules"),
                 Columns = columns
             };
             return View(model);
@@ -100,7 +104,7 @@ namespace Core.Web.Areas.Admin.Controllers
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
             IQueryable<Plugin> searchQuery = pluginService.GetSearchQuery(search);
-            int totalRecords = PluginHelper.CountAvailablePlugins(searchQuery);//pluginService.GetCount(searchQuery);
+            int totalRecords = PluginHelper.CountAvailablePlugins(searchQuery);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var plugins = PluginHelper.GetAvailablePlugins(searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize));
             var jsonData = new
@@ -108,10 +112,9 @@ namespace Core.Web.Areas.Admin.Controllers
                 total = totalPages,
                 page,
                 records = totalRecords,
-                rows = (
-                           plugins.Select(plugin => new
+                rows = (plugins.Select(plugin => new
                                                         {
-                                                            id = "not_clickabe",
+                                                            id = JqGridConstants.NotClickableId,
                                                             cell = new[]
                                                                        {
                                                                             plugin.Title, 
@@ -119,10 +122,10 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                             plugin.Version,
                                                                             plugin.CreateDate.ToLongDateString(),
                                                                             plugin.Status.ToString(),
-                                                                            plugin.Status.Equals(PluginStatus.NotInstalled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Install(plugin.Id)),HttpContext.Translate("Install", ResourceHelper.GetControllerScope(this))) :
-                                                                            plugin.Status.Equals(PluginStatus.Installed) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Uninstall(plugin.Id)),HttpContext.Translate("Uninstall", ResourceHelper.GetControllerScope(this))) : 
+                                                                            plugin.Status.Equals(PluginStatus.NotInstalled) ? String.Format(JqGridConstants.UrlTemplate, Url.Action(MVC.Admin.Module.Install(plugin.Id)), Translate("Actions.Install")) :
+                                                                            plugin.Status.Equals(PluginStatus.Installed) ? String.Format(JqGridConstants.UrlTemplate, Url.Action(MVC.Admin.Module.Uninstall(plugin.Id)), Translate("Actions.Uninstall")) : 
                                                                             String.Empty,
-                                                                            String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Module.Edit(plugin.Id)),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this)))
+                                                                            String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Module.Edit(plugin.Id)), Translate("Actions.Edit"))
                                                                        }
                                                         }).ToArray())
             };
@@ -140,7 +143,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var plugin = pluginService.Find(id);
             if (plugin == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             return View(new PluginViewModel().MapFrom(plugin));
@@ -152,11 +155,11 @@ namespace Core.Web.Areas.Admin.Controllers
             var plugin = pluginService.Find(pluginId);
             if (plugin == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Plugin not found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.PluginNotFound"));
             }
             PluginViewModel model = new PluginViewModel().MapFrom(plugin);
             model.SelectedCulture = culture;
-            IPluginLocaleService localeService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
+            var localeService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
             PluginLocale locale = localeService.GetLocale(pluginId, culture);
             if (locale != null)
             {
@@ -179,17 +182,14 @@ namespace Core.Web.Areas.Admin.Controllers
             var plugin = pluginService.Find(id);
             if (plugin == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (ModelState.IsValid)
             {
-                IPluginLocaleService localeService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
-                PluginLocale pluginLocale = localeService.GetLocale(id, pluginView.SelectedCulture);
-                if (pluginLocale == null)
-                {
-                    pluginLocale = new PluginLocale { Plugin = plugin, Culture = pluginView.SelectedCulture };
-                }
+                var localeService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
+                PluginLocale pluginLocale = localeService.GetLocale(id, pluginView.SelectedCulture) ??
+                                            new PluginLocale { Plugin = plugin, Culture = pluginView.SelectedCulture };
                 pluginLocale.Title = pluginView.Title;
                 pluginLocale.Description = pluginView.Description;
                 localeService.Save(pluginLocale);
@@ -212,7 +212,7 @@ namespace Core.Web.Areas.Admin.Controllers
             Plugin plugin = pluginService.Find(id);
             if (plugin == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             return View(new PluginViewModel().MapFrom(plugin));
         }
@@ -228,7 +228,7 @@ namespace Core.Web.Areas.Admin.Controllers
             Plugin plugin = pluginService.Find(id);
             if (plugin == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             return View(new PluginViewModel().MapFrom(plugin));
         }
@@ -244,7 +244,7 @@ namespace Core.Web.Areas.Admin.Controllers
             Plugin pluginEntity = pluginService.Find(id);
             if (pluginEntity == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             if (pluginEntity.Status.Equals(PluginStatus.NotInstalled))
             {
@@ -252,19 +252,17 @@ namespace Core.Web.Areas.Admin.Controllers
                     Application.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
                 if (corePlugin == null)
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound,
-                                            HttpContext.Translate("Messages.CouldNotFoundPlugin",
-                                                                  ResourceHelper.GetControllerScope(this)));
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundPlugin"));
                 }
                 CoreMigrator.Current.MigrateUp(corePlugin);
                 corePlugin.Install();
                 pluginEntity.Status = PluginStatus.Installed;
                 pluginService.Save(pluginEntity);
                 corePlugin.Start();
-                Success(Translate(".InstallPlugin"));
+                Success(Translate("Messages.InstallPlugin"));
                 return RedirectToAction(MVC.Admin.Module.Index());
             }
-            Error(Translate(".UnknownError"));
+            Error(Translate("Messages.UnknownError"));
             return RedirectToAction(MVC.Admin.Module.Index());
         }
 
@@ -279,7 +277,7 @@ namespace Core.Web.Areas.Admin.Controllers
             Plugin pluginEntity = pluginService.Find(id);
             if (pluginEntity == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             if (!pluginEntity.Status.Equals(PluginStatus.NotInstalled))
             {
@@ -287,9 +285,7 @@ namespace Core.Web.Areas.Admin.Controllers
                     Application.Plugins.FirstOrDefault(pl => pl.Identifier == pluginEntity.Identifier);
                 if (corePlugin == null)
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound,
-                                            HttpContext.Translate("Messages.CouldNotFoundPlugin",
-                                                                  ResourceHelper.GetControllerScope(this)));
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundPlugin"));
                 }
 
                 corePlugin.Uninstall();
@@ -298,10 +294,10 @@ namespace Core.Web.Areas.Admin.Controllers
 
                 pluginEntity.Status = PluginStatus.NotInstalled;
                 pluginService.Save(pluginEntity);
-                Success(Translate(".UninstallPlugin"));
+                Success(Translate("Messages.UninstallPlugin"));
                 return RedirectToAction(MVC.Admin.Module.Index());
             }
-            Error(Translate(".UnknownError"));
+            Error(Translate("Messages.UnknownError"));
             return RedirectToAction(MVC.Admin.Module.Index());
         }
     }

@@ -11,24 +11,13 @@ namespace Core.Web.NHibernate.Mappings
             Table("PageWidgets");
             Id(pageWidget => pageWidget.Id);
             Map(pageWidget => pageWidget.InstanceId);
-            Map(pageWidget => pageWidget.WidgetIdentifier);
             Map(pageWidget => pageWidget.ColumnNumber);
             Map(pageWidget => pageWidget.OrderNumber);
             References(pageWidget => pageWidget.Page);
             HasOne(pageWidget => pageWidget.Settings).PropertyRef(pageWidgetSettings => pageWidgetSettings.Widget).
                 Cascade.All().LazyLoad();
             References(pageWidget => pageWidget.User).Column("UserId").Nullable();
-
-
-         //   References(pageWidget => pageWidget.Widget, "Identifier").Column("WidgetIdentifier");
-
-         /*   Join("Widgets", m =>
-            {
-                m.Fetch.Join();
-                m.Optional();
-                m.KeyColumn("Identifier");
-                References(pageWidget => pageWidget.Widget).Column("WidgetIdentifier");
-            });*/
+            References(pageWidget => pageWidget.Widget).Column("WidgetId").Nullable();
         }
     }
 }

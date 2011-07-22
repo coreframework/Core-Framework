@@ -10,9 +10,8 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.MVC.Controllers;
-using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
 using System.Linq.Dynamic;
@@ -47,16 +46,16 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
-                                                         new GridColumnViewModel {Name = "Name", Index = "Name"},
+                                                         new GridColumnViewModel {Name = Translate(".Model.UserGroup.Name"), Index = "Name"},
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Users list",
+                                                                 Name = Translate(".Model.UserGroup.UsersList"),
                                                                  Width = 150,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Remove",
+                                                                 Name = Translate("Actions.Actions"),
                                                                  Width = 150,
                                                                  Sortable = false
                                                              },
@@ -68,7 +67,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                           DataUrl = Url.Action(MVC.Admin.UserGroup.DynamicGridData()),
                                           DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.UserGroup.Edit())),
                                           DefaultOrderColumn = "Name",
-                                          GridTitle = "User groups",
+                                          GridTitle = ".UserGroups",
                                           Columns = columns
                                       };
             return View(model);
@@ -94,12 +93,12 @@ namespace Core.Web.Areas.Admin.Controllers
                     {
                         id = userGroup.Id,
                         cell = new[] { userGroup.Name,
-                            String.Format("<a href=\"{0}\">{1}</a>",
+                            String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.UserGroup.Users(userGroup.Id)),
-                                HttpContext.Translate("Users", ResourceHelper.GetControllerScope(this))),
-                            String.Format("<a href=\"{0}\">{1}</a>",
+                                Translate(".Users")),
+                            String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.UserGroup.Remove(userGroup.Id)),
-                                HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this)))}
+                                Translate("Actions.Remove"))}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -143,7 +142,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             return View(new UserGroupViewModel().MapFrom(userGroup));
@@ -161,7 +160,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (ModelState.IsValid)
@@ -187,7 +186,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             return View(new UserGroupViewModel().MapFrom(userGroup));
         }
@@ -221,7 +220,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
@@ -262,7 +261,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             IQueryable<User> searchQuery = userService.GetSearchQuery(search);
             int totalRecords = userService.GetCount(searchQuery);
@@ -289,7 +288,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = userGroupService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (UserGroupHelper.UpdateUserGroupToUsersAssignment(userGroup, ids, selids))

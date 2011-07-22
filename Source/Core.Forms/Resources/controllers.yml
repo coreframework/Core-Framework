@@ -3,5 +3,8 @@ Controllers:
     Messages:
       SuccessFormSubmit: "Form has been successfully submit."
       ValidationError: "Validation errors occurred while processing this form."
+      SetupForm: "Setup form"
+      Error: "Error"
+
     
     

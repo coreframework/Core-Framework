@@ -1,0 +1,25 @@
+Models:
+  PageLocaleViewModel:
+   Title: "Title"
+   Url: "Url"
+  PageViewModel:
+   Title: "Title"
+   Url: "Url"
+  PageCSSModel:
+   CustomCSS: "Custom CSS"
+  PageLookAndFeelModel:
+   BackgroundColor: "Background Color"
+   FontFamily: "Font Family"
+   FontSizeValue: "Font Size"
+   Color: "Color"
+   OtherStyles: "Other"
+
+   
+  
+     
+
+
+
+
+    
+

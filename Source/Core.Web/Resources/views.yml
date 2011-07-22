@@ -2,11 +2,8 @@ Views:
     Pages:
       Show:
        WidgetNotFound: "Widget is not found"
-       Remove: "remove"
-       Edit: "edit"
-       RemoveConfirmation: "This widget will be removed, ok?"
-       Add: "Add"
-       Manage: "Manage"
+       PanelView: "View" 
+       PanelEdit: "Edit" 
        Widget: "Widget"
        PageSettings: "Change Page Common Settings"
        PageLayout: "Change Page Layout"
@@ -34,8 +31,6 @@ Views:
        AllWidgetsRule: "Add a CSS rule for all widgets on this page."
       PagePermissions:
        Role: "Role"
-      NavigationMenu:
-       AddNewPage: "Add New Page" 
     Shared:
       Widgets:
         WidgetSettings:
@@ -91,5 +86,7 @@ Views:
           UsernameOrEmail: "Username or Email"
           Password: "Password"
           RememberMe: "Remember me"
+          PanelView: "View" 
+          PanelEdit: "Edit" 
 
 

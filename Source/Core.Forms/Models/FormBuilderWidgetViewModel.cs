@@ -46,11 +46,11 @@ namespace Core.Forms.Models
         public bool SendEmail { get; set; }
 
         /// <summary>
-        /// Gets or sets the sender email.
+        /// Gets or sets the recipient email.
         /// </summary>
-        /// <value>The sender email.</value>
+        /// <value>The recipient email.</value>
         [StringLength(255), Email]
-        public String SenderEmail { get; set; }
+        public String RecipientEmail { get; set; }
 
         /// <summary>
         /// Gets or sets the user.
@@ -93,7 +93,7 @@ namespace Core.Forms.Models
             Title = from.Title;
             SaveData = from.SaveData;
             SendEmail = from.SendEmail;
-            SenderEmail = from.SenderEmail;
+            RecipientEmail = from.RecipientEmail;
 
             FormId = from.Form != null ? from.Form.Id : 0;
             return this;
@@ -105,7 +105,7 @@ namespace Core.Forms.Models
             to.Title = Title;
             to.SaveData = SaveData;
             to.SendEmail = SendEmail;
-            to.SenderEmail = SenderEmail;
+            to.RecipientEmail = RecipientEmail;
             to.Form = new Form
                           {
                 Id = FormId

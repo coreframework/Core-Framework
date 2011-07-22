@@ -19,10 +19,10 @@
 <div class="i_buttons clrfix">
     <div class="btn1 clrfix">
         <em></em>
-        <%: Html.Submit("Save",new { @class="button"})%>
+        <%: Html.Submit(Html.Translate("Actions.Save"), new { @class="button"})%>
         <strong></strong>
     </div>
     <span>
-        <%:Html.RouteLink("Cancel", new { controller = "Module", action = "Index" })%></span>
+        <%:Html.RouteLink(Html.Translate("Actions.Cancel"), new { controller = "Module", action = "Index" })%></span>
 </div>
 <% }%>

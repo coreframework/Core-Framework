@@ -132,7 +132,7 @@ namespace Framework.MVC.Grids.jqGrid
             var searchWrapper = new TagBuilder("div");
             searchWrapper.AddCssClass("filter_i");
             var searchLabel = new TagBuilder("label");
-            searchLabel.SetInnerText(String.Format("{0}:", html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel)))));
+            searchLabel.SetInnerText(String.Format("{0}: ", html.Translate("Search", ResourceHelper.GetModelScope(typeof(GridViewModel)))));
             searchWrapper.InnerHtml += searchLabel.ToString(TagRenderMode.Normal);
             searchWrapper.InnerHtml += html.TextBoxFor(searchExpression, new { onkeydown = "doSearch(arguments[0]||event)" }).ToHtmlString();
             return searchWrapper.ToString(TagRenderMode.Normal);

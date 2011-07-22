@@ -1,10 +1,11 @@
 Admin:
   Views:
-    Module:
+    AdminHome:
       Index:
-       Install: "Install"
-       Uninstall: "Uninstall"
-       Edit: "Edit"
+       Welcome: "Welcome to Core Framework!"
+    Module:
+      Edit:
+       Title: "Edit Module"
       Install:
        Title: "Install module \"{0}\""
        AreYouSure: "Are you sure want to install module \"{0}\"?"
@@ -24,93 +25,62 @@ Admin:
         New: "New User"
       New:
         Title: "New User"
-        Save: "Save"
-        Cancel: "Cancel"
       Edit:
         Title: "Edit user \"{0}\""
-        Save: "Save"
-        Cancel: "Cancel"
       Remove:
         Title: "Remove user \"{0}\""
         AreYouSure: "Are you sure want to remove user \"{0}\"?"
       UserGroups:
         Title: "User Groups assigned to user \"{0}\""
         All: "All"
-        Save: "Save"
-        Cancel: "Cancel"
     UserGroup:
       Index:
         Title: "User groups Listing"
         UserGroup: "User group"
         Remove: "[Remove]"
         Users: "[Users]"
-        New: "New User group"
       New:
         Title: "New User group"
-        Save: "Save"
-        Cancel: "Cancel"
       Edit:
         Title: "Edit user group \"{0}\""
-        Save: "Save"
-        Cancel: "Cancel"
       Remove:
         Title: "Remove user group \"{0}\""
         AreYouSure: "Are you sure want to remove user group \"{0}\"?"
-        Remove: "Remove"
-        Cancel: "Cancel"
       Users:
         Title: "Users assigned to user group \"{0}\""
         All: "All"
-        Save: "Save"
-        Cancel: "Cancel"
     Shared:
       TopLinks:
-       LoggedInAs: "Logged in as"
-       LogOut: "Log out"
-       ViewSite: "View Site"
        SignIn: "Sign in"
+       SignOut: "Sign Out"
       MainMenu:
         Home: "Home"
         Users: "Users"
         UserGroups: "User groups"
-        Modules: "Modules"
-        Plugins: "Plugins"
         Widgets: "Widgets"
-        Content Pages: "Content Pages"
-        Forms: "Forms"
         Roles: "Roles"
-        FormsAnswers: "Forms Answers"
-        Languages: "Languages"
+        Administration: "Administration"
+        Modules: "Modules"
+        Portal: "Portal"
     Role:
       Index:
        Role: "Role"
        Permissions: "Permissions"
        Users: "Users"
        Title: "Roles"
-       New: "New Role"
       New:
         Title: "New Role"
-        Save: "Save"
-        Cancel: "Cancel"
       Edit:
         Title: "Edit role \"{0}\""
-        Save: "Save"
-        Cancel: "Cancel"
       Remove:
         Title: "Remove role \"{0}\""
         AreYouSure: "Are you sure want to remove role \"{0}\"?"
-        Remove: "Remove"
-        Cancel: "Cancel"
       Users:
         Title: "Users assigned to role \"{0}\""
         All: "All"
-        Save: "Save"
-        Cancel: "Cancel"
       UserGroups:
         Title: "User Groups assigned to role \"{0}\""
         All: "All"
-        Save: "Save"
-        Cancel: "Cancel"
       Permissions:
        Permissions: "Permissions"
        Operation: "Operation"

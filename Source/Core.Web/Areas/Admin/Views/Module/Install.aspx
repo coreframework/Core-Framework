@@ -11,10 +11,10 @@
 		<div class="i_buttons clrfix">
 			<div class="btn1 clrfix">
                 <em></em>
-                <%: Html.Submit("Install", new { @class = "button" })%>
+                <%: Html.Submit(Html.Translate("Actions.Install"), new { @class = "button" })%>
                 <strong></strong>
 		    </div>
-            <span><%: Html.ActionLink("Cancel", MVC.Admin.Module.Index()) %></span>
+            <span><%: Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.Module.Index())%></span>
         </div>
     </div>
   <% } %>

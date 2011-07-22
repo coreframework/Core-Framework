@@ -17,7 +17,8 @@ namespace Core.Web.Helpers
                 throw new ArgumentNullException("controllerContext");
             if (bindingContext == null)
                 throw new ArgumentNullException("bindingContext");
-
+           
+            controllerContext.HttpContext.Request.InputStream.Position = 0;
             var serializer = new DataContractJsonSerializer(bindingContext.ModelType);
             return serializer.ReadObject(controllerContext.HttpContext.Request.InputStream);
         }

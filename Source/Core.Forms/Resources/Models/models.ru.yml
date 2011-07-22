@@ -1,0 +1,8 @@
+ru:
+ Models:
+  FormBuilderWidgetViewModel:
+   Title: "Название"
+   FormId: "Форма"
+   SendEmail: "Отправлять email"
+   SaveData: "Сохранять данные"
+   RecipientEmail: "Адрес отправителя"

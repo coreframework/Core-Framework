@@ -16,8 +16,8 @@
        {%>
     <%: Html.HttpMethodOverride(HttpVerbs.Delete) %>
     <p class="buttons">
-        <%: Html.Submit("Remove") %>
-        <%: Html.ActionLink("Cancel", MVC.Admin.Role.Index())%>
+        <%: Html.Submit(Html.Translate("Actions.Remove"))%>
+        <%: Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.Role.Index())%>
     </p>
     <% } %>
 </asp:Content>

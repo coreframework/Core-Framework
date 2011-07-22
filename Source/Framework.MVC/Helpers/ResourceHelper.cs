@@ -94,6 +94,26 @@ namespace Framework.MVC.Helpers
         }
 
         /// <summary>
+        /// Translates the name of the property.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="modelType">Type of the model.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="area">The area name.</param>
+        /// <returns>
+        /// Localized string or <c>null</c>.
+        /// </returns>
+        public static String TranslatePropertyName(HttpContextBase context, Type modelType, String propertyName, String area)
+        {
+            var modelScope = GetModelScope(modelType);
+            if (!MainAreas.Contains(area))
+            {
+                modelScope = area + ScopeSeparator + modelScope;
+            }
+            return GetResourceString(context, propertyName, modelScope, null, null);
+        }
+
+        /// <summary>
         /// Translates validation error message.
         /// </summary>
         /// <param name="context">The http context.</param>

@@ -5,17 +5,19 @@ namespace Core.Web.NHibernate.Models
 {
     public class PageWidget: Entity
     {
+        #region Constructor
+
+        public PageWidget()
+        {
+            Widget = new Widget();
+        }
+
+        #endregion
         /// <summary>
         /// Gets or sets the instance id.
         /// </summary>
         /// <value>The instance id.</value>
         public virtual long? InstanceId { get; set; }
-
-        /// <summary>
-        /// Gets or sets the widget identifier.
-        /// </summary>
-        /// <value>The widget identifier.</value>
-        public virtual String WidgetIdentifier { get; set; }
 
         /// <summary>
         /// Gets or sets the widget.

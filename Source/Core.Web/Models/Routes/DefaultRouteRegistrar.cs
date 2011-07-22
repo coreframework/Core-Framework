@@ -55,7 +55,7 @@ namespace Core.Web.Models.Routes
             routes.MapRoute(null, "pages/page-change-language", MVC.Pages.ChangeLanguage(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             routes.MapRoute(null, "pages/add-page/{parentPageId}", MVC.Pages.CreateNewPage());
             routes.MapRoute(null, "pages/update-page-position", MVC.Pages.UpdatePagePosition());
-            routes.MapRoute(null, "pages/add-widget/{pageId}/{widgetIdentifier}", MVC.Pages.AddWidget());
+            routes.MapRoute(null, "pages/add-widget/{pageId}/{widgetId}", MVC.Pages.AddWidget());
             routes.MapRoute(null, "pages/menu", MVC.Pages.Index());
             routes.MapRoute(null, "pages/show-change-layout-form/{pageId}", MVC.Pages.ShowChangeLayoutForm());
             routes.MapRoute(null, "pages/available-widgets", MVC.Pages.ShowAvailableWidgets());

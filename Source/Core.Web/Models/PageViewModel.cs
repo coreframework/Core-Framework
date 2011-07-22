@@ -13,6 +13,7 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
+using Framework.MVC.Metadata.Attributes;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.MEF.Extensions;
 
@@ -27,7 +28,7 @@ namespace Core.Web.Models
 
         private List<WidgetHolderViewModel> _widgets = new List<WidgetHolderViewModel>();
 
-        private IPermissionCommonService permissionService;
+        private readonly IPermissionCommonService _permissionService;
 
         #endregion
 
@@ -35,7 +36,7 @@ namespace Core.Web.Models
 
         public PageViewModel()
         {
-            permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             PagePlugins = new List<ICorePlugin>();
         }
 
@@ -49,7 +50,7 @@ namespace Core.Web.Models
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        [Required]
+        [LocalizedRequired]
         public String Title { get; set; }
 
         /// <summary>
@@ -112,48 +113,46 @@ namespace Core.Web.Models
             Id = from.Id;
             Settings = from.Settings;
             ParentPageId = from.ParentPageId;
-            var pageAccess = permissionService.GetAccess(from.Operations, HttpContext.Current.CorePrincipal(), typeof(Page), from.Id, IsPageOwner);
+            var pageAccess = _permissionService.GetAccess(from.Operations, HttpContext.Current.CorePrincipal(), typeof(Page), from.Id, IsPageOwner);
             Access = pageAccess;
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
             PageMode = PageHelper.GetCurrentUserPageMode();
+
+            var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
 
             foreach (var widget in from.Widgets.OrderBy(wd => wd.OrderNumber))
             {
                 PageWidget widget1 = widget;
                 ICoreWidget coreWidget =
-                    (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == widget1.WidgetIdentifier);
-                if (coreWidget != null)
+                    widget.Widget!=null?(MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == widget1.Widget.Identifier):null;
+
+                bool isWidetEnabled = widgetService.IsWidgetEnable(widget1.Widget);
+
+                Widgets.Add(new WidgetHolderViewModel
+                                {
+                                    WidgetInstance = new CoreWidgetInstance
+                                                         {
+                                                             InstanceId = widget.InstanceId,
+                                                             WidgetIdentifier = coreWidget != null?coreWidget.Identifier:null,
+                                                             PageSettings = new CorePageSettings {PageId = from.Id}
+                                                         },
+                                    Widget = widget1,
+
+                                    Access = coreWidget is BaseWidget
+                                                 ? _permissionService.GetAccess(
+                                                     ((BaseWidget) coreWidget).Operations,
+                                                     HttpContext.Current.CorePrincipal(), coreWidget.GetType(),
+                                                     widget1.EntityId,
+                                                     currentPrincipal != null && widget1.User != null &&
+                                                     widget1.User.PrincipalId == currentPrincipal.PrincipalId)
+                                                 : null,
+                                    PageAccess = pageAccess,
+                                    SystemWidget = (isWidetEnabled && coreWidget != null) ? coreWidget : null
+                });
+
+                if (coreWidget!=null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
                 {
-                    Widgets.Add(new WidgetHolderViewModel
-                                    {
-                                        Id = widget.Id,
-                                        Column = widget.ColumnNumber,
-                                        Order = widget.OrderNumber,
-                                        WidgetInstance = new CoreWidgetInstance
-                                                             {
-                                                                 InstanceId = widget.InstanceId,
-                                                                 WidgetIdentifier = widget.WidgetIdentifier,
-                                                                 PageSettings = new CorePageSettings {PageId = from.Id}
-                                                             },
-                                        Settings = widget1.Settings,
-                                        Widget =
-                                            new WidgetHelper().IsWidgetEnabled(widget.WidgetIdentifier)
-                                                ? coreWidget
-                                                : null,
-                                        Access = coreWidget is BaseWidget
-                                                     ? permissionService.GetAccess(
-                                                         ((BaseWidget) coreWidget).Operations,
-                                                         HttpContext.Current.CorePrincipal(), coreWidget.GetType(),
-                                                         widget1.EntityId,
-                                                         currentPrincipal != null && widget1.User != null &&
-                                                         widget1.User.PrincipalId == currentPrincipal.PrincipalId)
-                                                     : null,
-                                        PageAccess = pageAccess
-                                    });
-                    if (!PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
-                    {
-                        PagePlugins.Add(coreWidget.Plugin);
-                    }
+                    PagePlugins.Add(coreWidget.Plugin);
                 }
             }
             var plugins = ServiceLocator.Current.GetInstance<IPluginService>().FindPluginsByIdentifiers(PagePlugins.Select(t => t.Identifier).ToList());
@@ -173,7 +172,7 @@ namespace Core.Web.Models
         /// <returns></returns>
         public Page MapTo(Page to)
         {
-            UrlHelper urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             to.Title = Title;
             to.Url = Url = urlHelper.EncodeForSEO(Url);
             to.ParentPageId = ParentPageId == 0 ? null : ParentPageId;

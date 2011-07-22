@@ -3,8 +3,8 @@
         <% if (Request.IsAuthenticated)
            { %>
 			    <span><%: Page.User.Identity.Name %></span>
-                <a href="<%= Url.Action(MVC.Users.DeleteUserSession()) %>"><span class="sign">Sign Out</span></a>
+                <a href="<%= Url.Action(MVC.Users.DeleteUserSession()) %>"><span class="sign"><%:Html.Translate(".SignOut")%></span></a>
         <% } else { %>
-                <a class="sign" href="<%= Url.Action(MVC.Users.NewUserSession()) %>">Sign In</a>
+                <a class="sign" href="<%= Url.Action(MVC.Users.NewUserSession()) %>"><%:Html.Translate(".SignIn")%></a>
         <% } %>
 </div>

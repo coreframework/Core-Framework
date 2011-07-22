@@ -1,20 +1,38 @@
 Admin:
   Controllers:
     Module:
-      Uninstall: "[Uninstall]"
-      Install: "[Install]"
-      Edit: "[Edit]"
-      InstallPlugin: "Successfuly install plugin."
-      UninstallPlugin: "Successfuly uninstall plugin."
+      Model:
+       Module:
+        Title: "Title"
+        Description: "Description"
+        Version: "Version"
+        CreateDate: "Added"
+        Status: "Status"
+    Role:
+     Model:
+      Role:
+        Title: "Name"
+        UsersList: "Users List"
+        UserGroupsList: "User Groups List"
+        Permissions: "Permissions"
+        Users: "Users"
+        UserGroups: "UserGroups"
+        UserName: "User"
+        UserGroupName: "User Group"
     Widget:
-      Uninstall: "[Uninstall]"
-      Install: "[Install]"
-      InstallWidget: "Successfuly install widget."
-      UninstallWidget: "Successfuly uninstall widget."
-      Edit: "Edit"
+       Model:
+        Widget:
+         Title: "Title"
+         Module: "Module"
+         Status: "Status"
     User:
-      UserGroups: "[User groups list]"
-      Remove: "[Remove]"
+      UserGroups: "User groups list"
+      Remove: "Remove"
+      Model:
+       User:
+        Name: "Name"
+        Status: "Status"
+        UserGroups: "UserGroups"
       Admin:
         Models:
           UserStatus:
@@ -22,10 +40,9 @@ Admin:
             Locked: "Locked"
             Deleted: "Deleted"
     UserGroup:
-      Users: "[Users list]"
-      Remove: "[Remove]"
-    Role:
-      Users: "[Users list]"
-      UserGroups: "[User groups list]"
-      Permissions: "[Role permissions]"
-      Remove: "[Remove]"
+       Users: "Users List"
+       Model:
+        UserGroup:
+         Name: "Name"  
+         UsersList: "Users list"
+    

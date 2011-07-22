@@ -4,7 +4,7 @@
 <%@ Page Title="" Language="C#"  MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Framework.Permissions.Models.PermissionsModel>" %>
 <%@ Import Namespace="System.Web.Mvc.Ajax" %>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-    <h1> Form Permissions</h1>
+    <h1> <%:Html.Translate(".FormPermissions") %></h1>
  <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.EntityId, false, false, true));%>
 </asp:Content>
 
@@ -18,7 +18,7 @@
                     <tr>
                         <th>
                             <span></span>
-                            Role
+                            <%:Html.Translate(".Role") %>
                         </th>
                         <%foreach (var operation in Model.Operations) {%>
                             <th>

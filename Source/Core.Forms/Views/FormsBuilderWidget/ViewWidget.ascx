@@ -23,7 +23,7 @@
             <%=Html.FormElementRenderer(item, ViewData[String.Format("FormCollection{0}", Model.Id)] as FormCollection)%>
         </div>
     <%}%>
-    <%: Html.Submit(Html.Translate(".Submit"))%>
+    <%: Html.Submit(Html.Translate("Actions.Submit"))%>
     <%:Html.AntiForgeryToken()%>
     <%}%>
 </div>

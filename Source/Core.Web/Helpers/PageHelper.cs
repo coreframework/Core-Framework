@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web;
 using Core.Framework.Permissions.Contracts;
-using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
@@ -36,39 +35,47 @@ namespace Core.Web.Helpers
         /// Adds the widget to page.
         /// </summary>
         /// <param name="pageId">The page id.</param>
-        /// <param name="widgetIdentifier">The widget identifier.</param>
+        /// <param name="widgetId">The widget id.</param>
+        /// <param name="user">The user.</param>
         /// <returns></returns>
-        public static PageWidget AddWidgetToPage(long pageId, String widgetIdentifier)
+        public static PageWidget AddWidgetToPage(long pageId, long widgetId, ICorePrincipal user)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+            var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
             var pageWidgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
 
             var page = pageService.Find(pageId);
 
             if (page != null)
             {
-                page.Widgets.Update(
-                  wd =>
-                  {
-                      wd.OrderNumber =
-                        (wd.ColumnNumber == 1 ?
-                            wd.OrderNumber + 1 :
-                            wd.OrderNumber);
-                  }
-                      );
-                pageService.Save(page);
-                ICorePrincipal currentUser = HttpContext.Current.CorePrincipal();
-                var newPageWidget = new PageWidget
-                                        {
-                                            Page = page,
-                                            WidgetIdentifier = widgetIdentifier,
-                                            ColumnNumber = 1,
-                                            OrderNumber = 1,
-                                            User = currentUser != null ? new User { Id = currentUser.PrincipalId } : null 
-                                        };
+                Widget widget = widgetService.Find(widgetId);
+                if (widget != null && widgetService.IsWidgetEnable(widget))
+                {
+                    page.Widgets.Update(
+                        wd =>
+                            {
+                                wd.OrderNumber =
+                                    (wd.ColumnNumber == 1
+                                         ? wd.OrderNumber + 1
+                                         : wd.OrderNumber);
+                            }
+                        );
 
-                if (pageWidgetService.Save(newPageWidget))
-                    return newPageWidget;
+                    pageService.Save(page);
+
+                    var newPageWidget = new PageWidget
+                                            {
+                                                Page = page,
+                                                ColumnNumber = 1,
+                                                OrderNumber = 1,
+                                                User =
+                                                    user != null ? new User { Id = user.PrincipalId } : null,
+                                                Widget = widget
+                                            };
+
+                    if (pageWidgetService.Save(newPageWidget))
+                        return newPageWidget;
+                }
             }
 
             return null;
@@ -110,7 +117,7 @@ namespace Core.Web.Helpers
                     page.RemoveWidget(pageWidget);
                     if (pageService.Save(page))
                     {
-                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => widget.Identifier == pageWidget.WidgetIdentifier);
+                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => widget.Identifier == pageWidget.Widget.Identifier);
 
                         if (currentWidget!=null)
                         {

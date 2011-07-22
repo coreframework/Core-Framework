@@ -1,0 +1,9 @@
+Models:
+  FormBuilderWidgetViewModel:
+   Title: "Title"
+   FormId: "Form"
+   SendEmail: "Send Email"
+   SaveData: "Save Data"
+   RecipientEmail: "Recipient Email"
+    
+    

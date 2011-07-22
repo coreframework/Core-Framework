@@ -46,6 +46,11 @@ namespace Core.Web.NHibernate.Services
             return query.FirstOrDefault();
         }
 
+        public bool IsWidgetEnable(Widget widget)
+        {
+            return widget != null && widget.Plugin != null && widget.Plugin.Status.Equals(PluginStatus.Installed) && widget.Status.Equals(WidgetStatus.Enabled);
+        }
+
         /// <summary>
         /// Gets the count.
         /// </summary>
@@ -64,11 +69,12 @@ namespace Core.Web.NHibernate.Services
         public IQueryable<Widget> GetSearchQuery(string searchString)
         {
             var baseQuery = CreateQuery();
-//            if (String.IsNullOrEmpty(searchString))
-//            {
+            if (String.IsNullOrEmpty(searchString))
+            {
                 return baseQuery;
-//            }
-//            return baseQuery.Where(widget => widget.Title.Contains(searchString) && widget.Plugin.Status == PluginStatus.Installed && widget.Status == WidgetStatus.Enabled);
+            }
+           
+            return baseQuery.Where(widget => widget.CurrentWidgetLocales.Where(item=>item.Title.Contains(searchString)).Count()>0);
         }
 
         #endregion

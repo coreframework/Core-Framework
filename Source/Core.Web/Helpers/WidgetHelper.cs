@@ -38,33 +38,37 @@ namespace Core.Web.Helpers
         /// <returns></returns>
         public static WidgetHolderViewModel GetWidgetViewModel(PageWidget pageWidget)
         {
-            if (pageWidget == null)
+            if (pageWidget == null || pageWidget.Widget == null)
                 return null;
 
             ICoreWidget coreWidget =
-                (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.WidgetIdentifier);
+                (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
+
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
 
             return new WidgetHolderViewModel
             {
-                Id = pageWidget.Id,
+                Widget = pageWidget,
                 WidgetInstance = new CoreWidgetInstance
                 {
                     InstanceId = pageWidget.InstanceId,
-                    WidgetIdentifier = pageWidget.WidgetIdentifier,
+                    WidgetIdentifier = pageWidget.Widget.Identifier,
                     PageSettings = new CorePageSettings { PageId = pageWidget.Page.Id }
 
                 },
-                Settings = pageWidget.Settings,
-                Widget = coreWidget,
+
+                SystemWidget = coreWidget,
+
                 Access = coreWidget is BaseWidget ?
                                         permissionService.GetAccess(((BaseWidget)coreWidget).Operations,
                                         HttpContext.Current.CorePrincipal(), coreWidget.GetType(), pageWidget.EntityId,
                                         currentPrincipal != null && pageWidget.User != null && pageWidget.User.PrincipalId == currentPrincipal.PrincipalId) : null,
                 PageAccess = permissionService.GetAccess(pageWidget.Page.Operations, currentPrincipal, typeof(Page),
                                         pageWidget.Page.Id, currentPrincipal != null && pageWidget.Page.User != null
-                                        && pageWidget.Page.User.PrincipalId == currentPrincipal.PrincipalId)
+                                        && pageWidget.Page.User.PrincipalId == currentPrincipal.PrincipalId),
+
+
             };
         }
 
@@ -107,12 +111,24 @@ namespace Core.Web.Helpers
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
             Widget widget = widgetService.FindWidgetByIdentifier(widgetIdentifier);
 
+            return widgetService.IsWidgetEnable(widget);
+        }
+
+        /// <summary>
+        /// Determines whether [is widget enabled] [the specified widget].
+        /// </summary>
+        /// <param name="widget">The widget.</param>
+        /// <returns>
+        /// 	<c>true</c> if [is widget enabled] [the specified widget]; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsWidgetEnabled(Widget widget)
+        {
             return widget != null && widget.Plugin != null && widget.Plugin.Status.Equals(PluginStatus.Installed) && widget.Status.Equals(WidgetStatus.Enabled);
         }
 
         public static String GetWidgetHolderStyles(PageWidgetSettings settings)
         {
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             if (settings != null)
             {
                 AppendStyleString(builder, "background-color", settings.LookAndFeelSettings.BackgroundColor);
@@ -165,14 +181,19 @@ namespace Core.Web.Helpers
         {
             bool isAllowed = true;
 
-            var widget = MvcApplication.Widgets.FirstOrDefault(item => item.Identifier == pageWidget.WidgetIdentifier);
-            if (widget != null && widget is BaseWidget)
+            if (pageWidget.Widget!=null)
             {
-                bool isOwner = pageWidget.User != null && user != null &&
-                               pageWidget.User.PrincipalId == user.PrincipalId;
-                var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-                isAllowed = permissionService.IsAllowed((widget as BaseWidget).ManageOperationCode, user,
-                                                        widget.GetType(), entityId, isOwner, PermissionOperationLevel.Object);
+                ICoreWidget widget =
+                    MvcApplication.Widgets.FirstOrDefault(item => item.Identifier == pageWidget.Widget.Identifier);
+                if (widget != null && widget is BaseWidget)
+                {
+                    bool isOwner = pageWidget.User != null && user != null &&
+                                   pageWidget.User.PrincipalId == user.PrincipalId;
+                    var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+                    isAllowed = permissionService.IsAllowed((widget as BaseWidget).ManageOperationCode, user,
+                                                            widget.GetType(), entityId, isOwner,
+                                                            PermissionOperationLevel.Object);
+                }
             }
 
             return isAllowed;

@@ -101,7 +101,8 @@ slide: function( event, ui ) {
     <%:Html.AntiForgeryToken()%>
 </div>
  <div class="p_footer clrfix">
-	<div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button change-layout-btn" })%><strong></strong></div>
+	<div class="btn1"><em></em>
+    <%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button change-layout-btn" })%><strong></strong></div>
 </div>
 <script type="text/javascript">
     $(function () {

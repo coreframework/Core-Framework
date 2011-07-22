@@ -4,7 +4,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
@@ -16,7 +15,6 @@ using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Permissions.Operations;
-using Framework.Core;
 using Framework.MVC.Controllers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
@@ -93,7 +91,7 @@ namespace Core.Web.Controllers
 
             if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
             return View(PageHelper.BindPageViewModel(page, this.CorePrincipal()));
@@ -111,7 +109,7 @@ namespace Core.Web.Controllers
 
             if (page == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
             if (_permissionService.IsAllowed((Int32)PageOperations.Delete, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
@@ -129,7 +127,7 @@ namespace Core.Web.Controllers
         {
             if (!_permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
             {
-                throw new HttpException((int)HttpStatusCode.Forbidden, "Not Found");
+                throw new HttpException((int)HttpStatusCode.Forbidden, Translate("Messages.NotFound"));
             }
 
             return PartialView(MVC.Pages.Views.PageCreateForm, PageHelper.BindPageViewModel(
@@ -170,7 +168,7 @@ namespace Core.Web.Controllers
             var page = _pageService.Find(pageId);
             if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
             var pageLayoutTemplateService =
@@ -178,7 +176,7 @@ namespace Core.Web.Controllers
             PageLayoutTemplate layoutTemplate = pageLayoutTemplateService.Find(layoutTemplateId);
             if (layoutTemplate == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
             LayoutHelper.ChangePageLayout(page, page.PageLayout.LayoutTemplate, layoutTemplate);
 
@@ -237,7 +235,7 @@ namespace Core.Web.Controllers
                 //check page permissions
                 if (pageLayout == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageLayout.Page.Id, IsPageOwner(pageLayout.Page), PermissionOperationLevel.Object))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
 
                 foreach (RowSettings rowSettings in layoutSettings.RowsSetting)
@@ -245,11 +243,11 @@ namespace Core.Web.Controllers
                     PageLayoutRow row = pageLayoutRowService.Find(rowSettings.RowId);
                     if (row == null)
                     {
-                        throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                        throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                     }
                     if (row.Columns.Count() != rowSettings.ColumnsWidth.Count)
                     {
-                        throw new HttpException((int)HttpStatusCode.BadRequest, "Bad request");
+                        throw new HttpException((int)HttpStatusCode.BadRequest, Translate("Messages.BadRequest"));
                     }
                     int columnIndex = 0;
                     foreach (PageLayoutColumn column in row.Columns)
@@ -287,7 +285,7 @@ namespace Core.Web.Controllers
 
             if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
             PageSettings pageSetting = page.Settings ?? new PageSettings { Page = page };
@@ -309,7 +307,7 @@ namespace Core.Web.Controllers
                 Page page = _pageService.Find(model.PageId);
                 if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.PageId, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
 
                 var pageSettingService = ServiceLocator.Current.GetInstance<IPageSettingService>();
@@ -358,26 +356,27 @@ namespace Core.Web.Controllers
         /// Adds the widget.
         /// </summary>
         /// <param name="pageId">The page id.</param>
-        /// <param name="widgetIdentifier">The widget identifier.</param>
+        /// <param name="widgetId">The widget id.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual ActionResult AddWidget(long pageId, String widgetIdentifier)
+        public virtual ActionResult AddWidget(long pageId, long widgetId)
         {
-            var widgetHelper = ServiceLocator.Current.GetInstance<IWidgetHelper>();
+            var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
             Page currentPage = _pageService.Find(pageId);
             if (currentPage != null)
             {
-                ICorePrincipal user = this.CorePrincipal();
-                if (widgetHelper.IsWidgetEnabled(widgetIdentifier) &&
-                    _permissionService.IsAllowed((Int32)PageOperations.Update, user, typeof(Page),
+                var curWidget = widgetService.Find(widgetId);
+
+                if (curWidget != null && widgetService.IsWidgetEnable(curWidget) && _permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page),
                                                 pageId, IsPageOwner(currentPage), PermissionOperationLevel.Object))
                 {
                     ICoreWidget coreWidget =
-                            (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == widgetIdentifier);
+                            (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == curWidget.Identifier);
+
                     if (coreWidget != null && coreWidget is BaseWidget && _permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode,
-                            user, coreWidget.GetType(), null))
+                            this.CorePrincipal(), coreWidget.GetType(), null))
                     {
-                        var widget = PageHelper.AddWidgetToPage(pageId, widgetIdentifier);
+                        var widget = PageHelper.AddWidgetToPage(pageId, widgetId, this.CorePrincipal());
                         if (widget != null)
                         {
 
@@ -451,7 +450,7 @@ namespace Core.Web.Controllers
 
             if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
             return PartialView(MVC.Pages.Views.PageCommonSettings, new PageLocaleViewModel().MapFrom(page));//PageHelper.BindPageViewModel(page, this.CorePrincipal()));
@@ -465,7 +464,7 @@ namespace Core.Web.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
             }
-            IPageLocaleService localeService = ServiceLocator.Current.GetInstance<IPageLocaleService>();
+            var localeService = ServiceLocator.Current.GetInstance<IPageLocaleService>();
             PageLocale locale = localeService.GetLocale(pageId, culture);
             String pageTitle = locale != null ? locale.Title : page.Title;
             var serializer = new JavaScriptSerializer();
@@ -485,7 +484,7 @@ namespace Core.Web.Controllers
                 var page = new Page();
                 if (!_permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
 
                 page.OrderNumber = _pageService.GetLastOrderNumber(model.ParentPageId == 0 ? null : model.ParentPageId);
@@ -527,10 +526,10 @@ namespace Core.Web.Controllers
                 page = _pageService.Find(model.Id);
                 if (!_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.Id, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
-                IDictionary<String, String> locales = new JavaScriptSerializer().Deserialize<IDictionary<String, String>>(model.LocalesString);
-                IPageLocaleService localeService = ServiceLocator.Current.GetInstance<IPageLocaleService>();
+                var locales = new JavaScriptSerializer().Deserialize<IDictionary<String, String>>(model.LocalesString);
+                var localeService = ServiceLocator.Current.GetInstance<IPageLocaleService>();
                 IList<PageLocale> pageLocales = localeService.GetLocales(page.Id);
                 foreach (var locale in locales)
                 {
@@ -564,7 +563,7 @@ namespace Core.Web.Controllers
 
             if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
             PageSettings pageSetting = page.Settings ?? new PageSettings { Page = page };
@@ -587,7 +586,7 @@ namespace Core.Web.Controllers
 
                 if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.PageId, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
 
                 var pageSettingService = ServiceLocator.Current.GetInstance<IPageSettingService>();
@@ -755,15 +754,16 @@ namespace Core.Web.Controllers
         {
             var widgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             PageWidget pageWidget = widgetService.Find(pageWidgetId);
-            if (pageWidget == null)
+            if (pageWidget == null ||pageWidget.Widget==null)
             {
                 throw new Exception("Widget not found.");
             }
             ICoreWidget coreWidget =
-                (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.WidgetIdentifier);
+                (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
             ICorePrincipal currentPrincipal = this.CorePrincipal();
             bool isOwner = currentPrincipal != null && pageWidget.User != null &&
                            currentPrincipal.PrincipalId == pageWidget.User.PrincipalId;
+
             if (coreWidget == null || !(coreWidget is BaseWidget) || !_permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidgetId, isOwner, PermissionOperationLevel.Object))
             {
                 throw new Exception("Widget not found.");
@@ -777,10 +777,10 @@ namespace Core.Web.Controllers
         {
             var widgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             PageWidget pageWidget = widgetService.Find(model.EntityId);
-            if (pageWidget != null)
+            if (pageWidget != null && pageWidget.Widget!=null)
             {
                 ICoreWidget coreWidget =
-                    (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.WidgetIdentifier);
+                    (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
                 ICorePrincipal currentPrincipal = this.CorePrincipal();
                 bool isOwner = currentPrincipal != null && pageWidget.User != null &&
                                currentPrincipal.PrincipalId == pageWidget.User.PrincipalId;

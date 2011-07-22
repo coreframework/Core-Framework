@@ -54,7 +54,7 @@ namespace Core.Forms.Helpers
                                     {
                                         FromEmail = EmailSettings.FromEmail,
                                         Subject = HttpUtility.HtmlEncode(model.Title),
-                                        ToEmail = model.SenderEmail
+                                        ToEmail = model.RecipientEmail
                                     };
 
             FillFormAnswers(email, model, formAnswer);

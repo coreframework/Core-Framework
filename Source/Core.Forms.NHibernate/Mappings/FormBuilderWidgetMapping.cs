@@ -13,7 +13,7 @@ namespace Core.Forms.NHibernate.Mappings
             Map(formBuilderWidget => formBuilderWidget.Title).Length(255);
             Map(formBuilderWidget => formBuilderWidget.SaveData);
             Map(formBuilderWidget => formBuilderWidget.SendEmail);
-            Map(formBuilderWidget => formBuilderWidget.SenderEmail);
+            Map(formBuilderWidget => formBuilderWidget.RecipientEmail);
             References(formBuilderWidget => formBuilderWidget.User).Column("UserId");
             References(formBuilderWidget => formBuilderWidget.Form).Column("FormId");
 

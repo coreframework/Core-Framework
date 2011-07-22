@@ -47,7 +47,7 @@ namespace Core.Forms.Controllers
                 if (widget != null)
                     return PartialView(widget);
             }
-            return Content("Setup form.");
+            return Content(HttpContext.Translate("Messages.SetupForm", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Core.Forms.Controllers
                 return PartialView(new FormBuilderWidgetViewModel().MapFrom(widget));
             }
 
-            return Content("Edit widget");
+            return Content(HttpContext.Translate("Messages.SetupForm", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>
@@ -85,9 +85,9 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult UpdateWidget(FormBuilderWidgetViewModel model)
         {
-            if (model.SendEmail && String.IsNullOrEmpty(model.SenderEmail))
+            if (model.SendEmail && String.IsNullOrEmpty(model.RecipientEmail))
             {
-                ModelState.AddModelError("SenderEmail", @"The Email Field is required.");
+                ModelState.AddModelError("RecipientEmail", HttpContext.Translate("Messages.EmailRequired", ResourceHelper.GetControllerScope(this)));
             }
             if (ModelState.IsValid)
             {
@@ -129,7 +129,7 @@ namespace Core.Forms.Controllers
                 return PartialView("ViewWidget", model);
             }
 
-            return Content("Error");
+            return Content(HttpContext.Translate("Messages.Error", ResourceHelper.GetControllerScope(this)));
         }
 
         #endregion

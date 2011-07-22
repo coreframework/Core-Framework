@@ -4,10 +4,10 @@
 <div>
     <%:Html.Message(MessageType.Info, Html.Translate(".ChangeLayout"))%>
      <div id="successedResult" style="display: none;" class="validation_success">
-        <%:Html.Translate(".Successful")%>
+        <%:Html.Translate("Messages.Success")%>
     </div>
     <div id="notSuccessedResult" style="display: none;" class="validation_error">
-        <%:Html.Translate(".Error")%>
+        <%:Html.Translate("Messages.ValidationError")%>
     </div>
     <div class="form_area">
         <%foreach (PageLayoutTemplate layoutTemplate in Model.Layouts)

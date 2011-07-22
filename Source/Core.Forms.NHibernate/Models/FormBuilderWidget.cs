@@ -42,10 +42,10 @@ namespace Core.Forms.NHibernate.Models
         public virtual bool SendEmail { get; set; }
 
         /// <summary>
-        /// Gets or sets the sender email.
+        /// Gets or sets the recipient email.
         /// </summary>
-        /// <value>The sender email.</value>
-        public virtual String SenderEmail { get; set; }
+        /// <value>The recipient email.</value>
+        public virtual String RecipientEmail { get; set; }
 
         /// <summary>
         /// Gets or sets the form.

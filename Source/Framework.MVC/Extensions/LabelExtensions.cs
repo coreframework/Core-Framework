@@ -248,6 +248,56 @@ namespace Framework.MVC.Extensions
             return CustomLabel(html, html.ViewData.ModelMetadata, null);
         }
 
+        /// <summary>
+        /// Localizeds the label for.
+        /// </summary>
+        /// <typeparam name="TModel">The type of the model.</typeparam>
+        /// <param name="html">The HTML helper instance that this method extends.</param>
+        /// <param name="propertyAccessor">The property accessor.</param>
+        /// <returns>An HTML label element and the property name of the property that is represented by the model.</returns>
+        public static MvcHtmlString LocalizedLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, Object>> propertyAccessor)
+        {
+            return LocalizedLabelFor(html, propertyAccessor, null);
+        }
+
+        /// <summary>
+        /// Localizeds the label for.
+        /// </summary>
+        /// <typeparam name="TModel">The type of the model.</typeparam>
+        /// <param name="html">The HTML helper instance that this method extends.</param>
+        /// <param name="propertyAccessor">The property accessor.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <returns>
+        /// An HTML label element and the property name of the property that is represented by the model.
+        /// </returns>
+        public static MvcHtmlString LocalizedLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, Object>> propertyAccessor, Object htmlAttributes)
+        {
+            var area = html.ViewContext.RouteData.AreaName();
+
+            var labelText = ResourceHelper.TranslatePropertyName(html.ViewContext.HttpContext, typeof(TModel), PropertyName.For(propertyAccessor), area);
+
+            if (String.IsNullOrEmpty(labelText))
+            {
+                 labelText = TextHelper.InsertSpaceBeforeCapitalLetters(PropertyName.For(propertyAccessor));
+            }
+               
+            var builder = new TagBuilder("label");
+            builder.Attributes.Add("for", html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(String.Empty));
+
+            var routeValues = new RouteValueDictionary(htmlAttributes);
+
+            Object cssClass;
+            if (routeValues.TryGetValue(CssClassKey, out cssClass))
+            {
+                builder.AddCssClass(cssClass as String);
+            }
+
+            builder.SetInnerText(labelText);
+            MvcHtmlString result = MvcHtmlString.Create(builder.ToString(TagRenderMode.Normal));
+
+            return result;
+        }
+
         #endregion
 
         #region Helper methods

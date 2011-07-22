@@ -3,10 +3,10 @@ Inherits="System.Web.Mvc.ViewPage<Framework.MVC.Grids.GridViewModel>" %>
 <%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Registered widgets
+   <%:Html.Translate("Titles.Widgets") %>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-  <h1> Registered widgets</h1>
+  <h1><%:Html.Translate("Titles.Widgets")%></h1>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="e_table_area">

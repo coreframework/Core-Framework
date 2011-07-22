@@ -60,7 +60,7 @@
         }
 
         function addNewPage(url) {
-            var dialog = $('<div title="Add new page" style="display:none"/>').appendTo('body');
+            var dialog = $('<div title="<%=Html.Translate("Actions.AddNewPage")%>e" style="display:none"/>').appendTo('body');
             dialog.load(
                                     url,
                                     {},

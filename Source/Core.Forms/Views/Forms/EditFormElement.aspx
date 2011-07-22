@@ -17,32 +17,32 @@
                     <%: Html.Hidden("formId", Model.FormId) %> 
                     <%: Html.HiddenFor(model=>model.Id) %> 
 			    <div class="i_form_i">
-                        <%: Html.LabelFor(model => model.Type)%>
+                        <%: Html.LocalizedLabelFor(model => model.Type)%>
                         <%: Html.DropDownListFor("Type", Model.Type, new {}) %>
                         <%: Html.ValidationMessageFor(model => model.Type) %>
                 </div>
                  <div class="i_form_i">
-                        <%: Html.LabelFor(model => model.Title)%>
+                        <%: Html.LocalizedLabelFor(model => model.Title)%>
                         <%: Html.TextBoxFor(model => model.Title) %>
                         <%: Html.ValidationMessageFor(model => model.Title) %>
                 </div>
 			    <div class="i_form_i"  id="el_values">
-                        <%:Html.LabelFor(model => model.Values)%>
+                        <%:Html.LocalizedLabelFor(model => model.Values)%>
                         <%:Html.TextBoxFor(model => model.Values)%>
                         <%:Html.Translate(".SeparateWithComma")%>
                         <%:Html.ValidationMessageFor(model => model.Values)%>
                 </div>
 			    <div class="i_form_i"  id="el_is_required">
                         <%:Html.CheckBoxFor(model => model.IsRequired)%>
-                        <%:Html.LabelFor(model => model.IsRequired)%>
+                        <%:Html.LocalizedLabelFor(model => model.IsRequired)%>
                 </div>
 			    <div class="i_form_i"  id="el_validation">
-                        <%: Html.LabelFor(model => model.RegexTemplate)%>
+                        <%: Html.LocalizedLabelFor(model => model.RegexTemplate)%>
                         <%: Html.DropDownListFor("RegexTemplate", Model.RegexTemplate, new { })%>
                         <%: Html.ValidationMessageFor(model => model.RegexTemplate)%>
                 </div>
 			    <div class="i_form_i"  id="el_maxLength">
-                        <%: Html.LabelFor(model=>model.MaxLength)%>
+                        <%: Html.LocalizedLabelFor(model => model.MaxLength)%>
                         <%: Html.TextBoxFor(model => model.MaxLength)%>
                         <%: Html.ValidationMessageFor(model => model.MaxLength)%>
                 </div>

@@ -342,10 +342,10 @@ namespace Core.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult AddWidget(long pageId, string widgetIdentifier) {
+        public override System.Web.Mvc.ActionResult AddWidget(long pageId, long widgetId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddWidget);
             callInfo.RouteValueDictionary.Add("pageId", pageId);
-            callInfo.RouteValueDictionary.Add("widgetIdentifier", widgetIdentifier);
+            callInfo.RouteValueDictionary.Add("widgetId", widgetId);
             return callInfo;
         }
 

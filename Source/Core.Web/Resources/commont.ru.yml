@@ -1,0 +1,20 @@
+ru:
+ Messages:
+  UnknownError: "Произошла ошибка. Пожалуйста, попробуйте позже."
+  ValidationError: "В процессе обработки запроса были выявлены ошибки валидации."
+  Success: "Ваш запрос был успешно обработан."
+  EmailShouldBeUnique: "Введенный email-адрес был обнаружен в системе."
+  NicknameShouldBeUnique: "Имя пользователя было обнаружено в системе."
+  InvalidUserCredentials: "Пользователь с такими деталями не был найден в системе."
+  DeleteConfirm: "Сущность будет удалена, вы уверены?"
+Actions:
+  View: "View"
+  Edit: "Edit"
+  Save: "Save"
+  Cancel: "Cancel"
+  AddNewPage: "Добавить новую страницу"
+  AddWidget: "Новый виджет"
+  Add: "Добавить"
+  Manage: "Настройки"
+  Reset: "Сброс"
+

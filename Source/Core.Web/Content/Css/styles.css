@@ -157,7 +157,7 @@ html, body {height:100%;}
 		.widget {margin-bottom:5px;}
 			.widget_title {border:1px solid #808283;border-top:1px solid #b4b4b4;}
 				.widget_title_i {background:url(../images/widget_t_bg.gif) repeat-x;border:1px solid #f3f3f4}
-					.widget_title h1 {color:#2f2f2f;font-weight:bold;font-size:12px;width:75%;float:left;margin:3px 0 0 10px}
+					.widget_title h1 {color:#2f2f2f;font-weight:bold;font-size:12px;float:left;margin:3px 0 0 10px}
 					.widget_title a.edit {float:right;height:22px;width:22px;background:url(../images/widget_edit.gif) repeat-x;}
                     .widget_title a.remove {float:right;height:22px;width:21px;background:url(../images/widget_delete.gif) repeat-x;}
 			.widget_content {border:1px solid #808283;border-top:none;}

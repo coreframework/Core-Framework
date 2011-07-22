@@ -1,7 +1,3 @@
-Application:
-  Admin:
-    TitlePrefix: "BlogUs Administrative Suite | "
-    TitlePostfix: ""
 Messages:
   UnknownError: "Some error has been occured. Please try again."
   ValidationError: "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
@@ -21,3 +17,22 @@ Messages:
   UnknownUser: "Posted data is incorrect. Please specify user."
   UnknownRole: "Posted data is incorrect. Please specify role."
   WidgetUpdated: "Widget has been saved successfully."
+  PluginUpdated: "Module has been saved successfully."
+  UninstallPlugin: "Module has been successfully uninstalled."
+  InstallPlugin: "Module has been successfully installed."
+  CouldNotFoundPlugin: "Plugin couldn't found."
+  InstallWidget: "Successfuly install widget."
+  UninstallWidget: "Successfuly uninstall widget."
+Actions:
+  Actions: "Actions"
+  Install: "Install"
+  UnInstall: "Uninstall"
+  Edit: "Edit"
+  Remove: "Remove"
+  Cancel: "Cancel"
+  Save: "Save"
+  New: "New"
+Titles:
+  Home: "Home"
+  Modules: "Modules"
+  Widgets: "Widgets"

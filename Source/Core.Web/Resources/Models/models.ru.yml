@@ -1,0 +1,16 @@
+ru:
+ Models:
+  PageLocaleViewModel:
+   Title: "Название"
+   Url: "Url"
+  PageViewModel:
+   Title: "Название"
+   Url: "Url"
+  PageCSSModel:
+   CustomCSS: "CSS стили"
+  PageLookAndFeelModel:
+   BackgroundColor: "Цвет фона"
+   FontFamily: "Шрифт"
+   FontSizeValue: "Размер шрифта"
+   Color: "Цвет"
+   OtherStyles: "Другое"

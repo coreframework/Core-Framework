@@ -75,7 +75,7 @@ namespace Framework.MVC.Extensions
                                                                            { "id", radiobutton.Value }
                                                                        };
                 builder.Append(html.RadioButton(name, radiobutton.Value, radiobutton.Selected, buttonHtmlAttributes).ToHtmlString());
-                builder.Append(html.Label(radiobutton.Text));
+                builder.Append(html.Label(radiobutton.Value, radiobutton.Text));
             }
 
             return MvcHtmlString.Create(builder.ToString());

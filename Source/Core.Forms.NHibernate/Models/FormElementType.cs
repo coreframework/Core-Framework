@@ -1,4 +1,5 @@
-﻿using Core.Forms.NHibernate.Helpers;
+﻿using System.ComponentModel;
+using Core.Forms.NHibernate.Helpers;
 
 namespace Core.Forms.NHibernate.Models
 {

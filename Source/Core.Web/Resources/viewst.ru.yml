@@ -3,11 +3,8 @@ ru:
     Pages:
       Show:
        WidgetNotFound: "Виджет не найден"
-       Remove: "удалить"
-       Edit: "редактировать"
-       RemoveConfirmation: "Виджет будет удален, вы согласны?"
-       Add: "Добавить"
-       Manage: "Настройки"
+       PanelView: "Просмотр" 
+       PanelEdit: "Редактор" 
        Widget: "Виджет"
        PageSettings: "Изменить общие настройки страницы"
        PageLayout: "Изменить шаблон страницы"
@@ -16,27 +13,22 @@ ru:
        Permissions: "Права доступа"
       PageLookAndFeelSettings:
        LookAndFeel: "Внешний вид"
-      PageLookAndFeelForm:
-       Successful: "Your request processed successfully."
-       Error: "Ошибка"
       PageCommonSettings:
        CommonSettings: "Общие настройки"
       PageCSSSettings:
        CSS: "CSS"
-       CurrentPageInformation: "Your current page information is as follows"
-       PageClass: "Page class"
-       WidgetClasses: "Widget Classes"
-       PageRule: "Add a CSS rule for this page."
-       AllWidgetsRule: "Add a CSS rule for all widgets on this page."
+       CurrentPageInformation: "Информация о текущей странице"
+       PageClass: "Css класс страницы"
+       WidgetClasses: "Css класс виджетов"
+       PageRule: "Добавить Css стили для этой страницы."
+       AllWidgetsRule: "Добавить Css стили для всех виджетов на этой странице."
       PageCSSForm:
        Successful: "Your request processed successfully."
-       Error: "Error"
-       PageRule: "Add a CSS rule for this page."
-       AllWidgetsRule: "Add a CSS rule for all widgets on this page."
+       Error: "Оштбка"
+       PageRule: "Добавить CSS стили для этой страницы."
+       AllWidgetsRule: "Добавить Css стили для всех виджетов на этой странице."
       PagePermissions:
        Role: "Role"
-      NavigationMenu:
-       AddNewPage: "Добавить новую страницу" 
     Shared:
       Widgets:
         WidgetSettings:
@@ -45,7 +37,6 @@ ru:
             LookAndFeel: "Внешний вид"
             CSS: "CSS"
             Permissions: "Права доступа"
-            Save: "Сохранить"
         WidgetLookAndFeelSettings:
             LookAndFeel: "Look and Feel"
         WidgetLookAndFeelForm:
@@ -75,11 +66,7 @@ ru:
       Layouts:
         ChangeLayout:
             ChangeLayout: "Выберите шаблон, чтобы применить его на странице"
-            Successful: "Your request processed successfully."
-            Error: "Error"
         LayoutSettings:
-            Successful: "Your request processed successfully."
-            Error: "Error"
       Users:
         UserPanel:
             SignIn: "Войти"
@@ -92,4 +79,6 @@ ru:
           UsernameOrEmail: "Имя пользователя или email"
           Password: "Пароль"
           RememberMe: "Запомнить меня"
+          PanelView: "Просмотр" 
+          PanelEdit: "Редактор" 
 

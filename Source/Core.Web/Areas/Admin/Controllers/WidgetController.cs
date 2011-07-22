@@ -12,6 +12,7 @@ using Core.Web.NHibernate.Models;
 using Framework.MVC.Controllers;
 using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
+using Framework.MVC.Grids.jqGrid;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
@@ -50,31 +51,31 @@ namespace Core.Web.Areas.Admin.Controllers
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Widget", Index = "Title"
+                                                                 Name = Translate(".Model.Widget.Title"), Index = "Title"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Plugin", Sortable = false
+                                                                 Name = Translate(".Model.Widget.Module"), Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Status", Index = "Status"
+                                                                 Name = Translate(".Model.Widget.Status"), Index = "Status"
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Actions", Sortable = false
+                                                                 Name = Translate("Actions.Actions"), Sortable = false
                                                              }
                                                              ,
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Edit", Sortable = false
+                                                                 Name = Translate("Actions.Edit"), Sortable = false
                                                              }
                                                      };
             var model = new GridViewModel
             {
                 DataUrl = Url.Action(MVC.Admin.Widget.DynamicGridData()),
                 DefaultOrderColumn = "Id",
-                GridTitle = "Modules",
+                GridTitle = Translate(".Widgets"),
                 Columns = columns
             };
             return View(model);
@@ -97,17 +98,17 @@ namespace Core.Web.Areas.Admin.Controllers
                 rows = (
                            plugins.Select(widget => new
                            {
-                               id = "not_clickabe",
+                               id = JqGridConstants.NotClickableId,
                                cell = new[]
-                                                                       {
-                                                                            widget.Title, 
-                                                                            widget.Plugin.Title,
-                                                                            widget.Status.ToString(),
-                                                                            widget.Status.Equals(WidgetStatus.Disabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Enable(widget.Id)),HttpContext.Translate("Install", ResourceHelper.GetControllerScope(this))) :
-                                                                            widget.Status.Equals(WidgetStatus.Enabled) ? String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Disable(widget.Id)),HttpContext.Translate("Uninstall", ResourceHelper.GetControllerScope(this))) : 
-                                                                            String.Empty,
-                                                                            String.Format("<a href=\"{0}\">{1}</a>",Url.Action(MVC.Admin.Widget.Edit(widget.Id)),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this)))
-                                                                       }
+                                            {
+                                                widget.Title, 
+                                                widget.Plugin.Title,
+                                                widget.Status.ToString(),
+                                                widget.Status.Equals(WidgetStatus.Disabled) ? String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Widget.Enable(widget.Id)), Translate("Actions.Install")) :
+                                                widget.Status.Equals(WidgetStatus.Enabled) ? String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Widget.Disable(widget.Id)), Translate("Actions.Uninstall")) : 
+                                                String.Empty,
+                                                String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Widget.Edit(widget.Id)),Translate("Actions.Edit"))
+                                            }
                            }).ToArray())
             };
             return Json(jsonData);
@@ -124,7 +125,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var widget = widgetService.Find(id);
             if (widget == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             return View(new WidgetViewModel().MapFrom(widget));
@@ -136,7 +137,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var widget = widgetService.Find(widgetId);
             if (widget == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Widget not found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.WidgetNotFound"));
             }
             WidgetViewModel model = new WidgetViewModel().MapFrom(widget);
             model.SelectedCulture = culture;
@@ -162,7 +163,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var widget = widgetService.Find(id);
             if (widget == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (ModelState.IsValid)
@@ -194,16 +195,16 @@ namespace Core.Web.Areas.Admin.Controllers
             Widget widgetEntity = widgetService.Find(id);
             if (widgetEntity == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             if (widgetEntity.Status.Equals(WidgetStatus.Disabled))
             {
                 widgetEntity.Status = WidgetStatus.Enabled;
                 widgetService.Save(widgetEntity);
-                Success(Translate(".InstallWidget"));
+                Success(Translate("Messages.InstallWidget"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
-            Error(Translate(".UnknownError"));
+            Error(Translate("Messages.UnknownError"));
             return View("Index", widgetService.GetInstalledWidgets());
         }
 
@@ -218,16 +219,16 @@ namespace Core.Web.Areas.Admin.Controllers
             Widget widgetEntity = widgetService.Find(id);
             if (widgetEntity == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             if (widgetEntity.Status.Equals(WidgetStatus.Enabled))
             {
                 widgetEntity.Status = WidgetStatus.Disabled;
                 widgetService.Save(widgetEntity);
-                Success(Translate(".UninstallWidget"));
+                Success(Translate("Messages.UninstallWidget"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
-            Error(Translate(".UnknownError"));
+            Error(Translate("Messages.UnknownError"));
             return View("Index", widgetService.GetInstalledWidgets());
         }
 

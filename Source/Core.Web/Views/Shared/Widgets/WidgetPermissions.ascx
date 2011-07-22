@@ -35,7 +35,7 @@
             </table>
        </div>
       <div class="p_footer clrfix">
-	    <div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button" })%><strong></strong></div>
+	    <div class="btn1"><em></em><%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button" })%><strong></strong></div>
      </div>
 <%} %>
 <script type="text/javascript">

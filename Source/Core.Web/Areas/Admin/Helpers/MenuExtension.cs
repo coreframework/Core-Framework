@@ -26,7 +26,7 @@ namespace Core.Web.Areas.Admin.Helpers
     /// </summary>
     public static class MenuExtension
     {
-        private static Dictionary<string, IEnumerable<IMenuItem>> InitializeMenu(HttpContext context)
+        private static Dictionary<string, IEnumerable<IMenuItem>> InitializeMenu(HttpContext context, HtmlHelper html)
         {
             var menuItems = new Dictionary<string, IEnumerable<IMenuItem>>();
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
@@ -39,29 +39,35 @@ namespace Core.Web.Areas.Admin.Helpers
                 var usersMenuItem = new List<IMenuItem>();
                 if (isUsersAllowed)
                 {
-                    usersMenuItem.Add(new ActionLink<UserController>("Users", "~/Content/images/admin/ico1.png", c => c.Index()) );
+                    usersMenuItem.Add(new ActionLink<UserController>(html.Translate(".Users"), Links.Content.Images.Admin.ico1_png, c => c.Index()));
                 }
                 if (isUserGroupsAllowed)
                 {
-                    usersMenuItem.Add(new ActionLink<UserGroupController>("UserGroups", "~/Content/images/admin/ico2.png", c => c.Index()) );
+                    usersMenuItem.Add(new ActionLink<UserGroupController>(html.Translate(".UserGroups"), Links.Content.Images.Admin.ico2_png, c => c.Index()));
                 }
                 if (isUsersAllowed)
                 {
-                    usersMenuItem.Add(new ActionLink<RoleController>("Roles", "~/Content/images/admin/ico3.png", c => c.Index()) );
+                    usersMenuItem.Add(new ActionLink<RoleController>(html.Translate(".Roles"), Links.Content.Images.Admin.ico3_png, c => c.Index()));
                 }
-                menuItems.Add("Users", usersMenuItem);
+                menuItems.Add(html.Translate(".Portal"), usersMenuItem);
             }
+
             if (permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Plugin), null))
             {
-                menuItems.Add("Modules", new IMenuItem[] { new ActionLink<ModuleController>("Modules", "~/Content/images/admin/ico5.png", c => c.Index()), new ActionLink<WidgetController>("Widgets", "~/Content/images/admin/ico6.png", c => c.Index()), });
+                menuItems.Add(html.Translate(".Administration"), new IMenuItem[]
+                                                    {
+                                                        new ActionLink<ModuleController>(html.Translate(".Modules"), Links.Content.Images.Admin.ico5_png, c => c.Index()),
+                                                        new ActionLink<WidgetController>(html.Translate(".Widgets"), Links.Content.Images.Admin.ico6_png, c => c.Index()),
+                                                    });
             }
 
             var pluginHelper = ServiceLocator.Current.GetInstance<IPluginHelper>();
             var usersMenuItem1 = (from verb in Application.GetVerbsForCategory("AdminModules")
                                   where pluginHelper.IsPluginEnabled(verb.ControllerPluginIdentifier) && verb.IsAllowed(context.CorePrincipal())
-                                  select new RouteLink(verb.Name, "~/Content/images/admin/ico3.png", verb.RouteName)).Cast<IMenuItem>().ToList();
+                                  select new RouteLink(verb.Name, Links.Content.Images.Admin.ico3_png, verb.RouteName)).Cast<IMenuItem>().ToList();
+
             if (usersMenuItem1.Count>0)
-                menuItems.Add("Plugins", usersMenuItem1);
+                menuItems.Add(html.Translate(".Modules"), usersMenuItem1);
 
             return menuItems;
         }
@@ -77,7 +83,7 @@ namespace Core.Web.Areas.Admin.Helpers
         /// </returns>
         public static MvcHtmlString RenderMenu(this HtmlHelper html, UrlHelper url, HttpContext context)
         {
-            var items = InitializeMenu(context);
+            var items = InitializeMenu(context, html);
             var activeSection = String.Empty;
             foreach (var section in items)
             {
@@ -112,7 +118,6 @@ namespace Core.Web.Areas.Admin.Helpers
 
         private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent,int number)
         {
-            /* <h3><em class="bg1"><a href="#">Level 1</a></em></h3> */
             var sectionContent = new StringBuilder();
             var firstItem = items.FirstOrDefault();
             if (firstItem != null)
@@ -130,7 +135,7 @@ namespace Core.Web.Areas.Admin.Helpers
                 }
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = firstItem.GetUrl(url);
-                link.InnerHtml = html.Translate(String.Format(".{0}", title));
+                link.InnerHtml = title;
                 em.InnerHtml = link.ToString();
                 h3.InnerHtml = em.ToString();
                 sectionContent.Append(h3.ToString());
@@ -146,21 +151,18 @@ namespace Core.Web.Areas.Admin.Helpers
                 var em = new TagBuilder("em");
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = "javascript:void(0)";
-                link.InnerHtml = html.Translate(String.Format(".{0}", title));
+                link.InnerHtml = title;
                 em.InnerHtml = link.ToString();
                 h3.InnerHtml = em.ToString();
                 sectionContent.Append(h3.ToString());
             }
 
-            //if (isCurrent)
-            {
-                var divSectionItems = new TagBuilder("div");
-                var sectionItems = new TagBuilder("ul");
-                sectionItems.Attributes["id"] = "nav_sub";
-                sectionItems.InnerHtml = RenderMenuItems(html, url, items);
-                divSectionItems.InnerHtml = sectionItems.ToString();
-                sectionContent.Append(divSectionItems.ToString());
-            }
+            var divSectionItems = new TagBuilder("div");
+            var sectionItems = new TagBuilder("ul");
+            sectionItems.Attributes["id"] = "nav_sub";
+            sectionItems.InnerHtml = RenderMenuItems(html, url, items);
+            divSectionItems.InnerHtml = sectionItems.ToString();
+            sectionContent.Append(divSectionItems.ToString());
 
             return sectionContent.ToString();
         }
@@ -179,7 +181,7 @@ namespace Core.Web.Areas.Admin.Helpers
                 }
                 var link = new TagBuilder("a");
                 link.Attributes["href"] = item.GetUrl(url);
-                link.InnerHtml = (new TagBuilder("spam") { InnerHtml = html.Translate(String.Format(".{0}", item.Title)) }).ToString();
+                link.InnerHtml = (new TagBuilder("spam") { InnerHtml =item.Title }).ToString();
                 if (item.IsCurrent(html.ViewContext.RequestContext))
                 {
                     itemTag.Attributes["class"] = "active";

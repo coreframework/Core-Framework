@@ -11,9 +11,9 @@
           { %>
         <td style="width: <%=LayoutHelper.GetColumnWidth(Model.Layout, column) %>%;" colspan="<%=LayoutHelper.GetColumnColspan(Model.Layout, column) %>"
             class="column">
-            <%foreach (var widget in Model.Widgets.FindAll(wd => wd.Column == columnIndex))
+            <%foreach (var widget in Model.Widgets.FindAll(wd => wd.Widget.ColumnNumber == columnIndex))
               {%>
-            <%if (widget.Widget == null || !(widget.Widget is BaseWidget) || widget.Access[((BaseWidget)widget.Widget).ViewOperationCode])
+            <%if (widget.Widget == null || !(widget.SystemWidget is BaseWidget) || widget.Access[((BaseWidget)widget.SystemWidget).ViewOperationCode])
               {%>
             <%Html.RenderPartial(
                 MVC.Shared.Views.Widgets.WidgetContentHolder,

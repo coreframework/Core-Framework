@@ -11,9 +11,8 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.MVC.Controllers;
-using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
 
@@ -59,15 +58,19 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
-                                                         new GridColumnViewModel {Name = "Role", Index = "Name"},
                                                          new GridColumnViewModel
-                                                             {Name = "Users list", Width = 150, Sortable = false},
+                                                             {
+                                                                 Name = Translate(".Model.Role.Title"),
+                                                                 Index = "Name"
+                                                             },
                                                          new GridColumnViewModel
-                                                             {Name = "User groups list", Width = 150, Sortable = false},
+                                                             {Name = Translate(".Model.Role.UsersList"), Width = 150, Sortable = false},
                                                          new GridColumnViewModel
-                                                             {Name = "Role permissions", Width = 150, Sortable = false},
+                                                             {Name = Translate(".Model.Role.UserGroupsList"), Width = 150, Sortable = false},
                                                          new GridColumnViewModel
-                                                             {Name = "Remove", Width = 150, Sortable = false},
+                                                             {Name = Translate(".Model.Role.Permissions"), Width = 150, Sortable = false},
+                                                         new GridColumnViewModel
+                                                             {Name = Translate("Actions.Actions"), Width = 150, Sortable = false},
                                                          new GridColumnViewModel
                                                              {Name = "Id", Sortable = false, Hidden = true}
                                                      };
@@ -76,7 +79,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 DataUrl = Url.Action(MVC.Admin.Role.DynamicGridData()),
                 DetailsUrl = String.Format("{0}/", Url.Action(MVC.Admin.Role.Edit())),
                 DefaultOrderColumn = "Id",
-                GridTitle = "Roles",
+                GridTitle = ".Model.Roles",
                 Columns = columns
             };
             return View(model);
@@ -102,18 +105,18 @@ namespace Core.Web.Areas.Admin.Controllers
                     {
                         id = !role.IsSystemRole ? role.Id.ToString() : null,
                         cell = new[] { role.Name,
-                            !role.NotAssignableRole ? String.Format("<a href=\"{0}\">{1}</a>",
+                            !role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.Role.Users(role.Id)),
-                                HttpContext.Translate("Users", ResourceHelper.GetControllerScope(this))) : String.Empty,
-                            !role.NotAssignableRole ? String.Format("<a href=\"{0}\">{1}</a>",
+                                Translate(".Model.Role.Users")) : String.Empty,
+                            !role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.Role.UserGroups(role.Id)),
-                                HttpContext.Translate("UserGroups", ResourceHelper.GetControllerScope(this))) : String.Empty,
-                            !role.NotPermissible ? String.Format("<a href=\"{0}\">{1}</a>",
+                                Translate(".Model.Role.UserGroups")) : String.Empty,
+                            !role.NotPermissible ? String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.Role.Permissions(role.Id, null)),
-                                HttpContext.Translate("Permissions", ResourceHelper.GetControllerScope(this))) : String.Empty,
-                            !role.IsSystemRole ? String.Format("<a href=\"{0}\">{1}</a>",
+                                Translate(".Model.Role.Permissions")) : String.Empty,
+                            !role.IsSystemRole ? String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.Role.Remove(role.Id)),
-                                HttpContext.Translate("Remove", ResourceHelper.GetControllerScope(this))) : String.Empty
+                                Translate("Actions.Remove")) : String.Empty
                             }
                     }).ToArray()
             };
@@ -162,7 +165,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             return View(new RoleLocaleViewModel().MapFrom(role));
@@ -174,11 +177,11 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(roleId);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Role not found");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.RoleNotFound"));
             }
             RoleLocaleViewModel model = new RoleLocaleViewModel().MapFrom(role);
             model.SelectedCulture = culture;
-            IRoleLocaleService localeService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
+            var localeService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
             RoleLocale locale = localeService.GetLocale(roleId, culture);
             if (locale != null)
             {
@@ -200,17 +203,14 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (ModelState.IsValid)
             {
-                IRoleLocaleService localeService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
-                RoleLocale roleLocale = localeService.GetLocale(id, roleView.SelectedCulture);
-                if (roleLocale == null)
-                {
-                    roleLocale = new RoleLocale { Role = role, Culture = roleView.SelectedCulture };
-                }
+                var localeService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
+                RoleLocale roleLocale = localeService.GetLocale(id, roleView.SelectedCulture) ??
+                                        new RoleLocale { Role = role, Culture = roleView.SelectedCulture };
                 roleLocale.Name = roleView.Name;
                 localeService.Save(roleLocale);
                 Success(Translate("Messages.RoleUpdated"));
@@ -232,7 +232,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             return View(new RoleViewModel().MapFrom(role));
         }
@@ -267,13 +267,13 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Name", 
+                                                                 Name = Translate(".Model.Role.UserName"), 
                                                                  Index = "Username",
                                                                  Width = 1100
                                                              },
@@ -288,7 +288,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 DataUrl = Url.Action(MVC.Admin.Role.UsersDynamicGridData()),
                 DefaultOrderColumn = "Username",
-                GridTitle = "Users",
+                GridTitle =Translate(".Model.Users"),
                 Columns = columns,
                 MultiSelect = true,
                 IsRowNotClickable = true,
@@ -298,7 +298,6 @@ namespace Core.Web.Areas.Admin.Controllers
 
 
             return View(model);
-            //return View(RoleHelper.BuildRoleToUsersAssignmentModel(role));
         }
 
         [HttpPost]
@@ -309,7 +308,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             IQueryable<User> searchQuery = userService.GetSearchQuery(search);
             int totalRecords = userService.GetCount(searchQuery);
@@ -336,7 +335,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var userGroup = roleService.Find(id);
             if (userGroup == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (RoleHelper.UpdateRoleToUsersAssignment(userGroup, ids, selids))
@@ -360,13 +359,13 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Name", 
+                                                                 Name = Translate(".Model.Role.UserGroupName"), 
                                                                  Index = "Name",
                                                                  Width = 1100
                                                              },
@@ -381,7 +380,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 DataUrl = Url.Action(MVC.Admin.User.UserGroupsDynamicGridData()),
                 DefaultOrderColumn = "Name",
-                GridTitle = "User Groups",
+                GridTitle = Translate(".Model.UserGroups"),
                 Columns = columns,
                 MultiSelect = true,
                 IsRowNotClickable = true,
@@ -390,8 +389,6 @@ namespace Core.Web.Areas.Admin.Controllers
             };
 
             return View(model);
-
-            //return View(RoleHelper.BuildRoleToUserGroupsAssignmentModel(role));
         }
 
         [HttpPost]
@@ -402,7 +399,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
             IQueryable<UserGroup> searchQuery = userGroupService.GetSearchQuery(search);
             int totalRecords = userGroupService.GetCount(searchQuery);
@@ -429,7 +426,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(id);
             if (role == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             if (RoleHelper.UpdateRoleToUserGroupsAssignment(role, ids, selids))
@@ -455,7 +452,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(roleId);
             if (role == null || role.NotPermissible)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             return View(RoleHelper.BindRolePermissionModel(roleId, resource));
@@ -472,7 +469,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var role = roleService.Find(model.RoleId);
             if (role == null || role.NotPermissible)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             RoleHelper.ApplyRolePermissions(model);

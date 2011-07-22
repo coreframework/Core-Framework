@@ -24,8 +24,9 @@
                     <div class="fst_col colls_i">
                       <%:Html.HiddenFor(model => model.Id)%>     
 			            <div class="i_form_i">
-                      <%:Html.EditorFor(model => model.Title)%>
-                      <%:Html.ValidationMessageFor(model => model.Title) %>
+                          <%:Html.LocalizedLabelFor(model=>model.Title) %>
+                          <%:Html.TextBoxFor(model => model.Title)%>
+                          <%:Html.ValidationMessageFor(model => model.Title) %>
                         </div>
 			            <div class="i_form_i">
                       <%:Html.AntiForgeryToken()%>
@@ -36,14 +37,14 @@
                 <%if (Model.AllowManage){%>
 			        <div class="btn1 clrfix">
                         <em></em>
-                        <%:Html.Submit("Save", new {@class = "button"})%>
+                        <%:Html.Submit(Html.Translate("Actions.Save"), new {@class = "button"})%>
                         <strong></strong>
                     </div>
                     <%if (Model.Id > 0) {%>
-                        <span style="margin-right:10px;"><%:Html.ActionLink("Remove", FormsMVC.Forms.Remove(Model.Id))%></span>
+                        <span style="margin-right:10px;"><%:Html.ActionLink(Html.Translate("Actions.Remove"), FormsMVC.Forms.Remove(Model.Id))%></span>
                     <%}%>
                     <%}%>
-			        <span><%:Html.RouteLink("Cancel", new { controller = "Forms", action = "ShowAll" })%></span>
+			        <span><%:Html.RouteLink(Html.Translate("Actions.Cancel"), new { controller = "Forms", action = "ShowAll" })%></span>
 		        </div>
             </div>
           <% }%>

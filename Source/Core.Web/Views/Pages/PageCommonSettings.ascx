@@ -20,14 +20,12 @@
                                                              new {id = "SelectedCulture"})%>
         </div>
         <div class="form_i">
-            <label>
-                Title</label><br />
+            <%:Html.LocalizedLabelFor(model=>model.Title) %><br />
             <%:Html.TextBoxFor(model => model.Title, new { Class = "inp_txt" })%>
             <%:Html.ValidationMessageFor(model => model.Title)%>
         </div>
         <div class="form_i">
-            <label>
-                Url</label><br />
+            <%:Html.LocalizedLabelFor(model=>model.Url) %><br />
             <%:Html.TextBoxFor(model => model.Url, new { Class = "inp_txt" })%>
             <%:Html.ValidationMessageFor(model => model.Url)%>
         </div>
@@ -36,7 +34,7 @@
     <div class="p_footer clrfix">
         <div class="btn1">
             <em></em>
-            <%: Html.Submit("Save", new { Class = "button" })%><strong></strong></div>
+            <%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button" })%><strong></strong></div>
     </div>
     <%} %>
 </div>

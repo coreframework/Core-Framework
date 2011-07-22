@@ -26,8 +26,8 @@
        </div>
     </div>
      <div class="p_footer clrfix">
-		<div class="btn1"><em></em><%: Html.Submit("Save", new { Class = "button" })%><strong></strong></div>
-		<div class="cancel_l"><a class="reset" href="javascript:void(0)">Reset</a></div>
+		<div class="btn1"><em></em><%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button" })%><strong></strong></div>
+		<div class="cancel_l"><a class="reset" href="javascript:void(0)"><%:Html.Translate("Actions.Reset") %></a></div>
 	 </div>
     <% }%>
 </div>

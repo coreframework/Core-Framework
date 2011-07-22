@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Core.Web.Models
 {
@@ -10,7 +11,10 @@ namespace Core.Web.Models
 
     public enum PageMode
     {
+        [Description(".PanelView")]
         View = 1,
+
+        [Description(".PanelEdit")]
         Edit = 2
     }
 }

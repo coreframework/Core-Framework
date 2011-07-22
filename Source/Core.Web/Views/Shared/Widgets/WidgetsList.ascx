@@ -6,7 +6,7 @@
     <ul class="widgets">
         <%foreach (var item in Model) {%>
            <li>
-                <%=Ajax.ActionLink(Html.Encode(item.Title), MVC.Pages.AddWidget((long)ViewData["pageId"], item.Identifier), new AjaxOptions { OnSuccess = "addWidget", OnComplete = "addLinkCss" }, new { @widgetID = item.Plugin.Identifier })%>
+                <%=Ajax.ActionLink(Html.Encode(item.Title), MVC.Pages.AddWidget((long)ViewData["pageId"], item.Id), new AjaxOptions { OnSuccess = "addWidget", OnComplete = "addLinkCss" }, new { @widgetID = item.Plugin.Identifier })%>
            </li>
         <%} %>
     </ul>

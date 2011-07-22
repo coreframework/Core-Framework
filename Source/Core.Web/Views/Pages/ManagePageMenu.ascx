@@ -9,7 +9,7 @@
 			    <ul class="clrfix">
                  <%if (Model.Access[(int)PageOperations.Update]) {%>
                     <li>
-                        <a href="javascript:void(0);"><%=Html.Translate(".Add")%></a>
+                        <a href="javascript:void(0);"><%=Html.Translate("Actions.Add")%></a>
                         <ul>
                             <li>
                                  <a class="show-widgets" href="javascript:void(0);"><%=Html.Translate(".Widget")%></a>
@@ -18,7 +18,7 @@
                     </li>
                     <% }%>
                     <li>
-                        <a href="javascript:void(0);"><%=Html.Translate(".Manage") %></a>
+                        <a href="javascript:void(0);"><%=Html.Translate("Actions.Manage") %></a>
                         <ul>
                             <%if (Model.Access[(int)PageOperations.Update]) {%>
                                 <li>
@@ -37,7 +37,7 @@
                                     jQuery(function () {
                                         $('a.show-widgets').click(function () {
                                             var url = '<%=Url.Action(MVC.Pages.ShowAvailableWidgets(Model.Id??0))%>';
-                                            var dialog = $('<div title="Add widget" style="display:none"/>').appendTo('body');
+                                            var dialog = $('<div title="<%=Html.Translate("Actions.AddWidget")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,
                                         {},
@@ -50,7 +50,7 @@
                                         });
                                         $('a.change-layout').click(function () {
                                             var url = '<%=Url.Action(MVC.Pages.ShowChangeLayoutForm(Model.Id??0))%>';
-                                            var dialog = $('<div title="Change page layout" style="display:none"/>').appendTo('body');
+                                            var dialog = $('<div title="<%=Html.Translate(".PageLayout")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,
                                         {},
@@ -63,7 +63,7 @@
                                         });
                                         $('a.change-settings').click(function () {
                                             var url = '<%=Url.Action(MVC.Pages.ShowPageCommonSettings(Model.Id??0))%>';
-                                            var dialog = $('<div title="Change Page Common Settings" style="display:none"/>').appendTo('body');
+                                            var dialog = $('<div title="<%=Html.Translate(".PageSettings")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,
                                         {},
@@ -76,7 +76,7 @@
                                         });
                                         $('a.change-lookAndFeel').click(function () {
                                             var url = '<%=Url.Action(MVC.Pages.ShowPageLookAndFeel(Model.Id??0))%>';
-                                            var dialog = $('<div title="Page Look And Feel" style="display:none"/>').appendTo('body');
+                                            var dialog = $('<div title="<%=Html.Translate(".PageLookAndFeel")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,
                                         {},
@@ -89,7 +89,7 @@
                                         });
                                         $('a.change-css').click(function () {
                                             var url = '<%=Url.Action(MVC.Pages.ShowPageCSS(Model.Id??0))%>';
-                                            var dialog = $('<div title="Page CSS" style="display:none"/>').appendTo('body');
+                                            var dialog = $('<div title="<%=Html.Translate(".CSS")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,
                                         {},
@@ -111,7 +111,7 @@
                                     jQuery(function () {
                                         $('a.permissions').click(function () {
                                             var url = '<%=Url.Action(MVC.Pages.ShowPagePermissions(Model.Id??0))%>';
-                                            var dialog = $('<div title="Permissions" style="display:none"/>').appendTo('body');
+                                            var dialog = $('<div title="<%=Html.Translate(".Permissions")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,
                                         {},

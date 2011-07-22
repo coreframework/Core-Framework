@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Web.Areas.Admin.Models.PluginViewModel>" %>
 
-<%@ Import Namespace="Framework.MVC.Extensions" %>
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent"><%: String.Format(Html.Translate(".Title"), Model) %></asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1><%: String.Format(Html.Translate(".Title"), Model.Title)%></h1>
@@ -13,10 +12,10 @@
 		<div class="i_buttons clrfix">
 			<div class="btn1 clrfix">
                 <em></em>
-                <%: Html.Submit("Uninstall",new { @class="button"}) %>
+                <%: Html.Submit(Html.Translate("Actions.Uninstall"), new { @class = "button" })%>
                 <strong></strong>
 		    </div>
-            <span><%: Html.ActionLink("Cancel", MVC.Admin.Module.Index()) %></span>
+            <span><%: Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.Module.Index())%></span>
         </div>
     </div>
   <% } %>

@@ -10,8 +10,6 @@
      <%= Html.CssInclude("admin/style.css") %>
      <%= Html.CssInclude("admin/dd.css") %>
      <!--[if lte IE 6]><%= Html.CssInclude("admin/style_ie.css") %><![endif]-->
-
-     <%--<%= Html.JavascriptInclude("jquery-1.5.1.min.js")%>--%>
      <%: Html.JavascriptPackInclude("adminbase")%>
      <%: Html.JavascriptPackInclude("adminui") %>
      <%: Html.JavascriptPackInclude("ajax") %>
@@ -26,7 +24,7 @@
     <div id="wrapper">
 	    <div id="header">
 		    <a href="<%= Url.Action(MVC.Admin.AdminHome.Index()) %>">
-                <img src="<%= HttpContext.Current.Request.ApplicationPath %>/Content/images/admin/logo.png" width="145" height="19" alt="" title="" class="logo" />
+                <img src="<%= Links.Content.Images.Admin.logo_png %>" width="145" height="19" alt="" title="" class="logo" />
             </a>
             <%= Html.PartialWithScope(MVC.Admin.Shared.Views.TopLinks)%>
 		    <div class="breadcrumbs">
@@ -61,7 +59,7 @@
 
     <div id="footer">
 	    <div class="footer_i">
-		    <div class="copyright">&copy; 2011 Core Framework</div>
+		    <div class="copyright">&copy; <%=DateTime.Now.Year %> Core Framework</div>
 	    </div>
     </div>
 

@@ -4,54 +4,54 @@
 <%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
 <%@ Import Namespace="Core.Web.Models" %>
 
-<div class="widget <%=Model.Settings != null ? Model.Settings.CustomCSSClasses : String.Empty %>" id="<%=WidgetHelper.GetWidgetClientId(Model.Id) %>">
-    <%=Html.Hidden("pageWidgetId", Model.Id) %>
-    <%=Html.Hidden("column", Model.Column) %>
-    <%=Html.Hidden("order", Model.Order) %>
+<div class="widget <%=Model.Widget.Settings != null ? Model.Widget.Settings.CustomCSSClasses : String.Empty %>" id="<%=WidgetHelper.GetWidgetClientId(Model.Widget.Id) %>">
+    <%=Html.Hidden("pageWidgetId", Model.Widget.Id) %>
+    <%=Html.Hidden("column", Model.Widget.ColumnNumber) %>
+    <%=Html.Hidden("order", Model.Widget.OrderNumber) %>
     <%if(PageHelper.GetCurrentUserPageMode() == PageMode.Edit)
         {%>
         <div class="widget_title">
 		    <div class="widget_title_i clrfix">
             <h1>
-                <%:Model.Widget != null ? Model.Widget.Title : Html.Translate(".WidgetNotFound")%>
+                <%:Model.SystemWidget != null &&  Model.Widget!=null && Model.Widget.Widget!=null ? Model.Widget.Widget.Title : Html.Translate(".WidgetNotFound")%>
             </h1>
         <%if (Model.PageAccess[(int) PageOperations.Update] &&
-                (Model.Widget == null || !(Model.Widget is BaseWidget) ||
-                Model.Access[((BaseWidget) Model.Widget).ManageOperationCode] ||
-                Model.Access[((BaseWidget) Model.Widget).PermissionOperationCode]))
+                (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
+                Model.Access[((BaseWidget) Model.SystemWidget).ManageOperationCode] ||
+                Model.Access[((BaseWidget) Model.SystemWidget).PermissionOperationCode]))
             {
-                if (Model.Widget == null || !(Model.Widget is BaseWidget) ||
-                    Model.Access[((BaseWidget) Model.Widget).ManageOperationCode])
+                if (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
+                    Model.Access[((BaseWidget) Model.SystemWidget).ManageOperationCode])
                 {%>
 
                 <%=Ajax.ActionLink(" ",
-                                                    MVC.Pages.RemovePageWidget(Model.Id),
+                                                    MVC.Pages.RemovePageWidget(Model.Widget.Id),
                                                     new AjaxOptions
                                                         {
-                                                            Confirm = "This widget will be removed, ok?",
+                                                            Confirm = Html.Translate("Messages.DeleteConfirm"),
                                                             OnSuccess =
                                                                 "function(){updateAfterRemoving(this,'.widget');}"
                                                         },
                                                     new {@class = "remove"})%>
     
             <%}
-                if (Model.Widget != null) {%>
+                if (Model.SystemWidget != null) {%>
                     <a class="edit" href="javascript:void(0)"> </a>
             <% }%>
             <% }%>
          </div>
       </div>
     <% }%>
-      <div class="widget_content" style="<%: WidgetHelper.GetWidgetHolderStyles(Model.Settings) %>">
-        <div class="widget_content_i" style="<%: (Model.Settings != null && !String.IsNullOrEmpty(Model.Settings.LookAndFeelSettings.OtherStyles)) ? Model.Settings.LookAndFeelSettings.OtherStyles : String.Empty %>">
-            <%if (Model.Widget != null)
+      <div class="widget_content" style="<%: WidgetHelper.GetWidgetHolderStyles(Model.Widget.Settings) %>">
+        <div class="widget_content_i" style="<%: (Model.Widget.Settings != null && !String.IsNullOrEmpty(Model.Widget.Settings.LookAndFeelSettings.OtherStyles)) ? Model.Widget.Settings.LookAndFeelSettings.OtherStyles : String.Empty %>">
+            <%if (Model.SystemWidget != null)
                 {%>
-            <% Html.RenderAction(Model.Widget.ViewAction.Action,
-                                Model.Widget.ViewAction.Controller,
+            <% Html.RenderAction(Model.SystemWidget.ViewAction.Action,
+                                Model.SystemWidget.ViewAction.Controller,
                                 new
                                     {
                                         instance = Model.WidgetInstance,
-                                        area = Model.Widget.ViewAction.Area
+                                        area = Model.SystemWidget.ViewAction.Area
                                     });%>
             <% }%>
          <div class="clear"></div>
