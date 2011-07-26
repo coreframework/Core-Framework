@@ -111,7 +111,7 @@ namespace Core.Forms.Controllers
             var model = new GridViewModel
             {
                 DataUrl = Url.Action("DynamicGridData", "Forms"),
-                DefaultOrderColumn = "Title",
+                DefaultOrderColumn = "Id",
                 GridTitle = "Forms",
                 Columns = columns,
                 IsRowNotClickable = true
@@ -140,7 +140,7 @@ namespace Core.Forms.Controllers
                     {
                         id = form.Id,
                         cell = new[] {  
-                                        form.Title, 
+                                        ((FormLocale)form.CurrentLocale).Title, 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("Edit","Forms",new { formId = form.Id }),"Details")}
                     }).ToArray()
@@ -263,7 +263,55 @@ namespace Core.Forms.Controllers
         [HttpGet]
         public virtual ActionResult New()
         {
-            return View("EditForm", new FormViewModel {AllowManage = true});
+            return View("New", new FormViewModel {AllowManage = true});
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public virtual ActionResult New(FormViewModel form)
+        {
+            FormsHelper.ValidateForm(form, ModelState);
+            if (ModelState.IsValid)
+            {
+                var newForm = form.MapTo(new Form{UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null});
+                if (_formsService.Save(newForm))
+                {
+                    _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormOperations>(), typeof(Form), newForm.Id);
+                    Success(HttpContext.Translate("Messages.Success", String.Empty));
+                    return RedirectToAction(FormsMVC.Forms.Edit(newForm.Id));
+                }
+            }
+
+            Error(HttpContext.Translate("Messages.ValidationError", String.Empty));
+
+            form.AllowManage = true;
+            return View("New", form);
+        }
+
+        [HttpPost]
+        public virtual ActionResult ChangeLanguage(long formId, String culture)
+        {
+            var form = _formsService.Find(formId);
+
+            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+            }
+
+            bool allowManage = _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(),
+                                                        typeof(Form), form.Id, IsFormOwner(form),
+                                                        PermissionOperationLevel.Object);
+
+            FormViewModel model = new FormViewModel {AllowManage = allowManage}.MapFrom(form);
+            model.SelectedCulture = culture;
+
+            //get locale
+            var localeService = ServiceLocator.Current.GetInstance<IFormLocaleService>();
+            FormLocale locale = localeService.GetLocale(formId, culture);
+
+            if (locale!=null)
+                model.MapLocaleFrom(locale);
+
+            return PartialView("EditForm", model);
         }
 
         /// <summary>
@@ -285,40 +333,34 @@ namespace Core.Forms.Controllers
                                                             typeof (Form), form.Id, IsFormOwner(form),
                                                             PermissionOperationLevel.Object);
 
-            return View("EditForm", new FormViewModel { AllowManage = allowManage}.MapFrom(form));
+            return View("Edit", new FormViewModel { AllowManage = allowManage}.MapFrom(form));
         }
 
         [HttpPost]
         public virtual ActionResult Save(FormViewModel model)
         {
+            FormsHelper.ValidateForm(model, ModelState);
             if (ModelState.IsValid)
             {
-                bool isNew = false;
-                var form = new Form();
-                if (model.Id > 0)
-                {
-                     form = _formsService.Find(model.Id);
+                var form = _formsService.Find(model.Id);
 
-                     if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
-                     {
-                         throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
-                     }
-                }
-                else
+                if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
-                    isNew = true;
-                    form.UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?) null;
+                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
                 }
 
                 if (_formsService.Save(model.MapTo(form)))
                 {
+                    //save locale
+                    var localeService = ServiceLocator.Current.GetInstance<IFormLocaleService>();
+                    FormLocale locale = localeService.GetLocale(form.Id, model.SelectedCulture);
+                    locale = model.MapLocaleTo(locale ?? new FormLocale{Form = form});
+
+                    localeService.Save(locale);
+
                     Success(HttpContext.Translate("Messages.SuccessFormSubmit",
                                                                 ResourceHelper.GetControllerScope(this)));
-                    if (isNew)
-                    {
-                        _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormOperations>(), typeof(Form), form.Id);
-                        return RedirectToAction(FormsMVC.Forms.Edit(form.Id));
-                    }
+                    return RedirectToAction(FormsMVC.Forms.Edit(model.Id));
                 }
             }
             else
@@ -328,7 +370,8 @@ namespace Core.Forms.Controllers
             }
 
             model.AllowManage = true;
-            return View("EditForm", model);
+
+            return View("Edit", model);
         }
 
         public virtual ActionResult ShowFormElements(long formId)

@@ -50,6 +50,11 @@ namespace Framework.MVC.Extensions
         public const String LabelErrorCssClass = "label-validation-error";
 
         /// <summary>
+        /// Areas constant.
+        /// </summary>
+        public const String Areas = "Areas";
+
+        /// <summary>
         /// Default extension options.
         /// </summary>
         /// <remarks>
@@ -185,6 +190,7 @@ namespace Framework.MVC.Extensions
         public static String DisplayNameFor(this HttpContextBase context, Type modelType, String propertyName)
         {
             var result = ResourceHelper.TranslatePropertyName(context, modelType, propertyName);
+
             if (String.IsNullOrEmpty(result))
             {
                 result = propertyName.Humanize();
@@ -272,13 +278,11 @@ namespace Framework.MVC.Extensions
         /// </returns>
         public static MvcHtmlString LocalizedLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, Object>> propertyAccessor, Object htmlAttributes)
         {
-            var area = html.ViewContext.RouteData.AreaName();
-
-            var labelText = ResourceHelper.TranslatePropertyName(html.ViewContext.HttpContext, typeof(TModel), PropertyName.For(propertyAccessor), area);
+            var labelText = ResourceHelper.TranslatePropertyName(html.ViewContext.HttpContext, typeof(TModel), PropertyName.For(propertyAccessor));
 
             if (String.IsNullOrEmpty(labelText))
             {
-                 labelText = TextHelper.InsertSpaceBeforeCapitalLetters(PropertyName.For(propertyAccessor));
+                labelText = PropertyName.For(propertyAccessor).Humanize();
             }
                
             var builder = new TagBuilder("label");

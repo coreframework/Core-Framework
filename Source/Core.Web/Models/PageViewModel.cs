@@ -13,7 +13,6 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
-using Framework.MVC.Metadata.Attributes;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.MEF.Extensions;
 
@@ -50,7 +49,7 @@ namespace Core.Web.Models
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        [LocalizedRequired]
+        [Required]
         public String Title { get; set; }
 
         /// <summary>

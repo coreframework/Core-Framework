@@ -9,12 +9,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq.Expressions;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Mvc.Html;
 using System.Linq;
 using System.Web.UI;
 using Framework.Core.DomainModel;
+using Framework.MVC.Helpers;
 
 namespace Framework.MVC.Extensions
 {
@@ -146,10 +148,9 @@ namespace Framework.MVC.Extensions
                     {
                         var text = Enum.GetName(typeof(TEnum), value);
                         var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
-                        if (description != null)
-                        {
-                            text = html.Translate(description.Description);
-                        }
+                        text = description != null ?
+                        html.Translate(description.Description) :
+                        new HttpContextWrapper(HttpContext.Current).DisplayNameFor(typeof(TEnum), text);
                         items.Add(new SelectListItem { Text = text, Value = value.ToString() });
                     }
                 }
@@ -179,10 +180,10 @@ namespace Framework.MVC.Extensions
                 {
                     var text = Enum.GetName(typeof(TEnum), value);
                     var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
-                    if (description != null)
-                    {
-                        text = html.Translate(description.Description);
-                    }
+                    text = description != null ? 
+                        html.Translate(description.Description) :
+                        new HttpContextWrapper(HttpContext.Current).DisplayNameFor(typeof(TEnum), text);
+
                     items.Add(new SelectListItem { Text = text, Value = value.ToString() });
                 }
             }

@@ -41,7 +41,7 @@
                 var url = '<%=Url.Action(MVC.Pages.UpdatePageWidgetInstance()) %>';
                 $.post(url, params, function (data) {
                     var widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.Widget.Id %>]').parents('.widget');
-                    $('.widget_content_i', widget).html($(data).find('.widget_content_i').html());
+                    $(widget).replaceWith(data);
                 });
             }
         }

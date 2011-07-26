@@ -1,4 +1,12 @@
+Titles:
+ NewForm: "New form"
+ EditForm: "Edit form"
 ElementTypes:
-  TextField: "Text Field"
+ TextField: "Text Field"
+Messages: 
+ EmailRequired: "The Email field is required"
+Actions:
+ AddNewElement: "Add new element"
+
     
     

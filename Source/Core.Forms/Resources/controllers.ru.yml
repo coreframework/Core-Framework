@@ -1,0 +1,9 @@
+ru:
+ Controllers:
+  FormsBuilderWidget:
+    Messages:
+      SuccessFormSubmit: "Форма была успешно обработана."
+      ValidationError: "В процессе обработки запроса были выявлены ошибки валидации."
+      SetupForm: "Укажите настройки формы"
+      Error: "Произошла ошибка. Пожалуйста, попробуйте позже."
+      EmailRequired: "Поле Email обязательно для заполнения."

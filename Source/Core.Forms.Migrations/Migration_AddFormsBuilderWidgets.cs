@@ -6,7 +6,7 @@ namespace Core.Forms.Migrations
     /// <summary>
     /// Adds Forms_FormsBuilderWidgets table.
     /// </summary>
-    [Migration(3)]
+    [Migration(4)]
     public class Migration_AddFormsBuilderWidgets : Migration
     {
         /// <summary>

@@ -8,7 +8,6 @@ using Core.Forms.NHibernate.Permissions.Operations;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Framework.Core.Extensions;
-using Framework.MVC.Extensions;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
@@ -74,7 +73,30 @@ namespace Core.Forms.Helpers
 
             if (currentType.IsValuesEnabled && String.IsNullOrEmpty(model.Values))
             {
-                modelState.AddModelError("Values", controller.HttpContext.Translate("Messages.RequiredErrorMessage", ResourceHelper.GetControllerScope(controller)));
+                modelState.AddModelError(PropertyName.For<FormElementViewModel>(item => item.Values),
+                    ResourceHelper.TranslateErrorMessage(new HttpContextWrapper(HttpContext.Current), typeof(FormElementViewModel),
+                    PropertyName.For<FormElementViewModel>(item => item.Values), "required", null));
+            }
+        }
+
+        /// <summary>
+        /// Validates the form model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="modelState">State of the model.</param>
+        public static void ValidateForm(FormViewModel model, ModelStateDictionary modelState)
+        {
+            if (model.ShowSubmitButton && String.IsNullOrEmpty(model.SubmitButtonText))
+            {
+                modelState.AddModelError(PropertyName.For<FormViewModel>(item => item.SubmitButtonText),
+                    ResourceHelper.TranslateErrorMessage(new HttpContextWrapper(HttpContext.Current), typeof(FormViewModel),
+                    PropertyName.For<FormViewModel>(item => item.SubmitButtonText), "required", null));
+            }
+            if (model.ShowResetButton && String.IsNullOrEmpty(model.ResetButtonText))
+            {
+                modelState.AddModelError(PropertyName.For<FormViewModel>(item => item.ResetButtonText),
+                     ResourceHelper.TranslateErrorMessage(new HttpContextWrapper(HttpContext.Current), typeof(FormViewModel),
+                     PropertyName.For<FormViewModel>(item => item.ResetButtonText), "required", null));
             }
         }
 

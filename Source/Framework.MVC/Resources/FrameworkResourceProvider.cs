@@ -140,7 +140,10 @@ namespace Framework.MVC.Resources
                 String area = scopeChains.FirstOrDefault();
                 if (area != null && ResourceCachesHolder.ContainsCache(area))
                 {
-                    chains.Add(String.Join(YamlResourceCache.ScopeSeparator, scopeChains.Skip(1)));   
+                    if (scopeChains.Count() > 1)
+                    {
+                        chains.Add(String.Join(YamlResourceCache.ScopeSeparator, scopeChains.Skip(1))); 
+                    }   
                 }
                 else
                 {

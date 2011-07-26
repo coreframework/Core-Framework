@@ -277,7 +277,7 @@ $.widget( "ui.accordion", {
 				.each(function() {
 					maxHeight = Math.max( maxHeight, $( this ).height( "" ).height() );
 				})
-				.height( maxHeight );
+				.height();
 		}
 
 		return this;

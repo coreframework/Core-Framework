@@ -27,7 +27,6 @@ namespace Core.ContentPages.Models
             Content = from.Content;
 
             return this;
-
         }
 
         public ContentPage MapTo(ContentPage to)

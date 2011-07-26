@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using Core.ContentPages.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Core.ContentPages.Models
 {

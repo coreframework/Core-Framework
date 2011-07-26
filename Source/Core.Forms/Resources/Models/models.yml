@@ -1,9 +1,41 @@
 Models:
-  FormBuilderWidgetViewModel:
-   Title: "Title"
-   FormId: "Form"
-   SendEmail: "Send Email"
-   SaveData: "Save Data"
-   RecipientEmail: "Recipient Email"
+    FormBuilderWidgetViewModel:
+        Title: "Title"
+        FormId: "Form"
+        SendEmail: "Send Email"
+        SaveData: "Save Data"
+        RecipientEmail: "Recipient Email"
+    FormViewModel:
+        Title: "Title"
+        ShowSubmitButton: "Show Submit button"
+        ShowResetButton: "Show Reset button"
+        SubmitButtonText: "Submit button text"
+        ResetButtonText: "ResetButtonText"
+        FormElementViewModel:
+        Type: "Type"
+        Title: "Title"
+        Values: "Values"
+        IsRequired: "Is Required"
+        RegexTemplate: "Regex Template"
+        MaxLength: "Max Length"
+    RegexTemplate:
+        None: "None"
+        PositiveIntValue: "Positive integer value"
+        IntValue: "Integer value"
+        DoubleValue: "Double value"
+        MoneyValue: "Money value"
+        Email: "Email"
+        Url: "Url"
+        UrlPart: "Url part"
+        AlphaNumeric: "Alphanumeric value"
+        Phone: "Phone"
+    FormElementType:
+        TextBox: "Text box"
+        TextArea: "Text area"
+        DropDownList: "Dropdown list"
+        RadioButtons: "Radio buttons"
+        CheckBox: "Checkbox"
+        TextField: "Text field"
+        Captcha: "Captcha"
     
     

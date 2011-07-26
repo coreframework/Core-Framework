@@ -6,7 +6,7 @@ namespace Core.Forms.Migrations
     /// <summary>
     /// Adds Forms_FormElements table.
     /// </summary>
-    [Migration(2)]
+    [Migration(3)]
     public class Migration_AddFormElements : Migration
     {
         /// <summary>

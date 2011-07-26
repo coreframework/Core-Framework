@@ -12,11 +12,11 @@
         <%:Html.HiddenFor(model => model.PageCssModel.PageId)%>
         <input id="PageCssModel_SettingId" name="PageCssModel.SettingId" type="hidden" value="<%=Model.PageCssModel.SettingId %>" />
         <div class="form_i">
-            <label>Custom CSS class names</label><br/>
+            <%:Html.LocalizedLabelFor(model => model.CustomCSSClasses)%><br/>
             <%:Html.TextBoxFor(model => model.CustomCSSClasses, new { Class = "inp_txt" })%>
         </div>
         <div class="form_i">
-            <label> Custom CSS</label><br/>
+            <%:Html.LocalizedLabelFor(model => model.PageCssModel.CustomCSS)%><br/>
             <%:Html.TextAreaFor(model => model.PageCssModel.CustomCSS, new { Class = "inp_txt", Rows = 15 })%>
         </div>
         <%:Html.AntiForgeryToken()%>

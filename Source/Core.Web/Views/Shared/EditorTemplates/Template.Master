@@ -28,12 +28,12 @@
 <asp:ContentPlaceHolder runat="server" id="Content">  
   <div>
     <asp:ContentPlaceHolder runat="server" id="Label">
-      <%: Html.CustomLabelForModel() %> <%: !String.IsNullOrEmpty(ViewData.ModelMetadata.TemplateHint) ? String.Format("({0})", ViewData.ModelMetadata.TemplateHint) : String.Empty %>
+      <%: Html.CustomLabelForModel() %>
     </asp:ContentPlaceHolder>
     <br />
     <asp:PlaceHolder runat="server" id="DataPlaceholder" />  
     <asp:ContentPlaceHolder runat="server" ID="Validation">
-   <%--   <%: Html.ValidationTooltipForModel(Links.Content.Images.icons.tooltip_png) %>--%>
+    <%: Html.ValidationMessageForModel() %>
     </asp:ContentPlaceHolder>
   </div>
 </asp:ContentPlaceHolder>

@@ -59,41 +59,41 @@
 		</div>
     </div>
 
-               <script type="text/javascript">
-                   jQuery(function () {
-                       function checkForm() {
-                         curValue = $('#Type').val();
-                            $('#el_validation').removeClass('editor-field-hidden');
-                            $('#el_values').removeClass('editor-field-hidden');
-                            $('#el_is_required').removeClass('editor-field-hidden');
-                            $('#el_maxLength').removeClass('editor-field-hidden');
-                            switch(curValue)
-                            {
-                               <% foreach (var formType in Model.Types) {%>
-                                    case "<%=formType.Type%>":
-                                        <%if (!formType.IsRequiredEnabled) {%>
-                                        $('#el_is_required').addClass('editor-field-hidden');
-                                        <% } %>
-                                        <%if (!formType.IsValidationEnabled) {%>
-                                        $('#el_validation').addClass('editor-field-hidden');
-                                        <% } %>
-                                        <%if (!formType.IsValuesEnabled) {%>
-                                        $('#el_values').addClass('editor-field-hidden');
-                                        <% } %>
-                                        <%if (!formType.IsMaxLengthEnabled) {%>
-                                        $('#el_maxLength').addClass('editor-field-hidden');
-                                        <% } %>
-                                    break;
-                               <% } %>
-                               default: alert('default');
-                            }
-                       }
+        <script type="text/javascript">
+            jQuery(function () {
+                function checkForm() {
+                    curValue = $('#Type').val();
+                    $('#el_validation').removeClass('editor-field-hidden');
+                    $('#el_values').removeClass('editor-field-hidden');
+                    $('#el_is_required').removeClass('editor-field-hidden');
+                    $('#el_maxLength').removeClass('editor-field-hidden');
+                    switch(curValue)
+                    {
+                        <% foreach (var formType in Model.Types) {%>
+                            case "<%=formType.Type%>":
+                                <%if (!formType.IsRequiredEnabled) {%>
+                                $('#el_is_required').addClass('editor-field-hidden');
+                                <% } %>
+                                <%if (!formType.IsValidationEnabled) {%>
+                                $('#el_validation').addClass('editor-field-hidden');
+                                <% } %>
+                                <%if (!formType.IsValuesEnabled) {%>
+                                $('#el_values').addClass('editor-field-hidden');
+                                <% } %>
+                                <%if (!formType.IsMaxLengthEnabled) {%>
+                                $('#el_maxLength').addClass('editor-field-hidden');
+                                <% } %>
+                            break;
+                        <% } %>
+                        default: break;
+                    }
+                }
 
-                       $('#Type').change(function () {
-                           checkForm();
-                       });
-                       checkForm();
-                   });
-               </script>
+                $('#Type').change(function () {
+                    checkForm();
+                });
+                checkForm();
+            });
+        </script>
           <% }%>
 </asp:Content>

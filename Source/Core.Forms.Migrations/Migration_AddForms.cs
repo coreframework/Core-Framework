@@ -17,7 +17,8 @@ namespace Core.Forms.Migrations
             Database.AddTable("Forms_Forms", t =>
             {
                 t.PrimaryKey();
-                t.String("Title");
+                t.Bool("ShowSubmitButton");
+                t.Bool("ShowResetButton");
                 t.ForeignKey("FormUser").Table("Users").Column("UserId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
             });
         }

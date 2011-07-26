@@ -16,10 +16,9 @@ namespace Core.Forms.Tests.Services
         /// <returns></returns>
         public Form CreateForm()
         {
-            var form = new Form
-            {
-                Title = "Test form"
-            };
+            var form = new Form();
+            ((FormLocale)form.CurrentLocale).Title = "test form";
+          
             return form;
         }
 

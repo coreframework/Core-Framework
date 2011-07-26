@@ -211,7 +211,6 @@
     <Compile Include="Metadata\Attributes\FileTypeAttribute.cs" />
     <Compile Include="Metadata\Attributes\FileTypesPreset.cs" />
     <Compile Include="Metadata\Attributes\ImageUploadAttribute.cs" />
-    <Compile Include="Metadata\Attributes\RequiredAttribute.cs" />
     <Compile Include="Metadata\MetadataProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\FrameworkResourceProvider.cs" />

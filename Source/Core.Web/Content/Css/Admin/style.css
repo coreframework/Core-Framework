@@ -65,21 +65,21 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 * @section Main Layouts
 * @subsection Two Column Layout
 */
-#wrapper {width:100%;min-width:1000px;min-height:100%;height:auto !important;height:100%;}
+#wrapper {min-width:1000px;min-height:100%;height:auto !important;height:100%;background:url(../../images/admin/sidebar_bg.gif) repeat-y 0 0 #fff;margin:0 14px;} 
 	#middle {width:100%;padding:0 0 49px;height:1%;position:relative;}
 		#middle:after {content:'.';display:block;clear:both;visibility:hidden;height:0;}
 		#container {	width:100%;float:left;overflow:hidden;}
-			#content {padding:0 0 0 220px;background:#fff;margin:0 14px;}
-		#sideLeft {float:left;width:222px;margin-left:-100%;position:relative;padding-left:14px;}
-			.sidebar_i {background:url(../../images/admin/sidebar_bg.gif) repeat-y 0 0;}
-#footer {margin:-49px 14px 0;min-width:1000px;height:49px;}
+			#content {padding:0 0 0 220px;}
+		#sideLeft {float:left;width:222px;margin-left:-100%;position:relative;} 
+			.sidebar_i {}
+#footer {margin:-49px 14px 0;min-width:1000px;height:49px;background:#16294f}
 
 
 /**
 * @section Main Layouts
 * @subsection Header
 */
-#header {height: 82px;margin:0 14px;position:relative}
+#header {height: 82px;position:relative;background:url(../../images/admin/bg.gif) repeat-x #16294f;}
 	#header .logo {position:absolute;top:14px;left:9px}
 	#header .right_side {position:absolute;top:12px;right:0}
 		#header span {color:#72bffb;font-size:12px;float:left;margin:4px 10px 0 0 }

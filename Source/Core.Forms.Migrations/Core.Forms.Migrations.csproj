@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddFormLocales.cs" />
     <Compile Include="Migration_AddFormAnswerValues.cs" />
     <Compile Include="Migration_AddFormWidgetAnswers.cs" />
     <Compile Include="Migration_AddFormsBuilderWidgets.cs" />

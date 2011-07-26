@@ -58,6 +58,11 @@ namespace Core.Forms.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult Edit() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
         }
@@ -121,6 +126,7 @@ namespace Core.Forms.Controllers {
             public readonly string Remove = "Remove";
             public readonly string ApplyPermissions = "ApplyPermissions";
             public readonly string New = "New";
+            public readonly string ChangeLanguage = "ChangeLanguage";
             public readonly string Edit = "Edit";
             public readonly string Save = "Save";
             public readonly string ShowFormElements = "ShowFormElements";
@@ -138,7 +144,8 @@ namespace Core.Forms.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string EditForm = "~/Views/Forms/EditForm.aspx";
+            public readonly string Edit = "~/Views/Forms/Edit.aspx";
+            public readonly string EditForm = "~/Views/Forms/EditForm.ascx";
             public readonly string EditFormElement = "~/Views/Forms/EditFormElement.aspx";
             public readonly string FormElements = "~/Views/Forms/FormElements.aspx";
             public readonly string FormPermissions = "~/Views/Forms/FormPermissions.aspx";
@@ -195,6 +202,13 @@ namespace Core.Forms.Controllers {
 
         public override System.Web.Mvc.ActionResult New() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long formId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
+            callInfo.RouteValueDictionary.Add("formId", formId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
             return callInfo;
         }
 

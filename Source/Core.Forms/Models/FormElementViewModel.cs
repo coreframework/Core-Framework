@@ -42,7 +42,6 @@ namespace Core.Forms.Models
         /// <value>
         /// 	<c>true</c> if this instance is required; otherwise, <c>false</c>.
         /// </value>
-        [DisplayName("Is Required")]
         public virtual bool IsRequired { get; set; }
 
         /// <summary>
@@ -58,7 +57,6 @@ namespace Core.Forms.Models
         /// Gets or sets the validation regex template.
         /// </summary>
         /// <value>The validation regex template.</value>
-        [DisplayName("Regex Template")]
         public RegexTemplate? RegexTemplate { get; set; }
 
         /// <summary>
@@ -71,7 +69,6 @@ namespace Core.Forms.Models
         /// Gets or sets the length of the max.
         /// </summary>
         /// <value>The length of the max.</value>
-        [DisplayName("Max Length")]
         public long? MaxLength { get; set; }
 
         /// <summary>

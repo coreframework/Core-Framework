@@ -1063,6 +1063,9 @@
     <None Include="Resources\Admin\views.yml" />
     <None Include="Resources\commont.ru.yml" />
     <Content Include="Resources\Models\models.yml" />
+    <Content Include="Resources\Models\messages.yml" />
+    <None Include="Resources\framework.ru.yml" />
+    <None Include="Resources\Models\messages.ru.yml" />
     <None Include="Resources\Models\models.ru.yml" />
     <None Include="Resources\viewst.ru.yml" />
     <None Include="Scripts\fck\editor\dialog\fck_spellerpages\spellerpages\server-scripts\spellchecker.cfm" />

@@ -15,6 +15,7 @@
             <h1>
                 <%:Model.SystemWidget != null &&  Model.Widget!=null && Model.Widget.Widget!=null ? Model.Widget.Widget.Title : Html.Translate(".WidgetNotFound")%>
             </h1>
+            <div class="widget_edit">
         <%if (Model.PageAccess[(int) PageOperations.Update] &&
                 (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
                 Model.Access[((BaseWidget) Model.SystemWidget).ManageOperationCode] ||
@@ -39,6 +40,7 @@
                     <a class="edit" href="javascript:void(0)"> </a>
             <% }%>
             <% }%>
+            </div>
          </div>
       </div>
     <% }%>

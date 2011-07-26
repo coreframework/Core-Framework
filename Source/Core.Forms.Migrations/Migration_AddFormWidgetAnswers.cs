@@ -6,7 +6,7 @@ namespace Core.Forms.Migrations
     /// <summary>
     /// Adds Forms_FormWidgetAnswers table.
     /// </summary>
-    [Migration(4)]
+    [Migration(5)]
     public class Migration_AddFormWidgetAnswers : Migration
     {
         /// <summary>

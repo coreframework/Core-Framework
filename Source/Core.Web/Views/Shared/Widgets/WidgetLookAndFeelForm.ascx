@@ -7,34 +7,34 @@
         <div class="form_i">
              <input id="SettingId" name="SettingId" type="hidden" value="<%=Model.SettingId %>" />
              <%:Html.HiddenFor(model => model.WidgetId)%>
-             <label>Background color</label><br/>
+             <%:Html.LocalizedLabelFor(model=>model.BackgroundColor)%><br/>
               <%:Html.TextBoxFor(model => model.BackgroundColor, new { Class = "inp_txt colorPicker", Attr = "background-color", Readonly = "readonly" })%>
         </div>
         <div class="form_i">
-            <label>Font</label><br/>
+            <%:Html.LocalizedLabelFor(model => model.FontFamily)%><br/>
             <%:Html.DropDownListFor(model => model.FontFamily, new SelectList(new List<String> { "Arial", "Tahoma", "Verdana" }), "Please select", new {Attr = "font-family" })%>
         </div>
         <div class="form_i">
-            <label>Font size</label><br/>
+            <%:Html.LocalizedLabelFor(model => model.FontSizeValue)%><br/>
             <%:Html.TextBoxFor(model => model.FontSizeValue, new { Class = "inp_txt w_220", Attr = "font-size" })%>
             <%:Html.DropDownListFor(model => model.FontSizeUnit, new SelectList(new List<String> { "px", "em", "pt", "%" }), "Please select", new { Class = "w_232", Attr = "font-size", style = "margin-left:5px;" })%>
         </div>
         <div class="form_i">
-             <label>Font color</label><br/>
-                <%:Html.TextBoxFor(model => model.Color, new { Class = "inp_txt colorPicker", Attr = "color", Readonly = "readonly" })%>
+             <%:Html.LocalizedLabelFor(model => model.Color)%><br/>
+             <%:Html.TextBoxFor(model => model.Color, new { Class = "inp_txt colorPicker", Attr = "color", Readonly = "readonly" })%>
         </div>
         <div class="form_i">
-            <label>Width</label><br/>
+            <%:Html.LocalizedLabelFor(model => model.WidthValue)%><br/>
             <%:Html.TextBoxFor(model => model.WidthValue, new { Class = "inp_txt w_220", Attr = "width" })%>
             <%:Html.DropDownListFor(model => model.WidthUnit, new SelectList(new List<String> { "px", "em", "pt", "%" }), "Please select", new { Class = "w_232", Attr = "width", style = "margin-left:5px;" })%>
         </div>
         <div class="form_i">
-            <label>Height</label><br/>
+            <%:Html.LocalizedLabelFor(model => model.HeightValue)%><br/>
             <%:Html.TextBoxFor(model => model.HeightValue, new { Class = "inp_txt w_220", Attr = "height" })%>
             <%:Html.DropDownListFor(model => model.HeightUnit, new SelectList(new List<String> { "px", "em", "pt", "%" }), "Please select", new {Class="w_232", Attr = "height", style = "margin-left:5px;" })%>
         </div>
         <div class="form_i">
-           <label>Other</label><br/>
+           <%:Html.LocalizedLabelFor(model => model.OtherStyles)%><br/>
             <%:Html.TextAreaFor(model => model.OtherStyles, new { Class = "inp_txt" })%>
         </div>
       </div>

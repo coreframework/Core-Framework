@@ -5,6 +5,7 @@ Controllers:
       ValidationError: "Validation errors occurred while processing this form."
       SetupForm: "Setup form"
       Error: "Error"
+      EmailRequired: "The Email field is required."
 
     
     

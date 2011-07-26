@@ -13,6 +13,17 @@ Models:
    FontSizeValue: "Font Size"
    Color: "Color"
    OtherStyles: "Other"
+  WidgetLookAndFeelModel:
+   BackgroundColor: "Background Color"
+   FontFamily: "Font Family"
+   FontSizeValue: "Font Size"
+   Color: "Color"
+   HeightValue: "HeightValue"
+   WidthValue: "WidthValue"
+   OtherStyles: "Other"
+  WidgetCSSModel:
+   CustomCSSClasses: "Custom CSS Classes"
+   PageCssModel.CustomCSS: "Custom CSS"
 
    
   

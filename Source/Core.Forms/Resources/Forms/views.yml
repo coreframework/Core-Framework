@@ -6,6 +6,8 @@ Views:
       Actions: "Actions"
       Title: "Title"
       CreateForm: "Create Form"
+      Forms: "Forms"
+      AddForm: "Add Form"
     EditForm:
       NewForm: "New form"
       EditForm: "Edit form"
@@ -14,3 +16,6 @@ Views:
       Delete: "Delete"
     EditFormElement:
       SeparateWithComma: "(separate with comma)"
+    New:
+     NewForm: "New form"
+      

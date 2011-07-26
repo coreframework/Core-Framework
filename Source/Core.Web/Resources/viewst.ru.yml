@@ -23,12 +23,10 @@ ru:
        PageRule: "Добавить Css стили для этой страницы."
        AllWidgetsRule: "Добавить Css стили для всех виджетов на этой странице."
       PageCSSForm:
-       Successful: "Your request processed successfully."
-       Error: "Оштбка"
        PageRule: "Добавить CSS стили для этой страницы."
        AllWidgetsRule: "Добавить Css стили для всех виджетов на этой странице."
       PagePermissions:
-       Role: "Role"
+       Role: "Роль"
     Shared:
       Widgets:
         WidgetSettings:
@@ -38,28 +36,19 @@ ru:
             CSS: "CSS"
             Permissions: "Права доступа"
         WidgetLookAndFeelSettings:
-            LookAndFeel: "Look and Feel"
-        WidgetLookAndFeelForm:
-            Successful: "Your request processed successfully."
-            Error: "Error"
+            LookAndFeel: "Внешний вид"
         WidgetCSSSettings:
             CSS: "CSS"
-            CurrentWidgetInformation: "Your current widget information is as follows"
+            CurrentWidgetInformation: "Информация о текущем виджете"
             WidgetID: "Виджет ID"
-            WidgetClasses: "Widget Classes"
-            WidgetRule: "Add a CSS rule for just this widget."
-            AllWidgetsRule: "Add a CSS rule for all widgets like this one."
+            WidgetClasses: "Css классы виджета"
+            WidgetRule: "Добавить Css стили для этого виджета."
+            AllWidgetsRule: "Добавить Css стили для всех виджетов на этой странице."
         WidgetCSSForm:
-            Successful: "Your request processed successfully."
-            Error: "Error"
-            WidgetRule: "Add a CSS rule for just this widget."
-            AllWidgetsRule: "Add a CSS rule for all widgets like this one."
-        WidgetContentHolder: 
-             RemoveConfirmation: "This widget will be removed, ok?"
-             Remove: "удалить"
-             Edit: "редактировать"
+            WidgetRule: "Добавить Css стили для этого виджета."
+            AllWidgetsRule: "Добавить Css стили для всех виджетов на этой странице."
         WidgetPermissions: 
-             Role: "Role"
+             Role: "Роль"
              Permissions: "Права доступа"
         WidgetsList:
              AddWidget: "Выберите виджет, чтобы добавить его на страницу"

@@ -13,7 +13,7 @@
     <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>
 		<div class="e_table_bottom clrfix">
-			<div class="btn1 clrfix"><em></em><input id="New" type="button" class="button" value="<%:Html.Translate("Actions.AddFrom") %>" /><strong></strong></div>
+			<div class="btn1 clrfix"><em></em><input id="New" type="button" class="button" value="<%:Html.Translate(".AddForm") %>" /><strong></strong></div>
 		</div>
     </div>
     <script type="text/javascript">

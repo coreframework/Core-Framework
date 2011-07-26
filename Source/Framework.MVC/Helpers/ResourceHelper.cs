@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
@@ -27,6 +28,11 @@ namespace Framework.MVC.Helpers
         /// Resources scope separator.
         /// </summary>
         public const String ScopeSeparator = ".";
+
+        /// <summary>
+        /// Slash separator.
+        /// </summary>
+        public const char SlashSeparator = '\\';
 
         /// <summary>
         /// View scope key.
@@ -94,26 +100,6 @@ namespace Framework.MVC.Helpers
         }
 
         /// <summary>
-        /// Translates the name of the property.
-        /// </summary>
-        /// <param name="context">The context.</param>
-        /// <param name="modelType">Type of the model.</param>
-        /// <param name="propertyName">Name of the property.</param>
-        /// <param name="area">The area name.</param>
-        /// <returns>
-        /// Localized string or <c>null</c>.
-        /// </returns>
-        public static String TranslatePropertyName(HttpContextBase context, Type modelType, String propertyName, String area)
-        {
-            var modelScope = GetModelScope(modelType);
-            if (!MainAreas.Contains(area))
-            {
-                modelScope = area + ScopeSeparator + modelScope;
-            }
-            return GetResourceString(context, propertyName, modelScope, null, null);
-        }
-
-        /// <summary>
         /// Translates validation error message.
         /// </summary>
         /// <param name="context">The http context.</param>
@@ -129,6 +115,26 @@ namespace Framework.MVC.Helpers
                 message = GetResourceString(context, validatorKey, GetCommonMessagesScope(), null, null);
             }
             return message;
+        }
+
+        /// <summary>
+        /// Translates the error message and replace params.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="modelType">Type of the model.</param>
+        /// <param name="propertyName">Name of the property.</param>
+        /// <param name="validatorKey">The validator key.</param>
+        /// <param name="validationParams">The validation params.</param>
+        /// <returns>Localized string or <c>null</c>.</returns>
+        public static String TranslateErrorMessage(HttpContextBase context, Type modelType, String propertyName, String validatorKey, String[] validationParams)
+        {
+            var message = GetResourceString(context, validatorKey, GetModelSpecificMessagesScope(modelType, propertyName), null, null);
+            if (String.IsNullOrEmpty(message))
+            {
+                message = GetResourceString(context, validatorKey, GetCommonMessagesScope(), null, null);
+            }
+            var propertyNameText = TranslatePropertyName(context, modelType, propertyName);
+            return String.Format(message, propertyNameText, validationParams);
         }
 
         /// <summary>
@@ -171,7 +177,19 @@ namespace Framework.MVC.Helpers
                     modelScope = modelScope.Skip(1);
                 }
 
-                return Combine(modelScope);
+                chains = modelScope.ToList();
+            }
+
+            // Get real Area name
+            var assembly = Assembly.GetAssembly(modelType);
+            if (assembly.Location.Contains(Areas.ToUpper()))
+            {
+                var pathItems = assembly.Location.Split(SlashSeparator).SkipWhile(x => !Areas.ToUpper().Equals(x));
+
+                if (pathItems.Count() > 1)
+                {
+                    chains.Insert(0, pathItems.Skip(1).First());
+                }
             }
 
             return Combine(chains);

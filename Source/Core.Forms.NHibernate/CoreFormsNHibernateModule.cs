@@ -20,6 +20,7 @@ namespace Core.Forms.NHibernate
             container.Register(Component.For<IFormBuilderWidgetService>().ImplementedBy<NHibernateFormBuilderWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IFormWidgetAnswerService>().ImplementedBy<NHibernateFormWidgetAnswerService>().LifeStyle.Transient);
             container.Register(Component.For<IFormWidgetAnswerValueService>().ImplementedBy<NHibernateFormWidgetAnswerValueService>().LifeStyle.Transient);
+            container.Register(Component.For<IFormLocaleService>().ImplementedBy<NHibernateFormLocaleService>().LifeStyle.Transient);
         }
     }
 }

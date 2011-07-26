@@ -19,9 +19,9 @@
         <%if (ViewData["Form"] is FormViewModel && ((FormViewModel)ViewData["Form"]).AllowManage) {%>
         <div class="e_table_bottom clrfix">
             <div class="btn1 clrfix">
-                <strong><em></em>
-                    <input id="New" type="button" class="button" value="<%:Html.Translate("Actions.AddNewElement") %>" />
-                </strong></strong>
+                <em></em>
+                <input id="New" type="button" class="button" value="<%:Html.Translate("Actions.AddNewElement","Forms") %>" />
+                <strong></strong>
             </div>
         </div>
         <script type="text/javascript">

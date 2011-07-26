@@ -1,7 +1,5 @@
-﻿using System;
-using Core.ContentPages.NHibernate.Models;
+﻿using Core.ContentPages.NHibernate.Models;
 using FluentNHibernate.Mapping;
-using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.ContentPages.NHibernate.Mappings
 {

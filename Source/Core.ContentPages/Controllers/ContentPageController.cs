@@ -155,7 +155,7 @@ namespace Core.ContentPages.Controllers
             }
             ContentPageLocaleViewModel model = new ContentPageLocaleViewModel().MapFrom(contentPage);
             model.SelectedCulture = culture;
-            IContentPageLocaleService localeService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
+            var localeService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
             ContentPageLocale locale = localeService.GetLocale(contentPageId, culture);
             if(locale != null)
             {
@@ -170,7 +170,7 @@ namespace Core.ContentPages.Controllers
         /// Updates content page.
         /// </summary>
         /// <param name="id">The content page id.</param>
-        /// <param name="contentPage">The content page model.</param>
+        /// <param name="contentPageModel">The content page model.</param>
         /// <returns></returns>
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult Edit(long? id, ContentPageLocaleViewModel contentPageModel)

@@ -23,7 +23,14 @@
             <%=Html.FormElementRenderer(item, ViewData[String.Format("FormCollection{0}", Model.Id)] as FormCollection)%>
         </div>
     <%}%>
-    <%: Html.Submit(Html.Translate("Actions.Submit"))%>
+
+    <%if (Model.Form.ShowSubmitButton){%>
+        <%:Html.Submit(((FormLocale)Model.Form.CurrentLocale).SubmitButtonText)%>
+    <%}%>
+    <%if (Model.Form.ShowResetButton){%>
+       <input type="reset" value="<%=((FormLocale)Model.Form.CurrentLocale).ResetButtonText %>" />
+    <%}%>
+
     <%:Html.AntiForgeryToken()%>
     <%}%>
 </div>
