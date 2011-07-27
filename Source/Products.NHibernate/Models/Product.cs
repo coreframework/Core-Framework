@@ -66,6 +66,11 @@ namespace Products.NHibernate.Models
         /// <value>The categories.</value>
         public virtual IList<Category> Categories { get; set; }
 
+        /// <summary>
+        /// Gets or sets the Create Date
+        /// </summary>
+        public virtual DateTime? CreateDate { get; set; }
+
         #endregion
 
         public virtual IList<ILocale> CurrentLocales

@@ -45,10 +45,6 @@ namespace Products.NHibernate.Models
         /// </summary>
         public virtual DateTime? CreateDate { get; set; }
 
-        /// <summary>
-        /// Gets or sets the Last Modified Date
-        /// </summary>
-        public virtual DateTime? LastModifiedDate { get; set; }
 
         #endregion
 

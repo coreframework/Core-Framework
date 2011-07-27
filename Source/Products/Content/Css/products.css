@@ -1,4 +1,4 @@
-.widget-products .product { clear: both; padding: 5px;}
+.widget-products .product { clear: both; padding: 5px 5px 10px; border-bottom: 1px solid #DFE5E8;margin-bottom: 5px;}
 .widget-products .product .imgHolder { display: block; float: left;margin-right: 15px;}
 .widget-products .product img { margin: 0; }
 .widget-products .product .title {display: inline-block;}
@@ -8,3 +8,8 @@
 .widget-products .product .price { margin-bottom: 5px;}
 .widget-products .product .price span {font-weight: bold;}
 .widget-products .product .description {max-height: 76px; overflow: hidden;}
+.widget-products .pager span, .widget-products .pager a { padding: 2px 4px;}
+.widget-products .pager span.current { font-weight: bold;}
+.widget-products .pager span.disabled { display: none;}
+.widget-products .pager a { text-decoration: none;color: #000000;}
+.widget-products .pager a:hover { text-decoration: underline;}

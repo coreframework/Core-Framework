@@ -232,7 +232,7 @@ namespace Products.Controllers
         {
             if (ModelState.IsValid)
             {
-                productService.Save(product.MapTo(new Product()));
+                productService.Save(product.MapTo(new Product(){CreateDate = DateTime.Now}));
                 Success(HttpContext.Translate("SuccessCreate", ResourceHelper.GetControllerScope(this)));
                 return RedirectToAction("ShowAll");
             }

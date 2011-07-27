@@ -16,6 +16,7 @@ namespace Products.NHibernate.Mappings
             Id(product => product.Id);
             Map(product => product.FileName).Length(255);
             Map(product => product.Price);
+            Map(product => product.CreateDate);
 
             HasManyToMany(product => product.Categories)
                .Table("Product_ProductsToCategories").ParentKeyColumn("ProductId")

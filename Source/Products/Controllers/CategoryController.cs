@@ -180,11 +180,10 @@ namespace Products.Controllers
             {
                 var localeService = ServiceLocator.Current.GetInstance<ICategoryLocaleService>();
                 var categoryLocale = localeService.GetLocale((long) id, category.SelectedCulture);
-                categoryLocale = categoryLocale ??  new CategoryLocale
+                categoryLocale = categoryLocale ?? new CategoryLocale
                                          {
                                              Category =
-                                                 category.MapTo(new Category
-                                                                    {Id = (long) id, LastModifiedDate = DateTime.Now}),
+                                                 category.MapTo(new Category { Id = (long)id }),
                                              Culture = category.SelectedCulture,
                                          };
                 categoryLocale.Title = category.Title;

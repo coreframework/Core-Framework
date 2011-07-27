@@ -32,16 +32,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ECM7.Common">
-      <HintPath>..\Framework.MSBuild\bin\Release\ECM7.Common.dll</HintPath>
+      <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Common.dll</HintPath>
     </Reference>
     <Reference Include="ECM7.Migrator.Framework">
-      <HintPath>..\Framework.MSBuild\bin\Release\ECM7.Migrator.Framework.dll</HintPath>
+      <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Framework.Migrator">
-      <HintPath>..\Framework.Migrator\bin\Release\Framework.Migrator.dll</HintPath>
-    </Reference>
-    <Reference Include="Framework.MSBuild">
-      <HintPath>..\Framework.MSBuild\bin\Release\Framework.MSBuild.dll</HintPath>
+      <HintPath>..\Framework.Migrator\bin\Debug\Framework.Migrator.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

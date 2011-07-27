@@ -18,7 +18,6 @@ namespace Products.Migrations
             {
                 t.PrimaryKey();
                 t.DateTime("CreateDate").Null();
-                t.DateTime("LastModifiedDate").Null();
             });
         }
 
