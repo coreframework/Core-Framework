@@ -17,9 +17,9 @@
 
 var ddsmoothmenu={
 
-transition: {overtime:300, outtime:300}, //duration of slide in/ out animation, in milliseconds
+transition: {overtime:300, outtime:0}, //duration of slide in/ out animation, in milliseconds
 shadow: {enable:false, offsetx:5, offsety:5}, //enable shadow?
-showhidedelay: {showdelay: 100, hidedelay: 200}, //set delay in milliseconds before sub menus appear and disappear, respectively
+showhidedelay: {showdelay: 100, hidedelay:200}, //set delay in milliseconds before sub menus appear and disappear, respectively
 
 ///////Stop configuring beyond here///////////////////////////
 

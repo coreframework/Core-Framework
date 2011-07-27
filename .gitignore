@@ -78,3 +78,11 @@
 /Source/Core.Web/Scripts/adminbase_packed.js
 /Source/Core.Forms.Tests/bin
 /Source/Core.Forms.Tests/obj
+/Source/Products/obj
+/Source/Products/bin
+/Source/Core.Web/temp
+/Source/Core.Web/Areas/Product
+/Source/Products.Migrations/bin
+/Source/Products.Migrations/obj
+/Source/Products.NHibernate/bin
+/Source/Products.NHibernate/obj

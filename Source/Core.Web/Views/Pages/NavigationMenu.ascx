@@ -11,20 +11,23 @@
 <div class="clear"></div>
 
  <script type="text/javascript">
-     $(".pages-menu ul li").each(function () {
-         $(this).mouseover(
-			function () {
-			    $(this).css("position", "relative");
-			}
-		);
-     });
      jQuery(function () {
          $('a.add-page').parent('li').addClass('add_new');
          $('div.btn2').parent('li').addClass('add_new');
          $('.pages-menu ul:first').children('li.add_new').removeClass('add_new').addClass('add_new_pg');
      });
-     
-
+     $(document).ready(function () {
+         $(".pages-menu ul li").each(function () {
+             $(this).hover(
+			function () {
+			    $(this).css("position", "relative");
+			},
+			function () {
+			    $(this).css("position", "static");
+			}
+		);
+         });
+     });
      jQuery(function () {
          ddsmoothmenu.init({
              mainmenuid: "pagesMenu", //menu DIV id
@@ -33,13 +36,6 @@
              contentsource: "markup",
              arrowimages: { down: ['downarrowclass', '<%:Links.Content.Images.ico_open_png %>', 17], right: ['rightarrowclass', '<%:Links.Content.Images.ico_right_png %>'] }
          });
-     });
-     $(".pages-menu ul li").each(function () {
-         $(this).mouseout(
-			function () {
-			    $(this).css("position", "static");
-			}
-		);
      });
 </script>
 <%if (Model.PageMode==PageMode.Edit && Model.ManageAccess) {%>

@@ -31,6 +31,9 @@ namespace Core.Web.Models.Routes
         /// <param name="routes">The collection of routes to add to.</param>
         public void RegisterRoutes(RouteCollection routes)
         {
+            routes.MapRoute("UploadImage", "upload/image", MVC.Upload.Image());
+            routes.MapRoute("UploadFile", "upload/file", MVC.Upload.File()); 
+
             routes.MapRoute(null, "pages/changelayout/{pageId}/{layoutTemplateId}", MVC.Pages.ChangeLayout());
             routes.MapRoute(null, "pages/show-layout-setting", MVC.Pages.ShowLayoutSettingsForm());
             routes.MapRoute(null, "pages/update-layout-setting", MVC.Pages.UpdateLayoutSettingsForm());

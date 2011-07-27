@@ -1,0 +1,33 @@
+﻿ru:
+ Controllers:
+    Product:
+      Categories: "Категории Продукта"
+      Title: "Название"
+      GridTitle: "Продукты"
+      View: "Просмотреть"
+      Edit: "Редактировать"
+      NotFound: "Продукт не найден"
+      SuccessDelete: "Продукт был успешно удален."
+      SuccessCreate: "Продукт был успешно создан."
+      SuccessUpdate: "Продукт был успешно изменен."
+      Error: "Во время сохранения продукта возникли ошибки. Пожалуйста, попробуйте еще раз."
+      GridTitleCategory: "Категории Продукта"
+      TitleCategory: "Название"
+      CategoriesTitle: "Категории"
+      Messages:
+        CategoriesUpdated: "Категории были успешно сохранены."
+        ValidationError: "Во время обработки формы возникли ошибки."
+    Category:
+      Title: "Название"
+      GridTitle: "Категории"
+      View: "Просмотреть"
+      Edit: "Редактировать"
+      NotFound: "Категория не найденя"
+      SuccessDelete: "Категория была успешно удалена."
+      SuccessCreate: "Категория была успешно создана."
+      SuccessUpdate: "Категория была успешно изменена."
+      Error: "Во время сохранения категории возникли ошибки. Пожалуйста, попробуйте еще раз."
+    ProductViewerWidget:
+      Setup: "Настройте продукты."
+    CategoryViewerWidget:
+      Setup: "Настройте категории."

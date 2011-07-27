@@ -1,0 +1,5 @@
+﻿ru:
+  Models:
+    ProductWidgetModel:
+      PageSize: "Количество продуктов"
+      CategoryId: "Категория"

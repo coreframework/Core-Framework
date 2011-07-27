@@ -1,0 +1,10 @@
+.widget-products .product { clear: both; padding: 5px;}
+.widget-products .product .imgHolder { display: block; float: left;margin-right: 15px;}
+.widget-products .product img { margin: 0; }
+.widget-products .product .title {display: inline-block;}
+.widget-products .product h3 { float: left; margin-bottom:15px; }
+.widget-products .product .title h3 a { text-decoration: none; color: #278181;}
+.widget-products .product .title h3 a:hover { text-decoration: underline;}
+.widget-products .product .price { margin-bottom: 5px;}
+.widget-products .product .price span {font-weight: bold;}
+.widget-products .product .description {max-height: 76px; overflow: hidden;}

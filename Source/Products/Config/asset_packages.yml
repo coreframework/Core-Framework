@@ -1,0 +1,3 @@
+﻿stylesheets:
+  base:
+    - products.css

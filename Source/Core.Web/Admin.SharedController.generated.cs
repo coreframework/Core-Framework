@@ -28,7 +28,6 @@ namespace T4MVC.Admin {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Grid = "~/Areas/Admin/Views/Shared/Grid.ascx";
             public readonly string MainMenu = "~/Areas/Admin/Views/Shared/MainMenu.ascx";
             public readonly string TopLinks = "~/Areas/Admin/Views/Shared/TopLinks.ascx";
         }

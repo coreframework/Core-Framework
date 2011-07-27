@@ -208,6 +208,7 @@
     <Compile Include="Areas\Navigation\Widgets\NSiteMapWidget.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CoreWebInstaller.cs" />
     <Compile Include="Global.asax.cs">
@@ -272,6 +273,9 @@
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UploadController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="UsersController.generated.cs">
@@ -410,6 +414,7 @@
     <Content Include="Content\Images\Admin\zaglushka2.jpg" />
     <Content Include="Content\Images\Admin\zaglushka3.jpg" />
     <Content Include="Content\Images\Admin\zaglushka4.png" />
+    <Content Include="Content\Images\btn2.png" />
     <Content Include="Content\Images\btn2_c.gif" />
     <Content Include="Content\Images\btn2_l.gif" />
     <Content Include="Content\Images\btn2_r.gif" />

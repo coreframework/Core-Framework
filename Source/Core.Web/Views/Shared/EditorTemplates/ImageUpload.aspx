@@ -7,14 +7,14 @@
   <script type="text/javascript">
 
     $(function () {
-      $("#Avatar").makeAsyncUploader({
+      $("#FileName").makeAsyncUploader({
         upload_url: '<%= Url.Action(MVC.Upload.Image()) %>',
         flash_url: '<%= Links.Content.swfupload_swf %>',
-        button_image_url: '<%= Links.Content.Images.blank_button_png %>',
-        button_width : 109,
-	      button_height : 22,
+        button_image_url: '<%= Links.Content.Images.btn2_png %>',
+        button_width : 90,
+	    button_height : 27,
         button_text: "<span class=\"swfupload-button\"><%: Html.Translate("Actions.Browse") %></span>",
-        button_text_style: ".swfupload-button { font-family: Arial, Helvetica, sans-serif; font-size: 14px; }",
+        button_text_style: ".swfupload-button { font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: bold;color: #F9F9F9;}",
         button_cursor: SWFUpload.CURSOR.HAND, 
         button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
         value: '<%= Url.AbsoluteUrl(Model as String) %>',
@@ -39,7 +39,8 @@
           file_exceed_size_limit: "<%: Html.Translate("Messages.UploadFileExceedSizeLimit") %>",
           invalid_file_type: "<%: Html.Translate("Messages.UploadInvalidFileType") %>",
           zero_byte_file: "<%: Html.Translate("Messages.UploadZeroByteFile") %>",
-          unknown_error: "<%: Html.Translate("Messages.UploadUnknownError") %>"
+          unknown_error: "<%: Html.Translate("Messages.UploadUnknownError") %>",
+          confirm_delete: "<%: Html.Translate("Messages.ConfirmDeleteFile") %>"
         }
       });
     });

@@ -1,0 +1,4 @@
+﻿Models:
+  ProductWidgetModel:
+    PageSize: "Page Size"
+    CategoryId: "Category"

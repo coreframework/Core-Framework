@@ -29,6 +29,7 @@ public static class MVC {
     public static NavigationClass Navigation { get { return s_Navigation; } }
     public static Core.Web.Controllers.HomeController Home = new Core.Web.Controllers.T4MVC_HomeController();
     public static Core.Web.Controllers.PagesController Pages = new Core.Web.Controllers.T4MVC_PagesController();
+    public static Core.Web.Controllers.UploadController Upload = new Core.Web.Controllers.T4MVC_UploadController();
     public static Core.Web.Controllers.UsersController Users = new Core.Web.Controllers.T4MVC_UsersController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
@@ -1696,6 +1697,7 @@ namespace Links {
             public static readonly string btn_pu_content_png = Url("btn_pu_content.png");
             public static readonly string btn_pu_left_png = Url("btn_pu_left.png");
             public static readonly string btn_pu_right_png = Url("btn_pu_right.png");
+            public static readonly string btn2_png = Url("btn2.png");
             public static readonly string btn2_c_gif = Url("btn2_c.gif");
             public static readonly string btn2_l_gif = Url("btn2_l.gif");
             public static readonly string btn2_r_gif = Url("btn2_r.gif");
