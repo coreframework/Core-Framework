@@ -18,4 +18,7 @@ Views:
       SeparateWithComma: "(separate with comma)"
     New:
      NewForm: "New form"
+    FormPermissions:
+     FormPermissions: "Form Permissions"
+     Role: "Role"
       
