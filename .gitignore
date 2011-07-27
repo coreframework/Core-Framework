@@ -86,3 +86,10 @@
 /Source/Products.Migrations/obj
 /Source/Products.NHibernate/bin
 /Source/Products.NHibernate/obj
+/Source/Core.News.Migrations/bin
+/Source/Core.News.Migrations/obj
+/Source/Core.News.Nhibernate/bin
+/Source/Core.News.Nhibernate/obj
+/Source/Core.News/bin
+/Source/Core.News/obj
+/Source/Core.Web/Areas/News

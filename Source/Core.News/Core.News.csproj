@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{73032687-9E87-436E-94BA-BBF518C2D221}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core.News</RootNamespace>
+    <AssemblyName>Core.News</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\Core.Web\Areas\News\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\Libs\Castle\Castle.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Castle.Facilities.NHibernateIntegration">
+      <HintPath>..\..\Libs\Castle\Castle.Facilities.NHibernateIntegration.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Castle.MicroKernel">
+      <HintPath>..\..\Libs\Castle\Castle.MicroKernel.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\Libs\Castle\Castle.Windsor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Dynamic">
+      <HintPath>..\..\Libs\jqGrid\Dynamic.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Framework.Facilities.NHibernate">
+      <HintPath>..\..\Libs\Framework_\Framework.Facilities.NHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages" />
+    <Reference Include="System.Web.Helpers" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdminController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\NewsViewerWidgetController.cs" />
+    <Compile Include="Helpers\NewsViewerWidgetHelper.cs" />
+    <Compile Include="NewsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsPlugin.cs" />
+    <Compile Include="Models\NewsArticleLocaleViewModel.cs" />
+    <Compile Include="Models\NewsArticleViewModel.cs" />
+    <Compile Include="Models\NewsArticleViewerWidgetModel.cs" />
+    <Compile Include="ModuleAreaRegistration.cs" />
+    <Compile Include="NewsViewerWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Permissions\Operations\NewsPluginOperations.cs" />
+    <Compile Include="Permissions\Operations\NewsArticleViewerWidgetOperations.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Verbs\AdminVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsWidgetViewerVerb.cs" />
+    <Compile Include="Widgets\NewsViewerWidget.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\PluginConfig.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Admin\Edit.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Admin\EditForm.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Admin\Index.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Admin\New.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsViewerWidget\ArticleWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsViewerWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsViewerWidget\ViewWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Framework.MEF.Contracts\Core.Framework.MEF.Contracts.csproj">
+      <Project>{1FCA1EA6-B397-4F77-AE18-0277214AE3B7}</Project>
+      <Name>Core.Framework.MEF.Contracts</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.MEF.ServiceLocation\Core.Framework.MEF.ServiceLocation.csproj">
+      <Project>{1A8F39D8-9D23-4518-B483-D7D2ADF3457D}</Project>
+      <Name>Core.Framework.MEF.ServiceLocation</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.MEF\Core.Framework.MEF.csproj">
+      <Project>{A9E75C6E-5446-4A42-A9F3-84B0BE3859C0}</Project>
+      <Name>Core.Framework.MEF</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
+      <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
+      <Name>Core.Framework.Permissions</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.Plugins\Core.Framework.Plugins.csproj">
+      <Project>{7EE54877-FD43-4458-BB95-15B93164BA80}</Project>
+      <Name>Core.Framework.Plugins</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.News.Migrations\Core.News.Migrations.csproj">
+      <Project>{6C2CB9C4-F3F3-47E5-BCF9-4B2B816F7576}</Project>
+      <Name>Core.News.Migrations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.News.Nhibernate\Core.News.Nhibernate.csproj">
+      <Project>{3AA8FDAC-A8FA-41A7-BD34-3A8EFB8F3FB5}</Project>
+      <Name>Core.News.Nhibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj">
+      <Project>{8548D8D8-F616-42B6-9271-DB8E600CF652}</Project>
+      <Name>Framework.Core</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.MVC\Framework.MVC.csproj">
+      <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
+      <Name>Framework.MVC</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\messages.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Messages.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\models.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\models.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\verbs.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\verbs.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\views.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\views.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="T4MVC.settings.t4" />
+    <None Include="T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54938</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

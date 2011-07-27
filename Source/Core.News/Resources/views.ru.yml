@@ -1,0 +1,53 @@
+﻿Views:
+
+  Admin:
+
+    Index:
+
+      Title: "Edit News Article"
+      Actions: "Actions"
+
+      User: "User"
+
+      Status: "Status"
+
+      Remove: "[Remove]"
+
+      UserGroups: "[User groups]"
+
+      New: "New Article"
+    Edit:
+
+      Title: "Edit News Article"
+
+      Save: "Save"
+
+      Cancel: "Cancel"
+
+      Title: "Edit News Article"
+
+    New:
+
+      Title: "Edit News Article"
+
+      Save: "Save"
+
+      Cancel: "Cancel"
+
+      Title: "Edit News Article"
+    
+    EditForm:
+
+      Title: "Edit News Article"
+
+      Save: "Save"
+
+      Cancel: "Cancel"
+
+      Title: "Edit News Article"
+
+  NewsViewerWidget:
+    EditWidget:
+      Count: "News items count"
+    ArticleWidget:
+      Back: "Назад"
