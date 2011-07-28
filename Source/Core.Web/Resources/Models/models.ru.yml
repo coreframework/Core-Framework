@@ -25,3 +25,11 @@ ru:
   WidgetCSSModel:
    CustomCSSClasses: "Css классы"
    PageCssModel.CustomCSS: "Css стили"
+ Navigation:
+  Models:
+   NavigationMenuWidgetModel:
+     Orientation: "Расположение"
+   SiteMapWidgetModel:
+     Depth: "Глубина"
+   ListMenuWidgetModel:
+     Orientation: "Расположение"

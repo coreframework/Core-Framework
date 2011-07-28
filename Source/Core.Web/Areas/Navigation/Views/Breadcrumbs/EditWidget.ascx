@@ -5,7 +5,7 @@
     <input type="hidden" id="Id" name="Id" value="<%= Html.Encode(Model.Id) %>" />
     <div class="form_i">
         <%:Html.CheckBoxFor(model => model.ShowHomePage)%>
-        <label class="checkbx-label">Show Home Page</label>
+        <label class="checkbx-label"><%=Html.Translate(".ShowHomePage")%></label>
         <%:Html.ValidationMessageFor(model => model.ShowHomePage)%>
     </div>
     <%:Html.AntiForgeryToken()%>

@@ -1084,6 +1084,8 @@
     <Content Include="Resources\Models\models.yml" />
     <Content Include="Resources\Models\messages.yml" />
     <None Include="Resources\common.yml" />
+    <None Include="Resources\controllers.ru.yml" />
+    <None Include="Resources\controllers.yml" />
     <None Include="Resources\framework.ru.yml" />
     <None Include="Resources\Models\messages.ru.yml" />
     <None Include="Resources\Models\models.ru.yml" />

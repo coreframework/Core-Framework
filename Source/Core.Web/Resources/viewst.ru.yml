@@ -70,4 +70,22 @@ ru:
           RememberMe: "Запомнить меня"
           PanelView: "Просмотр" 
           PanelEdit: "Редактор" 
-
+ Navigation: 
+  Views:
+   SiteMap:
+      EditWidget:
+        RootPage: "Корневая страница"
+        IncludeRootInTree: "Включить корневую страницу в дерево"
+        PleaseSelect: "Пожалуйста, выберите"
+   Breadcrumbs:
+      EditWidget:
+        ShowHomePage: "Показать Главную страницу"
+   ListMenu:
+      EditWidget:
+        SelectPagesToDisplay: "Выберите страницы для отображения"
+        Horizontal: "Горизонтальное"
+        Vertical: "Вертикальное"
+   NavigationMenu:
+      EditWidget:
+        Horizontal: "Горизонтальное"
+        Vertical: "Вертикальное" 

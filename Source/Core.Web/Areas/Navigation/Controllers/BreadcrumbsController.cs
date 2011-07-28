@@ -8,6 +8,8 @@ using Core.Web.Areas.Navigation.Models;
 using Core.Web.Areas.Navigation.Widgets;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
+using Framework.MVC.Extensions;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Navigation.Controllers
@@ -34,7 +36,7 @@ namespace Core.Web.Areas.Navigation.Controllers
                 if (model != null)
                     return PartialView(model);
             }
-            return Content("Setup your breadcrumbs");
+            return Content(HttpContext.Translate("SetupYourBreadcrumbs", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>

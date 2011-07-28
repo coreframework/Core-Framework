@@ -24,8 +24,14 @@ Models:
   WidgetCSSModel:
    CustomCSSClasses: "Custom CSS Classes"
    PageCssModel.CustomCSS: "Custom CSS"
-
-   
+Navigation:
+ Models:
+  NavigationMenuWidgetModel:
+    Orientation: "Orientation"
+  SiteMapWidgetModel:
+    Depth: "Depth"
+  ListMenuWidgetModel:
+    Orientation: "Orientation"
   
      
 

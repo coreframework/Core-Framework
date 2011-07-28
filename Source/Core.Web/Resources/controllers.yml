@@ -1,0 +1,10 @@
+Navigation:
+ Controllers:
+  NavigationMenu:
+    SelectOrientation: "Select orientation to display menu"
+  SiteMap:
+    SelectItemsToDisplay: "Select items to display"
+  ListMenu:
+    SelectItemsToDisplay: "Select items to display"
+  Breadcrumbs:
+    SetupYourBreadcrumbs: "Setup your breadcrumbs"

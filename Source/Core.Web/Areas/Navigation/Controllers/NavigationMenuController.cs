@@ -1,4 +1,6 @@
 ﻿using System;
+using System;
+using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Extensions;
@@ -8,6 +10,8 @@ using Core.Web.Areas.Navigation.Models;
 using Core.Web.Areas.Navigation.Widgets;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
+using Framework.MVC.Extensions;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Navigation.Controllers
@@ -41,7 +45,7 @@ namespace Core.Web.Areas.Navigation.Controllers
                 if (exWidget != null)
                     return View(MVC.Navigation.NavigationMenu.Views.ViewWidget, NavigationMenuWidgetHelper.GetNavigationMenu(this.CorePrincipal(), exWidget));
             }
-            return Content("Select orientation to display menu");
+            return Content(HttpContext.Translate("SelectOrientation", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>

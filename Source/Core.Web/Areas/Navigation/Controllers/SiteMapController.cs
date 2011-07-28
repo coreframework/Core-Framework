@@ -9,6 +9,8 @@ using Core.Web.Areas.Navigation.Models;
 using Core.Web.Areas.Navigation.Widgets;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
+using Framework.MVC.Extensions;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Navigation.Controllers
@@ -39,7 +41,7 @@ namespace Core.Web.Areas.Navigation.Controllers
 
                 return PartialView(siteMap);
             }
-            return Content("Select items to display");
+            return Content(HttpContext.Translate("SelectItemsToDisplay", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>

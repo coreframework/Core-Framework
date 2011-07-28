@@ -82,5 +82,22 @@ Views:
           RememberMe: "Remember me"
           PanelView: "View" 
           PanelEdit: "Edit" 
-
-
+Navigation:
+ Views:
+    SiteMap:
+      EditWidget:
+        RootPage: "Root Page"
+        IncludeRootInTree: "Include Root in Tree"
+        PleaseSelect: "Please select"
+    Breadcrumbs:
+      EditWidget:
+        ShowHomePage: "Show Home Page"
+    ListMenu:
+      EditWidget:
+        SelectPagesToDisplay: "Select pages to display"
+        Horizontal: "Horizontal"
+        Vertical: "Vertical"
+    NavigationMenu:
+      EditWidget:
+        Horizontal: "Horizontal"
+        Vertical: "Vertical"
