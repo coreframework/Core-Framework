@@ -51,14 +51,15 @@ namespace Products.Controllers
                 else
                     if (Int64.TryParse(Request.QueryString[ProductConstants.ProductIdQueryRequestParam + instance.InstanceId], out id))
                     {
-
+                       
                         var productService = ServiceLocator.Current.GetInstance<IProductService>();
-                        var prod = productService.Find(id);
+                        var prod = productService.GetProduct(id, instance.InstanceId ?? 0);
                         if (prod != null)
                         {
                             TempData[ProductConstants.ProductWidgetIdQueryRequestParam] = instance.InstanceId;
                             return PartialView("ViewProduct", prod);
                         }
+                        return Content(HttpContext.Translate("NoProduct", ResourceHelper.GetControllerScope(this)));
                     }
             }
 

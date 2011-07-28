@@ -15,7 +15,7 @@
        {%>
     <div class="i_form clrfix">
         <div class="cols clrfix">
-            <div class="fst_col colls_i" style="width: 60%;">
+            <div class="fst_col colls_i">
                 <div class="i_form_i">
                     <%:Html.EditorFor(model => model.Title)%>
                 </div>

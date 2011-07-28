@@ -11,37 +11,42 @@
 </asp:Content>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <%: Html.ValidationSummary(true) %>
-    <div class="i_form clrfix">
-        <% using (Html.BeginForm("Edit", "Product", new { id = Model.ProductId }))
-           {%>
-        <div class="cols clrfix">
-            <div class="i_form_i">
-                <%:Html.EditorFor(model => model.Price)%>
-            </div>
-            <div class="i_form_i">
-                <%:Html.EditorFor(model => model.FileName)%>
-            </div>
-            <div class="i_form_i">
-                <%:Html.DropDownListFor(model => model.SelectedCulture,
+    <% using (Html.BeginForm("Edit", "Product", new { id = Model.ProductId }))
+       {%><div class="i_form clrfix">
+           <div class="cols clrfix">
+               <div class="fst_col colls_i">
+                   <div class="i_form_i">
+                       <%:Html.DropDownListFor(model => model.SelectedCulture,
                                                              new SelectList(Model.Cultures, "Value", "Key",
                                                                             Model.SelectedCulture),
                                                              new {id = "SelectedCulture"})%>
-            </div>
-        </div>
-        <div id="localeForm">
-            <% Html.RenderPartial("EditForm", Model); %>
-        </div>
-        <div class="i_buttons clrfix">
-            <div class="btn1 clrfix">
-                <em></em>
-                <%: Html.Submit(Html.Translate(".Save"),new { @class="button"})%>
-                <strong></strong>
-            </div>
-            <span>
-                <%:Html.RouteLink(Html.Translate(".Cancel"), new { controller = "Product", action = "ShowAll" })%></span>
-        </div>
-        <% }%>
-    </div>
+                   </div>
+               </div>
+           </div>
+           <div id="localeForm">
+               <% Html.RenderPartial("EditForm", Model); %>
+           </div>
+           <div class="cols clrfix">
+               <div class="fst_col colls_i">
+                   <div class="i_form_i">
+                       <%:Html.EditorFor(model => model.Price)%>
+                   </div>
+                   <div class="i_form_i">
+                       <%:Html.EditorFor(model => model.FileName)%>
+                   </div>
+               </div>
+           </div>
+           <div class="i_buttons clrfix">
+               <div class="btn1 clrfix">
+                   <em></em>
+                   <%: Html.Submit(Html.Translate(".Save"),new { @class="button"})%>
+                   <strong></strong>
+               </div>
+               <span>
+                   <%:Html.RouteLink(Html.Translate(".Cancel"), new { controller = "Product", action = "ShowAll" })%></span>
+           </div>
+       </div>
+    <% }%>
     <script type='text/javascript'>
         $(document).ready(function () {
             $('#SelectedCulture').change(function () {

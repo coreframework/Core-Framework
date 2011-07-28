@@ -1,0 +1,21 @@
+﻿ru:
+ Models:
+  ProductViewModel:
+   Title: "Название"
+   Price: "Цена"
+   FileName: "Изображение"
+   Description: "Описание"
+  ProductLocaleViewModel:
+   Title: "Название"
+   Price: "Цена"
+   FileName: "Изображение"
+   Description: "Описание"
+  CategoryViewModel:
+   Title: "Название"
+   Description: "Описание"
+  CategoryLocaleViewModel:
+   Title: "Название"
+   Description: "Описание"
+  ProductWidgetModel:
+   CategoriesId: "Категории"
+   PageSize: "Количество продуктов на странице"

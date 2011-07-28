@@ -53,5 +53,19 @@ namespace Products.NHibernate.Services
          
             return basecriteria;
         }
+
+        public Product GetProduct(long id, long widgetId)
+        {
+            var categoriesIdSubQuery = DetachedCriteria.For<ProductWidgetToCategory>("prodWidCat")
+              .Add(Restrictions.Eq("prodWidCat.ProductWidgetId", widgetId))
+              .SetProjection(Projections.Property("prodWidCat.CategoryId"));
+            var productIdSubQuery = DetachedCriteria.For<ProductToCategory>("prodCat")
+              .Add(Subqueries.PropertyIn("prodCat.CategoryId", categoriesIdSubQuery))
+              .SetProjection(Projections.Distinct(Projections.Property("prodCat.ProductId")));
+            ICriteria basecriteria = Session.CreateCriteria<Product>("product")
+               .Add(Subqueries.PropertyIn("product.Id", productIdSubQuery))
+               .Add(Restrictions.IdEq(id));
+            return (Product)basecriteria.UniqueResult();
+        }
     }
 }

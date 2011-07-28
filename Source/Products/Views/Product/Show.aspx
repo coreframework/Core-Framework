@@ -11,13 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="i_form clrfix">
         <div class="cols clrfix">
-            <div class="fst_col colls_i" style="width: 60%;">
-                <div class="i_form_i">
-                    <img class="preview" style="" src="<%=Model.FileName %>" alt="">
-                </div>
-                <div class="i_form_i">
-                    <%=Model.Price %>
-                </div>
+            <div class="fst_col colls_i">
                 <div class="i_form_i">
                     <%:Html.DropDownListFor(model => model.SelectedCulture,
                                                              new SelectList(Model.Cultures, "Value", "Key",
@@ -28,6 +22,21 @@
         </div>
         <div id="localeForm">
             <% Html.RenderPartial("ShowForm", Model); %>
+        </div>
+        <div class="cols clrfix">
+            <div class="fst_col colls_i">
+                <div class="i_form_i">
+                    <%:Html.LocalizedLabelFor(model=>model.Price) %>
+                    <%=Model.Price %>
+                </div>
+                <%if (!String.IsNullOrEmpty(Model.FileName)){%>
+                <div class="i_form_i">
+                    <%:Html.LocalizedLabelFor(model => model.FileName, new { cssClass = "for_some_field" })%>
+                    <img class="preview" style="" src="<%=Model.FileName %>" alt="">
+                </div>
+                <%} %>
+               
+            </div>
         </div>
         <div class="i_buttons clrfix">
             <span>

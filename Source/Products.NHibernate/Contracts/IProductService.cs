@@ -45,6 +45,14 @@ namespace Products.NHibernate.Contracts
         /// <returns>ICriteria</returns>
         ICriteria GetProductCriteria(long[] categoriesIds);
 
+        /// <summary>
+        /// Get Product by product id and widget id
+        /// </summary>
+        /// <param name="id">The Product Id</param>
+        /// <param name="widgetId">The Widget id</param>
+        /// <returns>ICriteria</returns>
+        Product GetProduct(long id, long widgetId);
+
 
     }
 }

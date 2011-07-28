@@ -28,5 +28,6 @@ Controllers:
     Error: "Errors occurred while saving this category. Please, try again later."
   ProductViewerWidget:
     Setup: "Setup products."
+    NoProduct: "There are no available products."
   CategoryViewerWidget:
     Setup: "Setup categories"

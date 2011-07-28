@@ -296,10 +296,10 @@
     <None Include="Resources\controllers.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\models.ru.yml">
+    <None Include="Resources\Models\models.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\models.yml">
+    <None Include="Resources\Models\models.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\verbs.ru.yml">

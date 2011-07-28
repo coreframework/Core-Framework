@@ -72,6 +72,7 @@
     <Compile Include="Mappings\ProductLocaleMapping.cs" />
     <Compile Include="Mappings\ProductMapping.cs" />
     <Compile Include="Mappings\ProductWidgetMapping.cs" />
+    <Compile Include="Mappings\ProductWidgetToCategoryMapping.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\CategoryLocale.cs" />
     <Compile Include="Models\CategoryWidget.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Models\ProductLocale.cs" />
     <Compile Include="Models\ProductToCategory.cs" />
     <Compile Include="Models\ProductWidget.cs" />
+    <Compile Include="Models\ProductWidgetToCategory.cs" />
     <Compile Include="ProductsNHibernateModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NHibernateCategoryLocaleService.cs" />

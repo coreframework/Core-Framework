@@ -1,0 +1,20 @@
+Models:
+    ProductViewModel:
+        Title: "Title"
+        Price: "Price"
+        FileName: "Image"
+        Description: "Description"
+    ProductLocaleViewModel:
+        Title: "Title"
+        Price: "Price"
+        FileName: "Image"
+        Description: "Description"
+    CategoryViewModel:
+        Title: "Title"
+        Description: "Description"
+    CategoryLocaleViewModel:
+        Title: "Title"
+        Description: "Description"
+    ProductWidgetModel:
+        CategoriesId: "Categories"
+        PageSize: "Page Size"

@@ -55,6 +55,8 @@ namespace Products.Helpers
 
                 ICriteria searchQuery = productService.GetProductCriteria(model.CategoriesId);
                 model.TotalItemsCount = productService.GetCount(searchQuery);
+                if (model.TotalItemsCount < widget.PageSize * (currentPage - 1))
+                    currentPage = 1;
                 model.Products = searchQuery.SetFirstResult((currentPage - 1) * widget.PageSize).SetMaxResults(widget.PageSize).List<Product>(); //searchQuery.Skip().Take().ToList();
                 model.CurrentPage = currentPage;
                 return model;

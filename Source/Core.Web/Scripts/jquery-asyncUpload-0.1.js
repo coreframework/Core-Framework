@@ -39,7 +39,7 @@
 
             // Instantiate the uploader SWF
             var swfu;
-            var width = 90, height = 26, text_width = 40, text_height = 10;
+            var width = 90, height = 27, text_width = 70, text_height = 10;
             if (options) {
                 width = options.button_width || width;
                 height = options.button_height || height;
@@ -61,8 +61,8 @@
                 button_image_url: "blank-button.png",
                 button_placeholder_id: id + "Upload",
                 button_text: "<font face=\"Arial\" size=\"13pt\">Choose file</span>",
-                button_text_left_padding: (width - text_width) / 2,
-                button_text_top_padding: (height - text_height) / 2,
+                button_text_left_padding: (width - text_width) / 2 -8, //
+                button_text_top_padding: (height - text_height) / 2 -3, //
 
                 messages: {
                     success: "File \"{0}\" has been uploaded successfully. Don't forget to save changes.",
