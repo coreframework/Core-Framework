@@ -132,6 +132,7 @@
     <Compile Include="Contracts\Permissions\PermissionsBuilder.cs" />
     <Compile Include="Contracts\Widgets\IBreadcrumbsWidgetService.cs" />
     <Compile Include="Contracts\Widgets\IListMenuWidgetService.cs" />
+    <Compile Include="Contracts\Widgets\INavigationMenuWidgetService.cs" />
     <Compile Include="Contracts\Widgets\ISiteMapWidgetService.cs" />
     <Compile Include="CoreWebNHibernateModule.cs" />
     <Compile Include="Helpers\FormsAuthenticationHelper.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="Mappings\SchemaInfoMapping.cs" />
     <Compile Include="Mappings\Widgets\BreadcrumbsWidgetMapping.cs" />
     <Compile Include="Mappings\Widgets\ListMenuWidgetMapping.cs" />
+    <Compile Include="Mappings\Widgets\NavigationMenuWidgetMapping.cs" />
     <Compile Include="Mappings\Widgets\SiteMapWidgetMapping.cs" />
     <Compile Include="Migrator\CoreMigrator.cs" />
     <Compile Include="Models\PageLocale.cs" />
@@ -198,6 +200,7 @@
     <Compile Include="Models\Widget.cs" />
     <Compile Include="Models\Widgets\BreadcrumbsWidget.cs" />
     <Compile Include="Models\Widgets\ListMenuWidget.cs" />
+    <Compile Include="Models\Widgets\NavigationMenuWidget.cs" />
     <Compile Include="Models\Widgets\SiteMapWidget.cs" />
     <Compile Include="Permissions\Operations\PageOperations.cs" />
     <Compile Include="Permissions\Operations\PluginOperations.cs" />
@@ -227,6 +230,7 @@
     <Compile Include="Services\Permissions\PermissionCommonService.cs" />
     <Compile Include="Services\Widgets\NHibernateBreadcrumbsWidgetService.cs" />
     <Compile Include="Services\Widgets\NHibernateListMenuWidgetService.cs" />
+    <Compile Include="Services\Widgets\NHibernateNavigationMenuWidgetService.cs" />
     <Compile Include="Services\Widgets\NHibernateSiteMapWidgetService.cs" />
   </ItemGroup>
   <ItemGroup>

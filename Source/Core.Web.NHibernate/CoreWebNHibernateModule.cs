@@ -60,6 +60,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<IPermissionCommonService>().ImplementedBy<PermissionCommonService>().LifeStyle.Transient);
             container.Register(Component.For<IPageCommonService>().ImplementedBy<PageCommonService>().LifeStyle.Transient);
             container.Register(Component.For<IAuthenticationHelper>().ImplementedBy<FormsAuthenticationHelper>().LifeStyle.Transient);
+            container.Register(Component.For<INavigationMenuWidgetService>().ImplementedBy<NHibernateNavigationMenuWidgetService>().LifeStyle.Transient);
         }
 
         #endregion

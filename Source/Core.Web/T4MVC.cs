@@ -51,6 +51,7 @@ namespace T4MVC {
         public readonly string Name = "Navigation";
         public Core.Web.Areas.Navigation.Controllers.BreadcrumbsController Breadcrumbs = new Core.Web.Areas.Navigation.Controllers.T4MVC_BreadcrumbsController();
         public Core.Web.Areas.Navigation.Controllers.ListMenuController ListMenu = new Core.Web.Areas.Navigation.Controllers.T4MVC_ListMenuController();
+        public Core.Web.Areas.Navigation.Controllers.NavigationMenuController NavigationMenu = new Core.Web.Areas.Navigation.Controllers.T4MVC_NavigationMenuController();
         public Core.Web.Areas.Navigation.Controllers.SiteMapController SiteMap = new Core.Web.Areas.Navigation.Controllers.T4MVC_SiteMapController();
     }
 }

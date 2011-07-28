@@ -181,15 +181,20 @@
     <Compile Include="Areas\Admin\Models\WidgetViewModel.cs" />
     <Compile Include="Areas\Navigation\Controllers\BreadcrumbsController.cs" />
     <Compile Include="Areas\Navigation\Controllers\ListMenuController.cs" />
+    <Compile Include="Areas\Navigation\Controllers\NavigationMenuController.cs" />
     <Compile Include="Areas\Navigation\Controllers\SiteMapController.cs" />
     <Compile Include="Areas\Navigation\Helpers\BreadcrumbsWidgetHelper.cs" />
     <Compile Include="Areas\Navigation\Helpers\ListMenuWidgetHelper.cs" />
+    <Compile Include="Areas\Navigation\Helpers\NavigationMenuWidgetHelper.cs" />
     <Compile Include="Areas\Navigation\Helpers\SiteMapWidgetHelper.cs" />
     <Compile Include="Areas\Navigation\Models\BreadcrumbsItem.cs" />
     <Compile Include="Areas\Navigation\Models\BreadcrumbsViewWidgetModel.cs" />
     <Compile Include="Areas\Navigation\Models\BreadcrumbsWidgetModel.cs" />
     <Compile Include="Areas\Navigation\Models\ListMenuPageItemModel.cs" />
     <Compile Include="Areas\Navigation\Models\ListMenuWidgetModel.cs" />
+    <Compile Include="Areas\Navigation\Models\NavigationMenuWidgetModel.cs" />
+    <Compile Include="Areas\Navigation\Models\PartialNavigationMenuItemModel.cs" />
+    <Compile Include="Areas\Navigation\Models\PartialNavigationMenuModel.cs" />
     <Compile Include="Areas\Navigation\Models\SiteMapViewWidgetModel.cs" />
     <Compile Include="Areas\Navigation\Models\SiteMapWidgetModel.cs" />
     <Compile Include="Areas\Navigation\NavigationAreaRegistration.cs" />
@@ -200,11 +205,15 @@
     <Compile Include="Areas\Navigation\Verbs\ListMenuViewerVerb.cs" />
     <Compile Include="Areas\Navigation\Verbs\ListMenuSaveVerb.cs" />
     <Compile Include="Areas\Navigation\Verbs\ListMenuEditorVerb.cs" />
+    <Compile Include="Areas\Navigation\Verbs\NavigationMenuEditorVerb.cs" />
+    <Compile Include="Areas\Navigation\Verbs\NavigationMenuSaveVerb.cs" />
+    <Compile Include="Areas\Navigation\Verbs\NavigationMenuViewerVerb.cs" />
     <Compile Include="Areas\Navigation\Verbs\SiteMapEditorVerb.cs" />
     <Compile Include="Areas\Navigation\Verbs\SiteMapSaveVerb.cs" />
     <Compile Include="Areas\Navigation\Verbs\SiteMapViewerVerb.cs" />
     <Compile Include="Areas\Navigation\Widgets\NBreadcrumbsWidget.cs" />
     <Compile Include="Areas\Navigation\Widgets\NListMenuWidget.cs" />
+    <Compile Include="Areas\Navigation\Widgets\NNavigationMenuWidget.cs" />
     <Compile Include="Areas\Navigation\Widgets\NSiteMapWidget.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
@@ -258,6 +267,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Navigation.ListMenuController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Navigation.NavigationMenuController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Navigation.SiteMapController.generated.cs">
@@ -322,6 +334,9 @@
     <Content Include="Areas\Navigation\Views\ListMenu\EditWidget.ascx" />
     <Content Include="Areas\Navigation\Views\ListMenu\ListMenuPageItem.ascx" />
     <Content Include="Areas\Navigation\Views\ListMenu\ViewWidget.ascx" />
+    <Content Include="Areas\Navigation\Views\NavigationMenu\EditWidget.ascx" />
+    <Content Include="Areas\Navigation\Views\NavigationMenu\PartialNavigationMenuItem.ascx" />
+    <Content Include="Areas\Navigation\Views\NavigationMenu\ViewWidget.ascx" />
     <Content Include="Areas\Navigation\Views\SiteMap\EditWidget.ascx" />
     <Content Include="Areas\Navigation\Views\SiteMap\ViewWidget.ascx" />
     <Content Include="Content\Css\Admin\dd.css" />

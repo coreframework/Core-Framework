@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddNavigationMenuWidgets.cs" />
     <Compile Include="Migration_AddSiteMapWidgets.cs" />
     <Compile Include="Migration_AddListMenuWidgetPages.cs" />
     <Compile Include="Migration_AddListMenuWidgets.cs" />

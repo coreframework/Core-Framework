@@ -19,6 +19,10 @@ namespace Core.Web.Areas.Navigation
             context.MapRoute(null, String.Empty, MVC.Navigation.Breadcrumbs.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, String.Empty, MVC.Navigation.Breadcrumbs.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "navigation/update-breadcrumbs", MVC.Navigation.Breadcrumbs.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
+            context.MapRoute(null, String.Empty, MVC.Navigation.NavigationMenu.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, String.Empty, MVC.Navigation.NavigationMenu.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "navigation/update-navigation-menu", MVC.Navigation.NavigationMenu.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
 
         public override string AreaName

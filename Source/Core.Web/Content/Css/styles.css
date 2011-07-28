@@ -277,6 +277,39 @@ div.success {}
 	.ddshadow{position: absolute;left: 0;top: 0;width: 0;height: 0;background: silver;}
 	.toplevelshadow{}
 
+.vertical .pages{ text-align: left;margin-bottom:10px; border: medium none; height:31px}
+.vertical .pages-menu ul{ border: 1px solid #dfe5e8; z-index:200;margin: 0;padding: 0;list-style-type: none; left:0;width: auto;}
+		
+	.vertical .pages .pages-menu ul li {display: block;float: none;border-right: medium none;
+		                                    height:auto;padding:6px 12px;font-size:14px;font-family:Arial}
+	.vertical .pages-menu ul li{z-index:200;position: relative;border-bottom:1px solid #dfe5e8;margin-bottom: -1px;height:19px;padding:6px 12px;font-size:14px;font-family:Arial;cursor:pointer}
+		.vertical .pages-menu ul li span {float:left;padding-top:2px;color:#0074bf}
+	.vertical .pages-menu ul li:hover {}
+		.vertical .pages-menu ul li a{text-decoration:none;padding-right:0 !important}
+		* html .vertical .pages-menu ul li a{}
+			.vertical .pages-menu ul li a:hover{}
+	.vertical  .pages .pages-menu ul li ul{position: absolute;left: 0;display: none;visibility: hidden;background:#fff;border:1px solid #c9ced2;width:200px;}
+		.vertical  .pages .pages-menu ul li ul li{display: list-item;margin-left:0;float: none;border-bottom: medium none;text-align:left;font-size:12px;padding:7px 12px 5px;z-index:200}
+		.vertical .pages-menu ul li ul li:first-child {border-top:none}
+			.vertical .pages-menu ul li ul li:hover{border-bottom:1px solid #c9ced2;background:url(../images/nav_sub_bg_active.gif) repeat-x}
+			.vertical .pages-menu ul li ul li a{width: 286px;color:#0052b8;text-decoration:underline;}
+				.vertical .pages-menu ul li:hover ul li a{color:#0052b8;text-decoration:underline;}
+				.vertical .pages-menu ul li ul li:hover a {text-decoration:none}
+			.vertical .pages-menu ul li:hover ul li.active a {}
+	.vertical .pages-menu ul li ul li ul{top: 0;margin-left:2px;margin-top:-1px;display: none;top: 0px; visibility: visible; left: 258px; }
+		.vertical .pages-menu ul li ul li ul li {}
+		.vertical .pages-menu ul li:hover ul li ul li a{color:#0052b8;text-decoration:underline;}
+		.vertical .pages-menu ul li ul li ul li:hover a {text-decoration:none}
+		.vertical .pages-menu ul li ul li img.li_del {visibility:hidden;}
+		.vertical .pages-menu ul li ul li:hover img.li_del {visibility:visible;}
+			.vertical .pages-menu ul li ul li:hover ul li img.li_del {visibility:hidden;}
+			.vertical .pages-menu ul li ul li:hover ul li:hover img.li_del {visibility:visible;}
+					
+.vertical .pages .pages-menu ul li .rightarrowclass{position: absolute;top: 9px;right: 5px;display:none;}					
+.vertical .pages .pages-menu ul li ul li .rightarrowclass{display:block; position: absolute;top: 6px;right: 5px;height:7px;width:4px;overflow:hidden;background:url(../images/nav_r.gif) no-repeat 0 -7px}
+.vertical .pages-menu ul li ul li:hover .rightarrowclass{background:url(../images/nav_r.gif) no-repeat 0 0}
+
+
 .pages-menu{width: 100%;}
 
 	.pages-menu ul{ z-index:300;margin: 0;padding: 0;list-style-type: none;border-top:none;*left:0;width:100% ;position:relative}

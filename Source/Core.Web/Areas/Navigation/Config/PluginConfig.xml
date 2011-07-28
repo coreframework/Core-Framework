@@ -24,5 +24,10 @@
       <Identifier>5224B396-44E1-11E0-B8AF-801ADFD92185</Identifier>
       <Title>Site Map</Title>
     </WidgetSetting>
+    <WidgetSetting>
+        <Key>Core.Web.Areas.Navigation.Widgets.NNavigationMenuWidget</Key>
+        <Identifier>5224B396-44E1-11E0-B8AF-801ADFD921rr5</Identifier>
+        <Title>Navigation Menu</Title>
+    </WidgetSetting>
   </WidgetSettings>
 </PluginSetting>
