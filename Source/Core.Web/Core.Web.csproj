@@ -1054,7 +1054,6 @@
     <Content Include="Config\asset_packages.yml" />
     <Content Include="Config\database.yml" />
     <Content Include="Config\sample.database.yml" />
-    <Content Include="Resources\common.yml" />
     <Content Include="Resources\views.yml" />
     <Content Include="Resources\framework.yml" />
     <Content Include="Areas\Navigation\Config\asset_packages.yml" />
@@ -1066,9 +1065,10 @@
     <None Include="Resources\Admin\models.yml" />
     <None Include="Resources\Admin\views.ru.yml" />
     <None Include="Resources\Admin\views.yml" />
-    <None Include="Resources\commont.ru.yml" />
+    <None Include="Resources\common.ru.yml" />
     <Content Include="Resources\Models\models.yml" />
     <Content Include="Resources\Models\messages.yml" />
+    <None Include="Resources\common.yml" />
     <None Include="Resources\framework.ru.yml" />
     <None Include="Resources\Models\messages.ru.yml" />
     <None Include="Resources\Models\models.ru.yml" />

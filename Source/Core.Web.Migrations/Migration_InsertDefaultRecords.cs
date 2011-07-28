@@ -63,9 +63,7 @@ namespace Core.Web.Migrations
         private void SetupDefaultPageLayoutRows()
         {
             Database.ExecuteNonQuery(
-                @"
-
-                 INSERT INTO PageLayoutRows
+                @"INSERT INTO PageLayoutRows
                                ([TemplateId])
                              VALUES (1)
                 INSERT INTO PageLayoutRows
@@ -73,10 +71,13 @@ namespace Core.Web.Migrations
                              VALUES (2)
                 INSERT INTO PageLayoutRows
                                ([TemplateId])
-                             VALUES (2)
+                             VALUES (3)
                 INSERT INTO PageLayoutRows
                                ([TemplateId])
                              VALUES (3)
+                INSERT INTO PageLayoutRows
+                               ([TemplateId])
+                             VALUES (4)
                 INSERT INTO PageLayoutRows
                                ([TemplateId])
                              VALUES (4)
@@ -86,6 +87,15 @@ namespace Core.Web.Migrations
                 INSERT INTO PageLayoutRows
                                ([TemplateId])
                              VALUES (5)
+                INSERT INTO PageLayoutRows
+                               ([TemplateId])
+                             VALUES (5)
+                INSERT INTO PageLayoutRows
+                               ([TemplateId])
+                             VALUES (6)
+                INSERT INTO PageLayoutRows
+                               ([TemplateId])
+                             VALUES (6)
                 INSERT INTO PageLayoutRows
                                ([TemplateId])
                              VALUES (6)
@@ -102,13 +112,13 @@ namespace Core.Web.Migrations
                              VALUES (1, 100, NULL)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (2, 100, 2)
+                             VALUES (2, 25, NULL)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (3, 25, NULL)
+                             VALUES (2, 75, NULL)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (3, 75, NULL)
+                             VALUES (3, 100, 2)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
                              VALUES (4, 25, NULL)
@@ -124,21 +134,34 @@ namespace Core.Web.Migrations
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
                              VALUES (6, 100, 2)
+                INSERT INTO PageLayoutColumns
+                               ([RowId], [DefaultWidthValue], [DefaultColspan])
+                             VALUES (7, 100, 2)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (7, 75, NULL)
+                             VALUES (8, 25, NULL)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (7, 25, NULL)
+                             VALUES (8, 75, NULL)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (8, 33, NULL)
+                             VALUES (9, 100, 2)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (8, 33, NULL)
+                             VALUES (10, 100, 3)
                  INSERT INTO PageLayoutColumns
                                ([RowId], [DefaultWidthValue], [DefaultColspan])
-                             VALUES (8, 33, NULL)
+                             VALUES (11, 33, NULL)
+                 INSERT INTO PageLayoutColumns
+                               ([RowId], [DefaultWidthValue], [DefaultColspan])
+                             VALUES (11, 33, NULL)
+                 INSERT INTO PageLayoutColumns
+                               ([RowId], [DefaultWidthValue], [DefaultColspan])
+                             VALUES (11, 33, NULL)
+                 INSERT INTO PageLayoutColumns
+                               ([RowId], [DefaultWidthValue], [DefaultColspan])
+                             VALUES (12, 100, 3)
+              
                 ");
         }
 
