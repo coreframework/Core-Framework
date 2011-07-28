@@ -4,11 +4,11 @@
     <div class="fst_col colls_i">
         <%:Html.HiddenFor(model => model.SelectedCulture) %>
         <div class="i_form_i">
-            <%:Html.LocalizedLabelFor(model=>model.Title) %>
+            <%:Html.LocalizedLabelFor(model=>model.Title) %><em>:</em>
             <%=Model.Title%>
         </div>
         <div class="i_form_i">
-         <%:Html.LocalizedLabelFor(model => model.Description, new{cssClass="for_some_field"})%>
+         <%:Html.LocalizedLabelFor(model => model.Description)%><em>:</em>
             <%=Model.Description%>
         </div>       
     </div>

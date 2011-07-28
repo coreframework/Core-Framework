@@ -3,7 +3,7 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Products.NHibernate.Models.Product>" %>
 <%@ Import Namespace="Products.Helpers" %>
 <div class="widget-products">
-    <div class="product">
+    <div class="product last">
         <%if (!String.IsNullOrEmpty(Model.FileName))
           {%>
         <div class="imgHolder">

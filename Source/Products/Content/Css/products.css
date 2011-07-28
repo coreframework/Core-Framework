@@ -1,4 +1,5 @@
 .widget-products .product { clear: both; padding: 5px 5px 10px; border-bottom: 1px solid #DFE5E8;margin-bottom: 5px;}
+.widget-products .last { border-bottom: 0 none ;margin-bottom: 0px;}
 .widget-products .product .imgHolder { display: block; float: left;margin-right: 15px;}
 .widget-products .product img { margin: 0; }
 .widget-products .product .title {display: inline-block;}
@@ -8,6 +9,7 @@
 .widget-products .product .price { margin-bottom: 5px;}
 .widget-products .product .price span {font-weight: bold;}
 .widget-products .product .description {max-height: 76px; overflow: hidden;}
+.widget-products .pager { padding-top: 5px; border-top: 1px solid #DFE5E8;}
 .widget-products .pager span, .widget-products .pager a { padding: 2px 4px;}
 .widget-products .pager span.current { font-weight: bold;}
 .widget-products .pager span.disabled { display: none;}

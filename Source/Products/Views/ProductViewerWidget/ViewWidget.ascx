@@ -5,7 +5,7 @@
 <div class="widget-products">
     <% foreach (var product in Model.Products)
        {%>
-    <div class="product">
+    <div class="product <%= Model.Products.Last().Id == product.Id ? "last" : ""%>">
         <%if (!String.IsNullOrEmpty(product.FileName))
           {%>
         <div class="imgHolder">

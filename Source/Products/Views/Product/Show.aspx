@@ -26,12 +26,11 @@
         <div class="cols clrfix">
             <div class="fst_col colls_i">
                 <div class="i_form_i">
-                    <%:Html.LocalizedLabelFor(model=>model.Price) %>
+                    <%:Html.LocalizedLabelFor(model=>model.Price) %><em>:</em>
                     <%=Model.Price %>
                 </div>
                 <%if (!String.IsNullOrEmpty(Model.FileName)){%>
-                <div class="i_form_i">
-                    <%:Html.LocalizedLabelFor(model => model.FileName, new { cssClass = "for_some_field" })%>
+                <div class="i_form_i">                   
                     <img class="preview" style="" src="<%=Model.FileName %>" alt="">
                 </div>
                 <%} %>

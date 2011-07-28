@@ -243,8 +243,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 					.r_chb_w h3{float:left;margin-right:24px;}
 				.cols h3 {margin-bottom:10px;font-size:13px;}
 				.cols .i_form_i {width:90%;margin-bottom:10px}
-				.cols .i_form_i label {color:#474747;font-size:12px;font-weight:bold}
-				.cols .i_form_i label.for_some_field {float: left;margin-right: 5px;}
+				.cols .i_form_i label, .cols .i_form_i em {color:#474747;font-size:12px;font-weight: bold;font-style: normal; }				 		
 					.cols .i_form_i label span {color:#0f5cbb;}
 				.cols .i_form_i input[type=text] {width:100%;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;}
 				.cols .i_form_i input[type=password] {width:100%;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;}
