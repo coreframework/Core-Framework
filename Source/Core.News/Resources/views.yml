@@ -4,7 +4,7 @@ Views:
 
     Index:
 
-      Title: "Edit News Article"
+      Title: "News Articles"
       Actions: "Actions"
 
       User: "User"
@@ -28,13 +28,11 @@ Views:
 
     New:
 
-      Title: "Edit News Article"
+      Title: "New News Article"
 
       Save: "Save"
 
       Cancel: "Cancel"
-
-      Title: "Edit News Article"
     
     EditForm:
 
@@ -44,10 +42,11 @@ Views:
 
       Cancel: "Cancel"
 
-      Title: "Edit News Article"
-
   NewsViewerWidget:
     EditWidget:
       Count: "News items count"
     ArticleWidget:
-      Back: "Back"
+      Back: "Back" 
+      Added: "Added"
+    ViewWidget:
+      Added: "Added"

@@ -16,6 +16,13 @@ namespace Core.News.Controllers
     [Export(typeof(IController)), ExportMetadata("Name", "NewsViewerWidget")]
     public partial class NewsViewerWidgetController : CoreWidgetController
     {
+        #region
+
+        private const string Newsvidgetid = "newsvidgetid";
+        private const string Articleid = "articleid";
+
+        #endregion
+
         #region Properties
 
         public override string ControllerWidgetIdentifier
@@ -42,16 +49,16 @@ namespace Core.News.Controllers
 
                 if (widget != null)
                 {
-                    if (!String.IsNullOrEmpty(Request.Params["newsvidgetid"]))
+                    if (!String.IsNullOrEmpty(Request.Params[Newsvidgetid]))
                     {
-                        var ids = Request.Params["newsvidgetid"].Split(',');
+                        var ids = Request.Params[Newsvidgetid].Split(',');
                         foreach (var id in ids)
                         {
                             if (widget.Id == int.Parse(id))
                             {
-                                if (!String.IsNullOrEmpty(Request.Params["articleid" + id]))
+                                if (!String.IsNullOrEmpty(Request.Params[Articleid + id]))
                                 {
-                                    var article = articleService.Find(long.Parse(Request.Params["articleid" + id]));
+                                    var article = articleService.FindPublished(long.Parse(Request.Params[Articleid + id]));
                                     article.WidgetId = widget.Id;
                                     return PartialView("ArticleWidget", article);
                                 }
@@ -60,7 +67,7 @@ namespace Core.News.Controllers
                     }
 
                     widget.NewsArticles =
-                        articleService.GetAll() as List<NewsArticle>;
+                        new List<NewsArticle>(articleService.FindPublished());
                     return PartialView(widget);
                 }
             }

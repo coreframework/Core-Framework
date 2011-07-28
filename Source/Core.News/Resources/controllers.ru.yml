@@ -1,0 +1,9 @@
+﻿ru:
+  Controllers:
+    News:
+      Title: "Название"
+      GridTitle: "Новости"
+      View: "Просмотреть"
+      Edit: "Редактировать"
+      NotFound: "Новость не найдена"
+      Status: "Статус"

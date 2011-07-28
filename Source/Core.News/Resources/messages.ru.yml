@@ -1,7 +1,9 @@
-Controllers:
-  News:
-    Messages:
-      SaveSuccess: "Sucessfully save news article."
-      ValidationError: "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
-      UnknownError: "Some error has been occured. Please try again."
-      RemoveSuccess: "Sucessfully remove news article."
+﻿ru:
+  Controllers:
+    News:
+      Messages:
+        SaveSuccess: "Новость сохранена успешно."
+        ValidationError: "Возникли валидационные ошибки. Пожалуйста, проверьте правильность заполнения полей."
+        UnknownError: "Возникла ошибка. Попробуйте еще раз."
+        RemoveSuccess: "Новость удалена успешно."
+        Pagenotfound: "Страница не найдена"

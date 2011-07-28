@@ -68,6 +68,7 @@
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Models\NewsArticleLocale.cs" />
     <Compile Include="Models\NewsArticleWidget.cs" />
+    <Compile Include="Models\NewsStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NHibernateNewsArticleLocaleService.cs" />
     <Compile Include="Services\NHibernateNewsArticleService.cs" />

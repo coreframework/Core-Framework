@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Core.News.Nhibernate.Models;
 using Framework.Core.Services;
 
@@ -18,6 +19,10 @@ namespace Core.News.Nhibernate.Contracts
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        IQueryable<NewsArticle> GetSearchQuery(string searchString);   
+        IQueryable<NewsArticle> GetSearchQuery(string searchString);
+
+        NewsArticle FindPublished(long id);
+
+        IEnumerable<NewsArticle> FindPublished();
     }
 }

@@ -1,10 +1,13 @@
-﻿Models:
-  ProductWidgetModel:
-    ItemsOnPage: "News items count"
-  NewsArticleViewModel:
-    Title: "Title"
-    Content: "Content"
-  NewsArticleLocaleViewModel:
-    Cultures: "Cultures"
-    Title: "Title"
-    Content: "Content"
+﻿ru:
+  Models:
+    ProductWidgetModel:
+      ItemsOnPage: "Количество новостей"
+    NewsArticleViewModel:
+      Title: "Заголовок"
+      Content: "Содержимое"
+      Summary: "Аннотация"
+    NewsArticleLocaleViewModel:
+      Cultures: "Культуры"
+      Title: "Заголовок"
+      Content: "Содержимое"
+      Summary: "Аннотация"

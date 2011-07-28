@@ -17,8 +17,15 @@
 			    <div class="i_form_i">
               <%:Html.EditorFor(model => model.Title)%>
                 </div>
+                <div class="i_form_i">
+              <%:Html.EditorFor(model => model.Summary)%>
+                </div>
 			    <div class="i_form_i">
               <%:Html.EditorFor(model => model.Content)%>
+                </div>
+                <div class="i_form_i">
+              <%:Html.DropDownListFor(model => model.Status)%>
+
                 </div>
 			    <div class="i_form_i">
               <%:Html.AntiForgeryToken()%>

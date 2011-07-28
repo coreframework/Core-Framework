@@ -11,7 +11,7 @@ namespace Core.News.Nhibernate
     {
         public static void Install(IWindsorContainer container)
         {
-            // Register nhibernate fluent mapper.
+            //Register nhibernate fluent mapper.
             container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("cnews_mapper").LifeStyle.Transient);
 
             // Register data services.

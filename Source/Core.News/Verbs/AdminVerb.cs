@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Web;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
@@ -8,7 +9,7 @@ using Microsoft.Practices.ServiceLocation;
 
 namespace Core.News.Verbs
 {
-    [Export(typeof(IActionVerb)), ExportMetadata("News", "AdminModules")]
+    [Export(typeof(IActionVerb)), ExportMetadata("Category", "AdminModules")]
     public class AdminVerb : IActionVerb
     {
         #region Properties
@@ -17,7 +18,7 @@ namespace Core.News.Verbs
         /// </summary>
         public string Name
         {
-            get { return "News"; }
+            get { return HttpContext.GetGlobalResourceObject(String.Format("News.Verbs.AdminVerb"), String.Format("News")) as String ?? "News"; }
         }
 
         /// <summary>

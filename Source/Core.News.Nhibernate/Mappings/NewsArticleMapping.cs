@@ -14,6 +14,9 @@ namespace Core.News.Nhibernate.Mappings
             Cache.Region("News").ReadWrite();
             Table("News");
             Id(newsArticle => newsArticle.Id);
+            Map(newsArticle => newsArticle.CreateDate);
+            Map(newsArticle => newsArticle.LastModifiedDate);
+            Map(newsArticle => newsArticle.StatusId);
 //            HasMany(newsArticle => newsArticle.Widgets).KeyColumn("NewsArticleId")
 //            .Table("NewsArticleWidgets")
 //            .Inverse()

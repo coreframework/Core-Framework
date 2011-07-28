@@ -1,0 +1,8 @@
+Controllers:
+  News:
+    Title: "Title"
+    GridTitle: "News"
+    View: "View"
+    Edit: "Edit"
+    NotFound: "Article not found"
+    Status: "Status"

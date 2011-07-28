@@ -19,6 +19,12 @@ namespace Core.News.Nhibernate.Models
         public virtual String Title { get; set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        /// <value>The summary.</value>
+        public virtual String Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the content.
         /// </summary>
         /// <value>The content.</value>

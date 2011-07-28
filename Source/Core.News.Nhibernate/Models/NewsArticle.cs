@@ -15,6 +15,8 @@ namespace Core.News.Nhibernate.Models
 
         #region Properties
 
+        public virtual long WidgetId { get; set; }
+
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -28,9 +30,18 @@ namespace Core.News.Nhibernate.Models
             set { ((NewsArticleLocale)CurrentLocale).Title = value; }
         }
 
-
-
-        public virtual long WidgetId { get; set; }
+        /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        /// <value>The summary.</value>
+        public virtual String Summary
+        {
+            get
+            {
+                return ((NewsArticleLocale)CurrentLocale).Summary;
+            }
+            set { ((NewsArticleLocale)CurrentLocale).Summary = value; }
+        }
 
         /// <summary>
         /// Gets or sets the content.
@@ -44,6 +55,16 @@ namespace Core.News.Nhibernate.Models
             }
             set { ((NewsArticleLocale)CurrentLocale).Content = value; }
         }
+
+        /// <summary>
+        /// Gets or sets the status Id.
+        /// </summary>
+        /// <value>The status Id.</value>
+        public virtual int StatusId { get; set; }
+
+        public virtual DateTime CreateDate { get; set; }
+
+        public virtual DateTime LastModifiedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the widgets.

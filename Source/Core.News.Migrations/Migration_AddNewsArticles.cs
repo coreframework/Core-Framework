@@ -17,6 +17,7 @@ namespace Core.News.Migrations
             Database.AddTable("News", t =>
             {
                 t.PrimaryKey();
+                t.Integer("StatusId").Null();
                 t.DateTime("CreateDate").Null();
                 t.DateTime("LastModifiedDate").Null();
             });

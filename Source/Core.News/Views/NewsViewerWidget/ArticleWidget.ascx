@@ -7,8 +7,14 @@
 
 <div>
     <h1><%=Model.Title%></h1>
+    <p><b>
+        <%=Model.Summary%>
+    </b></p>
     <p>
         <%=Model.Content%>
+    </p>
+    <p>
+        <%=Html.Translate(".Added") %> <%=Model.LastModifiedDate.ToString("dd.MM.yy")%>
     </p>
     <p>
         <a href="<% =NewsViewerWidgetHelper.GetBackUrl(Request.Url.ToString(), Model.WidgetId, Model.Id) %>"><%=Html.Translate(".Back") %></a>

@@ -1,3 +1,4 @@
-Verbs:
-  AdminCategoryVerb:
-    News: "News"
+﻿ru:
+  Verbs:
+    AdminVerb:
+      News: "Новости"

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
 using Core.News.Nhibernate.Contracts;
@@ -24,6 +25,18 @@ namespace Core.News.Nhibernate.Services
         {
             var baseQuery = CreateQuery();
             return String.IsNullOrEmpty(searchString) ? baseQuery : baseQuery.Where(article => article.Title.Contains(searchString) || article.Content.Contains(searchString));
+        }
+
+        public NewsArticle FindPublished(long id)
+        {
+            IQueryable<NewsArticle> query = CreateQuery();
+            return query.Where(article => article.Id == id && article.StatusId == (int)NewsStatus.Publish).OrderBy(article => article.LastModifiedDate).FirstOrDefault();
+        }
+
+        public IEnumerable<NewsArticle> FindPublished()
+        {
+            IQueryable<NewsArticle> query = CreateQuery();
+            return query.Where(article => article.StatusId == (int)NewsStatus.Publish).OrderBy(article => article.LastModifiedDate).AsEnumerable();
         }
     }
 }

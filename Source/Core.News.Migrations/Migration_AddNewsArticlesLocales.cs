@@ -18,6 +18,7 @@ namespace Core.News.Migrations
             {
                 t.PrimaryKey();
                 t.String("Title");
+                t.String("Summary");
                 t.Text("Content");
                 t.Text("Culture").Length(10);
                 t.ForeignKey("NewsArticle").Table("News").OnDelete(ForeignKeyConstraint.Cascade);

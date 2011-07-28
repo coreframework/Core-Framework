@@ -1,53 +1,44 @@
-﻿Views:
+﻿ru:
+  Views:
+    Admin:
 
-  Admin:
+      Index:
+        Title: "Новости"
+        Actions: "Actions"
+        User: "User"
+        Status: "Статус"
+        Remove: "[Удалить]"
+        UserGroups: "[User groups]"
+        New: "Новая новость"
+      Edit:
 
-    Index:
+        Title: "Редактировать новость"
 
-      Title: "Edit News Article"
-      Actions: "Actions"
+        Save: "Сохранить"
 
-      User: "User"
+        Cancel: "Отмена"
 
-      Status: "Status"
+      New:
 
-      Remove: "[Remove]"
+        Title: "Новая новость"
 
-      UserGroups: "[User groups]"
+        Save: "Сохранить"
 
-      New: "New Article"
-    Edit:
-
-      Title: "Edit News Article"
-
-      Save: "Save"
-
-      Cancel: "Cancel"
-
-      Title: "Edit News Article"
-
-    New:
-
-      Title: "Edit News Article"
-
-      Save: "Save"
-
-      Cancel: "Cancel"
-
-      Title: "Edit News Article"
+        Cancel: "Отмена"
     
-    EditForm:
+      EditForm:
 
-      Title: "Edit News Article"
+        Save: "Сохранить"
 
-      Save: "Save"
+        Cancel: "Отмена"
 
-      Cancel: "Cancel"
+        Title: "Редактировать новость"
 
-      Title: "Edit News Article"
-
-  NewsViewerWidget:
-    EditWidget:
-      Count: "News items count"
-    ArticleWidget:
-      Back: "Назад"
+    NewsViewerWidget:
+      EditWidget:
+        Count: "Количество новостей в списке"
+      ArticleWidget:
+        Back: "Назад"
+        Added: "Добавлено"
+      ViewWidget:
+        Added: "Добавлено"

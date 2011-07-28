@@ -68,8 +68,14 @@ namespace Core.News.Controllers
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Title", 
+                                                                 Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
                                                                  Index = "Title",
+                                                                 Width = 400
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = HttpContext.Translate("Status", ResourceHelper.GetControllerScope(this)), 
+                                                                 Index = "Status",
                                                                  Width = 400
                                                              },
                                                          new GridColumnViewModel
@@ -93,7 +99,7 @@ namespace Core.News.Controllers
             {
                 DataUrl = Url.Action("DynamicGridData","News"),
                 DefaultOrderColumn = "Id",
-                GridTitle = "News",
+                GridTitle = HttpContext.Translate("GridTitle", ResourceHelper.GetControllerScope(this)),
                 Columns = columns,
                 IsRowNotClickable = true
             };
@@ -119,10 +125,10 @@ namespace Core.News.Controllers
                     select new
                     {
                         id = article.Id,
-                        cell = new[] {  article.Title, 
+                        cell = new[] {  article.Title, ((NewsStatus)article.StatusId).ToString(),
 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","News",new { id = article.Id }),"Edit"),
+                                            Url.Action("Edit","News",new { id = article.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","News",new { id = article.Id }))}
                     }).ToArray()
@@ -140,7 +146,7 @@ namespace Core.News.Controllers
             var article = newsArticlesService.Find(id ?? 0);
             if (article == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.Pagenotfound", ResourceHelper.GetControllerScope(this)));
             }
 
             return View("Admin/Edit", new NewsArticleLocaleViewModel().MapFrom(article));
@@ -152,7 +158,7 @@ namespace Core.News.Controllers
             var newsArticle = newsArticlesService.Find(newsArticleId);
             if (newsArticle == null)
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.Pagenotfound", ResourceHelper.GetControllerScope(this)));
             }
             var model = new NewsArticleLocaleViewModel().MapFrom(newsArticle);
             model.SelectedCulture = culture;
@@ -162,6 +168,10 @@ namespace Core.News.Controllers
             {
                 model.Title = locale.Title;
                 model.Content = locale.Content;
+                model.Summary = locale.Summary;
+                model.StatusId = locale.NewsArticle.StatusId;
+                model.CreateDate = locale.NewsArticle.CreateDate;
+                model.LastModifiedDate = locale.NewsArticle.LastModifiedDate;
             }
 
             return PartialView("Admin/EditForm", model);
@@ -187,7 +197,10 @@ namespace Core.News.Controllers
                     newsArticleLocale = new NewsArticleLocale { NewsArticle = newsArticle, Culture = newsArticleLocaleViewModel.SelectedCulture };
                 }
                 newsArticleLocale.Title = newsArticleLocaleViewModel.Title;
+                newsArticleLocale.Summary = newsArticleLocaleViewModel.Summary;
                 newsArticleLocale.Content = newsArticleLocaleViewModel.Content;
+                newsArticleLocale.NewsArticle.LastModifiedDate = DateTime.Now;
+                newsArticleLocale.NewsArticle.StatusId = newsArticleLocaleViewModel.StatusId;
                 localeService.Save(newsArticleLocale);
                 Success(HttpContext.Translate("Messages.SaveSuccess", ResourceHelper.GetControllerScope(this)));
                 return RedirectToAction("ShowAll");
@@ -216,6 +229,8 @@ namespace Core.News.Controllers
         {
             if (ModelState.IsValid)
             {
+                newsArticle.LastModifiedDate = DateTime.Now;
+                newsArticle.CreateDate = DateTime.Now;
                 newsArticlesService.Save(newsArticle.MapTo(new NewsArticle()));
                 Success(HttpContext.Translate("Messages.SaveSuccess", ResourceHelper.GetControllerScope(this)));
                 return RedirectToAction("ShowAll");
@@ -237,7 +252,7 @@ namespace Core.News.Controllers
             var newsArticle = newsArticlesService.Find(id);
             if (newsArticle != null)
             {
-                Success("Sucessfully remove news article.");
+                Success(HttpContext.Translate("Messages.RemoveSuccess", ResourceHelper.GetControllerScope(this)));
                 newsArticlesService.Delete(newsArticle);
                 return RedirectToAction("ShowAll");
             }

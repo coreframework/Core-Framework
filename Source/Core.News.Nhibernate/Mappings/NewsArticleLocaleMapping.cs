@@ -16,6 +16,7 @@ namespace Core.News.Nhibernate.Mappings
             References(newsArticleLocale => newsArticleLocale.NewsArticle).Column("NewsArticleId").LazyLoad().Not.Nullable();
             Map(newsArticleLocale => newsArticleLocale.Culture).Length(5);
             Map(newsArticleLocale => newsArticleLocale.Title).Length(255);
+            Map(newsArticleLocale => newsArticleLocale.Summary).Length(1024);
             Map(newsArticleLocale => newsArticleLocale.Content);
         }
     }
