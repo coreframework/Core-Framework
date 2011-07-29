@@ -1,0 +1,3 @@
+stylesheets:
+  base:
+    - news.css

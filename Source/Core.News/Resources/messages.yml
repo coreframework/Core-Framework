@@ -6,3 +6,6 @@ Controllers:
       UnknownError: "Some error has been occured. Please try again."
       RemoveSuccess: "Sucessfully remove news article."
       Pagenotfound: "Page not found"
+  NewsViewerWidget:
+    Messages:
+      Nonews: "There are no news there."

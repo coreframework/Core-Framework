@@ -9,6 +9,8 @@ using Core.News.Models;
 using Core.News.Nhibernate.Contracts;
 using Core.News.Nhibernate.Models;
 using Core.News.Widgets;
+using Framework.MVC.Extensions;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.News.Controllers
@@ -71,7 +73,7 @@ namespace Core.News.Controllers
                     return PartialView(widget);
                 }
             }
-            return Content("There are no news there");
+            return Content(HttpContext.Translate("Messages.Nonews", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>

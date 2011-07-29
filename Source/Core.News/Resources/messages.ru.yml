@@ -7,3 +7,6 @@
         UnknownError: "Возникла ошибка. Попробуйте еще раз."
         RemoveSuccess: "Новость удалена успешно."
         Pagenotfound: "Страница не найдена"
+    NewsViewerWidget:
+      Messages:
+        Nonews: "Нет новостей для отображения."

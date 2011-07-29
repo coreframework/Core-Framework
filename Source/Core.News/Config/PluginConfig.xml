@@ -6,8 +6,8 @@
   <Description>Allow managing News.</Description>
   <CssJsConfigPath></CssJsConfigPath>
   <ImagesPath></ImagesPath>
-  <CssPath></CssPath>
-  <CssPack></CssPack>
+  <CssPath>Content\Css\</CssPath>
+  <CssPack>base</CssPack>
   <WidgetSettings>
     <WidgetSetting>
       <Key>Core.News.Widgets.NewsViewerWidget</Key>
