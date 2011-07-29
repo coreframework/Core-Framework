@@ -85,6 +85,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IFormElementLocaleService.cs" />
     <Compile Include="Contracts\IFormLocaleService.cs" />
     <Compile Include="Contracts\IFormWidgetAnswerService.cs" />
     <Compile Include="Contracts\IFormWidgetAnswerValueService.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="CoreFormsNHibernateModule.cs" />
     <Compile Include="Helpers\ElementTypeDescriptionAttribute.cs" />
     <Compile Include="Mappings\BaseUserMapping.cs" />
+    <Compile Include="Mappings\FormElementLocaleMapping.cs" />
     <Compile Include="Mappings\FormLocaleMapping.cs" />
     <Compile Include="Mappings\FormWidgetAnswerValueMapping.cs" />
     <Compile Include="Mappings\FormBuilderWidgetMapping.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Mappings\FormMapping.cs" />
     <Compile Include="Mappings\FormWidgetAnswerMapping.cs" />
     <Compile Include="Mappings\FormWidgetMapping.cs" />
+    <Compile Include="Models\FormElementLocale.cs" />
     <Compile Include="Models\ElementTypeDescriptionModel.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\FormBuilderWidget.cs" />
@@ -112,6 +115,7 @@
     <Compile Include="Models\RegexTemplate.cs" />
     <Compile Include="Permissions\Operations\FormOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateFormElementLocaleService.cs" />
     <Compile Include="Services\NHibernateFormLocaleService.cs" />
     <Compile Include="Services\NHibernateFormWidgetAnswerValueService.cs" />
     <Compile Include="Services\NHibernateFormWidgetAnswerService.cs" />

@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Core.Forms.NHibernate.Helpers;
 using Core.Forms.NHibernate.Models;
 using Framework.Core.DomainModel;
+using Framework.Core.Localization;
 
 namespace Core.Forms.Models
 {
@@ -14,6 +14,8 @@ namespace Core.Forms.Models
         #region Fields
 
         List<ElementTypeDescriptionModel> _types;
+
+        private IDictionary<String, String> _cultures;
 
         #endregion
 
@@ -77,15 +79,30 @@ namespace Core.Forms.Models
         /// <value>The form id.</value>
         public long? FormId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the selected culture.
+        /// </summary>
+        /// <value>The selected culture.</value>
+        public String SelectedCulture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the cultures.
+        /// </summary>
+        /// <value>The cultures.</value>
+        public IDictionary<String, String> Cultures
+        {
+            get { return _cultures ?? (_cultures = CultureHelper.GetAvailableCultures()); }
+            set { _cultures = value; }
+        }
+
         public FormElementViewModel MapFrom(FormElement from)
         {
             Id = from.Id;
-            Title = from.Title;
             RegexTemplate = from.RegexTemplate;
             MaxLength = from.MaxLength;
             Type = from.Type;
-            Values = from.ElementValues;
             IsRequired = from.IsRequired;
+            MapLocaleFrom(from.CurrentLocale as FormElementLocale);
 
             return this;
         }
@@ -93,13 +110,31 @@ namespace Core.Forms.Models
         public FormElement MapTo(FormElement to)
         {
             to.Id = Id;
-            to.Title = Title;
             to.IsRequired = IsRequired;
-            to.ElementValues = Values;
             to.Type = Type;
             if (RegexTemplate != null) to.RegexTemplate = (RegexTemplate) RegexTemplate;
             to.MaxLength = MaxLength;
+            if (String.IsNullOrEmpty(SelectedCulture))
+                MapLocaleTo((FormElementLocale)to.CurrentLocale);
             return to;
+        }
+
+        public FormElementViewModel MapLocaleFrom(FormElementLocale locale)
+        {
+            Title = locale.Title;
+            Values = locale.ElementValues;
+            SelectedCulture = locale.Culture;
+
+            return this;
+        }
+
+        public FormElementLocale MapLocaleTo(FormElementLocale locale)
+        {
+            locale.Title = Title;
+            locale.ElementValues = Values;
+            if (SelectedCulture != null)
+                locale.Culture = SelectedCulture;
+            return locale;
         }
 
         /// <summary>

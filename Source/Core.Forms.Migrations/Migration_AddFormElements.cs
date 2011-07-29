@@ -17,10 +17,8 @@ namespace Core.Forms.Migrations
             Database.AddTable("Forms_FormElements", t =>
             {
                 t.PrimaryKey();
-                t.String("Title");
                 t.Integer("Type");
                 t.Bool("IsRequired").Default(0);
-                t.Text("ElementValues").Null();
                 t.Integer("OrderNumber");
                 t.Integer("RegexTemplate");
                 t.Long("MaxLength").Null();

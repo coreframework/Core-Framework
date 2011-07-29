@@ -98,6 +98,11 @@ namespace Core.Forms.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ChangeFormElementLanguage() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ChangeFormElementLanguage);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult SaveElement() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.SaveElement);
         }
@@ -134,6 +139,7 @@ namespace Core.Forms.Controllers {
             public readonly string UpdateFormElementPosition = "UpdateFormElementPosition";
             public readonly string NewElement = "NewElement";
             public readonly string EditElement = "EditElement";
+            public readonly string ChangeFormElementLanguage = "ChangeFormElementLanguage";
             public readonly string SaveElement = "SaveElement";
             public readonly string RemoveElement = "RemoveElement";
         }
@@ -147,10 +153,12 @@ namespace Core.Forms.Controllers {
             public readonly string Edit = "~/Views/Forms/Edit.aspx";
             public readonly string EditForm = "~/Views/Forms/EditForm.ascx";
             public readonly string EditFormElement = "~/Views/Forms/EditFormElement.aspx";
+            public readonly string FormElementEditor = "~/Views/Forms/FormElementEditor.ascx";
             public readonly string FormElements = "~/Views/Forms/FormElements.aspx";
             public readonly string FormPermissions = "~/Views/Forms/FormPermissions.aspx";
             public readonly string FormsList = "~/Views/Forms/FormsList.aspx";
             public readonly string FormTabs = "~/Views/Forms/FormTabs.ascx";
+            public readonly string New = "~/Views/Forms/New.aspx";
         }
     }
 
@@ -202,6 +210,12 @@ namespace Core.Forms.Controllers {
 
         public override System.Web.Mvc.ActionResult New() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult New(Core.Forms.Models.FormViewModel form) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            callInfo.RouteValueDictionary.Add("form", form);
             return callInfo;
         }
 
@@ -258,6 +272,13 @@ namespace Core.Forms.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditElement);
             callInfo.RouteValueDictionary.Add("formId", formId);
             callInfo.RouteValueDictionary.Add("formElementId", formElementId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangeFormElementLanguage(long formElementId, string culture) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeFormElementLanguage);
+            callInfo.RouteValueDictionary.Add("formElementId", formElementId);
+            callInfo.RouteValueDictionary.Add("culture", culture);
             return callInfo;
         }
 

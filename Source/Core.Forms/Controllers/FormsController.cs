@@ -374,6 +374,8 @@ namespace Core.Forms.Controllers
             return View("Edit", model);
         }
 
+        #region Form Elements
+
         public virtual ActionResult ShowFormElements(long formId)
         {
             var form = _formsService.Find(formId);
@@ -496,7 +498,7 @@ namespace Core.Forms.Controllers
                 throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
             }
 
-            return View("EditFormElement", new FormElementViewModel {FormId = formId}.MapFrom(new FormElement()));
+            return View("EditFormElement", new FormElementViewModel {FormId = formId});
         }
 
         [HttpGet]
@@ -510,6 +512,29 @@ namespace Core.Forms.Controllers
             }
 
             return View("EditFormElement", new FormElementViewModel { FormId = formId }.MapFrom(formElement));
+        }
+
+        [HttpPost]
+        public virtual ActionResult ChangeFormElementLanguage(long formElementId, String culture)
+        {
+            var formElement = _formsElementService.Find(formElementId);
+
+            if (formElement == null || formElement.Form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+            }
+
+            FormElementViewModel model = new FormElementViewModel{FormId = formElement.Form.Id}.MapFrom(formElement);
+            model.SelectedCulture = culture;
+
+            //get locale
+            var localeService = ServiceLocator.Current.GetInstance<IFormElementLocaleService>();
+            FormElementLocale locale = localeService.GetLocale(formElementId, culture);
+
+            if (locale != null)
+                model.MapLocaleFrom(locale);
+
+            return PartialView("FormElementEditor", model);
         }
 
         [HttpPost]
@@ -528,7 +553,8 @@ namespace Core.Forms.Controllers
                 }
 
                 var formElement = new FormElement();
-                if (model.Id > 0)
+                bool isEdited = model.Id > 0;
+                if (isEdited)
                 {
                     formElement = _formsElementService.Find(model.Id);
                 }
@@ -540,8 +566,16 @@ namespace Core.Forms.Controllers
 
                 if (_formsElementService.Save(model.MapTo(formElement)))
                 {
+                    if (isEdited)
+                    {
+                        //save locale
+                        var localeService = ServiceLocator.Current.GetInstance<IFormElementLocaleService>();
+                        FormElementLocale locale = localeService.GetLocale(formElement.Id, model.SelectedCulture);
+                        locale = model.MapLocaleTo(locale ?? new FormElementLocale { FormElement = formElement });
+                        localeService.Save(locale);
+                    }
                     Success("Sucessfully save form element.");
-                    return RedirectToAction(FormsMVC.Forms.ShowFormElements());
+                    return RedirectToAction(FormsMVC.Forms.ShowFormElements(formId));
                 }
             }
 
@@ -577,6 +611,8 @@ namespace Core.Forms.Controllers
             Error("Some error has been occured. Please try again.");
             return Content(String.Empty);
         }
+
+        #endregion
 
         #endregion
     }

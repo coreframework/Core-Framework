@@ -285,7 +285,7 @@ div.success {}
 	.vertical .pages-menu ul li{z-index:200;position: relative;border-bottom:1px solid #dfe5e8;margin-bottom: -1px;height:19px;padding:6px 12px;font-size:14px;font-family:Arial;cursor:pointer}
 		.vertical .pages-menu ul li span {float:left;padding-top:2px;color:#0074bf}
 	.vertical .pages-menu ul li:hover {}
-		.vertical .pages-menu ul li a{text-decoration:none;padding-right:0 !important}
+		.vertical .pages-menu ul li a{text-decoration:none;padding-right:0 !important;float:none !important;}
 		* html .vertical .pages-menu ul li a{}
 			.vertical .pages-menu ul li a:hover{}
 	.vertical  .pages .pages-menu ul li ul{position: absolute;left: 0;display: none;visibility: hidden;background:#fff;border:1px solid #c9ced2;width:200px;}
@@ -316,7 +316,8 @@ div.success {}
 		.pages-menu ul li{z-index:300;display: inline;float:left;float:left;border-right:1px solid #dfe5e8;height:19px;padding:6px 12px;font-size:14px;font-family:Arial;cursor:pointer;border-bottom:1px solid #dfe5e8;margin-bottom:-1px;}
 			.pages-menu ul li span {float:left;padding-top:2px;color:#0074bf}
 		.pages-menu ul li:hover {}
-			.pages-menu ul li a{text-decoration:none;padding-right:0 !important}
+			.pages-menu ul li a{text-decoration:none;padding-right:0 !important; float:left;}
+			.pages-menu ul li li a, .pages-menu ul li li li a {float:none!important;}
 			* html .pages-menu ul li a{}
 				.pages-menu ul li a:hover{}
 		.pages-menu ul li ul{position: absolute;left: 0;display: none;visibility: hidden;background:#fff;border:1px solid #c9ced2;margin-left:-1px;width:200px;z-index:500;}
@@ -328,7 +329,7 @@ div.success {}
 					.pages-menu ul li ul li:hover a {text-decoration:none}
 				.pages-menu ul li:hover ul li.active a {}
 				
-				li.add_new{background:url(../images/add_new_bg.gif) repeat-x;}
+				li.add_new{background:url(../images/add_new_bg.gif) repeat-x;white-space:nowrap;}
 					li.add_new a {font-weight:bold;color:#0052b8}
 					img.add_new {margin-right:5px;margin-bottom:-2px;}
 					.pages ul li img.add_new {margin-left:0}

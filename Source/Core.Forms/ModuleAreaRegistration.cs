@@ -32,7 +32,8 @@ namespace Core.Forms
             
             context.MapRoute(null, "admin/form-{formId}/new-element", FormsMVC.Forms.NewElement());
             context.MapRoute(null, "admin/form-{formId}/edit-element-{formElementId}", FormsMVC.Forms.EditElement());
-            context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", FormsMVC.Forms.SaveElement(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.ChangeFormElementLanguage", "admin/forms/form-element/change-language", new { controller = "Forms", action = "ChangeFormElementLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.SaveFormElement", "admin/forms-{formId}/save-element", new { controller = "Forms", action = "SaveElement", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.RemoveFormElement", "admin/forms-element/remove-{id}", FormsMVC.Forms.RemoveElement());
 
             context.MapRoute(null, "admin/form-tabs", FormsMVC.Forms.FormTabs(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

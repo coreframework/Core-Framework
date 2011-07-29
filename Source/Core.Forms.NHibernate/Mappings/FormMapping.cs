@@ -21,14 +21,14 @@ namespace Core.Forms.NHibernate.Mappings
             Map(form => form.ShowResetButton);
             Map(form => form.UserId);
 
-            HasMany(contentPage => contentPage.CurrentFormLocales).KeyColumn("FormId")
+            HasMany(form => form.CurrentFormLocales).KeyColumn("FormId")
             .Table("Forms_FormLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
             .Inverse()
             .LazyLoad()
             .Cascade.All();
 
-            HasMany(formBuilderWidget => formBuilderWidget.FormElements).KeyColumn("FormId")
+            HasMany(form => form.FormElements).KeyColumn("FormId")
            .Table("Forms_FormElements")
            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
            .Inverse()
