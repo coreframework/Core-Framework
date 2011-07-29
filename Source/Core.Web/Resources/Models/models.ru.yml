@@ -25,6 +25,8 @@ ru:
   WidgetCSSModel:
    CustomCSSClasses: "Css классы"
    PageCssModel.CustomCSS: "Css стили"
+  SiteSettings:
+   ShowMainMenu: "Показывать верхнее меню в режиме просмотра"
  Navigation:
   Models:
    NavigationMenuWidgetModel:

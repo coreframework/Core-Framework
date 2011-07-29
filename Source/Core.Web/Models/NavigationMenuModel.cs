@@ -21,5 +21,6 @@ namespace Core.Web.Models
         /// </summary>
         /// <value><c>true</c> if [manage access]; otherwise, <c>false</c>.</value>
         public bool ManageAccess { get; set; }
+
     }
 }

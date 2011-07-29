@@ -139,6 +139,9 @@
     <Compile Include="Admin.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.SiteSettingsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.UserController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -152,6 +155,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SiteSettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\WidgetController.cs" />
@@ -312,6 +316,7 @@
     <Content Include="Areas\Admin\Views\Role\Users.aspx" />
     <Content Include="Areas\Admin\Views\Shared\MainMenu.ascx" />
     <Content Include="Areas\Admin\Views\Shared\TopLinks.ascx" />
+    <Content Include="Areas\Admin\Views\SiteSettings\ViewSettings.aspx" />
     <Content Include="Areas\Admin\Views\UserGroup\Edit.aspx" />
     <Content Include="Areas\Admin\Views\UserGroup\Index.aspx" />
     <Content Include="Areas\Admin\Views\UserGroup\New.aspx" />

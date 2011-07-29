@@ -63,6 +63,7 @@ ru:
             Administration: "Администрирование"
             Modules: "Модули"
             Portal: "Портал"
+            SiteSettings: "Настройки сайта"
         Role:
           Index:
            Role: "Роль"
@@ -86,3 +87,6 @@ ru:
            Permissions: "Права доступа"
            Operation: "Действие"
            SelectPermissionSection: "Пожалуйста, выберите раздел для установления прав доступа."
+        SiteSettings:
+          ViewSettings:
+           SiteSettings: "Настройки сайта"

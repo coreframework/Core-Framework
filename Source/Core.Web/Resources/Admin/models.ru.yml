@@ -1,5 +1,5 @@
 ru:
-  Admin:
+ Admin: 
     Models:
       UserStatus:
         Active: "Активный"

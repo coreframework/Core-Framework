@@ -110,7 +110,11 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Widgets.ChangeLanguage", "admin/widgets/change-language", new { controller = "Widget", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Widgets.Update", "admin/widgets/{id}", MVC.Admin.Widget.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Widgets.Enable", "admin/widgets/{id}/enable", MVC.Admin.Widget.Enable());
-            context.MapRoute("Admin.Widgets.Disable", "admin/widgets/{id}/disable", MVC.Admin.Widget.Disable());          
+            context.MapRoute("Admin.Widgets.Disable", "admin/widgets/{id}/disable", MVC.Admin.Widget.Disable());
+            
+            context.MapRoute("Admin.SiteSettings", "admin/site-settings", MVC.Admin.SiteSettings.Show());
+            context.MapRoute("Admin.UpdateSiteSettings", "admin/update-site-settings", MVC.Admin.SiteSettings.Edit(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
         }
 
         #region Helper Methods

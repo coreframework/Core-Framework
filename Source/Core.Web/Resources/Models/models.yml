@@ -24,6 +24,8 @@ Models:
   WidgetCSSModel:
    CustomCSSClasses: "Custom CSS Classes"
    PageCssModel.CustomCSS: "Custom CSS"
+  SiteSettings:
+   ShowMainMenu: "Show main menu in View Mode"
 Navigation:
  Models:
   NavigationMenuWidgetModel:
@@ -32,6 +34,7 @@ Navigation:
     Depth: "Depth"
   ListMenuWidgetModel:
     Orientation: "Orientation"
+
   
      
 

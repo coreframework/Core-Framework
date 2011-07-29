@@ -52,13 +52,23 @@ namespace Core.Web.Areas.Admin.Helpers
                 menuItems.Add(html.Translate(".Portal"), usersMenuItem);
             }
 
-            if (permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Plugin), null))
+            var siteSettingsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (SiteSettings), null);
+            var pluginsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (Plugin), null);
+            if (siteSettingsAccess || pluginsAccess)
             {
-                menuItems.Add(html.Translate(".Administration"), new IMenuItem[]
-                                                    {
-                                                        new ActionLink<ModuleController>(html.Translate(".Modules"), Links.Content.Images.Admin.ico5_png, c => c.Index()),
-                                                        new ActionLink<WidgetController>(html.Translate(".Widgets"), Links.Content.Images.Admin.ico6_png, c => c.Index()),
-                                                    });
+                var administrationMenuItem = new List<IMenuItem>();
+
+                if (siteSettingsAccess)
+                {
+                    administrationMenuItem.Add(new ActionLink<SiteSettingsController>(html.Translate(".SiteSettings"), Links.Content.Images.Admin.ico1_png, c => c.Show()));
+                }
+                if (pluginsAccess)
+                {
+                    administrationMenuItem.Add(new ActionLink<ModuleController>(html.Translate(".Modules"), Links.Content.Images.Admin.ico5_png, c => c.Index()));
+                    administrationMenuItem.Add(new ActionLink<WidgetController>(html.Translate(".Widgets"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
+                }
+
+                menuItems.Add(html.Translate(".Administration"), administrationMenuItem);
             }
 
             var pluginHelper = ServiceLocator.Current.GetInstance<IPluginHelper>();

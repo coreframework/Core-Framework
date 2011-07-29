@@ -103,6 +103,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ISiteSettingsService.cs" />
     <Compile Include="Contracts\IPageLayoutColumnWidthValueService.cs" />
     <Compile Include="Contracts\IPageLayoutRowService.cs" />
     <Compile Include="Contracts\IPageLayoutService.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Helpers\IAuthenticationHelper.cs" />
     <Compile Include="Helpers\PasswordHash.cs" />
     <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Mappings\SiteSettingsMapping.cs" />
     <Compile Include="Mappings\PageLocaleMapping.cs" />
     <Compile Include="Mappings\Permissions\EntityTypeMapping.cs" />
     <Compile Include="Mappings\Permissions\PermissionMapping.cs" />
@@ -173,6 +175,7 @@
     <Compile Include="Models\Permissions\Permission.cs" />
     <Compile Include="Models\PluginLocale.cs" />
     <Compile Include="Models\RoleLocale.cs" />
+    <Compile Include="Models\SiteSettings.cs" />
     <Compile Include="Models\Static\PermissionScope.cs" />
     <Compile Include="Models\Static\SystemRoles.cs" />
     <Compile Include="Models\User.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Permissions\Operations\PluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Common\PageCommonService.cs" />
+    <Compile Include="Services\NHibernateSiteSettingsService.cs" />
     <Compile Include="Services\NHibernatePageLayoutColumnWidthValueService.cs" />
     <Compile Include="Services\NHibernatePageLayoutRowService.cs" />
     <Compile Include="Services\NHibernatePageLayoutService.cs" />

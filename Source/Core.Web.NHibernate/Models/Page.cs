@@ -112,7 +112,6 @@ namespace Core.Web.NHibernate.Models
         /// <value>The permission title.</value>
         public virtual string PermissionTitle { get; set; }
 
-
         /// <summary>
         /// Gets or sets the object permission operations.
         /// </summary>

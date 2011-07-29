@@ -41,6 +41,7 @@ namespace T4MVC {
         public Core.Web.Areas.Admin.Controllers.AdminHomeController AdminHome = new Core.Web.Areas.Admin.Controllers.T4MVC_AdminHomeController();
         public Core.Web.Areas.Admin.Controllers.ModuleController Module = new Core.Web.Areas.Admin.Controllers.T4MVC_ModuleController();
         public Core.Web.Areas.Admin.Controllers.RoleController Role = new Core.Web.Areas.Admin.Controllers.T4MVC_RoleController();
+        public Core.Web.Areas.Admin.Controllers.SiteSettingsController SiteSettings = new Core.Web.Areas.Admin.Controllers.T4MVC_SiteSettingsController();
         public Core.Web.Areas.Admin.Controllers.UserController User = new Core.Web.Areas.Admin.Controllers.T4MVC_UserController();
         public Core.Web.Areas.Admin.Controllers.UserGroupController UserGroup = new Core.Web.Areas.Admin.Controllers.T4MVC_UserGroupController();
         public Core.Web.Areas.Admin.Controllers.WidgetController Widget = new Core.Web.Areas.Admin.Controllers.T4MVC_WidgetController();
