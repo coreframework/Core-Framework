@@ -67,7 +67,7 @@ namespace Core.ContentPages.Controllers
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Title", 
+                                                                 Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
                                                                  Index = "Title",
                                                                  Width = 400
                                                              },
@@ -121,7 +121,7 @@ namespace Core.ContentPages.Controllers
                         cell = new[] {  contentPage.Title, 
 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","ContentPage",new { id = contentPage.Id }),"Edit"),
+                                            Url.Action("Edit","ContentPage",new { id = contentPage.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","ContentPage",new { id = contentPage.Id }))}
                     }).ToArray()

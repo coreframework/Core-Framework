@@ -6,8 +6,7 @@
 
 <%@ Import Namespace="System.Web.Mvc" %>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-    <h1>
-        Edit Content Page</h1>
+    <h1><%=Html.Translate(".EditContentPage")%></h1>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%: Html.ValidationSummary(true) %>

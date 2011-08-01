@@ -25,3 +25,6 @@ Views:
      Manage: "Manage"
      AddToWidget: "Add To Widget"
      Permissions: "Manage Permissions"
+  FormAnswers:
+    FormsAnswersList:
+     FormAnswers: "Form Answers"

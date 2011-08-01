@@ -11,4 +11,5 @@
     <div class="e_table_area">
         <%=Html.JqGrid(model => model.SearchString) %>
    </div>
+ 
 </asp:Content>

@@ -200,9 +200,9 @@
     <None Include="Resources\Forms\controllers.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\Forms\views.ru.yml">
+    <Content Include="Resources\Forms\views.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Resources\Models\models.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

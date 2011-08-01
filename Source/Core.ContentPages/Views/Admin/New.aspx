@@ -4,7 +4,7 @@
 <%@ Import Namespace="System.Web.Mvc" %>
 
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-  <h1>New Content Page</h1>
+  <h1><%=Html.Translate(".NewContentPage")%></h1>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -28,10 +28,10 @@
 		<div class="i_buttons clrfix">
 			<div class="btn1 clrfix">
                 <em></em>
-                <%: Html.Submit("Save",new { @class="button"})%>
+                <%: Html.Submit(Html.Translate(".Save"), new { @class = "button" })%>
                 <strong></strong>
             </div>
-			<span><%:Html.RouteLink("Cancel", new { controller = "ContentPage", action = "ShowAll"})%></span>
+			<span><%:Html.RouteLink(Html.Translate(".Cancel"), new { controller = "ContentPage", action = "ShowAll" })%></span>
 		</div>
     </div>
           <% }%>

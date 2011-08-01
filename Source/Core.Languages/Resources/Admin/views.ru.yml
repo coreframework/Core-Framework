@@ -1,0 +1,19 @@
+﻿ru:
+  Views:
+    Admin:
+      Index:
+        Title: "Языки"
+        NewLanguage: "Новый язык"
+      New:
+        Title: "Языки"
+        Save: "Сохранить"
+        Cancel: "Отменить"
+      Edit:
+        Title: "Редактировать язык \"{0}\""
+        Save: "Сохранить"
+        Cancel: "Отменить"
+  Models:
+    LanguageViewModel:
+       Title: "Название"
+       Code : "Код"
+       Culture: "Культура"

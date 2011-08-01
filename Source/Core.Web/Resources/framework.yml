@@ -4,3 +4,4 @@ Framework:
       GridViewModel:
         EnableAutosearch: "Enable autosearch"
         Search: "Search"
+        NoItemToDisplay: "There are no items to display"

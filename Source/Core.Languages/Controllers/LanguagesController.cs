@@ -11,7 +11,9 @@ using Core.Languages.Models;
 using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
+using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
 
@@ -64,7 +66,7 @@ namespace Core.Languages.Controllers
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Title", 
+                                                                 Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
                                                                  Index = "Title",
                                                                  Width = 400
                                                              },
@@ -117,7 +119,7 @@ namespace Core.Languages.Controllers
                         id = language.Id,
                         cell = new[] {  language.Title, 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","Languages",new { id = language.Id }),"Edit"),
+                                            Url.Action("Edit","Languages",new { id = language.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","Languages",new { id = language.Id }))}
                     }).ToArray()

@@ -1100,6 +1100,7 @@ $.fn.jqGrid = function( p ) {
 			};
 			pgcnt = "pg_"+pgid;
 			lft = pgid+"_left"; cent = pgid+"_center"; rgt = pgid+"_right";
+            $(ts.p.pager).attr('style', 'display:none;');
 			$(ts.p.pager).addClass('ui-jqgrid-pager corner-bottom')
 			.append("<div id='"+pgcnt+"' class='ui-pager-control' role='group'><table cellspacing='0' cellpadding='0' border='0' class='ui-pg-table' style='width:100%;table-layout:fixed;float:left;' role='row'><tbody><tr><td id='"+lft+"' align='left'></td><td id='"+cent+"' align='center' style='white-space:nowrap;'></td><td id='"+rgt+"' align='right'></td></tr></tbody></table></div>");
 			if(ts.p.pgbuttons===true) {
@@ -1465,7 +1466,7 @@ $.fn.jqGrid = function( p ) {
 		.addClass("ui-jqgrid-htable");
 		grid.hDiv = document.createElement("div");
 		var hg = (ts.p.caption && ts.p.hiddengrid===true) ? true : false;
-		var hb = $("<div class='ui-jqgrid-hbox'></div>");
+		var hb = $("<div class='ui-jqgrid-hbox' style='display:none;'></div>");
 		$(grid.hDiv)
 			.css({ width: grid.width+"px"})
 			.addClass("ui-state-default ui-jqgrid-hdiv")
@@ -1577,6 +1578,7 @@ $.fn.jqGrid = function( p ) {
 			.addClass("ui-jqgrid-bdiv")
 			.css({ height: ts.p.height+(isNaN(ts.p.height)?"":"px"), width: (grid.width+1)+"px"})
 			.scroll(function (e) {grid.scrollGrid();});
+            
 		$("table:first",grid.bDiv).css({width:ts.p.tblwidth+"px"});
 		if( isMSIE ) {
 			if( $("tbody",this).size() === 2 ) { $("tbody:first",this).remove();}
@@ -1586,7 +1588,8 @@ $.fn.jqGrid = function( p ) {
 			if( ts.p.multikey) {$(grid.bDiv).bind("mousedown",function(){return false;});}
 		}
 		if(hg) {$(grid.bDiv).hide();}
-		grid.cDiv = document.createElement("div");
+
+        grid.cDiv = document.createElement("div");
 		var arf = ts.p.hidegrid===true ? $("<a role='link' href='javascript:void(0)'/>").addClass('ui-jqgrid-titlebar-close').hover(
 			function(){ arf.addClass('ui-state-hover');},
 			function() {arf.removeClass('ui-state-hover');})

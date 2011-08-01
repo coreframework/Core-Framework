@@ -49,6 +49,14 @@ namespace Framework.MVC.Grids.jqGrid
                        for(var id in selectedIDs) {{ 
                             grid.setSelection(selectedIDs[id].toString()); 
                        }}
+                       var rows = $('table#list tr');
+                     if (rows.length == 0) {{
+                         $('#notItem').attr('style', 'display:block;');
+                      }}
+                    else{{
+                           $('.ui-jqgrid-hbox').attr('style', 'display:block;');
+                           $('#pager').attr('style', 'display:block')
+                        }}
                     }},
                     onSelectRow: function (id) {{
                         if(parseInt(id) && !{7}) {{
@@ -113,11 +121,19 @@ namespace Framework.MVC.Grids.jqGrid
             searchWrapper.InnerHtml += GenerateSearchButtons(html);
 
             filterWrapper.InnerHtml += searchWrapper.ToString(TagRenderMode.Normal);
-            
+
+            var noItem = new TagBuilder("div");
+            noItem.InnerHtml = html.Translate("NoItemToDisplay", ResourceHelper.GetModelScope(typeof(GridViewModel)));
+            noItem.MergeAttribute("id", "notItem");
+            noItem.MergeAttribute("style", "display:none;");
+            noItem.AddCssClass("noItemToDisplay");
+
             builder.Append(filterWrapper.ToString(TagRenderMode.Normal));
 
             builder.Append(GenerateGrid());
 
+            builder.Append(noItem);
+            
             builder.Append(GeneratePager());
             
             builder.Append(GenerateScript(html));

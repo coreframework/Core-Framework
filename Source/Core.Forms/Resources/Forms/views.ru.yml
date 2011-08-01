@@ -1,4 +1,4 @@
-﻿ru:
+ru:
   Views:
     Forms:
       FormsList:
@@ -16,7 +16,7 @@
         Edit: "Редактировать"
         Delete: "Удалить"
       EditFormElement:
-        SeparateWithComma: "(разделить точкой)"
+        SeparateWithComma: "(через запятую)"
       New:
         NewForm: "Новая форма"
       FormPermissions:
