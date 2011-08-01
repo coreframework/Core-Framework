@@ -82,6 +82,11 @@ Views:
           RememberMe: "Remember me"
           PanelView: "View" 
           PanelEdit: "Edit" 
+    Error:
+      Error:
+          PanelView: "View" 
+          PanelEdit: "Edit" 
+          PageNotFound: "Page was not found or you don't have rights to view this page."
 Navigation:
  Views:
     SiteMap:

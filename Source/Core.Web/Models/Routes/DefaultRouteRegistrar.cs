@@ -65,9 +65,13 @@ namespace Core.Web.Models.Routes
             routes.MapRoute(null, "pages/remove-widget/{pageWidgetId}", MVC.Pages.RemovePageWidget());
             routes.MapRoute(null, "pages/remove/{pageId}", MVC.Pages.RemovePage());
             routes.MapRoute("Pages.ChangePageMode", "pages/change-page-mode", MVC.Pages.ChangePageMode(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            routes.MapRoute("Pages.Error", "error", MVC.Error.Index());
+
             routes.MapRoute("Pages.Show", "pages/{url}", MVC.Pages.Show(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
             routes.MapRoute("Login", "users/sign-in", MVC.Users.NewUserSession());
+
+          
         }
 
         #endregion

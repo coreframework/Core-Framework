@@ -127,6 +127,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Admin.AdminErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.AdminHomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -153,6 +156,7 @@
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminErrorController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SiteSettingsController.cs" />
@@ -219,11 +223,15 @@
     <Compile Include="Areas\Navigation\Widgets\NListMenuWidget.cs" />
     <Compile Include="Areas\Navigation\Widgets\NNavigationMenuWidget.cs" />
     <Compile Include="Areas\Navigation\Widgets\NSiteMapWidget.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CoreWebInstaller.cs" />
+    <Compile Include="ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -300,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\AdminHome\Index.aspx" />
+    <Content Include="Areas\Admin\Views\AdminError\AdminError.aspx" />
     <Content Include="Areas\Admin\Views\Module\Edit.aspx" />
     <Content Include="Areas\Admin\Views\Module\EditForm.ascx" />
     <Content Include="Areas\Admin\Views\Module\Index.aspx" />
@@ -1026,6 +1035,7 @@
     <Content Include="Views\Shared\EditorTemplates\MultilineText.aspx" />
     <Content Include="Views\Shared\EditorTemplates\Password.aspx" />
     <Content Include="Views\Shared\EditorTemplates\String.aspx" />
+    <Content Include="Views\Error\Error.aspx" />
     <Content Include="Views\Shared\Layouts\Layout.ascx" />
     <Content Include="Views\Shared\Layouts\ChangeLayout.ascx" />
     <Content Include="Views\Shared\Layouts\LayoutSettings.ascx" />

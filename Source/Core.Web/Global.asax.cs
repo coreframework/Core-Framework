@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Castle.Core.Logging;
@@ -182,6 +184,16 @@ namespace Core.Web
             PermissibleObjects = Composer.ResolveAll<IPermissible>().ToList();
         }
 
+        protected void Application_Error(object sender, EventArgs e)
+        {
+            #if !DEBUG
+           
+            if (Request.RawUrl.Contains("admin") && !Request.RawUrl.Contains("administration"))
+                Response.Redirect("~/admin/error");
+            else Response.Redirect("~/error");
+             #endif
+        }
+       
         #endregion
     }
 }

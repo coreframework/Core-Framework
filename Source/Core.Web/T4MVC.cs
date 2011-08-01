@@ -27,6 +27,7 @@ public static class MVC {
     public static AdminClass Admin { get { return s_Admin; } }
     static readonly NavigationClass s_Navigation = new NavigationClass();
     public static NavigationClass Navigation { get { return s_Navigation; } }
+    public static Core.Web.Controllers.ErrorController Error = new Core.Web.Controllers.T4MVC_ErrorController();
     public static Core.Web.Controllers.HomeController Home = new Core.Web.Controllers.T4MVC_HomeController();
     public static Core.Web.Controllers.PagesController Pages = new Core.Web.Controllers.T4MVC_PagesController();
     public static Core.Web.Controllers.UploadController Upload = new Core.Web.Controllers.T4MVC_UploadController();
@@ -38,6 +39,7 @@ namespace T4MVC {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public class AdminClass {
         public readonly string Name = "Admin";
+        public Core.Web.Areas.Admin.Controllers.AdminErrorController AdminError = new Core.Web.Areas.Admin.Controllers.T4MVC_AdminErrorController();
         public Core.Web.Areas.Admin.Controllers.AdminHomeController AdminHome = new Core.Web.Areas.Admin.Controllers.T4MVC_AdminHomeController();
         public Core.Web.Areas.Admin.Controllers.ModuleController Module = new Core.Web.Areas.Admin.Controllers.T4MVC_ModuleController();
         public Core.Web.Areas.Admin.Controllers.RoleController Role = new Core.Web.Areas.Admin.Controllers.T4MVC_RoleController();

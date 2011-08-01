@@ -115,6 +115,8 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.SiteSettings", "admin/site-settings", MVC.Admin.SiteSettings.Show());
             context.MapRoute("Admin.UpdateSiteSettings", "admin/update-site-settings", MVC.Admin.SiteSettings.Edit(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
+            context.MapRoute("Admin.Error", "admin/error", MVC.Admin.AdminError.Index());
+
         }
 
         #region Helper Methods

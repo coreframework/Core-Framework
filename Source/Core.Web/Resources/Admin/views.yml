@@ -89,5 +89,8 @@ Admin:
     SiteSettings:
       ViewSettings:
         SiteSettings: "Site Settings"
+    AdminError:
+      AdminError:
+        PageNotFound: "Page was not found or you don't have rights to view this page."
     
 

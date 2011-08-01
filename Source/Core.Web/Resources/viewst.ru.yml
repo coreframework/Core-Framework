@@ -70,6 +70,11 @@ ru:
           RememberMe: "Запомнить меня"
           PanelView: "Просмотр" 
           PanelEdit: "Редактор" 
+    Error:
+      Error:
+          PanelView: "Просмотр" 
+          PanelEdit: "Редактор" 
+          PageNotFound: "Страница не найдена или у вас нет прав на просмотр этой страницы."
  Navigation: 
   Views:
    SiteMap:
