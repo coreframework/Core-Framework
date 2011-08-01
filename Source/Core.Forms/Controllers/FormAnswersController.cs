@@ -11,7 +11,9 @@ using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
+using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
+using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.Permissions.Helpers;
 using System.Linq.Dynamic;
@@ -76,15 +78,15 @@ namespace Core.Forms.Controllers
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
-            columns.Add(new GridColumnViewModel { Name = "Form", Index = "Title" });
-            columns.Add(new GridColumnViewModel { Name = "Answers", Width = 50});
+            columns.Add(new GridColumnViewModel { Name = HttpContext.Translate("Form", ResourceHelper.GetControllerScope(this)), Index = "Title" });
+            columns.Add(new GridColumnViewModel { Name = HttpContext.Translate("Answers", ResourceHelper.GetControllerScope(this)), Width = 50 });
             columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
             var model = new GridViewModel
                             {
                                 DataUrl = Url.Action("FormAnswersDynamicGridData"),
                                 DetailsUrl ="form-answers/",
                                 DefaultOrderColumn = "Title",
-                                GridTitle = "Forms Answers",
+                                GridTitle = HttpContext.Translate("GridTitle", ResourceHelper.GetControllerScope(this)),
                                 Columns = columns
                             };
 
@@ -125,16 +127,16 @@ namespace Core.Forms.Controllers
         public virtual ActionResult ShowAnswers(long formWidgetId)
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
-            columns.Add(new GridColumnViewModel { Name = "User", Index = "User" });
-            columns.Add(new GridColumnViewModel { Name = "Date", Width = 150, Index = "CreateDate"});
-            columns.Add(new GridColumnViewModel { Name = "Title"});
+            columns.Add(new GridColumnViewModel { Name = HttpContext.Translate("User", ResourceHelper.GetControllerScope(this)), Index = "User" });
+            columns.Add(new GridColumnViewModel { Name = HttpContext.Translate("Date", ResourceHelper.GetControllerScope(this)), Width = 150, Index = "CreateDate"});
+            columns.Add(new GridColumnViewModel { Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this))});
             columns.Add(new GridColumnViewModel { Name = "Id", Sortable = false, Hidden = true });
             GridViewModel model = new GridViewModel
             {
                 DataUrl = Url.Action("ShowAnswers"),
                 DetailsUrl = System.Web.HttpContext.Current.Request.ApplicationPath+ "/admin/forms-answer-details/",
                 DefaultOrderColumn = "Title",
-                GridTitle = "Form Answers",
+                GridTitle = HttpContext.Translate("GridTitle", ResourceHelper.GetControllerScope(this)),//"Form Answers",
                 Columns = columns,
                 SearchEnable = false
             };
@@ -178,7 +180,7 @@ namespace Core.Forms.Controllers
 
             if (model == null || !_permissionService.IsAllowed((int)FormsBuilderWidgetOperations.ViewAnswers, this.CorePrincipal(), typeof(FormsBuilderWidget), model.FormBuilderWidget.Id, IsFormOwner(model.FormBuilderWidget.Form), PermissionOperationLevel.ObjectType))
             {
-                throw new Exception("Answer not found.");
+                throw new Exception(HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             return View("FormAnswerDetails", model);

@@ -1,0 +1,6 @@
+Verbs:
+  AdminVerb:
+    Forms: "Forms"
+  FormsAnswersAdminVerb:
+    FormsAnswers: "Forms Answers"
+ 

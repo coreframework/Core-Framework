@@ -91,13 +91,13 @@ namespace Core.Forms.Controllers
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Title", 
+                                                                 Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
                                                                  Index = "Title",
                                                                  Width = 400
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Actions",
+                                                                 Name = HttpContext.Translate("Actions", ResourceHelper.GetControllerScope(this)),
                                                                  Width = 30,
                                                                  Sortable = false
                                                              },
@@ -112,7 +112,7 @@ namespace Core.Forms.Controllers
             {
                 DataUrl = Url.Action("DynamicGridData", "Forms"),
                 DefaultOrderColumn = "Id",
-                GridTitle = "Forms",
+                GridTitle = HttpContext.Translate("Forms", ResourceHelper.GetControllerScope(this)),
                 Columns = columns,
                 IsRowNotClickable = true
             };
@@ -142,7 +142,7 @@ namespace Core.Forms.Controllers
                         cell = new[] {  
                                         ((FormLocale)form.CurrentLocale).Title, 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","Forms",new { formId = form.Id }),"Details")}
+                                            Url.Action("Edit","Forms",new { formId = form.Id }),HttpContext.Translate("Details", ResourceHelper.GetControllerScope(this)))}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -159,7 +159,7 @@ namespace Core.Forms.Controllers
 
             if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Notfound", ResourceHelper.GetControllerScope(this))/*"Not Found"*/);
             }
 
             return View("FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
@@ -247,12 +247,12 @@ namespace Core.Forms.Controllers
                 }
                 if (_permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
-                    Success("Successfully apply permissions.");
+                    Success(HttpContext.Translate("Messages.PermitionsSuccess", ResourceHelper.GetControllerScope(this))/*"Successfully apply permissions."*/);
                     return Content(Url.Action("ShowPermissions", "Forms", new { formId = form.Id }));
                 }
-                Error(String.Format("Could not apply permissions to Form Entity: {0}", model.EntityId));
+                Error(String.Format(HttpContext.Translate("Messages.PermitionsUnSuccess", ResourceHelper.GetControllerScope(this))/*"Could not apply permissions to Form Entity: {0}"*/, model.EntityId));
             }
-            Error(String.Format("Could not found Form Entity: {0}", model.EntityId));
+            Error(String.Format(HttpContext.Translate("Messages.NotFoundEntity", ResourceHelper.GetControllerScope(this))/*"Could not found Form Entity: {0}"*/, model.EntityId));
             return Content(Url.Action("ShowAll"));
         }
 
@@ -294,7 +294,7 @@ namespace Core.Forms.Controllers
 
             if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             bool allowManage = _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(),
@@ -326,7 +326,7 @@ namespace Core.Forms.Controllers
 
             if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
@@ -346,7 +346,7 @@ namespace Core.Forms.Controllers
 
                 if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
                 }
 
                 if (_formsService.Save(model.MapTo(form)))
@@ -382,24 +382,24 @@ namespace Core.Forms.Controllers
 
             if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Title", 
+                                                                 Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
                                                                  Sortable = false,
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Type", 
+                                                                 Name = HttpContext.Translate("Type", ResourceHelper.GetControllerScope(this)), 
                                                                  Sortable = false,
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = "Required", 
+                                                                 Name = HttpContext.Translate("Required", ResourceHelper.GetControllerScope(this)), 
                                                                  Sortable = false,
                                                              },
                                                          new GridColumnViewModel
@@ -423,7 +423,7 @@ namespace Core.Forms.Controllers
             {
                 DataUrl = Url.Action("FormElementsDynamicGridData", "Forms", new { formId = form.Id}),
                 DefaultOrderColumn = "Title",
-                GridTitle = "Form Elements",
+                GridTitle = HttpContext.Translate("GridTitle", ResourceHelper.GetControllerScope(this)),//"Form Elements",
                 Columns = columns,
                 IsRowNotClickable = true
             };
@@ -444,7 +444,7 @@ namespace Core.Forms.Controllers
 
             if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
@@ -472,7 +472,7 @@ namespace Core.Forms.Controllers
                                         formElement.Type.ToString(), 
                                         formElement.IsRequired.ToString(), 
                                         allowManage?String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("EditElement","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }),"Edit"):String.Empty,
+                                            Url.Action("EditElement","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))):String.Empty,
                                         allowManage?String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("RemoveElement","Forms",new { id = formElement.Id})):String.Empty}
 
@@ -495,7 +495,7 @@ namespace Core.Forms.Controllers
             var form = _formsService.Find(formId);
             if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             return View("EditFormElement", new FormElementViewModel {FormId = formId});
@@ -508,7 +508,7 @@ namespace Core.Forms.Controllers
 
             if (formElement == null || formElement.Form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             return View("EditFormElement", new FormElementViewModel { FormId = formId }.MapFrom(formElement));
@@ -521,7 +521,7 @@ namespace Core.Forms.Controllers
 
             if (formElement == null || formElement.Form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
             {
-                throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             FormElementViewModel model = new FormElementViewModel{FormId = formElement.Form.Id}.MapFrom(formElement);
@@ -549,7 +549,7 @@ namespace Core.Forms.Controllers
                 var form = _formsService.Find(formId);
                 if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
-                    throw new HttpException((int)HttpStatusCode.NotFound, "Not Found");
+                    throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
                 }
 
                 var formElement = new FormElement();
@@ -574,12 +574,12 @@ namespace Core.Forms.Controllers
                         locale = model.MapLocaleTo(locale ?? new FormElementLocale { FormElement = formElement });
                         localeService.Save(locale);
                     }
-                    Success("Sucessfully save form element.");
+                    Success(HttpContext.Translate("Messages.FormElementSaveSuccess", ResourceHelper.GetControllerScope(this))/*"Sucessfully save form element."*/);
                     return RedirectToAction(FormsMVC.Forms.ShowFormElements(formId));
                 }
             }
 
-            Error("Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing.");
+            Error(HttpContext.Translate("Messages.ElementValidationError", ResourceHelper.GetControllerScope(this))/*"Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."*/);
             return View("EditFormElement", model);
         }
 
@@ -604,11 +604,11 @@ namespace Core.Forms.Controllers
                     if (element.Id != formElement.Id)
                         _formsElementService.Save(element);
                 }
-                Success("Sucessfully remove form element.");
+                Success(HttpContext.Translate("Messages.RemoveSuccess", ResourceHelper.GetControllerScope(this))/*"Sucessfully remove form element."*/);
                 return RedirectToAction("ShowFormElements", new { formId = formElement.Form.Id });
             }
 
-            Error("Some error has been occured. Please try again.");
+            Error(HttpContext.Translate("Messages.UnknownError", ResourceHelper.GetControllerScope(this))/*"Some error has been occured. Please try again."*/);
             return Content(String.Empty);
         }
 

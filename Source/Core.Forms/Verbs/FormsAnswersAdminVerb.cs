@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Web;
 using Core.Forms.Permissions.Operations;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.Permissions.Contracts;
@@ -21,7 +22,7 @@ namespace Core.Forms.Verbs
         /// </summary>
         public string Name
         {
-            get { return "FormsAnswers"; }
+            get { return HttpContext.GetGlobalResourceObject(String.Format("Forms.Verbs.FormsAnswersAdminVerb"), String.Format("FormsAnswers")) as String ?? "FormsAnswers"; }
         }
 
         /// <summary>

@@ -6,5 +6,8 @@ Views:
       SaveData: "Save Data"
     ViewWidget:
       Submit: "Submit"
+  FormAnswers:
+    FormsAnswersList:
+      FormAnswers: "Form Answers"
     
     
