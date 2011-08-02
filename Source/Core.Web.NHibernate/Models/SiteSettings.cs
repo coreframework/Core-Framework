@@ -28,6 +28,12 @@ namespace Core.Web.NHibernate.Models
         /// <value>The show main menu.</value>
         public virtual bool ShowMainMenu { get; set; }
 
+        /// <summary>
+        /// Gets or sets the show panel.
+        /// </summary>
+        /// <value>The show panel.</value>
+        public virtual bool ShowPanel { get; set; }
+        
         #endregion
 
         #region IPermissible Members

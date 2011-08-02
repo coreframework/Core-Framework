@@ -14,6 +14,7 @@ namespace Core.Web.NHibernate.Mappings
             Table("SiteSettings");
             Id(siteSettings => siteSettings.Id);
             Map(siteSettings => siteSettings.ShowMainMenu);
+            Map(siteSettings => siteSettings.ShowPanel);
         }
     }
 }

@@ -23,6 +23,7 @@ ru:
   CouldNotFoundPlugin: "Модуль не найден."
   InstallWidget: "Виджет был успешно установлен."
   UninstallWidget: "Виджет был успешно отключен."
+  SiteSettingsApplied:"Настройки были успешно сохранены."
  Actions:
   Actions: "Действия"
   Install: "Установить"

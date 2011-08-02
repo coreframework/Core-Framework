@@ -30,7 +30,7 @@ namespace Core.Web.NHibernate.Services
 
             if (siteSettings == null)
             {
-                siteSettings = new SiteSettings { ShowMainMenu = true };
+                siteSettings = new SiteSettings { ShowMainMenu = true, ShowPanel = true};
                 Save(siteSettings);
             }
 

@@ -15,8 +15,12 @@
             <div class="fst_col colls_i">
                  <div class="i_form_i">
                     <%:Html.HiddenFor(model => model.Id)%>
+                    
                     <%:Html.CheckBoxFor(model => model.ShowMainMenu)%>
                     <%:Html.LocalizedLabelFor(model => model.ShowMainMenu)%>
+                    <br />
+                    <%:Html.CheckBoxFor(model => model.ShowPanel)%>
+                    <%:Html.LocalizedLabelFor(model => model.ShowPanel)%>
                 </div>
             </div>
         </div>

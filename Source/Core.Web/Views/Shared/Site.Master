@@ -2,6 +2,8 @@
 
 <%@ Import Namespace="Core.Web.Models" %>
 <%@ Import Namespace="Core.Web.Helpers" %>
+<%@ Import Namespace="Microsoft.Practices.ServiceLocation" %>
+<%@ Import Namespace="Core.Web.NHibernate.Contracts" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -27,7 +29,11 @@
 </head>
 <body>
 <div class="container <%=PageHelper.GetCurrentUserPageMode() == PageMode.View ? "view-mode" : "edit-mode" %>" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
-   	<div class="header">
+   
+   	<%if (ServiceLocator.Current.GetInstance<ISiteSettingsService>().GetSettings() != null &&
+          ServiceLocator.Current.GetInstance<ISiteSettingsService>().GetSettings().ShowPanel)
+    {%>
+    <div class="header">
 		<div class="header_i clrfix">
             <a href="<%=Url.Action(MVC.Home.Index())%>">
 			    <img src="<%:Links.Content.Images.logo_core_png %>" width="174" height="10" alt="" title="" class="core_logo" />
@@ -37,11 +43,12 @@
                                                                               {
                                                                                   PageMode = PageHelper.GetCurrentUserPageMode(),
                                                                                   PageUrl = Model is PageViewModel ? ((PageViewModel)Model).Url : String.Empty
-                                                                              }) %>
-                <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel) %>
+                                                                              })%>
+                <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel)%>
 			</div>
 		</div>
 	</div>
+    <%} %>
     <div class="wrapper">
 		<div class="content">
            <%Html.RenderAction(MVC.Pages.Index(Model as PageViewModel)); %>
