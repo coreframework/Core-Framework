@@ -84,6 +84,21 @@ public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
 
 
 namespace Links {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class Content {
+        private const string URLPATH = "~/Content";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Css {
+            private const string URLPATH = "~/Content/Css";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string news_css = Url("news.css");
+        }
+    
+    }
+
 }
 
 static class T4MVCHelpers {

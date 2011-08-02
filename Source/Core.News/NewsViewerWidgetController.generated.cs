@@ -73,6 +73,7 @@ namespace Core.News.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string ArticleWidget = "~/Views/NewsViewerWidget/ArticleWidget.ascx";
             public readonly string EditWidget = "~/Views/NewsViewerWidget/EditWidget.ascx";
             public readonly string ViewWidget = "~/Views/NewsViewerWidget/ViewWidget.ascx";
         }
