@@ -1,4 +1,5 @@
 ﻿using Core.Web.NHibernate.Models;
+using Core.Web.NHibernate.Models.Static;
 using FluentNHibernate.Mapping;
 
 namespace Core.Web.NHibernate.Mappings
@@ -11,6 +12,7 @@ namespace Core.Web.NHibernate.Mappings
             Table("PageWidgets");
             Id(pageWidget => pageWidget.Id);
             Map(pageWidget => pageWidget.InstanceId);
+            Map(pageWidget => pageWidget.PageSection).CustomType(typeof(PageSection));
             Map(pageWidget => pageWidget.ColumnNumber);
             Map(pageWidget => pageWidget.OrderNumber);
             References(pageWidget => pageWidget.Page);

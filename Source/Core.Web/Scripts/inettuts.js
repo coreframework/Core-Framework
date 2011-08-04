@@ -15,6 +15,8 @@ var iNettuts = {
         pageWidgetIdSelector: '#pageWidgetId',
         columnNumberSelector: '#column',
         orderNumberSelector: '#order',
+        pageSectionNumberSelector: '#pageSection',
+        pageSectionSelector: '.pageSection',
         widgetDefault: {
             movable: true,
             removable: true,
@@ -23,12 +25,14 @@ var iNettuts = {
         },
         widgetIndividual: {},
         settingURLTemplate: '',
-        updateWidgetsURL: ''
+        updateWidgetsURL: '',
+        $stickyFooter: {}
     },
 
-    init: function (settingURLTemplate, updateWidgetsURL) {
+    init: function (settingURLTemplate, updateWidgetsURL, $stickyFooter) {
         this.settings.settingURLTemplate = settingURLTemplate;
         this.settings.updateWidgetsURL = updateWidgetsURL;
+        this.settings.$stickyFooter = $stickyFooter;
         this.addWidgetControls();
         this.makeSortable();
     },
@@ -101,14 +105,14 @@ var iNettuts = {
         $sortableItems.find(settings.handleSelector).css({
             cursor: 'move'
         }).mousedown(function (e) {
-            $sortableItems.css({ width: '' });
+            /*$sortableItems.css({ width: '' });
             $(this).parent().css({
                 width: $(this).parent().width() + 'px'
-            });
+            });*/
             $(this).bind('mousemove', function () { $(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('50px'); });
         }).mouseup(function () {
             if (!$(this).parent().hasClass('dragging')) {
-                $(this).parent().css({ width: '' });
+            //    $(this).parent().css({ width: '' });
             } else {
                 $(settings.columns).sortable('disable');
             }
@@ -130,23 +134,29 @@ var iNettuts = {
                 $(ui.helper).addClass('dragging');
                 //$(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('50px');
                 $(settings.columns).addClass('column-placeholder');
+                settings.$stickyFooter.positionFooter();
             },
             stop: function (e, ui) {
+                $(settings.handleSelector).unbind('mousemove');
                 $(settings.columns).removeClass('column-placeholder');
                 $(ui.item).css({ width: '' }).removeClass('dragging');
                 $(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('0');
                 $(settings.columns).sortable('enable');
                 $widget = $(ui.item);
+                var prevPageSection = $(settings.pageSectionNumberSelector, $widget).val();
                 var prevColumnNumber = $(settings.columnNumberSelector, $widget).val();
                 var prevOrderNumber = $(settings.orderNumberSelector, $widget).val();
                 var $widgetColumn = $widget.parents(settings.columns);
-                var currentColumnNumber = $(settings.columns).index($widgetColumn) + 1;
+                var $currentPageSection = $widgetColumn.parents(settings.pageSectionSelector);
+                var currentPageSectionNumber = $currentPageSection.attr('pageSection');
+                var currentColumnNumber = $(settings.columns, $currentPageSection).index($widgetColumn) + 1;
                 var currentOrderNumber = $(settings.widgetSelector, $widgetColumn).index($widget) + 1;
-                if (prevColumnNumber != currentColumnNumber || prevOrderNumber != currentOrderNumber) {
+                if (prevPageSection != currentPageSectionNumber || prevColumnNumber != currentColumnNumber || prevOrderNumber != currentOrderNumber) {
                     $(settings.columnNumberSelector, $widget).val(currentColumnNumber);
                     $(settings.orderNumberSelector, $widget).val(currentOrderNumber);
                     var postData = {};
                     postData.widgetId = $(settings.pageWidgetIdSelector, $widget).val();
+                    postData.pageSection = currentPageSectionNumber;
                     postData.columnNumber = currentColumnNumber;
                     postData.orderNumber = currentOrderNumber;
                     $.ajax({
@@ -155,6 +165,7 @@ var iNettuts = {
                         data: postData
                     });
                 }
+                settings.$stickyFooter.positionFooter();
             }
         });
     }

@@ -126,6 +126,19 @@ namespace Core.Web.Helpers
             return widget != null && widget.Plugin != null && widget.Plugin.Status.Equals(PluginStatus.Installed) && widget.Status.Equals(WidgetStatus.Enabled);
         }
 
+        public static String GetWidgetStyles(PageWidgetSettings settings)
+        {
+            var builder = new StringBuilder();
+            if (settings != null)
+            {
+                if (settings.LookAndFeelSettings.WidthValue.HasValue && !String.IsNullOrEmpty(settings.LookAndFeelSettings.WidthUnit))
+                {
+                    builder.AppendFormat("width:{0}{1};", settings.LookAndFeelSettings.WidthValue, settings.LookAndFeelSettings.WidthUnit);
+                }
+            }
+            return builder.ToString();
+        }
+
         public static String GetWidgetHolderStyles(PageWidgetSettings settings)
         {
             var builder = new StringBuilder();
@@ -137,10 +150,6 @@ namespace Core.Web.Helpers
                 if (settings.LookAndFeelSettings.FontSizeValue.HasValue && !String.IsNullOrEmpty(settings.LookAndFeelSettings.FontSizeUnit))
                 {
                     builder.AppendFormat("font-size:{0}{1};", settings.LookAndFeelSettings.FontSizeValue, settings.LookAndFeelSettings.FontSizeUnit);
-                }
-                if (settings.LookAndFeelSettings.WidthValue.HasValue && !String.IsNullOrEmpty(settings.LookAndFeelSettings.WidthUnit))
-                {
-                    builder.AppendFormat("width:{0}{1};", settings.LookAndFeelSettings.WidthValue, settings.LookAndFeelSettings.WidthUnit);
                 }
                 if (settings.LookAndFeelSettings.HeightValue.HasValue && !String.IsNullOrEmpty(settings.LookAndFeelSettings.HeightUnit))
                 {

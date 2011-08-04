@@ -362,9 +362,10 @@ namespace Core.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UpdateWidgetsPositions(long widgetId, int columnNumber, int orderNumber) {
+        public override System.Web.Mvc.ActionResult UpdateWidgetsPositions(long widgetId, int pageSection, int columnNumber, int orderNumber) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateWidgetsPositions);
             callInfo.RouteValueDictionary.Add("widgetId", widgetId);
+            callInfo.RouteValueDictionary.Add("pageSection", pageSection);
             callInfo.RouteValueDictionary.Add("columnNumber", columnNumber);
             callInfo.RouteValueDictionary.Add("orderNumber", orderNumber);
             return callInfo;

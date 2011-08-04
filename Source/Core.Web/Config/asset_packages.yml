@@ -22,6 +22,7 @@
     - colorpicker.js
     - ddsmoothmenu.js
     - json2.js
+    - stickyFooter.js
   adminui:
     - Admin/jquery.ui.core.js
     - Admin/jquery.ui.widget.js

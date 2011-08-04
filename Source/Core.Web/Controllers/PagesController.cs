@@ -437,10 +437,10 @@ namespace Core.Web.Controllers
         /// <param name="orderNumber">The order number.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual ActionResult UpdateWidgetsPositions(long widgetId, int columnNumber, int orderNumber)
+        public virtual ActionResult UpdateWidgetsPositions(long widgetId, int pageSection, int columnNumber, int orderNumber)
         {
             //check permissions inside UpdateWidgetsPositions method
-            PageHelper.UpdateWidgetsPositions(widgetId, columnNumber, orderNumber, this.CorePrincipal());
+            PageHelper.UpdateWidgetsPositions(widgetId, pageSection, columnNumber, orderNumber, this.CorePrincipal());
             return null;
         }
 

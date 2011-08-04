@@ -18,9 +18,9 @@ namespace Core.Web.Migrations
             {
                 t.PrimaryKey();
                 t.Long("InstanceId").Null();
+                t.Integer("PageSection");
                 t.Integer("ColumnNumber");
                 t.Integer("OrderNumber");
-
                 t.ForeignKey("PageWidgetsUser").Table("Users").Column("UserId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
                 t.ForeignKey("PageWidgetsPage").Table("Pages").Column("PageId").OnDelete(ForeignKeyConstraint.Cascade);
                 t.ForeignKey("PageWidgetsWidget").Table("Widgets").Column("WidgetId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);

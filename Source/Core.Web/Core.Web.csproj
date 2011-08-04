@@ -1011,6 +1011,7 @@
     <Content Include="Scripts\jquery.qtip-1.0.0.js" />
     <Content Include="Scripts\jquery.watermark.js" />
     <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\stickyFooter.js" />
     <Content Include="Scripts\superfish.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Views\Home\Index.aspx" />

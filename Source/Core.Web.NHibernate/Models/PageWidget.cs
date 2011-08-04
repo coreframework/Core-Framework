@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.Web.NHibernate.Models.Static;
 using FluentNHibernate.Data;
 
 namespace Core.Web.NHibernate.Models
@@ -10,9 +11,11 @@ namespace Core.Web.NHibernate.Models
         public PageWidget()
         {
             Widget = new Widget();
+            PageSection = PageSection.Body;
         }
 
         #endregion
+
         /// <summary>
         /// Gets or sets the instance id.
         /// </summary>
@@ -36,6 +39,12 @@ namespace Core.Web.NHibernate.Models
         /// </summary>
         /// <value>The settings.</value>
         public virtual PageWidgetSettings Settings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page section.
+        /// </summary>
+        /// <value>The page section.</value>
+        public virtual PageSection PageSection { get; set; }
 
         /// <summary>
         /// Gets or sets the column.

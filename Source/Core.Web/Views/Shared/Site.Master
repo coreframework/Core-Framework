@@ -18,43 +18,46 @@
     <%: Html.JavascriptPackInclude("base") %>
     <%: Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
     <%: Html.JavascriptPackInclude("custom")%>
-
-    <% if(Model as PageViewModel != null && !String.IsNullOrEmpty(((PageViewModel)Model).CssFileName)) { %>
-        <%= AssetsExtensions.CssHelper(HttpContext.Current, HttpContext.Current.Request.ApplicationPath + "/styles.cssx?common=" + ((PageViewModel)Model).CssFileName, null)%>
+    <% if (Model as PageViewModel != null && !String.IsNullOrEmpty(((PageViewModel)Model).CssFileName))
+       { %>
+    <%= AssetsExtensions.CssHelper(HttpContext.Current, HttpContext.Current.Request.ApplicationPath + "/styles.cssx?common=" + ((PageViewModel)Model).CssFileName, null)%>
     <%}%>
-
     <style id="pageAdditionalStyles" type="text/css">
         <%= Model is PageViewModel && ((PageViewModel)Model).Settings != null ? ((PageViewModel)Model).Settings.CustomCSS : String.Empty%>
     </style>
 </head>
-<body>
-<div class="container <%=PageHelper.GetCurrentUserPageMode() == PageMode.View ? "view-mode" : "edit-mode" %>" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
-   
-   	<%if (ServiceLocator.Current.GetInstance<ISiteSettingsService>().GetSettings() != null &&
+<body class="<%=PageHelper.GetCurrentUserPageMode() == PageMode.View ? "view-mode" : "edit-mode" %>">
+    <div class="container" style="<%=Model is PageViewModel ? PageHelper.GetPageHolderStyles(((PageViewModel)Model).Settings): String.Empty %>">
+        <%if (ServiceLocator.Current.GetInstance<ISiteSettingsService>().GetSettings() != null &&
           ServiceLocator.Current.GetInstance<ISiteSettingsService>().GetSettings().ShowPanel)
-    {%>
-    <div class="header">
-		<div class="header_i clrfix">
-            <a href="<%=Url.Action(MVC.Home.Index())%>">
-			    <img src="<%:Links.Content.Images.logo_core_png %>" width="174" height="10" alt="" title="" class="core_logo" />
-            </a>
-			<div class="right_top clrfix">
-                <%: Html.Partial(MVC.Shared.Views.Pages.PageModePanel, new PageModeModel
+          {%>
+        <div class="header">
+            <div class="header_i clrfix">
+                <a href="<%=Url.Action(MVC.Home.Index())%>">
+                    <img src="<%:Links.Content.Images.logo_core_png %>" width="174" height="10" alt=""
+                        title="" class="core_logo" />
+                </a>
+                <div class="right_top clrfix">
+                    <%: Html.Partial(MVC.Shared.Views.Pages.PageModePanel, new PageModeModel
                                                                               {
                                                                                   PageMode = PageHelper.GetCurrentUserPageMode(),
                                                                                   PageUrl = Model is PageViewModel ? ((PageViewModel)Model).Url : String.Empty
                                                                               })%>
-                <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel)%>
-			</div>
-		</div>
-	</div>
-    <%} %>
-    <div class="wrapper">
-		<div class="content">
-           <%Html.RenderAction(MVC.Pages.Index(Model as PageViewModel)); %>
-           <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+                    <%: Html.PartialWithScope(MVC.Shared.Views.Users.UserPanel)%>
+                </div>
+            </div>
         </div>
-    </div> 
-</div>
+        <%} %>
+        <div class="wrapper">
+            <div class="content">
+                <asp:ContentPlaceHolder ID="HeaderContent" runat="server" />
+                <%Html.RenderAction(MVC.Pages.Index(Model as PageViewModel)); %>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <asp:ContentPlaceHolder ID="FooterContent" runat="server" />
+    </div>
 </body>
 </html>

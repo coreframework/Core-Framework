@@ -7,6 +7,7 @@ using Core.Framework.Permissions.Models;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
+using Core.Web.NHibernate.Models.Static;
 using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Core;
 using Framework.Core.Extensions;
@@ -135,7 +136,7 @@ namespace Core.Web.Helpers
         /// <param name="columnNumber">The column number.</param>
         /// <param name="orderNumber">The order number.</param>
         /// <param name="user">The user.</param>
-        public static void UpdateWidgetsPositions(long pageWidgetId, int columnNumber, int orderNumber,ICorePrincipal user)
+        public static void UpdateWidgetsPositions(long pageWidgetId, int pageSection, int columnNumber, int orderNumber, ICorePrincipal user)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var pageWidgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
@@ -154,7 +155,7 @@ namespace Core.Web.Helpers
                         wd =>
                             {
                                 wd.OrderNumber =
-                                    (wd.ColumnNumber == pageWidget.ColumnNumber &&
+                                    (wd.PageSection == pageWidget.PageSection && wd.ColumnNumber == pageWidget.ColumnNumber &&
                                      wd.OrderNumber > pageWidget.OrderNumber
                                          ? wd.OrderNumber - 1
                                          : wd.OrderNumber);
@@ -164,18 +165,18 @@ namespace Core.Web.Helpers
                         wd =>
                             {
                                 wd.OrderNumber =
-                                    (wd.ColumnNumber == columnNumber && wd.OrderNumber >= orderNumber
+                                    ((int)wd.PageSection == pageSection && wd.ColumnNumber == columnNumber && wd.OrderNumber >= orderNumber
                                          ? wd.OrderNumber + 1
                                          : wd.OrderNumber);
                             }
                         );
                     pageService.Save(pageWidget.Page);
+                    pageWidget.PageSection = (PageSection)pageSection;
                     pageWidget.ColumnNumber = columnNumber;
                     pageWidget.OrderNumber = orderNumber;
                     pageWidgetService.Save(pageWidget);
                 }
             }
-
         }
 
         /// <summary>
