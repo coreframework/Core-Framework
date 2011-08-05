@@ -14,7 +14,7 @@
 <script type="text/javascript">
     function addWidget(content) {
         $('#tblLayoutHolder table td.column').first().prepend(content.get_data());
-        iNettutsInit();
+        iNettutsInit($stickyFooter);
      }
      function addLinkCss(content) {
          var uid = $(this).attr('widgetID');

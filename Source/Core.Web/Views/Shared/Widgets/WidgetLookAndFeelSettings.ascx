@@ -87,10 +87,14 @@
         var $widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.WidgetId %>]').parents('.widget');
         var value = parseFloat($('input[attr=' + attrName + ']').val());
         var unit = $('select[attr=' + attrName + ']').val();
+        var $styleHolder = $('.widget_content', $widget);
+        if (attrName == "width") {
+            $styleHolder = $('.widget_container', $widget);
+        }
         if (value && unit) {
-            $('.widget_content', $widget).css(attrName, value + unit);
+            $styleHolder.css(attrName, value + unit);
         } else {
-            $('.widget_content', $widget).css(attrName, '');
+            $styleHolder.css(attrName, '');
         }
     }
     

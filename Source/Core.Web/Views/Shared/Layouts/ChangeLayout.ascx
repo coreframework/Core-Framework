@@ -23,7 +23,7 @@
 <script type="text/javascript">
     function updatePageLayout(ref) {
         $(ref).addClass("active").siblings().removeClass("active");
-        iNettutsInit();
+        iNettutsInit($stickyFooter);
         $.ajax({
             type: "POST",
             url: "<%=Url.Action(MVC.Pages.ShowLayoutSettingsForm(Model.PageId)) %>",

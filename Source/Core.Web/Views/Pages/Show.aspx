@@ -33,8 +33,9 @@
         <%Html.RenderPartial(MVC.Shared.Views.Layouts.Layout, Model);%>
     </div>
     <script type="text/javascript">
+        var $stickyFooter;
         $(function () {
-            var $stickyFooter = $('.footer').stickyFooter();
+            $stickyFooter = $('.footer').stickyFooter();
         <%if (Model.Access[(int)PageOperations.Update] && Model.PageMode == PageMode.Edit)
       {%>
             iNettutsInit($stickyFooter);

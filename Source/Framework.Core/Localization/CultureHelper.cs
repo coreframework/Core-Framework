@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using Castle.MicroKernel;
 using Framework.Core.Configuration;
 using Microsoft.Practices.ServiceLocation;
 
