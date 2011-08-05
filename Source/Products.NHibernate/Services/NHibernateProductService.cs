@@ -4,6 +4,7 @@ using Castle.Facilities.NHibernateIntegration;
 using Framework.Facilities.NHibernate;
 using NHibernate;
 using NHibernate.Criterion;
+using NHibernate.SqlCommand;
 using Products.NHibernate.Contracts;
 using Products.NHibernate.Models;
 
@@ -56,9 +57,10 @@ namespace Products.NHibernate.Services
 
         public Product GetProduct(long id, long widgetId)
         {
-            var categoriesIdSubQuery = DetachedCriteria.For<ProductWidgetToCategory>("prodWidCat")
-              .Add(Restrictions.Eq("prodWidCat.ProductWidgetId", widgetId))
-              .SetProjection(Projections.Property("prodWidCat.CategoryId"));
+            var categoriesIdSubQuery = DetachedCriteria.For<ProductWidgetToCategory>("prodWidCat").CreateAlias("Category", "category", JoinType.LeftOuterJoin).CreateAlias("ProductWidget", "widget", JoinType.LeftOuterJoin)
+              .Add(Restrictions.Eq("widget.Id", widgetId))
+              .SetProjection(Projections.Property("category.Id"));
+
             var productIdSubQuery = DetachedCriteria.For<ProductToCategory>("prodCat")
               .Add(Subqueries.PropertyIn("prodCat.CategoryId", categoriesIdSubQuery))
               .SetProjection(Projections.Distinct(Projections.Property("prodCat.ProductId")));
