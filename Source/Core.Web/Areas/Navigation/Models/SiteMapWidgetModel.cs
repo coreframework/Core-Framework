@@ -44,7 +44,6 @@ namespace Core.Web.Areas.Navigation.Models
         /// Gets or sets a value indicating whether [include root in tree].
         /// </summary>
         /// <value><c>true</c> if [include root in tree]; otherwise, <c>false</c>.</value>
-        [DisplayName("Include root in tree")]
         public bool IncludeRootInTree { get; set; }
 
         /// <summary>
@@ -57,8 +56,8 @@ namespace Core.Web.Areas.Navigation.Models
             {
                 if (_rootPages == null)
                 {
-                    var contentPageService = ServiceLocator.Current.GetInstance<IPageService>();
-                    _rootPages = (List<Page>)contentPageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal,(Int32)PageOperations.View);
+                    var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+                    _rootPages = (List<Page>)pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
                 }
                 return _rootPages;
             }

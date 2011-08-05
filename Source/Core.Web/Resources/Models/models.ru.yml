@@ -6,6 +6,7 @@ ru:
   PageViewModel:
    Title: "Название"
    Url: "Url"
+   ClonedPageId: "Копировать из"
   PageCSSModel:
    CustomCSS: "CSS стили"
   PageLookAndFeelModel:

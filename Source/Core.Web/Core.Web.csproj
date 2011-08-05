@@ -35,6 +35,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\Libs\AutoMapper\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\Libs\Castle\Castle.Core.dll</HintPath>
     </Reference>
@@ -91,6 +94,9 @@
     </Reference>
     <Reference Include="NHibernate.Caches.SysCache">
       <HintPath>..\..\Libs\NHibernate\Cache\NHibernate.Caches.SysCache\NHibernate.Caches.SysCache.dll</HintPath>
+    </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\..\Libs\ValueInjecter\Omu.ValueInjecter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />

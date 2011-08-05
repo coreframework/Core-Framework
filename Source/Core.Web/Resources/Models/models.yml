@@ -5,6 +5,7 @@ Models:
   PageViewModel:
    Title: "Title"
    Url: "Url"
+   ClonedPageId: "Copy from"
   PageCSSModel:
    CustomCSS: "Custom CSS"
   PageLookAndFeelModel:

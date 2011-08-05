@@ -7,7 +7,9 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
 using Core.Web.NHibernate.Permissions.Operations;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
+using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
@@ -98,7 +100,32 @@ namespace Core.Web.Areas.Navigation.Helpers
             return new SiteMapWidgetModel().MapFrom(widget);
         }
 
-        #endregion
+        /// <summary>
+        /// Clones the site map widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneSiteMapWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<ISiteMapWidgetService>();
 
+            if (instance.InstanceId!=null)
+            {
+                var widget = widgetService.Find((long)instance.InstanceId);
+
+                if (widget != null)
+                {
+                    var clone = (SiteMapWidget)new SiteMapWidget().InjectFrom<CloneEntityInjection>(widget);
+
+                    if (widgetService.Save(clone))
+                    {
+                        return clone.Id;
+                    }
+                }
+            }
+            return null;
+        }
+
+        #endregion
     }
 }

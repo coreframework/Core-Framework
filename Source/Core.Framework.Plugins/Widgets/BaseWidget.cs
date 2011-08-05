@@ -114,6 +114,11 @@ namespace Core.Framework.Plugins.Widgets
             
         }
 
+        public virtual long? Clone(ICoreWidgetInstance coreWidgetInstance)
+        {
+            return null;
+        }
+
         #endregion
 
         #region IPermissible Members

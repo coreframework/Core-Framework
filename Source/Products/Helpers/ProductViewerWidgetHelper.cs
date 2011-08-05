@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Framework.Plugins.Web;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
+using Omu.ValueInjecter;
 using Products.Models;
 using Products.NHibernate.Contracts;
 using Products.NHibernate.Models;
@@ -46,7 +48,7 @@ namespace Products.Helpers
                 model.Id = widget.Id;
                 model.PageSize = widget.PageSize;
               
-                model.CategoriesId = widget.Categories.Select(t=>t.Id).ToArray();
+                model.CategoriesId = widget.Categories.Select(t=>t.Category.Id).ToArray();
                
                 //IQueryable<Product> searchQuery = productService.GetSearchQuery("")
                 //    .SelectMany(prod => prod.Categories, (prod, cat) => new { prod, cat })
@@ -93,6 +95,36 @@ namespace Products.Helpers
 
             widgetService.Save(productViewer);
             return new ProductWidgetModel().MapFrom(productViewer);
+        }
+
+        /// <summary>
+        /// Clones the product viewer widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneProductViewerWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<IProductWidgetService>();
+            var sourceWidget = BindWidgetModel(instance);
+
+            if (sourceWidget != null)
+            {
+                var targetWidget = (ProductWidget)new ProductWidget().InjectFrom<CloneEntityInjection>(sourceWidget);
+
+                sourceWidget.Categories.AsParallel().ForAll(category =>
+                {
+                    var productCategory = (ProductWidgetToCategory)new ProductWidgetToCategory().InjectFrom<CloneEntityInjection>(category);
+                    productCategory.ProductWidget = targetWidget;
+
+                    targetWidget.AddCategory(productCategory);
+                });
+
+                if (widgetService.Save(targetWidget))
+                {
+                    return targetWidget.Id;
+                }
+            }
+            return null;
         }
 
         #endregion

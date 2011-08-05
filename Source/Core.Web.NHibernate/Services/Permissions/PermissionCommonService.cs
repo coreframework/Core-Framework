@@ -9,6 +9,7 @@ using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Permissions;
 using Core.Web.NHibernate.Models.Static;
+using Framework.Core.Extensions;
 using Framework.Facilities.NHibernate;
 using LinqKit;
 using Microsoft.Practices.ServiceLocation;
@@ -17,6 +18,7 @@ using NHibernate.Criterion;
 using NHibernate.SqlCommand;
 using NHibernate.Type;
 using EntityType = Core.Web.NHibernate.Models.Permissions.EntityType;
+using Omu.ValueInjecter;
 
 namespace Core.Web.NHibernate.Services.Permissions
 {
@@ -232,6 +234,22 @@ namespace Core.Web.NHibernate.Services.Permissions
                                            };
 
                 permissionService.Save(guestPermissions);
+            }
+        }
+
+        public void CloneObjectPermisions(Type type, long sourceEntityId, long targetEntityId)
+        {
+            var permissionService = ServiceLocator.Current.GetInstance<IPermissionService>();
+
+            var query = from permission in permissionService.CreateQuery()
+                        where permission.EntityId == sourceEntityId && permission.EntityType.Name == PermissionsHelper.GetEntityType(type)
+                        select permission;
+
+            foreach (var targetPermission in
+                query.ToList().Select(permission => new Permission().InjectFrom<CloneEntityInjection>(permission) as Permission))
+            {
+                targetPermission.EntityId = targetEntityId;
+                permissionService.Save(targetPermission);
             }
         }
 

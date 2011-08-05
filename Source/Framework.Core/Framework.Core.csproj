@@ -137,6 +137,9 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\..\Libs\ValueInjecter\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -174,6 +177,7 @@
     <Compile Include="DomainModel\GenericEntity.cs" />
     <Compile Include="DomainModel\IMappedModel.cs" />
     <Compile Include="DomainModel\IPersistent.cs" />
+    <Compile Include="Extensions\CloneExtentions.cs" />
     <Compile Include="Extensions\ListExtentions.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\Images\DefaultImageUtility.cs" />

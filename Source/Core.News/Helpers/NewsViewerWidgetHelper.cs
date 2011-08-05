@@ -2,7 +2,9 @@
 using Core.News.Models;
 using Core.News.Nhibernate.Contracts;
 using Core.News.Nhibernate.Models;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
+using Omu.ValueInjecter;
 
 namespace Core.News.Helpers
 {
@@ -40,7 +42,14 @@ namespace Core.News.Helpers
             widgetService.Save(newsViewer);
             return new NewsArticleViewerWidgetModel().MapFrom(newsViewer);
         }
-        
+
+        /// <summary>
+        /// Gets the back URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="widgetId">The widget id.</param>
+        /// <param name="articleId">The article id.</param>
+        /// <returns></returns>
         public static string GetBackUrl(string url, long widgetId, long articleId)
         {
             url = url.Replace("&articleid" + widgetId + "=" + articleId, "");
@@ -61,6 +70,29 @@ namespace Core.News.Helpers
             }
 
             return url;
+        }
+
+        /// <summary>
+        /// Clones the news widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneNewsWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
+
+            var widget = BindWidgetModel(instance);
+
+            if (widget != null)
+            {
+                var clone = (NewsArticleWidget)new NewsArticleWidget().InjectFrom<CloneEntityInjection>(widget);
+
+                if (widgetService.Save(clone))
+                {
+                    return clone.Id;
+                }
+            }
+            return null;
         }
         
         #endregion

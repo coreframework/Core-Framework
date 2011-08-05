@@ -14,12 +14,17 @@ namespace Products.NHibernate.Mappings
             Table("Product_ProductWidgets");
             Id(productWidget => productWidget.Id);
             Map(productWidget => productWidget.PageSize);
-            //References(productWidget => productWidget.Category).Column("CategoryId").LazyLoad().Not.Nullable();
            
-            HasManyToMany(productWidget => productWidget.Categories)
+       /*     HasMany(productWidget => productWidget.Categories)
                 .Table("Product_ProductWidgetToCategories").ParentKeyColumn("ProductWidgetId")
-                .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();
+                .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().AsSet().LazyLoad();*/
 
+            HasMany(page => page.Categories).KeyColumn("ProductWidgetId")
+              .Table("Product_ProductWidgetToCategories")
+              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+              .Inverse()
+              .LazyLoad()
+              .Cascade.AllDeleteOrphan();
         }
     }
 }

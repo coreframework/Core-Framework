@@ -61,7 +61,7 @@ Admin:
         Roles: "Roles"
         Administration: "Administration"
         Modules: "Modules"
-        Portal: "Portal"
+        AccountsAndPermissions: "Accounts & Permissions"
         SiteSettings: "Site Settings"
     Role:
       Index:

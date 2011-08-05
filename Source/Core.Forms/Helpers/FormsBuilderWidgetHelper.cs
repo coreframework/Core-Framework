@@ -10,8 +10,10 @@ using Core.Forms.NHibernate.Models;
 using Core.Forms.Validation;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
+using Framework.Core.Extensions;
 using Framework.MVC.Captcha;
 using Microsoft.Practices.ServiceLocation;
+using Omu.ValueInjecter;
 
 namespace Core.Forms.Helpers
 {
@@ -239,6 +241,27 @@ namespace Core.Forms.Helpers
                 var widget = widgetService.Find((long) coreWidgetInstance.InstanceId);
                 widgetService.Delete(widget);
             }
+        }
+
+        /// <summary>
+        /// Clones the forms builder widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneFormsBuilderWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
+            var widget = BindWidgetModel(instance);
+
+            if (widget != null)
+            {
+                var clone = (FormBuilderWidget) new FormBuilderWidget().InjectFrom<CloneEntityInjection>(widget);
+                if (widgetService.Save(clone))
+                {
+                    return clone.Id;
+                }
+            }
+            return null;
         }
     }
 }

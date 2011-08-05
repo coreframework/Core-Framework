@@ -3,6 +3,7 @@ using System.ComponentModel.Composition;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
+using Core.News.Helpers;
 using Core.News.Verbs.Widgets;
 
 namespace Core.News.Widgets
@@ -48,6 +49,11 @@ namespace Core.News.Widgets
         public override IWidgetActionVerb SaveAction
         {
             get { return NewsWidgetSaveSettingsVerb.Instance; }
+        }
+
+        public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
+        {
+            return NewsViewerWidgetHelper.CloneNewsWidget(coreWidgetInstance);
         }
     }
 }

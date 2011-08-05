@@ -49,7 +49,7 @@ namespace Core.Web.Areas.Admin.Helpers
                 {
                     usersMenuItem.Add(new ActionLink<RoleController>(html.Translate(".Roles"), Links.Content.Images.Admin.ico3_png, c => c.Index()));
                 }
-                menuItems.Add(html.Translate(".Portal"), usersMenuItem);
+                menuItems.Add(html.Translate(".AccountsAndPermissions"), usersMenuItem);
             }
 
             var siteSettingsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (SiteSettings), null);
@@ -108,7 +108,7 @@ namespace Core.Web.Areas.Admin.Helpers
             }
 
             var menu = new TagBuilder("div");
-            menu.Attributes["id"] = "accordion";//"navigation";
+            menu.Attributes["id"] = "accordion";
             menu.InnerHtml = RenderSectionsList(html, url, items, activeSection);
             return MvcHtmlString.Create(menu.ToString());
         }

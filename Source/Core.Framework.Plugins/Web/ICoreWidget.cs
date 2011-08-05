@@ -49,5 +49,12 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <param name="coreWidgetInstance">The core widget instance.</param>
         void Remove(ICoreWidgetInstance coreWidgetInstance);
+
+        /// <summary>
+        /// Clones the specified core widget instance.
+        /// </summary>
+        /// <param name="coreWidgetInstance">The core widget instance.</param>
+        /// <returns></returns>
+        long? Clone(ICoreWidgetInstance coreWidgetInstance);
     }
 }

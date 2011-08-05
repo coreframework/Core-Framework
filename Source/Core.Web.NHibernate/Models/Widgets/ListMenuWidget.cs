@@ -4,7 +4,7 @@ using FluentNHibernate.Data;
 
 namespace Core.Web.NHibernate.Models.Widgets
 {
-    public class ListMenuWidget:Entity
+    public class ListMenuWidget: Entity
     {
         public virtual Orientation Orientation { get; set; }
 

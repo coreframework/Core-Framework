@@ -20,7 +20,7 @@ namespace Products.NHibernate.Mappings
 
             HasManyToMany(product => product.Categories)
                .Table("Product_ProductsToCategories").ParentKeyColumn("ProductId")
-               .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();
+               .ChildKeyColumn("CategoryId").Cascade.None().LazyLoad();
 
             HasMany(product => product.CurrentProductLocales).KeyColumn("ProductId")
             .Table("Product_ProductLocales").ApplyFilter<CultureFilter>()

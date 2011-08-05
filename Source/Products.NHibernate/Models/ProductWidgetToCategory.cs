@@ -4,14 +4,17 @@ namespace Products.NHibernate.Models
 {
     public class ProductWidgetToCategory:Entity
     {
+        #region Properties
         /// <summary>
         /// Gets or sets the product widget id
         /// </summary>
-        public virtual long ProductWidgetId { get; set; }
+        public virtual ProductWidget ProductWidget { get; set; }
 
         /// <summary>
         /// Gets or sets the category id
         /// </summary>
-        public virtual long CategoryId { get; set; }
+        public virtual Category Category { get; set; }
+
+        #endregion
     }
 }

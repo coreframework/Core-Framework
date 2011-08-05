@@ -106,7 +106,9 @@ namespace Framework.Facilities.NHibernate
         /// <returns>Entity or null if a record is not found matching the provided Id.</returns>
         public virtual TEntity Find(long id)
         {
-            return Session.Get<TEntity>(id);
+            var entity = Session.Get<TEntity>(id);
+
+            return entity;
         }
 
         /// <summary>

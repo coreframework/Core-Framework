@@ -104,6 +104,11 @@ namespace Core.Web.NHibernate.Models
             _widgets.Remove(widget);
         }
 
+        public virtual void AddWidget(PageWidget widget)
+        {
+            _widgets.Add(widget);
+        }
+
         #region IPermissible Members
 
         /// <summary>

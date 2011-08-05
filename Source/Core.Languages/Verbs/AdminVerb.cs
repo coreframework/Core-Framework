@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Web;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
@@ -20,7 +21,7 @@ namespace Core.Languages.Verbs
         /// </summary>
         public string Name
         {
-            get { return "Languages"; }
+            get { return HttpContext.GetGlobalResourceObject(String.Format("Languages.Verbs.AdminVerb"), String.Format("Languages")) as String ?? "Languages"; }
         }
 
         /// <summary>

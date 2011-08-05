@@ -504,12 +504,24 @@ namespace Core.Web.Controllers
                     {
                         Id = this.CorePrincipal().PrincipalId
                     };
+
                 page = model.MapTo(page);
-                if (_pageService.Save(model.MapTo(page)))
+
+                if (_pageService.Save(page))
                 {
                     _permissionService.SetupDefaultRolePermissions(ResourcePermissionsHelper.GetResourceOperations(typeof(Page)), typeof(Page), page.Id);
+                    if (model.ClonedPageId!=null)
+                    {
+                        var sourcePage = _pageService.Find((long) model.ClonedPageId);
+                        if (_permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
+                        {
+                            PageHelper.ClonePageSettings(sourcePage, page);
+                        }
+                    }
+
                     TempData["Success"] = true;
                 }
+
                 model = model.MapFrom(page);
             }
             else Error(Translate("Messages.ValidationError"));

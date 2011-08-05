@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Web;
 using Core.ContentPages.Permissions.Operations;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.Permissions.Contracts;
@@ -20,7 +21,7 @@ namespace Core.ContentPages.Verbs
         /// </summary>
         public string Name
         {
-            get { return "Content Pages"; }
+            get { return HttpContext.GetGlobalResourceObject(String.Format("ContentPages.Verbs.AdminVerb"), String.Format("ContentPages")) as String ?? "Content Pages"; }
         }
 
         /// <summary>

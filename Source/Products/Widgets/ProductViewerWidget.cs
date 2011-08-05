@@ -3,6 +3,7 @@ using System.ComponentModel.Composition;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
+using Products.Helpers;
 using Products.Verbs.Widgets;
 
 namespace Products.Widgets
@@ -48,6 +49,11 @@ namespace Products.Widgets
         public override IWidgetActionVerb SaveAction
         {
             get { return ProductWidgetSaveSettingsVerb.Instance; }
+        }
+
+        public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
+        {
+            return ProductViewerWidgetHelper.CloneProductViewerWidget(coreWidgetInstance);
         }
     }
 }

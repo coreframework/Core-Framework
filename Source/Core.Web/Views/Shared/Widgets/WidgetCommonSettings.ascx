@@ -42,6 +42,7 @@
                 $.post(url, params, function (data) {
                     var widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.Widget.Id %>]').parents('.widget');
                     $(widget).replaceWith(data);
+                    iNettutsInit();
                 });
             }
         }

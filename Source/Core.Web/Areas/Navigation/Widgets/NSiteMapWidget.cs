@@ -3,6 +3,7 @@ using System.ComponentModel.Composition;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
+using Core.Web.Areas.Navigation.Helpers;
 using Core.Web.Areas.Navigation.Verbs;
 
 namespace Core.Web.Areas.Navigation.Widgets
@@ -49,6 +50,11 @@ namespace Core.Web.Areas.Navigation.Widgets
         public override IWidgetActionVerb SaveAction
         {
             get { return SiteMapSaveVerb.Instance; }
+        }
+
+        public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
+        {
+            return SiteMapWidgetHelper.CloneSiteMapWidget(coreWidgetInstance);
         }
     }
 }

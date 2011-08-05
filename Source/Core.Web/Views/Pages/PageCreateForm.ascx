@@ -20,6 +20,11 @@
                     <%:Html.TextBoxFor(model => model.Url, new { Class = "inp_txt" })%>
                     <%:Html.ValidationMessageFor(model => model.Url)%>
                 </div>
+                <div class="form_i">
+                    <%:Html.LocalizedLabelFor(model=>model.ClonedPageId) %><br/>
+                    <%:Html.DropDownListFor(model => model.ClonedPageId, new SelectList(Model.AvailablePages, "Id", "Title", Model.ClonedPageId), Html.Translate("Actions.PleaseSelect"), new { })%>
+                    <%:Html.ValidationMessageFor(model => model.ClonedPageId)%>
+                </div>
                 <%:Html.AntiForgeryToken()%>
         </div>
             <div class="p_footer clrfix">

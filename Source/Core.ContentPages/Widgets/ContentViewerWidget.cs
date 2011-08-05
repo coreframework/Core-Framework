@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Core.ContentPages.Helpers;
 using Core.ContentPages.Verbs.Widgets;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
@@ -48,6 +49,11 @@ namespace Core.ContentPages.Widgets
         public override IWidgetActionVerb SaveAction
         {
             get { return ContentWidgetSaveSettingsVerb.Instance; }
+        }
+
+        public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
+        {
+            return ContentViewerWidgetHelper.CloneContentPageWidget(coreWidgetInstance);
         }
     }
 }

@@ -8,7 +8,9 @@ using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Widgets;
 using Core.Web.NHibernate.Permissions.Operations;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
+using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
@@ -64,6 +66,27 @@ namespace Core.Web.Areas.Navigation.Helpers
             var widget = model.MapTo(new BreadcrumbsWidget());
             widgetService.Save(widget);
             return new BreadcrumbsWidgetModel().MapFrom(widget);
+        }
+
+        /// <summary>
+        /// Clones the breadcrumbs widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneBreadcrumbsWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<IBreadcrumbsWidgetService>();
+            var widget = widgetService.Find(instance.InstanceId ?? 0);
+
+            if (widget != null)
+            {
+                var clone = (BreadcrumbsWidget)new BreadcrumbsWidget().InjectFrom<CloneEntityInjection>(widget);
+                if (widgetService.Save(clone))
+                {
+                    return clone.Id;
+                }
+            }
+            return null;
         }
     }
 }

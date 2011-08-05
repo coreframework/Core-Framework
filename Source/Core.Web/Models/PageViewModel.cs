@@ -12,6 +12,7 @@ using Core.Framework.Plugins.Widgets;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
+using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Core.DomainModel;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.MEF.Extensions;
@@ -28,6 +29,8 @@ namespace Core.Web.Models
         private List<WidgetHolderViewModel> _widgets = new List<WidgetHolderViewModel>();
 
         private readonly IPermissionCommonService _permissionService;
+
+        private List<Page> _availablePages;
 
         #endregion
 
@@ -94,6 +97,21 @@ namespace Core.Web.Models
         public String CssFileName { get; set; }
 
         public List<ICorePlugin> PagePlugins { get; set; }
+
+        public List<Page> AvailablePages
+        {
+            get
+            {
+                if (_availablePages == null)
+                {
+                    var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+                    _availablePages = (List<Page>)pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
+                }
+                return _availablePages;
+            }
+        }
+
+        public long? ClonedPageId { get; set; }
 
         #endregion
 

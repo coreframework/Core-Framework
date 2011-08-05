@@ -26,5 +26,14 @@ namespace Core.Web.NHibernate.Models
                 return _columnWidths;
             }
         }
+
+        #region Helper Methods
+
+        public virtual void AddColumnWidth(PageLayoutColumnWidthValue item)
+        {
+            _columnWidths.Add(item);
+        }
+
+        #endregion
     }
 }

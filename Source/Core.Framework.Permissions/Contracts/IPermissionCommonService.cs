@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Framework.Permissions.Models;
-using NHibernate;
 using NHibernate.Criterion;
 
 namespace Core.Framework.Permissions.Contracts
@@ -75,6 +74,14 @@ namespace Core.Framework.Permissions.Contracts
         /// <param name="type">The type.</param>
         /// <param name="entityId">The entity id.</param>
         void SetupDefaultRolePermissions(IEnumerable<IPermissionOperation> operations, Type type, long entityId);
+
+        /// <summary>
+        /// Clones the object permisions.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="sourceEntityId">The source entity id.</param>
+        /// <param name="targetEntityId">The target entity id.</param>
+        void CloneObjectPermisions(Type type, long sourceEntityId, long targetEntityId);
 
         /// <summary>
         /// Gets the permissions criteria.

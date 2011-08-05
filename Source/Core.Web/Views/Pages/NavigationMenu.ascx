@@ -15,17 +15,8 @@
          $('a.add-page').parent('li').addClass('add_new');
          $('div.btn2').parent('li').addClass('add_new');
          $('.pages-menu ul:first').children('li.add_new').removeClass('add_new').addClass('add_new_pg');
-     });
-     $(document).ready(function () {
-         $(".pages-menu ul li").each(function () {
-             $(this).hover(
-			function () {
-			    $(this).css("position", "relative");
-			},
-			function () {
-			    $(this).css("position", "static");
-			}
-		);
+        $(".pages-menu ul li").each(function () {
+           $(this).hover(function () { $(this).css("position", "relative"); }, function () { $(this).css("position", "static"); });
          });
      });
      jQuery(function () {

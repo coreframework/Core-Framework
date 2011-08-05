@@ -69,6 +69,9 @@
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Omu.ValueInjecter">
+      <HintPath>..\..\Libs\ValueInjecter\Omu.ValueInjecter.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />

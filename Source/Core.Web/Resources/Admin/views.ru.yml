@@ -62,7 +62,7 @@ ru:
             Roles: "Роли"
             Administration: "Администрирование"
             Modules: "Модули"
-            Portal: "Портал"
+            AccountsAndPermissions: "Аккаунты и Полномочия"
             SiteSettings: "Настройки сайта"
         Role:
           Index:

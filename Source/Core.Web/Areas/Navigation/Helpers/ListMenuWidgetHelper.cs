@@ -8,7 +8,9 @@ using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Widgets;
 using Core.Web.NHibernate.Permissions.Operations;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
+using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
@@ -70,12 +72,41 @@ namespace Core.Web.Areas.Navigation.Helpers
             }
         }
 
+        /// <summary>
+        /// Saves the list menu widget.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns></returns>
         public static ListMenuWidgetModel SaveListMenuWidget(ListMenuWidgetModel model)
         {
             var widgetService = ServiceLocator.Current.GetInstance<IListMenuWidgetService>();
             var widget = model.MapTo(new ListMenuWidget());
             widgetService.Save(widget);
             return new ListMenuWidgetModel().MapFrom(widget);
+        }
+
+        /// <summary>
+        /// Clones the list menu widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneListMenuWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<IListMenuWidgetService>();
+            var widget = widgetService.Find(instance.InstanceId ?? 0);
+
+            if (widget != null)
+            {
+                var clone = (ListMenuWidget)new ListMenuWidget().InjectFrom<CloneEntityInjection>(widget);
+                clone.Pages = new List<Page>();
+                widget.Pages.AsParallel().ForAll(page=> ((List<Page>)clone.Pages).Add(page));
+
+                if (widgetService.Save(clone))
+                {
+                    return clone.Id;
+                }
+            }
+            return null;
         }
     }
 }

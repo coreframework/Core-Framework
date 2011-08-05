@@ -64,7 +64,7 @@ namespace Products.Models
         {
             Id = from.Id;
             PageSize = from.PageSize;
-            CategoriesId = from.Categories != null ?  from.Categories.Select(t => t.Id).ToArray() : new long[]{};
+            CategoriesId = from.Categories != null ?  from.Categories.Select(t => t.Category.Id).ToArray() : new long[]{};
             return this;
         }
 
@@ -72,7 +72,11 @@ namespace Products.Models
         {
             to.Id = Id;
             to.PageSize = PageSize;
-            to.Categories = Categories.Where(t => CategoriesId.Contains(t.Id)).ToList();
+
+            foreach (var category in CategoriesId.Select(item => Categories.Find(ct => ct.Id == item)).Where(category => category != null))
+            {
+                to.AddCategory(new ProductWidgetToCategory { Category = category, ProductWidget = to});
+            }
             return to;
         }
     }

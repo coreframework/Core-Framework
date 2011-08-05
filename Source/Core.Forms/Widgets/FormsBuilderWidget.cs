@@ -62,5 +62,10 @@ namespace Core.Forms.Widgets
         {
             FormsBuilderWidgetHelper.Remove(coreWidgetInstance);
         }
+
+        public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
+        {
+            return FormsBuilderWidgetHelper.CloneFormsBuilderWidget(coreWidgetInstance);
+        }
     }
 }

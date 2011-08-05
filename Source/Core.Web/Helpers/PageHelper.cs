@@ -4,6 +4,7 @@ using System.Text;
 using System.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
+using Core.Framework.Plugins.Web;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
@@ -13,6 +14,7 @@ using Framework.Core;
 using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
+using Omu.ValueInjecter;
 
 namespace Core.Web.Helpers
 {
@@ -369,6 +371,89 @@ namespace Core.Web.Helpers
         {
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(Constants.PageModeCookieName, pageMode.ToString()));
             HttpContext.Current.Items[typeof (PageMode)] = pageMode;
+        }
+
+        /// <summary>
+        /// Clones the target page settings to source page.
+        /// </summary>
+        /// <param name="sourcePage">The source page.</param>
+        /// <param name="targetPage">The target page.</param>
+        /// <returns></returns>
+        public static bool ClonePageSettings(Page sourcePage, Page targetPage)
+        {
+            var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+            var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+
+            sourcePage.Widgets.AsParallel().ForAll(widget =>
+            {
+                var pageWidget = new PageWidget();                        
+                pageWidget.InjectFrom<CloneEntityInjection>(widget);
+                pageWidget.Page = targetPage;
+
+                //copy widget settings
+                if (widget.Settings != null)
+                {
+                    pageWidget.Settings = (PageWidgetSettings)new PageWidgetSettings().InjectFrom<CloneEntityInjection>(widget.Settings);
+                    pageWidget.Settings.LookAndFeelSettings = new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(widget.Settings.LookAndFeelSettings) as LookAndFeelSettings;
+                    pageWidget.Settings.Widget = pageWidget;
+                }
+               
+                //clone page widget instance
+                if (widget.InstanceId!=null)
+                {
+                    pageWidget.InstanceId = CloneWidgetInstance(widget);
+                }
+                targetPage.AddWidget(pageWidget);
+            });
+
+            //copy page layout
+            targetPage.PageLayout = (PageLayout)new PageLayout{Id = targetPage.PageLayout.Id}.InjectFrom<CloneEntityInjection>(sourcePage.PageLayout);
+            targetPage.PageLayout.Page = targetPage;
+            sourcePage.PageLayout.ColumnWidths.AsParallel().ForAll(column =>
+                                                                       {
+                                                                           var columnWidth = (PageLayoutColumnWidthValue)new PageLayoutColumnWidthValue().InjectFrom<CloneEntityInjection>(column);
+                                                                           columnWidth.PageLayout = sourcePage.PageLayout;
+                                                                           targetPage.PageLayout.AddColumnWidth(columnWidth);
+                                                                       });
+
+            //copy page settings)
+            if (sourcePage.Settings!=null)
+            {
+                targetPage.Settings = (PageSettings) new PageSettings().InjectFrom<CloneEntityInjection>(sourcePage.Settings);
+                targetPage.Settings.LookAndFeelSettings = (LookAndFeelSettings)new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(sourcePage.Settings.LookAndFeelSettings);
+                targetPage.Settings.Page = targetPage;
+            }
+            
+            if (pageService.Save(targetPage))
+            {
+                //copy permissions
+                for (var i=0; i<targetPage.Widgets.Count(); i++)
+                {
+                    var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == targetPage.Widgets.ToList()[i].Widget.Identifier);
+
+                    if (sourcePage.Widgets.ToList()[i]!=null)
+                    {
+                        permissionCommonService.CloneObjectPermisions(systemWidget.GetType(), sourcePage.Widgets.ToList()[i].Id, targetPage.Widgets.ToList()[i].Id);
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Clones the widget instance.
+        /// </summary>
+        /// <param name="widget">The widget.</param>
+        /// <returns></returns>
+        private static long? CloneWidgetInstance(PageWidget widget)
+        {
+            var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == widget.Widget.Identifier);
+            if (widget.InstanceId!=null)
+            {
+                return systemWidget.Clone(new CoreWidgetInstance { InstanceId = widget.InstanceId, WidgetIdentifier = systemWidget.Identifier });
+            }
+            return null;
         }
     }
 }

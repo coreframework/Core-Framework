@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Web.Areas.Navigation.Models;
-using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Widgets;
-using Core.Web.NHibernate.Models;
-using Core.Web.NHibernate.Models.Static;
 using Core.Web.NHibernate.Models.Widgets;
 using Core.Web.NHibernate.Permissions.Operations;
+using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
+using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
@@ -79,6 +75,27 @@ namespace Core.Web.Areas.Navigation.Helpers
             var widget = model.MapTo(new NavigationMenuWidget());
             widgetService.Save(widget);
             return new NavigationMenuWidgetModel().MapFrom(widget);
+        }
+
+        /// <summary>
+        /// Clones the navigation menu widget.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns></returns>
+        public static long? CloneNavigationMenuWidget(ICoreWidgetInstance instance)
+        {
+            var widgetService = ServiceLocator.Current.GetInstance<INavigationMenuWidgetService>();
+            var widget = widgetService.Find(instance.InstanceId ?? 0);
+
+            if (widget != null)
+            {
+                var clone = (NavigationMenuWidget)new NavigationMenuWidget().InjectFrom<CloneEntityInjection>(widget);
+                if (widgetService.Save(clone))
+                {
+                    return clone.Id;
+                }
+            }
+            return null;
         }
     }
 }
