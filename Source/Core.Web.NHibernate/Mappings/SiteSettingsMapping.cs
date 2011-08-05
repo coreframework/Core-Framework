@@ -13,7 +13,6 @@ namespace Core.Web.NHibernate.Mappings
             Cache.Region("SiteSettings").ReadWrite();
             Table("SiteSettings");
             Id(siteSettings => siteSettings.Id);
-            Map(siteSettings => siteSettings.ShowMainMenu);
             Map(siteSettings => siteSettings.ShowPanel);
         }
     }

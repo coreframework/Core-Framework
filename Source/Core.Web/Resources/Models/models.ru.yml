@@ -27,7 +27,7 @@ ru:
    CustomCSSClasses: "Css классы"
    PageCssModel.CustomCSS: "Css стили"
   SiteSettings:
-   ShowMainMenu: "Показывать верхнее меню в режиме просмотра"
+   ShowPanel: "Показывать панель администрирования"
  Navigation:
   Models:
    NavigationMenuWidgetModel:

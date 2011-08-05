@@ -23,12 +23,6 @@ namespace Core.Web.NHibernate.Models
         #region Properties
 
         /// <summary>
-        /// Gets or sets the show main menu.
-        /// </summary>
-        /// <value>The show main menu.</value>
-        public virtual bool ShowMainMenu { get; set; }
-
-        /// <summary>
         /// Gets or sets the show panel.
         /// </summary>
         /// <value>The show panel.</value>

@@ -90,6 +90,6 @@ ru:
         SiteSettings:
           ViewSettings:
            SiteSettings: "Настройки сайта"
-      AdminError:
         AdminError:
-          PageNotFound: "Страница не найдена или у вас нет прав на просмотр этой страницы."
+          AdminError:
+           PageNotFound: "Извините, но запрашиваемая вами страница не найдена."

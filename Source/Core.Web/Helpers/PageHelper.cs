@@ -20,6 +20,12 @@ namespace Core.Web.Helpers
 {
     public class PageHelper
     {
+        #region Fields
+
+        private const String PageWidgetTemplate = "#widget_{0}";
+
+        #endregion
+
         /// <summary>
         /// Binds the page view model.
         /// </summary>
@@ -389,6 +395,8 @@ namespace Core.Web.Helpers
                 var pageWidget = new PageWidget();                        
                 pageWidget.InjectFrom<CloneEntityInjection>(widget);
                 pageWidget.Page = targetPage;
+                pageWidget.ParentWidgetId = widget.Id;
+
 
                 //copy widget settings
                 if (widget.Settings != null)
@@ -412,7 +420,7 @@ namespace Core.Web.Helpers
             sourcePage.PageLayout.ColumnWidths.AsParallel().ForAll(column =>
                                                                        {
                                                                            var columnWidth = (PageLayoutColumnWidthValue)new PageLayoutColumnWidthValue().InjectFrom<CloneEntityInjection>(column);
-                                                                           columnWidth.PageLayout = sourcePage.PageLayout;
+                                                                           columnWidth.PageLayout = targetPage.PageLayout;
                                                                            targetPage.PageLayout.AddColumnWidth(columnWidth);
                                                                        });
 
@@ -426,17 +434,19 @@ namespace Core.Web.Helpers
             
             if (pageService.Save(targetPage))
             {
-                //copy permissions
-                for (var i=0; i<targetPage.Widgets.Count(); i++)
+                //copy permissions and update page styles
+                foreach (var item in targetPage.Widgets)
                 {
-                    var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == targetPage.Widgets.ToList()[i].Widget.Identifier);
-
-                    if (sourcePage.Widgets.ToList()[i]!=null)
+                    if (item.ParentWidgetId == null) continue;
+                    var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == item.Widget.Identifier);
+                    var sourceWidget = sourcePage.Widgets.FirstOrDefault(w => w.Id == item.ParentWidgetId);
+                    if (sourceWidget!=null)
                     {
-                        permissionCommonService.CloneObjectPermisions(systemWidget.GetType(), sourcePage.Widgets.ToList()[i].Id, targetPage.Widgets.ToList()[i].Id);
+                        targetPage.Settings.CustomCSS = targetPage.Settings.CustomCSS.Replace(String.Format(PageWidgetTemplate, sourceWidget.Id), String.Format(PageWidgetTemplate, item.Id));
+                        permissionCommonService.CloneObjectPermisions(systemWidget.GetType(), sourceWidget.Id, item.Id);
                     }
                 }
-                return true;
+                return pageService.Save(targetPage);
             }
             return false;
         }

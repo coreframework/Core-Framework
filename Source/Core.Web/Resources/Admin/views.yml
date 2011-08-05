@@ -91,6 +91,6 @@ Admin:
         SiteSettings: "Site Settings"
     AdminError:
       AdminError:
-        PageNotFound: "Page was not found or you don't have rights to view this page."
+        PageNotFound: "Sorry, but we couldn't find the page you're looking for."
     
 

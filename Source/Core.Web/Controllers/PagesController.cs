@@ -76,12 +76,7 @@ namespace Core.Web.Controllers
         [ChildActionOnly]
         public virtual ActionResult Index(PageViewModel currentPage)
         {
-            var siteSettingsService = ServiceLocator.Current.GetInstance<ISiteSettingsService>();
-            var settings = siteSettingsService.GetSettings();
-            if (settings.ShowMainMenu || PageHelper.GetCurrentUserPageMode()==PageMode.Edit)
-                return View(MVC.Pages.Views.NavigationMenu, PageHelper.GetNavigationMenu(currentPage, this.CorePrincipal()));
-
-            return Content(String.Empty);
+            return View(MVC.Pages.Views.NavigationMenu, PageHelper.GetNavigationMenu(currentPage, this.CorePrincipal()));
         }
 
         /// <summary>

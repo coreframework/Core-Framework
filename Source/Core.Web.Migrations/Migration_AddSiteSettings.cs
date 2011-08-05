@@ -17,7 +17,7 @@ namespace Core.Web.Migrations
             Database.AddTable("SiteSettings", t =>
             {
                 t.PrimaryKey();
-                t.Bool("ShowMainMenu");
+                t.Bool("ShowPanel");
             });
         }
 

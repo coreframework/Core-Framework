@@ -18,6 +18,7 @@ namespace Core.Web.Migrations
             {
                 t.PrimaryKey();
                 t.Long("InstanceId").Null();
+                t.Long("ParentWidgetId").Null();
                 t.Integer("PageSection");
                 t.Integer("ColumnNumber");
                 t.Integer("OrderNumber");

@@ -23,7 +23,7 @@ Messages:
   CouldNotFoundPlugin: "Plugin couldn't found."
   InstallWidget: "Successfuly install widget."
   UninstallWidget: "Successfuly uninstall widget."
-  SiteSettingsApplied:"Settings have been saved successfully."
+  SiteSettingsApplied: "Settings have been saved successfully."
 Actions:
   Actions: "Actions"
   Install: "Install"
@@ -37,3 +37,4 @@ Titles:
   Home: "Home"
   Modules: "Modules"
   Widgets: "Widgets"
+  PageNotFound: "Page not found"

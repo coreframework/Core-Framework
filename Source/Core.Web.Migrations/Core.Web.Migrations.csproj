@@ -63,7 +63,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migration_AddColumnInSiteSettings.cs" />
     <Compile Include="Migration_AddSiteSettings.cs" />
     <Compile Include="Migration_InsertDefaultRecords.cs" />
     <Compile Include="Migration_AddEntityTypes.cs" />

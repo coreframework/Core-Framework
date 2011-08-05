@@ -74,7 +74,8 @@ ru:
       Error:
           PanelView: "Просмотр" 
           PanelEdit: "Редактор" 
-          PageNotFound: "Страница не найдена или у вас нет прав на просмотр этой страницы."
+          PageNotFound: "Извините, но запрашиваемая вами страница не найдена."
+          PageNotFoundTitle: "Страница не найдена."
  Navigation: 
   Views:
    SiteMap:

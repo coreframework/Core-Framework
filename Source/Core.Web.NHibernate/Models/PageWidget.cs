@@ -58,7 +58,17 @@ namespace Core.Web.NHibernate.Models
         /// <value>The order.</value>
         public virtual Int32 OrderNumber { get; set; }
 
+        /// <summary>
+        /// Gets or sets the user.
+        /// </summary>
+        /// <value>The user.</value>
         public virtual User User { get; set; }
+
+        /// <summary>
+        /// Gets or sets the parent widget id.
+        /// </summary>
+        /// <value>The parent widget id.</value>
+        public virtual long? ParentWidgetId { get; set; }
 
         #region IPermissible Members
 
