@@ -23,9 +23,9 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class NewsMVC {
+    public static Core.News.Controllers.NewsCategoryController NewsCategory = new Core.News.Controllers.T4MVC_NewsCategoryController();
     public static Core.News.Controllers.NewsController News = new Core.News.Controllers.T4MVC_NewsController();
     public static Core.News.Controllers.NewsViewerWidgetController NewsViewerWidget = new Core.News.Controllers.T4MVC_NewsViewerWidgetController();
-    public static T4MVC.AdminController Admin = new T4MVC.AdminController();
 }
 
 namespace T4MVC {

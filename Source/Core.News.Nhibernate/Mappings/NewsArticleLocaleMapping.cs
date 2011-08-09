@@ -10,8 +10,8 @@ namespace Core.News.Nhibernate.Mappings
         /// </summary>
         public NewsArticleLocaleMapping()
         {
-            Cache.Region("NewsArticleLocales").ReadWrite();
-            Table("NewsArticleLocales");
+            Cache.Region("News_ArticleLocales").ReadWrite();
+            Table("News_ArticleLocales");
             Id(newsArticleLocale => newsArticleLocale.Id);
             References(newsArticleLocale => newsArticleLocale.NewsArticle).Column("NewsArticleId").LazyLoad().Not.Nullable();
             Map(newsArticleLocale => newsArticleLocale.Culture).Length(5);

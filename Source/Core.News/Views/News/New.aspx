@@ -22,10 +22,14 @@
                 </div>
 			    <div class="i_form_i">
               <%:Html.EditorFor(model => model.Content)%>
-                </div>
+                </div>                
+                <%if (Model.PublishingAccess){%>
                 <div class="i_form_i">
-              <%:Html.DropDownListFor(model => model.Status)%>
-
+                    <%:Html.DropDownListFor(model => model.Status)%>
+                </div>    
+                <%}%>
+                <div class="i_form_i">
+                    <%:Html.EditorFor(model => model.PublishDate)%>
                 </div>
 			    <div class="i_form_i">
               <%:Html.AntiForgeryToken()%>

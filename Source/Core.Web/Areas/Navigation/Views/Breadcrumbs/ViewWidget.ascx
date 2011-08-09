@@ -3,7 +3,7 @@
 <ul class="breadcrumbs">
     <%foreach (var item in Model) {%>
         <li>
-            <%=Html.ActionLink(Html.Encode(item.Title), item.IsHomePage?MVC.Home.Index():MVC.Pages.Show(item.Url))%>
+            <%=Html.ActionLink(String.IsNullOrEmpty(item.Title) ? " " : Html.Encode(item.Title) , item.IsHomePage?MVC.Home.Index():MVC.Pages.Show(item.Url))%>
             <%=item != Model.Last() ? "&raquo;" : ""%>
         </li>
     <% }%>

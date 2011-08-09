@@ -1,52 +1,54 @@
 Views:
-
-  Admin:
-
+  News:
     Index:
-
       Title: "News Articles"
       Actions: "Actions"
-
       User: "User"
-
       Status: "Status"
-
       Remove: "[Remove]"
-
       UserGroups: "[User groups]"
-
       New: "New Article"
     Edit:
-
       Title: "Edit News Article"
-
       Save: "Save"
-
       Cancel: "Cancel"
-
       Title: "Edit News Article"
-
     New:
-
       Title: "New News Article"
-
       Save: "Save"
-
-      Cancel: "Cancel"
-    
+      Cancel: "Cancel"    
     EditForm:
-
       Title: "Edit News Article"
-
       Save: "Save"
-
       Cancel: "Cancel"
-
+    Categories:
+      Title: "Categories assigned to product \"{0}\""
+      Save: "Save"
   NewsViewerWidget:
     EditWidget:
       Count: "News items count"
+      Categories: "Categories to show"
+      ShowPaginator: "Show Paginator"
     ArticleWidget:
       Back: "Back" 
       Added: "Added"
     ViewWidget:
       Added: "Added"
+  NewsCategory:
+    Edit:
+      EditCategory: "Edit News Category"
+      Save: "Save"
+      Cancel: "Cancel"
+    Index:
+      NewCategory: "New News Category"
+      Categories: "Categories"
+    New:
+      Save: "Save"
+      Cancel: "Cancel"
+      NewCategory: "New News Category"
+    EditForm:
+      Save: "Save"
+      Cancel: "Cancel"
+    Show:
+      ViewCategory: "View News Category"
+      Cancel: "Cancel"

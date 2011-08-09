@@ -5,8 +5,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Core.Framework.Permissions.Contracts;
+using Core.Framework.Permissions.Extensions;
+using Core.News.Helpers;
 using Core.News.Models;
 using Core.News.Nhibernate.Contracts;
+using Core.News.NHibernate.Contracts;
 using Core.News.Nhibernate.Models;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
@@ -31,6 +35,7 @@ namespace Core.News.Controllers
         #region Fields
         
         private readonly INewsService newsArticlesService;
+        private readonly INewsCategoryService categoryService;
 
         #endregion
 
@@ -51,6 +56,7 @@ namespace Core.News.Controllers
         public NewsController()
         {
             newsArticlesService = ServiceLocator.Current.GetInstance<INewsService>();
+            categoryService = ServiceLocator.Current.GetInstance<INewsCategoryService>();
         }
 
         #endregion
@@ -70,22 +76,26 @@ namespace Core.News.Controllers
                                                              {
                                                                  Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
                                                                  Index = "Title",
-                                                                 Width = 400
                                                              },
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = HttpContext.Translate("Status", ResourceHelper.GetControllerScope(this)), 
                                                                  Index = "Status",
-                                                                 Width = 400
+                                                                 Width = 150
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Width = 20,
+                                                                 Name = HttpContext.Translate("CategoriesTitle", ResourceHelper.GetControllerScope(this)),
+                                                                 Width = 150,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                  Width = 10,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                  Width = 30,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -103,7 +113,7 @@ namespace Core.News.Controllers
                 Columns = columns,
                 IsRowNotClickable = true
             };
-            return View("Admin/Index", model);
+            return View("Index", model);
         }
 
         [HttpPost]
@@ -126,7 +136,8 @@ namespace Core.News.Controllers
                     {
                         id = article.Id,
                         cell = new[] {  article.Title, ((NewsStatus)article.StatusId).ToString(),
-
+                                        String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("Categories","News", new { id = article.Id }), HttpContext.Translate("Categories", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("Edit","News",new { id = article.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
@@ -148,8 +159,12 @@ namespace Core.News.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.Pagenotfound", ResourceHelper.GetControllerScope(this)));
             }
+            var model = new NewsArticleLocaleViewModel().MapFrom(article);
+            model.PublishingAccess =
+                ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
+                    (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
 
-            return View("Admin/Edit", new NewsArticleLocaleViewModel().MapFrom(article));
+            return View("Edit", new NewsArticleLocaleViewModel().MapFrom(article));
         }
 
         [HttpPost]
@@ -173,8 +188,10 @@ namespace Core.News.Controllers
                 model.CreateDate = locale.NewsArticle.CreateDate;
                 model.LastModifiedDate = locale.NewsArticle.LastModifiedDate;
             }
-
-            return PartialView("Admin/EditForm", model);
+            model.PublishingAccess =
+                ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
+                    (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
+            return PartialView("EditForm", model);
         }
 
         /// <summary>
@@ -207,7 +224,7 @@ namespace Core.News.Controllers
             }
 
             Error(HttpContext.Translate("Messages.ValidationError", ResourceHelper.GetControllerScope(this)));
-            return View("Admin/Edit", newsArticleLocaleViewModel);
+            return View("Edit", newsArticleLocaleViewModel);
         }
 
         /// <summary>
@@ -216,7 +233,11 @@ namespace Core.News.Controllers
         /// <returns>Content page create form.</returns>
         public virtual ActionResult New()
         {
-            return View("Admin/New", new NewsArticleViewModel());
+            var model = new NewsArticleViewModel{PublishDate = DateTime.Now};
+            model.PublishingAccess =
+                ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
+                    (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
+            return View("New", model);
         }
 
         /// <summary>
@@ -237,7 +258,7 @@ namespace Core.News.Controllers
             }
 
             Error(HttpContext.Translate("Messages.ValidationError", ResourceHelper.GetControllerScope(this)));
-            return View("Admin/New", newsArticle);
+            return View("New", newsArticle);
         }
 
 
@@ -259,6 +280,100 @@ namespace Core.News.Controllers
 
             Error((HttpContext.Translate("Messages.UnknownError", ResourceHelper.GetControllerScope(this))));
             return RedirectToAction("ShowAll");
+        }
+
+        /// <summary>
+        /// Categories.
+        /// </summary>
+        /// <param name="id">The product id.</param>
+        /// <returns></returns>
+        [HttpGet]
+        public virtual ActionResult Categories(long id)
+        {
+            var newsArticle = newsArticlesService.Find(id);
+            if (newsArticle == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = HttpContext.Translate("TitleCategory", ResourceHelper.GetControllerScope(this)), 
+                                                                 Index = "Title",
+                                                                 Width = 1100
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action("NewsCategoriesDynamicGridData", "News"),
+                DefaultOrderColumn = "Id",
+                GridTitle = HttpContext.Translate("GridTitleCategory", ResourceHelper.GetControllerScope(this)),
+                Columns = columns,
+                MultiSelect = true,
+                IsRowNotClickable = true,
+                SelectedIds = newsArticle.Categories.Select(t => t.Id),
+                Title = newsArticle.Title
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public virtual JsonResult NewsCategoriesDynamicGridData(int id, int page, int rows, string search, string sidx, string sord)
+        {
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            var user = newsArticlesService.Find(id);
+            if (user == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+            var categories = categoryService.GetCategories(search);
+            int totalRecords = categories.Count();
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            categories = sord == "asc"
+                             ? categories.OrderBy(cat => cat.Title).Skip(pageIndex * pageSize).Take(pageSize).ToList()
+                             : categories.OrderByDescending(cat => cat.Title).Skip(pageIndex * pageSize).Take(pageSize).
+                                   ToList();
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from category in categories
+                    select new
+                    {
+                        id = category.Id,
+                        cell = new[] { category.Title }
+                    }).ToArray()
+            };
+            return Json(jsonData);
+        }
+
+        public virtual JsonResult UpdateCategories(long id, IEnumerable<string> ids, IEnumerable<string> selids)
+        {
+            var newsArticle = newsArticlesService.Find(id);
+            if (newsArticle == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
+            }
+
+            if (NewsArticleHelper.UpdateCategoriesToProductAssignment(newsArticle, ids, selids))
+            {
+                Success(HttpContext.Translate("Messages.CategoriesUpdated", ResourceHelper.GetControllerScope(this)));
+                return Json(true);
+            }
+
+            return Json(HttpContext.Translate("Messages.ValidationError", ResourceHelper.GetControllerScope(this)));
         }
 
         #endregion

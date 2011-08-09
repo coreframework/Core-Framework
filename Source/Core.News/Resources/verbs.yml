@@ -1,3 +1,5 @@
 Verbs:
   AdminVerb:
     News: "News" 
+  AdminNewsCategoryVerb:
+    NewsCategories: "News: Categories"

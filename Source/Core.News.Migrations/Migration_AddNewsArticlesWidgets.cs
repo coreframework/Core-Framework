@@ -14,10 +14,11 @@ namespace Core.News.Migrations
         /// </summary>
         public override void Up()
         {
-            Database.AddTable("NewsArticleWidgets", t =>
+            Database.AddTable("News_ArticleWidgets", t =>
             {
                 t.PrimaryKey();
                 t.Integer("ItemsOnPage");
+                t.Bool("ShowPaginator");
                 //t.ForeignKey("NewsArticleId").Table("News").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

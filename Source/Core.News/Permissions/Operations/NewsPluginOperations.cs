@@ -8,6 +8,14 @@ namespace Core.News.Permissions.Operations
     {
         [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
         [Description("Manage news")]
-        ManageNews = 1
+        ManageNews = 1,
+
+        [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
+        [Description("Manage Categories")]
+        ManageCategories = 2,
+
+        [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
+        [Description("Publishing News")]
+        PublishingNews = 4
     }
 }

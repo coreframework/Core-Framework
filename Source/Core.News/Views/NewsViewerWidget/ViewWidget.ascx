@@ -1,13 +1,16 @@
 ﻿<%@ Assembly Name="Core.News" %>
 <%@ Assembly Name="Core.News.NHibernate" %>
 
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.News.Nhibernate.Models.NewsArticleWidget>" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.News.Models.NewsArticleViewerWidgetModel>" %>
+
+<%@ Import Namespace="Core.News.Helpers" %>
 
 <div class="widget-news">
-        <%for (var i = 0; i < (Model.NewsArticles.Count < Model.ItemsOnPage ? Model.NewsArticles.Count : Model.ItemsOnPage); i++){ %>
-            <div class="newslist" style="border-bottom: 1px solid #DFE5E8;">
+        <%for (var i = Model.CurrentPage * Model.ItemsOnPage; i < (Model.NewsArticles.Count < (Model.CurrentPage + 1) * Model.ItemsOnPage ? Model.NewsArticles.Count : (Model.CurrentPage + 1) * Model.ItemsOnPage); i++)
+          { %>
+            <div class="newslist">
                 <p>
-                    <a href="<%=Request.Url + (Request.Url.ToString().Contains("?") ? "&" : "?") + "newsvidgetid=" + Model.Id + "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id %>">
+                    <a href="<%=Request.Url + (!Request.Url.ToString().Contains("newsvidgetid=" + Model.Id) ? (Request.Url.ToString().Contains("?") ? "&" : "?") + "newsvidgetid=" + Model.Id + "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id : "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id) %>">
                         <b><%=Model.NewsArticles[i].Title%></b>
                     </a>
                 </p>
@@ -19,4 +22,7 @@
                 </p>
             </div>
         <%} %>
+        <%if (Model.ShowPaginator){%>
+        <%=Html.Pager(Model.ItemsOnPage, Model.CurrentPage, Model.TotalItemsCount, Model.Id, Request.Url.ToString())%>
+        <%}%>
 </div>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
@@ -18,12 +17,6 @@ namespace Core.News.Controllers
     [Export(typeof(IController)), ExportMetadata("Name", "NewsViewerWidget")]
     public partial class NewsViewerWidgetController : CoreWidgetController
     {
-        #region
-
-        private const string Newsvidgetid = "newsvidgetid";
-        private const string Articleid = "articleid";
-
-        #endregion
 
         #region Properties
 
@@ -51,25 +44,40 @@ namespace Core.News.Controllers
 
                 if (widget != null)
                 {
-                    if (!String.IsNullOrEmpty(Request.Params[Newsvidgetid]))
+                    if (!String.IsNullOrEmpty(Request.Params[NewsConstants.Newsvidgetid]))
                     {
-                        var ids = Request.Params[Newsvidgetid].Split(',');
+
+                        var ids = Request.Params[NewsConstants.Newsvidgetid].Split(',');
                         foreach (var id in ids)
                         {
                             if (widget.Id == int.Parse(id))
                             {
-                                if (!String.IsNullOrEmpty(Request.Params[Articleid + id]))
+                                if (!String.IsNullOrEmpty(Request.Params[NewsConstants.Articleid + id]))
                                 {
-                                    var article = articleService.FindPublished(long.Parse(Request.Params[Articleid + id]));
-                                    article.WidgetId = widget.Id;
-                                    return PartialView("ArticleWidget", article);
+
+                                    if (!String.IsNullOrEmpty(Request.Params[NewsConstants.Articleid + id]))
+                                    {
+                                        var article =
+                                            articleService.FindPublished(
+                                                long.Parse(Request.Params[NewsConstants.Articleid + id]));
+                                        article.WidgetId = widget.Id;
+                                        return PartialView("ArticleWidget", article);
+                                    }
+                                }
+                                else
+                                {
+                                    if (!String.IsNullOrEmpty(Request.Params[NewsConstants.CurrentPage + id]))
+                                    {
+                                        widget.CurrentPage = int.Parse(Request.Params[NewsConstants.CurrentPage + id]);
+                                    }
                                 }
                             }
                         }
                     }
-
-                    widget.NewsArticles =
-                        new List<NewsArticle>(articleService.FindPublished());
+                    else
+                    {
+                        widget.CurrentPage = 0;
+                    }
                     return PartialView(widget);
                 }
             }
@@ -96,7 +104,8 @@ namespace Core.News.Controllers
                     if (exWidget != null)
                         widget = exWidget;
                 }
-                return PartialView(new NewsArticleViewerWidgetModel().MapFrom(widget));
+                //widget.Categories = ServiceLocator.Current.GetInstance<INewsCategoryService>().GetAll().ToList(); 
+                return PartialView(new NewsArticleWidgetModel().MapFrom(widget));
             }
 
             return Content(String.Empty);
@@ -108,7 +117,7 @@ namespace Core.News.Controllers
         /// <param name="model">The model.</param>
         /// <returns></returns>
         [HttpPost]
-        public virtual ActionResult UpdateWidget(NewsArticleViewerWidgetModel model)
+        public virtual ActionResult UpdateWidget(NewsArticleWidgetModel model)
         {
             if (ModelState.IsValid)
             {

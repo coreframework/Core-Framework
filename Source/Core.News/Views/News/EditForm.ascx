@@ -4,6 +4,7 @@
 <div class="cols clrfix">
     <div class="fst_col colls_i" style="width: 60%;">
         <%:Html.HiddenFor(model => model.SelectedCulture) %>
+        <%:Html.HiddenFor(model => model.PublishingAccess)%>
         <div class="i_form_i">
             <%:Html.EditorFor(model => model.Title)%>
         </div>
@@ -13,8 +14,13 @@
     <div class="i_form_i">
         <%:Html.EditorFor(model => model.Content)%>
     </div>
+    <%if (Model.PublishingAccess){%>
     <div class="i_form_i">
         <%:Html.DropDownListFor(model => model.Status)%>
+    </div>    
+    <%}%>
+    <div class="i_form_i">
+        <%:Html.EditorFor(model => model.PublishDate)%>
     </div>
     <div class="i_form_i">
         <%:Html.AntiForgeryToken()%>

@@ -11,19 +11,21 @@ namespace Core.News.Nhibernate.Mappings
         /// </summary>
         public NewsArticleMapping()
         {
-            Cache.Region("News").ReadWrite();
-            Table("News");
+            Cache.Region("News_News").ReadWrite();
+            Table("News_News");
             Id(newsArticle => newsArticle.Id);
             Map(newsArticle => newsArticle.CreateDate);
+            Map(newsArticle => newsArticle.PublishDate);
             Map(newsArticle => newsArticle.LastModifiedDate);
             Map(newsArticle => newsArticle.StatusId);
-//            HasMany(newsArticle => newsArticle.Widgets).KeyColumn("NewsArticleId")
-//            .Table("NewsArticleWidgets")
-//            .Inverse()
-//            .LazyLoad()
-//            .Cascade.All();
+
+            HasManyToMany(newsArticle => newsArticle.Categories)
+                           .Table("News_ArticlesToCategories").ParentKeyColumn("ArticleId")
+                           .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();
+
+
             HasMany(newsArticle => newsArticle.CurrentNewsArticleLocales).KeyColumn("NewsArticleId")
-            .Table("NewsArticleLocales").ApplyFilter<CultureFilter>()
+            .Table("News_ArticleLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
             .Inverse()
             .LazyLoad()

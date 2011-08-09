@@ -14,12 +14,13 @@ namespace Core.News.Migrations
         /// </summary>
         public override void Up()
         {
-            Database.AddTable("News", t =>
+            Database.AddTable("News_News", t =>
             {
                 t.PrimaryKey();
                 t.Integer("StatusId").Null();
                 t.DateTime("CreateDate").Null();
                 t.DateTime("LastModifiedDate").Null();
+                t.DateTime("PublishDate").Null();
             });
         }
 

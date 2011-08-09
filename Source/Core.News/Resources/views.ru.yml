@@ -1,7 +1,6 @@
 ﻿ru:
   Views:
-    Admin:
-
+    News:
       Index:
         Title: "Новости"
         Actions: "Actions"
@@ -11,34 +10,45 @@
         UserGroups: "[User groups]"
         New: "Новая новость"
       Edit:
-
         Title: "Редактировать новость"
-
         Save: "Сохранить"
-
         Cancel: "Отмена"
-
       New:
-
         Title: "Новая новость"
-
         Save: "Сохранить"
-
-        Cancel: "Отмена"
-    
+        Cancel: "Отмена"    
       EditForm:
-
         Save: "Сохранить"
-
         Cancel: "Отмена"
-
         Title: "Редактировать новость"
-
+      Categories:
+        Title: "Категории продукта \"{0}\""
+        Save: "Save"
     NewsViewerWidget:
       EditWidget:
         Count: "Количество новостей в списке"
+        Categories: "Отображаемые категории"
+        ShowPaginator: "Показывать пагинатор"
       ArticleWidget:
         Back: "Назад"
         Added: "Добавлено"
       ViewWidget:
         Added: "Добавлено"
+    NewsCategory:
+      Edit:
+        EditCategory: "Редактирование Категории Новостей"
+        Save: "Сохранить"
+        Cancel: "Отмена"
+      Index:
+        NewCategory: "Создать Категорию Новостей"
+        Categories: "Категории"
+      New:
+        Save: "Сохранить"
+        Cancel: "Отмена"
+        NewCategory: "Создание Категории Новостей"
+      EditForm:
+        Save: "Сохранить"
+        Cancel: "Отмена"
+      Show:
+        ViewCategory: "Просмотр Категории Новостей"
+        Cancel: "Отмена"

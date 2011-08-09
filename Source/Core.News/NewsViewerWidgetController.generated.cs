@@ -95,7 +95,7 @@ namespace Core.News.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult UpdateWidget(Core.News.Models.NewsArticleViewerWidgetModel model) {
+        public override System.Web.Mvc.ActionResult UpdateWidget(Core.News.Models.NewsArticleWidgetModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateWidget);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;

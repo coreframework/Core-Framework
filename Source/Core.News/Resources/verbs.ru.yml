@@ -2,3 +2,5 @@
   Verbs:
     AdminVerb:
       News: "Новости"
+    AdminNewsCategoryVerb:
+      NewsCategories: "Новости: Категории"

@@ -14,14 +14,14 @@ namespace Core.News.Migrations
         /// </summary>
         public override void Up()
         {
-            Database.AddTable("NewsArticleLocales", t =>
+            Database.AddTable("News_ArticleLocales", t =>
             {
                 t.PrimaryKey();
                 t.String("Title");
                 t.String("Summary");
                 t.Text("Content");
                 t.Text("Culture").Length(10);
-                t.ForeignKey("NewsArticle").Table("News").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("NewsArticle").Table("News_News").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
 
@@ -30,7 +30,7 @@ namespace Core.News.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.ChangeTable("NewsArticleLocales", t => t.RemoveForeignKey("NewsArticle").Table("News"));
+            Database.ChangeTable("NewsArticleLocales", t => t.RemoveForeignKey("NewsArticle").Table("News_News"));
             Database.RemoveTable("NewsArticleLocales");
         }
     }

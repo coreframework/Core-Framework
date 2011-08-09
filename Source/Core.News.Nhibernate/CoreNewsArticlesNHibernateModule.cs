@@ -2,7 +2,9 @@
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Core.News.Nhibernate.Contracts;
+using Core.News.NHibernate.Contracts;
 using Core.News.Nhibernate.Services;
+using Core.News.NHibernate.Services;
 using Framework.Facilities.NHibernate.Castle;
 
 namespace Core.News.Nhibernate
@@ -17,9 +19,12 @@ namespace Core.News.Nhibernate
             // Register data services.
             container.Register(Component.For<INewsArticleService>().ImplementedBy<NHibernateNewsArticleService>().LifeStyle.Transient);
             container.Register(Component.For<INewsArticleLocaleService>().ImplementedBy<NHibernateNewsArticleLocaleService>().LifeStyle.Transient);
+            container.Register(Component.For<INewsCategoryService>().ImplementedBy<NHibernateNewsCategoryService>().LifeStyle.Transient);
+            container.Register(Component.For<INewsCategoryLocaleService>().ImplementedBy<NHibernateNewsCategoryLocaleService>().LifeStyle.Transient);
 
             //Register widget data services. 
             container.Register(Component.For<INewsArticleWidgetService>().ImplementedBy<NHibernateNewsArticleWidgetService>().LifeStyle.Transient);
+            container.Register(Component.For<INewsCategoryWidgetService>().ImplementedBy<NHibernateNewsCategoryWidgetService>().LifeStyle.Transient);
         }
     }
 }

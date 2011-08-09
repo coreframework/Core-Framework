@@ -98,12 +98,22 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Controllers\NewsCategoryController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\NewsViewerWidgetController.cs" />
+    <Compile Include="Helpers\NewsArticleHelper.cs" />
+    <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\NewsViewerWidgetHelper.cs" />
+    <Compile Include="Helpers\NewsConstants.cs" />
+    <Compile Include="Models\CategoryLocaleViewModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\CategoryViewWidgetModel.cs" />
+    <Compile Include="Models\CategoryWidgetModel.cs" />
+    <Compile Include="Models\NewsArticleWidgetModel.cs" />
+    <Compile Include="NewsCategoryController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="NewsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -123,7 +133,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Verbs\AdminNewsCategoryVerb.cs" />
     <Compile Include="Verbs\AdminVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsCategoryWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsCategoryWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsCategoryWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsWidgetViewerVerb.cs" />
@@ -136,16 +150,37 @@
     <Content Include="Content\Css\news.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Admin\Edit.aspx">
+    <Content Include="Views\NewsCategory\Edit.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Admin\EditForm.ascx">
+    <Content Include="Views\NewsCategory\EditForm.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Admin\Index.aspx">
+    <Content Include="Views\NewsCategory\Index.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Admin\New.aspx">
+    <Content Include="Views\NewsCategory\New.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsCategory\Show.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsCategory\ShowForm.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\News\Categories.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\News\Edit.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\News\EditForm.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\News\Index.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\News\New.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\NewsViewerWidget\ArticleWidget.ascx">

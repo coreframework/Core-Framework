@@ -30,13 +30,13 @@ namespace Core.News.Nhibernate.Services
         public NewsArticle FindPublished(long id)
         {
             IQueryable<NewsArticle> query = CreateQuery();
-            return query.Where(article => article.Id == id && article.StatusId == (int)NewsStatus.Publish).OrderBy(article => article.LastModifiedDate).FirstOrDefault();
+            return query.Where(article => article.Id == id && article.StatusId == (int)NewsStatus.Published && article.PublishDate <= DateTime.Now).OrderBy(article => article.LastModifiedDate).FirstOrDefault();
         }
 
         public IEnumerable<NewsArticle> FindPublished()
         {
             IQueryable<NewsArticle> query = CreateQuery();
-            return query.Where(article => article.StatusId == (int)NewsStatus.Publish).OrderBy(article => article.LastModifiedDate).AsEnumerable();
+            return query.Where(article => article.StatusId == (int)NewsStatus.Published && article.PublishDate <= DateTime.Now).OrderBy(article => article.LastModifiedDate).AsEnumerable();
         }
     }
 }

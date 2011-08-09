@@ -4,8 +4,8 @@
   <Title>News</Title>
   <ResourcesDirectory>Resources</ResourcesDirectory>
   <Description>Allow managing News.</Description>
-  <CssJsConfigPath></CssJsConfigPath>
-  <ImagesPath></ImagesPath>
+  <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
+  <ImagesPath>Content\</ImagesPath>
   <CssPath>Content\Css\</CssPath>
   <CssPack>base</CssPack>
   <WidgetSettings>

@@ -10,15 +10,14 @@ namespace Core.News.Nhibernate.Mappings
         /// </summary>
         public NewsArticleWidgetMapping()
         {
-            Cache.Region("NewsArticleWidgets").ReadWrite();
-            Table("NewsArticleWidgets");
+            Cache.Region("News_ArticleWidgets").ReadWrite();
+            Table("News_ArticleWidgets");
             Id(newsArticleWidget => newsArticleWidget.Id);
             Map(newsArticleWidget => newsArticleWidget.ItemsOnPage);
-//            HasMany(newsArticleWidget => newsArticleWidget.NewsArticles).KeyColumn("NewsArticleId")
-//            .Table("NewsOnWidgets")
-//            .Inverse()
-//            .LazyLoad()
-//            .Cascade.All();
+            Map(newsArticleWidget => newsArticleWidget.ShowPaginator);
+            HasManyToMany(newsArticleWidget => newsArticleWidget.Categories)
+                                       .Table("News_ArticleWidgetToCategories").ParentKeyColumn("ArticleWidgetId")
+                                       .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();
         }
     }
 }

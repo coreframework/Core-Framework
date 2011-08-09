@@ -3,6 +3,6 @@
     public enum NewsStatus
     {
         Pending = 1,
-        Publish = 2
+        Published = 2
     }
 }

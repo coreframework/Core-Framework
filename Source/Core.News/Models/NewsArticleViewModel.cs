@@ -28,6 +28,11 @@ namespace Core.News.Models
         [DataType("FckEditorText"), Required]
         public virtual String Content { get; set; }
 
+        [Required]
+        [DataType(DataType.Date)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        public virtual DateTime PublishDate { get; set; }
+
         /// <summary>
         /// Gets or sets the status Id.
         /// </summary>
@@ -51,6 +56,8 @@ namespace Core.News.Models
 
         public virtual DateTime LastModifiedDate { get; set; }
 
+        public virtual bool PublishingAccess { get; set; }
+
         public NewsArticleViewModel MapFrom(NewsArticle from)
         {
             Title = from.Title;
@@ -59,6 +66,7 @@ namespace Core.News.Models
             StatusId = from.StatusId;
             CreateDate = from.CreateDate;
             LastModifiedDate = from.LastModifiedDate;
+            PublishDate = from.PublishDate;
             return this;
 
         }
@@ -71,6 +79,7 @@ namespace Core.News.Models
             to.StatusId = StatusId;
             to.CreateDate = CreateDate;
             to.LastModifiedDate = LastModifiedDate;
+            to.PublishDate = PublishDate;
             return to;
         }
     }

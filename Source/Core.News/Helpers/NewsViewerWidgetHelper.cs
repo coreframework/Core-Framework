@@ -17,11 +17,11 @@ namespace Core.News.Helpers
         /// </summary>
         /// <param name="instance">The instance.</param>
         /// <returns></returns>
-        public static NewsArticleWidget BindWidgetModel(ICoreWidgetInstance instance)
+        public static NewsArticleViewerWidgetModel BindWidgetModel(ICoreWidgetInstance instance)
         {
             var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
 
-            return widgetService.Find(instance.InstanceId ?? 0);
+            return new NewsArticleViewerWidgetModel().MapFrom(widgetService.Find(instance.InstanceId ?? 0));
         }
 
         public static NewsArticleWidget BindEditWidgetModel(ICoreWidgetInstance instance)
@@ -35,12 +35,12 @@ namespace Core.News.Helpers
         /// Saves the content viewer widget.
         /// </summary>
         /// <param name="model">The model.</param>
-        public static NewsArticleViewerWidgetModel SaveContentViewerWidget(NewsArticleViewerWidgetModel model)
+        public static NewsArticleWidgetModel SaveContentViewerWidget(NewsArticleWidgetModel model)
         {
             var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
             var newsViewer = model.MapTo(new NewsArticleWidget());
             widgetService.Save(newsViewer);
-            return new NewsArticleViewerWidgetModel().MapFrom(newsViewer);
+            return new NewsArticleWidgetModel().MapFrom(newsViewer);
         }
 
         /// <summary>
@@ -52,21 +52,24 @@ namespace Core.News.Helpers
         /// <returns></returns>
         public static string GetBackUrl(string url, long widgetId, long articleId)
         {
-            url = url.Replace("&articleid" + widgetId + "=" + articleId, "");
-            url = url.Replace("?newsvidgetid=" + widgetId, "");
-            if (!url.Contains("?"))
+            url = url.Replace("&" + NewsConstants.Articleid + widgetId + "=" + articleId, "");
+            if (!url.Contains(NewsConstants.CurrentPage + widgetId))
             {
-                var index = url.IndexOf("&");
-                if (index > 0)
+                url = url.Replace("?" + NewsConstants.Newsvidgetid + "=" + widgetId, "");
+                if (!url.Contains("?"))
                 {
-                    var tempUrl = url.ToCharArray();
-                    tempUrl[index] = '?';
-                    url = new string(tempUrl);
+                    var index = url.IndexOf("&");
+                    if (index > 0)
+                    {
+                        var tempUrl = url.ToCharArray();
+                        tempUrl[index] = '?';
+                        url = new string(tempUrl);
+                    }
                 }
-            }
-            else
-            {
-                url = url.Replace("&newsvidgetid=" + widgetId, "");
+                else
+                {
+                    url = url.Replace("?" + NewsConstants.Newsvidgetid + "=" + widgetId, "");
+                }
             }
 
             return url;

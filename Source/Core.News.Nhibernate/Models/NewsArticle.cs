@@ -13,6 +13,11 @@ namespace Core.News.Nhibernate.Models
         private IList<ILocale> _currentLocales = new List<ILocale>();
         private NewsArticleLocale _currentLocale;
 
+        public NewsArticle()
+        {
+            PublishDate = DateTime.Now;
+        }
+
         #region Properties
 
         public virtual long WidgetId { get; set; }
@@ -57,12 +62,20 @@ namespace Core.News.Nhibernate.Models
         }
 
         /// <summary>
+        /// Gets or sets the categories.
+        /// </summary>
+        /// <value>The categories.</value>
+        public virtual IList<NewsCategory> Categories { get; set; }
+
+        /// <summary>
         /// Gets or sets the status Id.
         /// </summary>
         /// <value>The status Id.</value>
         public virtual int StatusId { get; set; }
 
         public virtual DateTime CreateDate { get; set; }
+
+        public virtual DateTime PublishDate { get; set; }
 
         public virtual DateTime LastModifiedDate { get; set; }
 

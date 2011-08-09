@@ -51,6 +51,21 @@ namespace Core.News.Controllers {
         public System.Web.Mvc.ActionResult Remove() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Categories() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Categories);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult NewsCategoriesDynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.NewsCategoriesDynamicGridData);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult UpdateCategories() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.UpdateCategories);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NewsController Actions { get { return NewsMVC.News; } }
@@ -70,6 +85,9 @@ namespace Core.News.Controllers {
             public readonly string ChangeLanguage = "ChangeLanguage";
             public readonly string New = "New";
             public readonly string Remove = "Remove";
+            public readonly string Categories = "Categories";
+            public readonly string NewsCategoriesDynamicGridData = "NewsCategoriesDynamicGridData";
+            public readonly string UpdateCategories = "UpdateCategories";
         }
 
 
@@ -78,6 +96,11 @@ namespace Core.News.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string Categories = "~/Views/News/Categories.aspx";
+            public readonly string Edit = "~/Views/News/Edit.aspx";
+            public readonly string EditForm = "~/Views/News/EditForm.ascx";
+            public readonly string Index = "~/Views/News/Index.aspx";
+            public readonly string New = "~/Views/News/New.aspx";
         }
     }
 
@@ -134,6 +157,31 @@ namespace Core.News.Controllers {
         public override System.Web.Mvc.ActionResult Remove(long id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
             callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Categories(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Categories);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult NewsCategoriesDynamicGridData(int id, int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.NewsCategoriesDynamicGridData);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult UpdateCategories(long id, System.Collections.Generic.IEnumerable<string> ids, System.Collections.Generic.IEnumerable<string> selids) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.UpdateCategories);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("ids", ids);
+            callInfo.RouteValueDictionary.Add("selids", selids);
             return callInfo;
         }
 

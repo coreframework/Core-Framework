@@ -52,9 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddArticleToCategories.cs" />
     <Compile Include="Migration_AddNewsArticles.cs" />
     <Compile Include="Migration_AddNewsArticlesLocales.cs" />
     <Compile Include="Migration_AddNewsArticlesWidgets.cs" />
+    <Compile Include="Migration_AddNewsCategory.cs" />
+    <Compile Include="Migration_AddNewsCategoryLocales.cs" />
+    <Compile Include="Migration_AddNewsCategoryWidget.cs" />
+    <Compile Include="Migration_AddNewsArticleWidgetToCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

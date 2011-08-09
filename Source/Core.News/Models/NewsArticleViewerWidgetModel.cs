@@ -4,6 +4,7 @@ using Core.News.Nhibernate.Contracts;
 using Core.News.Nhibernate.Models;
 using Framework.Core.DomainModel;
 using Microsoft.Practices.ServiceLocation;
+using System.Linq;
 
 namespace Core.News.Models
 {
@@ -30,12 +31,26 @@ namespace Core.News.Models
             {
                 if (_newsArticles == null)
                 {
-                    var newsArticleService = ServiceLocator.Current.GetInstance<INewsArticleService>();
-                    _newsArticles = (List<NewsArticle>)newsArticleService.GetAll();
+                    _newsArticles = new List<NewsArticle>();
+                    if (NewsCategories != null)
+                    {
+                        var newsArticleService = ServiceLocator.Current.GetInstance<INewsArticleService>();
+                        var tempArticles = (List<NewsArticle>) newsArticleService.GetAll();
+                        foreach (var article in tempArticles)
+                        {
+                            foreach (var category in NewsCategories)
+                            {
+                                if(article.Categories.Contains(category) && !_newsArticles.Contains(article))
+                                    _newsArticles.Add(article);
+                            }
+                        }
+                    }
                 }
                 return _newsArticles;
             }
         }
+
+        public List<NewsCategory> NewsCategories { get; set; }
 
         /// <summary>
         /// Gets or sets the content page.
@@ -44,12 +59,27 @@ namespace Core.News.Models
         [Required]
         public int ItemsOnPage { get; set; }
 
+        [Required]
+        public bool ShowPaginator { get; set; }
+
+        public int TotalItemsCount
+        {
+            get
+            {
+                return NewsArticles.Count;
+            }
+        }
+
+        public int CurrentPage { get; set; }
+
         #endregion
 
         public NewsArticleViewerWidgetModel MapFrom(NewsArticleWidget from)
         {
             Id = from.Id;
             ItemsOnPage = from.ItemsOnPage;
+            ShowPaginator = from.ShowPaginator;
+            NewsCategories = from.Categories.ToList();
             return this;
         }
 
@@ -57,6 +87,8 @@ namespace Core.News.Models
         {
             to.Id = Id;
             to.ItemsOnPage = ItemsOnPage;
+            to.ShowPaginator = ShowPaginator;
+            to.Categories = NewsCategories;
             return to;
         }
     }
