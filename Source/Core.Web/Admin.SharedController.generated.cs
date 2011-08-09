@@ -30,6 +30,10 @@ namespace T4MVC.Admin {
         public class ViewNames {
             public readonly string MainMenu = "~/Areas/Admin/Views/Shared/MainMenu.ascx";
             public readonly string TopLinks = "~/Areas/Admin/Views/Shared/TopLinks.ascx";
+            static readonly _EditorTemplates s_EditorTemplates = new _EditorTemplates();
+            public _EditorTemplates EditorTemplates { get { return s_EditorTemplates; } }
+            public partial class _EditorTemplates{
+            }
         }
     }
 

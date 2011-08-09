@@ -1613,6 +1613,7 @@ namespace Links {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string jquery_ui_1_8_11_custom_css = Url("jquery-ui-1.8.11.custom.css");
+                public static readonly string jquery_ui_datepicker_css = Url("jquery.ui.datepicker.css");
             }
         
             public static readonly string reset_css = Url("reset.css");

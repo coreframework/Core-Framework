@@ -35,9 +35,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper">
-      <HintPath>..\..\Libs\AutoMapper\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\Libs\Castle\Castle.Core.dll</HintPath>
     </Reference>
@@ -95,7 +92,8 @@
     <Reference Include="NHibernate.Caches.SysCache">
       <HintPath>..\..\Libs\NHibernate\Cache\NHibernate.Caches.SysCache\NHibernate.Caches.SysCache.dll</HintPath>
     </Reference>
-    <Reference Include="Omu.ValueInjecter">
+    <Reference Include="Omu.ValueInjecter, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\ValueInjecter\Omu.ValueInjecter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -161,8 +159,8 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminErrorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SiteSettingsController.cs" />
@@ -313,8 +311,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Areas\Admin\Views\AdminHome\Index.aspx" />
     <Content Include="Areas\Admin\Views\AdminError\AdminError.aspx" />
+    <Content Include="Areas\Admin\Views\AdminHome\Index.aspx" />
     <Content Include="Areas\Admin\Views\Module\Edit.aspx" />
     <Content Include="Areas\Admin\Views\Module\EditForm.ascx" />
     <Content Include="Areas\Admin\Views\Module\Index.aspx" />
@@ -1009,61 +1007,7 @@
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery-asyncUpload-0.1.js" />
     <Content Include="Scripts\jquery-ui-personalized-1.6rc2.min.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery-ui-i18n.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-af.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ar.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-az.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-bg.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-bs.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ca.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-cs.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-da.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-de.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-el.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-en-GB.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-eo.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-es.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-et.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-eu.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-fa.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-fi.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-fo.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-fr-CH.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-fr.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-he.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-hr.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-hu.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-hy.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-id.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-is.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-it.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ja.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ko.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-lt.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-lv.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ms.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-nl.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-no.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-pl.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-pt-BR.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ro.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ru.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-sk.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-sl.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-sq.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-sr-SR.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-sr.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-sv.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-ta.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-th.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-tr.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-uk.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-vi.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-zh-CN.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-zh-HK.js" />
-    <Content Include="Scripts\jquery-ui\i18n\jquery.ui.datepicker-zh-TW.js" />
     <Content Include="Scripts\jquery-ui\jquery-ui-1.8.11.custom.min.js" />
-    <Content Include="Scripts\jquery-ui\jquery.ui.datepicker.js" />
     <Content Include="Scripts\jquery-ui_packed.js" />
     <Content Include="Scripts\jquery.blockUI.js" />
     <Content Include="Scripts\jquery.corner.js" />
@@ -1072,7 +1016,6 @@
     <Content Include="Scripts\jquery.qtip-1.0.0.js" />
     <Content Include="Scripts\jquery.watermark.js" />
     <Content Include="Scripts\json2.js" />
-    <Content Include="Scripts\stickyFooter.js" />
     <Content Include="Scripts\superfish.js" />
     <Content Include="Scripts\swfupload.js" />
     <Content Include="Views\Home\Index.aspx" />
@@ -1097,7 +1040,6 @@
     <Content Include="Views\Shared\EditorTemplates\MultilineText.aspx" />
     <Content Include="Views\Shared\EditorTemplates\Password.aspx" />
     <Content Include="Views\Shared\EditorTemplates\String.aspx" />
-    <Content Include="Views\Error\Error.aspx" />
     <Content Include="Views\Shared\Layouts\Layout.ascx" />
     <Content Include="Views\Shared\Layouts\ChangeLayout.ascx" />
     <Content Include="Views\Shared\Layouts\LayoutSettings.ascx" />
