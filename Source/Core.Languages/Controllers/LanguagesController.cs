@@ -11,6 +11,7 @@ using Core.Languages.Models;
 using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
+using Framework.Core.Localization;
 using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
@@ -27,7 +28,7 @@ namespace Core.Languages.Controllers
     public partial class LanguagesController : CorePluginController
     {
         #region Fields
-        
+
         private readonly ILanguageService languageService;
 
         #endregion
@@ -40,7 +41,7 @@ namespace Core.Languages.Controllers
         }
 
         #endregion
-        
+
         #region Constructor
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace Core.Languages.Controllers
         /// Renders languages listing.
         /// </summary>
         /// <returns>List of languages.</returns>
-        
+
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -73,6 +74,12 @@ namespace Core.Languages.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Width = 15,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 45,
+                                                                 Align = "center",
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -120,6 +127,8 @@ namespace Core.Languages.Controllers
                         cell = new[] {  language.Title, 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
                                             Url.Action("Edit","Languages",new { id = language.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
+                                            language.IsDefault ? HttpContext.Translate("Default", ResourceHelper.GetControllerScope(this)) : String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
+                                            Url.Action("SetAsDefault","Languages",new { id = language.Id }),HttpContext.Translate("SetAsDefault", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action("Remove","Languages",new { id = language.Id }))}
                     }).ToArray()
@@ -152,7 +161,7 @@ namespace Core.Languages.Controllers
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult Edit(long? id, LanguageViewModel languageModel)
         {
-            if (ModelState.IsValid && id!=null)
+            if (ModelState.IsValid && id != null)
             {
                 Language language = languageService.Find((long)id);
                 languageService.Save(languageModel.MapTo(language));
@@ -201,6 +210,28 @@ namespace Core.Languages.Controllers
             if (language != null)
             {
                 languageService.Delete(language);
+            }
+
+            return RedirectToAction("ShowAll");
+        }
+
+        /// <summary>
+        /// Set the specified language as default.
+        /// </summary>
+        /// <param name="id">The language id.</param>
+        /// <returns>List of language pages</returns>
+        [HttpGet]
+        public virtual ActionResult SetAsDefault(long id)
+        {
+            var language = languageService.Find(id);
+            var currentDefaultLanguage = languageService.GetDefaultLanguage();
+            if(language != currentDefaultLanguage)
+            {
+                currentDefaultLanguage.IsDefault = false;
+                languageService.Save(currentDefaultLanguage);
+                language.IsDefault = true;
+                languageService.Save(language);
+                CultureHelper.SetDefaultCulture(language.Culture);
             }
 
             return RedirectToAction("ShowAll");

@@ -19,7 +19,7 @@ namespace Core.Forms.Migrations
                 t.PrimaryKey();
                 t.String("Title").Length(255);
                 t.Text("ElementValues").Null();
-                t.Text("Culture").Length(10);
+                t.Text("Culture").Length(10).Null();
                 t.ForeignKey("FormElement").Table("Forms_FormElements").Column("FormElementId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

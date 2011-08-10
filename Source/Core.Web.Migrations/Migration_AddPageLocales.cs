@@ -1,26 +1,25 @@
 ﻿using ECM7.Migrator.Framework;
 using Framework.Migrator.Extensions;
 
-namespace Core.ContentPages.Migrations
+namespace Core.Web.Migrations
 {
     /// <summary>
-    /// Adds ContentPageLocales table.
+    /// Adds PageLocales table.
     /// </summary>
-    [Migration(3)]
-    public class Migration_AddContentPageLocales : Migration
+    [Migration(201109081123)]
+    public class Migration_AddPageLocales : Migration
     {
         /// <summary>
         /// Executes migration.
         /// </summary>
         public override void Up()
         {
-            Database.AddTable("ContentPageLocales", t =>
+            Database.AddTable("PageLocales", t =>
             {
                 t.PrimaryKey();
                 t.String("Title");
-                t.Text("Content");
                 t.Text("Culture").Length(10).Null();
-                t.ForeignKey("ContentPage").Table("ContentPages").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("Page").Table("Pages").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
 
@@ -29,8 +28,8 @@ namespace Core.ContentPages.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.ChangeTable("ContentPageLocales", t => t.RemoveForeignKey("ContentPage").Table("ContentPages"));
-            Database.RemoveTable("ContentPageLocales");
+            Database.ChangeTable("PageLocales", t => t.RemoveForeignKey("Page").Table("Pages"));
+            Database.RemoveTable("PageLocales");
         }
     }
 }

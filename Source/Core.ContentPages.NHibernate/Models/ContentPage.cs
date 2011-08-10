@@ -88,28 +88,13 @@ namespace Core.ContentPages.NHibernate.Models
             {
                 if (_currentLocale == null)
                 {
-                    //2 - max locales number: current locale and default locale
-                    if (CurrentLocales != null && CurrentLocales.Count > 0 && CurrentLocales.Count <= 2)
-                    {
-                        if (CurrentLocales.Count == 1)
-                        {
-                            _currentLocale = (ContentPageLocale) CurrentLocales[0];
-                        }
-                        else if (!CurrentLocales[0].Culture.Equals(CultureHelper.DefaultCultureName))
-                        {
-                            _currentLocale = (ContentPageLocale) CurrentLocales[0];
-                        }
-                        else
-                        {
-                            _currentLocale = (ContentPageLocale)CurrentLocales[1];
-                        }
-                    }
-                    else
+                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ContentPageLocale;
+                    if(_currentLocale == null)
                     {
                         _currentLocale = new ContentPageLocale
                                              {
                                                  ContentPage = this,
-                                                 Culture = CultureHelper.DefaultCultureName
+                                                 Culture = null
                                              };
                     }
                 }

@@ -19,8 +19,6 @@ namespace Core.Web.Migrations
                 t.PrimaryKey();
                 t.String("Identifier");
                 t.Integer("Status");
-                t.String("Title").Null();
-
                 t.ForeignKey("WidgetPlugin").Table("Plugins").Column("PluginId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

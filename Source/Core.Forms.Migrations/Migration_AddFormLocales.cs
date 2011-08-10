@@ -20,7 +20,7 @@ namespace Core.Forms.Migrations
                 t.String("Title").Length(255);
                 t.String("SubmitButtonText").Length(255).Null();
                 t.String("ResetButtonText").Length(255).Null();
-                t.Text("Culture").Length(10);
+                t.Text("Culture").Length(10).Null();
                 t.ForeignKey("Form").Table("Forms_Forms").Column("formId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

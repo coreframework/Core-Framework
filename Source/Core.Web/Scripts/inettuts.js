@@ -178,6 +178,7 @@ function updateAfterRemoving(removeLink, widgetSelector) {
     }, function () {
         $(this).wrap('<div/>').parent().slideUp(function () {
             $(this).remove();
+            $stickyFooter.positionFooter();
         });
     });
 }

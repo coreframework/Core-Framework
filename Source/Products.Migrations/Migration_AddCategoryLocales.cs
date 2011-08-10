@@ -19,9 +19,8 @@ namespace Products.Migrations
                 t.PrimaryKey();
                 t.String("Title");
                 t.Text("Description");
-                t.Text("Culture").Length(10);
+                t.Text("Culture").Length(10).Null();
                 t.ForeignKey("CategoryId").Table("Product_Categories").OnDelete(ForeignKeyConstraint.Cascade);
-
             });
         }
 

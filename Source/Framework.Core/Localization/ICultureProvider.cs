@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Framework.Core.Localization
 {
@@ -13,5 +14,11 @@ namespace Framework.Core.Localization
         /// </summary>
         /// <returns></returns>
         IDictionary<String, String> GetAvailableLanguages();
+
+        /// <summary>
+        /// Gets the default culture.
+        /// </summary>
+        /// <returns></returns>
+        CultureInfo GetDefaultCulture();
     }
 }

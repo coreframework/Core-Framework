@@ -20,7 +20,7 @@ namespace Core.News.Migrations
                 t.String("Title");
                 t.String("Summary");
                 t.Text("Content");
-                t.Text("Culture").Length(10);
+                t.Text("Culture").Length(10).Null();;
                 t.ForeignKey("NewsArticle").Table("News_News").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

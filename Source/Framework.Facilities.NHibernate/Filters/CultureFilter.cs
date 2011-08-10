@@ -6,7 +6,6 @@
 
 using System;
 using FluentNHibernate.Mapping;
-using Framework.Core.Localization;
 using NHibernate;
 
 namespace Framework.Facilities.NHibernate.Filters
@@ -24,9 +23,9 @@ namespace Framework.Facilities.NHibernate.Filters
         public const string FilterParamName = "cultureCode";
 
         /// <summary>
-        /// Filter param name constant for query.
+        /// Default culture filter param name constant.
         /// </summary>
-        public const string FilterParamNameForQuery = ":cultureCode";
+        public const string DefaultCultureFilterParamName = "defaultCultureCode";
 
         #endregion
 
@@ -37,8 +36,8 @@ namespace Framework.Facilities.NHibernate.Filters
         /// </summary>
         public CultureFilter()
         {
-            WithName("CultureFilter").WithCondition(String.Format("Culture = {0} OR Culture = '{1}'", FilterParamNameForQuery, CultureHelper.DefaultCultureName))
-                .AddParameter(FilterParamName, NHibernateUtil.String);
+            WithName("CultureFilter").WithCondition(String.Format("Culture = :{0} OR Culture = :{1} OR Culture IS NULL", FilterParamName, DefaultCultureFilterParamName))
+                .AddParameter(FilterParamName, NHibernateUtil.String).AddParameter(DefaultCultureFilterParamName, NHibernateUtil.String);
         }
 
         #endregion

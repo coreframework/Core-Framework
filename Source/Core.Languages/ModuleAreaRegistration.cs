@@ -21,6 +21,7 @@ namespace Core.Languages
             context.MapRoute("Admin.EditLanguage", "admin/languages/edit-{id}", new { controller = "Languages", action = "Edit", id = "" });
             context.MapRoute("Admin.NewLanguage", "admin/languages/new", new { controller = "Languages", action = "New", id = "" });
             context.MapRoute("Admin.Languages.Create", "admin/languages", new { controller = "Languages", action = "Create", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
+            context.MapRoute("Admin.SetAsDefault", "admin/languages/set-as-default-{id}", LanguagesMVC.Languages.SetAsDefault(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.RemoveLanguage", "admin/languages/remove-{id}", LanguagesMVC.Languages.Remove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
 
             //widget routs

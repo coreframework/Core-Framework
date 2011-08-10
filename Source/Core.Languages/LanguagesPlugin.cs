@@ -66,14 +66,14 @@ namespace Core.Languages
         public override void Install()
         {
             AssetsHelper.BuildPluginCssPack(this, HttpContext.Current.Request.PhysicalApplicationPath);
-            Language currentLanguage = new Language
-                                           {
-                                               Title = CultureHelper.DefaultCulture.NativeName,
-                                               Code = CultureHelper.DefaultCulture.TwoLetterISOLanguageName,
-                                               Culture = CultureHelper.DefaultCulture.Name,
-                                               IsDefault = true
-                                           };
-            ServiceLocator.Current.GetInstance<ILanguageService>().Save(currentLanguage);
+//            Language currentLanguage = new Language
+//                                           {
+//                                               Title = CultureHelper.NeutralCultureName,
+//                                               Code = null,
+//                                               Culture = null,
+//                                               IsDefault = true
+//                                           };
+//            ServiceLocator.Current.GetInstance<ILanguageService>().Save(currentLanguage);
         }
 
         public override void Uninstall()

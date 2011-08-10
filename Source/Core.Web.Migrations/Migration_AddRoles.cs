@@ -17,7 +17,6 @@ namespace Core.Web.Migrations
             Database.AddTable("Roles", t =>
             {
                 t.PrimaryKey();
-                t.String("Name");
                 t.Bool("IsSystemRole");
                 t.Bool("NotAssignableRole");
                 t.Bool("NotPermissible");

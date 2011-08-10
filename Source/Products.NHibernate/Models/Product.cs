@@ -113,28 +113,13 @@ namespace Products.NHibernate.Models
             {
                 if (_currentLocale == null)
                 {
-                    //2 - max locales number: current locale and default locale
-                    if (CurrentLocales != null && CurrentLocales.Count > 0 && CurrentLocales.Count <= 2)
-                    {
-                        if (CurrentLocales.Count == 1)
-                        {
-                            _currentLocale = (ProductLocale)CurrentLocales[0];
-                        }
-                        else if (!CurrentLocales[0].Culture.Equals(CultureHelper.DefaultCultureName))
-                        {
-                            _currentLocale = (ProductLocale)CurrentLocales[0];
-                        }
-                        else
-                        {
-                            _currentLocale = (ProductLocale)CurrentLocales[1];
-                        }
-                    }
-                    else
+                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ProductLocale;
+                    if (_currentLocale == null)
                     {
                         _currentLocale = new ProductLocale
                         {
                             Product = this,
-                            Culture = CultureHelper.DefaultCultureName
+                            Culture = null
                         };
                     }
                 }

@@ -13,6 +13,8 @@ namespace Core.Languages.NHibernate.Contracts
         /// <returns></returns>
         int GetCount(IQueryable<Language> baseQuery);
 
+        Language GetDefaultLanguage();
+
         /// <summary>
         /// Gets the search query.
         /// </summary>

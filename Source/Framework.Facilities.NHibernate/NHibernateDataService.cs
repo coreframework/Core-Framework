@@ -28,7 +28,10 @@ namespace Framework.Facilities.NHibernate
     {
         #region Fields
 
-        private readonly ISessionManager sessionManager;
+        /// <summary>
+        /// Session manager.
+        /// </summary>
+        protected readonly ISessionManager SessionManager;
 
         private ILogger logger = NullLogger.Instance;
 
@@ -42,7 +45,7 @@ namespace Framework.Facilities.NHibernate
         /// <param name="sessionManager">The session manager.</param>
         public NHibernateDataService(ISessionManager sessionManager)
         {
-            this.sessionManager = sessionManager;
+            this.SessionManager = sessionManager;
         }
 
         #endregion
@@ -83,13 +86,14 @@ namespace Framework.Facilities.NHibernate
 
                 if (String.IsNullOrEmpty(Alias))
                 {
-                    session = sessionManager.OpenSession();
+                    session = SessionManager.OpenSession();
                 }
                 else
                 {
-                    session = sessionManager.OpenSession(Alias);
+                    session = SessionManager.OpenSession(Alias);
                 }
-                session.EnableFilter("CultureFilter").SetParameter(CultureFilter.FilterParamName, Thread.CurrentThread.CurrentCulture.Name);
+                session.EnableFilter("CultureFilter").SetParameter(CultureFilter.FilterParamName, Thread.CurrentThread.CurrentCulture.Name)
+                    .SetParameter(CultureFilter.DefaultCultureFilterParamName, CultureHelper.DefaultCultureName);
 
                 return session;
             }
@@ -150,7 +154,7 @@ namespace Framework.Facilities.NHibernate
             {
                 if (entity is ILocalizable)
                 {
-                    ILocalizable localizableEntity = (ILocalizable) entity;
+                    ILocalizable localizableEntity = (ILocalizable)entity;
                     if (!localizableEntity.CurrentLocales.Contains(localizableEntity.CurrentLocale))
                     {
                         localizableEntity.CurrentLocales.Add(localizableEntity.CurrentLocale);

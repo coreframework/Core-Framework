@@ -15,6 +15,7 @@
     function addWidget(content) {
         $('#tblLayoutHolder table td.column').first().prepend(content.get_data());
         iNettutsInit($stickyFooter);
+        $stickyFooter.positionFooter();
      }
      function addLinkCss(content) {
          var uid = $(this).attr('widgetID');

@@ -51,6 +51,11 @@ namespace Core.Languages.Controllers {
         public System.Web.Mvc.ActionResult Remove() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SetAsDefault() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SetAsDefault);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LanguagesController Actions { get { return LanguagesMVC.Languages; } }
@@ -70,6 +75,7 @@ namespace Core.Languages.Controllers {
             public readonly string New = "New";
             public readonly string Create = "Create";
             public readonly string Remove = "Remove";
+            public readonly string SetAsDefault = "SetAsDefault";
         }
 
 
@@ -126,6 +132,12 @@ namespace Core.Languages.Controllers {
 
         public override System.Web.Mvc.ActionResult Remove(long id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SetAsDefault(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SetAsDefault);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }

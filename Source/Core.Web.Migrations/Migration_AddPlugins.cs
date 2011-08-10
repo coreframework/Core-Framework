@@ -21,8 +21,6 @@ namespace Core.Web.Migrations
                 t.Integer("Status");
                 t.DateTime("CreateDate");
                 t.String("Version").Null();
-                t.String("Title").Null();
-                t.String("Description").Null();
             });
         }
 

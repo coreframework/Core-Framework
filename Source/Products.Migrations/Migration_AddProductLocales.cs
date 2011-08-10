@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ECM7.Migrator.Framework;
+﻿using ECM7.Migrator.Framework;
 using Framework.Migrator.Extensions;
 
 namespace Products.Migrations
@@ -23,7 +19,7 @@ namespace Products.Migrations
                 t.PrimaryKey();
                 t.String("Title");
                 t.Text("Description");
-                t.Text("Culture").Length(10);
+                t.Text("Culture").Length(10).Null();
                 t.ForeignKey("Product").Table("Product_Products").OnDelete(ForeignKeyConstraint.Cascade);
 
             });

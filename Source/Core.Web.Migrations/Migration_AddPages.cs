@@ -17,11 +17,9 @@ namespace Core.Web.Migrations
             Database.AddTable("Pages", t =>
             {
                 t.PrimaryKey();
-                t.String("Title");
                 t.String("Url");
                 t.Long("ParentPageId").Null();
                 t.Integer("OrderNumber").Null();
-
                 t.ForeignKey("PageUser").Table("Users").Column("UserId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
             });
         }
