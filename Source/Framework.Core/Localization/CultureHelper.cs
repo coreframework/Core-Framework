@@ -29,10 +29,16 @@ namespace Framework.Core.Localization
             {
                 if (defaultCulture == null)
                 {
-                    ICultureProvider cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
-                    if (cultureProvider != null)
+                    try
                     {
-                        defaultCulture = cultureProvider.GetDefaultCulture();
+                        ICultureProvider cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
+                        if (cultureProvider != null)
+                        {
+                            defaultCulture = cultureProvider.GetDefaultCulture();
+                        }
+                    }
+                    catch (Exception)
+                    {
                     }
                     if (defaultCulture == null)
                     {

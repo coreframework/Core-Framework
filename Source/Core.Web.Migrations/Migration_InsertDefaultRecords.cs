@@ -10,7 +10,7 @@ namespace Core.Web.Migrations
     /// <summary>
     /// Insert default records.
     /// </summary>
-    [Migration(22)]
+    [Migration(201109081910)]
     public class MigrationInsertDefaultRecords : Migration
     {
         /// <summary>
@@ -171,32 +171,53 @@ namespace Core.Web.Migrations
                 @"
 
                INSERT INTO Roles
-                       ([Name]
-                       ,[IsSystemRole]
+                       ([IsSystemRole]
                        ,[NotAssignableRole]
                        ,[NotPermissible])
-                 VALUES ('Administrator', 1, 0, 1)
+                 VALUES (1, 0, 1)
                 
                  INSERT INTO Roles
-                       ([Name]
-                       ,[IsSystemRole]
+                       ([IsSystemRole]
                        ,[NotAssignableRole]
                        ,[NotPermissible])
-                 VALUES ('Guest', 1, 1, 0)
+                 VALUES (1, 1, 0)
 
                  INSERT INTO Roles
-                       ([Name]
-                       ,[IsSystemRole]
+                       ([IsSystemRole]
                        ,[NotAssignableRole]
                        ,[NotPermissible])
-                 VALUES ('Owner', 1, 1, 1)
+                 VALUES (1, 1, 1)
 
                  INSERT INTO Roles
-                       ([Name]
-                       ,[IsSystemRole]
+                       ([IsSystemRole]
                        ,[NotAssignableRole]
                        ,[NotPermissible])
-                 VALUES ('User', 1, 1, 0)
+                 VALUES (1, 1, 0)
+
+                INSERT INTO [RoleLocales]
+                       ([Name]
+                       ,[Culture]
+                       ,[RoleId])
+                VALUES ('Administrator', NULL, 1)
+
+                INSERT INTO [RoleLocales]
+                       ([Name]
+                       ,[Culture]
+                       ,[RoleId])
+                VALUES ('Guest', NULL, 2)
+
+                INSERT INTO [RoleLocales]
+                       ([Name]
+                       ,[Culture]
+                       ,[RoleId])
+                VALUES ('Owner', NULL, 3)
+
+                INSERT INTO [RoleLocales]
+                       ([Name]
+                       ,[Culture]
+                       ,[RoleId])
+                VALUES ('User', NULL, 4)
+
             ");
         }
 
