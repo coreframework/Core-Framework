@@ -227,8 +227,11 @@ namespace Core.Languages.Controllers
             var currentDefaultLanguage = languageService.GetDefaultLanguage();
             if(language != currentDefaultLanguage)
             {
-                currentDefaultLanguage.IsDefault = false;
-                languageService.Save(currentDefaultLanguage);
+                if (currentDefaultLanguage != null)
+                {
+                    currentDefaultLanguage.IsDefault = false;
+                    languageService.Save(currentDefaultLanguage);
+                }
                 language.IsDefault = true;
                 languageService.Save(language);
                 CultureHelper.SetDefaultCulture(language.Culture);
