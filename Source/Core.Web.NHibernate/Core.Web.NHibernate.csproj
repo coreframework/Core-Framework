@@ -127,6 +127,7 @@
     <Compile Include="Contracts\IPageService.cs" />
     <Compile Include="Contracts\IPluginService.cs" />
     <Compile Include="Contracts\ISchemaInfoService.cs" />
+    <Compile Include="Contracts\Localization\ILocaleService.cs" />
     <Compile Include="Contracts\Permissions\IEntityTypeService.cs" />
     <Compile Include="Contracts\Permissions\IPermissionsBuilder.cs">
       <SubType>Code</SubType>
@@ -213,6 +214,7 @@
     <Compile Include="Permissions\Operations\PageOperations.cs" />
     <Compile Include="Permissions\Operations\PluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Common\LocaleService.cs" />
     <Compile Include="Services\Common\PageCommonService.cs" />
     <Compile Include="Services\NHibernateSiteSettingsService.cs" />
     <Compile Include="Services\NHibernatePageLayoutColumnWidthValueService.cs" />

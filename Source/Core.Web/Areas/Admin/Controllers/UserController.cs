@@ -294,6 +294,7 @@ namespace Core.Web.Areas.Admin.Controllers
                         cell = new[] { userGroup.Name }
                     }).ToArray()
             };
+
             return Json(jsonData);
         }
 

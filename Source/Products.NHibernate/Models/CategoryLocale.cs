@@ -27,6 +27,12 @@ namespace Products.NHibernate.Models
         /// <value>The description.</value>
         public virtual String Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
+        /// <value>The priority.</value>
+        public virtual int Priority { get; private set; }
+
         #endregion
     }
 }

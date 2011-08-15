@@ -11,12 +11,13 @@ using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
+using NHibernate;
+using NHibernate.Criterion;
 using Products.Helpers;
 using Products.Models;
 using Products.NHibernate.Contracts;
 using Products.NHibernate.Models;
 using Products.Permissions.Operations;
-using System.Linq.Dynamic;
 
 namespace Products.Controllers
 {
@@ -30,7 +31,8 @@ namespace Products.Controllers
         #region Fields
 
         private readonly IProductService productService;
-        private readonly ICategoryService categoryService;
+        private readonly IProductLocaleService productLocaleService;
+        private readonly ICategoryLocaleService categoryLocaleService;
 
         #endregion
 
@@ -53,7 +55,8 @@ namespace Products.Controllers
         public ProductController()
         {
             productService = ServiceLocator.Current.GetInstance<IProductService>();
-            categoryService = ServiceLocator.Current.GetInstance<ICategoryService>();
+            productLocaleService = ServiceLocator.Current.GetInstance<IProductLocaleService>();
+            categoryLocaleService = ServiceLocator.Current.GetInstance<ICategoryLocaleService>();
         }
 
         #endregion
@@ -117,30 +120,31 @@ namespace Products.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            IQueryable<Product> searchQuery = productService.GetSearchQuery(search);
-            int totalRecords = productService.GetCount(searchQuery);
+            ICriteria searchCriteria = productLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = productLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var products = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var products = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<ProductLocale>();
             var jsonData = new
             {
                 total = totalPages,
                 page,
                 records = totalRecords,
                 rows = (
-                    from product in products
+                    from productLocale in products
                     select new
                     {
-                        id = product.Id,
-                        cell = new[] {  product.Title, 
+                        id = productLocale.Product.Id,
+                        cell = new[] {  productLocale.Title, 
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Categories","Product", new { id = product.Id }),
+                                            Url.Action("Categories","Product", new { id = productLocale.Product.Id }),
                                             HttpContext.Translate("Categories", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("ShowById","Product",new { id = product.Id }),HttpContext.Translate("View", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("ShowById","Product",new { id = productLocale.Product.Id }),HttpContext.Translate("View", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Edit","Product",new { id = product.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("Edit","Product",new { id = productLocale.Product.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
-                                            Url.Action("Remove","Product",new { id = product.Id }))}
+                                            Url.Action("Remove","Product",new { id = productLocale.Product.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -312,14 +316,11 @@ namespace Products.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-            var categories = categoryService.GetCategories(search); //categoryService.GetSearchQuery(search);
-            int totalRecords = categories.Count();//categoryService.GetCount(searchQuery);
+            ICriteria searchCriteria = categoryLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = categoryLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            categories = sord == "asc"
-                             ? categories.OrderBy(cat => cat.Title).Skip(pageIndex * pageSize).Take(pageSize).ToList()
-                             : categories.OrderByDescending(cat => cat.Title).Skip(pageIndex * pageSize).Take(pageSize).
-                                   ToList();
-            //var categories = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var categories = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<CategoryLocale>();
             var jsonData = new
             {
                 total = totalPages,
@@ -329,7 +330,7 @@ namespace Products.Controllers
                     from category in categories
                     select new
                     {
-                        id = category.Id,
+                        id = category.Category.Id,
                         cell = new[] { category.Title }
                     }).ToArray()
             };

@@ -5,7 +5,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Threading;
 using FluentNHibernate.Mapping;
+using Framework.Core.Localization;
 using NHibernate;
 
 namespace Framework.Facilities.NHibernate.Filters
@@ -38,6 +40,15 @@ namespace Framework.Facilities.NHibernate.Filters
         {
             WithName("CultureFilter").WithCondition(String.Format("Culture = :{0} OR Culture = :{1} OR Culture IS NULL", FilterParamName, DefaultCultureFilterParamName))
                 .AddParameter(FilterParamName, NHibernateUtil.String).AddParameter(DefaultCultureFilterParamName, NHibernateUtil.String);
+        }
+
+        /// <summary>
+        /// Returns the culture priority filter expression.
+        /// </summary>
+        /// <returns>Returns the culture priority filter.</returns>
+        public static String CultureFilterPriorityExpression()
+        {
+            return String.Format("case when Culture = '{0}' then 3 when Culture='{1}' then 2 when Culture IS NULL then 1 else 0 end", Thread.CurrentThread.CurrentCulture.Name, CultureHelper.DefaultCultureName);
         }
 
         #endregion

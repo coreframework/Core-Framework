@@ -20,8 +20,8 @@ using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using INewsService = Core.News.Nhibernate.Contracts.INewsArticleService;
-using System.Linq.Dynamic;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Core.News.Controllers
 {
@@ -33,8 +33,9 @@ namespace Core.News.Controllers
     public partial class NewsController : CorePluginController
     {
         #region Fields
-        
-        private readonly INewsService newsArticlesService;
+
+        private readonly INewsArticleService newsArticlesService;
+        private readonly INewsArticleLocaleService newsArticlesLocaleService;
         private readonly INewsCategoryService categoryService;
 
         #endregion
@@ -55,7 +56,8 @@ namespace Core.News.Controllers
         /// </summary>
         public NewsController()
         {
-            newsArticlesService = ServiceLocator.Current.GetInstance<INewsService>();
+            newsArticlesService = ServiceLocator.Current.GetInstance<INewsArticleService>();
+            newsArticlesLocaleService = ServiceLocator.Current.GetInstance<INewsArticleLocaleService>();
             categoryService = ServiceLocator.Current.GetInstance<INewsCategoryService>();
         }
 
@@ -80,7 +82,7 @@ namespace Core.News.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = HttpContext.Translate("Status", ResourceHelper.GetControllerScope(this)), 
-                                                                 Index = "Status",
+                                                                 Index = "newsArticle.StatusId",
                                                                  Width = 150
                                                              },
                                                          new GridColumnViewModel
@@ -121,27 +123,28 @@ namespace Core.News.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            IQueryable<NewsArticle> searchQuery = newsArticlesService.GetSearchQuery(search);
-            int totalRecords = newsArticlesService.GetCount(searchQuery);
+            ICriteria searchCriteria = newsArticlesLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = newsArticlesLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var newsArticles = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var newsArticles = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<NewsArticleLocale>();
             var jsonData = new
             {
                 total = totalPages,
                 page,
                 records = totalRecords,
                 rows = (
-                    from article in newsArticles
+                    from articleLocale in newsArticles
                     select new
                     {
-                        id = article.Id,
-                        cell = new[] {  article.Title, ((NewsStatus)article.StatusId).ToString(),
+                        id = articleLocale.NewsArticle.Id,
+                        cell = new[] {  articleLocale.NewsArticle.Title, ((NewsStatus)articleLocale.NewsArticle.StatusId).ToString(),
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Categories","News", new { id = article.Id }), HttpContext.Translate("Categories", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("Categories","News", new { id = articleLocale.NewsArticle.Id }), HttpContext.Translate("Categories", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","News",new { id = article.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("Edit","News",new { id = articleLocale.NewsArticle.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
-                                            Url.Action("Remove","News",new { id = article.Id }))}
+                                            Url.Action("Remove","News",new { id = articleLocale.NewsArticle.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -198,7 +201,7 @@ namespace Core.News.Controllers
         /// Updates content page.
         /// </summary>
         /// <param name="id">The content page id.</param>
-        /// <param name="contentPage">The content page model.</param>
+        /// <param name="newsArticleLocaleViewModel">The news article locale view model.</param>
         /// <returns></returns>
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult Edit(long? id, NewsArticleLocaleViewModel newsArticleLocaleViewModel)
@@ -261,7 +264,6 @@ namespace Core.News.Controllers
             Error(HttpContext.Translate("Messages.ValidationError", ResourceHelper.GetControllerScope(this)));
             return View("New", newsArticle);
         }
-
 
         /// <summary>
         /// Removes the specified content page.

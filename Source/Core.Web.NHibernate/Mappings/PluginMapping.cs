@@ -24,6 +24,7 @@ namespace Core.Web.NHibernate.Mappings
             .Inverse()
             .LazyLoad()
             .Cascade.All();
+
         }
     }
 }

@@ -32,6 +32,12 @@ namespace Core.Forms.NHibernate.Models
         /// <value>The values.</value>
         public virtual String ElementValues { get; set; }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
+        /// <value>The priority.</value>
+        public virtual int Priority { get; private set; }
+
         #endregion
     }
 }

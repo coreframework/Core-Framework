@@ -1,5 +1,6 @@
 ﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Web.NHibernate.Mappings
 {
@@ -16,6 +17,7 @@ namespace Core.Web.NHibernate.Mappings
             References(roleLocale => roleLocale.Role).Column("RoleId").LazyLoad().Not.Nullable();
             Map(roleLocale => roleLocale.Culture).Length(5);
             Map(roleLocale => roleLocale.Name).Length(255);
+            Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

@@ -11,6 +11,8 @@ using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
+using NHibernate;
+using NHibernate.Criterion;
 using Products.Models;
 using Products.NHibernate.Contracts;
 using Products.NHibernate.Models;
@@ -26,6 +28,7 @@ namespace Products.Controllers
         #region Fields
         
         private readonly ICategoryService categoryService;
+        private readonly ICategoryLocaleService categoryLocaleService;
 
         #endregion
 
@@ -49,6 +52,7 @@ namespace Products.Controllers
         public CategoryController()
         {
             this.categoryService = ServiceLocator.Current.GetInstance<ICategoryService>();
+            this.categoryLocaleService = ServiceLocator.Current.GetInstance<ICategoryLocaleService>();
         }
 
         #endregion
@@ -105,14 +109,11 @@ namespace Products.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            var searchQuery = categoryService.GetSearchQuery(search);
-            int totalRecords = categoryService.GetCount(searchQuery);
+            ICriteria searchCriteria = categoryLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = categoryLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            //categories = sord == "asc"
-            //                 ? categories.OrderBy(cat => cat.Title).Skip(pageIndex*pageSize).Take(pageSize).ToList()
-            //                 : categories.OrderByDescending(cat => cat.Title).Skip(pageIndex*pageSize).Take(pageSize).
-            //                       ToList();
-            var categories = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var categories = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<CategoryLocale>();
            
             var jsonData = new
             {
@@ -120,17 +121,17 @@ namespace Products.Controllers
                 page,
                 records = totalRecords,
                 rows = (
-                    from category in categories
+                    from categoryLocale in categories
                     select new
                     {
-                        id = category.Id,
-                        cell = new[] {  category.Title, 
+                        id = categoryLocale.Category.Id,
+                        cell = new[] {  categoryLocale.Title, 
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("ShowById","Category",new { id = category.Id }),HttpContext.Translate("View", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("ShowById","Category",new { id = categoryLocale.Category.Id }),HttpContext.Translate("View", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Edit","Category",new { id = category.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("Edit","Category",new { id = categoryLocale.Category.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
-                                            Url.Action("Remove","Category",new { id = category.Id }))}
+                                            Url.Action("Remove","Category",new { id = categoryLocale.Category.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);

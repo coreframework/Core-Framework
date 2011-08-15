@@ -4,6 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using NHibernate;
+
 namespace Framework.Core.Services
 {
     using System.Collections.Generic;
@@ -36,6 +38,13 @@ namespace Framework.Core.Services
         /// <param name="pageSize">Size of the page.</param>
         /// <returns>Not nullable collection of <typeparamref name="TEntity"/>.</returns>
         IEnumerable<TEntity> GetPaged(int page, int pageSize);
+
+        /// <summary>
+        /// Counts the specified criteria.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns></returns>
+        long Count(ICriteria criteria);
 
         /// <summary>
         /// Saves specified entity to repository.

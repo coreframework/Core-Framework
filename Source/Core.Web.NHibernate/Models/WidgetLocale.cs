@@ -11,5 +11,7 @@ namespace Core.Web.NHibernate.Models
         public virtual String Culture { get; set; }
 
         public virtual String Title { get; set; }
+
+        public virtual int Priority { get; private set; }
     }
 }

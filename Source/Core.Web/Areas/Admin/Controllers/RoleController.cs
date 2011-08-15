@@ -15,6 +15,8 @@ using Framework.MVC.Grids;
 using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -24,6 +26,8 @@ namespace Core.Web.Areas.Admin.Controllers
         #region Fields
 
         private readonly IRoleService roleService;
+
+        private readonly IRoleLocaleService roleLocaleService;
 
         private readonly IUserService userService;
 
@@ -39,6 +43,8 @@ namespace Core.Web.Areas.Admin.Controllers
         public RoleController()
         {
             roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+
+            roleLocaleService = ServiceLocator.Current.GetInstance<IRoleLocaleService>();
 
             userService = ServiceLocator.Current.GetInstance<IUserService>();
 
@@ -90,10 +96,11 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            IQueryable<Role> searchQuery = roleService.GetSearchQuery(search);
-            int totalRecords = roleService.GetCount(searchQuery);
+            ICriteria searchCriteria = roleLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = roleLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var roles = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var roles = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<RoleLocale>();
             var jsonData = new
             {
                 total = totalPages,
@@ -103,19 +110,19 @@ namespace Core.Web.Areas.Admin.Controllers
                     from role in roles
                     select new
                     {
-                        id = !role.IsSystemRole ? role.Id.ToString() : null,
-                        cell = new[] { role.Name,
-                            !role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
-                                Url.Action(MVC.Admin.Role.Users(role.Id)),
+                        id = !role.Role.IsSystemRole ? role.Id.ToString() : null,
+                        cell = new[] { role.Role.Name,
+                            !role.Role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
+                                Url.Action(MVC.Admin.Role.Users(role.Role.Id)),
                                 Translate(".Model.Role.Users")) : String.Empty,
-                            !role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
-                                Url.Action(MVC.Admin.Role.UserGroups(role.Id)),
+                            !role.Role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
+                                Url.Action(MVC.Admin.Role.UserGroups(role.Role.Id)),
                                 Translate(".Model.Role.UserGroups")) : String.Empty,
-                            !role.NotPermissible ? String.Format(JqGridConstants.UrlTemplate,
-                                Url.Action(MVC.Admin.Role.Permissions(role.Id, null)),
+                            !role.Role.NotPermissible ? String.Format(JqGridConstants.UrlTemplate,
+                                Url.Action(MVC.Admin.Role.Permissions(role.Role.Id, null)),
                                 Translate(".Model.Role.Permissions")) : String.Empty,
-                            !role.IsSystemRole ? String.Format(JqGridConstants.UrlTemplate,
-                                Url.Action(MVC.Admin.Role.Remove(role.Id)),
+                            !role.Role.IsSystemRole ? String.Format(JqGridConstants.UrlTemplate,
+                                Url.Action(MVC.Admin.Role.Remove(role.Role.Id)),
                                 Translate("Actions.Remove")) : String.Empty
                             }
                     }).ToArray()
@@ -378,7 +385,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                      };
             var model = new GridViewModel
             {
-                DataUrl = Url.Action(MVC.Admin.User.UserGroupsDynamicGridData()),
+                DataUrl = Url.Action(MVC.Admin.Role.UserGroupsDynamicGridData()),
                 DefaultOrderColumn = "Name",
                 GridTitle = Translate(".Model.UserGroups"),
                 Columns = columns,

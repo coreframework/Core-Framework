@@ -15,6 +15,8 @@ using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
+using NHibernate;
+using NHibernate.Criterion;
 using IContentPageService = Core.ContentPages.NHibernate.Contracts.IContentPageService;
 using System.Linq.Dynamic;
 
@@ -30,6 +32,8 @@ namespace Core.ContentPages.Controllers
         #region Fields
         
         private readonly IContentPageService contentPageService;
+
+        private readonly IContentPageLocaleService contentPageLocaleService;
 
         #endregion
 
@@ -50,6 +54,7 @@ namespace Core.ContentPages.Controllers
         public ContentPageController()
         {
             this.contentPageService = ServiceLocator.Current.GetInstance<IContentPageService>();
+            this.contentPageLocaleService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
         }
 
         #endregion
@@ -92,7 +97,7 @@ namespace Core.ContentPages.Controllers
             {
                 DataUrl = Url.Action("DynamicGridData","ContentPage"),
                 DefaultOrderColumn = "Id",
-                GridTitle = "Users",
+                GridTitle = "Content Pages",
                 Columns = columns,
                 IsRowNotClickable = true
             };
@@ -104,10 +109,11 @@ namespace Core.ContentPages.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            IQueryable<ContentPage> searchQuery = contentPageService.GetSearchQuery(search);
-            int totalRecords = contentPageService.GetCount(searchQuery);
+            ICriteria searchCriteria = contentPageLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = contentPageLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var contentPages = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var contentPages = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<ContentPageLocale>();
             var jsonData = new
             {
                 total = totalPages,
@@ -117,13 +123,13 @@ namespace Core.ContentPages.Controllers
                     from contentPage in contentPages
                     select new
                     {
-                        id = contentPage.Id,
+                        id = contentPage.ContentPage.Id,
                         cell = new[] {  contentPage.Title, 
 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","ContentPage",new { id = contentPage.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("Edit","ContentPage",new { id = contentPage.ContentPage.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
-                                            Url.Action("Remove","ContentPage",new { id = contentPage.Id }))}
+                                            Url.Action("Remove","ContentPage",new { id = contentPage.ContentPage.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);

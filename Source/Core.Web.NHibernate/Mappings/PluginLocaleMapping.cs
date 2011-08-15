@@ -1,5 +1,6 @@
 ﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Web.NHibernate.Mappings
 {
@@ -17,6 +18,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(pluginLocale => pluginLocale.Culture).Length(5);
             Map(plugin => plugin.Title);
             Map(plugin => plugin.Description);
+            Map(plugin => plugin.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

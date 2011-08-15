@@ -1,5 +1,6 @@
 ﻿using Core.News.Nhibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.News.Nhibernate.Mappings
 {
@@ -18,6 +19,7 @@ namespace Core.News.Nhibernate.Mappings
             Map(newsArticleLocale => newsArticleLocale.Title).Length(255);
             Map(newsArticleLocale => newsArticleLocale.Summary).Length(1024);
             Map(newsArticleLocale => newsArticleLocale.Content);
+            Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

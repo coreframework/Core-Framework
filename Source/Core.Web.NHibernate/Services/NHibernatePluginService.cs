@@ -5,6 +5,8 @@ using Castle.Facilities.NHibernateIntegration;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Facilities.NHibernate;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Core.Web.NHibernate.Services
 {
@@ -42,22 +44,27 @@ namespace Core.Web.NHibernate.Services
             return baseQuery.Count();
         }
 
-        /// <summary>
-        /// Gets the search query.
-        /// </summary>
-        /// <param name="searchString">The search string.</param>
-        /// <returns></returns>
-        public IQueryable<Plugin> GetSearchQuery(string searchString)
+        public ICriteria GetSearchCriteria(string searchString)
         {
-            var baseQuery = CreateQuery();
-//            if (String.IsNullOrEmpty(searchString))
-//            {
-                return baseQuery;
-//            }
-//            return baseQuery.Where(user => user.Title.Contains(searchString));
+            var criteria = Session.CreateCriteria<Plugin>();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var localesSubQuery = DetachedCriteria.For<PluginLocale>("locale")
+               .Add(Restrictions.Like("Title", searchString, MatchMode.Anywhere)).CreateAlias("Plugin", "plugin")
+               .SetProjection(Projections.Property("plugin.Id"));
+
+                var filter = DetachedCriteria.For<PluginLocale>("filteredLocale").CreateAlias("Plugin", "filteredPlugin")
+                    .SetProjection(Projections.Id()).SetMaxResults(1).AddOrder(Order.Desc("filteredLocale.Priority")).Add(Restrictions.EqProperty("filteredPlugin.Id", "plugin.Id"));
+
+                localesSubQuery.Add(Subqueries.PropertyIn("locale.Id", filter));
+
+                criteria.Add(Subqueries.PropertyIn("Id", localesSubQuery));
+            }
+
+            return criteria.SetCacheable(true);
         }
 
         #endregion
-
     }
 }

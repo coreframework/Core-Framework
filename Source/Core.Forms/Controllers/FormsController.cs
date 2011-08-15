@@ -35,7 +35,11 @@ namespace Core.Forms.Controllers
 
         private readonly IFormService _formsService;
 
+        private readonly IFormLocaleService _formsLocaleService;
+
         private readonly IFormElementService _formsElementService;
+
+        private readonly IFormElementLocaleService _formsElementLocaleService;
 
         private readonly IPermissionCommonService _permissionService;
 
@@ -61,7 +65,9 @@ namespace Core.Forms.Controllers
         public FormsController()
         {
             _formsService = ServiceLocator.Current.GetInstance<IFormService>();
+            _formsLocaleService = ServiceLocator.Current.GetInstance<IFormLocaleService>();
             _formsElementService = ServiceLocator.Current.GetInstance<IFormElementService>();
+            _formsElementLocaleService = ServiceLocator.Current.GetInstance<IFormElementLocaleService>();
             _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             _permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
 
@@ -125,10 +131,10 @@ namespace Core.Forms.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            ICriteria searchQuery = _formsService.GetSearchQuery(search, this.CorePrincipal(), (Int32)FormOperations.View);
-            int totalRecords = _formsService.GetCount(searchQuery);
+            ICriteria searchQuery = _formsLocaleService.GetSearchCriteria(search, this.CorePrincipal(), (Int32)FormOperations.View);
+            long totalRecords = _formsLocaleService.Count(searchQuery);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var forms = searchQuery.AddOrder(new Order("forms." + sidx, sord == "asc")).SetFirstResult(pageIndex * rows).SetMaxResults(rows).List<Form>();
+            var forms = searchQuery.AddOrder(new Order(sidx, sord == "asc")).SetFirstResult(pageIndex * rows).SetMaxResults(rows).List<FormLocale>();
             var jsonData = new
             {
                 total = totalPages,
@@ -140,9 +146,9 @@ namespace Core.Forms.Controllers
                     {
                         id = form.Id,
                         cell = new[] {  
-                                        ((FormLocale)form.CurrentLocale).Title, 
+                                        form.Title, 
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("Edit","Forms",new { formId = form.Id }),HttpContext.Translate("Details", ResourceHelper.GetControllerScope(this)))}
+                                            Url.Action("Edit","Forms",new { formId = form.Form.Id }),HttpContext.Translate("Details", ResourceHelper.GetControllerScope(this)))}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -451,30 +457,29 @@ namespace Core.Forms.Controllers
                                                             typeof (Form), form.Id, IsFormOwner(form),
                                                             PermissionOperationLevel.Object);
 
-            int pageIndex = Convert.ToInt32(page) - 1;
-            int pageSize = rows;
-            IQueryable<FormElement> searchQuery = _formsElementService.GetSearchQuery(form.Id,search);
-            int totalRecords = _formsElementService.GetCount(searchQuery);
-            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var forms = searchQuery.OrderBy("OrderNumber asc").Skip(pageIndex * pageSize).Take(pageSize).ToList(); //todo order only on OrderNumber field
+            ICriteria searchQuery = _formsElementLocaleService.GetSearchCriteria(form.Id, search);
+            long totalRecords = _formsLocaleService.Count(searchQuery);
+            const int totalPages = 1;
+            var forms = searchQuery.AddOrder(new Order("formElement.OrderNumber", sord == "asc")).List<FormElementLocale>();
+
             var jsonData = new
             {
                 total = totalPages,
                 page,
                 records = totalRecords,
                 rows = (
-                    from formElement in forms
+                    from formElementLocale in forms
                     select new
                     {
                         id = form.Id,
                         cell = new[] {  
-                                        String.Format("{0}<input id=\"formElementId\" type=\"hidden\" value={1} />",formElement.Title,formElement.Id), 
-                                        formElement.Type.ToString(), 
-                                        formElement.IsRequired.ToString(), 
+                                        String.Format("{0}<input id=\"formElementId\" type=\"hidden\" value={1} />",formElementLocale.Title,formElementLocale.FormElement.Id), 
+                                        formElementLocale.FormElement.Type.ToString(), 
+                                        formElementLocale.FormElement.IsRequired.ToString(), 
                                         allowManage?String.Format("<a href=\"{0}\" style=\"margin-left: 10px;\">{1}</a>",
-                                            Url.Action("EditElement","Forms",new { formElementId = formElement.Id, formId = formElement.Form.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))):String.Empty,
+                                            Url.Action("EditElement","Forms",new { formElementId = formElementLocale.FormElement.Id, formId = formElementLocale.FormElement.Form.Id }), HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))):String.Empty,
                                         allowManage?String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
-                                            Url.Action("RemoveElement","Forms",new { id = formElement.Id})):String.Empty}
+                                            Url.Action("RemoveElement","Forms",new { id = formElementLocale.FormElement.Id})):String.Empty}
 
                     }).ToArray()
             };

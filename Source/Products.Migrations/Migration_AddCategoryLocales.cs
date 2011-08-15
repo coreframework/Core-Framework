@@ -20,7 +20,7 @@ namespace Products.Migrations
                 t.String("Title");
                 t.Text("Description");
                 t.Text("Culture").Length(10).Null();
-                t.ForeignKey("CategoryId").Table("Product_Categories").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("ProductCategory").Table("Product_Categories").Column("CategoryId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
 
@@ -29,9 +29,8 @@ namespace Products.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.ChangeTable("Product_CategoryLocales", t => t.RemoveForeignKey("ProductCategoryId").Table("Product_Categories"));
+            Database.ChangeTable("Product_CategoryLocales", t => t.RemoveForeignKey("ProductCategory").Table("Product_Categories"));
             Database.RemoveTable("Product_CategoryLocales");
         }
     }
-   
 }

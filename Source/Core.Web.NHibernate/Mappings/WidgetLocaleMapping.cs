@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Core.Web.NHibernate.Models;
+﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Web.NHibernate.Mappings
 {
@@ -20,6 +17,7 @@ namespace Core.Web.NHibernate.Mappings
             References(widgetLocale => widgetLocale.Widget).Column("WidgetId").LazyLoad().Not.Nullable();
             Map(widgetLocale => widgetLocale.Culture).Length(5);
             Map(widgetLocale => widgetLocale.Title).Length(255);
+            Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

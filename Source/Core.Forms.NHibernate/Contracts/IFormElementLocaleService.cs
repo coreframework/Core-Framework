@@ -1,6 +1,7 @@
 ﻿using System;
 using Core.Forms.NHibernate.Models;
 using Framework.Core.Services;
+using NHibernate;
 
 namespace Core.Forms.NHibernate.Contracts
 {
@@ -13,5 +14,13 @@ namespace Core.Forms.NHibernate.Contracts
         /// <param name="culture">The culture.</param>
         /// <returns></returns>
         FormElementLocale GetLocale(long formElementId, String culture);
+
+        /// <summary>
+        /// Gets the search criteria.
+        /// </summary>
+        /// <param name="formId">The form id.</param>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
+        ICriteria GetSearchCriteria(long formId, string searchString);
     }
 }

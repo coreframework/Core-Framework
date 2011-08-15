@@ -13,5 +13,7 @@ namespace Core.Web.NHibernate.Models
         public virtual String Title { get; set; }
         
         public virtual String Description { get; set; }
+
+        public virtual int Priority { get; private set; }
     }
 }

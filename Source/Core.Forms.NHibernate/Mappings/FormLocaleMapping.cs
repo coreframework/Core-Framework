@@ -1,5 +1,6 @@
 ﻿using Core.Forms.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Forms.NHibernate.Mappings
 {
@@ -21,6 +22,7 @@ namespace Core.Forms.NHibernate.Mappings
             Map(formlocale => formlocale.SubmitButtonText).Length(255);
             Map(formlocale => formlocale.ResetButtonText).Length(255);
             References(formlocale => formlocale.Form).Column("FormId").LazyLoad().Not.Nullable();
+            Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

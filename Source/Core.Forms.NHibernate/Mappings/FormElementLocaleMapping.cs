@@ -1,5 +1,6 @@
 ﻿using Core.Forms.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Forms.NHibernate.Mappings
 {
@@ -20,6 +21,7 @@ namespace Core.Forms.NHibernate.Mappings
             Map(formElementLocale => formElementLocale.Culture);
             Map(formElementLocale => formElementLocale.ElementValues);
             References(formElementLocale => formElementLocale.FormElement).Column("FormElementId").LazyLoad().Not.Nullable();
+            Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Core.Web.NHibernate.Mappings
     public class WidgetMapping : ClassMap<Widget>
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WidgetMapping"/> class.
+        /// Initializes a new instance of the9 <see cref="WidgetMapping"/> class.
         /// </summary>
         public WidgetMapping()
         {
@@ -17,6 +17,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(widget => widget.Identifier).Length(255);
             Map(widget => widget.Status).CustomType(typeof(WidgetStatus));
             References(widget => widget.Plugin);
+
             HasMany(widget => widget.CurrentWidgetLocales).KeyColumn("WidgetId")
             .Table("WidgetLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)

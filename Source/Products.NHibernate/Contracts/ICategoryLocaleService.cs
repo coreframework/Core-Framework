@@ -1,5 +1,6 @@
 ﻿using System;
 using Framework.Core.Services;
+using NHibernate;
 using Products.NHibernate.Models;
 
 namespace Products.NHibernate.Contracts
@@ -13,5 +14,12 @@ namespace Products.NHibernate.Contracts
         /// <param name="culture">The culture</param>
         /// <returns>Category Locale</returns>
         CategoryLocale GetLocale(long categoryId, String culture);
+
+        /// <summary>
+        /// Gets the search criteria.
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
+        ICriteria GetSearchCriteria(string searchString);
     }
 }

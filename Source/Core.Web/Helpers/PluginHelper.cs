@@ -5,6 +5,7 @@ using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Microsoft.Practices.ServiceLocation;
+using NHibernate;
 
 namespace Core.Web.Helpers
 {
@@ -49,26 +50,26 @@ namespace Core.Web.Helpers
                                }.MapFrom(plugin)).ToList();
         }
 
-        public static IEnumerable<PluginListModel> GetAvailablePlugins(IQueryable<Plugin> pluginQuery)
+        /// <summary>
+        /// Gets the available plugins.
+        /// </summary>
+        /// <param name="pluginCriteria">The plugin criteria.</param>
+        /// <returns></returns>
+        public static IEnumerable<PluginLocale> GetAvailablePlugins(ICriteria pluginCriteria)
         {
-            IEnumerable<Plugin> plugins = pluginQuery.ToList();
-
-            var registeredPlugins = Application.Plugins;
-
-            return (from plugin in plugins
-                    where registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier) != null
-                    select new PluginListModel
-                               {
-//                                   Title = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Title,
-//                                   Description = registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier).Description
-                               }.MapFrom(plugin)).ToList();
+            return (from plugin in pluginCriteria.List<PluginLocale>()
+                    where Application.Plugins.FirstOrDefault(pl => pl.Identifier == plugin.Plugin.Identifier) != null
+                    select plugin).ToList();
         }
 
-        public static int CountAvailablePlugins(IQueryable<Plugin> pluginQuery)
+        /// <summary>
+        /// Counts the available plugins.
+        /// </summary>
+        /// <param name="pluginCriteria">The plugin criteria.</param>
+        /// <returns></returns>
+        public static int CountAvailablePlugins(ICriteria pluginCriteria)
         {
-            IEnumerable<Plugin> plugins = pluginQuery.ToList();
-            var registeredPlugins = Application.Plugins;
-            return (plugins.Where(plugin => registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier) != null)).Count();
+            return (pluginCriteria.List<PluginLocale>().Where(plugin => Application.Plugins.FirstOrDefault(pl => pl.Identifier == plugin.Plugin.Identifier) != null)).Count();
         }
     }
 }

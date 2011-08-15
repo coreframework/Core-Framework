@@ -94,5 +94,7 @@ namespace Core.Web.NHibernate.Models
                 return _currentLocale;
             }
         }
+
+        public virtual WidgetLocale Locale { get; set; }
     }
 }

@@ -27,6 +27,9 @@ Models:
    PageCssModel.CustomCSS: "Custom CSS"
   SiteSettings:
    ShowPanel: "Show administration panel"
+  PluginLocale:
+   Title: "Title"
+   Description: "Description"
 Navigation:
  Models:
   NavigationMenuWidgetModel:

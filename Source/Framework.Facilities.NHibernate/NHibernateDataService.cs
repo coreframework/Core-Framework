@@ -14,6 +14,7 @@ using FluentNHibernate.Data;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Filters;
 using NHibernate;
+using NHibernate.Criterion;
 using NHibernate.Linq;
 
 using Framework.Core.Services;
@@ -137,6 +138,20 @@ namespace Framework.Facilities.NHibernate
             criteria.SetFirstResult(page * pageSize);
             criteria.SetMaxResults(pageSize);
             return criteria.List<TEntity>();
+        }
+
+        /// <summary>
+        /// Gets the count of entities.
+        /// </summary>
+        /// <param name="criteria">The criteria.</param>
+        /// <returns>The entity count.</returns>
+        public virtual long Count(ICriteria criteria)
+        {
+            var countCriteria = (ICriteria) criteria.Clone();
+            countCriteria.SetProjection(Projections.RowCount());
+            long count;
+            Int64.TryParse(countCriteria.List()[0].ToString(), out count);
+            return count;
         }
 
         /// <summary>

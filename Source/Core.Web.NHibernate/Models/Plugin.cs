@@ -65,6 +65,8 @@ namespace Core.Web.NHibernate.Models
             set { ((PluginLocale)CurrentLocale).Title = value; }
         }
 
+        public virtual PluginLocale Locale { get; set; }
+
         /// <summary>
         /// Gets or sets the description.
         /// </summary>

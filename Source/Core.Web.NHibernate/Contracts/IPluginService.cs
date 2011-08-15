@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Services;
+using NHibernate;
 
 namespace Core.Web.NHibernate.Contracts
 {
@@ -22,10 +23,10 @@ namespace Core.Web.NHibernate.Contracts
         int GetCount(IQueryable<Plugin> baseQuery);
 
         /// <summary>
-        /// Gets the search query.
+        /// Gets the search criteria.
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        IQueryable<Plugin> GetSearchQuery(string searchString);
+        ICriteria GetSearchCriteria(string searchString);
     }
 }

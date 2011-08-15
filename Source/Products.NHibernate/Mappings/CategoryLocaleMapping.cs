@@ -1,4 +1,5 @@
 ﻿using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 using Products.NHibernate.Models;
 
 namespace Products.NHibernate.Mappings
@@ -17,6 +18,7 @@ namespace Products.NHibernate.Mappings
             Map(categoryLocale => categoryLocale.Culture).Length(5);
             Map(categoryLocale => categoryLocale.Title).Length(255);
             Map(categoryLocale => categoryLocale.Description);
+            Map(categoryLocale => categoryLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

@@ -30,6 +30,12 @@ namespace Core.News.Nhibernate.Models
         /// <value>The content.</value>
         public virtual String Content { get; set; }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
+        /// <value>The priority.</value>
+        public virtual int Priority { get; private set; }
+
         #endregion
     }
 }
