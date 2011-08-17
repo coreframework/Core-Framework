@@ -52,10 +52,13 @@ namespace Framework.MVC.Grids.jqGrid
                        var rows = $('table#list tr');
                      if (rows.length == 0) {{
                          $('#notItem').attr('style', 'display:block;');
+                           $('.ui-jqgrid-hbox').attr('style', 'display:none;');
+                           $('#pager').attr('style', 'display:none');
                       }}
                     else{{
                            $('.ui-jqgrid-hbox').attr('style', 'display:block;');
-                           $('#pager').attr('style', 'display:block')
+                           $('#pager').attr('style', 'display:block');
+                           $('#notItem').attr('style', 'display:none;');
                         }}
                     }},
                     onSelectRow: function (id) {{
