@@ -37,7 +37,7 @@ namespace Core.News.Controllers
         [ChildActionOnly]
         public virtual ActionResult ViewWidget(ICoreWidgetInstance instance)
         {
-            if (instance != null)
+            if (instance != null && instance.InstanceId !=null)
             {
                 var articleService = ServiceLocator.Current.GetInstance<INewsArticleService>();
                 var widget = NewsViewerWidgetHelper.BindWidgetModel(instance);

@@ -30,8 +30,8 @@ namespace Core.News.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.ChangeTable("NewsArticleLocales", t => t.RemoveForeignKey("NewsArticle").Table("News_News"));
-            Database.RemoveTable("NewsArticleLocales");
+            Database.ChangeTable("News_ArticleLocales", t => t.RemoveForeignKey("NewsArticle").Table("News_News"));
+            Database.RemoveTable("News_ArticleLocales");
         }
     }
 }

@@ -40,6 +40,8 @@ namespace Core.News.Helpers
             var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
             var newsViewer = model.MapTo(new NewsArticleWidget());
             widgetService.Save(newsViewer);
+            newsViewer = model.MapTo(newsViewer);
+            widgetService.Save(newsViewer);
             return new NewsArticleWidgetModel().MapFrom(newsViewer);
         }
 

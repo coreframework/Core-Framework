@@ -3,7 +3,7 @@ using FluentNHibernate.Mapping;
 
 namespace Core.News.Nhibernate.Mappings
 {
-    class NewsArticleWidgetToCategoriesMapping : ClassMap<NewsArticleWidgetToCategories>
+    public class NewsArticleWidgetToCategoriesMapping : ClassMap<NewsArticleWidgetToCategories>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="NewsArticleWidgetToCategoriesMapping"/> class.
@@ -12,9 +12,9 @@ namespace Core.News.Nhibernate.Mappings
          {
              Cache.Region("News_ArticleWidgetToCategories").ReadWrite();
              Table("News_ArticleWidgetToCategories");
-             Id(prodWidCat => prodWidCat.Id);
-             Map(prodWidCat => prodWidCat.ArticleWidgetId);
-             Map(prodWidCat => prodWidCat.CategoryId);
+             Id(newsWidCat => newsWidCat.Id);
+             References(newsWidCat => newsWidCat.Category);
+             References(newsWidCat => newsWidCat.NewsArticleWidget);
         }
     }
 }

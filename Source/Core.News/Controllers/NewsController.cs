@@ -218,6 +218,7 @@ namespace Core.News.Controllers
                 newsArticleLocale.Content = newsArticleLocaleViewModel.Content;
                 newsArticleLocale.NewsArticle.LastModifiedDate = DateTime.Now;
                 newsArticleLocale.NewsArticle.StatusId = newsArticleLocaleViewModel.StatusId;
+                newsArticleLocale.NewsArticle.PublishDate = newsArticleLocaleViewModel.PublishDate;
                 localeService.Save(newsArticleLocale);
                 Success(HttpContext.Translate("Messages.SaveSuccess", ResourceHelper.GetControllerScope(this)));
                 return RedirectToAction("ShowAll");

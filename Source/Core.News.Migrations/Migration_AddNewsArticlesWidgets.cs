@@ -29,7 +29,7 @@ namespace Core.News.Migrations
         public override void Down()
         {
             //Database.ChangeTable("NewsArticleWidgets", t => t.RemoveForeignKey("NewsArticleId").Table("News"));
-            Database.RemoveTable("NewsArticleWidgets");
+            Database.RemoveTable("News_ArticleWidgets");
         }
     }
 }

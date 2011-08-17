@@ -15,9 +15,17 @@ namespace Core.News.Nhibernate.Mappings
             Id(newsArticleWidget => newsArticleWidget.Id);
             Map(newsArticleWidget => newsArticleWidget.ItemsOnPage);
             Map(newsArticleWidget => newsArticleWidget.ShowPaginator);
+            /*
             HasManyToMany(newsArticleWidget => newsArticleWidget.Categories)
                                        .Table("News_ArticleWidgetToCategories").ParentKeyColumn("ArticleWidgetId")
-                                       .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();
+                                       .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();*/
+
+            HasMany(newsArticleWidget => newsArticleWidget.Categories).KeyColumn("NewsArticleWidgetId")
+              .Table("News_ArticleWidgetToCategories")
+              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+              .Inverse()
+              .LazyLoad()
+              .Cascade.AllDeleteOrphan();
         }
     }
 }

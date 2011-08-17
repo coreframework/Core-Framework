@@ -18,7 +18,7 @@ namespace Core.News.Migrations
             Database.AddTable("News_ArticleWidgetToCategories", t =>
             {
                 t.PrimaryKey();
-                t.ForeignKey("ArticleWidget").Table("News_ArticleWidgets").Column("ArticleWidgetId").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("NewsArticleWidget").Table("News_ArticleWidgets").Column("NewsArticleWidgetId").OnDelete(ForeignKeyConstraint.Cascade);
                 t.ForeignKey("Category").Table("News_Categories").Column("CategoryId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

@@ -68,16 +68,21 @@ namespace Core.News.Models
             Id = from.Id;
             ItemsOnPage = from.ItemsOnPage;
             ShowPaginator = from.ShowPaginator;
-            CategoriesId = from.Categories != null ?  from.Categories.Select(t => t.Id).ToArray() : new long[]{};
+            CategoriesId = from.Categories != null ?  from.Categories.Select(t => t.Category.Id).ToArray() : new long[]{};
             return this;
         }
 
         public NewsArticleWidget MapTo(NewsArticleWidget to)
         {
-            to.Id = Id;
+            //to.Id = Id;
             to.ItemsOnPage = ItemsOnPage;
             to.ShowPaginator = ShowPaginator;
-            to.Categories = Categories.Where(t => CategoriesId.Contains(t.Id)).ToList();
+            //to.Categories = Categories.Where(t => CategoriesId.Contains(t.Id)).ToList();
+            if (to.Id > 0)
+            foreach (var category in CategoriesId.Select(item => Categories.Find(ct => ct.Id == item)).Where(category => category != null))
+            {
+                to.AddCategory(new NewsArticleWidgetToCategories { Category = category, NewsArticleWidget = to });
+            }
             return to;
         }
     }

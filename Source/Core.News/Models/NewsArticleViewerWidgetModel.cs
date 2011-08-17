@@ -35,13 +35,19 @@ namespace Core.News.Models
                     if (NewsCategories != null)
                     {
                         var newsArticleService = ServiceLocator.Current.GetInstance<INewsArticleService>();
-                        var tempArticles = (List<NewsArticle>) newsArticleService.GetAll();
+                        var tempArticles = (List<NewsArticle>) newsArticleService.FindPublished().ToList();
                         foreach (var article in tempArticles)
                         {
                             foreach (var category in NewsCategories)
                             {
-                                if(article.Categories.Contains(category) && !_newsArticles.Contains(article))
-                                    _newsArticles.Add(article);
+                                if (!_newsArticles.Contains(article))
+                                {
+                                    foreach (var newsCategory in article.Categories)
+                                    {
+                                        if (newsCategory.Id == category.Id)
+                                            _newsArticles.Add(article);
+                                    }
+                                }
                             }
                         }
                     }
@@ -79,7 +85,11 @@ namespace Core.News.Models
             Id = from.Id;
             ItemsOnPage = from.ItemsOnPage;
             ShowPaginator = from.ShowPaginator;
-            NewsCategories = from.Categories.ToList();
+            NewsCategories = new List<NewsCategory>();
+            foreach (var category in from.Categories)
+            {
+                NewsCategories.Add(category.Category);
+            }
             return this;
         }
 
@@ -88,7 +98,7 @@ namespace Core.News.Models
             to.Id = Id;
             to.ItemsOnPage = ItemsOnPage;
             to.ShowPaginator = ShowPaginator;
-            to.Categories = NewsCategories;
+            //to.Categories = NewsCategories;
             return to;
         }
     }
