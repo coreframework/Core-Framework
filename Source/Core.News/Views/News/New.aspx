@@ -22,7 +22,8 @@
                 </div>
 			    <div class="i_form_i">
               <%:Html.EditorFor(model => model.Content)%>
-                </div>                
+                </div>    
+                <%:Html.HiddenFor(model => model.PublishingAccess)%>            
                 <%if (Model.PublishingAccess){%>
                 <div class="i_form_i">
                     <%:Html.DropDownListFor(model => model.Status)%>

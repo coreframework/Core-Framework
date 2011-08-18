@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace Core.News.Helpers
 {
@@ -62,6 +64,43 @@ namespace Core.News.Helpers
                                              NewsConstants.CurrentPage + widgetId + "=" + (currentPage + 1), " > ");
             return string.Format(NewsConstants.Pager, htmlControl);
         }
+
+        public static string PageUrl(this HtmlHelper helper, object values)
+        {
+            var valuesDictionary = new RouteValueDictionary(values);
+            valuesDictionary = GetParams(valuesDictionary);
+
+            if (valuesDictionary.ContainsKey("url"))
+                return valuesDictionary["url"].ToString();
+
+            return String.Empty;
+        }
+
+        private static RouteValueDictionary GetParams(RouteValueDictionary valuesDictionary)
+        {
+            if (valuesDictionary.ContainsKey(NewsConstants.CurrentRequestParams))
+            {
+                var values = valuesDictionary[NewsConstants.CurrentRequestParams];
+
+                var routeValueDictionary = values as NameValueCollection;
+                if (routeValueDictionary != null)
+                    foreach (string key in routeValueDictionary.Keys)
+                    {
+                        if (key.ToLower().Equals("url"))
+                        {
+                            if (valuesDictionary.ContainsKey(NewsConstants.IsAjaxPageQueryRequestParam) && (bool)valuesDictionary[NewsConstants.IsAjaxPageQueryRequestParam] && !String.IsNullOrEmpty(routeValueDictionary["HTTP_REFERER"]))
+                                valuesDictionary.Add(key, routeValueDictionary["HTTP_REFERER"].Split('?')[0]);
+                            else
+                                valuesDictionary.Add(key, routeValueDictionary[key]);
+                        }
+
+                    }
+                valuesDictionary.Remove(NewsConstants.CurrentRequestParams);
+            }
+            return valuesDictionary;
+        }
     }
+
+
 
 }

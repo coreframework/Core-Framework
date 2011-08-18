@@ -10,7 +10,7 @@
           { %>
             <div class="newslist">
                 <p>
-                    <a href="<%=Request.Url + (!Request.Url.ToString().Contains("newsvidgetid=" + Model.Id) ? (Request.Url.ToString().Contains("?") ? "&" : "?") + "newsvidgetid=" + Model.Id + "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id : "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id) %>">
+                    <a onclick="RedirectToDetales();" href="<%= Request.Url + (!Request.Url.ToString().Contains("newsvidgetid=" + Model.Id) ? (Request.Url.ToString().Contains("?") ? "&" : "?") + "newsvidgetid=" + Model.Id + "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id : "&articleid" + Model.Id + "=" + Model.NewsArticles[i].Id) %>">
                         <b><%=Model.NewsArticles[i].Title%></b>
                     </a>
                 </p>
@@ -26,3 +26,6 @@
         <%=Html.Pager(Model.ItemsOnPage, Model.CurrentPage, Model.TotalItemsCount, Model.Id, Request.Url.ToString())%>
         <%}%>
 </div>
+<script>
+    function RedirectToDetales() {var t = document.location.href; }
+</script>

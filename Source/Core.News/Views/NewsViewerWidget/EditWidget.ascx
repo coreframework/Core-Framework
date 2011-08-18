@@ -18,7 +18,7 @@
     <div class="form_i">
        <label><%=Html.Translate(".ShowPaginator") %></label><br/>
         <%:Html.CheckBoxFor(model => model.ShowPaginator)%>
-        <%:Html.ValidationMessageFor(model => model.ItemsOnPage)%>        
+        <%:Html.ValidationMessageFor(model => model.ShowPaginator)%>        
     </div>
     <%:Html.AntiForgeryToken()%>
 </div>

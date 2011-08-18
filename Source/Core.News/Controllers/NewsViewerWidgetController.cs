@@ -41,7 +41,6 @@ namespace Core.News.Controllers
             {
                 var articleService = ServiceLocator.Current.GetInstance<INewsArticleService>();
                 var widget = NewsViewerWidgetHelper.BindWidgetModel(instance);
-
                 if (widget != null)
                 {
                     if (!String.IsNullOrEmpty(Request.Params[NewsConstants.Newsvidgetid]))

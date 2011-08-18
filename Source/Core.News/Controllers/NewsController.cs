@@ -167,7 +167,7 @@ namespace Core.News.Controllers
                 ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
                     (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
 
-            return View("Edit", new NewsArticleLocaleViewModel().MapFrom(article));
+            return View("Edit", model);
         }
 
         [HttpPost]
@@ -226,7 +226,9 @@ namespace Core.News.Controllers
                 Success(HttpContext.Translate("Messages.SaveSuccess", ResourceHelper.GetControllerScope(this)));
                 return RedirectToAction("ShowAll");
             }
-
+            newsArticleLocaleViewModel.PublishingAccess =
+                ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
+                    (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
             Error(HttpContext.Translate("Messages.ValidationError", ResourceHelper.GetControllerScope(this)));
             return View("Edit", newsArticleLocaleViewModel);
         }
@@ -260,7 +262,9 @@ namespace Core.News.Controllers
                 Success(HttpContext.Translate("Messages.SaveSuccess", ResourceHelper.GetControllerScope(this)));
                 return RedirectToAction("ShowAll");
             }
-
+            newsArticle.PublishingAccess =
+                ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
+                    (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
             Error(HttpContext.Translate("Messages.ValidationError", ResourceHelper.GetControllerScope(this)));
             return View("New", newsArticle);
         }

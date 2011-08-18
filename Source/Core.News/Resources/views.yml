@@ -1,24 +1,24 @@
 Views:
   News:
     Index:
-      Title: "News Articles"
+      Title: "News"
       Actions: "Actions"
       User: "User"
       Status: "Status"
       Remove: "[Remove]"
       UserGroups: "[User groups]"
-      New: "New Article"
+      New: "New News"
     Edit:
-      Title: "Edit News Article"
+      Title: "Edit News"
       Save: "Save"
       Cancel: "Cancel"
-      Title: "Edit News Article"
+      Title: "Edit News"
     New:
-      Title: "New News Article"
+      Title: "New News"
       Save: "Save"
       Cancel: "Cancel"    
     EditForm:
-      Title: "Edit News Article"
+      Title: "Edit News"
       Save: "Save"
       Cancel: "Cancel"
     Categories:

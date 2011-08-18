@@ -11,5 +11,8 @@ namespace Core.News.Helpers
         public const String PagerLink = "<a href='{0}'>{1}</a>";
         public const String Pager= "<div class='pager'>{0}</div>";
         public const String PagerCurrent = "<span class='current'>{0}</span>";
+
+        public const String CurrentRequestParams = "currentRequestParams";
+        public const String IsAjaxPageQueryRequestParam = "isAjax";
     }
 }

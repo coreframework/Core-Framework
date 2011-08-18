@@ -29,7 +29,7 @@ namespace Core.News.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.RemoveTable("News");
+            Database.RemoveTable("News_News");
         }
     }
 }
