@@ -1,6 +1,6 @@
 Verbs:
   AdminVerb:
-    Forms: "Forms"
+    Forms: "Forms: Templates"
   FormsAnswersAdminVerb:
-    FormsAnswers: "Forms Answers"
+    FormsAnswers: "Forms: Forms Answers"
  

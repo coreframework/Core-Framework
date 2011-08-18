@@ -1,6 +1,7 @@
 ﻿using System;
 using Framework.Core.Services;
 using Core.News.Nhibernate.Models;
+using NHibernate;
 
 namespace Core.News.NHibernate.Contracts
 {
@@ -13,5 +14,12 @@ namespace Core.News.NHibernate.Contracts
         /// <param name="culture">The culture</param>
         /// <returns>Category Locale</returns>
         NewsCategoryLocale GetLocale(long categoryId, String culture);
+
+        /// <summary>
+        /// Gets the search criteria.
+        /// </summary>
+        /// <param name="searchString">The search string.</param>
+        /// <returns></returns>
+        ICriteria GetSearchCriteria(string searchString);
     }
 }

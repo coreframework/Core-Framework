@@ -1,5 +1,5 @@
 Verbs:
   AdminCategoryVerb:
-    Categories: "Categories"
+    Categories: "Products: Categories"
   AdminVerb:
-    Products: "Products"
+    Products: "Products: Listing"

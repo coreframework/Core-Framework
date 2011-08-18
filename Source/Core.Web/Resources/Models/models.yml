@@ -30,6 +30,9 @@ Models:
   PluginLocale:
    Title: "Title"
    Description: "Description"
+  Plugin:
+   CreateDate: "Added"
+   Status: "Status" 
 Navigation:
  Models:
   NavigationMenuWidgetModel:

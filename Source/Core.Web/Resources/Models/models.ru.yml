@@ -28,6 +28,12 @@ ru:
    PageCssModel.CustomCSS: "Css стили"
   SiteSettings:
    ShowPanel: "Показывать панель администрирования"
+  PluginLocale:
+   Title: "Название"
+   Description: "Описание"
+  Plugin:
+   CreateDate: "Добавлено"
+   Status: "Статус" 
  Navigation:
   Models:
    NavigationMenuWidgetModel:

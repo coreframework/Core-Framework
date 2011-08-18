@@ -29,6 +29,7 @@
     - Admin/jquery.ui.accordion.js
     - Admin/jquery.ui.datepicker.js
     - Admin/jquery.dd.js
+    - Admin/jquery.ui.progressbar.js
   admincustom:
     - Admin/scripts.js
     - Admin/highlight-active-input.js

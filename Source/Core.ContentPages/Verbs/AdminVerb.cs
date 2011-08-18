@@ -21,7 +21,7 @@ namespace Core.ContentPages.Verbs
         /// </summary>
         public string Name
         {
-            get { return HttpContext.GetGlobalResourceObject(String.Format("ContentPages.Verbs.AdminVerb"), String.Format("ContentPages")) as String ?? "Content Pages"; }
+            get { return HttpContext.GetGlobalResourceObject(String.Format("ContentPage.Verbs.AdminVerb"), String.Format("ContentPages")) as String ?? "Content Pages"; }
         }
 
         /// <summary>

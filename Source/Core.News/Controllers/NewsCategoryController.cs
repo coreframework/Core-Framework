@@ -15,7 +15,8 @@ using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq.Dynamic;
+using NHibernate;
+using NHibernate.Criterion;
 
 namespace Core.News.Controllers
 {
@@ -26,6 +27,8 @@ namespace Core.News.Controllers
         #region Fields
         
         private readonly INewsCategoryService categoryService;
+
+        private readonly INewsCategoryLocaleService categoryLocaleService;
 
         #endregion
 
@@ -49,6 +52,7 @@ namespace Core.News.Controllers
         public NewsCategoryController()
         {
             this.categoryService = ServiceLocator.Current.GetInstance<INewsCategoryService>();
+            this.categoryLocaleService = ServiceLocator.Current.GetInstance<INewsCategoryLocaleService>();
         }
 
         #endregion
@@ -105,14 +109,12 @@ namespace Core.News.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            var searchQuery = categoryService.GetSearchQuery(search);
-            int totalRecords = categoryService.GetCount(searchQuery);
+
+            ICriteria searchCriteria = categoryLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = categoryLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            //categories = sord == "asc"
-            //                 ? categories.OrderBy(cat => cat.Title).Skip(pageIndex*pageSize).Take(pageSize).ToList()
-            //                 : categories.OrderByDescending(cat => cat.Title).Skip(pageIndex*pageSize).Take(pageSize).
-            //                       ToList();
-            var categories = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var categories = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<NewsCategoryLocale>();
            
             var jsonData = new
             {
@@ -120,17 +122,17 @@ namespace Core.News.Controllers
                 page,
                 records = totalRecords,
                 rows = (
-                    from category in categories
+                    from categoryLocale in categories
                     select new
                     {
-                        id = category.Id,
-                        cell = new[] {  category.Title, 
+                        id = categoryLocale.Category.Id,
+                        cell = new[] {  categoryLocale.Title, 
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("ShowById","NewsCategory",new { id = category.Id }),HttpContext.Translate("View", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("ShowById","NewsCategory",new { id = categoryLocale.Category.Id }),HttpContext.Translate("View", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Edit","NewsCategory",new { id = category.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
+                                            Url.Action("Edit","NewsCategory",new { id = categoryLocale.Category.Id }),HttpContext.Translate("Edit", ResourceHelper.GetControllerScope(this))),
                                         String.Format("<a href=\"{0}\" style=\"margin-left: 5px;\"><em class=\"delete\"/></a>",
-                                            Url.Action("Remove","NewsCategory",new { id = category.Id }))}
+                                            Url.Action("Remove","NewsCategory",new { id = categoryLocale.Category.Id }))}
                     }).ToArray()
             };
             return Json(jsonData);
@@ -270,6 +272,5 @@ namespace Core.News.Controllers
             return PartialView(isShow ? "ShowForm" : "EditForm", model);
         }
         #endregion
-
     }
 }

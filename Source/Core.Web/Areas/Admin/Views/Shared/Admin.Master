@@ -16,7 +16,6 @@
      <%: Html.JavascriptPackInclude("fckeditor")%> 
      <%: Html.JavascriptPackInclude("admincustom")%>
      <%= Html.JavascriptInclude("jqGrid/jquery.jqGrid.js")%>
-<%--     <%: Html.JavascriptPackInclude("jquery-ui")%>--%>
      <%: Html.JavascriptPackInclude("upload")%>
 
     <asp:ContentPlaceHolder id="HeadContent" runat="server">    

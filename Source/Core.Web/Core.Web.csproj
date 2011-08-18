@@ -554,6 +554,7 @@
     <Content Include="Scripts\Admin\jquery.ui.accordion.js" />
     <Content Include="Scripts\Admin\jquery.ui.core.js" />
     <Content Include="Scripts\Admin\jquery.ui.datepicker.js" />
+    <Content Include="Scripts\Admin\jquery.ui.progressbar.js" />
     <Content Include="Scripts\Admin\jquery.ui.widget.js" />
     <Content Include="Scripts\Admin\scripts.js" />
     <Content Include="Scripts\application.js" />

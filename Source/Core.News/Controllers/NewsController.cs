@@ -36,7 +36,7 @@ namespace Core.News.Controllers
 
         private readonly INewsArticleService newsArticlesService;
         private readonly INewsArticleLocaleService newsArticlesLocaleService;
-        private readonly INewsCategoryService categoryService;
+        private readonly INewsCategoryLocaleService categoryLocaleService;
 
         #endregion
 
@@ -58,7 +58,7 @@ namespace Core.News.Controllers
         {
             newsArticlesService = ServiceLocator.Current.GetInstance<INewsArticleService>();
             newsArticlesLocaleService = ServiceLocator.Current.GetInstance<INewsArticleLocaleService>();
-            categoryService = ServiceLocator.Current.GetInstance<INewsCategoryService>();
+            categoryLocaleService = ServiceLocator.Current.GetInstance<INewsCategoryLocaleService>();
         }
 
         #endregion
@@ -339,24 +339,22 @@ namespace Core.News.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.CouldNotFoundEntity", ResourceHelper.GetControllerScope(this)));
             }
-            var categories = categoryService.GetCategories(search);
-            int totalRecords = categories.Count();
+            ICriteria searchCriteria = categoryLocaleService.GetSearchCriteria(search);
+
+            long totalRecords = categoryLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            categories = sord == "asc"
-                             ? categories.OrderBy(cat => cat.Title).Skip(pageIndex * pageSize).Take(pageSize).ToList()
-                             : categories.OrderByDescending(cat => cat.Title).Skip(pageIndex * pageSize).Take(pageSize).
-                                   ToList();
+            var categories = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<NewsCategoryLocale>();
             var jsonData = new
             {
                 total = totalPages,
                 page,
                 records = totalRecords,
                 rows = (
-                    from category in categories
+                    from categoryLocale in categories
                     select new
                     {
-                        id = category.Id,
-                        cell = new[] { category.Title }
+                        id = categoryLocale.Category.Id,
+                        cell = new[] { categoryLocale.Title }
                     }).ToArray()
             };
             return Json(jsonData);

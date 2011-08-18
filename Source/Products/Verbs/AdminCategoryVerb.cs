@@ -21,7 +21,7 @@ namespace Products.Verbs
         /// </summary>
         public string Name
         {
-            get { return HttpContext.GetGlobalResourceObject(String.Format("Product.Verbs.AdminCategoryVerb"), String.Format("Categories")) as String ?? "CategoriesDefault"; }
+            get { return HttpContext.GetGlobalResourceObject(String.Format("Product.Verbs.AdminCategoryVerb"), String.Format("Categories")) as String ?? "Categories"; }
         }
 
         /// <summary>
