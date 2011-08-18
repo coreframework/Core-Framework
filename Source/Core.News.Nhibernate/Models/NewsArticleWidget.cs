@@ -33,6 +33,8 @@ namespace Core.News.Nhibernate.Models
 
         public virtual bool ShowPaginator { get; set; }
 
+        public virtual string Url { get; set; }
+
         #endregion
 
         #region Helper Methods

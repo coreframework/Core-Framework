@@ -88,6 +88,7 @@ namespace Core.News.Models
             ItemsOnPage = from.ItemsOnPage;
             ShowPaginator = from.ShowPaginator;
             NewsCategories = new List<NewsCategory>();
+            Url = from.Url;
             foreach (var category in from.Categories)
             {
                 NewsCategories.Add(category.Category);
@@ -100,6 +101,7 @@ namespace Core.News.Models
             to.Id = Id;
             to.ItemsOnPage = ItemsOnPage;
             to.ShowPaginator = ShowPaginator;
+            to.Url = Url;
             //to.Categories = NewsCategories;
             return to;
         }

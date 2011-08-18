@@ -19,6 +19,7 @@ namespace Core.News.Migrations
                 t.PrimaryKey();
                 t.Integer("ItemsOnPage");
                 t.Bool("ShowPaginator");
+                t.String("Url").Null();
                 //t.ForeignKey("NewsArticleId").Table("News").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }

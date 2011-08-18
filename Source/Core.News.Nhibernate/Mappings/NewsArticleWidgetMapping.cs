@@ -15,6 +15,7 @@ namespace Core.News.Nhibernate.Mappings
             Id(newsArticleWidget => newsArticleWidget.Id);
             Map(newsArticleWidget => newsArticleWidget.ItemsOnPage);
             Map(newsArticleWidget => newsArticleWidget.ShowPaginator);
+            Map(newsArticleWidget => newsArticleWidget.Url);
             /*
             HasManyToMany(newsArticleWidget => newsArticleWidget.Categories)
                                        .Table("News_ArticleWidgetToCategories").ParentKeyColumn("ArticleWidgetId")
