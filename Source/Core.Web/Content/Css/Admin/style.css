@@ -122,7 +122,8 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 						    #ui-datepicker-div .ui-widget-header {display: block;}
 							.ui-datepicker-header {position:relative;padding:5px 0}
 								.ui-datepicker-title {text-align:center;margin-bottom:5px;}
-								.ui-icon {position:absolute;top:8px;cursor:pointer;font-size:10px;}
+								.ui-datepicker-header .ui-icon {position:absolute;top:8px;cursor:pointer;font-size:10px;}
+                                .ui-icon {cursor:pointer;font-size:10px;}
 								.ui-icon-circle-triangle-w {left:3px;}
 								.ui-icon-circle-triangle-e {right:3px;}
 							table.ui-datepicker-calendar {}
