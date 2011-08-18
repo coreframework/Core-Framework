@@ -83,6 +83,10 @@
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="MvcSiteMapProvider, Version=3.1.0.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\SiteMap\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
     </Reference>
@@ -1031,6 +1035,7 @@
     <Content Include="Views\Pages\NavigationMenu.ascx" />
     <Content Include="Views\Pages\PagePermissions.ascx" />
     <Content Include="Views\Pages\Show.aspx" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.aspx" />
     <Content Include="Views\Shared\EditorTemplates\ColorPicker.aspx" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.aspx" />
@@ -1162,6 +1167,9 @@
     </None>
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Shared\EditorTemplates\Template.Master" />
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

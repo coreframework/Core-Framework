@@ -4,7 +4,7 @@
 <%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContent" runat="server">
-	<h1><%: String.Format(Html.Translate(".Title"), Model.Title) %></h1>
+	<h1><%: String.Format(Html.Translate(".Title"), Model.GridTitle)%></h1>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

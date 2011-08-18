@@ -17,6 +17,8 @@ using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
 using IContentPageService = Core.ContentPages.NHibernate.Contracts.IContentPageService;
 using System.Linq.Dynamic;
 
@@ -30,7 +32,7 @@ namespace Core.ContentPages.Controllers
     public partial class ContentPageController : CorePluginController
     {
         #region Fields
-        
+
         private readonly IContentPageService contentPageService;
 
         private readonly IContentPageLocaleService contentPageLocaleService;
@@ -45,7 +47,7 @@ namespace Core.ContentPages.Controllers
         }
 
         #endregion
-        
+
         #region Constructor
 
         /// <summary>
@@ -65,7 +67,8 @@ namespace Core.ContentPages.Controllers
         /// Renders content pages listing.
         /// </summary>
         /// <returns>List of content pages.</returns>
-        
+
+        [MvcSiteMapNode(Title = "$t:Titles.ContentPages", AreaName = "ContentPage", ParentKey = "Home", Key = "ContentPage.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -101,6 +104,7 @@ namespace Core.ContentPages.Controllers
                 Columns = columns,
                 IsRowNotClickable = true
             };
+
             return View("Admin/Index", model);
         }
 
@@ -138,8 +142,10 @@ namespace Core.ContentPages.Controllers
         /// <summary>
         /// Shows content page edit form.
         /// </summary>
-        /// <param name="id">The content id.</param>
+        /// <param name="id">The content id.</param>n
         /// <returns>Content page edit view</returns>
+        [MvcSiteMapNode(Title = "Edit", AreaName = "ContentPage", ParentKey = "ContentPage.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long? id)
         {
             var contentPage = contentPageService.Find(id ?? 0);
@@ -163,7 +169,7 @@ namespace Core.ContentPages.Controllers
             model.SelectedCulture = culture;
             var localeService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
             ContentPageLocale locale = localeService.GetLocale(contentPageId, culture);
-            if(locale != null)
+            if (locale != null)
             {
                 model.Title = locale.Title;
                 model.Content = locale.Content;
@@ -181,15 +187,14 @@ namespace Core.ContentPages.Controllers
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult Edit(long? id, ContentPageLocaleViewModel contentPageModel)
         {
-            if (ModelState.IsValid && id!=null)
+            if (ModelState.IsValid && id != null)
             {
-                ContentPage contentPage = contentPageService.Find((long) id);
+                ContentPage contentPage = contentPageService.Find((long)id);
                 IContentPageLocaleService localeService = ServiceLocator.Current.GetInstance<IContentPageLocaleService>();
                 ContentPageLocale contentPageLocale = localeService.GetLocale(id.Value, contentPageModel.SelectedCulture);
-                if(contentPageLocale == null)
+                if (contentPageLocale == null)
                 {
-                    contentPageLocale = new ContentPageLocale
-                                            {ContentPage = contentPage, Culture = contentPageModel.SelectedCulture};
+                    contentPageLocale = new ContentPageLocale { ContentPage = contentPage, Culture = contentPageModel.SelectedCulture };
                 }
                 contentPageLocale.Title = contentPageModel.Title;
                 contentPageLocale.Content = contentPageModel.Content;
@@ -206,6 +211,7 @@ namespace Core.ContentPages.Controllers
         /// Shows content page create form.
         /// </summary>
         /// <returns>Content page create form.</returns>
+        [MvcSiteMapNode(Title = "New", AreaName = "ContentPage", ParentKey = "ContentPage.ShowAll")]
         public virtual ActionResult New()
         {
             return View("Admin/New", new ContentPageViewModel());

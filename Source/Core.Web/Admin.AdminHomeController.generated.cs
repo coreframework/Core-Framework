@@ -23,9 +23,6 @@ using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class AdminHomeController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminHomeController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected AdminHomeController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

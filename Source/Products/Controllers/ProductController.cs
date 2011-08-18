@@ -13,6 +13,8 @@ using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
 using Products.Helpers;
 using Products.Models;
 using Products.NHibernate.Contracts;
@@ -67,7 +69,7 @@ namespace Products.Controllers
         /// Renders products listing.
         /// </summary>
         /// <returns>List of products.</returns>
-
+        [MvcSiteMapNode(Title = "$t:Titles.Products", AreaName = "Product", ParentKey = "Home", Key = "Product.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -155,6 +157,8 @@ namespace Products.Controllers
         /// </summary>
         /// <param name="id">The product id.</param>
         /// <returns>Product details</returns>
+        [MvcSiteMapNode(Title = "Show", AreaName = "Product", ParentKey = "Product.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult ShowById(long? id)
         {
             var product = productService.Find(id ?? 0);
@@ -171,6 +175,8 @@ namespace Products.Controllers
         /// </summary>
         /// <param name="id">The product id.</param>
         /// <returns>Product edit view</returns>
+        [MvcSiteMapNode(Title = "Edit", AreaName = "Product", ParentKey = "Product.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long? id)
         {
             var product = productService.Find(id ?? 0);
@@ -221,6 +227,7 @@ namespace Products.Controllers
         /// Shows product create form.
         /// </summary>
         /// <returns>Product create form.</returns>
+        [MvcSiteMapNode(Title = "New", AreaName = "Product", ParentKey = "Product.ShowAll")]
         public virtual ActionResult New()
         {
             return View("New", new ProductViewModel());
@@ -268,6 +275,8 @@ namespace Products.Controllers
         /// <param name="id">The product id.</param>
         /// <returns></returns>
         [HttpGet]
+        [MvcSiteMapNode(Title = "$t:Titles.ProductCategories", AreaName = "Product", ParentKey = "Product.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Categories(long id)
         {
             var product = productService.Find(id);
@@ -295,12 +304,12 @@ namespace Products.Controllers
             {
                 DataUrl = Url.Action("ProductCategoriesDynamicGridData", "Product"),
                 DefaultOrderColumn = "Id",
-                GridTitle = HttpContext.Translate("GridTitleCategory", ResourceHelper.GetControllerScope(this)),
+                GridTitle = product.Title,
                 Columns = columns,
                 MultiSelect = true,
                 IsRowNotClickable = true,
                 SelectedIds = product.Categories.Select(t => t.Id),
-                Title = product.Title
+                Title = String.Format(HttpContext.Translate("Titles.Product_Categories", RouteData.AreaName()), product.Title)
             };
 
             return View(model);

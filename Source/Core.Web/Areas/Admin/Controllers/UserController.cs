@@ -16,6 +16,7 @@ using Framework.MVC.Grids;
 using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -38,7 +39,6 @@ namespace Core.Web.Areas.Admin.Controllers
             userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
         }
         
-
         #endregion
 
         #region Actions
@@ -152,6 +152,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The user id.</param>
         /// <returns>User edit view.</returns>
         [HttpGet]
+        [SiteMapTitle("Nickname")]
         public virtual ActionResult Edit(long id)
         {
             var user = userService.Find(id);
@@ -229,6 +230,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The id.</param>
         /// <returns></returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult UserGroups(long id)
         {
             var user = userService.Find(id);
@@ -253,15 +255,15 @@ namespace Core.Web.Areas.Admin.Controllers
                                                              }
                                                      };
             var model = new GridViewModel
-            {
-                DataUrl = Url.Action(MVC.Admin.User.UserGroupsDynamicGridData()),
-                DefaultOrderColumn = "Name",
-                GridTitle = "User Groups",
-                Columns = columns,
-                MultiSelect = true,
-                IsRowNotClickable = true,
-                SelectedIds = user.UserGroups.Select(t => t.Id),
-                Title = user.Username
+                            {
+                                DataUrl = Url.Action(MVC.Admin.User.UserGroupsDynamicGridData()),
+                                DefaultOrderColumn = "Name",
+                                GridTitle = "User Groups",
+                                Columns = columns,
+                                MultiSelect = true,
+                                IsRowNotClickable = true,
+                                SelectedIds = user.UserGroups.Select(t => t.Id),
+                                Title = String.Format(Translate("Titles.User_UserGroups"), user.Username)
             };
             
             return View(model);

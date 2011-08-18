@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="MvcSiteMapProvider.Web.Html" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,6 +17,7 @@
      <%: Html.JavascriptPackInclude("fckeditor")%> 
      <%: Html.JavascriptPackInclude("admincustom")%>
      <%= Html.JavascriptInclude("jqGrid/jquery.jqGrid.js")%>
+<%--     <%: Html.JavascriptPackInclude("jquery-ui")%>--%>
      <%: Html.JavascriptPackInclude("upload")%>
 
     <asp:ContentPlaceHolder id="HeadContent" runat="server">    
@@ -28,14 +30,12 @@
                 <img src="<%= Links.Content.Images.Admin.logo_png %>" width="145" height="19" alt="" title="" class="logo" />
             </a>
             <%= Html.PartialWithScope(MVC.Admin.Shared.Views.TopLinks)%>
-		    <div class="breadcrumbs">
-			    <ul>          
-				    <li><a href="#">Home</a></li>
-			    </ul>
-		    </div>
+		<%--    <%= Html.Breadcrumbs()%>--%>
+         <div class="breadcrumbs">
+             <%=Html.MvcSiteMap().SiteMapPath()%>
+         </div>
 	    </div>
 	    <div id="middle">
-
 		    <div id="container">
 			    <div id="content" class="clrfix">
 				    <div class="top_b"></div>
@@ -55,7 +55,6 @@
 			    </div>
 		    </div>
 	    </div>
-
     </div>
 
     <div id="footer">

@@ -154,6 +154,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Breadcrumbs\Breadcrumb.cs" />
+    <Compile Include="Breadcrumbs\BreadcrumbsBuilder.cs" />
+    <Compile Include="Breadcrumbs\IBreadcrumb.cs" />
+    <Compile Include="Breadcrumbs\IBreadcrumbsBuilder.cs" />
     <Compile Include="Captcha\CaptchaImage.cs" />
     <Compile Include="Captcha\CaptchaImageHandler.cs" />
     <Compile Include="Controllers\CastleControllerFactory.cs" />
@@ -161,6 +165,7 @@
     <Compile Include="Extensions\AssetsExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Extensions\BreadcrumbsExtensions.cs" />
     <Compile Include="Extensions\ButtonExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

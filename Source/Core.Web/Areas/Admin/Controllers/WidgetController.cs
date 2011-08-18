@@ -15,6 +15,8 @@ using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Linq.Dynamic;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -124,6 +126,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The widget id.</param>
         /// <returns>Widget edit view.</returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long id)
         {
             var widget = _widgetService.Find(id);
@@ -190,7 +193,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">The widget id.</param>
         /// <returns>List of registered widgets.</returns>
-        //[HttpPost]
+        [HttpGet]
         public virtual ActionResult Enable(long id)
         {
             Widget widgetEntity = _widgetService.Find(id);
@@ -214,7 +217,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         /// <param name="id">The widget id.</param>
         /// <returns>List of registered widgets.</returns>
-        //[HttpPost]
+        [HttpGet]
         public virtual ActionResult Disable(long id)
         {
             Widget widgetEntity = _widgetService.Find(id);

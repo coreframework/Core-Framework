@@ -219,17 +219,26 @@ namespace Framework.MVC.Helpers
         /// Builds controller localization scope by it's namespace and type ([AreaName.]Controllers.{ControllerName}).
         /// </summary>
         /// <param name="controller">The controller.</param>
-        /// <returns>Model localization scope.</returns>
+        /// <returns>Controller localization scope.</returns>
         public static String GetControllerScope(Controller controller)
         {
-            var chains = new List<String>();
-            var areaName = controller.AreaName();
+            return GetControllerScope(controller.AreaName(), controller.ControllerName());
+        }
+
+        /// <summary>
+        /// Gets the controller scope.
+        /// </summary>
+        /// <param name="areaName">Name of the area.</param>
+        /// <param name="controllerName">Name of the controller.</param>
+        /// <returns>Controller localization scope.</returns>
+        public static String GetControllerScope(String areaName, String controllerName)
+        {
+            var chains = new List<String>();            
             if (!String.IsNullOrEmpty(areaName))
             {
                 chains.Add(areaName);
             }
             chains.Add(Controllers);
-            var controllerName = controller.ControllerName();
             if (!String.IsNullOrEmpty(controllerName))
             {
                 chains.Add(controllerName);

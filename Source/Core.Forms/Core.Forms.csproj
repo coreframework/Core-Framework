@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="Castle.MicroKernel">
       <HintPath>..\..\Libs\Castle\Castle.MicroKernel.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Castle.Windsor">
       <HintPath>..\..\Libs\Castle\Castle.Windsor.dll</HintPath>
@@ -52,18 +53,28 @@
     </Reference>
     <Reference Include="Dynamic">
       <HintPath>..\..\Libs\jqGrid\Dynamic.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MvcSiteMapProvider, Version=3.1.0.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\SiteMap\MvcSiteMapProvider.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Omu.ValueInjecter">
       <HintPath>..\..\Libs\ValueInjecter\Omu.ValueInjecter.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -154,10 +165,12 @@
     <ProjectReference Include="..\Framework.Core\Framework.Core.csproj">
       <Project>{8548D8D8-F616-42B6-9271-DB8E600CF652}</Project>
       <Name>Framework.Core</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Framework.MVC\Framework.MVC.csproj">
       <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
       <Name>Framework.MVC</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

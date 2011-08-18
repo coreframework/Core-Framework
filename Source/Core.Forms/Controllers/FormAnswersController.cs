@@ -17,6 +17,8 @@ using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.Permissions.Helpers;
 using System.Linq.Dynamic;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Forms.Controllers
 {
@@ -75,6 +77,7 @@ namespace Core.Forms.Controllers
         /// </summary>
         /// <returns>Accounts roles view.</returns>
         [HttpGet]
+        [MvcSiteMapNode(Title = "$t:Titles.FormAnswersForms", AreaName = "Forms", ParentKey = "Home", Key = "FormAnswers.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
@@ -124,6 +127,7 @@ namespace Core.Forms.Controllers
         }
 
         [HttpGet]
+        [MvcSiteMapNode(Title = "$t:Titles.FormAnswers", AreaName = "Forms", ParentKey = "FormAnswers.ShowAll")]
         public virtual ActionResult ShowAnswers(long formWidgetId)
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>();
@@ -174,6 +178,8 @@ namespace Core.Forms.Controllers
             return Json(jsonData);
         }
 
+        [MvcSiteMapNode(Title = "Details", AreaName = "Forms", ParentKey = "FormAnswers.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult ShowAnswerDetails(long answerId)
         {
             var model = _formWidgetAnswersService.Find(answerId);

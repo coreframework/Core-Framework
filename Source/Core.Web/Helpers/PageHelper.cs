@@ -442,7 +442,10 @@ namespace Core.Web.Helpers
                     var sourceWidget = sourcePage.Widgets.FirstOrDefault(w => w.Id == item.ParentWidgetId);
                     if (sourceWidget!=null)
                     {
-                        targetPage.Settings.CustomCSS = targetPage.Settings.CustomCSS.Replace(String.Format(PageWidgetTemplate, sourceWidget.Id), String.Format(PageWidgetTemplate, item.Id));
+                        if (targetPage.Settings!=null && !String.IsNullOrEmpty(targetPage.Settings.CustomCSS))
+                        {
+                            targetPage.Settings.CustomCSS = targetPage.Settings.CustomCSS.Replace(String.Format(PageWidgetTemplate, sourceWidget.Id), String.Format(PageWidgetTemplate, item.Id));
+                        }
                         permissionCommonService.CloneObjectPermisions(systemWidget.GetType(), sourceWidget.Id, item.Id);
                     }
                 }

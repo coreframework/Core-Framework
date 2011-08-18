@@ -22,6 +22,8 @@ using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
 using NHibernate;
 using NHibernate.Criterion;
 
@@ -91,6 +93,7 @@ namespace Core.Forms.Controllers
         /// Shows the list of all available forms.
         /// </summary>
         /// <returns></returns>
+        [MvcSiteMapNode(Title = "$t:Titles.Forms", AreaName = "Forms", ParentKey = "Home", Key = "Forms.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -159,6 +162,7 @@ namespace Core.Forms.Controllers
         /// </summary>
         /// <param name="formId">The form id.</param>
         /// <returns></returns>
+        [MvcSiteMapNode(Title = "$t:Titles.Permissions", AreaName = "Forms", ParentKey = "Forms.Edit")]
         public virtual ActionResult ShowPermissions(long formId)
         {
             var form = _formsService.Find(formId);
@@ -267,6 +271,7 @@ namespace Core.Forms.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [MvcSiteMapNode(Title = "New", AreaName = "Forms", ParentKey = "Forms.ShowAll")]
         public virtual ActionResult New()
         {
             return View("New", new FormViewModel {AllowManage = true});
@@ -326,6 +331,8 @@ namespace Core.Forms.Controllers
         /// <param name="formId">The form id.</param>
         /// <returns></returns>
         [HttpGet]
+        [MvcSiteMapNode(Title = "Edit", AreaName = "Forms", ParentKey = "Forms.ShowAll", Key = "Forms.Edit")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long formId)
         {
             var form = _formsService.Find(formId);
@@ -382,6 +389,7 @@ namespace Core.Forms.Controllers
 
         #region Form Elements
 
+        [MvcSiteMapNode(Title = "$t:Titles.FormElements", AreaName = "Forms", ParentKey = "Forms.Edit", Key = "Forms.FormElements")]
         public virtual ActionResult ShowFormElements(long formId)
         {
             var form = _formsService.Find(formId);
@@ -495,6 +503,7 @@ namespace Core.Forms.Controllers
         }
 
         [HttpGet]
+        [MvcSiteMapNode(Title = "New", AreaName = "Forms", ParentKey = "Forms.FormElements")]
         public virtual ActionResult NewElement(long formId)
         {
             var form = _formsService.Find(formId);
@@ -507,6 +516,8 @@ namespace Core.Forms.Controllers
         }
 
         [HttpGet]
+        [MvcSiteMapNode(Title = "Edit", AreaName = "Forms", ParentKey = "Forms.FormElements")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult EditElement(long formId, long formElementId)
         {
             var formElement = _formsElementService.Find(formElementId);

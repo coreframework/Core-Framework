@@ -15,6 +15,7 @@ using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq;
 using System.Linq.Dynamic;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -137,6 +138,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The user group id.</param>
         /// <returns>User group edit view.</returns>
         [HttpGet]
+        [SiteMapTitle("Name")]
         public virtual ActionResult Edit(long id)
         {
             var userGroup = userGroupService.Find(id);
@@ -215,6 +217,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The user group id.</param>
         /// <returns>Users assignment view.</returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Users(long id)
         {
             var userGroup = userGroupService.Find(id);
@@ -238,17 +241,16 @@ namespace Core.Web.Areas.Admin.Controllers
                                                              }
                                                      };
             var model = new GridViewModel
-            {
-                DataUrl = Url.Action(MVC.Admin.UserGroup.UsersDynamicGridData()),
-                DefaultOrderColumn = "Username",
-                GridTitle = "Users",
-                Columns = columns,
-                MultiSelect = true,
-                IsRowNotClickable = true,
-                SelectedIds = userGroup.Users.Select(t => t.Id),
-                Title = userGroup.Name
+                            {
+                                DataUrl = Url.Action(MVC.Admin.UserGroup.UsersDynamicGridData()),
+                                DefaultOrderColumn = "Username",
+                                GridTitle = "Users",
+                                Columns = columns,
+                                MultiSelect = true,
+                                IsRowNotClickable = true,
+                                SelectedIds = userGroup.Users.Select(t => t.Id),
+                                Title = String.Format(Translate("Titles.UserGroup_Users"), userGroup.Name)
             };
-
 
             return View(model);//View(UserGroupHelper.BuildAssignmentModel(userGroup));
         }

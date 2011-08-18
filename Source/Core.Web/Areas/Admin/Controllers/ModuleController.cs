@@ -13,12 +13,15 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
 using Core.Web.NHibernate.Models;
+using Framework.MVC.Breadcrumbs;
 using Framework.MVC.Controllers;
 using Framework.MVC.Grids;
 using Framework.MVC.Grids.jqGrid;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Linq.Dynamic;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -31,8 +34,8 @@ namespace Core.Web.Areas.Admin.Controllers
         #region Fields
 
         private readonly IPluginService _pluginService;
-
         private readonly IPluginLocaleService _pluginLocaleService;
+        private readonly IBreadcrumbsBuilder _breadcrumbsBuilder;
 
         #endregion
 
@@ -45,6 +48,7 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             _pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
             _pluginLocaleService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
+            _breadcrumbsBuilder = ServiceLocator.Current.GetInstance<IBreadcrumbsBuilder>();
         }
 
         #endregion
@@ -94,6 +98,22 @@ namespace Core.Web.Areas.Admin.Controllers
                 GridTitle =Translate(".Modules"),
                 Columns = columns
             };
+
+            //build breadcrumbs
+            _breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
+                                                           {
+                                                               new Breadcrumb
+                                                                   {
+                                                                       Text = Translate("Titles.Home"),
+                                                                       Url = Url.Action(MVC.Admin.AdminHome.Index())
+                                                                   },
+                                                               new Breadcrumb
+                                                                   {
+                                                                       Text = Translate("Titles.Modules"),
+                                                                   }
+                                                           });
+
+
             return View(model);
         }
 
@@ -102,9 +122,7 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-
             ICriteria searchCriteria = _pluginLocaleService.GetSearchCriteria(search);
-
             int totalRecords = PluginHelper.CountAvailablePlugins(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
 
@@ -140,6 +158,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The plugin id.</param>
         /// <returns>Plugin edit view.</returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long id)
         {
             var plugin = _pluginService.Find(id);
@@ -147,6 +166,25 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
+
+            //build breadcrumbs
+            _breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
+                                                           {
+                                                               new Breadcrumb
+                                                                   {
+                                                                       Text = Translate("Titles.Home"),
+                                                                       Url = Url.Action(MVC.Admin.AdminHome.Index())
+                                                                   },
+                                                               new Breadcrumb
+                                                                   {
+                                                                       Text = Translate("Titles.Modules"),
+                                                                        Url = Url.Action(MVC.Admin.Module.Index())
+                                                                   },
+                                                               new Breadcrumb
+                                                                   {
+                                                                       Text = Translate("Actions.Edit")
+                                                                   }
+                                                           });
 
             return View(new PluginViewModel().MapFrom(plugin));
         }

@@ -17,6 +17,9 @@ using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
+using System.Linq.Dynamic;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.News.Controllers
 {
@@ -63,6 +66,7 @@ namespace Core.News.Controllers
         /// Renders Categories listing.
         /// </summary>
         /// <returns>List of Categories.</returns>
+        [MvcSiteMapNode(Title = "$t:Titles.NewsCategories", AreaName = "News", ParentKey = "Home", Key = "NewsCategories.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -143,6 +147,8 @@ namespace Core.News.Controllers
         /// </summary>
         /// <param name="id">The Category id.</param>
         /// <returns>Category details</returns>
+        [MvcSiteMapNode(Title = "Show", AreaName = "News", ParentKey = "NewsCategories.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult ShowById(long? id)
         {
             var category = categoryService.Find(id ?? 0);
@@ -158,6 +164,8 @@ namespace Core.News.Controllers
         /// </summary>
         /// <param name="id">The Category id.</param>
         /// <returns>Category edit view</returns>
+        [MvcSiteMapNode(Title = "Edit", AreaName = "News", ParentKey = "NewsCategories.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long? id)
         {
             var category = categoryService.Find(id ?? 0);
@@ -203,6 +211,7 @@ namespace Core.News.Controllers
         /// Shows Category create form.
         /// </summary>
         /// <returns>Category create form.</returns>
+        [MvcSiteMapNode(Title = "New", AreaName = "News", ParentKey = "NewsCategories.ShowAll")]
         public virtual ActionResult New()
         {
             return View("New", new CategoryViewModel());

@@ -37,9 +37,6 @@
     <Reference Include="ECM7.Migrator.Framework">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="Framework.Migrator">
-      <HintPath>..\Framework.Migrator\bin\Debug\Framework.Migrator.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,6 +55,12 @@
     <Compile Include="Migration_AddProductWidgets.cs" />
     <Compile Include="Migration_AddProductWidgetToCategories.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Migrator\Framework.Migrator.csproj">
+      <Project>{06ADA971-CAD6-42DC-8E42-AD242B594784}</Project>
+      <Name>Framework.Migrator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

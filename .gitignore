@@ -94,3 +94,6 @@
 /Source/Core.News/obj
 /Source/Core.Web/Areas/News
 /Source/Core.6.0.ReSharper.user
+/Source/MvcSiteMapProvider/bin
+/Source/MvcSiteMapProvider/obj
+

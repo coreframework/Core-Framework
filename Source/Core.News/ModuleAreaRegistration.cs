@@ -23,7 +23,7 @@ namespace Core.News
             context.MapRoute("Admin.ChangeNewsLanguage", "admin/news/change-language", new { controller = "News", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.NewNewsArticle", "admin/news/new", new { controller = "News", action = "New", id = "" });
             context.MapRoute("Admin.RemoveNewsArticle", "admin/news/remove-{id}", NewsMVC.News.Remove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.News.Categories", "admin/news/{id}/categories", NewsMVC.News.Categories(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.News.Categories", "admin/news/categories/{id}", new { controller = "News", action = "Categories", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.News.CategoriesDynamicGridData", "admin/news/{id}/categories/ProductCategoriesDynamicGridData", NewsMVC.News.NewsCategoriesDynamicGridData());
             context.MapRoute("Admin.News.Update.Categories", "admin/news/{id}/categories/UpdateCategories", NewsMVC.News.UpdateCategories());
 

@@ -17,6 +17,7 @@ using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
 using NHibernate;
 using NHibernate.Criterion;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -35,7 +36,7 @@ namespace Core.Web.Areas.Admin.Controllers
 
         #endregion
 
-        #region Constructorss
+        #region Constructors
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RoleController"/> class.
@@ -167,6 +168,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The role id.</param>
         /// <returns>Role edit view.</returns>
         [HttpGet]
+        [SiteMapTitle("Name")]
         public virtual ActionResult Edit(long id)
         {
             var role = roleService.Find(id);
@@ -269,6 +271,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The role id.</param>
         /// <returns>Users assignment view.</returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Users(long id)
         {
             var role = roleService.Find(id);
@@ -300,7 +303,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 MultiSelect = true,
                 IsRowNotClickable = true,
                 SelectedIds = role.Users.Select(t => t.Id),
-                Title = role.Name
+                Title = String.Format(Translate("Titles.Role_Users"), role.Name)
             };
 
 
@@ -361,6 +364,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="id">The role id.</param>
         /// <returns>User groups assignment view.</returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult UserGroups(long id)
         {
             var role = roleService.Find(id);
@@ -392,7 +396,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 MultiSelect = true,
                 IsRowNotClickable = true,
                 SelectedIds = role.UserGroups.Select(t => t.Id),
-                Title = role.Name
+                Title = String.Format(Translate("Titles.Role_UserGroups"), role.Name)
             };
 
             return View(model);
@@ -454,6 +458,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <param name="resource">The resource.</param>
         /// <returns></returns>
         [HttpGet]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Permissions(long roleId, String resource)
         {
             var role = roleService.Find(roleId);
@@ -461,8 +466,9 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
-
-            return View(RoleHelper.BindRolePermissionModel(roleId, resource));
+            var model = RoleHelper.BindRolePermissionModel(roleId, resource);
+            model.Title = String.Format(Translate("Titles.Permissions"), role.Name);
+            return View(model);
         }
 
         /// <summary>

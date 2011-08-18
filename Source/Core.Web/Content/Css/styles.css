@@ -251,7 +251,7 @@ div.success {}
 		.manage-page-menu ul li:first-child {background:none; margin-left:0px;}
 		.manage-page-menu ul li:hover {background:#bebebf;border:1px solid #8f8d8d;border-bottom:none}
 			.manage-page-menu ul li:hover a {color:#222222;text-decoration:none}
-			.manage-page-menu ul li a{display: block;text-decoration: none;color:#0052b8;text-decoration:underline;}
+			.manage-page-menu ul li a{padding:10px 0;text-decoration: none;color:#0052b8;text-decoration:underline;}
 			* html .manage-page-menu ul li a{ display: inline-block;}
 				.manage-page-menu ul li a:hover{text-decoration:none;}
 
@@ -259,7 +259,7 @@ div.success {}
 			.manage-page-menu ul li ul li{display: list-item;float: none;background:#f2f2f3;padding-left:0px;margin-left:0px;border:none;border-top:1px solid #d3d8dd;padding-left:5px;}
 			.manage-page-menu ul li ul li:first-child{background:#f2f2f3;padding-left:5px;}
 				.manage-page-menu ul li ul li:hover{background:#dcdde0;border:none;border-top:1px solid #d3d8dd;}
-				.manage-page-menu ul li ul li a{width: 210px;padding: 3px;margin: 0;border-top-width: 0;color:#0052b8;text-decoration:underline;}
+				.manage-page-menu ul li ul li a{width: 210px;padding: 3px;margin: 0;border-top-width: 0;color:#0052b8;text-decoration:underline;display: block;}
 				.manage-page-menu ul li:hover ul li a{color:#0052b8;text-decoration:underline;}
 					.manage-page-menu ul li ul li:hover a {color:#222222;text-decoration:none}
 				.manage-page-menu ul li:hover ul li.active a {color:#222222;font-weight:bold}

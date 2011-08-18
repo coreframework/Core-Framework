@@ -65,12 +65,18 @@
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="MvcSiteMapProvider, Version=3.1.0.0, Culture=neutral, PublicKeyToken=1923abe4657913cc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\SiteMap\MvcSiteMapProvider.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Omu.ValueInjecter">
       <HintPath>..\..\Libs\ValueInjecter\Omu.ValueInjecter.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.Linq" />
@@ -254,6 +260,9 @@
     <None Include="Config\asset_packages.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\common.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\controllers.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

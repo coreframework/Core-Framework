@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Framework.Permissions.Models;
 
 namespace Core.Web.Areas.Admin.Models
@@ -34,6 +35,8 @@ namespace Core.Web.Areas.Admin.Models
         /// </summary>
         /// <value>The operations model.</value>
         public PermissionOperationsModel OperationsModel { get; set; }
+
+        public String Title { get; set; }
 
     }
 }

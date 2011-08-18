@@ -30,7 +30,7 @@ namespace Core.Web.Areas.Admin.Controllers
 
        public virtual ActionResult Show()
         {
-            return View("ViewSettings",_siteSettingsService.GetSettings());
+            return View("ViewSettings", _siteSettingsService.GetSettings());
         }
 
        [HttpPost]

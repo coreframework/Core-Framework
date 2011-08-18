@@ -17,6 +17,8 @@ using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using System.Linq.Dynamic;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
 
 namespace Core.Languages.Controllers
 {
@@ -61,6 +63,7 @@ namespace Core.Languages.Controllers
         /// </summary>
         /// <returns>List of languages.</returns>
 
+        [MvcSiteMapNode(Title = "$t:Titles.Languages", AreaName = "Languages", ParentKey = "Home", Key = "Languages.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -141,6 +144,8 @@ namespace Core.Languages.Controllers
         /// </summary>
         /// <param name="id">The language id.</param>
         /// <returns>Language edit view</returns>
+        [MvcSiteMapNode(Title = "Edit", AreaName = "Languages", ParentKey = "Languages.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long? id)
         {
             var language = languageService.Find(id ?? 0);
@@ -175,6 +180,7 @@ namespace Core.Languages.Controllers
         /// Shows language create form.
         /// </summary>
         /// <returns>Language create form.</returns>
+        [MvcSiteMapNode(Title = "New", AreaName = "Languages", ParentKey = "Languages.ShowAll")]
         public virtual ActionResult New()
         {
             return View("Admin/New", new LanguageViewModel());

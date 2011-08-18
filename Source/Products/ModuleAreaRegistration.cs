@@ -22,7 +22,7 @@ namespace Products
             context.MapRoute("Admin.EditProduct", "admin/products/edit-{id}", new { controller = "Product", action = "Edit", id = "" }); 
             context.MapRoute("Admin.NewProduct", "admin/products/new", new { controller = "Product", action = "New", id = "" });
             context.MapRoute("Admin.RemoveProduct", "admin/products/remove-{id}", ProductMVC.Product.Remove());
-            context.MapRoute("Admin.Product.Categories", "admin/products/{id}/categories", ProductMVC.Product.Categories(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.Product.Categories", "admin/products/categories/{id}", new { controller = "Product", action = "Categories", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Product.CategoriesDynamicGridData", "admin/products/{id}/categories/ProductCategoriesDynamicGridData", ProductMVC.Product.ProductCategoriesDynamicGridData());
             context.MapRoute("Admin.Product.Update.Categories", "admin/products/{id}/categories/UpdateCategories", ProductMVC.Product.UpdateCategories());
             context.MapRoute("Admin.ChangeProductLanguage", "admin/products/change-language", new { controller = "Product", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

@@ -22,6 +22,10 @@ using Framework.MVC.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
+using MvcSiteMapProvider;
+using MvcSiteMapProvider.Filters;
+using INewsService = Core.News.Nhibernate.Contracts.INewsArticleService;
+using System.Linq.Dynamic;
 
 namespace Core.News.Controllers
 {
@@ -69,7 +73,7 @@ namespace Core.News.Controllers
         /// Renders content pages listing.
         /// </summary>
         /// <returns>List of news articles.</returns>
-        
+        [MvcSiteMapNode(Title = "$t:Titles.News", AreaName = "News", ParentKey = "Home", Key = "News.ShowAll")]
         public virtual ActionResult ShowAll()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
@@ -155,6 +159,8 @@ namespace Core.News.Controllers
         /// </summary>
         /// <param name="id">The content id.</param>
         /// <returns>Content page edit view</returns>
+        [MvcSiteMapNode(Title = "Edit", AreaName = "News", ParentKey = "News.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long? id)
         {
             var article = newsArticlesService.Find(id ?? 0);
@@ -237,6 +243,7 @@ namespace Core.News.Controllers
         /// Shows content page create form.
         /// </summary>
         /// <returns>Content page create form.</returns>
+        [MvcSiteMapNode(Title = "New", AreaName = "News", ParentKey = "News.ShowAll")]
         public virtual ActionResult New()
         {
             var model = new NewsArticleViewModel{PublishDate = DateTime.Now};
@@ -295,6 +302,8 @@ namespace Core.News.Controllers
         /// <param name="id">The product id.</param>
         /// <returns></returns>
         [HttpGet]
+        [MvcSiteMapNode(Title = "$t:Titles.NewsCategories", AreaName = "News", ParentKey = "News.ShowAll")]
+        [SiteMapTitle("Title")]
         public virtual ActionResult Categories(long id)
         {
             var newsArticle = newsArticlesService.Find(id);
@@ -322,12 +331,12 @@ namespace Core.News.Controllers
             {
                 DataUrl = Url.Action("NewsCategoriesDynamicGridData", "News"),
                 DefaultOrderColumn = "Id",
-                GridTitle = HttpContext.Translate("GridTitleCategory", ResourceHelper.GetControllerScope(this)),
+                GridTitle = newsArticle.Title,
                 Columns = columns,
                 MultiSelect = true,
                 IsRowNotClickable = true,
                 SelectedIds = newsArticle.Categories.Select(t => t.Id),
-                Title = newsArticle.Title
+                Title = String.Format(HttpContext.Translate("Titles.News_Categories", RouteData.AreaName()), newsArticle.Title)
             };
 
             return View(model);
