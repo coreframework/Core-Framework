@@ -8,6 +8,8 @@ Views:
       Submit: "Submit"
   FormAnswers:
     FormsAnswersList:
+      FormAnswers: "Forms"
+    FormAnswers:
       FormAnswers: "Form Answers"
-    
-    
+    FormAnswerDetails:
+      FormAnswerDetails: "Form Answer Details"
