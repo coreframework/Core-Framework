@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
+using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -76,6 +77,27 @@ namespace Core.News.Helpers
             return String.Empty;
         }
 
+        public static string DetailsLink(this HtmlHelper helper, string linkText, long widgetId, long modelId, object values)
+        {
+            var valuesDictionary = new RouteValueDictionary(values);
+            valuesDictionary = GetParams(valuesDictionary);
+
+            var routeParams = String.Empty;
+            foreach (var key in valuesDictionary.Keys.Where(key => key.StartsWith(NewsConstants.CurrentPage) || key.StartsWith(NewsConstants.Articleid)))
+            {
+                if (routeParams.Equals(String.Empty))
+                    routeParams += "?";
+                else
+                    routeParams += "&";
+                routeParams += key + "=" + valuesDictionary[key];
+            }
+            routeParams = String.IsNullOrEmpty(routeParams) ? "?" : routeParams + "&";
+            if (valuesDictionary.ContainsKey("url"))
+                return @"<a href=""" + valuesDictionary["url"] + routeParams + NewsConstants.Articleid + widgetId + "=" + modelId + "\">" + linkText + "</a>";
+
+            return String.Empty;
+        }
+
         private static RouteValueDictionary GetParams(RouteValueDictionary valuesDictionary)
         {
             if (valuesDictionary.ContainsKey(NewsConstants.CurrentRequestParams))
@@ -86,6 +108,10 @@ namespace Core.News.Helpers
                 if (routeValueDictionary != null)
                     foreach (string key in routeValueDictionary.Keys)
                     {
+                        if (key.StartsWith(NewsConstants.CurrentPage))
+                            valuesDictionary.Add(key, routeValueDictionary[key]);
+                        if (key.StartsWith(NewsConstants.Articleid))
+                            valuesDictionary.Add(key, routeValueDictionary[key]);
                         if (key.ToLower().Equals("url"))
                         {
                             if (valuesDictionary.ContainsKey(NewsConstants.IsAjaxPageQueryRequestParam) && (bool)valuesDictionary[NewsConstants.IsAjaxPageQueryRequestParam] && !String.IsNullOrEmpty(routeValueDictionary["HTTP_REFERER"]))

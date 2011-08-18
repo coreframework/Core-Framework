@@ -14,7 +14,7 @@
         <%=Model.Content%>
     </p>
     <p>
-        <%=Html.Translate(".Added") %> <%=Model.LastModifiedDate.ToString("dd.MM.yy")%>
+        <%=Html.Translate(".Added") %> <%=Model.LastModifiedDate.ToString(NewsConstants.DateFormat)%>
     </p>
     <p>
         <a href="<% =NewsViewerWidgetHelper.GetBackUrl(Request.Url.ToString(), Model.WidgetId, Model.Id) %>"><%=Html.Translate(".Back") %></a>

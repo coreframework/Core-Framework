@@ -78,6 +78,8 @@ namespace Core.News.Models
 
         public int CurrentPage { get; set; }
 
+        public string Url { get; set; }
+
         #endregion
 
         public NewsArticleViewerWidgetModel MapFrom(NewsArticleWidget from)
