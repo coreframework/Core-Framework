@@ -1,6 +1,6 @@
 ﻿ru:
   Models:
-    ProductWidgetModel:
+    NewsWidgetModel:
       ItemsOnPage: "Количество новостей"
     NewsArticleViewModel:
       Title: "Заголовок"

@@ -41,6 +41,8 @@ namespace Core.News.Helpers
             var newsViewer = model.MapTo(new NewsArticleWidget());
             widgetService.Save(newsViewer);
             newsViewer = model.MapTo(newsViewer);
+            if (string.IsNullOrEmpty(newsViewer.Url))
+                newsViewer.Url = string.Empty;
             widgetService.Save(newsViewer);
             return new NewsArticleWidgetModel().MapFrom(newsViewer);
         }

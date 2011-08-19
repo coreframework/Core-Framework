@@ -17,7 +17,7 @@
       <script type="text/javascript">
           $(function () {
               $('#Save').click(function () {
-                  $.post('<%= Url.Content(Request.RawUrl + "/UpdateCategories") %>' + '?' + decodeURIComponent($.param({ ids: $('#list').getDataIDs() }, true)) + '&' + decodeURIComponent($.param({ selids: $('#list').getGridParam('selarrrow') }, true)),
+                  $.post('<%= Url.Content(Request.RawUrl + "/updatenewscategories") %>' + '?' + decodeURIComponent($.param({ ids: $('#list').getDataIDs() }, true)) + '&' + decodeURIComponent($.param({ selids: $('#list').getGridParam('selarrrow') }, true)),
                 function (data) { window.location = '<%= Url.Content(Request.RawUrl) %>'; });
               });
           });

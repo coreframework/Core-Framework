@@ -373,6 +373,7 @@ namespace Core.News.Controllers
             return Json(jsonData);
         }
 
+        [HttpPost]
         public virtual JsonResult UpdateCategories(long id, IEnumerable<string> ids, IEnumerable<string> selids)
         {
             var newsArticle = newsArticlesService.Find(id);

@@ -43,12 +43,17 @@ namespace Core.News.Controllers
                 var widget = NewsViewerWidgetHelper.BindWidgetModel(instance);
                 if (widget != null)
                 {
+                    var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
+                    var basewidget = widgetService.Find(widget.Id);
                     if(!Request.Url.ToString().Contains("update-widget-instance"))
                     {
                         widget.Url = Request.RawUrl;
-                        var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
-                        var basewidget = widgetService.Find(widget.Id);
                         basewidget = widget.MapTo(basewidget);
+                        widgetService.Save(basewidget);
+                    }
+                    else if (string.IsNullOrEmpty(basewidget.Url))
+                    {
+                        basewidget.Url = string.Empty;
                         widgetService.Save(basewidget);
                     }
                     if (!String.IsNullOrEmpty(Request.Params[NewsConstants.Newsvidgetid]))

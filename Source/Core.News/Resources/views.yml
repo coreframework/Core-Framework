@@ -22,7 +22,7 @@ Views:
       Save: "Save"
       Cancel: "Cancel"
     Categories:
-      Title: "Categories assigned to product \"{0}\""
+      Title: "Categories assigned to news \"{0}\""
       Save: "Save"
   NewsViewerWidget:
     EditWidget:

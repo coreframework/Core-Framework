@@ -74,7 +74,8 @@ namespace Core.News.Models
 
         public NewsArticleWidget MapTo(NewsArticleWidget to)
         {
-            //to.Id = Id;
+            if (Id > 0)
+                to.Id = Id;
             to.ItemsOnPage = ItemsOnPage;
             to.ShowPaginator = ShowPaginator;
             //to.Categories = Categories.Where(t => CategoriesId.Contains(t.Id)).ToList();
