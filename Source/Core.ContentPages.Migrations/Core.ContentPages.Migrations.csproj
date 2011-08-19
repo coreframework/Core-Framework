@@ -51,15 +51,19 @@
     <Reference Include="ECM7.Common, Version=0.4.0.1001, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ECM7.Migrator">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ECM7.Migrator.Framework">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ECM7.Migrator.Providers.SqlServer">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Providers.SqlServer.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
@@ -81,10 +85,12 @@
     <ProjectReference Include="..\Framework.Migrator\Framework.Migrator.csproj">
       <Project>{06ADA971-CAD6-42DC-8E42-AD242B594784}</Project>
       <Name>Framework.Migrator</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Framework.MSBuild\Framework.MSBuild.csproj">
       <Project>{260CA38B-D626-443C-A5B0-61094CF8462B}</Project>
       <Name>Framework.MSBuild</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

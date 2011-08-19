@@ -382,13 +382,6 @@
     <Content Include="Content\Css\Admin\reset.css" />
     <Content Include="Content\Css\Admin\style.css" />
     <Content Include="Content\Css\Admin\style_ie.css" />
-    <Content Include="Content\Css\blueprint\forms.css" />
-    <Content Include="Content\Css\blueprint\grid.css" />
-    <Content Include="Content\Css\blueprint\ie.css" />
-    <Content Include="Content\Css\blueprint\plugins\fancy-type.css" />
-    <Content Include="Content\Css\blueprint\print.css" />
-    <Content Include="Content\Css\blueprint\reset.css" />
-    <Content Include="Content\Css\blueprint\typography.css" />
     <Content Include="Content\Css\colorpicker.css" />
     <Content Include="Content\Css\ie.css" />
     <Content Include="Content\Css\inettuts.js.css" />
@@ -484,7 +477,6 @@
     <Content Include="Content\Images\colorpicker\select.png" />
     <Content Include="Content\Images\colorpicker\select2.png" />
     <Content Include="Content\Images\colorpicker\slider.png" />
-    <Content Include="Content\Images\icons\close.png" />
     <Content Include="Content\Images\ico_right.png" />
     <Content Include="Content\Images\ie_v.png" />
     <Content Include="Content\Images\layouts\Layout1-a.png" />
@@ -501,11 +493,6 @@
     <Content Include="Content\Images\layouts\Layout6.png" />
     <Content Include="Content\Images\li_del.gif" />
     <Content Include="Content\Images\logo.gif" />
-    <Content Include="Content\Images\navigation\2arrows.png" />
-    <Content Include="Content\Images\navigation\ico_delete.png" />
-    <Content Include="Content\Images\navigation\ico_delete2.png" />
-    <Content Include="Content\Images\navigation\ico_delete3.png" />
-    <Content Include="Content\Images\navigation\plus.png" />
     <Content Include="Content\Images\bg_main.png" />
     <Content Include="Content\Images\btn_add_new_page.gif" />
     <Content Include="Content\Images\btn_pu_content.png" />

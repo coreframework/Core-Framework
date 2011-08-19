@@ -50,12 +50,15 @@
   <ItemGroup>
     <Reference Include="ECM7.Common">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ECM7.Migrator">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="ECM7.Migrator.Framework">
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -79,6 +82,7 @@
     <ProjectReference Include="..\Framework.Migrator\Framework.Migrator.csproj">
       <Project>{06ADA971-CAD6-42DC-8E42-AD242B594784}</Project>
       <Name>Framework.Migrator</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
