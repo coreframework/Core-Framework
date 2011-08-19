@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.Collections.Generic.IEnumerable<Core.Web.NHibernate.Models.Widget>>" %>
 <%@ Import Namespace="Framework.Core.Infrastructure" %>
+<%@ Import Namespace="Framework.Core" %>
 
 <%:Html.Message(MessageType.Info, Html.Translate(".AddWidget")) %>
 <div class="form_area">
@@ -19,6 +20,6 @@
      }
      function addLinkCss(content) {
          var uid = $(this).attr('widgetID');
-         $('<link type="text/css" rel="stylesheet" media="screen, projection" href="<%= HttpContext.Current.Request.ApplicationPath %>/styles.cssx?package=' + uid + '" />').appendTo($('head'));
+         $('<link type="text/css" rel="stylesheet" media="screen, projection" href="<%= ApplicationUtility.Path %>styles.cssx?package=' + uid + '" />').appendTo($('head'));
      }
 </script>

@@ -27,6 +27,7 @@ using System.Text;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Mvc;
+using Framework.Core;
 using Framework.MVC.Captcha;
 
 namespace Framework.MVC.Extensions
@@ -79,7 +80,7 @@ namespace Framework.MVC.Extensions
             stringBuilder.Append("\" />");
             stringBuilder.AppendLine();
             stringBuilder.Append("<img src=\"");
-            stringBuilder.Append(HttpContext.Current.Request.ApplicationPath + "/captcha.ashx?guid=" + image.UniqueId);
+            stringBuilder.Append(ApplicationUtility.Path + "captcha.ashx?guid=" + image.UniqueId);
             stringBuilder.Append("\" alt=\"CAPTCHA\" width=\"");
             stringBuilder.Append(width);
             stringBuilder.Append("\" height=\"");

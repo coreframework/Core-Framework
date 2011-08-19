@@ -186,12 +186,16 @@ namespace Core.Web
 
         protected void Application_Error(object sender, EventArgs e)
         {
+            Exception exc = Server.GetLastError();
+            Logger.Error(exc.Message);
+
             #if !DEBUG
            
             if (Request.RawUrl.Contains("admin") && !Request.RawUrl.Contains("administration"))
                 Response.Redirect("~/admin/error");
             else Response.Redirect("~/error");
-             #endif
+
+            #endif
         }
        
         #endregion

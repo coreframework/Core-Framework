@@ -76,7 +76,11 @@ namespace Core.Web.Controllers
         [ChildActionOnly]
         public virtual ActionResult Index(PageViewModel currentPage)
         {
-            return View(MVC.Pages.Views.NavigationMenu, PageHelper.GetNavigationMenu(currentPage, this.CorePrincipal()));
+            var model = PageHelper.GetNavigationMenu(currentPage, this.CorePrincipal());
+
+            if (model.MenuItems.Count()>0)
+                return View(MVC.Pages.Views.NavigationMenu, model);
+            return Content(String.Empty);
         }
 
         /// <summary>

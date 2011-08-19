@@ -160,7 +160,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
-    <Compile Include="BaseApplication.cs" />
+    <Compile Include="ApplicationUtility.cs" />
     <Compile Include="Check.cs" />
     <Compile Include="Configuration\ConfigurationManagerWrapper.cs" />
     <Compile Include="Configuration\DatabaseConfiguration.cs" />

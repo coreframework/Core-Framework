@@ -11,6 +11,7 @@ using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
+using Framework.Core;
 using Framework.MVC.Extensions;
 using Framework.MVC.Grids;
 using Framework.MVC.Helpers;
@@ -138,9 +139,9 @@ namespace Core.Forms.Controllers
             GridViewModel model = new GridViewModel
             {
                 DataUrl = Url.Action("ShowAnswers"),
-                DetailsUrl = System.Web.HttpContext.Current.Request.ApplicationPath+ "/admin/forms-answer-details/",
+                DetailsUrl = ApplicationUtility.Path + "admin/forms-answer-details/",
                 DefaultOrderColumn = "Title",
-                GridTitle = HttpContext.Translate("GridTitle", ResourceHelper.GetControllerScope(this)),//"Form Answers",
+                GridTitle = HttpContext.Translate("GridTitle", ResourceHelper.GetControllerScope(this)),
                 Columns = columns,
                 SearchEnable = false
             };
