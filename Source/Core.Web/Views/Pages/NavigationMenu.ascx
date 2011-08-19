@@ -13,6 +13,7 @@
  <script type="text/javascript">
      jQuery(function () {
          $('a.add-page').parent('li').addClass('add_new');
+         $('a.current').parent('li').addClass('current');
          $('div.btn2').parent('li').addClass('add_new');
          $('.pages-menu ul:first').children('li.add_new').removeClass('add_new').addClass('add_new_pg');
         $(".pages-menu ul li").each(function () {

@@ -3,7 +3,7 @@
 
 <%if (Model.Page!=null) {%>
     <%=Html.Hidden("menuPageId", Model.Page.Id) %>
-    <%= Html.ActionLink(String.IsNullOrEmpty(Model.Page.Title) ? " " : Html.Encode(Model.Page.Title), MVC.Pages.Show(Model.Page.Url)).ToString()%>
+    <%= Html.ActionLink(String.IsNullOrEmpty(Model.Page.Title) ? " " : Html.Encode(Model.Page.Title), MVC.Pages.Show(Model.Page.Url), new {@class =  Model.IsCurrent?"current":""})%>
     <%if (!Model.IsCurrent && Model.RemoveAccess && Model.PageMode==PageMode.Edit) {%>
          <%= Ajax.ActionLink("    ", 
                                 MVC.Pages.RemovePage(Model.Page.Id),

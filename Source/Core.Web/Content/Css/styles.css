@@ -314,6 +314,7 @@ div.success {}
 
 	.pages-menu ul{ z-index:300;margin: 0;padding: 0;list-style-type: none;border-top:none;*left:0;width:100% ;position:relative}
 		.pages-menu ul li{z-index:300;display: inline;float:left;border-right:1px solid #dfe5e8;height:19px;padding:6px 12px;font-size:14px;font-family:Arial;cursor:pointer;border-bottom:1px solid #dfe5e8;margin-bottom:-1px;}
+        .pages-menu ul li.current {background-color:#F2F2F3;}
 			.pages-menu ul li span {float:left;padding-top:2px;color:#0074bf}
 		.pages-menu ul li:hover {}
 			.pages-menu ul li a{text-decoration:none;padding-right:0 !important; float:left;}
