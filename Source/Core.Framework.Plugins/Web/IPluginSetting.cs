@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using Core.Framework.Plugins.Configs;
+using Core.Framework.Plugins.Handlers;
 
 namespace Core.Framework.Plugins.Web
 {
@@ -59,5 +61,11 @@ namespace Core.Framework.Plugins.Web
         /// The widget settings.
         /// </value>
         WidgetSetting[] WidgetSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HTTP handlers.
+        /// </summary>
+        /// <value>The HTTP handlers.</value>
+        PluginHttpHandler[] HttpHandlers { get; set; }
     }
 }

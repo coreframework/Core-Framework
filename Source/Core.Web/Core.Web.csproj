@@ -283,6 +283,7 @@
     <Compile Include="Models\WidgetHolderViewModel.cs" />
     <Compile Include="Models\WidgetLookAndFeelModel.cs" />
     <Compile Include="Modules\ContainerHttpModule.cs" />
+    <Compile Include="Modules\HttpHandlersManagerModule.cs" />
     <Compile Include="Modules\PageModeModule.cs" />
     <Compile Include="Navigation.BreadcrumbsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -349,7 +350,6 @@
     <Content Include="Areas\Admin\Views\Widget\EditForm.ascx" />
     <Content Include="Areas\Admin\Views\Widget\Index.aspx" />
     <Content Include="Areas\Navigation\Config\PluginConfig.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Areas\Navigation\Content\Css\navigation.css" />

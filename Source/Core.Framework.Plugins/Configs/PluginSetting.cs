@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.Xml.Serialization;
+using Core.Framework.Plugins.Handlers;
 using Core.Framework.Plugins.Web;
 
 namespace Core.Framework.Plugins.Configs
@@ -69,8 +71,15 @@ namespace Core.Framework.Plugins.Configs
         /// <value>
         /// The widget settings.
         /// </value>
-        [XmlArray("WidgetSettings"),XmlArrayItem(typeof(WidgetSetting))]
+        [XmlArray("WidgetSettings"), XmlArrayItem(typeof(WidgetSetting))]
         public WidgetSetting[] WidgetSettings { get; set; }
+
+        /// <summary>
+        /// Gets or sets the HTTP handlers.
+        /// </summary>
+        /// <value>The HTTP handlers.</value>
+        [XmlArray("httphandlers", IsNullable = true), XmlArrayItem("handler", typeof(PluginHttpHandler))]
+        public PluginHttpHandler[] HttpHandlers { get; set; }
 
         #endregion
     }

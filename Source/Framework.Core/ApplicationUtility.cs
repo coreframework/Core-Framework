@@ -39,5 +39,19 @@ namespace Framework.Core
         }
 
         #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the short URL.
+        /// </summary>
+        /// <param name="rawUrl">The raw URL.</param>
+        /// <returns>Exclude scheme, host part from full url.</returns>
+        public static String GetUrlPath(String rawUrl)
+        {
+            return rawUrl.StartsWith(Path) ? rawUrl.Substring(Path.Length) : rawUrl;
+        }
+
+        #endregion
     }
 }

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Core.Framework.MEF.Web;
+using Core.Framework.Plugins.Web;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
@@ -27,6 +29,19 @@ namespace Core.Web.Helpers
             Plugin plugin = pluginService.FindPluginByIdentifier(pluginIdentifier);
 
             return plugin != null && plugin.Status.Equals(PluginStatus.Installed);
+        }
+
+        public IEnumerable<ICorePlugin> GetInstalledPlugins()
+        {
+            var pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
+
+            IEnumerable<Plugin> plugins = pluginService.GetAll();
+
+            var registeredPlugins = MvcApplication.Plugins;
+
+            return (from plugin in registeredPlugins
+                    where plugins.Any(pl => pl.Identifier == plugin.Identifier && pl.Status.Equals(PluginStatus.Installed))
+                    select plugin).ToList();
         }
 
         /// <summary>
