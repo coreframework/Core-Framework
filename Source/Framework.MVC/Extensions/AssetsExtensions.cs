@@ -209,6 +209,24 @@ namespace Framework.MVC.Extensions
             return builder.ToString(TagRenderMode.SelfClosing);
         }
 
+        /// <summary>
+        /// Generates javascript link.
+        /// </summary>
+        /// <param name="context">The context.</param>
+        /// <param name="path">The javascript file path.</param>
+        /// <returns>Full javascript link.</returns>
+        public static String JavascriptHelper(HttpContextBase context, String path)
+        {
+            var builder = new TagBuilder("script");
+            if (Environment.Development.Equals(GetEnvironment()))
+            {
+                path = String.Format("{0}?{1}", path, GetTimeStamp(context, path));
+            }
+            builder.Attributes["src"] = path;
+            builder.Attributes["type"] = "text/javascript";
+            return builder.ToString(TagRenderMode.Normal);
+        }
+
         #endregion
 
         #region Helper members

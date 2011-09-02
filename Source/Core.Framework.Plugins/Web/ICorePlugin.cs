@@ -102,5 +102,17 @@ namespace Core.Framework.Plugins.Web
         /// Gets the Plugin CSS pack.
         /// </summary>
         String CssPack { get; }
+
+        /// <summary>
+        /// Gets the js path.
+        /// </summary>
+        /// <value>The js path.</value>
+        String JsPath { get;}
+
+        /// <summary>
+        /// Gets the js package name.
+        /// </summary>
+        /// <value>The js package.</value>
+        String JsPack { get; }
     }
 }

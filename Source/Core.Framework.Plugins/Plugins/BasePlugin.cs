@@ -176,6 +176,16 @@ namespace Core.Framework.Plugins.Plugins
             get { return PluginSetting.CssPack; }
         }
 
+        public string JsPath
+        {
+            get { return PluginSetting.JsPath; }
+        }
+
+        public string JsPack
+        {
+            get { return PluginSetting.JsPack; }
+        }
+
         #endregion
 
         #region Methods

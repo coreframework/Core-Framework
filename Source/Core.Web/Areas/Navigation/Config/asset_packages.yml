@@ -1,3 +1,10 @@
 ﻿stylesheets:
   base:
     - navigation.css
+javascripts:
+  base:
+    internal:
+     - test.js
+     - test2.js
+    external:
+     - test3.js

@@ -177,6 +177,7 @@
     <Compile Include="Extensions\FormCollectionExtensions.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Extensions\JavascriptExtensions.cs" />
     <Compile Include="Extensions\LabelExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

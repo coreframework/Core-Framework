@@ -155,7 +155,10 @@ namespace Core.Web
             if (context.User != null)
             {
                 var userService = ServiceLocator.Current.GetInstance<IUserService>();
-                context.User = userService.FindByUsername(context.User.Identity.Name);
+                var user = userService.FindByUsername(context.User.Identity.Name);
+
+                if (user!=null)
+                    context.User = userService.FindByUsername(context.User.Identity.Name);
             }
         }
 

@@ -1,6 +1,7 @@
 ﻿<%@ Assembly Name="Core.ContentPages" %>
 <%@ Assembly Name="Core.ContentPages.NHibernate" %>
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.ContentPages.Models.ContentViewerWidgetModel>" %>
+<%:Html.RegisterScript("test.js")%>
 <div class="form_area">
     <%: Html.ValidationSummary(true) %>
     <input type="hidden" id="widgetId" name="widgetId" value="<%= Html.Encode(Model.Id) %>" />

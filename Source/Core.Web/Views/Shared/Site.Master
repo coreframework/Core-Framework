@@ -5,6 +5,7 @@
 <%@ Import Namespace="Microsoft.Practices.ServiceLocation" %>
 <%@ Import Namespace="Core.Web.NHibernate.Contracts" %>
 <%@ Import Namespace="Framework.Core" %>
+<%@ Import Namespace="Core.Web.Helpers.HtmlExtensions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
@@ -19,9 +20,18 @@
     <%: Html.JavascriptPackInclude("base") %>
     <%: Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
     <%: Html.JavascriptPackInclude("custom")%>
-    <% if (Model as PageViewModel != null && !String.IsNullOrEmpty(((PageViewModel)Model).CssFileName))
-       { %>
-    <%= AssetsExtensions.CssHelper(HttpContext.Current, ApplicationUtility.Path + "styles.cssx?common=" + ((PageViewModel)Model).CssFileName, null)%>
+    <% if (Model is PageViewModel)
+       {%>
+
+       <%= Html.PluginsScripts(((PageViewModel)Model).PagePlugins)%>
+
+       <%if (!String.IsNullOrEmpty(((PageViewModel) Model).CssFileName)) {%>
+            <%=AssetsExtensions.CssHelper(HttpContext.Current,
+                                                            ApplicationUtility.Path + "styles.cssx?common=" +
+                                                            ((PageViewModel) Model).CssFileName, null)%>
+            <%
+       }%>
+
     <%}%>
     <style id="pageAdditionalStyles" type="text/css">
         <%= Model is PageViewModel && ((PageViewModel)Model).Settings != null ? ((PageViewModel)Model).Settings.CustomCSS : String.Empty%>

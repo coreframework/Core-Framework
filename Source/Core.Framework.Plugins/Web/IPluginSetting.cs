@@ -55,6 +55,18 @@ namespace Core.Framework.Plugins.Web
         String CssPack { get; set; }
 
         /// <summary>
+        /// Gets or sets the js path.
+        /// </summary>
+        /// <value>The js path.</value>
+        String JsPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the js pack.
+        /// </summary>
+        /// <value>The js pack.</value>
+        String JsPack { get; set; }
+
+        /// <summary>
         /// Gets or sets the widget settings.
         /// </summary>
         /// <value>

@@ -8,6 +8,8 @@
   <ImagesPath>Content\</ImagesPath>
   <CssPath>Content\Css\</CssPath>
   <CssPack>base</CssPack>
+  <JsPath>Scripts\</JsPath>
+  <JsPack>base</JsPack>
   <WidgetSettings>
     <WidgetSetting>
       <Key>Core.Forms.Widgets.FormsBuilderWidget</Key>

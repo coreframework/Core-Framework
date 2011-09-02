@@ -4,10 +4,8 @@
   <Title>Content Pages</Title>
   <ResourcesDirectory>Resources</ResourcesDirectory>
   <Description>Allow managing Content Pages.</Description>
-  <CssJsConfigPath></CssJsConfigPath>
-  <ImagesPath></ImagesPath>
-  <CssPath></CssPath>
-  <CssPack></CssPack>
+  <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
+  <JsPath>Scripts\</JsPath>
   <WidgetSettings>
     <WidgetSetting>
       <Key>Core.ContentPages.Widgets.ContentViewerWidget</Key>

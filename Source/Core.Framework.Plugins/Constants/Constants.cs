@@ -8,11 +8,17 @@ namespace Core.Framework.Plugins.Constants
 
         public const String PluginCssPackage = "plugin_package.css";
 
+        public const String PluginJsPackage = "plugin_jspackage.js";
+
         public const String PluginSection = "plugin";
 
         public const String PluginIDAttribute = "id";
 
         public const String PluginTitleAttribute = "title";
+
+        public const String InnerJsTypeName = "inner";
+
+        public const String OuterJsTypeName = "outer";
 
         #endregion
 

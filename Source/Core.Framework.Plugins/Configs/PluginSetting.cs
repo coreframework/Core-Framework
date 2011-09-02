@@ -66,6 +66,20 @@ namespace Core.Framework.Plugins.Configs
         public string CssPack { get; set; }
 
         /// <summary>
+        /// Gets or sets the js path.
+        /// </summary>
+        /// <value>The js path.</value>
+        [XmlElement("JsPath")]
+        public string JsPath { get; set; }
+
+        /// <summary>
+        /// Gets or sets the js pack.
+        /// </summary>
+        /// <value>The js pack.</value>
+        [XmlElement("JsPack")]
+        public string JsPack { get; set; }
+
+        /// <summary>
         /// Gets or sets the widget settings.
         /// </summary>
         /// <value>

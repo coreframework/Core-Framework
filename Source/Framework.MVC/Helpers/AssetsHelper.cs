@@ -315,6 +315,80 @@ namespace Framework.MVC.Helpers
         }
 
         /// <summary>
+        /// Gets list of files included in plugin js package specified in <paramref name="configPath"/>.
+        /// </summary>
+        /// <param name="packageName">Name of the package.</param>
+        /// <param name="configPath">The configuration path.</param>
+        /// <param name="scriptType">The type of script (internal/external).</param>
+        /// <returns>List of files relative to js directory.</returns>
+        public static IEnumerable<String> GetPluginJsPackFiles(String packageName, String configPath, String scriptType)
+        {
+            dynamic config = GetPluginAssetsConfig(configPath);
+            var files = new List<String>();
+
+            if (config.javascripts[packageName] != null && config.javascripts[packageName][scriptType] != null)
+            {
+                foreach (dynamic file in config.javascripts[packageName][scriptType])
+                {
+                    files.Add(file);
+                }
+            }
+           
+            return files;
+        }
+
+        /// <summary>
+        /// Gets the plugin inner js path.
+        /// </summary>
+        /// <param name="corePlugin">The core plugin.</param>
+        /// <param name="applicationVirtualPath">The application virtual path.</param>
+        /// <param name="applicationServerPath">The application server path.</param>
+        /// <returns>Returns javascript package virtual path.</returns>
+        public static String GetPluginInnerJsPath(ICorePlugin corePlugin, String applicationVirtualPath, String applicationServerPath)
+        {
+            if (String.IsNullOrEmpty(corePlugin.CssJsConfigPath) || String.IsNullOrEmpty(corePlugin.JsPath) || String.IsNullOrEmpty(corePlugin.JsPack))
+            {
+                return string.Empty;
+            }
+
+            var pluginJsServerPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.JsPath);
+
+            var pluginPackageJsServerPath = Path.Combine(pluginJsServerPath, Constants.PluginJsPackage).ToLower();
+
+            var configPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.CssJsConfigPath);
+            var files = GetPluginJsPackFiles(corePlugin.JsPack, configPath, Constants.InnerJsTypeName);
+
+            if (!File.Exists(pluginPackageJsServerPath) || File.GetLastWriteTimeUtc(pluginPackageJsServerPath) < GetMaxLastModifyDate(Path.Combine(corePlugin.PluginDirectory, corePlugin.JsPath), files))
+            {
+                var outputJs = new StringBuilder();
+
+                foreach (var file in files)
+                {
+                    if (File.Exists(Path.Combine(pluginJsServerPath, file)))
+                    {
+                        using (var reader = new StreamReader(Path.Combine(pluginJsServerPath, file)))
+                        {
+                            string content = reader.ReadToEnd();
+                            if (!String.IsNullOrEmpty(content))
+                            {
+                                outputJs.Append(JavaScriptCompressor.Compress(content));
+                            }
+                        }
+                    }
+                }
+                using (var writer = new StreamWriter(File.Create(pluginPackageJsServerPath)))
+                {
+                    writer.Write(outputJs.ToString());
+                }
+            }
+
+            // get javascript package virtual path
+            pluginPackageJsServerPath = pluginPackageJsServerPath.Replace(applicationServerPath.ToLower(), applicationVirtualPath).Replace("\\", "/");
+
+            return pluginPackageJsServerPath;
+        }
+
+        /// <summary>
         /// Reads plugin assets config from <paramref name="configPath"/>.
         /// </summary>
         /// <param name="configPath">The configuration path.</param>

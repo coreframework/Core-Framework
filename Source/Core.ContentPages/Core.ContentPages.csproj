@@ -189,6 +189,7 @@
     <Content Include="Config\PluginConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\test.js" />
     <Content Include="Views\Admin\EditForm.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
