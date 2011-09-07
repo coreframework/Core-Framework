@@ -1,9 +1,0 @@
-ru:
- Framework:
-  MVC:
-    Grids:
-      GridViewModel:
-        EnableAutosearch: "Включить автопоиск"
-        Search: "Поиск"
-        NoItemToDisplay: "Нет элементов для отображения"
-

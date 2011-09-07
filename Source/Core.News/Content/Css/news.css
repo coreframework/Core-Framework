@@ -1,7 +1,0 @@
-.widget-news .newslist {border-bottom: 1px solid #DFE5E8;clear: both; margin-bottom: 5px; padding: 5px 5px 10px;}
-.widget-news .pager { padding-top: 5px;}
-.widget-news .pager span, .widget-news .pager a { padding: 2px 4px;}
-.widget-news .pager span.current { font-weight: bold;}
-.widget-news .pager span.disabled { display: none;}
-.widget-news .pager a { text-decoration: none;color: #000000;}
-.widget-news .pager a:hover { text-decoration: underline;}

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<FrameworkTasksPath Condition="'$(FrameworkTasksPath)' == ''">$(MSBuildExtensionsPath)\FrameworkTasks</FrameworkTasksPath>
-        <FrameworkTasksLib>$(FrameworkTasksPath)\Framework.MSBuild.dll</FrameworkTasksLib>
-    </PropertyGroup>
-
-    <UsingTask AssemblyFile="$(FrameworkTasksLib)" TaskName="Framework.MSBuild.Database.ConfigureDatabase" />
-</Project>

@@ -1,8 +1,0 @@
-﻿stylesheets:
-  base:
-    - forms.css
-javascripts:
-  base:
-   inner:
-     - test1.js
-     - test2.js

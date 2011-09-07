@@ -1,5 +1,0 @@
-Core Framework v3.0.6
-
-https://github.com/coreframework/Core-Framework
-
-Date: Fri May 27 19:00:00 2010

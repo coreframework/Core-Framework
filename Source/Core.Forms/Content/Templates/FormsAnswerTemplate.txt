@@ -1,3 +1,0 @@
-﻿<p><#Title#></p>
-<p>Date: <#Date#></p>
-<#Content#>

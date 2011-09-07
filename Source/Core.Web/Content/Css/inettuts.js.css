@@ -1,9 +1,0 @@
-/* JS-Enabled CSS */
-
-.widget-head a.remove,.widget-head a.edit {
-    float: right;
-    margin-right:5px;
-}
-.column-placeholder { border: 2px solid #999;}
-.widget-placeholder { border: 1px dashed #999; margin:3px;}
-
