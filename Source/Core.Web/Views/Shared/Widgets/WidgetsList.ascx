@@ -7,19 +7,27 @@
     <ul class="widgets">
         <%foreach (var item in Model) {%>
            <li>
-                <%=Ajax.ActionLink(Html.Encode(item.Title), MVC.Pages.AddWidget((long)ViewData["pageId"], item.Id), new AjaxOptions { OnSuccess = "addWidget", OnComplete = "addLinkCss" }, new { @widgetID = item.Plugin.Identifier })%>
+                <%=Ajax.ActionLink(Html.Encode(item.Title), MVC.Pages.AddWidget((long)ViewData["pageId"], item.Id), new AjaxOptions { OnSuccess = "addWidget"}, new { @pluginID = item.Plugin.Identifier })%>
            </li>
         <%} %>
     </ul>
 </div>
 <script type="text/javascript">
     function addWidget(content) {
+        addJsCss(this);
         $('#tblLayoutHolder table td.column').first().prepend(content.get_data());
         iNettutsInit($stickyFooter);
         $stickyFooter.positionFooter();
      }
-     function addLinkCss(content) {
-         var uid = $(this).attr('widgetID');
-         $('<link type="text/css" rel="stylesheet" media="screen, projection" href="<%= ApplicationUtility.Path %>styles.cssx?package=' + uid + '" />').appendTo($('head'));
+     function addJsCss(link) {
+         var uid = $(link).attr('pluginID');
+
+         //load css
+         var cssInclude = '<%= ApplicationUtility.Path %>styles.cssx?package=' + uid;
+         loadjscssfile(cssInclude, "css");
+
+         //load js file
+         var jsInclude = '<%= ApplicationUtility.Path %>scripts.jsx?pageId=' + <%=(long)ViewData["pageId"]%>+'&id='+uid;
+         loadjscssfile(jsInclude, "js");
      }
 </script>

@@ -22,6 +22,7 @@ namespace Core.Web.Models.Routes
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("{resource}.ashx/{*pathInfo}");
             routes.IgnoreRoute("{resource}.cssx/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.jsx/{*pathInfo}");
             routes.IgnoreRoute("{resource}.ico/{*pathInfo}");
         }
 

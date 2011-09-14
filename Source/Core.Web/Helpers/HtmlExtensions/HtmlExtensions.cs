@@ -21,8 +21,6 @@ namespace Core.Web.Helpers.HtmlExtensions
     {
         #region Fields
 
-        private const string InnerPluginTypeName = "inner";
-
         private const string OuterPluginTypeName = "outer";
 
         #endregion
@@ -63,7 +61,7 @@ namespace Core.Web.Helpers.HtmlExtensions
             foreach (var plugin in plugins)
             {
                 //get plugin inner scripts package path
-                var path = AssetsHelper.GetPluginInnerJsPath(plugin, ApplicationUtility.Path, html.ViewContext.HttpContext.Request.PhysicalApplicationPath);
+                var path = AssetsHelper.GetPluginInnerJsVirtualPath(plugin, ApplicationUtility.Path, html.ViewContext.HttpContext.Request.PhysicalApplicationPath);
 
                 if (!String.IsNullOrEmpty(path))
                     sb.Append(AssetsExtensions.JavascriptHelper(html.ViewContext.HttpContext, path));

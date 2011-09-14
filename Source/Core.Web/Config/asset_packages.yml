@@ -18,6 +18,7 @@
     - MicrosoftAjax.js
     - MicrosoftMvcAjax.js
   custom:
+    - application.js
     - inettuts.js
     - colorpicker.js
     - ddsmoothmenu.js

@@ -326,7 +326,7 @@ namespace Framework.MVC.Helpers
             dynamic config = GetPluginAssetsConfig(configPath);
             var files = new List<String>();
 
-            if (config.javascripts[packageName] != null && config.javascripts[packageName][scriptType] != null)
+            if (config.javascripts != null && config.javascripts[packageName] != null && config.javascripts[packageName][scriptType] != null)
             {
                 foreach (dynamic file in config.javascripts[packageName][scriptType])
                 {
@@ -344,7 +344,26 @@ namespace Framework.MVC.Helpers
         /// <param name="applicationVirtualPath">The application virtual path.</param>
         /// <param name="applicationServerPath">The application server path.</param>
         /// <returns>Returns javascript package virtual path.</returns>
-        public static String GetPluginInnerJsPath(ICorePlugin corePlugin, String applicationVirtualPath, String applicationServerPath)
+        public static String GetPluginInnerJsVirtualPath(ICorePlugin corePlugin, String applicationVirtualPath, String applicationServerPath)
+        {
+            var pluginPackageJsServerPath = GetPluginInnerJsPath(corePlugin, applicationServerPath);
+
+            if (!String.IsNullOrEmpty(pluginPackageJsServerPath))
+            {
+                // get javascript package virtual path
+                pluginPackageJsServerPath = pluginPackageJsServerPath.Replace(applicationServerPath.ToLower(), applicationVirtualPath).Replace("\\", "/");
+            }
+
+            return pluginPackageJsServerPath;
+        }
+
+        /// <summary>
+        /// Gets the plugin inner js path.
+        /// </summary>
+        /// <param name="corePlugin">The core plugin.</param>
+        /// <param name="applicationServerPath">The application server path.</param>
+        /// <returns>Returns javascript package path.</returns>
+        public static String GetPluginInnerJsPath(ICorePlugin corePlugin, String applicationServerPath)
         {
             if (String.IsNullOrEmpty(corePlugin.CssJsConfigPath) || String.IsNullOrEmpty(corePlugin.JsPath) || String.IsNullOrEmpty(corePlugin.JsPack))
             {
@@ -381,10 +400,7 @@ namespace Framework.MVC.Helpers
                     writer.Write(outputJs.ToString());
                 }
             }
-
-            // get javascript package virtual path
-            pluginPackageJsServerPath = pluginPackageJsServerPath.Replace(applicationServerPath.ToLower(), applicationVirtualPath).Replace("\\", "/");
-
+         
             return pluginPackageJsServerPath;
         }
 
