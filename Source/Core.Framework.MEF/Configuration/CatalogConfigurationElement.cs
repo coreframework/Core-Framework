@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Core.Framework.MEF.Configuration
 {
@@ -8,8 +9,8 @@ namespace Core.Framework.MEF.Configuration
     public class CatalogConfigurationElement : ConfigurationElement
     {
         #region Fields
-        private const string NameAttribute = "name";
-        private const string PathAttribute = "path";
+        private const String NameAttribute = "name";
+        private const String PathAttribute = "path";
         #endregion
 
         #region Methods
@@ -17,9 +18,9 @@ namespace Core.Framework.MEF.Configuration
         /// Gets or sets the name of the catalog.
         /// </summary>
         [ConfigurationProperty(NameAttribute, IsRequired = true, IsKey = true)]
-        public string Name
+        public String Name
         {
-            get { return (string)this[NameAttribute]; }
+            get { return (String)this[NameAttribute]; }
             set { this[NameAttribute] = value; }
         }
 
@@ -27,9 +28,9 @@ namespace Core.Framework.MEF.Configuration
         /// Gets or sets the path of the catalog.
         /// </summary>
         [ConfigurationProperty(PathAttribute, IsRequired = true)]
-        public string Path
+        public String Path
         {
-            get { return (string)this[PathAttribute]; }
+            get { return (String)this[PathAttribute]; }
             set { this[PathAttribute] = value; }
         }
         #endregion

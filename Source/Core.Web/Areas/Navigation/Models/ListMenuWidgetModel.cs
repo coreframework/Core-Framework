@@ -17,9 +17,9 @@ namespace Core.Web.Areas.Navigation.Models
     {
         #region Fields
 
-        private IEnumerable<Page> _pages;
+        private IEnumerable<Page> pages;
 
-        private IEnumerable<ListMenuPageItemModel> _pagesTree;
+        private IEnumerable<ListMenuPageItemModel> pagesTree;
 
         #endregion
 
@@ -35,12 +35,12 @@ namespace Core.Web.Areas.Navigation.Models
         {
             get
             {
-                if (_pages == null)
+                if (pages == null)
                 {
                      var pageService = ServiceLocator.Current.GetInstance<IPageService>();
-                    _pages = pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (int) PageOperations.View);
+                    pages = pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (int) PageOperations.View);
                 }
-                return _pages;
+                return pages;
             }
         }
 
@@ -52,11 +52,11 @@ namespace Core.Web.Areas.Navigation.Models
         {
             get
             {
-                if (_pagesTree == null)
+                if (pagesTree == null)
                 {
-                    _pagesTree = ListMenuWidgetHelper.BindListMenuPages(SelectedPages,Pages);
+                    pagesTree = ListMenuWidgetHelper.BindListMenuPages(SelectedPages,Pages);
                 }
-                return _pagesTree;
+                return pagesTree;
             }
         }
 

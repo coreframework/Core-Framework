@@ -7,7 +7,7 @@
 using System;
 using System.Web.Mvc;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extends <see cref="HtmlHelper"/> functionality for checkbox.
@@ -21,7 +21,7 @@ namespace Framework.MVC.Extensions
         /// <param name="name">The name of the control.</param>
         /// <param name="isChecked">if set to <c>true</c> [is checked].</param>
         /// <returns>Generates checkbox.</returns>
-        public static string SimpleCheckBox(this HtmlHelper html, string name, bool isChecked)
+        public static String SimpleCheckBox(this HtmlHelper html, String name, bool isChecked)
         {
             return String.Format(@"<input type=""checkbox"" id=""{0}"" name=""{0}"" {1} value=""true"" />", name, isChecked ? "checked=\"checked\"" : String.Empty);
         }

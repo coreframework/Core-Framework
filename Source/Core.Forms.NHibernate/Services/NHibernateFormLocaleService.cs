@@ -26,7 +26,7 @@ namespace Core.Forms.NHibernate.Services
             return query.Where(locale => locale.Form.Id == formId && locale.Culture == culture).FirstOrDefault();
         }
 
-        public ICriteria GetSearchCriteria(string searchString, ICorePrincipal user, int operationCode)
+        public ICriteria GetSearchCriteria(String searchString, ICorePrincipal user, int operationCode)
         {
             ICriteria criteria = Session.CreateCriteria<FormLocale>().CreateAlias("Form", "form");
 

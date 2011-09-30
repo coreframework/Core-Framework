@@ -7,17 +7,17 @@ namespace Core.Forms.Verbs.Widgets
     {
         #region Singleton
 
-        private static FormsBuilderWidgetEditorVerb _instance;
+        private static FormsBuilderWidgetEditorVerb instance;
 
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Object syncRoot = new Object();
 
         public static FormsBuilderWidgetEditorVerb Instance
         {
             get
             {
-                lock (SyncRoot)
+                lock (syncRoot)
                 {
-                    return _instance ?? (_instance = new FormsBuilderWidgetEditorVerb());
+                    return instance ?? (instance = new FormsBuilderWidgetEditorVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.Forms.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "EditWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get {return "FormsBuilderWidget"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Forms"; }
         }

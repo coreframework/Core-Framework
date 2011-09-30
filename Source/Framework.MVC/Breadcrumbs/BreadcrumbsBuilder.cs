@@ -3,10 +3,11 @@
 //   Itransition (c) Copyright. All right reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
+using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace Framework.MVC.Breadcrumbs
+namespace Framework.Mvc.Breadcrumbs
 {
     /// <summary>
     /// IBreadcrumbsBuilder implementations.
@@ -20,7 +21,7 @@ namespace Framework.MVC.Breadcrumbs
         /// <param name="items">The items.</param>
         public void BuildBreadcrumbs(Controller controller, IBreadcrumb[] items)
         {
-            controller.ViewData.Add(new KeyValuePair<string, object>("Breadcrumbs", items));
+            controller.ViewData.Add(new KeyValuePair<String, Object>("Breadcrumbs", items));
         }
     }
 }

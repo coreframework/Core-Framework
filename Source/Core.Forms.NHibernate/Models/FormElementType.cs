@@ -1,26 +1,25 @@
-﻿using System.ComponentModel;
-using Core.Forms.NHibernate.Helpers;
+﻿using Core.Forms.NHibernate.Helpers;
 
 namespace Core.Forms.NHibernate.Models
 {
     public enum FormElementType
     {
         [ElementTypeDescription(IsRequiredEnabled = true, IsValidationEnabled = true, IsMaxLengthEnabled = true)]
-        TextBox = 1,
+        TextBox,
 
         [ElementTypeDescription(IsRequiredEnabled = true, IsValidationEnabled = true, IsMaxLengthEnabled = true)]
-        TextArea = 2,
+        TextArea,
 
         [ElementTypeDescription(IsValuesEnabled = true, IsRequiredEnabled = true)]
-        DropDownList = 3,
+        DropDownList,
 
         [ElementTypeDescription(IsValuesEnabled = true)]
-        RadioButtons = 4,
+        RadioButtons,
 
-        CheckBox = 5,
+        CheckBox,
 
-        TextField = 6,
+        TextField,
 
-        Captcha = 7
+        Captcha
     }
 }

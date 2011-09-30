@@ -81,7 +81,7 @@ namespace Framework.Core.Configuration
 
         #region Helper methods
 
-        private DatabaseConfiguration ParseConfiguration(dynamic config, IApplication application)
+        private static DatabaseConfiguration ParseConfiguration(dynamic config, IApplication application)
         {
             var database = new DatabaseConfiguration();
             database.Platform = EnumHelper.Parse(config.Platform, DatabasePlatform.SqlServer);

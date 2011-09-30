@@ -10,8 +10,8 @@ using Core.Web.Areas.Navigation.Models;
 using Core.Web.Areas.Navigation.Widgets;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Navigation.Controllers
@@ -20,7 +20,7 @@ namespace Core.Web.Areas.Navigation.Controllers
     {
         #region Properties
 
-        public override string ControllerWidgetIdentifier
+        public override String ControllerWidgetIdentifier
         {
             get { return NNavigationMenuWidget.Instance.Identifier; }
         }
@@ -40,10 +40,10 @@ namespace Core.Web.Areas.Navigation.Controllers
             if (instance != null && instance.InstanceId != null)
             {
                 var widgetService = ServiceLocator.Current.GetInstance<INavigationMenuWidgetService>();
-                var exWidget = widgetService.Find((long)instance.InstanceId);
+                var existingWidget = widgetService.Find((long)instance.InstanceId);
 
-                if (exWidget != null)
-                    return View(MVC.Navigation.NavigationMenu.Views.ViewWidget, NavigationMenuWidgetHelper.GetNavigationMenu(this.CorePrincipal(), exWidget));
+                if (existingWidget != null)
+                    return View(MVC.Navigation.NavigationMenu.Views.ViewWidget, NavigationMenuWidgetHelper.GetNavigationMenu(this.CorePrincipal(), existingWidget));
             }
             return Content(HttpContext.Translate("SelectOrientation", ResourceHelper.GetControllerScope(this)));
         }
@@ -63,10 +63,10 @@ namespace Core.Web.Areas.Navigation.Controllers
                 if (instance.InstanceId != null)
                 {
                     var widgetService = ServiceLocator.Current.GetInstance<INavigationMenuWidgetService>();
-                    var exWidget = widgetService.Find((long)instance.InstanceId);
+                    var existingWidget = widgetService.Find((long)instance.InstanceId);
 
-                    if (exWidget != null)
-                        widget = exWidget;
+                    if (existingWidget != null)
+                        widget = existingWidget;
                 }
                 return PartialView(new NavigationMenuWidgetModel().MapFrom(widget));
             }

@@ -6,11 +6,11 @@ namespace Core.Web.Helpers.HtmlExtensions.MenuTreeView
 {
     public static class TreeViewHtmlHelper
     {
-        public static string RenderTree<T>(
+        public static String RenderTree<T>(
                this HtmlHelper htmlHelper,
                IEnumerable<T> rootLocations,
                String cssClass,
-               Func<T, string> locationRenderer)
+               Func<T, String> locationRenderer)
                where T : IComposite<T>
         {
 

@@ -1,13 +1,26 @@
-﻿using Core.Web.NHibernate.Contracts;
+﻿using System.Linq;
+using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 
 namespace Core.Web.Helpers.Layouts
 {
     public static class LayoutHelper
     {
+        #region Properties
+
+        public static PageLayoutTemplate DefaultLayoutTemplate
+        {
+            get
+            {
+                var pageLayoutTemplateService = ServiceLocator.Current.GetInstance<IPageLayoutTemplateService>();
+                return pageLayoutTemplateService.FindDefault();
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -29,14 +42,14 @@ namespace Core.Web.Helpers.Layouts
                     wd =>
                     {
                         wd.OrderNumber =
-                            (wd.ColumnNumber > toLayoutTemplate.ColumnsNumber
+                            wd.ColumnNumber > toLayoutTemplate.ColumnsNumber
                                  ? page.Widgets.Where(w => w.ColumnNumber == toLayoutTemplate.ColumnsNumber).Count
                                        () + 1
-                                 : wd.OrderNumber);
+                                 : wd.OrderNumber;
                         wd.ColumnNumber =
-                            (wd.ColumnNumber > toLayoutTemplate.ColumnsNumber
+                            wd.ColumnNumber > toLayoutTemplate.ColumnsNumber
                                  ? toLayoutTemplate.ColumnsNumber
-                                 : wd.ColumnNumber);
+                                 : wd.ColumnNumber;
 
                     }
                     );
@@ -44,13 +57,6 @@ namespace Core.Web.Helpers.Layouts
 
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             pageService.Save(page);
-        }
-
-        public static PageLayoutTemplate GetDefaultLayoutTemplate()
-        {
-            IPageLayoutTemplateService pageLayoutTemplateService =
-                ServiceLocator.Current.GetInstance<IPageLayoutTemplateService>();
-            return pageLayoutTemplateService.FindDefault();
         }
 
         public static int GetColumnWidth(PageLayout layout, PageLayoutColumn column)
@@ -78,4 +84,4 @@ namespace Core.Web.Helpers.Layouts
 
         #endregion
     }
-} ;
+}

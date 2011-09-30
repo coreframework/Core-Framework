@@ -8,11 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Resources;
 
-namespace Framework.MVC.Metadata.Attributes
+namespace Framework.Mvc.Metadata.Attributes
 {
     /// <summary>
     /// Specify file types available for upload.
     /// </summary>
+    [AttributeUsage(AttributeTargets.All)]
     public class FileTypeAttribute : Attribute
     {
         #region Fields
@@ -35,7 +36,7 @@ namespace Framework.MVC.Metadata.Attributes
 
         private String formats = String.Empty;
 
-        private FileTypesPreset preset = FileTypesPreset.None;
+        private FileTypesPreset preset;
 
         #endregion
 

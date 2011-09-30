@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Products.Controllers {
     public partial class ProductController {
@@ -75,25 +75,25 @@ namespace Products.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ProductController Actions { get { return ProductMVC.Product; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Product";
+        public readonly String Name = "Product";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ShowAll = "ShowAll";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string ShowById = "ShowById";
-            public readonly string Edit = "Edit";
-            public readonly string New = "New";
-            public readonly string Remove = "Remove";
-            public readonly string Categories = "Categories";
-            public readonly string ProductCategoriesDynamicGridData = "ProductCategoriesDynamicGridData";
-            public readonly string UpdateCategories = "UpdateCategories";
-            public readonly string ChangeLanguage = "ChangeLanguage";
+            public readonly String ShowAll = "ShowAll";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String ShowById = "ShowById";
+            public readonly String Edit = "Edit";
+            public readonly String New = "New";
+            public readonly String Remove = "Remove";
+            public readonly String Categories = "Categories";
+            public readonly String ProductCategoriesDynamicGridData = "ProductCategoriesDynamicGridData";
+            public readonly String UpdateCategories = "UpdateCategories";
+            public readonly String ChangeLanguage = "ChangeLanguage";
         }
 
 
@@ -102,13 +102,13 @@ namespace Products.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Categories = "~/Views/Product/Categories.aspx";
-            public readonly string Edit = "~/Views/Product/Edit.aspx";
-            public readonly string EditForm = "~/Views/Product/EditForm.ascx";
-            public readonly string Index = "~/Views/Product/Index.aspx";
-            public readonly string New = "~/Views/Product/New.aspx";
-            public readonly string Show = "~/Views/Product/Show.aspx";
-            public readonly string ShowForm = "~/Views/Product/ShowForm.ascx";
+            public readonly String Categories = "~/Views/Product/Categories.aspx";
+            public readonly String Edit = "~/Views/Product/Edit.aspx";
+            public readonly String EditForm = "~/Views/Product/EditForm.ascx";
+            public readonly String Index = "~/Views/Product/Index.aspx";
+            public readonly String New = "~/Views/Product/New.aspx";
+            public readonly String Show = "~/Views/Product/Show.aspx";
+            public readonly String ShowForm = "~/Views/Product/ShowForm.ascx";
         }
     }
 
@@ -143,10 +143,10 @@ namespace Products.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(long? id, Products.Models.ProductLocaleViewModel product) {
+        public override System.Web.Mvc.ActionResult Edit(long? id, Products.Models.ProductLocaleViewModel productModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("product", product);
+            callInfo.RouteValueDictionary.Add("productModel", productModel);
             return callInfo;
         }
 

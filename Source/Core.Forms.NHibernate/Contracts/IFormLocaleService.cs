@@ -10,6 +10,6 @@ namespace Core.Forms.NHibernate.Contracts
     {
         FormLocale GetLocale(long formId, String culture);
 
-        ICriteria GetSearchCriteria(string searchString, ICorePrincipal user, Int32 operationCode);
+        ICriteria GetSearchCriteria(String searchString, ICorePrincipal user, Int32 operationCode);
     }
 }

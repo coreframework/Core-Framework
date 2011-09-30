@@ -10,12 +10,8 @@ using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
 using Core.Languages.Modules;
-using Core.Languages.NHibernate.Contracts;
-using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
-using Framework.Core.Localization;
-using Framework.MVC.Helpers;
-using Microsoft.Practices.ServiceLocation;
+using Framework.Mvc.Helpers;
 
 namespace Core.Languages
 {
@@ -95,14 +91,14 @@ namespace Core.Languages
         /// Gets the Identifiers config path. Default String.Empty.
         /// [Example: @"Config\asset_packages.yml"]
         /// </summary>
-        public override string PluginConfigPath
+        public override String PluginConfigPath
         {
             get { return LanguagesConfig; }
         }
 
         #region IPermissible members
 
-        public string PermissionTitle { get; set; }
+        public String PermissionTitle { get; set; }
 
         public IEnumerable<IPermissionOperation> Operations { get; set; }
 

@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"
-    Inherits="System.Web.Mvc.ViewPage<Framework.MVC.Grids.GridViewModel>" %>
+    Inherits="System.Web.Mvc.ViewPage<Framework.Mvc.Grids.GridViewModel>" %>
 
-<%@ Import Namespace="Framework.MVC.Grids.jqGrid" %>
+<%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent">
     <%: Html.Translate(".Title") %></asp:Content>
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent">

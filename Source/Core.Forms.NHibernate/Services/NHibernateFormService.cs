@@ -50,9 +50,9 @@ namespace Core.Forms.NHibernate.Services
             return criteria;
         }
 
-        public int GetCount(ICriteria baseQuery)
+        public int GetCount(ICriteria searchCriteria)
         {
-            return ((ICriteria) baseQuery.Clone()).SetProjection(Projections.Count("forms.Id")).UniqueResult<int>();
+            return ((ICriteria)searchCriteria.Clone()).SetProjection(Projections.Count("forms.Id")).UniqueResult<int>();
         }
 
         public ICriteria GetSearchQuery(String searchString, ICorePrincipal user, Int32 operationCode)

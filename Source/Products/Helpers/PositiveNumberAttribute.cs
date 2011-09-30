@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Products.Helpers
 {
+    [AttributeUsage(AttributeTargets.All)]
     public class PositiveNumberAttribute : ValidationAttribute
     {
         public override bool IsValid(object value)

@@ -5,7 +5,7 @@ namespace Core.Web.NHibernate.Models
 {
     public class PageLayout : Entity
     {
-        private readonly IList<PageLayoutColumnWidthValue> _columnWidths = new List<PageLayoutColumnWidthValue>();
+        private readonly IList<PageLayoutColumnWidthValue> columnWidths = new List<PageLayoutColumnWidthValue>();
 
         /// <summary>
         /// Gets or sets the layout template.
@@ -23,7 +23,7 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                return _columnWidths;
+                return columnWidths;
             }
         }
 
@@ -31,7 +31,7 @@ namespace Core.Web.NHibernate.Models
 
         public virtual void AddColumnWidth(PageLayoutColumnWidthValue item)
         {
-            _columnWidths.Add(item);
+            columnWidths.Add(item);
         }
 
         #endregion

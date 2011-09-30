@@ -23,7 +23,7 @@ namespace Core.News.Nhibernate.Services
             return query.Where(locale => locale.NewsArticle.Id == newsArticleId && locale.Culture == culture).FirstOrDefault();
         }
 
-        public ICriteria GetSearchCriteria(string searchString)
+        public ICriteria GetSearchCriteria(String searchString)
         {
             ICriteria criteria = Session.CreateCriteria<NewsArticleLocale>().CreateAlias("NewsArticle", "newsArticle");
 

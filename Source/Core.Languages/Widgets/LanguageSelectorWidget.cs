@@ -15,7 +15,7 @@ namespace Core.Languages.Widgets
     {
         #region Singleton
 
-        private static LanguageSelectorWidget _instance;
+        private static LanguageSelectorWidget instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -25,7 +25,7 @@ namespace Core.Languages.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new LanguageSelectorWidget());
+                    return instance ?? (instance = new LanguageSelectorWidget());
                 }
             }
         }

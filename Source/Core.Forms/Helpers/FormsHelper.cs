@@ -8,7 +8,7 @@ using Core.Forms.NHibernate.Permissions.Operations;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Framework.Core.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Forms.Helpers
@@ -40,18 +40,18 @@ namespace Core.Forms.Helpers
                         el =>
                             {
                                 el.OrderNumber =
-                                    (el.OrderNumber > formElement.OrderNumber
+                                    el.OrderNumber > formElement.OrderNumber
                                          ? el.OrderNumber - 1
-                                         : el.OrderNumber);
+                                         : el.OrderNumber;
                             }
                         );
                     formElement.Form.FormElements.Update(
                         el =>
                             {
                                 el.OrderNumber =
-                                    (el.OrderNumber >= orderNumber
+                                    el.OrderNumber >= orderNumber
                                          ? el.OrderNumber + 1
-                                         : el.OrderNumber);
+                                         : el.OrderNumber;
                             }
                         );
                     formService.Save(formElement.Form);
@@ -64,10 +64,9 @@ namespace Core.Forms.Helpers
         /// <summary>
         /// Validates the form element.
         /// </summary>
-        /// <param name="controller">The controller.</param>
         /// <param name="model">The model.</param>
         /// <param name="modelState">State of the model.</param>
-        public static void ValidateFormElement(Controller controller, FormElementViewModel model,  ModelStateDictionary modelState)
+        public static void ValidateFormElement(FormElementViewModel model,  ModelStateDictionary modelState)
         {
             var currentType = model.Types.Find(type => type.Type == model.Type.ToString());
 

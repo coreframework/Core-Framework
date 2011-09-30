@@ -1,4 +1,5 @@
-﻿using Omu.ValueInjecter;
+﻿using System;
+using Omu.ValueInjecter;
 
 namespace Framework.Core.Extensions
 {
@@ -7,7 +8,7 @@ namespace Framework.Core.Extensions
     /// </summary>
     public class CloneEntityInjection : LoopValueInjection
     {
-        protected override bool UseSourceProp(string sourcePropName)
+        protected override bool UseSourceProp(String sourcePropName)
         {
             if (sourcePropName == "Id")
                 return false;

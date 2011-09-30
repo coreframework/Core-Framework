@@ -14,7 +14,7 @@ namespace Products.Widgets
     {
         #region Singleton
 
-        private static ProductViewerWidget _instance;
+        private static ProductViewerWidget instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -24,7 +24,7 @@ namespace Products.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new ProductViewerWidget());
+                    return instance ?? (instance = new ProductViewerWidget());
                 }
             }
         }

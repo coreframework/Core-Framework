@@ -44,7 +44,7 @@ namespace Core.Web.NHibernate.Services
             return baseQuery.Count();
         }
 
-        public ICriteria GetSearchCriteria(string searchString)
+        public ICriteria GetSearchCriteria(String searchString)
         {
             var criteria = Session.CreateCriteria<Plugin>();
 

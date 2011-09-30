@@ -7,10 +7,10 @@
 using System;
 using System.Collections.Generic;
 using Framework.Core.Controllers;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 
-namespace Framework.MVC.Controllers
+namespace Framework.Mvc.Controllers
 {
     /// <summary>
     /// Provides controller basic functionality.

@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace T4MVC.Admin {
     public class SharedController {
@@ -28,8 +28,8 @@ namespace T4MVC.Admin {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string MainMenu = "~/Areas/Admin/Views/Shared/MainMenu.ascx";
-            public readonly string TopLinks = "~/Areas/Admin/Views/Shared/TopLinks.ascx";
+            public readonly String MainMenu = "~/Areas/Admin/Views/Shared/MainMenu.ascx";
+            public readonly String TopLinks = "~/Areas/Admin/Views/Shared/TopLinks.ascx";
             static readonly _EditorTemplates s_EditorTemplates = new _EditorTemplates();
             public _EditorTemplates EditorTemplates { get { return s_EditorTemplates; } }
             public partial class _EditorTemplates{

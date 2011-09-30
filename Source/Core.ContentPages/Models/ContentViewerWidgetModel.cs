@@ -14,7 +14,7 @@ namespace Core.ContentPages.Models
     {
         #region Fields
 
-        private List<ContentPage> _contentPages;
+        private List<ContentPage> contentPages;
 
         #endregion
 
@@ -31,12 +31,12 @@ namespace Core.ContentPages.Models
         {
             get
             {
-                if (_contentPages == null)
+                if (contentPages == null)
                 {
                     var contentPageService = ServiceLocator.Current.GetInstance<IContentPageService>();
-                    _contentPages = (List<ContentPage>)contentPageService.GetAll();
+                    contentPages = (List<ContentPage>)contentPageService.GetAll();
                 }
-                return _contentPages;
+                return contentPages;
             }
         }
 
@@ -59,7 +59,7 @@ namespace Core.ContentPages.Models
         public ContentPageWidget MapTo(ContentPageWidget to)
         {
             to.Id = Id;
-            to.ContentPage = new ContentPage()
+            to.ContentPage = new ContentPage
                                  {
                                     Id = ContentPageId
                                  };

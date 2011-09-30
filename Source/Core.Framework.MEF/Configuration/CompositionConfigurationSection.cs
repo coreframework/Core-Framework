@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 
 namespace Core.Framework.MEF.Configuration
 {
@@ -8,8 +9,8 @@ namespace Core.Framework.MEF.Configuration
     public class CompositionConfigurationSection : ConfigurationSection
     {
         #region Fields
-        private const string SectionPath = "mef/composition";
-        private const string CatalogsElement = "catalogs";
+        private const String SectionPath = "mef/composition";
+        private const String CatalogsElement = "catalogs";
         #endregion
 
         #region Properties

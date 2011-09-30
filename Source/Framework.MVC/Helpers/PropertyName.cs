@@ -7,7 +7,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Gets property name using lambda expressions.
@@ -15,7 +15,7 @@ namespace Framework.MVC.Helpers
     /// <remarks>
     /// Source http://www.lesnikowski.com/blog/index.php/property-name-from-lambda/.
     /// </remarks>
-    public class PropertyName
+    public static class PropertyName
     {
         /// <summary>
         /// Gets property name by lambda expression.
@@ -60,13 +60,13 @@ namespace Framework.MVC.Helpers
 
                 if (unaryExpression.NodeType != ExpressionType.Convert)
                 {
-                    throw new Exception(String.Format("Cannot interpret member from {0}", expression));
+                    throw new InvalidOperationException(String.Format("Cannot interpret member from {0}", expression));
                 }
 
                 return GetMemberName(unaryExpression.Operand);
             }
 
-            throw new Exception(String.Format("Could not determine member from {0}", expression));
+            throw new InvalidOperationException(String.Format("Could not determine member from {0}", expression));
         }
     }
 }

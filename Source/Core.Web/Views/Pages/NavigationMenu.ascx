@@ -16,7 +16,7 @@
          $('a.current').parent('li').addClass('current');
          $('div.btn2').parent('li').addClass('add_new');
          $('.pages-menu ul:first').children('li.add_new').removeClass('add_new').addClass('add_new_pg');
-        $(".pages-menu ul li").each(function () {
+         $(".pages-menu ul li").each(function () {
            $(this).hover(function () { $(this).css("position", "relative"); }, function () { $(this).css("position", "static"); });
          });
      });
@@ -63,7 +63,7 @@
         }
 
         function addNewPage(url) {
-            var dialog = $('<div title="<%=Html.Translate("Actions.AddNewPage")%>e" style="display:none"/>').appendTo('body');
+            var dialog = $('<div title="<%=Html.Translate("Actions.AddNewPage")%>" style="display:none"/>').appendTo('body');
             dialog.load(
                                     url,
                                     {},
@@ -71,7 +71,7 @@
                                         dialog.dialog();
                                     }
                                 );
-            dialog.dialog({ width: 500, resizable: false, modal: true });
+            dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150] });
             return false;
         }
     </script>

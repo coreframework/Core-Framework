@@ -7,7 +7,7 @@ using Framework.Facilities.NHibernate.Castle;
 
 namespace Core.ContentPages.NHibernate
 {
-    public class CoreContentPagesNHibernateModule
+    public static class CoreContentPagesNHibernateModule
     {
         public static void Install(IWindsorContainer container)
         {

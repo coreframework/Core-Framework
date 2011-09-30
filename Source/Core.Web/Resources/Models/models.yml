@@ -9,21 +9,21 @@ Models:
   PageCSSModel:
    CustomCSS: "Custom CSS"
   PageLookAndFeelModel:
-   BackgroundColor: "Background Color"
-   FontFamily: "Font Family"
-   FontSizeValue: "Font Size"
+   BackgroundColor: "Background color"
+   FontFamily: "Font family"
+   FontSizeValue: "Font size"
    Color: "Color"
-   OtherStyles: "Other"
+   OtherStyles: "Custom style attributes"
   WidgetLookAndFeelModel:
-   BackgroundColor: "Background Color"
-   FontFamily: "Font Family"
-   FontSizeValue: "Font Size"
+   BackgroundColor: "Background color"
+   FontFamily: "Font family"
+   FontSizeValue: "Font size"
    Color: "Color"
-   HeightValue: "HeightValue"
-   WidthValue: "WidthValue"
-   OtherStyles: "Other"
+   HeightValue: "Height"
+   WidthValue: "Width"
+   OtherStyles: "Custom style attributes"
   WidgetCSSModel:
-   CustomCSSClasses: "Custom CSS Classes"
+   CustomCSSClasses: "Custom CSS classes"
    PageCssModel.CustomCSS: "Custom CSS"
   SiteSettings:
    ShowPanel: "Show administration panel"

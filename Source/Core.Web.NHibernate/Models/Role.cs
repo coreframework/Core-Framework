@@ -9,24 +9,23 @@ using Framework.Core.Localization;
 
 namespace Core.Web.NHibernate.Models
 {
-    [Export(typeof(IPermissible))]
+    [Export(typeof (IPermissible))]
     public class Role : Entity, IRole, IPermissible, ILocalizable
     {
         #region Fields
 
         private IList<User> users = new List<User>();
         private IList<UserGroup> userGroups = new List<UserGroup>();
-        private IList<RoleLocale> _currentRoleLocales = new List<RoleLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private RoleLocale _currentLocale;
+
+        private readonly IList<RoleLocale> currentRoleLocales = new List<RoleLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private RoleLocale currentLocale;
+
+        private String permissionTitle = "Roles";
+
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<BaseEntityOperations>();
 
         #endregion
-
-        public Role()
-        {
-            PermissionTitle = "Roles";
-            Operations = OperationsHelper.GetOperations<BaseEntityOperations>();
-        }
 
         #region Properties
 
@@ -36,11 +35,8 @@ namespace Core.Web.NHibernate.Models
         /// <value>The name.</value>
         public virtual String Name
         {
-            get
-            {
-                return ((RoleLocale)CurrentLocale).Name;
-            }
-            set { ((RoleLocale)CurrentLocale).Name = value; }
+            get { return ((RoleLocale) CurrentLocale).Name; }
+            set { ((RoleLocale) CurrentLocale).Name = value; }
         }
 
         /// <summary>
@@ -71,47 +67,38 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentRoleLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentRoleLocales.Count > 0)
                 {
-                    _currentLocales = _currentRoleLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentRoleLocales.ToList().ConvertAll(mc => (ILocale) mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
-            set
-            {
-                _currentLocales = value;
-            }
+            set { currentLocales = value; }
         }
 
         public virtual IList<RoleLocale> CurrentRoleLocales
         {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (RoleLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
+            get { return CurrentLocales.ToList().ConvertAll(mc => (RoleLocale) mc); }
+            set { CurrentLocales = value.ToList().ConvertAll(mc => (ILocale) mc); }
         }
 
         public virtual ILocale CurrentLocale
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as RoleLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as RoleLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new RoleLocale
-                        {
-                            Role = this,
-                            Culture = null
-                        };
+                        currentLocale = new RoleLocale
+                                             {
+                                                 Role = this,
+                                                 Culture = null
+                                             };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
 
@@ -123,13 +110,21 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle
+        {
+            get { return permissionTitle; }
+            set { permissionTitle = value; }
+        }
 
         /// <summary>
-        /// Gets or sets the permission groups.
+        /// Gets or sets the permission operations.
         /// </summary>
-        /// <value>The permission groups.</value>
-        public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+        /// <value>The permission operations.</value>
+        public virtual IEnumerable<IPermissionOperation> Operations
+        {
+            get { return operations; }
+            set { operations = value; }
+        }
 
         #endregion
     }

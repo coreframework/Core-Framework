@@ -6,7 +6,7 @@ namespace Core.Web.NHibernate.Helpers
     /// <summary>
     /// Contains hashed password.
     /// </summary>
-    public class PasswordHash
+    public class PasswordHash : IEquatable<PasswordHash>
     {
         #region Properties
 

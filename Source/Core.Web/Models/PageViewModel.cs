@@ -26,11 +26,11 @@ namespace Core.Web.Models
     {
         #region Fields
 
-        private List<WidgetHolderViewModel> _widgets = new List<WidgetHolderViewModel>();
+        private List<WidgetHolderViewModel> widgets = new List<WidgetHolderViewModel>();
 
-        private readonly IPermissionCommonService _permissionService;
+        private readonly IPermissionCommonService permissionService;
 
-        private List<Page> _availablePages;
+        private List<Page> availablePages;
 
         #endregion
 
@@ -38,7 +38,7 @@ namespace Core.Web.Models
 
         public PageViewModel()
         {
-            _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             PagePlugins = new List<ICorePlugin>();
         }
 
@@ -68,8 +68,8 @@ namespace Core.Web.Models
         /// <value>The widgets.</value>
         public List<WidgetHolderViewModel> Widgets
         {
-            get { return _widgets; }
-            set { _widgets = value; }
+            get { return widgets; }
+            set { widgets = value; }
         }
 
         /// <summary>
@@ -102,12 +102,12 @@ namespace Core.Web.Models
         {
             get
             {
-                if (_availablePages == null)
+                if (availablePages == null)
                 {
                     var pageService = ServiceLocator.Current.GetInstance<IPageService>();
-                    _availablePages = (List<Page>)pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
+                    availablePages = (List<Page>)pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
                 }
-                return _availablePages;
+                return availablePages;
             }
         }
 
@@ -130,10 +130,10 @@ namespace Core.Web.Models
             Id = from.Id;
             Settings = from.Settings;
             ParentPageId = from.ParentPageId;
-            var pageAccess = _permissionService.GetAccess(from.Operations, HttpContext.Current.CorePrincipal(), typeof(Page), from.Id, IsPageOwner);
+            var pageAccess = permissionService.GetAccess(from.Operations, HttpContext.Current.CorePrincipal(), typeof(Page), from.Id, IsPageOwner);
             Access = pageAccess;
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
-            PageMode = PageHelper.GetCurrentUserPageMode();
+            PageMode = PageHelper.CurrentUserPageMode;
 
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
 
@@ -141,7 +141,7 @@ namespace Core.Web.Models
             {
                 PageWidget widget1 = widget;
                 ICoreWidget coreWidget =
-                    widget.Widget!=null?(MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == widget1.Widget.Identifier):null;
+                    widget.Widget!=null?MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == widget1.Widget.Identifier):null;
 
                 bool isWidetEnabled = widgetService.IsWidgetEnable(widget1.Widget);
 
@@ -156,7 +156,7 @@ namespace Core.Web.Models
                                     Widget = widget1,
 
                                     Access = coreWidget is BaseWidget
-                                                 ? _permissionService.GetAccess(
+                                                 ? permissionService.GetAccess(
                                                      ((BaseWidget) coreWidget).Operations,
                                                      HttpContext.Current.CorePrincipal(), coreWidget.GetType(),
                                                      widget1.EntityId,
@@ -173,7 +173,7 @@ namespace Core.Web.Models
                 }
             }
             var plugins = ServiceLocator.Current.GetInstance<IPluginService>().FindPluginsByIdentifiers(PagePlugins.Select(t => t.Identifier).ToList());
-            if (plugins.Count() > 0)
+            if (plugins.Any())
             {
                 plugins.ForEach(t => { CssFileName += t.Id + "_"; });
                 CssFileName = CssFileName.Remove(CssFileName.Length - 1);

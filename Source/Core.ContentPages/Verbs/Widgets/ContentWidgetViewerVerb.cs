@@ -7,17 +7,17 @@ namespace Core.ContentPages.Verbs.Widgets
     {
         #region Singleton
 
-        private static ContentWidgetViewerVerb _instance;
+        private static ContentWidgetViewerVerb instance;
 
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Object syncRoot = new Object();
 
         public static ContentWidgetViewerVerb Instance
         {
             get
             {
-                lock (SyncRoot)
+                lock (syncRoot)
                 {
-                    return _instance ?? (_instance = new ContentWidgetViewerVerb());
+                    return instance ?? (instance = new ContentWidgetViewerVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.ContentPages.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String  Action
         {
             get { return "ViewWidget"; }
         }
 
-        public string Controller
+        public String  Controller
         {
             get { return "ContentViewerWidget"; }
         }
 
-        public string Area
+        public String  Area
         {
             get { return "ContentPage"; }
         }

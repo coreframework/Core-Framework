@@ -7,7 +7,7 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static ListMenuSaveVerb _instance;
+        private static ListMenuSaveVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Core.Web.Areas.Navigation.Verbs
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new ListMenuSaveVerb());
+                    return instance ?? (instance = new ListMenuSaveVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.Web.Areas.Navigation.Verbs
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "UpdateWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "ListMenu"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Navigation"; }
         }

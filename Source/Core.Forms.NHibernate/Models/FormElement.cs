@@ -13,9 +13,9 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<FormElementLocale> _currentFormElementLocales = new List<FormElementLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private FormElementLocale _currentLocale;
+        private readonly IList<FormElementLocale> currentFormElementLocales = new List<FormElementLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private FormElementLocale currentLocale;
 
         #endregion
 
@@ -94,15 +94,15 @@ namespace Core.Forms.NHibernate.Models
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentFormElementLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentFormElementLocales.Count > 0)
                 {
-                    _currentLocales = _currentFormElementLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentFormElementLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -130,19 +130,19 @@ namespace Core.Forms.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as FormElementLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as FormElementLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new FormElementLocale
+                        currentLocale = new FormElementLocale
                         {
                             FormElement = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
         #endregion

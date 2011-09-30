@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
-using Framework.MVC.Metadata.Attributes;
+using Framework.Mvc.Metadata.Attributes;
 
 namespace Core.Web.Areas.Admin.Models
 {

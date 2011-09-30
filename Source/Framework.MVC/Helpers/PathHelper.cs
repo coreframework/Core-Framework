@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Provides helper methods for paths processing.
@@ -17,12 +17,12 @@ namespace Framework.MVC.Helpers
         /// <summary>
         /// Path separator symbol (/).
         /// </summary>
-        public const String PathSeparator = "/";
+        public static readonly String PathSeparator = "/";
 
         /// <summary>
         /// Virtual path start (~/).
         /// </summary>
-        public const String VirtualPathStart = "~/";
+        public static readonly String VirtualPathStart = "~/";
 
         /// <summary>
         /// Splits path to chains using <see cref="PathSeparator"/>.
@@ -47,7 +47,7 @@ namespace Framework.MVC.Helpers
         /// Trims the virtual path start.
         /// </summary>
         /// <param name="path">The virtual path.</param>
-        /// <returns>The string that remains after all occurrences of <see cref="VirtualPathStart"/> are removed from the start of <paramref name="path"/>.</returns>
+        /// <returns>The String that remains after all occurrences of <see cref="VirtualPathStart"/> are removed from the start of <paramref name="path"/>.</returns>
         public static String TrimVirtualPathStart(String path)
         {
             return path.TrimStart(VirtualPathStart.ToCharArray());

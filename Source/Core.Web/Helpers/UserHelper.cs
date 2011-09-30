@@ -38,7 +38,7 @@ namespace Core.Web.Helpers
         {
             var userService = ServiceLocator.Current.GetInstance<IUserService>();
             model.MapTo(user);
-            if (!string.IsNullOrEmpty(model.Password))
+            if (!String.IsNullOrEmpty(model.Password))
             {
                 userService.SetPassword(user, model.Password);
             }
@@ -123,7 +123,7 @@ namespace Core.Web.Helpers
 
             foreach (var selid in selids)
             {
-                string selid1 = selid;
+                String selid1 = selid;
                 if (!user.UserGroups.Any(t=>t.Id.ToString() == selid1))
                 {
                     long selectedID;

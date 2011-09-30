@@ -14,7 +14,7 @@ namespace Core.Framework.Permissions.Models
 
         #region ICorePrincipal
 
-        public virtual bool IsInRole(string role)
+        public virtual bool IsInRole(String role)
         {
             return true;
         }

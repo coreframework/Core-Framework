@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
@@ -7,6 +8,7 @@ namespace Core.Web.NHibernate.Permissions.Operations
     /// <summary>
     /// Defines page permission operations
     /// </summary>
+    [Flags]
     public enum PageOperations
     {
         /// <summary>

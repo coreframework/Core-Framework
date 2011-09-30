@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Controllers {
     public partial class UploadController {
@@ -45,17 +45,17 @@ namespace Core.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UploadController Actions { get { return MVC.Upload; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Upload";
+        public readonly String Name = "Upload";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string File = "File";
-            public readonly string Image = "Image";
+            public readonly String File = "File";
+            public readonly String Image = "Image";
         }
 
 

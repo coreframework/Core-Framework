@@ -38,7 +38,7 @@
         /// </summary>
         /// <param name="message">The message to throw.</param>
         /// <param name="modifier">A modifier delegate used to modify the exception before being thrown.</param>
-        public static void NotSupported(string message, Func<Exception, Exception> modifier = null)
+        public static void NotSupported(String message, Func<Exception, Exception> modifier = null)
         {
             ThrowInternal(new NotSupportedException(message), modifier);
         }
@@ -48,7 +48,7 @@
         /// </summary>
         /// <param name="message">The message to throw.</param>
         /// <param name="modifier">A modifier delegate used to modify the exception before being thrown.</param>
-        public static void InvalidOperation(string message, Func<Exception, Exception> modifier = null)
+        public static void InvalidOperation(String message, Func<Exception, Exception> modifier = null)
         {
             ThrowInternal(new InvalidOperationException(message), modifier);
         }
@@ -58,7 +58,7 @@
         /// </summary>
         /// <param name="message">The message to throw.</param>
         /// <param name="modifier">A modifier delegate used to modify the exception before being thrown.</param>
-        public static void ConfigurationErrors(string message, Func<Exception, Exception> modifier = null)
+        public static void ConfigurationErrors(String message, Func<Exception, Exception> modifier = null)
         {
             ThrowInternal(new ConfigurationErrorsException(message), modifier);
         }

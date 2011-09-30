@@ -18,7 +18,7 @@ namespace Products.NHibernate.Mappings
             
              HasMany(category => category.CurrentCategoryLocales).KeyColumn("CategoryId")
             .Table("Product_CategoryLocales").ApplyFilter<CultureFilter>()
-            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();

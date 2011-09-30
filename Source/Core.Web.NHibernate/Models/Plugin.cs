@@ -14,9 +14,9 @@ namespace Core.Web.NHibernate.Models
     {
         #region Fields
 
-        private IList<PluginLocale> _currentPluginLocales = new List<PluginLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private PluginLocale _currentLocale;
+        private readonly IList<PluginLocale> currentPluginLocales = new List<PluginLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private PluginLocale currentLocale;
 
         #endregion
 
@@ -84,15 +84,15 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentPluginLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentPluginLocales.Count > 0)
                 {
-                    _currentLocales = _currentPluginLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentPluginLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -112,19 +112,19 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as PluginLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as PluginLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new PluginLocale
+                        currentLocale = new PluginLocale
                         {
                             Plugin = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
 
@@ -136,7 +136,7 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle { get; set; }
 
         /// <summary>
         /// Gets or sets the permission groups.

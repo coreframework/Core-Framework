@@ -109,7 +109,6 @@
     <Compile Include="Mappings\FormElementMapping.cs" />
     <Compile Include="Mappings\FormMapping.cs" />
     <Compile Include="Mappings\FormWidgetAnswerMapping.cs" />
-    <Compile Include="Mappings\FormWidgetMapping.cs" />
     <Compile Include="Models\FormElementLocale.cs" />
     <Compile Include="Models\ElementTypeDescriptionModel.cs" />
     <Compile Include="Models\Form.cs" />

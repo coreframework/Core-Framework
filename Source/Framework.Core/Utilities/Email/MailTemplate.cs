@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Web;
@@ -15,25 +14,25 @@ namespace Framework.Core.Utilities.Email
     {
         #region Fields
 
-        public const String ParamTemplate = "<#{0}#>";
+        private const String ParamTemplate = "<#{0}#>";
 
-        public const String SubjectParam = "Subject";
+        private const String  SubjectParam = "Subject";
 
-        private string bodyTemplate = String.Empty;
+        private String bodyTemplate = String.Empty;
 
-        private string from = String.Empty;
+        private String from = String.Empty;
 
-        private string fromEmail = String.Empty;
+        private String fromEmail = String.Empty;
 
-        private string to = String.Empty;
+        private String to = String.Empty;
 
-        private string toEmail = String.Empty;
+        private String toEmail = String.Empty;
 
-        private string subject = String.Empty;
+        private String subject = String.Empty;
 
         private bool isHtmlFormat = true;
 
-        private static MailConfiguration _emailSettings;
+        private static MailConfiguration emailSettings;
 
         private readonly MailMessage message = new MailMessage();
 
@@ -49,18 +48,18 @@ namespace Framework.Core.Utilities.Email
         {
             get
             {
-                if (_emailSettings == null)
+                if (emailSettings == null)
                 {
-                    _emailSettings = MailConfiguration.Current;
+                    emailSettings = MailConfiguration.Current;
                 }
-                return _emailSettings;
+                return emailSettings;
             }
         }
 
         /// <summary>
         /// From name.
         /// </summary>
-        public string From
+        public String From
         {
             get
             {
@@ -75,7 +74,7 @@ namespace Framework.Core.Utilities.Email
         /// <summary>
         /// From email.
         /// </summary>
-        public string FromEmail
+        public String FromEmail
         {
             get
             {
@@ -90,7 +89,7 @@ namespace Framework.Core.Utilities.Email
         /// <summary>
         /// To name.
         /// </summary>
-        public string To
+        public String To
         {
             get
             {
@@ -105,7 +104,7 @@ namespace Framework.Core.Utilities.Email
         /// <summary>
         /// To email.
         /// </summary>
-        public string ToEmail
+        public String ToEmail
         {
             get
             {
@@ -120,7 +119,7 @@ namespace Framework.Core.Utilities.Email
         /// <summary>
         /// Email subject.
         /// </summary>
-        public string Subject
+        public String Subject
         {
             get
             {
@@ -202,7 +201,7 @@ namespace Framework.Core.Utilities.Email
         {
             get
             {
-                foreach (KeyValuePair<string, string> pair in parameters)
+                foreach (KeyValuePair<String, String> pair in parameters)
                 {
                     bodyTemplate = bodyTemplate.Replace(String.Format(ParamTemplate, pair.Key), pair.Value);
                 }
@@ -230,7 +229,7 @@ namespace Framework.Core.Utilities.Email
         /// Gets or sets the template directory.
         /// </summary>
         /// <value>The template directory.</value>
-        public string TemplateDirectory { get; set; }
+        public String TemplateDirectory { get; set; }
 
         #endregion
 
@@ -240,7 +239,7 @@ namespace Framework.Core.Utilities.Email
         /// Initializes a new instance of the <see cref="MailTemplate"/> class.
         /// </summary>
         /// <param name="bodyTemplate">The body template.</param>
-        public MailTemplate(string bodyTemplate)
+        public MailTemplate(String bodyTemplate)
         {
             ReadTemplates(bodyTemplate);
         }
@@ -250,7 +249,7 @@ namespace Framework.Core.Utilities.Email
         /// </summary>
         /// <param name="templateDirectory">The template directory.</param>
         /// <param name="bodyTemplate">The body template.</param>
-        public MailTemplate(string templateDirectory, string bodyTemplate)
+        public MailTemplate(String templateDirectory, String bodyTemplate)
         {
             this.TemplateDirectory = templateDirectory;
             ReadTemplates(bodyTemplate);
@@ -356,24 +355,6 @@ namespace Framework.Core.Utilities.Email
         {
             return Send(SmtpHost, SmtpUser, SmtpPassword);
         }
-
-        /// <summary>
-        /// Send email with looging.
-        /// </summary>
-        /// <param name="enableLogging"></param>
-        /// <returns></returns>
-        public bool Send(bool enableLogging)
-        {
-            var mailer = new EmailSender(SmtpHost, SmtpUser, SmtpPassword);
-
-            if (mailer.SendEmail(from, fromEmail, to, toEmail, subject, Body, Attachments, IsHtmlFormat))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
 
         /// <summary>
         /// Sends mails to list of recipients specified in MailAddressCollection.

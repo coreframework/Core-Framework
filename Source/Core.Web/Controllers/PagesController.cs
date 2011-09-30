@@ -4,6 +4,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using System.Linq;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
@@ -15,9 +16,8 @@ using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Permissions.Operations;
-using Framework.MVC.Controllers;
+using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 
 namespace Core.Web.Controllers
 {
@@ -25,11 +25,11 @@ namespace Core.Web.Controllers
     {
         #region Fields
 
-        private readonly IPageService _pageService;
+        private readonly IPageService pageService;
 
-        private readonly IPermissionCommonService _permissionService;
+        private readonly IPermissionCommonService permissionService;
 
-        private readonly IPermissionsHelper _permissionHelper;
+        private readonly IPermissionsHelper permissionHelper;
 
         #endregion
 
@@ -40,9 +40,9 @@ namespace Core.Web.Controllers
         /// </summary>
         public PagesController()
         {
-            _pageService = ServiceLocator.Current.GetInstance<IPageService>();
-            _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-            _permissionHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
+            pageService = ServiceLocator.Current.GetInstance<IPageService>();
+            permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            permissionHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
 
         }
 
@@ -78,8 +78,10 @@ namespace Core.Web.Controllers
         {
             var model = PageHelper.GetNavigationMenu(currentPage, this.CorePrincipal());
 
-            if (model.MenuItems.Count()>0)
+            if (model.MenuItems.Any())
+            {
                 return View(MVC.Pages.Views.NavigationMenu, model);
+            }
             return Content(String.Empty);
         }
 
@@ -91,9 +93,9 @@ namespace Core.Web.Controllers
         [HttpGet]
         public virtual ActionResult Show(String url)
         {
-            var page = _pageService.FindByUrl(url);
+            var page = pageService.FindByUrl(url);
 
-            if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (page == null || !permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
@@ -109,14 +111,14 @@ namespace Core.Web.Controllers
         [HttpPost]
         public virtual ActionResult RemovePage(long pageId)
         {
-            var page = _pageService.Find(pageId);
+            var page = pageService.Find(pageId);
 
             if (page == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
-            if (_permissionService.IsAllowed((Int32)PageOperations.Delete, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (permissionService.IsAllowed((Int32)PageOperations.Delete, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
                 PageHelper.RemovePage(page);
 
             return Content(String.Empty);
@@ -129,19 +131,19 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult CreateNewPage(long? parentPageId)
         {
-            if (!_permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
+            if (!permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
             {
                 throw new HttpException((int)HttpStatusCode.Forbidden, Translate("Messages.NotFound"));
             }
 
             return PartialView(MVC.Pages.Views.PageCreateForm, PageHelper.BindPageViewModel(
-                new Page { ParentPageId = (parentPageId == 0 ? null : parentPageId) }, this.CorePrincipal()));
+                new Page { ParentPageId = parentPageId == 0 ? null : parentPageId }, this.CorePrincipal()));
         }
 
         [HttpPost]
         public virtual ActionResult UpdatePagePosition(long pageId, int orderNumber)
         {
-            if (_permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
+            if (permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
             {
                 PageHelper.UpdatePagesPositions(pageId, orderNumber);
             }
@@ -169,8 +171,8 @@ namespace Core.Web.Controllers
         [HttpPost]
         public virtual ActionResult ChangeLayout(long pageId, long layoutTemplateId)
         {
-            var page = _pageService.Find(pageId);
-            if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
+            var page = pageService.Find(pageId);
+            if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
@@ -195,9 +197,9 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult ShowChangeLayoutForm(long pageId)
         {
-            var page = _pageService.Find(pageId);
+            var page = pageService.Find(pageId);
 
-            if (page != null && _permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (page != null && permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 var pageLayoutTemplateService =
                     ServiceLocator.Current.GetInstance<IPageLayoutTemplateService>();
@@ -212,8 +214,8 @@ namespace Core.Web.Controllers
         [HttpPost]
         public virtual ActionResult ShowLayoutSettingsForm(long pageId)
         {
-            var page = _pageService.Find(pageId);
-            if (page != null && _permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
+            var page = pageService.Find(pageId);
+            if (page != null && permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 var pageLayoutTemplateService =
                     ServiceLocator.Current.GetInstance<IPageLayoutTemplateService>();
@@ -237,7 +239,7 @@ namespace Core.Web.Controllers
                 PageLayout pageLayout = pageLayoutService.Find(layoutSettings.LayoutId);
 
                 //check page permissions
-                if (pageLayout == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageLayout.Page.Id, IsPageOwner(pageLayout.Page), PermissionOperationLevel.Object))
+                if (pageLayout == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageLayout.Page.Id, IsPageOwner(pageLayout.Page), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
@@ -285,9 +287,9 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult ShowPageLookAndFeel(long pageId)
         {
-            Page page = _pageService.Find(pageId);
+            Page page = pageService.Find(pageId);
 
-            if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
@@ -308,8 +310,8 @@ namespace Core.Web.Controllers
             bool isSuccessed = false;
             if (ModelState.IsValid)
             {
-                Page page = _pageService.Find(model.PageId);
-                if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.PageId, IsPageOwner(page), PermissionOperationLevel.Object))
+                Page page = pageService.Find(model.PageId);
+                if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.PageId, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
@@ -346,8 +348,8 @@ namespace Core.Web.Controllers
             {
                 Widget widget1 = widget;
                 ICoreWidget coreWidget =
-                            (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == widget1.Identifier);
-                if (coreWidget is BaseWidget && _permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode, user, coreWidget.GetType(), null))
+                            MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == widget1.Identifier);
+                if (coreWidget is BaseWidget && permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode, user, coreWidget.GetType(), null))
                 {
                     allowedWidgets.Add(widget);
                 }
@@ -366,25 +368,25 @@ namespace Core.Web.Controllers
         public virtual ActionResult AddWidget(long pageId, long widgetId)
         {
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
-            Page currentPage = _pageService.Find(pageId);
+            Page currentPage = pageService.Find(pageId);
             if (currentPage != null)
             {
                 var curWidget = widgetService.Find(widgetId);
 
-                if (curWidget != null && widgetService.IsWidgetEnable(curWidget) && _permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page),
+                if (curWidget != null && widgetService.IsWidgetEnable(curWidget) && permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page),
                                                 pageId, IsPageOwner(currentPage), PermissionOperationLevel.Object))
                 {
                     ICoreWidget coreWidget =
-                            (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == curWidget.Identifier);
+                            MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == curWidget.Identifier);
 
-                    if (coreWidget != null && coreWidget is BaseWidget && _permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode,
+                    if (coreWidget != null && coreWidget is BaseWidget && permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode,
                             this.CorePrincipal(), coreWidget.GetType(), null))
                     {
                         var widget = PageHelper.AddWidgetToPage(pageId, widgetId, this.CorePrincipal());
                         if (widget != null)
                         {
 
-                            _permissionService.SetupDefaultRolePermissions(
+                            permissionService.SetupDefaultRolePermissions(
                                 ResourcePermissionsHelper.GetResourceOperations(coreWidget.GetType()),
                                 coreWidget.GetType(), widget.Id);
                             return PartialView(MVC.Shared.Views.Widgets.WidgetContentHolder,
@@ -450,20 +452,20 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult ShowPageCommonSettings(long pageId)
         {
-            var page = _pageService.Find(pageId);
+            var page = pageService.Find(pageId);
 
-            if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
-            return PartialView(MVC.Pages.Views.PageCommonSettings, new PageLocaleViewModel().MapFrom(page));//PageHelper.BindPageViewModel(page, this.CorePrincipal()));
+            return PartialView(MVC.Pages.Views.PageCommonSettings, new PageLocaleViewModel().MapFrom(page));
         }
 
         [HttpPost]
         public virtual ActionResult ChangeLanguage(long pageId, String culture)
         {
-            var page = _pageService.Find(pageId);
+            var page = pageService.Find(pageId);
             if (page == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, "Page not found");
@@ -486,15 +488,15 @@ namespace Core.Web.Controllers
             if (ModelState.IsValid)
             {
                 var page = new Page();
-                if (!_permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
+                if (!permissionService.IsAllowed((Int32)PageOperations.AddNewPages, this.CorePrincipal(), typeof(Page), null))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
 
-                page.OrderNumber = _pageService.GetLastOrderNumber(model.ParentPageId == 0 ? null : model.ParentPageId);
+                page.OrderNumber = pageService.GetLastOrderNumber(model.ParentPageId == 0 ? null : model.ParentPageId);
                 page.PageLayout = new PageLayout
                 {
-                    LayoutTemplate = LayoutHelper.GetDefaultLayoutTemplate(),
+                    LayoutTemplate = LayoutHelper.DefaultLayoutTemplate,
                     Page = page
                 };
 
@@ -506,13 +508,13 @@ namespace Core.Web.Controllers
 
                 page = model.MapTo(page);
 
-                if (_pageService.Save(page))
+                if (pageService.Save(page))
                 {
-                    _permissionService.SetupDefaultRolePermissions(ResourcePermissionsHelper.GetResourceOperations(typeof(Page)), typeof(Page), page.Id);
+                    permissionService.SetupDefaultRolePermissions(ResourcePermissionsHelper.GetResourceOperations(typeof(Page)), typeof(Page), page.Id);
                     if (model.ClonedPageId!=null)
                     {
-                        var sourcePage = _pageService.Find((long) model.ClonedPageId);
-                        if (_permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
+                        var sourcePage = pageService.Find((long) model.ClonedPageId);
+                        if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
                         {
                             PageHelper.ClonePageSettings(sourcePage, page);
                         }
@@ -539,8 +541,8 @@ namespace Core.Web.Controllers
             if (ModelState.IsValid)
             {
                 var page = new Page();
-                page = _pageService.Find(model.Id);
-                if (!_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+                page = pageService.Find(model.Id);
+                if (!permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.Id, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
@@ -557,7 +559,7 @@ namespace Core.Web.Controllers
                     pageLocale.Title = locale.Value;
                     localeService.Save(pageLocale);
                 }
-                if (_pageService.Save(model.MapTo(page)))
+                if (pageService.Save(model.MapTo(page)))
                 {
                     TempData["Success"] = true;
                 }
@@ -575,9 +577,9 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult ShowPageCSS(long pageId)
         {
-            Page page = _pageService.Find(pageId);
+            Page page = pageService.Find(pageId);
 
-            if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
@@ -598,9 +600,9 @@ namespace Core.Web.Controllers
             bool isSuccessed = false;
             if (ModelState.IsValid)
             {
-                Page page = _pageService.Find(model.PageId);
+                Page page = pageService.Find(model.PageId);
 
-                if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.PageId, IsPageOwner(page), PermissionOperationLevel.Object))
+                if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), model.PageId, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
                 }
@@ -631,30 +633,28 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult ShowPagePermissions(long pageId)
         {
-            Page page = _pageService.Find(pageId);
+            Page page = pageService.Find(pageId);
 
-            if (page == null || !_permissionService.IsAllowed((Int32)PageOperations.Permissions, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
+            if (page == null || !permissionService.IsAllowed((Int32)PageOperations.Permissions, this.CorePrincipal(), typeof(Page), pageId, IsPageOwner(page), PermissionOperationLevel.Object))
             {
-                throw new Exception("Page not found.");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
 
-
-
-            return PartialView(MVC.Pages.Views.PagePermissions, _permissionHelper.BindPermissionsModel(pageId, typeof(Page), false));
+            return PartialView(MVC.Pages.Views.PagePermissions, permissionHelper.BindPermissionsModel(pageId, typeof(Page), false));
         }
 
         [HttpPost]
         public virtual ActionResult ApplyPagePermissions(PermissionsModel model)
         {
-            Page page = _pageService.Find(model.EntityId);
+            Page page = pageService.Find(model.EntityId);
 
             if (page != null)
             {
-                if (_permissionService.IsAllowed((Int32)PageOperations.Permissions, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+                if (permissionService.IsAllowed((Int32)PageOperations.Permissions, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
                 {
-                    _permissionHelper.ApplyPermissions(model, typeof(Page));
+                    permissionHelper.ApplyPermissions(model, typeof(Page));
                 }
-                if (_permissionService.IsAllowed((Int32)PageOperations.Permissions, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+                if (permissionService.IsAllowed((Int32)PageOperations.Permissions, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
                     return Content(Url.Action(MVC.Pages.Show(page.Url)));
             }
 
@@ -772,20 +772,19 @@ namespace Core.Web.Controllers
             PageWidget pageWidget = widgetService.Find(pageWidgetId);
             if (pageWidget == null ||pageWidget.Widget==null)
             {
-                throw new Exception("Widget not found.");
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
             ICoreWidget coreWidget =
-                (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
+                MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
             ICorePrincipal currentPrincipal = this.CorePrincipal();
             bool isOwner = currentPrincipal != null && pageWidget.User != null &&
                            currentPrincipal.PrincipalId == pageWidget.User.PrincipalId;
 
-            if (coreWidget == null || !(coreWidget is BaseWidget) || !_permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidgetId, isOwner, PermissionOperationLevel.Object))
+            if (coreWidget == null || !(coreWidget is BaseWidget) || !permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidgetId, isOwner, PermissionOperationLevel.Object))
             {
-                throw new Exception("Widget not found.");
-
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
-            return PartialView(MVC.Shared.Views.Widgets.WidgetPermissions, _permissionHelper.BindPermissionsModel(pageWidgetId, coreWidget.GetType(), true));
+            return PartialView(MVC.Shared.Views.Widgets.WidgetPermissions, permissionHelper.BindPermissionsModel(pageWidgetId, coreWidget.GetType(), true));
         }
 
         [HttpPost]
@@ -796,16 +795,16 @@ namespace Core.Web.Controllers
             if (pageWidget != null && pageWidget.Widget!=null)
             {
                 ICoreWidget coreWidget =
-                    (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
+                    MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
                 ICorePrincipal currentPrincipal = this.CorePrincipal();
                 bool isOwner = currentPrincipal != null && pageWidget.User != null &&
                                currentPrincipal.PrincipalId == pageWidget.User.PrincipalId;
 
-                if (coreWidget != null && coreWidget is BaseWidget && _permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidget.Id, isOwner, PermissionOperationLevel.Object))
+                if (coreWidget != null && coreWidget is BaseWidget && permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidget.Id, isOwner, PermissionOperationLevel.Object))
                 {
-                    _permissionHelper.ApplyPermissions(model, coreWidget.GetType());
+                    permissionHelper.ApplyPermissions(model, coreWidget.GetType());
 
-                    if (_permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidget.Id, isOwner, PermissionOperationLevel.Object))
+                    if (permissionService.IsAllowed(((BaseWidget)coreWidget).PermissionOperationCode, currentPrincipal, coreWidget.GetType(), pageWidget.Id, isOwner, PermissionOperationLevel.Object))
                     {
                         return Content(Url.Action(MVC.Pages.Show(pageWidget.Page.Url)));
                     }

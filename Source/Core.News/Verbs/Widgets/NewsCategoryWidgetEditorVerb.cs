@@ -7,7 +7,7 @@ namespace Core.News.Verbs.Widgets
     {
         #region Singleton
 
-        private static NewsCategoryWidgetEditorVerb _instance;
+        private static NewsCategoryWidgetEditorVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Core.News.Verbs.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NewsCategoryWidgetEditorVerb());
+                    return instance ?? (instance = new NewsCategoryWidgetEditorVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.News.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "EditWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "NewsCategoryViewerWidget"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "News"; }
         }

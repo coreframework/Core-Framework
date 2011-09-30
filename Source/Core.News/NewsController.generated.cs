@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.News.Controllers {
     public partial class NewsController {
@@ -70,24 +70,24 @@ namespace Core.News.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NewsController Actions { get { return NewsMVC.News; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "News";
+        public readonly String Name = "News";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ShowAll = "ShowAll";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string Edit = "Edit";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string New = "New";
-            public readonly string Remove = "Remove";
-            public readonly string Categories = "Categories";
-            public readonly string NewsCategoriesDynamicGridData = "NewsCategoriesDynamicGridData";
-            public readonly string UpdateCategories = "UpdateCategories";
+            public readonly String ShowAll = "ShowAll";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String Edit = "Edit";
+            public readonly String ChangeLanguage = "ChangeLanguage";
+            public readonly String New = "New";
+            public readonly String Remove = "Remove";
+            public readonly String Categories = "Categories";
+            public readonly String NewsCategoriesDynamicGridData = "NewsCategoriesDynamicGridData";
+            public readonly String UpdateCategories = "UpdateCategories";
         }
 
 
@@ -96,11 +96,11 @@ namespace Core.News.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Categories = "~/Views/News/Categories.aspx";
-            public readonly string Edit = "~/Views/News/Edit.aspx";
-            public readonly string EditForm = "~/Views/News/EditForm.ascx";
-            public readonly string Index = "~/Views/News/Index.aspx";
-            public readonly string New = "~/Views/News/New.aspx";
+            public readonly String Categories = "~/Views/News/Categories.aspx";
+            public readonly String Edit = "~/Views/News/Edit.aspx";
+            public readonly String EditForm = "~/Views/News/EditForm.ascx";
+            public readonly String Index = "~/Views/News/Index.aspx";
+            public readonly String New = "~/Views/News/New.aspx";
         }
     }
 

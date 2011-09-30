@@ -7,7 +7,7 @@ using Products.NHibernate.Services;
 
 namespace Products.NHibernate
 {
-    public class ProductsNHibernateModule
+    public static class ProductsNHibernateModule
     {
         public static void Install(IWindsorContainer container)
         {
@@ -20,7 +20,6 @@ namespace Products.NHibernate
             container.Register(Component.For<IProductWidgetService>().ImplementedBy<NHibernateProductWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<ICategoryService>().ImplementedBy<NHibernateCategoryService>().LifeStyle.Transient);
             container.Register(Component.For<ICategoryLocaleService>().ImplementedBy<NHibernateCategoryLocaleService>().LifeStyle.Transient);
-            container.Register(Component.For<ICategoryWidgetService>().ImplementedBy<NHibernateCategoryWidgetService>().LifeStyle.Transient);
         }
     }
 }

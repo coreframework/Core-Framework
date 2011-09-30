@@ -11,13 +11,13 @@ using Core.Forms.Validation;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Framework.Core.Extensions;
-using Framework.MVC.Captcha;
+using Framework.Mvc.Captcha;
 using Microsoft.Practices.ServiceLocation;
 using Omu.ValueInjecter;
 
 namespace Core.Forms.Helpers
 {
-    public class FormsBuilderWidgetHelper
+    public static class FormsBuilderWidgetHelper
     {
         /// <summary>
         /// Saves the form builder widget.
@@ -72,9 +72,9 @@ namespace Core.Forms.Helpers
                     {
                         modelState.AddModelError(elementName, String.Format("The {0} field is required.", item.Title));
                     }
-                    // check if the item has max length limitation
                     else if (!String.IsNullOrEmpty(value) && item.MaxLength!=null)
                     {
+                        // check if the item has max length limitation
                         if (value.Length > item.MaxLength)
                         {
                             modelState.AddModelError(elementName, String.Format("The {0} field length is more then {1}.", item.Title, item.MaxLength));
@@ -109,7 +109,7 @@ namespace Core.Forms.Helpers
             bool isValid = true;
 
             // get the guid from form collection
-            string guid =  collection[CaptchaImage.CaptchaImageGuidKey];
+            String guid =  collection[CaptchaImage.CaptchaImageGuidKey];
 
             // check for the guid because it is required from the rest of the opperation
             if (String.IsNullOrEmpty(guid))
@@ -120,7 +120,7 @@ namespace Core.Forms.Helpers
             {
                 // get values
                 CaptchaImage image = CaptchaImage.GetCachedCaptcha(guid);
-                string expectedValue = image == null ? String.Empty : image.Text;
+                String expectedValue = image == null ? String.Empty : image.Text;
 
                 // removes the captch from cache so it cannot be used again
                 HttpContext.Current.Cache.Remove(guid);
@@ -166,8 +166,8 @@ namespace Core.Forms.Helpers
                 {
                     if (item.Type != FormElementType.Captcha)
                     {
-                        string elementName = String.Format("{0}_{1}", item.Type, item.Id);
-                        string value = collection[elementName];
+                        String elementName = String.Format("{0}_{1}", item.Type, item.Id);
+                        String value = collection[elementName];
                         if (value != null)
                         {
                             if (item.Type==FormElementType.RadioButtons)

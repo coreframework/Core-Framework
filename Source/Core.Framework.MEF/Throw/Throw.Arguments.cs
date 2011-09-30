@@ -4,7 +4,7 @@ using System.Globalization;
 
 namespace Core.Framework.MEF.Throw
 {
-    static partial class Throw
+    public static partial class Throw
     {
         #region Methods
         /// <summary>
@@ -14,7 +14,7 @@ namespace Core.Framework.MEF.Throw
         /// <param name="argumentName">The name of the argument.</param>
         /// <param name="modifier">A modifier delegate used to modify the exception before being thrown.</param>
         [DebuggerStepThrough]
-        public static void IfArgumentNull(object argument, string argumentName, Func<Exception, Exception> modifier = null)
+        public static void IfArgumentNull(object argument, String argumentName, Func<Exception, Exception> modifier = null)
         {
             if (argument == null)
                 ThrowInternal(
@@ -29,12 +29,12 @@ namespace Core.Framework.MEF.Throw
         /// <param name="argumentName">The name of the argument.</param>
         /// <param name="modifier">A modifier delegate used to modify the exception before being thrown.</param>
         [DebuggerStepThrough]
-        public static void IfArgumentNullOrEmpty(string argument, string argumentName, Func<Exception, Exception> modifier = null)
+        public static void IfArgumentNullOrEmpty(String argument, String argumentName, Func<Exception, Exception> modifier = null)
         {
-            if (string.IsNullOrEmpty(argument))
+            if (String.IsNullOrEmpty(argument))
                 ThrowInternal(
                     new ArgumentException(
-                        string.Format(CultureInfo.CurrentUICulture, Resources.Throw.ArgumentNullOrEmpty, argumentName)),
+                        String.Format(CultureInfo.CurrentUICulture, Resources.Throw.ArgumentNullOrEmpty, argumentName)),
                     modifier);
         }
         #endregion

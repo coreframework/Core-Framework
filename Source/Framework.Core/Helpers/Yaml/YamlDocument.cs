@@ -14,7 +14,7 @@ namespace Framework.Core.Helpers.Yaml
     /// <summary>
     /// Wraps yaml document for using dynamic objects.
     /// </summary>
-    public class YamlDocument
+    public static class YamlDocument
     {
         /// <summary>
         /// Loads document froms file.
@@ -31,7 +31,7 @@ namespace Framework.Core.Helpers.Yaml
                 return result;
             }
 
-            throw new Exception("Unexpected parsed value.");
+            throw new InvalidOperationException("Unexpected parsed value.");
         }
 
         /// <summary>

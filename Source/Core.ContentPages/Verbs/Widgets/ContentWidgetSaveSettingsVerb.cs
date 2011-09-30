@@ -7,7 +7,7 @@ namespace Core.ContentPages.Verbs.Widgets
     {
         #region Singleton
 
-        private static ContentWidgetSaveSettingsVerb _instance;
+        private static ContentWidgetSaveSettingsVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Core.ContentPages.Verbs.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new ContentWidgetSaveSettingsVerb());
+                    return instance ?? (instance = new ContentWidgetSaveSettingsVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.ContentPages.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String  Action
         {
             get { return "UpdateWidget"; }
         }
 
-        public string Controller
+        public String  Controller
         {
             get {return "ContentViewerWidget"; }
         }
 
-        public string Area
+        public String  Area
         {
             get { return "ContentPage"; }
         }

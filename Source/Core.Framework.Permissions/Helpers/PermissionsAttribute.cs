@@ -11,6 +11,7 @@ namespace Core.Framework.Permissions.Helpers
     /// <summary>
     /// Specifies permissions required for action executing.
     /// </summary>
+    [AttributeUsage(AttributeTargets.All)]
     public class PermissionsAttribute : ActionFilterAttribute
     {
         #region Constructors

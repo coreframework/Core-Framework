@@ -10,7 +10,7 @@
         <%=Html.Hidden("pageSection", Model.Widget.PageSection)%>
         <%=Html.Hidden("column", Model.Widget.ColumnNumber) %>
         <%=Html.Hidden("order", Model.Widget.OrderNumber) %>
-        <%if (PageHelper.GetCurrentUserPageMode() == PageMode.Edit)
+        <%if (PageHelper.CurrentUserPageMode == PageMode.Edit)
           {%>
         <div class="widget_title">
             <div class="widget_title_i clrfix">

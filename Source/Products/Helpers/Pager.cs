@@ -15,9 +15,9 @@ namespace Products.Helpers
         private readonly int totalItemCount;
         private readonly RouteValueDictionary linkWithoutPageValuesDictionary;
         private readonly long id;
-        private readonly string curPagePreffix;
+        private readonly String curPagePreffix;
 
-        public Pager(HtmlHelper helper, long id, int pageSize, int currentPage, int totalItemCount, string preffix, RouteValueDictionary valueDictionary)
+        public Pager(HtmlHelper helper, long id, int pageSize, int currentPage, int totalItemCount, String preffix, RouteValueDictionary valueDictionary)
         {
             this.helper = helper;
             this.pageSize = pageSize;
@@ -28,12 +28,12 @@ namespace Products.Helpers
             curPagePreffix = preffix;
         }
 
-        public string RenderHtml()
+        public String RenderHtml()
         {
             int pageCount = (int)Math.Ceiling(this.totalItemCount / (double)this.pageSize);
             if (pageCount < 2)
                 return String.Empty;
-            int nrOfPagesToDisplay = 10;
+            const int numberOfPagesToDisplay = 10;
 
             var sb = new StringBuilder();
             sb.Append("<div class=\"pager\">");
@@ -51,21 +51,21 @@ namespace Products.Helpers
             int start = 1;
             int end = pageCount;
 
-            if (pageCount > nrOfPagesToDisplay)
+            if (pageCount > numberOfPagesToDisplay)
             {
-                int middle = (int)Math.Ceiling(nrOfPagesToDisplay / 2d) - 1;
-                int below = (this.currentPage - middle);
-                int above = (this.currentPage + middle);
+                int middle = (int)Math.Ceiling(numberOfPagesToDisplay / 2d) - 1;
+                int below = this.currentPage - middle;
+                int above = this.currentPage + middle;
 
                 if (below < 4)
                 {
-                    above = nrOfPagesToDisplay;
+                    above = numberOfPagesToDisplay;
                     below = 1;
                 }
                 else if (above > (pageCount - 4))
                 {
                     above = pageCount;
-                    below = (pageCount - nrOfPagesToDisplay);
+                    below = pageCount - numberOfPagesToDisplay;
                 }
 
                 start = below;
@@ -112,7 +112,7 @@ namespace Products.Helpers
             return sb.ToString();
         }
 
-        private string GeneratePageLink(string linkText, int pageNumber)
+        private String GeneratePageLink(String linkText, int pageNumber)
         {
             var pageLinkValueDictionary = new RouteValueDictionary(this.linkWithoutPageValuesDictionary);
             if (pageLinkValueDictionary.ContainsKey(ProductConstants.CurrentPageQueryRequestParam + curPagePreffix + id))
@@ -122,10 +122,15 @@ namespace Products.Helpers
             var routeParams = String.Empty;
             foreach (var key in pageLinkValueDictionary.Keys.Where(key => key.StartsWith(ProductConstants.CurrentPageQueryRequestParam) || key.StartsWith(ProductConstants.ProductIdQueryRequestParam)))
             {
-                if (routeParams.Equals(String.Empty))
+                if (String.IsNullOrEmpty(routeParams))
+                {
                     routeParams += "?";
+                } 
                 else
+                {
                     routeParams += "&";
+                }
+                    
                 routeParams += key + "=" + pageLinkValueDictionary[key];
             }
             if (pageLinkValueDictionary.ContainsKey("url") && !pageLinkValueDictionary.ContainsKey("action"))

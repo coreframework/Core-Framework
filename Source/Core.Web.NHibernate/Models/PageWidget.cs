@@ -6,13 +6,11 @@ namespace Core.Web.NHibernate.Models
 {
     public class PageWidget: Entity
     {
-        #region Constructor
+        #region Fields
 
-        public PageWidget()
-        {
-            Widget = new Widget();
-            PageSection = PageSection.Body;
-        }
+        private Widget widget = new Widget();
+
+        private PageSection pageSection = PageSection.Body;
 
         #endregion
 
@@ -26,7 +24,11 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the widget.
         /// </summary>
         /// <value>The widget.</value>
-        public virtual Widget Widget { get; set; }
+        public virtual Widget Widget
+        {
+            get { return widget; }
+            set { widget = value; }
+        }
 
         /// <summary>
         /// Gets or sets the page.
@@ -44,7 +46,11 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the page section.
         /// </summary>
         /// <value>The page section.</value>
-        public virtual PageSection PageSection { get; set; }
+        public virtual PageSection PageSection
+        {
+            get { return pageSection; }
+            set { pageSection = value; }
+        }
 
         /// <summary>
         /// Gets or sets the column.
@@ -70,13 +76,9 @@ namespace Core.Web.NHibernate.Models
         /// <value>The parent widget id.</value>
         public virtual long? ParentWidgetId { get; set; }
 
-        #region IPermissible Members
-
         public virtual long EntityId
         {
             get { return Id; }
         }
-
-        #endregion
     }
 }

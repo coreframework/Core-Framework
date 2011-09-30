@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Models
 {

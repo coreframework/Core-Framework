@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
@@ -10,13 +11,11 @@ namespace Framework.Core.Utilities.Email
     /// </summary>
     public class EmailSender
     {
-        private readonly string mailServer;
+        private readonly String mailServer;
 
-        private readonly string mailUser;
+        private readonly String mailUser;
 
-        private readonly string mailPassword;
-
-        protected static string lastError;
+        private readonly String mailPassword;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EmailSender"/> class.
@@ -24,20 +23,11 @@ namespace Framework.Core.Utilities.Email
         /// <param name="server">The server.</param>
         /// <param name="login">The login.</param>
         /// <param name="psw">The PSW.</param>
-        public EmailSender(string server, string login, string psw)
+        public EmailSender(String server, String login, String psw)
         {
             mailServer = server;
             mailUser = login;
             mailPassword = psw;
-        }
-
-        /// <summary>
-        /// Gets the last error.
-        /// </summary>
-        /// <returns>The last error of mail's sending</returns>
-        public static string GetLastError()
-        {
-            return lastError;
         }
 
         /// <summary>
@@ -52,7 +42,7 @@ namespace Framework.Core.Utilities.Email
         /// <param name="attachPath">Path to the Attachments.</param>
         /// <param name="isHtmlFormat">Send in html format.</param>
         /// <returns>True if succedeed.</returns>
-        public bool SendEmail(string from, string fromEmail, string to, string toEmail, string subject, string text,
+        public bool SendEmail(String from, String fromEmail, String to, String toEmail, String subject, String text,
                               AttachmentCollection attachPath, bool isHtmlFormat)
         {
             try
@@ -80,10 +70,9 @@ namespace Framework.Core.Utilities.Email
         /// <param name="attachPath">Path to the attachment.</param>
         /// <param name="isHtmlFormat">Send in html format.</param>
         /// <returns>True if succedeed.</returns>
-        public bool SendEmail(string from, string fromEmail, MailAddressCollection toEmails, string subject,
-                              string text, AttachmentCollection attachPath, bool isHtmlFormat)
+        public bool SendEmail(String from, String fromEmail, IEnumerable<MailAddress> toEmails, String subject,
+                              String text, AttachmentCollection attachPath, bool isHtmlFormat)
         {
-            lastError = String.Empty;
 
             var message = new MailMessage();
 
@@ -129,11 +118,10 @@ namespace Framework.Core.Utilities.Email
         /// <param name="attach">The attach.</param>
         /// <param name="isHtmlFormat">if set to <c>true</c> [is HTML format].</param>
         /// <returns></returns>
-        public bool SendEmail(string from, string fromEmail, MailAddressCollection toEmails,
-            MailAddressCollection ccEmails, MailAddressCollection bccEmails,
-            string subject, string text, Attachment attach, bool isHtmlFormat)
+        public bool SendEmail(String from, String fromEmail, IEnumerable<MailAddress> toEmails,
+            IEnumerable<MailAddress> ccEmails, IEnumerable<MailAddress> bccEmails,
+            String subject, String text, Attachment attach, bool isHtmlFormat)
         {
-            lastError = String.Empty;
 
             var message = new MailMessage();
 
@@ -194,7 +182,6 @@ namespace Framework.Core.Utilities.Email
             }
             catch (Exception e)
             {
-                lastError = e.Message;
                 return false;
             }
             finally

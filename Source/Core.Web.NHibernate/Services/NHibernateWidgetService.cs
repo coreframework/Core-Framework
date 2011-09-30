@@ -66,7 +66,7 @@ namespace Core.Web.NHibernate.Services
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        public IQueryable<Widget> GetSearchQuery(string searchString)
+        public IQueryable<Widget> GetSearchQuery(String searchString)
         {
             var baseQuery = CreateQuery();
             if (String.IsNullOrEmpty(searchString))

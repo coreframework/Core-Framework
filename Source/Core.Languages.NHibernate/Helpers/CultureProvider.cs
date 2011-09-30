@@ -12,27 +12,33 @@ namespace Core.Languages.NHibernate.Helpers
     {
         private ILanguageService languageService = ServiceLocator.Current.GetInstance<ILanguageService>();
 
-        public IDictionary<String, String> GetAvailableLanguages()
+        public IDictionary<String, String> AvailableLanguages
         {
-            IEnumerable<Language> languages = languageService.GetAll();
-            IDictionary<String, String> availableLanguages = new Dictionary<String, String>();
-            availableLanguages.Add(CultureHelper.NeutralCultureName, null);
-            foreach (var language in languages)
+            get
             {
-                availableLanguages.Add(language.Title, language.Culture);
-            }
+                IEnumerable<Language> languages = languageService.GetAll();
+                IDictionary<String, String> availableLanguages = new Dictionary<String, String>();
+                availableLanguages.Add(CultureHelper.NeutralCultureName, null);
+                foreach (var language in languages)
+                {
+                    availableLanguages.Add(language.Title, language.Culture);
+                }
 
-            return availableLanguages;
+                return availableLanguages;
+            }
         }
 
-        public CultureInfo GetDefaultCulture()
+        public CultureInfo DefaultCulture
         {
-            Language language = languageService.GetDefaultLanguage();
-            if (language != null)
+            get
             {
-                return CultureInfo.GetCultureInfo(language.Culture);
+                Language language = languageService.DefaultLanguage;
+                if (language != null)
+                {
+                    return CultureInfo.GetCultureInfo(language.Culture);
+                }
+                return null;
             }
-            return null;
         }
     }
 }

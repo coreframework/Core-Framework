@@ -1,4 +1,6 @@
-﻿namespace Core.Framework.MEF.Contracts.Web
+﻿using System;
+
+namespace Core.Framework.MEF.Contracts.Web
 {
     /// <summary>
     /// Defines metadata associated with an action verb.
@@ -9,7 +11,7 @@
         /// <summary>
         /// Gets the category for the verb.
         /// </summary>
-        string Category { get; }
+        String Category { get; }
         #endregion
     }
 }

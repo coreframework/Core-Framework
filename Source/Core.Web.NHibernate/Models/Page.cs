@@ -12,24 +12,23 @@ namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
     public class Page : Entity, IPermissible, ILocalizable
-    { 
-        private readonly IList<PageWidget> _widgets;
-        private readonly IList<Page> _children;
-        private IList<PageLocale> _currentPageLocales = new List<PageLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private PageLocale _currentLocale;
+    {
+        #region Fields
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Page"/> class.
-        /// </summary>
-        public Page()
-        {
-            _widgets = new List<PageWidget>();
-            _children = new List<Page>();
-            PermissionTitle = "Pages";
-            Operations = OperationsHelper.GetOperations<PageOperations>();
-        }
-       
+        private readonly IList<PageWidget> widgets = new List<PageWidget>();
+        private readonly IList<Page> children = new List<Page>();
+
+        private readonly IList<PageLocale> currentPageLocales = new List<PageLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private PageLocale currentLocale;
+
+        private String permissionTitle = "Pages";
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<PageOperations>();
+
+        #endregion
+
+        #region Properties
+
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -75,7 +74,7 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                return _widgets;
+                return widgets;
             }
         }
 
@@ -83,7 +82,7 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                return _children;
+                return children;
             }
         }
 
@@ -101,12 +100,12 @@ namespace Core.Web.NHibernate.Models
         /// <param name="widget">The widget.</param>
         public virtual void RemoveWidget(PageWidget widget)
         {
-            _widgets.Remove(widget);
+            widgets.Remove(widget);
         }
 
         public virtual void AddWidget(PageWidget widget)
         {
-            _widgets.Add(widget);
+            widgets.Add(widget);
         }
 
         #region IPermissible Members
@@ -115,27 +114,37 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle
+        {
+            get { return permissionTitle; }
+            set { permissionTitle = value; }
+        }
 
         /// <summary>
-        /// Gets or sets the object permission operations.
+        /// Gets or sets the permission operations.
         /// </summary>
-        /// <value>The object permission operations.</value>
-        public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+        /// <value>The permission operations.</value>
+        public virtual IEnumerable<IPermissionOperation> Operations
+        {
+            get { return operations; }
+            set { operations = value; }
+        }
+
+        #endregion
 
         public virtual IList<ILocale> CurrentLocales
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentPageLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentPageLocales.Count > 0)
                 {
-                    _currentLocales = _currentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -155,19 +164,19 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as PageLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as PageLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new PageLocale
+                        currentLocale = new PageLocale
                         {
                             Page = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
 

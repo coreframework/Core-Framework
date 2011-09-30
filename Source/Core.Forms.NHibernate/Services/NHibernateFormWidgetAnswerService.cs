@@ -16,7 +16,7 @@ namespace Core.Forms.NHibernate.Services
 
         #region Helper Methods
 
-        public IQueryable<FormWidgetAnswer> GetAnswersQuery(long formWidgetId, string searchString)
+        public IQueryable<FormWidgetAnswer> GetAnswersQuery(long formWidgetId, String searchString)
         {
             var baseQuery = CreateQuery();
             return baseQuery.Where(answer => answer.FormBuilderWidget.Id == formWidgetId);

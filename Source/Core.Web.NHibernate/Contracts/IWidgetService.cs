@@ -50,6 +50,6 @@ namespace Core.Web.NHibernate.Contracts
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        IQueryable<Widget> GetSearchQuery(string searchString);
+        IQueryable<Widget> GetSearchQuery(String searchString);
     }
 }

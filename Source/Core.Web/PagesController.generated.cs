@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Controllers {
     public partial class PagesController {
@@ -195,47 +195,47 @@ namespace Core.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PagesController Actions { get { return MVC.Pages; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Pages";
+        public readonly String Name = "Pages";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string Show = "Show";
-            public readonly string RemovePage = "RemovePage";
-            public readonly string CreateNewPage = "CreateNewPage";
-            public readonly string UpdatePagePosition = "UpdatePagePosition";
-            public readonly string ChangePageMode = "ChangePageMode";
-            public readonly string ChangeLayout = "ChangeLayout";
-            public readonly string ShowChangeLayoutForm = "ShowChangeLayoutForm";
-            public readonly string ShowLayoutSettingsForm = "ShowLayoutSettingsForm";
-            public readonly string UpdateLayoutSettingsForm = "UpdateLayoutSettingsForm";
-            public readonly string ShowPageLookAndFeel = "ShowPageLookAndFeel";
-            public readonly string UpdatePageLookAndFeel = "UpdatePageLookAndFeel";
-            public readonly string ShowAvailableWidgets = "ShowAvailableWidgets";
-            public readonly string AddWidget = "AddWidget";
-            public readonly string UpdatePageWidgetInstance = "UpdatePageWidgetInstance";
-            public readonly string RemovePageWidget = "RemovePageWidget";
-            public readonly string UpdateWidgetsPositions = "UpdateWidgetsPositions";
-            public readonly string ShowPageCommonSettings = "ShowPageCommonSettings";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string SavePageCommonSettings = "SavePageCommonSettings";
-            public readonly string UpdatePageCommonSettings = "UpdatePageCommonSettings";
-            public readonly string ShowPageCSS = "ShowPageCSS";
-            public readonly string UpdatePageCSS = "UpdatePageCSS";
-            public readonly string ShowPagePermissions = "ShowPagePermissions";
-            public readonly string ApplyPagePermissions = "ApplyPagePermissions";
-            public readonly string ShowSettings = "ShowSettings";
-            public readonly string ShowWidgetLookAndFeel = "ShowWidgetLookAndFeel";
-            public readonly string UpdateWidgetLookAndFeel = "UpdateWidgetLookAndFeel";
-            public readonly string ShowWidgetCSS = "ShowWidgetCSS";
-            public readonly string UpdateWidgetCSS = "UpdateWidgetCSS";
-            public readonly string ShowWidgetPermissions = "ShowWidgetPermissions";
-            public readonly string ApplyWidgetPermissions = "ApplyWidgetPermissions";
+            public readonly String Index = "Index";
+            public readonly String Show = "Show";
+            public readonly String RemovePage = "RemovePage";
+            public readonly String CreateNewPage = "CreateNewPage";
+            public readonly String UpdatePagePosition = "UpdatePagePosition";
+            public readonly String ChangePageMode = "ChangePageMode";
+            public readonly String ChangeLayout = "ChangeLayout";
+            public readonly String ShowChangeLayoutForm = "ShowChangeLayoutForm";
+            public readonly String ShowLayoutSettingsForm = "ShowLayoutSettingsForm";
+            public readonly String UpdateLayoutSettingsForm = "UpdateLayoutSettingsForm";
+            public readonly String ShowPageLookAndFeel = "ShowPageLookAndFeel";
+            public readonly String UpdatePageLookAndFeel = "UpdatePageLookAndFeel";
+            public readonly String ShowAvailableWidgets = "ShowAvailableWidgets";
+            public readonly String AddWidget = "AddWidget";
+            public readonly String UpdatePageWidgetInstance = "UpdatePageWidgetInstance";
+            public readonly String RemovePageWidget = "RemovePageWidget";
+            public readonly String UpdateWidgetsPositions = "UpdateWidgetsPositions";
+            public readonly String ShowPageCommonSettings = "ShowPageCommonSettings";
+            public readonly String ChangeLanguage = "ChangeLanguage";
+            public readonly String SavePageCommonSettings = "SavePageCommonSettings";
+            public readonly String UpdatePageCommonSettings = "UpdatePageCommonSettings";
+            public readonly String ShowPageCSS = "ShowPageCSS";
+            public readonly String UpdatePageCSS = "UpdatePageCSS";
+            public readonly String ShowPagePermissions = "ShowPagePermissions";
+            public readonly String ApplyPagePermissions = "ApplyPagePermissions";
+            public readonly String ShowSettings = "ShowSettings";
+            public readonly String ShowWidgetLookAndFeel = "ShowWidgetLookAndFeel";
+            public readonly String UpdateWidgetLookAndFeel = "UpdateWidgetLookAndFeel";
+            public readonly String ShowWidgetCSS = "ShowWidgetCSS";
+            public readonly String UpdateWidgetCSS = "UpdateWidgetCSS";
+            public readonly String ShowWidgetPermissions = "ShowWidgetPermissions";
+            public readonly String ApplyWidgetPermissions = "ApplyWidgetPermissions";
         }
 
 
@@ -244,17 +244,17 @@ namespace Core.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string ManagePageMenu = "~/Views/Pages/ManagePageMenu.ascx";
-            public readonly string NavigationMenu = "~/Views/Pages/NavigationMenu.ascx";
-            public readonly string NavigationMenuItem = "~/Views/Pages/NavigationMenuItem.ascx";
-            public readonly string PageCommonSettings = "~/Views/Pages/PageCommonSettings.ascx";
-            public readonly string PageCreateForm = "~/Views/Pages/PageCreateForm.ascx";
-            public readonly string PageCSSForm = "~/Views/Pages/PageCSSForm.ascx";
-            public readonly string PageCSSSettings = "~/Views/Pages/PageCSSSettings.ascx";
-            public readonly string PageLookAndFeelForm = "~/Views/Pages/PageLookAndFeelForm.ascx";
-            public readonly string PageLookAndFeelSettings = "~/Views/Pages/PageLookAndFeelSettings.ascx";
-            public readonly string PagePermissions = "~/Views/Pages/PagePermissions.ascx";
-            public readonly string Show = "~/Views/Pages/Show.aspx";
+            public readonly String ManagePageMenu = "~/Views/Pages/ManagePageMenu.ascx";
+            public readonly String NavigationMenu = "~/Views/Pages/NavigationMenu.ascx";
+            public readonly String NavigationMenuItem = "~/Views/Pages/NavigationMenuItem.ascx";
+            public readonly String PageCommonSettings = "~/Views/Pages/PageCommonSettings.ascx";
+            public readonly String PageCreateForm = "~/Views/Pages/PageCreateForm.ascx";
+            public readonly String PageCSSForm = "~/Views/Pages/PageCSSForm.ascx";
+            public readonly String PageCSSSettings = "~/Views/Pages/PageCSSSettings.ascx";
+            public readonly String PageLookAndFeelForm = "~/Views/Pages/PageLookAndFeelForm.ascx";
+            public readonly String PageLookAndFeelSettings = "~/Views/Pages/PageLookAndFeelSettings.ascx";
+            public readonly String PagePermissions = "~/Views/Pages/PagePermissions.ascx";
+            public readonly String Show = "~/Views/Pages/Show.aspx";
         }
     }
 

@@ -13,41 +13,41 @@ using System.Reflection;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
-using Framework.MVC.Extensions;
+using Framework.Mvc.Extensions;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Provides methods for resources retrieving.
     /// </summary>
-    public class ResourceHelper
+    public static class ResourceHelper
     {
         #region Fields
 
         /// <summary>
         /// Resources scope separator.
         /// </summary>
-        public const String ScopeSeparator = ".";
+        public static readonly String ScopeSeparator = ".";
 
         /// <summary>
         /// Slash separator.
         /// </summary>
-        public const char SlashSeparator = '\\';
+        public static readonly char SlashSeparator = '\\';
 
         /// <summary>
         /// View scope key.
         /// </summary>
-        public const String ViewScopeKey = "ViewScopeKey";
+        public static readonly String ViewScopeKey = "ViewScopeKey";
 
         /// <summary>
         /// Areas constant.
         /// </summary>
-        public const String Areas = "Areas";
+        public static readonly String Areas = "Areas";
 
         /// <summary>
         /// Areas built in framework.
         /// </summary>
-        public static String[] MainAreas = new[] { "admin", "navigation", "views" };
+        public static readonly String[] MainAreas = new[] { "admin", "navigation", "views" };
 
         private const String Models = "Models";
 
@@ -58,7 +58,7 @@ namespace Framework.MVC.Helpers
         #endregion
 
         /// <summary>
-        /// Gets resource string using specified scope, key and culture.
+        /// Gets resource String using specified scope, key and culture.
         /// </summary>
         /// <remarks>
         /// <paramref name="translationMissing"/> handler will be called if resource can not be found.
@@ -68,7 +68,7 @@ namespace Framework.MVC.Helpers
         /// <param name="scope">The localization scope.</param>
         /// <param name="culture">The culture.</param>
         /// <param name="translationMissing">Translation missing fallback.</param>
-        /// <returns>Localized string or <paramref name="translationMissing"/> result.</returns>
+        /// <returns>Localized String or <paramref name="translationMissing"/> result.</returns>
         public static String GetResourceString(HttpContextBase context, String key, String scope, CultureInfo culture, Func<String, String, String, String> translationMissing)
         {
             if (culture == null)
@@ -92,7 +92,7 @@ namespace Framework.MVC.Helpers
         /// <param name="modelType">Type of the model.</param>
         /// <param name="propertyName">Name of the proprty.</param>
         /// <returns>
-        /// Localized string or <c>null</c>.
+        /// Localized String or <c>null</c>.
         /// </returns>
         public static String TranslatePropertyName(HttpContextBase context, Type modelType, String propertyName)
         {
@@ -106,7 +106,7 @@ namespace Framework.MVC.Helpers
         /// <param name="modelType">Type of the model.</param>
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="validatorKey">The validator key.</param>
-        /// <returns>Localized string or <c>null</c>.</returns>
+        /// <returns>Localized String or <c>null</c>.</returns>
         public static String TranslateErrorMessage(HttpContextBase context, Type modelType, String propertyName, String validatorKey)
         {
             var message = GetResourceString(context, validatorKey, GetModelSpecificMessagesScope(modelType, propertyName), null, null);
@@ -125,7 +125,7 @@ namespace Framework.MVC.Helpers
         /// <param name="propertyName">Name of the property.</param>
         /// <param name="validatorKey">The validator key.</param>
         /// <param name="validationParams">The validation params.</param>
-        /// <returns>Localized string or <c>null</c>.</returns>
+        /// <returns>Localized String or <c>null</c>.</returns>
         public static String TranslateErrorMessage(HttpContextBase context, Type modelType, String propertyName, String validatorKey, String[] validationParams)
         {
             var message = GetResourceString(context, validatorKey, GetModelSpecificMessagesScope(modelType, propertyName), null, null);
@@ -172,7 +172,7 @@ namespace Framework.MVC.Helpers
             if (chains.Contains(Areas) || chains.Contains(Models))
             {
                 var modelScope = chains.SkipWhile(x => !Areas.Equals(x) && !Models.Equals(x));
-                if (modelScope.Count() > 0 && Areas.Equals(modelScope.First()))
+                if (modelScope.Any() && Areas.Equals(modelScope.First()))
                 {
                     modelScope = modelScope.Skip(1);
                 }

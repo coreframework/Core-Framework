@@ -14,6 +14,10 @@ namespace Core.Web.NHibernate.Models
 
         private IList<User> users = new List<User>();
 
+        private String permissionTitle = "User Groups";
+
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<BaseEntityOperations>();
+
         #endregion
 
         #region Properties
@@ -38,29 +42,27 @@ namespace Core.Web.NHibernate.Models
 
         #endregion
 
-        #region Constructor
-
-        public UserGroup()
-        {
-            PermissionTitle = "User Groups";
-            Operations = OperationsHelper.GetOperations<BaseEntityOperations>();
-        }
-
-        #endregion
-
         #region IPermissible Members
 
         /// <summary>
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle
+        {
+            get { return permissionTitle; }
+            set { permissionTitle = value; }
+        }
 
         /// <summary>
-        /// Gets or sets the permission groups.
+        /// Gets or sets the permission operations.
         /// </summary>
-        /// <value>The permission groups.</value>
-        public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+        /// <value>The permission operations.</value>
+        public virtual IEnumerable<IPermissionOperation> Operations
+        {
+            get { return operations; }
+            set { operations = value; }
+        }
 
         #endregion
     }

@@ -19,7 +19,7 @@ namespace Core.ContentPages.NHibernate.Services
             return baseQuery.Count();
         }
 
-        public IQueryable<ContentPage> GetSearchQuery(string searchString)
+        public IQueryable<ContentPage> GetSearchQuery(String searchString)
         {
             var baseQuery = CreateQuery();
 //            if (String.IsNullOrEmpty(searchString))

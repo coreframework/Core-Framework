@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Core.Framework.MEF.Contracts.Web;
-using Framework.MVC.Routing;
+using Framework.Mvc.Routing;
 
 namespace Core.Web.Models.Routes
 {
@@ -69,7 +70,7 @@ namespace Core.Web.Models.Routes
             routes.MapRoute("Pages.Error", "error", MVC.Error.Index());
 
             routes.MapRoute("Pages.Show", "pages/{url}", MVC.Pages.Show(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = "" });
+            routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = String.Empty });
             routes.MapRoute("Login", "users/sign-in", MVC.Users.NewUserSession());
 
           

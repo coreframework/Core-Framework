@@ -14,7 +14,7 @@ ru:
    FontFamily: "Шрифт"
    FontSizeValue: "Размер шрифта"
    Color: "Цвет"
-   OtherStyles: "Другое"
+   OtherStyles: "Другие атрибуты стиля"
   WidgetLookAndFeelModel:
    BackgroundColor: "Цвет фона"
    FontFamily: "Шрифт"
@@ -22,7 +22,7 @@ ru:
    Color: "Цвет"
    HeightValue: "Высота"
    WidthValue: "Ширина"
-   OtherStyles: "Другое"
+   OtherStyles: "Другие атрибуты стиля"
   WidgetCSSModel:
    CustomCSSClasses: "Css классы"
    PageCssModel.CustomCSS: "Css стили"

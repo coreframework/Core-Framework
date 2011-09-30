@@ -7,7 +7,7 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static SiteMapEditorVerb _instance;
+        private static SiteMapEditorVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Core.Web.Areas.Navigation.Verbs
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new SiteMapEditorVerb());
+                    return instance ?? (instance = new SiteMapEditorVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.Web.Areas.Navigation.Verbs
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "EditWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "SiteMap"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Navigation"; }
         }

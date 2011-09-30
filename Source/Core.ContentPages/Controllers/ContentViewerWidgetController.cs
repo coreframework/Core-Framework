@@ -17,7 +17,7 @@ namespace Core.ContentPages.Controllers
     {
         #region Properties
 
-        public override string ControllerWidgetIdentifier
+        public override String  ControllerWidgetIdentifier
         {
             get { return ContentViewerWidget.Instance.Identifier; }
         }
@@ -59,10 +59,10 @@ namespace Core.ContentPages.Controllers
                 if(instance.InstanceId != null)
                 {
                     var widgetService = ServiceLocator.Current.GetInstance<IContentPageWidgetService>();
-                    var exWidget = widgetService.Find((long)instance.InstanceId);
+                    var existingWidget = widgetService.Find((long)instance.InstanceId);
 
-                    if (exWidget != null)
-                        widget = exWidget;
+                    if (existingWidget != null)
+                        widget = existingWidget;
                 }
                 return PartialView(new ContentViewerWidgetModel().MapFrom(widget));
             }

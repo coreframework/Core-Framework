@@ -6,21 +6,21 @@
 
 using System;
 
-namespace Framework.MVC.Grids.jqGrid
+namespace Framework.Mvc.Grids.JqGrid
 {
     /// <summary>
     /// Contains jqGrid constans.
     /// </summary>
-    public class JqGridConstants
+    public static class JqGridConstants
     {
         /// <summary>
         /// Url template constant.
         /// </summary>
-        public const String UrlTemplate = "<a href=\"{0}\">{1}</a>";
+        public static readonly String UrlTemplate = "<a href=\"{0}\">{1}</a>";
 
         /// <summary>
         /// Id for not clickable grid.
         /// </summary>
-        public const String NotClickableId = "not_clickabe";
+        public static readonly String NotClickableId = "not_clickabe";
     }
 }

@@ -6,7 +6,7 @@
 
 /*** Branding ***/ 
 body {font:normal 12px Arial, Helvetica, sans-serif;color:#000;background:#fff;width:100%;/*height:100%;*/}
-input, textarea {font-size:12px;}
+input, textarea, select {font-size:12px;}
 .clear {clear:both;}
 /**
 * @section Links
@@ -137,10 +137,10 @@ html, body {/*height:100%;*/}
 				.close_ico {}
 			.pages ul li:first-child{}
 				.pages ul li a{text-decoration:none;}
-                .pages ul li a.remove {background:url(../images/nav_del.gif) 18px 0 repeat-x;float:right;width:18px;height:18px;margin-left:6px;}
+                .pages ul li a.remove {background:url(../images/nav_del.gif) 18px 0 repeat-x;float:right!important;width:18px;height:18px;margin-left:6px;}
                 .pages ul li a.remove:hover {background:url(../images/nav_del.gif) repeat-x;}
                 .pages ul li ul a.remove {margin-right:5px;}
-		.add_new_pg {float:right!important;padding:3px 0!important;height:24px!important;}
+		.add_new_pg {float:right!important;padding:3px 0!important;height:24px!important;border:none !important;}
 	.curr_pg {margin-bottom:5px;}
 		.curr_pg .title {background:url(../images/curr_bg.gif) repeat-x;border:1px solid #525457;color:#fff;font-size:12px;font-weight:bold;padding:4px 10px;}
 		.curr_pg .functions {border:1px solid #808283;border-top:none}
@@ -191,7 +191,7 @@ html, body {/*height:100%;*/}
 	.chb_i input {float:left;margin-left:0}
 	.chb_i label {padding-top:2px;margin-left:3px;float:left}
 .tab-content p {color:#555}
-.p_footer {height:27px;background:url(../images/widget_f_bg.gif) repeat-x 0 0;padding:5px 8px}
+.p_footer {height:27px;background:url(../images/widget_f_bg.gif) repeat-x 0 0;padding:5px 16px}
 	.p_footer .btn1 {float:left;margin-right:5px;}
 	.cancel_l {color:#1e65be;font-size:12px;font-family:Arial;float:left;margin-top:5px;margin-left:5px;}
 		
@@ -312,7 +312,7 @@ div.success {}
 
 .pages-menu{width: 100%;}
 
-	.pages-menu ul{ z-index:300;margin: 0;padding: 0;list-style-type: none;border-top:none;*left:0;width:100% ;position:relative}
+	.pages-menu ul{ z-index:700;margin: 0;padding: 0;list-style-type: none;border-top:none;*left:0;width:100% ;position:relative}
 		.pages-menu ul li{z-index:300;display: inline;float:left;border-right:1px solid #dfe5e8;height:19px;padding:6px 12px;font-size:14px;font-family:Arial;cursor:pointer;border-bottom:1px solid #dfe5e8;margin-bottom:-1px;}
         .pages-menu ul li.current {background-color:#F2F2F3;}
 			.pages-menu ul li span {float:left;padding-top:2px;color:#0074bf}

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
-using Framework.MVC.Metadata.Attributes;
+using Framework.Mvc.Metadata.Attributes;
 using Products.Helpers;
 using Products.NHibernate.Models;
 

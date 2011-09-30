@@ -10,11 +10,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
-using Framework.MVC.Metadata.Attributes;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
+using Framework.Mvc.Metadata.Attributes;
 
-namespace Framework.MVC.Metadata
+namespace Framework.Mvc.Metadata
 {
     /// <summary>
     /// Customize entity metadata provider.
@@ -81,7 +81,7 @@ namespace Framework.MVC.Metadata
             return metadata;
         }
 
-        private void ProcessFileUploadOptions(IEnumerable<Attribute> attributes, ModelMetadata metadata)
+        private static void ProcessFileUploadOptions(IEnumerable<Attribute> attributes, ModelMetadata metadata)
         {
             var fileTypes = attributes.OfType<FileTypeAttribute>().FirstOrDefault();
             if (fileTypes != null)
@@ -97,7 +97,7 @@ namespace Framework.MVC.Metadata
             }
         }
 
-        private void ProcessImageUploadOptions(IEnumerable<Attribute> attributes, ModelMetadata metadata)
+        private static void ProcessImageUploadOptions(IEnumerable<Attribute> attributes, ModelMetadata metadata)
         {
             var imageUpload = attributes.OfType<ImageUploadAttribute>().FirstOrDefault();
             if (imageUpload != null)
@@ -121,12 +121,12 @@ namespace Framework.MVC.Metadata
 
         #region Helper methods
 
-        private void LocalizeDisplayName(ModelMetadata metadata, Type modelType, String propertyName)
+        private static void LocalizeDisplayName(ModelMetadata metadata, Type modelType, String propertyName)
         {
             metadata.DisplayName = new HttpContextWrapper(HttpContext.Current).DisplayNameFor(modelType, propertyName);
         }
 
-        private void LocalizeValidators(IEnumerable<Attribute> attributes, Type modelType, String propertyName)
+        private static void LocalizeValidators(IEnumerable<Attribute> attributes, Type modelType, String propertyName)
         {
             foreach (var attribute in attributes.OfType<ValidationAttribute>())
             {

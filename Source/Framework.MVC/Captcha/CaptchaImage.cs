@@ -27,7 +27,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Web;
 
-namespace Framework.MVC.Captcha
+namespace Framework.Mvc.Captcha
 {
     /// <summary>
     /// Amount of random font warping to apply to rendered text.
@@ -133,12 +133,12 @@ namespace Framework.MVC.Captcha
         /// <summary>
         /// Captcha image guid key.
         /// </summary>
-        public const String CaptchaImageGuidKey = "captcha-guid";
+        public static readonly String CaptchaImageGuidKey = "captcha-guid";
 
         /// <summary>
         /// Contains random font families.
         /// </summary>
-        private static readonly string[] RandomFontFamily = { "arial", "arial black", "comic sans ms", "courier new", "estrangelo edessa", "franklin gothic medium", "georgia", "lucida console", "lucida sans unicode", "mangal", "microsoft sans serif", "palatino linotype", "sylfaen", "tahoma", "times new roman", "trebuchet ms", "verdana" };
+        private static readonly String[] RandomFontFamily = { "arial", "arial black", "comic sans ms", "courier new", "estrangelo edessa", "franklin gothic medium", "georgia", "lucida console", "lucida sans unicode", "mangal", "microsoft sans serif", "palatino linotype", "sylfaen", "tahoma", "times new roman", "trebuchet ms", "verdana" };
 
         /// <summary>
         /// Contains random colors.
@@ -184,10 +184,10 @@ namespace Framework.MVC.Captcha
         #region Static
 
         /// <summary>
-        /// Gets or sets a string of available text characters for the generator to use.
+        /// Gets or sets a String of available text characters for the generator to use.
         /// </summary>
         /// <value>The text chars.</value>
-        public static string TextChars { get; set; }
+        public static String TextChars { get; set; }
 
         /// <summary>
         /// Gets or sets the length of the text.
@@ -227,7 +227,7 @@ namespace Framework.MVC.Captcha
         /// Gets a GUID that uniquely identifies this Captcha.
         /// </summary>
         /// <value>The unique id.</value>
-        public string UniqueId { get; private set; }
+        public String UniqueId { get; private set; }
 
         /// <summary>
         /// Gets the date and time this image was last rendered.
@@ -239,7 +239,7 @@ namespace Framework.MVC.Captcha
         /// Gets the randomly generated Captcha text.
         /// </summary>
         /// <value>The text of Captcha image.</value>
-        public string Text { get; private set; }
+        public String Text { get; private set; }
 
         /// <summary>
         /// Gets or sets the width of Captcha image to generate, in pixels.
@@ -290,7 +290,7 @@ namespace Framework.MVC.Captcha
         /// </summary>
         /// <param name="guid">The GUID of the Captcha.</param>
         /// <returns>Cached captcha.</returns>
-        public static CaptchaImage GetCachedCaptcha(string guid)
+        public static CaptchaImage GetCachedCaptcha(String guid)
         {
             if (String.IsNullOrEmpty(guid))
             {
@@ -310,13 +310,13 @@ namespace Framework.MVC.Captcha
         }
 
         /// <summary>
-        /// Returns a GraphicsPath containing the specified string and font.
+        /// Returns a GraphicsPath containing the specified String and font.
         /// </summary>
         /// <param name="s">The char value.</param>
         /// <param name="f">The font value.</param>
         /// <param name="r">The rectangle..</param>
         /// <returns>Text path.</returns>
-        private static GraphicsPath TextPath(string s, Font f, Rectangle r)
+        private static GraphicsPath TextPath(String s, Font f, Rectangle r)
         {
             var sf = new StringFormat();
             sf.Alignment = StringAlignment.Near;
@@ -330,7 +330,7 @@ namespace Framework.MVC.Captcha
         /// Returns a random font family from the font whitelist.
         /// </summary>
         /// <returns>Random font family.</returns>
-        private string GetRandomFontFamily()
+        private String GetRandomFontFamily()
         {
             return RandomFontFamily[rand.Next(0, RandomFontFamily.Length)];
         }
@@ -339,7 +339,7 @@ namespace Framework.MVC.Captcha
         /// Generate random text for the CAPTCHA.
         /// </summary>
         /// <returns>Random text.</returns>
-        private string GenerateRandomText()
+        private String GenerateRandomText()
         {
             var sb = new StringBuilder(TextLength);
             int maxLength = TextChars.Length;
@@ -390,7 +390,7 @@ namespace Framework.MVC.Captcha
         private Font GetFont()
         {
             float fsize;
-            string fname = GetRandomFontFamily();
+            String fname = GetRandomFontFamily();
 
             switch (FontWarp)
             {
@@ -429,7 +429,7 @@ namespace Framework.MVC.Captcha
                 gr.Clear(Color.White);
 
                 int charOffset = 0;
-                double charWidth = width / TextLength;
+                double charWidth = (double) width / TextLength;
                 Rectangle rectChar;
 
                 foreach (char c in Text)

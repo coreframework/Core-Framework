@@ -91,7 +91,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NHibernateNewsCategoryLocaleService.cs" />
     <Compile Include="Services\NHibernateNewsCategoryService.cs" />
-    <Compile Include="Services\NHibernateNewsCategoryWidgetService.cs" />
     <Compile Include="Services\NHibernateNewsArticleLocaleService.cs" />
     <Compile Include="Services\NHibernateNewsArticleService.cs" />
     <Compile Include="Services\NHibernateNewsArticleWidgetService.cs" />

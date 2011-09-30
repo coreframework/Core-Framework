@@ -9,17 +9,13 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private IEnumerable<FormWidgetAnswerValue> _answerValues;
+        private readonly IEnumerable<FormWidgetAnswerValue> answerValues = new List<FormWidgetAnswerValue>();
+
+        private BaseUser user = new BaseUser();
 
         #endregion
 
         #region Properties
-
-        public FormWidgetAnswer()
-        {
-            _answerValues = new List<FormWidgetAnswerValue>();
-            User = new BaseUser();
-        }
 
         /// <summary>
         /// Gets or sets the create date.
@@ -31,7 +27,11 @@ namespace Core.Forms.NHibernate.Models
         /// Gets or sets the user.
         /// </summary>
         /// <value>The user.</value>
-        public virtual BaseUser User { get; set; }
+        public virtual BaseUser User
+        {
+            get { return user; }
+            set { user = value; }
+        }
 
         /// <summary>
         /// Gets or sets the title.
@@ -51,7 +51,7 @@ namespace Core.Forms.NHibernate.Models
         /// <value>The answer values.</value>
         public virtual IEnumerable<FormWidgetAnswerValue> AnswerValues
         {
-            get { return _answerValues; }
+            get { return answerValues; }
         }
 
         #endregion

@@ -13,7 +13,7 @@ namespace Framework.Core
         ///<summary>
         /// Base Url Compulsory End.
         ///</summary>
-        public static String BaseUrlCompulsoryEnd = "/";
+        public readonly static String BaseUrlCompulsoryEnd = "/";
 
         #endregion
 

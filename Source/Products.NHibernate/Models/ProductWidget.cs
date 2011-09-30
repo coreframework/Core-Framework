@@ -7,7 +7,7 @@ namespace Products.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<ProductWidgetToCategory> _categories;
+        private readonly IList<ProductWidgetToCategory> categories;
 
         #endregion
 
@@ -15,7 +15,7 @@ namespace Products.NHibernate.Models
 
         public ProductWidget()
         {
-            _categories = new List<ProductWidgetToCategory>();
+            categories = new List<ProductWidgetToCategory>();
         }
 
         #endregion
@@ -30,7 +30,7 @@ namespace Products.NHibernate.Models
         /// </summary>
         public virtual IEnumerable<ProductWidgetToCategory> Categories
         {
-            get { return _categories;}
+            get { return categories;}
         }
 
         #endregion
@@ -39,7 +39,7 @@ namespace Products.NHibernate.Models
 
         public virtual void AddCategory(ProductWidgetToCategory category)
         {
-            _categories.Add(category);
+            categories.Add(category);
         }
 
         #endregion

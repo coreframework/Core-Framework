@@ -7,9 +7,9 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using Framework.MVC.Breadcrumbs;
+using Framework.Mvc.Breadcrumbs;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for breadcrumbs managing to <see cref="HtmlHelper"/>.

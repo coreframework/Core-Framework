@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace Framework.MVC.Metadata.Attributes
+namespace Framework.Mvc.Metadata.Attributes
 {
     /// <summary>
     /// Specifies predefined file types set.

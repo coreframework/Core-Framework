@@ -9,7 +9,7 @@ using Framework.Facilities.NHibernate.Castle;
 
 namespace Core.News.Nhibernate
 {
-    public class CoreNewsArticlesNHibernateModule
+    public static class CoreNewsArticlesNHibernateModule
     {
         public static void Install(IWindsorContainer container)
         {
@@ -24,7 +24,6 @@ namespace Core.News.Nhibernate
 
             //Register widget data services. 
             container.Register(Component.For<INewsArticleWidgetService>().ImplementedBy<NHibernateNewsArticleWidgetService>().LifeStyle.Transient);
-            container.Register(Component.For<INewsCategoryWidgetService>().ImplementedBy<NHibernateNewsCategoryWidgetService>().LifeStyle.Transient);
         }
     }
 }

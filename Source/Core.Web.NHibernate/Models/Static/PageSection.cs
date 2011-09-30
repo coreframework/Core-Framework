@@ -2,8 +2,19 @@
 {
     public enum PageSection
     {
-        Header = 1,
-        Body = 2,
-        Footer = 3
+        /// <summary>
+        /// Header page section.
+        /// </summary>
+        Header,
+
+        /// <summary>
+        /// Body page section.
+        /// </summary>
+        Body,
+
+        /// <summary>
+        /// Footer page section.
+        /// </summary>
+        Footer
     }
 }

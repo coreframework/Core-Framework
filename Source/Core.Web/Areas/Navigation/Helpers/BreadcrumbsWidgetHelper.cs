@@ -14,7 +14,7 @@ using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
-    public class BreadcrumbsWidgetHelper
+    public static class BreadcrumbsWidgetHelper
     {
         /// <summary>
         /// Binds the widget model.

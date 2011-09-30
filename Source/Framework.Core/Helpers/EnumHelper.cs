@@ -14,7 +14,7 @@ namespace Framework.Core.Helpers
     /// <summary>
     /// Provides helper methods for enumerations.
     /// </summary>
-    public class EnumHelper
+    public static class EnumHelper
     {
         /// <summary>
         /// Parses the specified value.
@@ -75,7 +75,7 @@ namespace Framework.Core.Helpers
         }
 
         /// <summary>
-        /// Gets the string representation for value specified.
+        /// Gets the String representation for value specified.
         /// </summary>
         /// <typeparam name="T">Type of enum.</typeparam>
         /// <param name="value">The value.</param>

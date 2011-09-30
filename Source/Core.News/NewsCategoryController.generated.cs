@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.News.Controllers {
     public partial class NewsCategoryController {
@@ -60,22 +60,22 @@ namespace Core.News.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NewsCategoryController Actions { get { return NewsMVC.NewsCategory; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "NewsCategory";
+        public readonly String Name = "NewsCategory";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ShowAll = "ShowAll";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string ShowById = "ShowById";
-            public readonly string Edit = "Edit";
-            public readonly string New = "New";
-            public readonly string Remove = "Remove";
-            public readonly string ChangeLanguage = "ChangeLanguage";
+            public readonly String ShowAll = "ShowAll";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String ShowById = "ShowById";
+            public readonly String Edit = "Edit";
+            public readonly String New = "New";
+            public readonly String Remove = "Remove";
+            public readonly String ChangeLanguage = "ChangeLanguage";
         }
 
 
@@ -84,12 +84,12 @@ namespace Core.News.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Views/NewsCategory/Edit.aspx";
-            public readonly string EditForm = "~/Views/NewsCategory/EditForm.ascx";
-            public readonly string Index = "~/Views/NewsCategory/Index.aspx";
-            public readonly string New = "~/Views/NewsCategory/New.aspx";
-            public readonly string Show = "~/Views/NewsCategory/Show.aspx";
-            public readonly string ShowForm = "~/Views/NewsCategory/ShowForm.ascx";
+            public readonly String Edit = "~/Views/NewsCategory/Edit.aspx";
+            public readonly String EditForm = "~/Views/NewsCategory/EditForm.ascx";
+            public readonly String Index = "~/Views/NewsCategory/Index.aspx";
+            public readonly String New = "~/Views/NewsCategory/New.aspx";
+            public readonly String Show = "~/Views/NewsCategory/Show.aspx";
+            public readonly String ShowForm = "~/Views/NewsCategory/ShowForm.ascx";
         }
     }
 

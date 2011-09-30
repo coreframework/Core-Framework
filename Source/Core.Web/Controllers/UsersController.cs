@@ -3,7 +3,7 @@ using System.Web.Mvc;
 using Core.Web.Helpers;
 using Core.Web.Models;
 using Core.Web.NHibernate.Helpers;
-using Framework.MVC.Controllers;
+using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Controllers

@@ -16,7 +16,7 @@ using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Controllers;
 using Core.Web.NHibernate.Models;
-using Framework.MVC.Extensions;
+using Framework.Mvc.Extensions;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Helpers
@@ -26,9 +26,9 @@ namespace Core.Web.Areas.Admin.Helpers
     /// </summary>
     public static class MenuExtension
     {
-        private static Dictionary<string, IEnumerable<IMenuItem>> InitializeMenu(HttpContext context, HtmlHelper html)
+        private static Dictionary<String, IEnumerable<IMenuItem>> InitializeMenu(HttpContext context, HtmlHelper html)
         {
-            var menuItems = new Dictionary<string, IEnumerable<IMenuItem>>();
+            var menuItems = new Dictionary<String, IEnumerable<IMenuItem>>();
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             var user = context.CorePrincipal();
             bool isUsersAllowed = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(User), null);
@@ -126,46 +126,13 @@ namespace Core.Web.Areas.Admin.Helpers
             return buffer.ToString(); 
         }
 
-        private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent,int number)
+        private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent, int number)
         {
             var sectionContent = new StringBuilder();
             var firstItem = items.FirstOrDefault();
-            if (firstItem != null)
-            {
-                var h3 = new TagBuilder("h3");
-                if (isCurrent)
-                {
-                    h3.Attributes["id"] = "active";
-                    h3.Attributes["number"] = number.ToString();
-                }
-                var em = new TagBuilder("em");
-                if (!String.IsNullOrEmpty(firstItem.Image))
-                {
-                    em.Attributes["style"] = String.Format("background: url(\"{0}\") no-repeat scroll 5px 50% transparent;", firstItem.GetImageUrl(url));
-                }
-                var link = new TagBuilder("a");
-                link.Attributes["href"] = firstItem.GetUrl(url);
-                link.InnerHtml = title;
-                em.InnerHtml = link.ToString();
-                h3.InnerHtml = em.ToString();
-                sectionContent.Append(h3.ToString());
-            }
-            else
-            {
-                var h3 = new TagBuilder("h3");
-                if (isCurrent)
-                {
-                    h3.Attributes["id"] = "active";
-                    h3.Attributes["number"] = number.ToString();
-                }
-                var em = new TagBuilder("em");
-                var link = new TagBuilder("a");
-                link.Attributes["href"] = "javascript:void(0)";
-                link.InnerHtml = title;
-                em.InnerHtml = link.ToString();
-                h3.InnerHtml = em.ToString();
-                sectionContent.Append(h3.ToString());
-            }
+
+            //renders section header
+            sectionContent.Append(RenderSectionHeader(url, title, isCurrent, number, firstItem));
 
             var divSectionItems = new TagBuilder("div");
             var sectionItems = new TagBuilder("ul");
@@ -175,6 +142,28 @@ namespace Core.Web.Areas.Admin.Helpers
             sectionContent.Append(divSectionItems.ToString());
 
             return sectionContent.ToString();
+        }
+
+        private static String RenderSectionHeader(UrlHelper url, String title, bool isCurrent, int number, IMenuItem item)
+        {
+            var h3 = new TagBuilder("h3");
+            if (isCurrent)
+            {
+                h3.Attributes["id"] = "active";
+                h3.Attributes["number"] = number.ToString();
+            }
+            var em = new TagBuilder("em");
+            if (item != null && !String.IsNullOrEmpty(item.Image))
+            {
+                em.Attributes["style"] = String.Format("background: url(\"{0}\") no-repeat scroll 5px 50% transparent;", item.GetImageUrl(url));
+            }
+            var link = new TagBuilder("a");
+            link.Attributes["href"] = item != null ? item.GetUrl(url) : "javascript:void(0)";
+            link.InnerHtml = title;
+            em.InnerHtml = link.ToString();
+            h3.InnerHtml = em.ToString();
+
+            return h3.ToString();
         }
 
         private static String RenderMenuItems(HtmlHelper html, UrlHelper url, IEnumerable<IMenuItem> items)

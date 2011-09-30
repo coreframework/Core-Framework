@@ -10,9 +10,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Framework.Core.Helpers.Images;
-using Framework.MVC.Controllers;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Controllers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Controllers
@@ -142,7 +142,7 @@ namespace Core.Web.Controllers
             }
         }
 
-        private string GenerateThumbnail(FormCollection form, String imageFileServerPath)
+        private String GenerateThumbnail(FormCollection form, String imageFileServerPath)
         {
             var thumbnailFileVirtualPath = String.Empty;
             if (form.BooleanValue(UploadHelper.GenerateThumbnailFlag))

@@ -1,8 +1,10 @@
-﻿using Core.Framework.Permissions.Helpers;
+﻿using System;
+using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
 namespace Core.Framework.Plugins.Plugins
 {
+    [Flags]
     public enum BasePluginOperations
     {
         [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]

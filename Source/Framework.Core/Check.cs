@@ -113,7 +113,7 @@ namespace Framework.Core
         /// <param name="argument">The argument.</param>
         /// <param name="argumentName">Name of the argument.</param>
         [DebuggerStepThrough]
-        public static void IsPositive<T>(T argument, string argumentName)
+        public static void IsPositive<T>(T argument, String argumentName)
             where T : IComparable
         {
             if (argument.CompareTo(0) <= 0)
@@ -129,7 +129,7 @@ namespace Framework.Core
         /// <param name="argument">The argument.</param>
         /// <param name="argumentName">Name of the argument.</param>
         [DebuggerStepThrough]
-        public static void IsNotEmpty<T>(IEnumerable<T> argument, string argumentName)
+        public static void IsNotEmpty<T>(IEnumerable<T> argument, String argumentName)
         {
             IsNotNull(argument, argumentName);
 

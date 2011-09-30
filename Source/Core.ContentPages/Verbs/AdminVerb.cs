@@ -19,15 +19,15 @@ namespace Core.ContentPages.Verbs
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name
+        public String  Name
         {
-            get { return HttpContext.GetGlobalResourceObject(String.Format("ContentPage.Verbs.AdminVerb"), String.Format("ContentPages")) as String ?? "Content Pages"; }
+            get { return HttpContext.GetGlobalResourceObject("ContentPage.Verbs.AdminVerb", "ContentPages") as String ?? "Content Pages"; }
         }
 
         /// <summary>
         /// Gets the action.
         /// </summary>
-        public string Action
+        public String  Action
         {
             get { return "ShowAll"; }
         }
@@ -35,7 +35,7 @@ namespace Core.ContentPages.Verbs
         /// <summary>
         /// Gets the controller.
         /// </summary>
-        public string Controller
+        public String  Controller
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Core.ContentPages.Verbs
         /// Gets the controller plugin identifier.
         /// </summary>
         /// <value>The controller plugin identifier.</value>
-        public string ControllerPluginIdentifier
+        public String  ControllerPluginIdentifier
         {
             get { return ContentPagePlugin.Instance.Identifier; }
         }

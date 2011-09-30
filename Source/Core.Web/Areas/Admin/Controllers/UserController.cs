@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Linq.Dynamic;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Models;
@@ -11,11 +12,10 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Helpers;
-using Framework.MVC.Controllers;
-using Framework.MVC.Grids;
-using Framework.MVC.Grids.jqGrid;
+using Framework.Mvc.Controllers;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Grids.JqGrid;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
@@ -87,7 +87,7 @@ namespace Core.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
@@ -270,7 +270,7 @@ namespace Core.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult UserGroupsDynamicGridData(int id,int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult UserGroupsDynamicGridData(int id,int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
@@ -300,7 +300,7 @@ namespace Core.Web.Areas.Admin.Controllers
             return Json(jsonData);
         }
 
-        public virtual JsonResult UpdateUserGroups(long id, IEnumerable<string> ids, IEnumerable<string> selids)
+        public virtual JsonResult UpdateUserGroups(long id, IEnumerable<String> ids, IEnumerable<string> selids)
         {
             var user = userService.Find(id);
             if (user == null)

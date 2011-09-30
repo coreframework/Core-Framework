@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Framework.Core.DomainModel;
-using Framework.MVC.Metadata.Attributes;
+using Framework.Mvc.Metadata.Attributes;
 using Products.Helpers;
 using Products.NHibernate.Models;
 

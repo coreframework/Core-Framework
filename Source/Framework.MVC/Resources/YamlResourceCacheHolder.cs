@@ -7,11 +7,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 using Application = Core.Framework.MEF.Web.Application;
 using Environment = Framework.Core.Configuration.Environment;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// YAML resources collection.
@@ -29,7 +29,7 @@ namespace Framework.MVC.Resources
         /// <param name="defaultResourcesPath">The default resources path.</param>
         public YamlResourceCacheHolder(Environment environment, String defaultResourcesPath)
         {
-            caches = new Dictionary<string, YamlResourceCache>();
+            caches = new Dictionary<String, YamlResourceCache>();
             caches.Add(String.Empty, new YamlResourceCache(environment, defaultResourcesPath));
             foreach (var plugin in Application.Plugins)
             {
@@ -53,7 +53,7 @@ namespace Framework.MVC.Resources
         /// <returns>
         /// Cache associated with <paramref name="scope"/> specified or <c>null</c>.
         /// </returns>
-        public IResourceCache GetCache(string scope)
+        public IResourceCache GetCache(String scope)
         {
             String area = scope.Split(YamlResourceCache.ScopeSeparator.ToCharArray()).FirstOrDefault();
             if (String.IsNullOrEmpty(area) || ResourceHelper.MainAreas.Contains(area.ToLower()))
@@ -77,7 +77,7 @@ namespace Framework.MVC.Resources
         /// <returns>
         /// <c>true</c> if the specified cache key contains cache; otherwise, <c>false</c>.
         /// </returns>
-        public bool ContainsCache(string cacheKey)
+        public bool ContainsCache(String cacheKey)
         {
             return caches.ContainsKey(cacheKey.ToLowerInvariant());
         }

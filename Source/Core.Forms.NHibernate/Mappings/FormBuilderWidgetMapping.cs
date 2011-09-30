@@ -19,7 +19,7 @@ namespace Core.Forms.NHibernate.Mappings
 
             HasMany(formBuilderWidget => formBuilderWidget.Answers).KeyColumn("FormWidgetId")
              .Table("Forms_FormsBuilderWidgets")
-             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
              .Inverse()
              .LazyLoad()
              .Cascade.AllDeleteOrphan();

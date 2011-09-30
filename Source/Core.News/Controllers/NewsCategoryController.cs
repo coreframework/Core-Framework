@@ -11,13 +11,12 @@ using Core.News.Models;
 using Core.News.NHibernate.Contracts;
 using Core.News.Nhibernate.Models;
 using Core.News.Permissions.Operations;
-using Framework.MVC.Extensions;
-using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Filters;
 
@@ -40,7 +39,7 @@ namespace Core.News.Controllers
         /// <summary>
         /// Controller Plugin Identifier
         /// </summary>
-        public override string ControllerPluginIdentifier
+        public override String ControllerPluginIdentifier
         {
             get { return NewsPlugin.Instance.Identifier; }
         }
@@ -109,7 +108,7 @@ namespace Core.News.Controllers
 
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;

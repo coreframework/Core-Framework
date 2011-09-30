@@ -251,7 +251,7 @@ namespace Core.Web.Migrations
                      VALUES
                            ((SELECT Id FROM Users WHERE Username='admin')
                            ,{0})",
-                    (int) SystemRoles.Administrator));
+                    (int) SystemRole.Administrator));
         }
     }
 }

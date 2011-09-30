@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
-using Framework.MVC.Routing;
+using Framework.Mvc.Routing;
 
 namespace Core.Web.Areas.Navigation
 {
@@ -25,7 +25,7 @@ namespace Core.Web.Areas.Navigation
             context.MapRoute(null, "navigation/update-navigation-menu", MVC.Navigation.NavigationMenu.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
 
-        public override string AreaName
+        public override String AreaName
         {
             get { return "Navigation"; }
         }

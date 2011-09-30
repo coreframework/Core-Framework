@@ -7,7 +7,7 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static BreadcrumbsViewerVerb _instance;
+        private static BreadcrumbsViewerVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Core.Web.Areas.Navigation.Verbs
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new BreadcrumbsViewerVerb());
+                    return instance ?? (instance = new BreadcrumbsViewerVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.Web.Areas.Navigation.Verbs
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "ViewWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "Breadcrumbs"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Navigation"; }
         }

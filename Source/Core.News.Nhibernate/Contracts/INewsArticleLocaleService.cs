@@ -9,6 +9,6 @@ namespace Core.News.Nhibernate.Contracts
     {
         NewsArticleLocale GetLocale(long newsArticleId, String culture);
 
-        ICriteria GetSearchCriteria(string searchString);
+        ICriteria GetSearchCriteria(String searchString);
     }
 }

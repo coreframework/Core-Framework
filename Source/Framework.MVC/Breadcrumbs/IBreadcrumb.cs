@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 
-namespace Framework.MVC.Breadcrumbs
+namespace Framework.Mvc.Breadcrumbs
 {
     /// <summary>
     /// Describes the breadcrumb's item.

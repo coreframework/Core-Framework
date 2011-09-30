@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Navigation.Controllers {
     public partial class NavigationMenuController {
@@ -53,18 +53,18 @@ namespace Core.Web.Areas.Navigation.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NavigationMenuController Actions { get { return MVC.Navigation.NavigationMenu; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Navigation";
+        public readonly String Area = "Navigation";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "NavigationMenu";
+        public readonly String Name = "NavigationMenu";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ViewWidget = "ViewWidget";
-            public readonly string EditWidget = "EditWidget";
-            public readonly string UpdateWidget = "UpdateWidget";
+            public readonly String ViewWidget = "ViewWidget";
+            public readonly String EditWidget = "EditWidget";
+            public readonly String UpdateWidget = "UpdateWidget";
         }
 
 
@@ -73,9 +73,9 @@ namespace Core.Web.Areas.Navigation.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string EditWidget = "~/Areas/Navigation/Views/NavigationMenu/EditWidget.ascx";
-            public readonly string PartialNavigationMenuItem = "~/Areas/Navigation/Views/NavigationMenu/PartialNavigationMenuItem.ascx";
-            public readonly string ViewWidget = "~/Areas/Navigation/Views/NavigationMenu/ViewWidget.ascx";
+            public readonly String EditWidget = "~/Areas/Navigation/Views/NavigationMenu/EditWidget.ascx";
+            public readonly String PartialNavigationMenuItem = "~/Areas/Navigation/Views/NavigationMenu/PartialNavigationMenuItem.ascx";
+            public readonly String ViewWidget = "~/Areas/Navigation/Views/NavigationMenu/ViewWidget.ascx";
         }
     }
 

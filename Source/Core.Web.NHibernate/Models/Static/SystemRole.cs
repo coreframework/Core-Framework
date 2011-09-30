@@ -1,6 +1,6 @@
 ﻿namespace Core.Web.NHibernate.Models.Static
 {
-    public enum SystemRoles
+    public enum SystemRole
     {
         Administrator = 1,
 

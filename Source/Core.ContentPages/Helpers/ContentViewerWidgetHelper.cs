@@ -8,7 +8,7 @@ using Omu.ValueInjecter;
 
 namespace Core.ContentPages.Helpers
 {
-    public class ContentViewerWidgetHelper
+    public static class ContentViewerWidgetHelper
     {
         #region Methods
 

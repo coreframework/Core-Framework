@@ -14,7 +14,7 @@ using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
-    public class ListMenuWidgetHelper
+    public static class ListMenuWidgetHelper
     {
         /// <summary>
         /// Binds the widget model.

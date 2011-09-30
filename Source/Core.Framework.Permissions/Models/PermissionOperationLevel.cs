@@ -2,10 +2,10 @@
 {
     public enum PermissionOperationLevel
     {
-        Object = 1,
+        Object,
 
-        Type = 2,
+        Type,
 
-        ObjectType = 3
+        ObjectType
     }
 }

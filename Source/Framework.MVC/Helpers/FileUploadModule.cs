@@ -8,7 +8,7 @@ using System;
 using System.Web;
 using System.Web.Security;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Initialize accept language and authentication cookie value for swf-upload requests.
@@ -35,23 +35,6 @@ namespace Framework.MVC.Helpers
 
         #endregion
 
-        #region Event handlers
-
-        /// <summary>
-        /// Begins the request handler.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void BeginRequestHandler(Object sender, EventArgs e)
-        {
-            if (HttpContext.Current.Request.Form[(string) UploadHelper.AuthenticationCookieKey] != null)
-            {
-                UpdateCookie(FormsAuthentication.FormsCookieName, HttpContext.Current.Request.Form[(string) UploadHelper.AuthenticationCookieKey]);
-            }
-        }
-
-        #endregion
-
         #region Helper methods
 
         /// <summary>
@@ -59,7 +42,7 @@ namespace Framework.MVC.Helpers
         /// </summary>
         /// <param name="name">The cookie name.</param>
         /// <param name="value">The cookie value.</param>
-        private void UpdateCookie(String name, string value)
+        private static void UpdateCookie(String name, String value)
         {
             HttpCookie cookie = HttpContext.Current.Request.Cookies.Get(name);
             if (cookie == null)
@@ -70,6 +53,23 @@ namespace Framework.MVC.Helpers
             cookie.Value = value;
             cookie.Expires = DateTime.Now.AddMinutes(10);
             HttpContext.Current.Request.Cookies.Set(cookie);
+        }
+
+        #endregion
+
+        #region Event handlers
+
+        /// <summary>
+        /// Begins the request handler.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void BeginRequestHandler(Object sender, EventArgs e)
+        {
+            if (HttpContext.Current.Request.Form[UploadHelper.AuthenticationCookieKey] != null)
+            {
+                UpdateCookie(FormsAuthentication.FormsCookieName, HttpContext.Current.Request.Form[UploadHelper.AuthenticationCookieKey]);
+            }
         }
 
         #endregion

@@ -9,6 +9,6 @@ namespace Core.ContentPages.NHibernate.Contracts
     {
         ContentPageLocale GetLocale(long contentPageId, String culture);
 
-        ICriteria GetSearchCriteria(string searchString);
+        ICriteria GetSearchCriteria(String searchString);
     }
 }

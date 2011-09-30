@@ -22,12 +22,12 @@ namespace Framework.Facilities.NHibernate.Filters
         /// <summary>
         /// Filter param name constant.
         /// </summary>
-        public const string FilterParamName = "cultureCode";
+        public static readonly String FilterParamName = "cultureCode";
 
         /// <summary>
         /// Default culture filter param name constant.
         /// </summary>
-        public const string DefaultCultureFilterParamName = "defaultCultureCode";
+        public static readonly String DefaultCultureFilterParamName = "defaultCultureCode";
 
         #endregion
 

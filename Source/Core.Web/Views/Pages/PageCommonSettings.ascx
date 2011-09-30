@@ -40,7 +40,7 @@
 </div>
 <script type="text/javascript">
     var locales = {};
-    var currentCulture = '<%=Model.SelectedCulture %>';
+    var currentCulture = '<%=Model.SelectedCulture ?? " "%>';
     
     function completeUpdates(content) {
         if ($('input[type=hidden]#pageUrl', content.get_data()).length > 0) {
@@ -62,7 +62,12 @@
                 success: function (response) {
                     var model = eval('(' + response + ')');
                     $('#Title').val(model.Title);
-                    currentCulture = model.Culture;
+                    if (model.Culture==""){
+                      currentCulture = " ";
+                    }
+                    else {
+                       currentCulture = model.Culture;
+                    }
                 }
                 });
             });

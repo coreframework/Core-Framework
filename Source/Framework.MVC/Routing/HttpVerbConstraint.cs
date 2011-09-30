@@ -9,7 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Framework.MVC.Routing
+namespace Framework.Mvc.Routing
 {
     /// <summary>
     /// Allows you to define which HTTP verbs are permitted when determining whether an HTTP request matches a route. 
@@ -51,7 +51,7 @@ namespace Framework.MVC.Routing
         /// <returns>
         /// true if the URL parameter contains a valid value; otherwise, false.
         /// </returns>
-        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+        public bool Match(HttpContextBase httpContext, Route route, String parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
             var isMatch = true;
 

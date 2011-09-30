@@ -21,7 +21,7 @@ namespace Core.Forms.NHibernate.Contracts
         /// <param name="formId">The form id.</param>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        IQueryable<FormElement> GetSearchQuery(long formId,string searchString);
+        IQueryable<FormElement> GetSearchQuery(long formId,String searchString);
 
         /// <summary>
         /// Gets the last order number.

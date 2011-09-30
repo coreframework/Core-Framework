@@ -6,7 +6,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -32,7 +31,7 @@ namespace Framework.Core.DomainModel
         /// <remarks>
         /// See http://computinglife.wordpress.com/2008/11/20/why-do-hash-functions-use-prime-numbers/ for more information.
         /// </remarks>
-        public const int HashMultiplier = 31;
+        public static readonly int HashMultiplier = 31;
 
         /// <summary>
         /// This static member caches the domain signature properties to avoid looking them up for each instance of the same type.
@@ -53,7 +52,7 @@ namespace Framework.Core.DomainModel
         /// </returns>
         public override bool Equals(Object obj) 
         {
-            BaseObject compareTo = obj as BaseObject;
+            var compareTo = obj as BaseObject;
 
             if (ReferenceEquals(this, compareTo))
             {

@@ -3,8 +3,8 @@ using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
 using Core.Framework.Plugins.Web;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using Products.Helpers;
 using Products.Models;
@@ -19,7 +19,7 @@ namespace Products.Controllers
     {
         #region Properties
 
-        public override string ControllerWidgetIdentifier
+        public override String ControllerWidgetIdentifier
         {
             get { return ProductViewerWidget.Instance.Identifier; }
         }
@@ -81,10 +81,10 @@ namespace Products.Controllers
                 if (instance.InstanceId != null)
                 {
                     var widgetService = ServiceLocator.Current.GetInstance<IProductWidgetService>();
-                    var exWidget = widgetService.Find((long)instance.InstanceId);
+                    var existingWidget = widgetService.Find((long)instance.InstanceId);
 
-                    if (exWidget != null)
-                        widget = exWidget;
+                    if (existingWidget != null)
+                        widget = existingWidget;
                 }
                 return PartialView(new ProductWidgetModel().MapFrom(widget));
             }

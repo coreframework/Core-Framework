@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
@@ -7,16 +8,11 @@ namespace Core.Web.NHibernate.Models
 {
     public class SiteSettings: Entity, IPermissible
     {
-        #region
+        #region Fields
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SiteSettings"/> class.
-        /// </summary>
-        public SiteSettings()
-        {
-            PermissionTitle = "Site Settings";
-            Operations = OperationsHelper.GetOperations<BaseEntityOperations>();
-        }
+        private String permissionTitle = "Site Settings";
+
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<BaseEntityOperations>();
 
         #endregion
 
@@ -36,13 +32,21 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle
+        {
+            get { return permissionTitle; }
+            set { permissionTitle = value; }
+        }
 
         /// <summary>
-        /// Gets or sets the object permission operations.
+        /// Gets or sets the permission operations.
         /// </summary>
-        /// <value>The object permission operations.</value>
-        public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+        /// <value>The permission operations.</value>
+        public virtual IEnumerable<IPermissionOperation> Operations
+        {
+            get { return operations; }
+            set { operations = value; }
+        }
 
         #endregion
     }

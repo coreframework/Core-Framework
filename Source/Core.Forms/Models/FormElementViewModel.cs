@@ -13,9 +13,9 @@ namespace Core.Forms.Models
     {
         #region Fields
 
-        List<ElementTypeDescriptionModel> _types;
+        private List<ElementTypeDescriptionModel> types;
 
-        private IDictionary<String, String> _cultures;
+        private IDictionary<String, String> cultures;
 
         #endregion
 
@@ -52,7 +52,7 @@ namespace Core.Forms.Models
         /// <value>The types.</value>
         public List<ElementTypeDescriptionModel> Types
         {
-            get { return _types ?? (_types = BindElementTypes()); }
+            get { return types ?? (types = BindElementTypes()); }
         }
 
         /// <summary>
@@ -91,8 +91,8 @@ namespace Core.Forms.Models
         /// <value>The cultures.</value>
         public IDictionary<String, String> Cultures
         {
-            get { return _cultures ?? (_cultures = CultureHelper.GetAvailableCultures()); }
-            set { _cultures = value; }
+            get { return cultures ?? (cultures = CultureHelper.GetAvailableCultures()); }
+            set { cultures = value; }
         }
 
         public FormElementViewModel MapFrom(FormElement from)

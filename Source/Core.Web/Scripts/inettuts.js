@@ -70,7 +70,7 @@ var iNettuts = {
                             dialog.dialog();
                         }
                     );
-                        dialog.dialog({ width: 500, resizable: false, modal: true, position: 'top', close: function (ev, ui) { $(this).remove(); } });
+                        dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150], close: function (ev, ui) { $(this).remove(); } });
                         return false;
                     });
                 }

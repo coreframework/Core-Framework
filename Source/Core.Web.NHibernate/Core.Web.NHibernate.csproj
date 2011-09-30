@@ -129,13 +129,8 @@
     <Compile Include="Contracts\ISchemaInfoService.cs" />
     <Compile Include="Contracts\Localization\ILocaleService.cs" />
     <Compile Include="Contracts\Permissions\IEntityTypeService.cs" />
-    <Compile Include="Contracts\Permissions\IPermissionsBuilder.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Contracts\Permissions\IPermissionService.cs" />
-    <Compile Include="Contracts\Permissions\IPermissionsQuery.cs" />
     <Compile Include="Contracts\Permissions\ISystemUserService.cs" />
-    <Compile Include="Contracts\Permissions\PermissionsBuilder.cs" />
     <Compile Include="Contracts\Widgets\IBreadcrumbsWidgetService.cs" />
     <Compile Include="Contracts\Widgets\IListMenuWidgetService.cs" />
     <Compile Include="Contracts\Widgets\INavigationMenuWidgetService.cs" />
@@ -182,8 +177,7 @@
     <Compile Include="Models\RoleLocale.cs" />
     <Compile Include="Models\SiteSettings.cs" />
     <Compile Include="Models\Static\PageSection.cs" />
-    <Compile Include="Models\Static\PermissionScope.cs" />
-    <Compile Include="Models\Static\SystemRoles.cs" />
+    <Compile Include="Models\Static\SystemRole.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\LookAndFeelSettings.cs" />
     <Compile Include="Models\PageLayout.cs" />
@@ -212,9 +206,7 @@
     <Compile Include="Models\Widgets\NavigationMenuWidget.cs" />
     <Compile Include="Models\Widgets\SiteMapWidget.cs" />
     <Compile Include="Permissions\Operations\PageOperations.cs" />
-    <Compile Include="Permissions\Operations\PluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\Common\LocaleService.cs" />
     <Compile Include="Services\Common\PageCommonService.cs" />
     <Compile Include="Services\NHibernateSiteSettingsService.cs" />
     <Compile Include="Services\NHibernatePageLayoutColumnWidthValueService.cs" />

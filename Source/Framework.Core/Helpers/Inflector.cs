@@ -37,6 +37,17 @@ namespace Framework.Core.Helpers
         /// </summary>
         static Inflector()
         {
+            AddPluralRules();
+
+            AddSingularRules();
+
+            AddIrregularRules();
+
+            AddUncountableRules();
+        }
+
+        private static void AddPluralRules()
+        {
             AddPlural("$", "s");
             AddPlural("s$", "s");
             AddPlural("(ax|test)is$", "$1es");
@@ -54,7 +65,10 @@ namespace Framework.Core.Helpers
             AddPlural("([m|l])ouse$", "$1ice");
             AddPlural("^(ox)$", "$1en");
             AddPlural("(quiz)$", "$1zes");
+        }
 
+        private static void AddSingularRules()
+        {
             AddSingular("s$", String.Empty);
             AddSingular("(n)ews$", "$1ews");
             AddSingular("([ti])a$", "$1um");
@@ -79,13 +93,19 @@ namespace Framework.Core.Helpers
             AddSingular("(vert|ind)ices$", "$1ex");
             AddSingular("(matr)ices$", "$1ix");
             AddSingular("(quiz)zes$", "$1");
+        }
 
+        private static void AddIrregularRules()
+        {
             AddIrregular("person", "people");
             AddIrregular("man", "men");
             AddIrregular("child", "children");
             AddIrregular("sex", "sexes");
             AddIrregular("move", "moves");
+        }
 
+        private static void AddUncountableRules()
+        {
             AddUncountable("equipment");
             AddUncountable("information");
             AddUncountable("rice");

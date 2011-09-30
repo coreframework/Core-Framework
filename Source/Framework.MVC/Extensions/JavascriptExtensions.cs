@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Web.Mvc;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extensions for working with javascript.
@@ -21,7 +21,7 @@ namespace Framework.MVC.Extensions
         /// <summary>
         /// Script manager key.
         /// </summary>
-        public static String ScriptManagerKey = "JavascriptManager";
+        public static readonly String ScriptManagerKey = "JavascriptManager";
 
         #endregion
 
@@ -55,7 +55,7 @@ namespace Framework.MVC.Extensions
         public static HashSet<String> GetJsResourcesStorage(ViewContext context)
         {
             return context.HttpContext.Items[ScriptManagerKey] as HashSet<String> ??
-                                new HashSet<string>();
+                                new HashSet<String>();
         }
 
         /// <summary>

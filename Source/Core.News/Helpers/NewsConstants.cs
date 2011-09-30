@@ -3,20 +3,20 @@ using System.Globalization;
 
 namespace Core.News.Helpers
 {
-    public class NewsConstants
+    public static class NewsConstants
     {
-        public const string Newsvidgetid = "newsvidgetid";
-        public const string Articleid = "articleid";
-        public const string CurrentPage = "currpage";
+        public static readonly String Newsvidgetid = "newsvidgetid";
+        public static readonly String Articleid = "articleid";
+        public static readonly String CurrentPage = "currpage";
 
-        public const String PagerLink = "<a href='{0}'>{1}</a>";
-        public const String Pager= "<div class='pager'>{0}</div>";
-        public const String PagerCurrent = "<span class='current'>{0}</span>";
+        public static readonly String PagerLink = "<a href='{0}'>{1}</a>";
+        public static readonly String Pager= "<div class='pager'>{0}</div>";
+        public static readonly String PagerCurrent = "<span class='current'>{0}</span>";
 
-        public const String CurrentRequestParams = "currentRequestParams";
-        public const String IsAjaxPageQueryRequestParam = "isAjax";
+        public static readonly String CurrentRequestParams = "currentRequestParams";
+        public static readonly String IsAjaxPageQueryRequestParam = "isAjax";
 
-        public static string JqueryDateFormat
+        public static String JqueryDateFormat
         {
             get
             {
@@ -24,7 +24,7 @@ namespace Core.News.Helpers
             }
         }
 
-        public static string DateFormat
+        public static String DateFormat
         {
             get
             {

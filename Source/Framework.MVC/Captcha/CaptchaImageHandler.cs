@@ -24,7 +24,7 @@ using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Framework.MVC.Captcha
+namespace Framework.Mvc.Captcha
 {
     /// <summary>
     /// Captcha image stream HttpModule. Retrieves CAPTCHA objects from cache, renders them to memory, 
@@ -52,7 +52,7 @@ namespace Framework.MVC.Captcha
         public void ProcessRequest(HttpContext context)
         {
             // get the unique GUID of the captcha; this must be passed in via the querystring
-            string guid = context.Request.QueryString["guid"];
+            String guid = context.Request.QueryString["guid"];
             CaptchaImage ci = CaptchaImage.GetCachedCaptcha(guid);
 
             if (String.IsNullOrEmpty(guid) || ci == null)

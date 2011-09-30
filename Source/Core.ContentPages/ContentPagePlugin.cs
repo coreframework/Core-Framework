@@ -23,7 +23,7 @@ namespace Core.ContentPages
 
         #region Singleton
 
-        private static ContentPagePlugin _instance;
+        private static ContentPagePlugin instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -33,7 +33,7 @@ namespace Core.ContentPages
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new ContentPagePlugin());
+                    return instance ?? (instance = new ContentPagePlugin());
                 }
             }
         }
@@ -74,14 +74,14 @@ namespace Core.ContentPages
         /// <summary>
         /// Gets the Plugin Identifiers config path.
         /// </summary>
-        public override string PluginConfigPath
+        public override String  PluginConfigPath
         {
             get { return ContentPageConfig; }
         }
 
         #region IPermissible members
 
-        public string PermissionTitle { get; set; }
+        public String  PermissionTitle { get; set; }
 
         public IEnumerable<IPermissionOperation> Operations { get; set; }
 

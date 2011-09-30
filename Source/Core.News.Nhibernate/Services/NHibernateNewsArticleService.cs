@@ -21,7 +21,7 @@ namespace Core.News.Nhibernate.Services
             return baseQuery.Count();
         }
 
-        public IQueryable<NewsArticle> GetSearchQuery(string searchString)
+        public IQueryable<NewsArticle> GetSearchQuery(String searchString)
         {
             var baseQuery = CreateQuery();
             return String.IsNullOrEmpty(searchString) ? baseQuery : baseQuery.Where(article => article.Title.Contains(searchString) || article.Content.Contains(searchString));

@@ -7,17 +7,17 @@ namespace Products.Verbs.Widgets
     {
         #region Singleton
 
-        private static CategoryWidgetViewerVerb _instance;
+        private static CategoryWidgetViewerVerb instance;
 
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Object syncRoot = new Object();
 
         public static CategoryWidgetViewerVerb Instance
         {
             get
             {
-                lock (SyncRoot)
+                lock (syncRoot)
                 {
-                    return _instance ?? (_instance = new CategoryWidgetViewerVerb());
+                    return instance ?? (instance = new CategoryWidgetViewerVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Products.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "ViewWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "CategoryViewerWidget"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Product"; }
         }

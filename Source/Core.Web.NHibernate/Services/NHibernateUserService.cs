@@ -192,7 +192,7 @@ namespace Core.Web.NHibernate.Services
             return baseQuery.Count();
         }
 
-        public IQueryable<User> GetSearchQuery(string searchString)
+        public IQueryable<User> GetSearchQuery(String searchString)
         {
             var baseQuery = CreateQuery();
             if (String.IsNullOrEmpty(searchString))

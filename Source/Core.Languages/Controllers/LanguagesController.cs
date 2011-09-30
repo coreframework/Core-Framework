@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -12,11 +13,10 @@ using Core.Languages.NHibernate.Contracts;
 using Core.Languages.NHibernate.Models;
 using Core.Languages.Permissions.Operations;
 using Framework.Core.Localization;
-using Framework.MVC.Extensions;
-using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Filters;
 
@@ -37,7 +37,7 @@ namespace Core.Languages.Controllers
 
         #region Properties
 
-        public override string ControllerPluginIdentifier
+        public override String ControllerPluginIdentifier
         {
             get { return LanguagesPlugin.Instance.Identifier; }
         }
@@ -109,7 +109,7 @@ namespace Core.Languages.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
@@ -230,7 +230,7 @@ namespace Core.Languages.Controllers
         public virtual ActionResult SetAsDefault(long id)
         {
             var language = languageService.Find(id);
-            var currentDefaultLanguage = languageService.GetDefaultLanguage();
+            var currentDefaultLanguage = languageService.DefaultLanguage;
             if(language != currentDefaultLanguage)
             {
                 if (currentDefaultLanguage != null)

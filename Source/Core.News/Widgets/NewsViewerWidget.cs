@@ -14,7 +14,7 @@ namespace Core.News.Widgets
     {
         #region Singleton
 
-        private static NewsViewerWidget _instance;
+        private static NewsViewerWidget instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -24,7 +24,7 @@ namespace Core.News.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NewsViewerWidget());
+                    return instance ?? (instance = new NewsViewerWidget());
                 }
             }
         }

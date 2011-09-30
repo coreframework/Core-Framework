@@ -14,12 +14,12 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Core.Framework.Plugins.Web;
 using Framework.Core;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
 using Microsoft.Practices.ServiceLocation;
 using Environment = Framework.Core.Configuration.Environment;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for resource managing to <see cref="HtmlHelper"/>.
@@ -31,22 +31,22 @@ namespace Framework.MVC.Extensions
         /// <summary>
         /// Virtual path for directory with css files (~/Content/Css/).
         /// </summary>
-        public const String CssPath = "~/Content/Css/";
+        public static readonly String CssPath = "~/Content/Css/";
 
         /// <summary>
         /// Virtual path for directory with javascript files (~/Scripts/).
         /// </summary>
-        public const String JavascriptPath = "~/Scripts/";
+        public static readonly String JavascriptPath = "~/Scripts/";
 
         /// <summary>
         /// Path for asset packager config.
         /// </summary>
-        public const String AssetPackagesConfigPath = "~/Config/asset_packages.yml";
+        public static readonly String AssetPackagesConfigPath = "~/Config/asset_packages.yml";
 
         /// <summary>
         /// Virtual path for directory with css files (~/Content/Css/).
         /// </summary>
-        public const String PluginCssPath = "~/Content/Css/Plugin/";
+        public static readonly String PluginCssPath = "~/Content/Css/Plugin/";
 
         private const String TimeSpampFormat = "yyyyMMddhhmmss";
 
@@ -158,13 +158,13 @@ namespace Framework.MVC.Extensions
         /// <returns>HTML markup for including css-file specified in plugins.</returns>
         public static String CssPluginPackHelper(HttpContext context, IEnumerable<ICorePlugin> plugins, String fileName, RouteValueDictionary htmlAttributes)
         {
-            if (String.IsNullOrEmpty(fileName) || plugins == null || plugins.Count() == 0)
+            if (String.IsNullOrEmpty(fileName) || plugins == null || !plugins.Any())
             {
                 return String.Empty;
             }
             var cssServerPath = context.Server.MapPath(PluginCssPath);
             var file = Math.Abs(fileName.GetHashCode()) + CssExtension;
-            return AssetsHelper.BuildPluginsCssPack(Environment.Test, plugins, context.Request.PhysicalApplicationPath, cssServerPath, file);
+            return AssetsHelper.BuildPluginsCssPack(plugins, context.Request.PhysicalApplicationPath, cssServerPath, file);
         }
 
         /// <summary>
@@ -177,14 +177,14 @@ namespace Framework.MVC.Extensions
         /// <returns>HTML markup for including css-file specified in plugins.</returns>
         public static String CssPluginPackHelper(HttpContextBase context, IEnumerable<ICorePlugin> plugins, String fileName, RouteValueDictionary htmlAttributes)
         {
-            if (String.IsNullOrEmpty(fileName) || plugins == null || plugins.Count() == 0)
+            if (String.IsNullOrEmpty(fileName) || plugins == null || !plugins.Any())
             {
-                return string.Empty;
+                return String.Empty;
             }
-            var environment = GetEnvironment();
+
             var cssServerPath = context.Server.MapPath(PluginCssPath);
             var file = Math.Abs(fileName.GetHashCode()) + CssExtension;
-            var filePath = AssetsHelper.BuildPluginsCssPack(environment, plugins, context.Request.PhysicalApplicationPath, cssServerPath, file);
+            var filePath = AssetsHelper.BuildPluginsCssPack(plugins, context.Request.PhysicalApplicationPath, cssServerPath, file);
             return filePath;
         }
 

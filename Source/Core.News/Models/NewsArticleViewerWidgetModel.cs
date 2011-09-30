@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Core.News.Nhibernate.Contracts;
 using Core.News.Nhibernate.Models;
 using Framework.Core.DomainModel;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 
 namespace Core.News.Models
 {
@@ -12,7 +13,7 @@ namespace Core.News.Models
     {
         #region Fields
 
-        private List<NewsArticle> _newsArticles;
+        private List<NewsArticle> newsArticles;
 
         #endregion
 
@@ -29,9 +30,9 @@ namespace Core.News.Models
         {
             get
             {
-                if (_newsArticles == null)
+                if (newsArticles == null)
                 {
-                    _newsArticles = new List<NewsArticle>();
+                    newsArticles = new List<NewsArticle>();
                     if (NewsCategories != null)
                     {
                         var newsArticleService = ServiceLocator.Current.GetInstance<INewsArticleService>();
@@ -40,19 +41,19 @@ namespace Core.News.Models
                         {
                             foreach (var category in NewsCategories)
                             {
-                                if (!_newsArticles.Contains(article))
+                                if (!newsArticles.Contains(article))
                                 {
                                     foreach (var newsCategory in article.Categories)
                                     {
                                         if (newsCategory.Id == category.Id)
-                                            _newsArticles.Add(article);
+                                            newsArticles.Add(article);
                                     }
                                 }
                             }
                         }
                     }
                 }
-                return _newsArticles;
+                return newsArticles;
             }
         }
 
@@ -78,7 +79,7 @@ namespace Core.News.Models
 
         public int CurrentPage { get; set; }
 
-        public string Url { get; set; }
+        public String Url { get; set; }
 
         #endregion
 

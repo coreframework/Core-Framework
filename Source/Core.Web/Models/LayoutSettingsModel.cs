@@ -14,10 +14,4 @@ namespace Core.Web.Models
         [DataMember]
         public IList<RowSettings> RowsSetting { get; set; }
     }
-
-    public class RowSettings
-    {
-        public long RowId { get; set; }
-        public IList<int> ColumnsWidth { get; set; }
-    }
 }

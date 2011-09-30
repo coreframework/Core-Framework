@@ -7,17 +7,17 @@ namespace Core.Forms.Verbs.Widgets
     {
         #region Singleton
 
-        private static FormsBuilderWidgetViewerVerb _instance;
+        private static FormsBuilderWidgetViewerVerb instance;
 
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Object syncRoot = new Object();
 
         public static FormsBuilderWidgetViewerVerb Instance
         {
             get
             {
-                lock (SyncRoot)
+                lock (syncRoot)
                 {
-                    return _instance ?? (_instance = new FormsBuilderWidgetViewerVerb());
+                    return instance ?? (instance = new FormsBuilderWidgetViewerVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.Forms.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "ViewWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "FormsBuilderWidget"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Forms"; }
         }

@@ -14,7 +14,7 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using Framework.Core.DomainModel;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extends <see cref="HtmlHelper"/> functionality for radio buttons.
@@ -70,7 +70,7 @@ namespace Framework.MVC.Extensions
             StringBuilder builder = new StringBuilder();
             foreach (var radiobutton in items)
             {
-                IDictionary<String, Object> buttonHtmlAttributes = new Dictionary<string, object>(htmlAttributes)
+                IDictionary<String, Object> buttonHtmlAttributes = new Dictionary<String, Object>(htmlAttributes)
                                                                        {
                                                                            { "id", radiobutton.Value }
                                                                        };

@@ -97,6 +97,6 @@ namespace Core.Web.NHibernate.Contracts
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        IQueryable<User> GetSearchQuery(string searchString);
+        IQueryable<User> GetSearchQuery(String searchString);
     }
 }

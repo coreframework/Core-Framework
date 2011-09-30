@@ -8,7 +8,7 @@ using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for generating buttons HTML-markup to <see cref="HtmlHelper"/>.
@@ -20,22 +20,22 @@ namespace Framework.MVC.Extensions
         /// <summary>
         /// Indicates hidden submit button.
         /// </summary>
-        public const String HiddenSubmitCssClass = "hidden-submit";
+        public static readonly String HiddenSubmitCssClass = "hidden-submit";
 
         /// <summary>
         /// Indicates link buttons.
         /// </summary>
-        public const String ButtonCssClass = "button";
+        public static readonly String ButtonCssClass = "button";
 
         /// <summary>
         /// Indicates link buttons that submits form.
         /// </summary>
-        public const String SubmitButtonCssClass = "submit-button";
+        public static readonly String SubmitButtonCssClass = "submit-button";
 
         /// <summary>
         /// Empty javascript action (javascript:void(0);).
         /// </summary>
-        public const String EmptyHref = "javascript:void(0);";
+        public static readonly String EmptyHref = "javascript:void(0);";
 
         #endregion
 

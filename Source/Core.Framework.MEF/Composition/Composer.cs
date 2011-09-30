@@ -122,13 +122,13 @@ namespace Core.Framework.MEF.Composition
         /// <typeparam name="T">The type of instance to resolve.</typeparam>
         /// <param name="contractName">The contract name the type was exported with.</param>
         /// <returns>The resolved instance.</returns>
-        public T Resolve<T>(string contractName)
+        public T Resolve<T>(String contractName)
         {
             if (Catalog == null)
                 return default(T);
 
             EnsureContainer();
-            return (string.IsNullOrEmpty(contractName))
+            return String.IsNullOrEmpty(contractName)
                        ? Container.GetExportedValue<T>()
                        : Container.GetExportedValue<T>(contractName);
         }
@@ -151,13 +151,13 @@ namespace Core.Framework.MEF.Composition
         /// <typeparam name="TMetadata">The metadata type to resolve.</typeparam>
         /// <param name="contractName">The contract name the type was exported with.</param>
         /// <returns>A <see cref="Lazy{T,TMetadata}" /> that allows lazy-loading.</returns>
-        public Lazy<T, TMetadata> Resolve<T, TMetadata>(string contractName)
+        public Lazy<T, TMetadata> Resolve<T, TMetadata>(String contractName)
         {
             if (Catalog == null)
                 return null;
 
             EnsureContainer();
-            return (string.IsNullOrEmpty(contractName))
+            return String.IsNullOrEmpty(contractName)
                        ? Container.GetExport<T, TMetadata>()
                        : Container.GetExport<T, TMetadata>(contractName);
         }
@@ -178,13 +178,13 @@ namespace Core.Framework.MEF.Composition
         /// <typeparam name="T">The type of instance to resolve.</typeparam>
         /// <param name="contractName">The contract name the type was exported with.</param>
         /// <returns>An enumerable of resolved instances.</returns>
-        public IEnumerable<T> ResolveAll<T>(string contractName)
+        public IEnumerable<T> ResolveAll<T>(String contractName)
         {
             if (Catalog == null)
                 return new T[0];
 
             EnsureContainer();
-            return (string.IsNullOrEmpty(contractName))
+            return String.IsNullOrEmpty(contractName)
                        ? Container.GetExportedValues<T>()
                        : Container.GetExportedValues<T>(contractName);
         }
@@ -207,13 +207,13 @@ namespace Core.Framework.MEF.Composition
         /// <typeparam name="TMetadata">The metadata type to resolve.</typeparam>
         /// <param name="contractName">The contract name the type was exported with.</param>
         /// <returns>An enumerable of <see cref="Lazy{T,TMetadata}" />.</returns>
-        public IEnumerable<Lazy<T, TMetadata>> ResolveAll<T, TMetadata>(string contractName)
+        public IEnumerable<Lazy<T, TMetadata>> ResolveAll<T, TMetadata>(String contractName)
         {
             if (Catalog == null)
                 return null;
 
             EnsureContainer();
-            return (string.IsNullOrEmpty(contractName))
+            return String.IsNullOrEmpty(contractName)
                        ? Container.GetExports<T, TMetadata>()
                        : Container.GetExports<T, TMetadata>(contractName);
         }

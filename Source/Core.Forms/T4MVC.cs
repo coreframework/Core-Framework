@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -42,7 +42,7 @@ namespace System.Web.Mvc {
             return t4MVCResult;
         }
         
-        public static void InitMVCT4Result(this IT4MVCActionResult result, string area, string controller, string action) {
+        public static void InitMVCT4Result(this IT4MVCActionResult result, String area, String controller, String action) {
             result.Area = area;
             result.Controller = controller;
             result.Action = action;
@@ -58,26 +58,26 @@ namespace System.Web.Mvc {
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
-    public T4MVC_ActionResult(string area, string controller, string action): base()  {
+    public T4MVC_ActionResult(String area, String controller, String action): base()  {
         this.InitMVCT4Result(area, controller, action);
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
-    public string Area { get; set; }
-    public string Controller { get; set; }
-    public string Action { get; set; }
+    public String Area { get; set; }
+    public String Controller { get; set; }
+    public String Action { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
-    public T4MVC_JsonResult(string area, string controller, string action): base()  {
+    public T4MVC_JsonResult(String area, String controller, String action): base()  {
         this.InitMVCT4Result(area, controller, action);
     }
     
-    public string Area { get; set; }
-    public string Controller { get; set; }
-    public string Action { get; set; }
+    public String Area { get; set; }
+    public String Controller { get; set; }
+    public String Action { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 
@@ -85,25 +85,32 @@ public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
 
 namespace Links {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class Scripts {
+        private const String URLPATH = "~/Scripts";
+        public static String Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static String Url(String fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+    }
+
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static class Content {
-        private const string URLPATH = "~/Content";
-        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        private const String URLPATH = "~/Content";
+        public static String Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static String Url(String fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class Css {
-            private const string URLPATH = "~/Content/Css";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string forms_css = Url("forms.css");
+            private const String URLPATH = "~/Content/Css";
+            public static String Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static String Url(String fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly String forms_css = Url("forms.css");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public static class Templates {
-            private const string URLPATH = "~/Content/Templates";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string FormsAnswerTemplate_txt = Url("FormsAnswerTemplate.txt");
-            public static readonly string FormsAnswerValueTemplate_txt = Url("FormsAnswerValueTemplate.txt");
+            private const String URLPATH = "~/Content/Templates";
+            public static String Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static String Url(String fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly String FormsAnswerTemplate_txt = Url("FormsAnswerTemplate.txt");
+            public static readonly String FormsAnswerValueTemplate_txt = Url("FormsAnswerValueTemplate.txt");
         }
     
     }
@@ -114,9 +121,9 @@ static class T4MVCHelpers {
     // You can change the ProcessVirtualPath method to modify the path that gets returned to the client.
     // e.g. you can prepend a domain, or append a query string:
     //      return "http://localhost" + path + "?foo=bar";
-    private static string ProcessVirtualPathDefault(string virtualPath) {
+    private static String ProcessVirtualPathDefault(String virtualPath) {
         // The path that comes in starts with ~/ and must first be made absolute
-        string path = VirtualPathUtility.ToAbsolute(virtualPath);
+        String path = VirtualPathUtility.ToAbsolute(virtualPath);
         
         // Add your own modifications here before returning the path
         return path;

@@ -10,31 +10,31 @@ namespace Framework.Core
         ///<summary>
         /// Environment constant.
         ///</summary>
-        public const String Environment = "environment";
+        public static readonly String Environment = "environment";
 
         /// <summary>
         /// ActionResult constant
         /// </summary>
-        public const String ActionResult = "ActionResult";
+        public static readonly String ActionResult = "ActionResult";
 
         /// <summary>
         /// ActionResultMessage constant
         /// </summary>
-        public const String ActionResultMessage = "ActionResultMessage";
+        public static readonly String ActionResultMessage = "ActionResultMessage";
 
         /// <summary>
         /// PageModeCookieName constant
         /// </summary>
-        public const String PageModeCookieName = "PageModeCookie";
+        public static readonly String PageModeCookieName = "PageModeCookie";
 
         /// <summary>
         /// CultureCookieName constant
         /// </summary>
-        public const String CultureCookieName = "CultureCookie";
+        public static readonly String CultureCookieName = "CultureCookie";
 
         /// <summary>
         /// Default culture constant.
         /// </summary>
-        public const String DefaultCulture = "DefaultCulture";
+        public static readonly String DefaultCulture = "DefaultCulture";
     }
 }

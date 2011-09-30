@@ -17,7 +17,7 @@ namespace Core.News.NHibernate.Services
         }
 
 
-        public IQueryable<NewsCategory> GetSearchQuery(string search)
+        public IQueryable<NewsCategory> GetSearchQuery(String search)
         {
             var baseQuery = CreateQuery();
            // if (String.IsNullOrEmpty(search))
@@ -32,18 +32,18 @@ namespace Core.News.NHibernate.Services
             return searchQuery.Count();
         }
 
-        public IEnumerable<NewsCategory> GetCategories(string searchString)
+        public IEnumerable<NewsCategory> GetCategories(String search)
         {
             var baseQuery = CreateQuery();
           //  var allCategories = baseQuery.ToList();
-            if (String.IsNullOrEmpty(searchString))
+            if (String.IsNullOrEmpty(search))
             {
                 return baseQuery;
             }
-            return baseQuery.Where(category => category.CurrentCategoryLocales.Any(item=>item.Title.Contains(searchString)));
+            return baseQuery.Where(category => category.CurrentCategoryLocales.Any(item => item.Title.Contains(search)));
         }
 
-        public int GetCount(string searchQuery)
+        public int GetCount(String searchQuery)
         {
             return 0;
         }

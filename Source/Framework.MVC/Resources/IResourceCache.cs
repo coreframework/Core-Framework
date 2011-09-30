@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Specifies interface for resource cache.

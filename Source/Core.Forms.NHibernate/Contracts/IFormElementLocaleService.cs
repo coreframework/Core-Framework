@@ -21,6 +21,6 @@ namespace Core.Forms.NHibernate.Contracts
         /// <param name="formId">The form id.</param>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        ICriteria GetSearchCriteria(long formId, string searchString);
+        ICriteria GetSearchCriteria(long formId, String searchString);
     }
 }

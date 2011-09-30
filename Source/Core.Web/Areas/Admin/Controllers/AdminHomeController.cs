@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
-using Framework.MVC.Breadcrumbs;
-using Framework.MVC.Controllers;
+using Framework.Mvc.Breadcrumbs;
+using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Controllers
@@ -12,7 +12,7 @@ namespace Core.Web.Areas.Admin.Controllers
     {
         #region Fields
 
-        private readonly IBreadcrumbsBuilder _breadcrumbsBuilder;
+        private readonly IBreadcrumbsBuilder breadcrumbsBuilder;
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace Core.Web.Areas.Admin.Controllers
 
         public AdminHomeController()
         {
-            _breadcrumbsBuilder = ServiceLocator.Current.GetInstance<IBreadcrumbsBuilder>();
+            breadcrumbsBuilder = ServiceLocator.Current.GetInstance<IBreadcrumbsBuilder>();
         }
 
         #endregion
@@ -31,7 +31,7 @@ namespace Core.Web.Areas.Admin.Controllers
         /// <returns>Dashboard view.</returns>
         public virtual ActionResult Index()
         {
-            _breadcrumbsBuilder.BuildBreadcrumbs(this, new[] {
+            breadcrumbsBuilder.BuildBreadcrumbs(this, new[] {
                                                                new Breadcrumb
                                                                    {
                                                                        Text = Translate("Titles.Home"),

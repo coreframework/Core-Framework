@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class WidgetController {
@@ -65,22 +65,22 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public WidgetController Actions { get { return MVC.Admin.Widget; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Widget";
+        public readonly String Name = "Widget";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string Edit = "Edit";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string Update = "Update";
-            public readonly string Enable = "Enable";
-            public readonly string Disable = "Disable";
+            public readonly String Index = "Index";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String Edit = "Edit";
+            public readonly String ChangeLanguage = "ChangeLanguage";
+            public readonly String Update = "Update";
+            public readonly String Enable = "Enable";
+            public readonly String Disable = "Disable";
         }
 
 
@@ -89,9 +89,9 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Areas/Admin/Views/Widget/Edit.aspx";
-            public readonly string EditForm = "~/Areas/Admin/Views/Widget/EditForm.ascx";
-            public readonly string Index = "~/Areas/Admin/Views/Widget/Index.aspx";
+            public readonly String Edit = "~/Areas/Admin/Views/Widget/Edit.aspx";
+            public readonly String EditForm = "~/Areas/Admin/Views/Widget/EditForm.ascx";
+            public readonly String Index = "~/Areas/Admin/Views/Widget/Index.aspx";
         }
     }
 

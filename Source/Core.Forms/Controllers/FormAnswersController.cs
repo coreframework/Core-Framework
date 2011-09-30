@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Linq.Dynamic;
+using System.Web;
 using System.Web.Mvc;
 using Core.Forms.NHibernate.Contracts;
 using Core.Forms.NHibernate.Models;
@@ -12,12 +14,11 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Framework.Core;
-using Framework.MVC.Extensions;
-using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.Permissions.Helpers;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Filters;
 
@@ -29,11 +30,11 @@ namespace Core.Forms.Controllers
     {
         #region Fields
 
-        private readonly IPermissionCommonService _permissionService;
+        private readonly IPermissionCommonService permissionService;
 
-        private readonly IFormBuilderWidgetService _formBuilderWidgetService;
+        private readonly IFormBuilderWidgetService formBuilderWidgetService;
 
-        private readonly IFormWidgetAnswerService _formWidgetAnswersService;
+        private readonly IFormWidgetAnswerService formWidgetAnswersService;
 
         #endregion
 
@@ -43,7 +44,7 @@ namespace Core.Forms.Controllers
         /// Gets the controller plugin identifier.
         /// </summary>
         /// <value>The controller plugin identifier.</value>
-        public override string ControllerPluginIdentifier
+        public override String ControllerPluginIdentifier
         {
             get { return FormsPlugin.Instance.Identifier; }
         }
@@ -54,9 +55,9 @@ namespace Core.Forms.Controllers
 
         public FormAnswersController()
         {
-            _formBuilderWidgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
-            _formWidgetAnswersService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerService>();
-            _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            formBuilderWidgetService = ServiceLocator.Current.GetInstance<IFormBuilderWidgetService>();
+            formWidgetAnswersService = ServiceLocator.Current.GetInstance<IFormWidgetAnswerService>();
+            permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
         }
 
         #endregion
@@ -98,15 +99,15 @@ namespace Core.Forms.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult FormAnswersDynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult FormAnswersDynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
 
-            var criteria = _formBuilderWidgetService.GetSearchCriteria(this.CorePrincipal(), (int)FormsBuilderWidgetOperations.ViewAnswers, search, FormsBuilderWidget.Instance.Identifier);
-            int totalRecords = _formBuilderWidgetService.GetCount(criteria);
+            var criteria = formBuilderWidgetService.GetSearchCriteria(this.CorePrincipal(), (int)FormsBuilderWidgetOperations.ViewAnswers, search, FormsBuilderWidget.Instance.Identifier);
+            int totalRecords = formBuilderWidgetService.GetCount(criteria);
             int totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var widgets = _formBuilderWidgetService.GetPagedCriteria(criteria, pageIndex, pageSize, sidx, sord.Equals("asc")).List<FormBuilderWidget>();
+            var widgets = formBuilderWidgetService.GetPagedCriteria(criteria, pageIndex, pageSize, sidx, sord.Equals("asc")).List<FormBuilderWidget>();
 
             var jsonData = new
             {
@@ -150,11 +151,11 @@ namespace Core.Forms.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult ShowAnswers(long formWidgetId, int page, int rows, string sidx, string sord)
+        public virtual JsonResult ShowAnswers(long formWidgetId, int page, int rows, String sidx, String sord)
         {
           int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            IQueryable<FormWidgetAnswer> searchQuery = _formWidgetAnswersService.GetAnswersQuery(formWidgetId, String.Empty);
+            IQueryable<FormWidgetAnswer> searchQuery = formWidgetAnswersService.GetAnswersQuery(formWidgetId, String.Empty);
             int totalRecords = searchQuery.Count();
             int totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var widgetAnswers = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
@@ -183,11 +184,11 @@ namespace Core.Forms.Controllers
         [SiteMapTitle("Title")]
         public virtual ActionResult ShowAnswerDetails(long answerId)
         {
-            var model = _formWidgetAnswersService.Find(answerId);
+            var model = formWidgetAnswersService.Find(answerId);
 
-            if (model == null || !_permissionService.IsAllowed((int)FormsBuilderWidgetOperations.ViewAnswers, this.CorePrincipal(), typeof(FormsBuilderWidget), model.FormBuilderWidget.Id, IsFormOwner(model.FormBuilderWidget.Form), PermissionOperationLevel.ObjectType))
+            if (model == null || !permissionService.IsAllowed((int)FormsBuilderWidgetOperations.ViewAnswers, this.CorePrincipal(), typeof(FormsBuilderWidget), model.FormBuilderWidget.Id, IsFormOwner(model.FormBuilderWidget.Form), PermissionOperationLevel.ObjectType))
             {
-                throw new Exception(HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
+                throw new HttpException(HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
             return View("FormAnswerDetails", model);

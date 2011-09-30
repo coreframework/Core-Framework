@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Facilities.NHibernate;
-using System.Linq;
 
 namespace Core.Web.NHibernate.Services
 {
@@ -21,7 +21,7 @@ namespace Core.Web.NHibernate.Services
             return baseQuery.Count();
         }
 
-        public IQueryable<UserGroup> GetSearchQuery(string searchString)
+        public IQueryable<UserGroup> GetSearchQuery(String searchString)
         {
             var baseQuery = CreateQuery();
             if(String.IsNullOrEmpty(searchString))

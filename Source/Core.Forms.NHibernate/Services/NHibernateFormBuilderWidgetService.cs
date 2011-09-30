@@ -36,7 +36,7 @@ namespace Core.Forms.NHibernate.Services
             return criteria.List().Count;
         }
 
-        public ICriteria GetSearchCriteria(ICorePrincipal user, int operation, string searchString, String widgetIdentifier)
+        public ICriteria GetSearchCriteria(ICorePrincipal user, int operation, String searchString, String widgetIdentifier)
         {
             var criteria = GetAllowedFormBuilderWidgets(user, operation, widgetIdentifier);
 

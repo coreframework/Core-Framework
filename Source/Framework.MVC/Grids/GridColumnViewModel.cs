@@ -6,7 +6,7 @@
 
 using System;
 
-namespace Framework.MVC.Grids
+namespace Framework.Mvc.Grids
 {
     /// <summary>
     /// Grid column view model.

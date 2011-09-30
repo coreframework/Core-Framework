@@ -12,9 +12,9 @@ namespace Core.Web.Models
     public enum PageMode
     {
         [Description(".PanelView")]
-        View = 1,
+        View,
 
         [Description(".PanelEdit")]
-        Edit = 2
+        Edit
     }
 }

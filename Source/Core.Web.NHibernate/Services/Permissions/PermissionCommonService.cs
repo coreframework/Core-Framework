@@ -17,8 +17,8 @@ using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.SqlCommand;
 using NHibernate.Type;
-using EntityType = Core.Web.NHibernate.Models.Permissions.EntityType;
 using Omu.ValueInjecter;
+using EntityType = Core.Web.NHibernate.Models.Permissions.EntityType;
 
 namespace Core.Web.NHibernate.Services.Permissions
 {
@@ -53,7 +53,7 @@ namespace Core.Web.NHibernate.Services.Permissions
         public bool IsAllowed(int operation, ICorePrincipal user, Type entityType, long? entityId, bool isOwner, PermissionOperationLevel level)
         {
             //check if user is administrator
-            if (user != null && user.IsInRole(SystemRoles.Administrator.ToString()))
+            if (user != null && user.IsInRole(SystemRole.Administrator.ToString()))
                 return true;
 
             bool isAllowed = false;
@@ -79,12 +79,12 @@ namespace Core.Web.NHibernate.Services.Permissions
 
                 criteria.Add(Restrictions.Or(
                     Restrictions.Or(Subqueries.PropertyIn("Role.Id", rolesSubQuery), Subqueries.PropertyIn("Role.Id", userGroupsRolesSubQuery)), !isOwner ?
-                    Restrictions.Eq("Role.Id", (Int64)SystemRoles.User) :
-                    Restrictions.In("Role.Id", new List<SystemRoles> { SystemRoles.User, SystemRoles.Owner })));
+                    Restrictions.Eq("Role.Id", (Int64)SystemRole.User) :
+                    Restrictions.In("Role.Id", new List<SystemRole> { SystemRole.User, SystemRole.Owner })));
             }
             else
             {
-                criteria.Add(Restrictions.Eq("Role.Id", (Int64)SystemRoles.Guest));
+                criteria.Add(Restrictions.Eq("Role.Id", (Int64)SystemRole.Guest));
             }
 
             criteria.CreateAlias("EntityType", "et").Add(Restrictions.Eq("et.Name", PermissionsHelper.GetEntityType(entityType)));
@@ -129,7 +129,7 @@ namespace Core.Web.NHibernate.Services.Permissions
         public Dictionary<int, bool> GetAccess(IEnumerable<IPermissionOperation> operations, ICorePrincipal user, Type entityType, long? entityId, bool isOwner)
         {
             //check if user is administrator
-            if (user != null && user.IsInRole(SystemRoles.Administrator.ToString()))
+            if (user != null && user.IsInRole(SystemRole.Administrator.ToString()))
                 return operations.ToDictionary(value => value.Key, value => true);
 
             var result = operations.ToDictionary(value => value.Key, value => false);
@@ -155,12 +155,12 @@ namespace Core.Web.NHibernate.Services.Permissions
 
                 criteria.Add(Restrictions.Or(
                   Restrictions.Or(Subqueries.PropertyIn("Role.Id", rolesSubQuery), Subqueries.PropertyIn("Role.Id", userGroupsRolesSubQuery)), !isOwner ?
-                  Restrictions.Eq("Role.Id", (Int64)SystemRoles.User) :
-                  Restrictions.In("Role.Id", new List<SystemRoles> { SystemRoles.User, SystemRoles.Owner })));
+                  Restrictions.Eq("Role.Id", (Int64)SystemRole.User) :
+                  Restrictions.In("Role.Id", new List<SystemRole> { SystemRole.User, SystemRole.Owner })));
             }
             else
             {
-                criteria.Add(Restrictions.Eq("Role.Id", (Int64)SystemRoles.Guest));
+                criteria.Add(Restrictions.Eq("Role.Id", (Int64)SystemRole.Guest));
             }
 
             criteria.Add(Restrictions.Eq("EntityId", entityId)).CreateAlias("EntityType", "et").Add(Restrictions.Eq("et.Name", PermissionsHelper.GetEntityType(entityType)));
@@ -194,7 +194,7 @@ namespace Core.Web.NHibernate.Services.Permissions
                                            {
                                                EntityId = entityId,
                                                EntityType = entityType,
-                                               Role = new Role {Id = (long) SystemRoles.Owner},
+                                               Role = new Role {Id = (long) SystemRole.Owner},
                                                Permissions =
                                                    operations.Where(
                                                        permissionOperation => permissionOperation.OwnerDefaultAcess).
@@ -209,7 +209,7 @@ namespace Core.Web.NHibernate.Services.Permissions
                                           {
                                               EntityId = entityId,
                                               EntityType = entityType,
-                                              Role = new Role {Id = (long) SystemRoles.User},
+                                              Role = new Role {Id = (long) SystemRole.User},
                                               Permissions =
                                                   operations.Where(
                                                       permissionOperation => permissionOperation.UserDefaultAccess).
@@ -224,7 +224,7 @@ namespace Core.Web.NHibernate.Services.Permissions
                                            {
                                                EntityId = entityId,
                                                EntityType = entityType,
-                                               Role = new Role {Id = (long) SystemRoles.Guest},
+                                               Role = new Role {Id = (long) SystemRole.Guest},
                                                Permissions =
                                                    operations.Where(
                                                        permissionOperation => permissionOperation.GuestDefaultAcess).
@@ -257,7 +257,7 @@ namespace Core.Web.NHibernate.Services.Permissions
         {
             if (user != null)
             {
-                if (user.IsInRole(SystemRoles.Administrator.ToString()))
+                if (user.IsInRole(SystemRole.Administrator.ToString()))
                     return null;
 
                 var rolesSubQuery = DetachedCriteria.For<Role>()
@@ -279,9 +279,9 @@ namespace Core.Web.NHibernate.Services.Permissions
                                 .Add(Restrictions.EqProperty("EntityId", permissibleIdPropertyName)).CreateAlias("EntityType", "et").Add(Restrictions.Eq("et.Name", PermissionsHelper.GetEntityType(permissibleObjectType))).
                                  Add(Restrictions.Or(Restrictions.Or(
                                           Restrictions.Or(Subqueries.PropertyIn("Role.Id", rolesSubQuery), Subqueries.PropertyIn("Role.Id", userGroupsRolesSubQuery)),
-                                          Restrictions.Eq("Role.Id", (Int64)SystemRoles.User)),
+                                          Restrictions.Eq("Role.Id", (Int64)SystemRole.User)),
 
-                                          !String.IsNullOrEmpty(permissibleOwnerPropertyName) ? Restrictions.And(Restrictions.IsNotNull(permissibleOwnerPropertyName), Restrictions.And(Restrictions.Eq(permissibleOwnerPropertyName, user.PrincipalId), Restrictions.Eq("Role.Id", (Int64)SystemRoles.Owner))) : null
+                                          !String.IsNullOrEmpty(permissibleOwnerPropertyName) ? Restrictions.And(Restrictions.IsNotNull(permissibleOwnerPropertyName), Restrictions.And(Restrictions.Eq(permissibleOwnerPropertyName, user.PrincipalId), Restrictions.Eq("Role.Id", (Int64)SystemRole.Owner))) : null
 
                                           )).Add(
 
@@ -294,7 +294,7 @@ namespace Core.Web.NHibernate.Services.Permissions
             {
                 var permissionsSubQuery = DetachedCriteria.For<Permission>()
                                .Add(Restrictions.EqProperty("EntityId", permissibleIdPropertyName)).CreateAlias("EntityType", "et").Add(Restrictions.Eq("et.Name", PermissionsHelper.GetEntityType(permissibleObjectType))).
-                                Add(Restrictions.Eq("Role.Id", (Int64)SystemRoles.Guest)).Add(
+                                Add(Restrictions.Eq("Role.Id", (Int64)SystemRole.Guest)).Add(
                                 Restrictions.Eq(Projections.SqlProjection(String.Format("Permissions & {0} as result", operationCode), new[] { "result" }, new IType[] { NHibernateUtil.Int32 }), operationCode))
                                .SetProjection(Projections.Id());
 

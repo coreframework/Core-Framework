@@ -3,7 +3,7 @@ using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
-using Framework.MVC.Controllers;
+using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Controllers
@@ -13,7 +13,7 @@ namespace Core.Web.Areas.Admin.Controllers
     {
         #region Fields
 
-        private readonly ISiteSettingsService _siteSettingsService;
+        private readonly ISiteSettingsService siteSettingsService;
 
         #endregion
 
@@ -21,7 +21,7 @@ namespace Core.Web.Areas.Admin.Controllers
 
        public SiteSettingsController()
        {
-           _siteSettingsService = ServiceLocator.Current.GetInstance<ISiteSettingsService>();
+           siteSettingsService = ServiceLocator.Current.GetInstance<ISiteSettingsService>();
        }
 
         #endregion
@@ -30,7 +30,7 @@ namespace Core.Web.Areas.Admin.Controllers
 
        public virtual ActionResult Show()
         {
-            return View("ViewSettings", _siteSettingsService.GetSettings());
+            return View("ViewSettings", siteSettingsService.GetSettings());
         }
 
        [HttpPost]
@@ -38,7 +38,7 @@ namespace Core.Web.Areas.Admin.Controllers
        {
            if (ModelState.IsValid)
            {
-               if (_siteSettingsService.Save(model))
+               if (siteSettingsService.Save(model))
                    Success(Translate("Messages.SiteSettingsApplied"));
                else Error(Translate("Messages.Error"));
            }

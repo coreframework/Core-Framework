@@ -16,14 +16,10 @@ namespace Core.News.Nhibernate.Mappings
             Map(newsArticleWidget => newsArticleWidget.ItemsOnPage);
             Map(newsArticleWidget => newsArticleWidget.ShowPaginator);
             Map(newsArticleWidget => newsArticleWidget.Url);
-            /*
-            HasManyToMany(newsArticleWidget => newsArticleWidget.Categories)
-                                       .Table("News_ArticleWidgetToCategories").ParentKeyColumn("ArticleWidgetId")
-                                       .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();*/
 
             HasMany(newsArticleWidget => newsArticleWidget.Categories).KeyColumn("NewsArticleWidgetId")
               .Table("News_ArticleWidgetToCategories")
-              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
               .Inverse()
               .LazyLoad()
               .Cascade.AllDeleteOrphan();

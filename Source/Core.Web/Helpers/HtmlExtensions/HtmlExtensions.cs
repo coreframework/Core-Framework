@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Framework.Core;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 
 namespace Core.Web.Helpers.HtmlExtensions
 {
@@ -21,7 +20,7 @@ namespace Core.Web.Helpers.HtmlExtensions
     {
         #region Fields
 
-        private const string OuterPluginTypeName = "outer";
+        private const String OuterPluginTypeName = "outer";
 
         #endregion
 

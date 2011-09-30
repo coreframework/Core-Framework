@@ -10,9 +10,9 @@ namespace Core.Web.NHibernate.Models
     {
         #region Fields
 
-        private IList<WidgetLocale> _currentWidgetLocales = new List<WidgetLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private WidgetLocale _currentLocale;
+        private readonly IList<WidgetLocale> currentWidgetLocales = new List<WidgetLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private WidgetLocale currentLocale;
 
         #endregion
 
@@ -51,15 +51,15 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentWidgetLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentWidgetLocales.Count > 0)
                 {
-                    _currentLocales = _currentWidgetLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentWidgetLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -79,19 +79,19 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as WidgetLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as WidgetLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new WidgetLocale
+                        currentLocale = new WidgetLocale
                         {
                             Widget = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
 

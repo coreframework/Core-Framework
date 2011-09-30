@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class RoleController {
@@ -110,32 +110,32 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public RoleController Actions { get { return MVC.Admin.Role; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Role";
+        public readonly String Name = "Role";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string New = "New";
-            public readonly string Create = "Create";
-            public readonly string Edit = "Edit";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string Update = "Update";
-            public readonly string Remove = "Remove";
-            public readonly string ConfirmRemove = "ConfirmRemove";
-            public readonly string Users = "Users";
-            public readonly string UsersDynamicGridData = "UsersDynamicGridData";
-            public readonly string UpdateUsers = "UpdateUsers";
-            public readonly string UserGroups = "UserGroups";
-            public readonly string UserGroupsDynamicGridData = "UserGroupsDynamicGridData";
-            public readonly string UpdateUserGroups = "UpdateUserGroups";
-            public readonly string Permissions = "Permissions";
-            public readonly string ApplyPermissions = "ApplyPermissions";
+            public readonly String Index = "Index";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String New = "New";
+            public readonly String Create = "Create";
+            public readonly String Edit = "Edit";
+            public readonly String ChangeLanguage = "ChangeLanguage";
+            public readonly String Update = "Update";
+            public readonly String Remove = "Remove";
+            public readonly String ConfirmRemove = "ConfirmRemove";
+            public readonly String Users = "Users";
+            public readonly String UsersDynamicGridData = "UsersDynamicGridData";
+            public readonly String UpdateUsers = "UpdateUsers";
+            public readonly String UserGroups = "UserGroups";
+            public readonly String UserGroupsDynamicGridData = "UserGroupsDynamicGridData";
+            public readonly String UpdateUserGroups = "UpdateUserGroups";
+            public readonly String Permissions = "Permissions";
+            public readonly String ApplyPermissions = "ApplyPermissions";
         }
 
 
@@ -144,15 +144,15 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Areas/Admin/Views/Role/Edit.aspx";
-            public readonly string EditForm = "~/Areas/Admin/Views/Role/EditForm.ascx";
-            public readonly string Index = "~/Areas/Admin/Views/Role/Index.aspx";
-            public readonly string New = "~/Areas/Admin/Views/Role/New.aspx";
-            public readonly string PermissionOperations = "~/Areas/Admin/Views/Role/PermissionOperations.ascx";
-            public readonly string Permissions = "~/Areas/Admin/Views/Role/Permissions.aspx";
-            public readonly string Remove = "~/Areas/Admin/Views/Role/Remove.aspx";
-            public readonly string UserGroups = "~/Areas/Admin/Views/Role/UserGroups.aspx";
-            public readonly string Users = "~/Areas/Admin/Views/Role/Users.aspx";
+            public readonly String Edit = "~/Areas/Admin/Views/Role/Edit.aspx";
+            public readonly String EditForm = "~/Areas/Admin/Views/Role/EditForm.ascx";
+            public readonly String Index = "~/Areas/Admin/Views/Role/Index.aspx";
+            public readonly String New = "~/Areas/Admin/Views/Role/New.aspx";
+            public readonly String PermissionOperations = "~/Areas/Admin/Views/Role/PermissionOperations.ascx";
+            public readonly String Permissions = "~/Areas/Admin/Views/Role/Permissions.aspx";
+            public readonly String Remove = "~/Areas/Admin/Views/Role/Remove.aspx";
+            public readonly String UserGroups = "~/Areas/Admin/Views/Role/UserGroups.aspx";
+            public readonly String Users = "~/Areas/Admin/Views/Role/Users.aspx";
         }
     }
 

@@ -15,20 +15,23 @@ namespace Core.Web.NHibernate.Models.Permissions
     /// </summary>
     public class Permission : Entity, IPermissionModel
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Permission"/> class.
-        /// </summary>
-        public Permission()
-        {
-            Role = new Role();
-            EntityType = new EntityType();
-        }
-        
+        #region Fields
+
+        private Role role = new Role();
+
+        private EntityType entityType = new EntityType();
+
+        #endregion
+
         /// <summary>
         /// Gets or sets the entity this permission applies to (for entity-specific operations).
         /// </summary>
         /// <value>The entity this permission applies to.</value>
-        public virtual EntityType EntityType { get; set; }
+        public virtual EntityType EntityType
+        {
+            get { return entityType; }
+            set { entityType = value; }
+        }
 
         /// <summary>
         /// Gets or sets the entity id.
@@ -36,13 +39,21 @@ namespace Core.Web.NHibernate.Models.Permissions
         /// <value>The entity id.</value>
         public virtual long? EntityId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the instance id.
+        /// </summary>
+        /// <value>The instance id.</value>
         public virtual long? InstanceId { get; set; }
 
         /// <summary>
         /// Gets or sets the role this permission belongs to.
         /// </summary>
         /// <value>The role this permission applies to.</value>
-        public virtual Role Role { get; set; }
+        public virtual Role Role
+        {
+            get { return role; }
+            set { role = value; }
+        }
 
         /// <summary>
         /// Gets or sets the permissions.

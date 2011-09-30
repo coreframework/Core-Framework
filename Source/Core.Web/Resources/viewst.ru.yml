@@ -10,6 +10,7 @@ ru:
        PageLayout: "Изменить шаблон страницы"
        PageLookAndFeel: "Изменить внешний вид страницы"
        CSS: "Изменить CSS страницы"
+       DeletePage: "Удалить страницу"
        Permissions: "Права доступа"
       PageLookAndFeelSettings:
        LookAndFeel: "Внешний вид"

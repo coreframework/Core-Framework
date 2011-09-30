@@ -15,7 +15,7 @@ namespace Core.News.Models
     {
         #region Fields
 
-        private List<NewsCategory> _categories;
+        private List<NewsCategory> categories;
 
         #endregion
 
@@ -52,12 +52,12 @@ namespace Core.News.Models
         {
             get
             {
-                if (_categories == null)
+                if (categories == null)
                 {
                     var categoriesService = ServiceLocator.Current.GetInstance<INewsCategoryService>();
-                    _categories = (List<NewsCategory>)categoriesService.GetAll();
+                    categories = (List<NewsCategory>)categoriesService.GetAll();
                 }
-                return _categories;
+                return categories;
             }
         }
 

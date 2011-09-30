@@ -7,10 +7,10 @@ namespace Core.Framework.Plugins.Handlers
     public class PluginHttpHandler : IPluginHttpHandler
     {
         [XmlElement("verb")]
-        public string Verb { get; set; }
+        public String Verb { get; set; }
 
         [XmlElement("path")]
-        public string Path { get; set; }
+        public String Path { get; set; }
 
         [XmlElement("type")]
         public String HandlerType { get; set; }

@@ -13,7 +13,7 @@ using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
-    public class NavigationMenuWidgetHelper
+    public static class NavigationMenuWidgetHelper
     {
        
         /// <summary>

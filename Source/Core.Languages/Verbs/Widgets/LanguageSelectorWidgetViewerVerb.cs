@@ -7,7 +7,7 @@ namespace Core.Languages.Verbs.Widgets
     {
         #region Singleton
 
-        private static LanguageSelectorWidgetViewerVerb _instance;
+        private static LanguageSelectorWidgetViewerVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Core.Languages.Verbs.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new LanguageSelectorWidgetViewerVerb());
+                    return instance ?? (instance = new LanguageSelectorWidgetViewerVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Core.Languages.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "ViewWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "LanguageSelectorWidget"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Languages"; }
         }

@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Products.Helpers
 {
-    public class ProductConstants
+    public static class ProductConstants
     {
-        public const String ProductIdQueryRequestParam = "productId";
-        public const String ProductWidgetIdQueryRequestParam = "widgetId";
-        public const String CurrentPageQueryRequestParam = "curPage";
-        public const String CurrentRequestParams = "currentRequestParams";
-        public const String IsAjaxPageQueryRequestParam = "isAjax";
+        public static readonly String ProductIdQueryRequestParam = "productId";
+        public static readonly String ProductWidgetIdQueryRequestParam = "widgetId";
+        public static readonly String CurrentPageQueryRequestParam = "curPage";
+        public static readonly String CurrentRequestParams = "currentRequestParams";
+        public static readonly String IsAjaxPageQueryRequestParam = "isAjax";
        
     }
 }

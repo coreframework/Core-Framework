@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace T4MVC {
     public class CategoryViewerWidgetController {
@@ -28,9 +28,9 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Category = "~/Views/CategoryViewerWidget/Category.aspx";
-            public readonly string EditWidget = "~/Views/CategoryViewerWidget/EditWidget.ascx";
-            public readonly string ViewWidget = "~/Views/CategoryViewerWidget/ViewWidget.ascx";
+            public readonly String Category = "~/Views/CategoryViewerWidget/Category.aspx";
+            public readonly String EditWidget = "~/Views/CategoryViewerWidget/EditWidget.ascx";
+            public readonly String ViewWidget = "~/Views/CategoryViewerWidget/ViewWidget.ascx";
         }
     }
 

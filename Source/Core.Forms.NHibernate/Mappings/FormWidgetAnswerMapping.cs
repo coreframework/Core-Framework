@@ -23,7 +23,7 @@ namespace Core.Forms.NHibernate.Mappings
 
             HasMany(form => form.AnswerValues).KeyColumn("FormAnswerId")
            .Table("Forms_FormAnswerValues")
-           .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+           .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
            .Inverse()
            .LazyLoad()
            .Cascade.AllDeleteOrphan();

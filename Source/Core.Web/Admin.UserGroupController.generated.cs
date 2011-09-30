@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class UserGroupController {
@@ -80,26 +80,26 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UserGroupController Actions { get { return MVC.Admin.UserGroup; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "UserGroup";
+        public readonly String Name = "UserGroup";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string New = "New";
-            public readonly string Create = "Create";
-            public readonly string Edit = "Edit";
-            public readonly string Update = "Update";
-            public readonly string Remove = "Remove";
-            public readonly string ConfirmRemove = "ConfirmRemove";
-            public readonly string Users = "Users";
-            public readonly string UsersDynamicGridData = "UsersDynamicGridData";
-            public readonly string UpdateUsers = "UpdateUsers";
+            public readonly String Index = "Index";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String New = "New";
+            public readonly String Create = "Create";
+            public readonly String Edit = "Edit";
+            public readonly String Update = "Update";
+            public readonly String Remove = "Remove";
+            public readonly String ConfirmRemove = "ConfirmRemove";
+            public readonly String Users = "Users";
+            public readonly String UsersDynamicGridData = "UsersDynamicGridData";
+            public readonly String UpdateUsers = "UpdateUsers";
         }
 
 
@@ -108,11 +108,11 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Areas/Admin/Views/UserGroup/Edit.aspx";
-            public readonly string Index = "~/Areas/Admin/Views/UserGroup/Index.aspx";
-            public readonly string New = "~/Areas/Admin/Views/UserGroup/New.aspx";
-            public readonly string Remove = "~/Areas/Admin/Views/UserGroup/Remove.aspx";
-            public readonly string Users = "~/Areas/Admin/Views/UserGroup/Users.aspx";
+            public readonly String Edit = "~/Areas/Admin/Views/UserGroup/Edit.aspx";
+            public readonly String Index = "~/Areas/Admin/Views/UserGroup/Index.aspx";
+            public readonly String New = "~/Areas/Admin/Views/UserGroup/New.aspx";
+            public readonly String Remove = "~/Areas/Admin/Views/UserGroup/Remove.aspx";
+            public readonly String Users = "~/Areas/Admin/Views/UserGroup/Users.aspx";
         }
     }
 

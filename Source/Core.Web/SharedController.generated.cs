@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace T4MVC {
     public class SharedController {
@@ -31,51 +31,51 @@ namespace T4MVC {
             static readonly _DisplayTemplates s_DisplayTemplates = new _DisplayTemplates();
             public _DisplayTemplates DisplayTemplates { get { return s_DisplayTemplates; } }
             public partial class _DisplayTemplates{
-                public readonly string SiteMapPathHelperModel = "~/Views/Shared/DisplayTemplates/SiteMapPathHelperModel.ascx";
+                public readonly String SiteMapPathHelperModel = "~/Views/Shared/DisplayTemplates/SiteMapPathHelperModel.ascx";
             }
             static readonly _EditorTemplates s_EditorTemplates = new _EditorTemplates();
             public _EditorTemplates EditorTemplates { get { return s_EditorTemplates; } }
             public partial class _EditorTemplates{
-                public readonly string Boolean = "~/Views/Shared/EditorTemplates/Boolean.aspx";
-                public readonly string ColorPicker = "~/Views/Shared/EditorTemplates/ColorPicker.aspx";
-                public readonly string DateTime = "~/Views/Shared/EditorTemplates/DateTime.aspx";
-                public readonly string DropDownList = "~/Views/Shared/EditorTemplates/DropDownList.aspx";
-                public readonly string FckEditorText = "~/Views/Shared/EditorTemplates/FckEditorText.aspx";
-                public readonly string ImageUpload = "~/Views/Shared/EditorTemplates/ImageUpload.aspx";
-                public readonly string List = "~/Views/Shared/EditorTemplates/List.aspx";
-                public readonly string MultilineText = "~/Views/Shared/EditorTemplates/MultilineText.aspx";
-                public readonly string Password = "~/Views/Shared/EditorTemplates/Password.aspx";
-                public readonly string String = "~/Views/Shared/EditorTemplates/String.aspx";
+                public readonly String Boolean = "~/Views/Shared/EditorTemplates/Boolean.aspx";
+                public readonly String ColorPicker = "~/Views/Shared/EditorTemplates/ColorPicker.aspx";
+                public readonly String DateTime = "~/Views/Shared/EditorTemplates/DateTime.aspx";
+                public readonly String DropDownList = "~/Views/Shared/EditorTemplates/DropDownList.aspx";
+                public readonly String FckEditorText = "~/Views/Shared/EditorTemplates/FckEditorText.aspx";
+                public readonly String ImageUpload = "~/Views/Shared/EditorTemplates/ImageUpload.aspx";
+                public readonly String List = "~/Views/Shared/EditorTemplates/List.aspx";
+                public readonly String MultilineText = "~/Views/Shared/EditorTemplates/MultilineText.aspx";
+                public readonly String Password = "~/Views/Shared/EditorTemplates/Password.aspx";
+                public readonly String String = "~/Views/Shared/EditorTemplates/String.aspx";
             }
             static readonly _Layouts s_Layouts = new _Layouts();
             public _Layouts Layouts { get { return s_Layouts; } }
             public partial class _Layouts{
-                public readonly string ChangeLayout = "~/Views/Shared/Layouts/ChangeLayout.ascx";
-                public readonly string Layout = "~/Views/Shared/Layouts/Layout.ascx";
-                public readonly string LayoutSettings = "~/Views/Shared/Layouts/LayoutSettings.ascx";
+                public readonly String ChangeLayout = "~/Views/Shared/Layouts/ChangeLayout.ascx";
+                public readonly String Layout = "~/Views/Shared/Layouts/Layout.ascx";
+                public readonly String LayoutSettings = "~/Views/Shared/Layouts/LayoutSettings.ascx";
             }
             static readonly _Pages s_Pages = new _Pages();
             public _Pages Pages { get { return s_Pages; } }
             public partial class _Pages{
-                public readonly string PageModePanel = "~/Views/Shared/Pages/PageModePanel.ascx";
+                public readonly String PageModePanel = "~/Views/Shared/Pages/PageModePanel.ascx";
             }
             static readonly _Users s_Users = new _Users();
             public _Users Users { get { return s_Users; } }
             public partial class _Users{
-                public readonly string UserPanel = "~/Views/Shared/Users/UserPanel.ascx";
+                public readonly String UserPanel = "~/Views/Shared/Users/UserPanel.ascx";
             }
             static readonly _Widgets s_Widgets = new _Widgets();
             public _Widgets Widgets { get { return s_Widgets; } }
             public partial class _Widgets{
-                public readonly string WidgetCommonSettings = "~/Views/Shared/Widgets/WidgetCommonSettings.ascx";
-                public readonly string WidgetContentHolder = "~/Views/Shared/Widgets/WidgetContentHolder.ascx";
-                public readonly string WidgetCSSForm = "~/Views/Shared/Widgets/WidgetCSSForm.ascx";
-                public readonly string WidgetCSSSettings = "~/Views/Shared/Widgets/WidgetCSSSettings.ascx";
-                public readonly string WidgetLookAndFeelForm = "~/Views/Shared/Widgets/WidgetLookAndFeelForm.ascx";
-                public readonly string WidgetLookAndFeelSettings = "~/Views/Shared/Widgets/WidgetLookAndFeelSettings.ascx";
-                public readonly string WidgetPermissions = "~/Views/Shared/Widgets/WidgetPermissions.ascx";
-                public readonly string WidgetSettings = "~/Views/Shared/Widgets/WidgetSettings.ascx";
-                public readonly string WidgetsList = "~/Views/Shared/Widgets/WidgetsList.ascx";
+                public readonly String WidgetCommonSettings = "~/Views/Shared/Widgets/WidgetCommonSettings.ascx";
+                public readonly String WidgetContentHolder = "~/Views/Shared/Widgets/WidgetContentHolder.ascx";
+                public readonly String WidgetCSSForm = "~/Views/Shared/Widgets/WidgetCSSForm.ascx";
+                public readonly String WidgetCSSSettings = "~/Views/Shared/Widgets/WidgetCSSSettings.ascx";
+                public readonly String WidgetLookAndFeelForm = "~/Views/Shared/Widgets/WidgetLookAndFeelForm.ascx";
+                public readonly String WidgetLookAndFeelSettings = "~/Views/Shared/Widgets/WidgetLookAndFeelSettings.ascx";
+                public readonly String WidgetPermissions = "~/Views/Shared/Widgets/WidgetPermissions.ascx";
+                public readonly String WidgetSettings = "~/Views/Shared/Widgets/WidgetSettings.ascx";
+                public readonly String WidgetsList = "~/Views/Shared/Widgets/WidgetsList.ascx";
             }
         }
     }

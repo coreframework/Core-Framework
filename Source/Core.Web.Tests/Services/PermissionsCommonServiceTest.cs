@@ -113,7 +113,7 @@ namespace Core.Web.Tests.Services
             pageService.Save(page);
 
             //check administrator rights
-            var user = CreateUserAndAssignToRole((int) SystemRoles.Administrator);
+            var user = CreateUserAndAssignToRole((int) SystemRole.Administrator);
             userService.Save(user);
 
             var isAllowed = permissionCommonService.IsAllowed((int)PageOperations.View, user, typeof(Page), page.Id, PermissionOperationLevel.Object);
@@ -125,7 +125,7 @@ namespace Core.Web.Tests.Services
             user = CreateUserAndAssignToRole(null);
             userService.Save(user);
 
-            var permission = SetupPermissionsForPage(page, (int) SystemRoles.User);
+            var permission = SetupPermissionsForPage(page, (int) SystemRole.User);
             permissionService.Save(permission);
 
 
@@ -157,7 +157,7 @@ namespace Core.Web.Tests.Services
             pageService.Save(page);
 
             //check administrator rights
-            var user = CreateUserAndAssignToRole((int)SystemRoles.Administrator);
+            var user = CreateUserAndAssignToRole((int)SystemRole.Administrator);
             userService.Save(user);
 
             var result = permissionCommonService.GetAccess(page.Operations,user,typeof(Page),page.Id);
@@ -169,7 +169,7 @@ namespace Core.Web.Tests.Services
             user = CreateUserAndAssignToRole(null);
             userService.Save(user);
 
-            var permission = SetupPermissionsForPage(page, (int)SystemRoles.User);
+            var permission = SetupPermissionsForPage(page, (int)SystemRole.User);
             permissionService.Save(permission);
 
             result = permissionCommonService.GetAccess(page.Operations, user, typeof(Page), page.Id);

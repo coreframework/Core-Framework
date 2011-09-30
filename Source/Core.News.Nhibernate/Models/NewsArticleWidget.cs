@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using FluentNHibernate.Data;
 
 namespace Core.News.Nhibernate.Models
@@ -7,7 +8,7 @@ namespace Core.News.Nhibernate.Models
     {
         #region Fields
 
-        private readonly IList<NewsArticleWidgetToCategories> _categories;
+        private readonly IList<NewsArticleWidgetToCategories> categories;
 
         #endregion
 
@@ -15,7 +16,7 @@ namespace Core.News.Nhibernate.Models
 
         public NewsArticleWidget()
         {
-            _categories = new List<NewsArticleWidgetToCategories>();
+            categories = new List<NewsArticleWidgetToCategories>();
         }
 
         #endregion
@@ -26,14 +27,14 @@ namespace Core.News.Nhibernate.Models
         /// </summary>
         public virtual IEnumerable<NewsArticleWidgetToCategories> Categories
         {
-            get { return _categories; }
+            get { return categories; }
         }
 
         public virtual int ItemsOnPage { get; set; }
 
         public virtual bool ShowPaginator { get; set; }
 
-        public virtual string Url { get; set; }
+        public virtual String Url { get; set; }
 
         #endregion
 
@@ -41,7 +42,7 @@ namespace Core.News.Nhibernate.Models
 
         public virtual void AddCategory(NewsArticleWidgetToCategories category)
         {
-            _categories.Add(category);
+            categories.Add(category);
         }
 
         #endregion

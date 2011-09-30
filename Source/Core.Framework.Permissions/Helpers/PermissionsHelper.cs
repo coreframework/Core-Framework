@@ -12,16 +12,6 @@ namespace Core.Framework.Permissions.Helpers
         /// <summary>
         /// Gets the entity type name.
         /// </summary>
-        /// <typeparam name="T">Type of entity.</typeparam>
-        /// <returns>The entity type name.</returns>
-        public static String GetEntityType<T>()
-        {
-            return GetEntityType(typeof(T));
-        }
-
-        /// <summary>
-        /// Gets the entity type name.
-        /// </summary>
         /// <param name="entityType">Type of the entity.</param>
         /// <returns>The entity type name.</returns>
         public static String GetEntityType(Type entityType)

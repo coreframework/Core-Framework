@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Forms.Controllers {
     public partial class FormsBuilderWidgetController {
@@ -58,19 +58,19 @@ namespace Core.Forms.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsBuilderWidgetController Actions { get { return FormsMVC.FormsBuilderWidget; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "FormsBuilderWidget";
+        public readonly String Name = "FormsBuilderWidget";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ViewWidget = "ViewWidget";
-            public readonly string EditWidget = "EditWidget";
-            public readonly string UpdateWidget = "UpdateWidget";
-            public readonly string SubmitWidgetForm = "SubmitWidgetForm";
+            public readonly String ViewWidget = "ViewWidget";
+            public readonly String EditWidget = "EditWidget";
+            public readonly String UpdateWidget = "UpdateWidget";
+            public readonly String SubmitWidgetForm = "SubmitWidgetForm";
         }
 
 
@@ -79,8 +79,8 @@ namespace Core.Forms.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string EditWidget = "~/Views/FormsBuilderWidget/EditWidget.ascx";
-            public readonly string ViewWidget = "~/Views/FormsBuilderWidget/ViewWidget.ascx";
+            public readonly String EditWidget = "~/Views/FormsBuilderWidget/EditWidget.ascx";
+            public readonly String ViewWidget = "~/Views/FormsBuilderWidget/ViewWidget.ascx";
         }
     }
 

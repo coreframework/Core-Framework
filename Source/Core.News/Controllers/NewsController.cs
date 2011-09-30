@@ -16,16 +16,15 @@ using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
 using Core.News.Permissions.Operations;
 using Framework.Core.Localization;
-using Framework.MVC.Extensions;
-using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Filters;
 using INewsService = Core.News.Nhibernate.Contracts.INewsArticleService;
-using System.Linq.Dynamic;
 
 namespace Core.News.Controllers
 {
@@ -46,7 +45,7 @@ namespace Core.News.Controllers
 
         #region Properties
 
-        public override string ControllerPluginIdentifier
+        public override String ControllerPluginIdentifier
         {
             get { return NewsPlugin.Instance.Identifier; }
         }
@@ -123,7 +122,7 @@ namespace Core.News.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
@@ -246,10 +245,14 @@ namespace Core.News.Controllers
         [MvcSiteMapNode(Title = "New", AreaName = "News", ParentKey = "News.ShowAll")]
         public virtual ActionResult New()
         {
-            var model = new NewsArticleViewModel{PublishDate = DateTime.Now};
-            model.PublishingAccess =
-                ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
-                    (Int32)NewsPluginOperations.PublishingNews, this.CorePrincipal(), typeof(NewsPlugin), null);
+            var model = new NewsArticleViewModel
+                            {
+                                PublishDate = DateTime.Now,
+                                PublishingAccess =
+                                    ServiceLocator.Current.GetInstance<IPermissionCommonService>().IsAllowed(
+                                        (Int32) NewsPluginOperations.PublishingNews, this.CorePrincipal(),
+                                        typeof (NewsPlugin), null)
+                            };
             return View("New", model);
         }
 
@@ -292,7 +295,8 @@ namespace Core.News.Controllers
                 return RedirectToAction("ShowAll");
             }
 
-            Error((HttpContext.Translate("Messages.UnknownError", ResourceHelper.GetControllerScope(this))));
+            Error(HttpContext.Translate("Messages.UnknownError", ResourceHelper.GetControllerScope(this)));
+
             return RedirectToAction("ShowAll");
         }
 
@@ -343,7 +347,7 @@ namespace Core.News.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult NewsCategoriesDynamicGridData(int id, int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult NewsCategoriesDynamicGridData(int id, int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
@@ -374,7 +378,7 @@ namespace Core.News.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult UpdateCategories(long id, IEnumerable<string> ids, IEnumerable<string> selids)
+        public virtual JsonResult UpdateCategories(long id, IEnumerable<String> ids, IEnumerable<string> selids)
         {
             var newsArticle = newsArticlesService.Find(id);
             if (newsArticle == null)

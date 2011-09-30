@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Configs;
 using Core.Framework.Plugins.Web;
-using System.Linq;
 
 namespace Core.Framework.Plugins.Widgets
 {
@@ -22,7 +22,7 @@ namespace Core.Framework.Plugins.Widgets
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public virtual string Title 
+        public virtual String Title 
         {
             get { return WidgetSetting.Title; }
         }
@@ -37,7 +37,7 @@ namespace Core.Framework.Plugins.Widgets
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public virtual string Identifier
+        public virtual String Identifier
         {
             get { return WidgetSetting.Identifier; }
         }
@@ -101,7 +101,6 @@ namespace Core.Framework.Plugins.Widgets
 
         protected BaseWidget()
         {
-            PermissionTitle = Title;
             Operations = OperationsHelper.GetOperations<BaseWidgetOperations>();
         }
 
@@ -123,7 +122,11 @@ namespace Core.Framework.Plugins.Widgets
 
         #region IPermissible Members
 
-        public string PermissionTitle { get; set; }
+        public String PermissionTitle
+        {
+            get { return Title; }
+            set { }
+        }
 
         public IEnumerable<IPermissionOperation> Operations { get; set; }
 

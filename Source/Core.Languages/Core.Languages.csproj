@@ -81,6 +81,8 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -188,9 +190,9 @@
       <Name>Framework.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Framework.MVC\Framework.MVC.csproj">
+    <ProjectReference Include="..\Framework.MVC\Framework.Mvc.csproj">
       <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
-      <Name>Framework.MVC</Name>
+      <Name>Framework.Mvc</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

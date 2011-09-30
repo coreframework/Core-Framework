@@ -20,7 +20,7 @@ namespace Core.Forms.Verbs
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return HttpContext.GetGlobalResourceObject(String.Format("Forms.Verbs.FormsAnswersAdminVerb"), String.Format("FormsAnswers")) as String ?? "FormsAnswers"; }
         }
@@ -28,7 +28,7 @@ namespace Core.Forms.Verbs
         /// <summary>
         /// Gets the action.
         /// </summary>
-        public string Action
+        public String Action
         {
             get { return "ShowAll"; }
         }
@@ -36,7 +36,7 @@ namespace Core.Forms.Verbs
         /// <summary>
         /// Gets the controller.
         /// </summary>
-        public string Controller
+        public String Controller
         {
             get { return "FormAnswers"; }
         }
@@ -45,7 +45,7 @@ namespace Core.Forms.Verbs
         /// Gets the controller plugin identifier.
         /// </summary>
         /// <value>The controller plugin identifier.</value>
-        public string ControllerPluginIdentifier
+        public String ControllerPluginIdentifier
         {
             get { return FormsPlugin.Instance.Identifier; }
         }

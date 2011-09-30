@@ -12,11 +12,11 @@ using System.Web.Mvc.Html;
 
 using Castle.Core.Logging;
 
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
 using Microsoft.Practices.ServiceLocation;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extends <see cref="HtmlHelper"/> functionality to provide views localization.
@@ -97,7 +97,7 @@ namespace Framework.MVC.Extensions
         }
 
         /// <summary>
-        /// Renders the specified partial view as an HTML-encoded string with specific localization scope.
+        /// Renders the specified partial view as an HTML-encoded String with specific localization scope.
         /// </summary>
         /// <param name="html">The HTML helper instance that this method extends.</param>
         /// <param name="partialViewName">The name of the partial view to render.</param>

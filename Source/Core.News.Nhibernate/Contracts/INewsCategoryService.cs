@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Framework.Core.Services;
 using Core.News.Nhibernate.Models;
@@ -12,7 +13,7 @@ namespace Core.News.NHibernate.Contracts
         /// </summary>
         /// <param name="search">The search string.</param>
         /// <returns>Categories</returns>
-        IQueryable<NewsCategory> GetSearchQuery(string search);
+        IQueryable<NewsCategory> GetSearchQuery(String search);
 
         /// <summary>
         /// Gets the count.
@@ -26,13 +27,13 @@ namespace Core.News.NHibernate.Contracts
         /// </summary>
         /// <param name="search">The search string.</param>
         /// <returns>Categories</returns>
-        IEnumerable<NewsCategory> GetCategories(string search);
+        IEnumerable<NewsCategory> GetCategories(String search);
 
         /// <summary>
         /// Gets the count.
         /// </summary>
         /// <param name="searchQuery">The search string.</param>
         /// <returns>Count</returns>
-        int GetCount(string searchQuery);
+        int GetCount(String searchQuery);
     }
 }

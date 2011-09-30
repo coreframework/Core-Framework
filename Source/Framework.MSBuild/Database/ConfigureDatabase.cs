@@ -5,8 +5,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.IO;
-
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -94,7 +92,7 @@ namespace Framework.MSBuild.Database
 
         #region Helper members
 
-        private string GetConfigKey()
+        private String GetConfigKey()
         {
             var configKey = Environment;
             if (String.IsNullOrEmpty(configKey))

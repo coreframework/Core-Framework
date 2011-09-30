@@ -9,6 +9,6 @@ namespace Core.Web.NHibernate.Contracts
     {
         WidgetLocale GetLocale(long widgetId, String culture);
 
-        ICriteria GetSearchCriteria(string searchString);
+        ICriteria GetSearchCriteria(String searchString);
     }
 }

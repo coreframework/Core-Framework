@@ -7,7 +7,7 @@ using Products.NHibernate.Models;
 
 namespace Products.Helpers
 {
-    public class ProductHelper
+    public static class ProductHelper
     {
         /// <summary>
         /// Updates the categories to product assignment.
@@ -31,7 +31,7 @@ namespace Products.Helpers
 
             foreach (var selid in selids)
             {
-                string selid1 = selid;
+                String selid1 = selid;
                 if (!product.Categories.Any(t => t.Id.ToString() == selid1))
                 {
                     long selectedID;

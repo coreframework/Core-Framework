@@ -7,7 +7,7 @@ using Framework.Core.Utilities.Email;
 
 namespace Core.Forms.Helpers
 {
-    public class FormsMailer
+    public static class FormsMailer
     {
         #region Fields
 
@@ -19,7 +19,7 @@ namespace Core.Forms.Helpers
 
         private const String FormsEmailSubjectTemplate = "{0}: {1}";
 
-        private static MailConfiguration _emailSettings;
+        private static MailConfiguration emailSettings;
 
         #endregion
 
@@ -29,11 +29,11 @@ namespace Core.Forms.Helpers
         {
            get
            {
-               if (_emailSettings == null)
+               if (emailSettings == null)
                {
-                   _emailSettings = MailConfiguration.Current;
+                   emailSettings = MailConfiguration.Current;
                }
-               return _emailSettings;
+               return emailSettings;
            }
         }
 
@@ -78,18 +78,19 @@ namespace Core.Forms.Helpers
 
             if (File.Exists(path))
             {
-                var streamTemplate = new StreamReader(File.OpenRead(path), Encoding.UTF8);
-                var template = streamTemplate.ReadToEnd();
-                streamTemplate.Close();
-
-                //render form answer
-                var answer = new StringBuilder();
-                foreach (var item in formAnswer.AnswerValues)
+                using (var streamTemplate = new StreamReader(File.OpenRead(path), Encoding.UTF8))
                 {
-                    answer.Append(template.Replace("<#AnswerValue#>", String.Format("{0}: {1}", item.Field, item.Value)));
-                }
+                    var template = streamTemplate.ReadToEnd();
 
-                email.AppendParam("Content", answer.ToString(), false);
+                    //render form answer
+                    var answer = new StringBuilder();
+                    foreach (var item in formAnswer.AnswerValues)
+                    {
+                        answer.Append(template.Replace("<#AnswerValue#>", String.Format("{0}: {1}", item.Field, item.Value)));
+                    }
+
+                    email.AppendParam("Content", answer.ToString(), false);
+                }
             }
         }
 

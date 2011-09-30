@@ -13,7 +13,7 @@ using System.Threading;
 using System.Web.Compilation;
 using Microsoft.Practices.ServiceLocation;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Get resources from <see cref="IResourceCache"/>.

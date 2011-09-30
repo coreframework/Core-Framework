@@ -12,7 +12,7 @@ namespace Core.Forms.NHibernate.Contracts
 
         int GetCount(ICriteria criteria);
 
-        ICriteria GetSearchCriteria(ICorePrincipal user, int operation, string searchString, String widgetIdentifier);
+        ICriteria GetSearchCriteria(ICorePrincipal user, int operation, String searchString, String widgetIdentifier);
 
         ICriteria GetPagedCriteria(ICriteria criteria, int page, int pageSize, String ordering, bool ascending);
     }

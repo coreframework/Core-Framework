@@ -13,7 +13,7 @@ namespace Framework.Migrator
     /// <summary>
     /// Provides helper methods for migrator.
     /// </summary>
-    public class MigratorUtility
+    public static class MigratorUtility
     {
         #region Fields
 

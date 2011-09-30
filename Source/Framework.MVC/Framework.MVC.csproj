@@ -8,8 +8,8 @@
     <ProjectGuid>{930E0E39-8A09-4373-A077-33971E9F7BEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Framework.MVC</RootNamespace>
-    <AssemblyName>Framework.MVC</AssemblyName>
+    <RootNamespace>Framework.Mvc</RootNamespace>
+    <AssemblyName>Framework.Mvc</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <DocumentationFile>bin\$(Configuration)\$(AssemblyName).xml</DocumentationFile>
@@ -43,6 +43,7 @@
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <DocumentationFile>bin\Debug\Framework.Mvc.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
@@ -204,8 +205,8 @@
     </Compile>
     <Compile Include="Grids\GridColumnViewModel.cs" />
     <Compile Include="Grids\GridViewModel.cs" />
-    <Compile Include="Grids\jqGrid\JqGridConstants.cs" />
-    <Compile Include="Grids\jqGrid\JqGridExtensions.cs" />
+    <Compile Include="Grids\JqGrid\JqGridConstants.cs" />
+    <Compile Include="Grids\JqGrid\JqGridExtensions.cs" />
     <Compile Include="Helpers\AssetsHelper.cs" />
     <Compile Include="Helpers\FileUploadModule.cs" />
     <Compile Include="Helpers\HtmlMarkupHelper.cs" />

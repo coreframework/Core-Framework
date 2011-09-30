@@ -52,7 +52,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using <#=T4MVCNamespace #>;
 <#foreach (var referencedNamespace in ReferencedNamespaces) { #>
 using <#=referencedNamespace #>;
@@ -80,7 +80,7 @@ namespace <#=T4MVCNamespace #> {
 <#foreach (var area in Areas.Where(a => !string.IsNullOrEmpty(a.Name))) { #>
     [<#= GeneratedCode #>, DebuggerNonUserCode]
     public class <#=area.Name #>Class {
-        public readonly string Name = "<#=ProcessAreaOrControllerName(area.Name) #>";
+        public readonly String Name = "<#=ProcessAreaOrControllerName(area.Name) #>";
 <#foreach (var controller in area.GetControllers()) { #>
         public <#=controller.FullClassName #> <#=controller.Name #> = new <#=controller.FullDerivedClassName #>();
 <#} #>
@@ -99,7 +99,7 @@ namespace System.Web.Mvc {
             return t4MVCResult;
         }
         
-        public static void InitMVCT4Result(this <#=ActionResultInterfaceName #> result, string area, string controller, string action) {
+        public static void InitMVCT4Result(this <#=ActionResultInterfaceName #> result, String area, String controller, String action) {
             result.Area = area;
             result.Controller = controller;
             result.Action = action;
@@ -114,9 +114,9 @@ namespace System.Web.Mvc {
 <#if (GenerateActionResultInterface) { #>   
 [<#= GeneratedCode #>]   
 public interface <#=ActionResultInterfaceName #> {   
-    string Area { get; set; }   
-    string Controller { get; set; }   
-    string Action { get; set; }   
+    String Area { get; set; }   
+    String Controller { get; set; }   
+    String Action { get; set; }   
     RouteValueDictionary RouteValueDictionary { get; set; }   
 }   
 <#} #>  
@@ -124,16 +124,16 @@ public interface <#=ActionResultInterfaceName #> {
 <#foreach (var resultType in ResultTypes.Values) { #>
 [<#= GeneratedCode #>, DebuggerNonUserCode]
 public class T4MVC_<#=resultType.Name #> : <#=resultType.FullName #>, <#=ActionResultInterfaceName #> {
-    public T4MVC_<#=resultType.Name #>(string area, string controller, string action): base(<#resultType.Constructor.WriteNonEmptyParameterValues(true); #>)  {
+    public T4MVC_<#=resultType.Name #>(String area, String controller, String action): base(<#resultType.Constructor.WriteNonEmptyParameterValues(true); #>)  {
         this.InitMVCT4Result(area, controller, action);
     }
     <#foreach (var method in resultType.AbstractMethods) { #> 
     <#=method.IsPublic ? "public" : "protected" #> override void <#=method.Name #>(<#method.WriteFormalParameters(true); #>) { }
     <#} #>
 
-    public string Area { get; set; }
-    public string Controller { get; set; }
-    public string Action { get; set; }
+    public String Area { get; set; }
+    public String Controller { get; set; }
+    public String Action { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 <#} #>
@@ -142,7 +142,7 @@ public class T4MVC_<#=resultType.Name #> : <#=resultType.FullName #>, <#=ActionR
 
 namespace <#=LinksNamespace #> {
 <#
-foreach (string folder in StaticFilesFolders) {
+foreach (String folder in StaticFilesFolders) {
     ProcessStaticFiles(Project, folder);
 }
 #>
@@ -200,9 +200,9 @@ namespace <#=controller.Namespace #> {
         [<#= GeneratedCode #>, DebuggerNonUserCode]
         public <#=controller.ClassName #> Actions { get { return <#=controller.T4MVCControllerFullName #>; } }
         [<#= GeneratedCode #>]
-        public readonly string Area = "<#=ProcessAreaOrControllerName(controller.AreaName) #>";
+        public readonly String Area = "<#=ProcessAreaOrControllerName(controller.AreaName) #>";
         [<#= GeneratedCode #>]
-        public readonly string Name = "<#=ProcessAreaOrControllerName(controller.Name) #>";
+        public readonly String Name = "<#=ProcessAreaOrControllerName(controller.Name) #>";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [<#= GeneratedCode #>, DebuggerNonUserCode]
@@ -211,9 +211,9 @@ namespace <#=controller.Namespace #> {
         public class ActionNamesClass {
 <#foreach (var method in controller.ActionMethodsWithUniqueNames) { #>
 <#  if (UseLowercaseRoutes) { #>
-            public readonly string <#=method.ActionName #> = (<#=method.ActionNameValueExpression #>).ToLowerInvariant();
+            public readonly String <#=method.ActionName #> = (<#=method.ActionNameValueExpression #>).ToLowerInvariant();
 <#  } else { #>
-            public readonly string <#=method.ActionName #> = <#=method.ActionNameValueExpression #>;
+            public readonly String <#=method.ActionName #> = <#=method.ActionNameValueExpression #>;
 <#  }
 } #>
         }
@@ -273,21 +273,21 @@ namespace <#=T4MVCNamespace #> {
 <#@ Include File="T4MVC.settings.t4" #>
 
 <#+ 
-const string T4MVCNamespace = "T4MVC";
-const string ControllerSuffix = "Controller";
+const String T4MVCNamespace = "T4MVC";
+const String ControllerSuffix = "Controller";
 
 static DTE Dte;
 static Project Project;
-static string AppRoot;
+static String AppRoot;
 static HashSet<AreaInfo> Areas;
 static AreaInfo DefaultArea;
 static Dictionary<string, ResultTypeInfo> ResultTypes;
 static TextTransformation TT;
-static string T4FileName;
-static string T4Folder;
-static string GeneratedCode = @"GeneratedCode(""T4MVC"", ""2.0"")";
+static String T4FileName;
+static String T4Folder;
+static String GeneratedCode = @"GeneratedCode(""T4MVC"", ""2.0"")";
 static float MvcVersion;
-static string HtmlStringType;
+static String HtmlStringType;
 static Microsoft.CSharp.CSharpCodeProvider codeProvider = new Microsoft.CSharp.CSharpCodeProvider();
 
 IEnumerable<ControllerInfo> GetControllers() {
@@ -394,7 +394,7 @@ void ProcessAreas(Project project) {
     }
 }
 
-void ProcessArea(ProjectItems areaFolderItems, string name) {
+void ProcessArea(ProjectItems areaFolderItems, String name) {
     var area = new AreaInfo() { Name = name };
     ProcessAreaControllers(areaFolderItems, area);
     ProcessAreaViews(areaFolderItems, area);
@@ -607,7 +607,7 @@ void AddViewsRecursive(ProjectItems items, ViewsFolderInfo viewsFolder) {
             viewsFolder.AddView(item);
         }
         else if (item.Kind == Constants.vsProjectItemKindPhysicalFolder) {
-            string folderName = Path.GetFileName(item.Name);
+            String folderName = Path.GetFileName(item.Name);
             if (folderName.Equals("App_LocalResources", StringComparison.OrdinalIgnoreCase))
                 continue;
             var subViewFolder = new ViewsFolderInfo() { Name = folderName };
@@ -627,12 +627,12 @@ void RenderViewsRecursive(ViewsFolderInfo viewsFolder, ControllerInfo controller
 
     // For each view, generate a readonly string
     foreach (var viewPair in viewsFolder.Views) {
-        WriteLine("public readonly string " + EscapeID(Sanitize(viewPair.Key)) + " = \"" + viewPair.Value + "\";");
+        WriteLine("public readonly String " + EscapeID(Sanitize(viewPair.Key)) + " = \"" + viewPair.Value + "\";");
     }
 
     // For each sub folder, generate a class and recurse
     foreach (var subFolder in viewsFolder.SubFolders) {
-        string newClassName = Sanitize(subFolder.Name);#>
+        String newClassName = Sanitize(subFolder.Name);#>
 static readonly _<#=newClassName#> s_<#=newClassName#> = new _<#=newClassName#>();
 public _<#=newClassName#> <#=EscapeID(newClassName)#> { get { return s_<#=newClassName#>; } }
 public partial class _<#=newClassName#>{
@@ -645,7 +645,7 @@ WriteLine("}");
     }
 }
 
-void ProcessStaticFiles(Project project, string folder) {
+void ProcessStaticFiles(Project project, String folder) {
 
     ProjectItem folderProjectItem = GetProjectItem(project, folder);
     if (folderProjectItem != null) {
@@ -653,14 +653,14 @@ void ProcessStaticFiles(Project project, string folder) {
     }
 }
 
-void ProcessStaticFilesRecursive(ProjectItem projectItem, string path) {
+void ProcessStaticFilesRecursive(ProjectItem projectItem, String path) {
 
     if (IsFolder(projectItem)) { #>
     [<#= GeneratedCode #>, DebuggerNonUserCode]
     public static class <#=EscapeID(Sanitize(projectItem.Name)) #> {
-        private const string URLPATH = "<#=path#>/<#=projectItem.Name#>";
-        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        private const String URLPATH = "<#=path#>/<#=projectItem.Name#>";
+        public static String Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static String Url(String fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
 <#+
 PushIndent("    ");
 
@@ -681,16 +681,16 @@ if (!ExcludedStaticFileExtensions.Any(extension => projectItem.Name.EndsWith(ext
     // if it's a non-minified javascript file
     if (projectItem.Name.EndsWith(".js") && !projectItem.Name.EndsWith(".min.js")) { 
         if (AddTimestampToStaticLinks) { #>
-    public static readonly string <#=Sanitize(projectItem.Name)#> = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/<#=projectItem.Name.Replace(".js", ".min.js")#>") ? Url("<#=projectItem.Name.Replace(".js", ".min.js")#>")+"?"+T4Extensions.TimestampString(URLPATH + "/<#=projectItem.Name#>") : Url("<#=projectItem.Name#>")+"?"+T4Extensions.TimestampString(URLPATH + "/<#=projectItem.Name#>");
+    public static readonly String <#=Sanitize(projectItem.Name)#> = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/<#=projectItem.Name.Replace(".js", ".min.js")#>") ? Url("<#=projectItem.Name.Replace(".js", ".min.js")#>")+"?"+T4Extensions.TimestampString(URLPATH + "/<#=projectItem.Name#>") : Url("<#=projectItem.Name#>")+"?"+T4Extensions.TimestampString(URLPATH + "/<#=projectItem.Name#>");
         <#+} else {#>
-    public static readonly string <#=Sanitize(projectItem.Name)#> = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/<#=projectItem.Name.Replace(".js", ".min.js")#>") ? Url("<#=projectItem.Name.Replace(".js", ".min.js")#>") : Url("<#=projectItem.Name#>");
+    public static readonly String <#=Sanitize(projectItem.Name)#> = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/<#=projectItem.Name.Replace(".js", ".min.js")#>") ? Url("<#=projectItem.Name.Replace(".js", ".min.js")#>") : Url("<#=projectItem.Name#>");
         <#+}  #>          
 <#+}
     else if (AddTimestampToStaticLinks) { #>
-    public static readonly string <#=Sanitize(projectItem.Name)#> = Url("<#=projectItem.Name#>")+"?"+T4Extensions.TimestampString(URLPATH + "/<#=projectItem.Name#>");
+    public static readonly String <#=Sanitize(projectItem.Name)#> = Url("<#=projectItem.Name#>")+"?"+T4Extensions.TimestampString(URLPATH + "/<#=projectItem.Name#>");
 <#+}
     else { #>
-    public static readonly string <#=Sanitize(projectItem.Name)#> = Url("<#=projectItem.Name#>");
+    public static readonly String <#=Sanitize(projectItem.Name)#> = Url("<#=projectItem.Name#>");
 <#+}
 } #>
 <#+
@@ -701,14 +701,14 @@ foreach (ProjectItem item in projectItem.ProjectItems) {
 }
     }
 }
-ProjectItem GetProjectItem(Project project, string name) {
+ProjectItem GetProjectItem(Project project, String name) {
     return GetProjectItem(project.ProjectItems, name);
 }
 
-ProjectItem GetProjectItem(ProjectItems items, string subPath) {
+ProjectItem GetProjectItem(ProjectItems items, String subPath) {
 
     ProjectItem current = null;
-    foreach (string name in subPath.Split('\\')) {
+    foreach (String name in subPath.Split('\\')) {
         try {
             // ProjectItems.Item() throws when it doesn't exist, so catch the exception
             // to return null instead.
@@ -724,8 +724,8 @@ ProjectItem GetProjectItem(ProjectItems items, string subPath) {
     return current;
 }
 
-static string GetVirtualPath(ProjectItem item) {
-    string fileFullPath = item.get_FileNames(0);
+static String GetVirtualPath(ProjectItem item) {
+    String fileFullPath = item.get_FileNames(0);
     if (!fileFullPath.StartsWith(AppRoot, StringComparison.OrdinalIgnoreCase))
         throw new Exception(string.Format("File {0} is not under app root {1}. Please report issue.", fileFullPath, AppRoot));
 
@@ -733,7 +733,7 @@ static string GetVirtualPath(ProjectItem item) {
     return "~/" + fileFullPath.Substring(AppRoot.Length).Replace('\\', '/');
 }
 
-static string ProcessAreaOrControllerName(string name) {
+static String ProcessAreaOrControllerName(String name) {
     return UseLowercaseRoutes ? name.ToLowerInvariant() : name;
 }
 
@@ -757,12 +757,12 @@ static bool HasExplicitDefaultConstructor(CodeClass2 codeClass) {
 }
 
 // Find a method with a given name
-static CodeFunction2 GetMethod(CodeClass2 codeClass, string name) {
+static CodeFunction2 GetMethod(CodeClass2 codeClass, String name) {
     return GetMethods(codeClass).FirstOrDefault(f => f.Name == name);
 }
 
 // Find an attribute of a given type on an attribute collection
-static CodeAttribute2 GetAttribute(CodeElements attributes, string attributeType) {
+static CodeAttribute2 GetAttribute(CodeElements attributes, String attributeType) {
     for (int i = 1; i <= attributes.Count; i++) {
         var attrib = (CodeAttribute2)attributes.Item(i);
         if (attrib.FullName == attributeType) {
@@ -777,12 +777,12 @@ static bool IsFolder(ProjectItem item) {
     return (item.Kind == Constants.vsProjectItemKindPhysicalFolder);
 }
 
-static string MakeClassName(string ns, string classname) {
+static String MakeClassName(String ns, String classname) {
     return String.IsNullOrEmpty(ns) ? classname :
         String.IsNullOrEmpty(classname) ? ns : ns + "." + codeProvider.CreateEscapedIdentifier(classname);
 }
 
-static string Sanitize(string token) {
+static String Sanitize(String token) {
     // Replace all invalid chars by underscores
     token = Regex.Replace(token, @"[\W\b]", "_", RegexOptions.IgnoreCase);
 
@@ -796,7 +796,7 @@ static string Sanitize(string token) {
     return token;
 }
 
-static string EscapeID(string id) {
+static String EscapeID(String id) {
     return codeProvider.CreateEscapedIdentifier(id);
 }
 
@@ -806,10 +806,10 @@ class AreaInfo {
         Controllers = new HashSet<ControllerInfo>();
     }
 
-    public string Name { get; set; }
+    public String Name { get; set; }
     public HashSet<ControllerInfo> Controllers { get; set; }
 
-    public string Namespace {
+    public String Namespace {
         get {
             // When *not* using an 'Areas' token, we need to disambiguate conflicts
             // between Area names and controller names (from the default Area)
@@ -838,20 +838,20 @@ class ControllerInfo {
 
     public AreaInfo Area { get; set; }
 
-    public string AreaName {
+    public String AreaName {
         get { return Area.Name ?? ""; }
     }
 
-    public string T4MVCControllerFullName {
+    public String T4MVCControllerFullName {
         get {
-            string name = HelpersPrefix;
+            String name = HelpersPrefix;
             if (!String.IsNullOrEmpty(AreaName))
                 name += "." + EscapeID(Area.Namespace);
             return name + "." + Name; ;
         }
     }
 
-    public string ViewPath {
+    public String ViewPath {
         get {
             if (string.IsNullOrEmpty(Area.Name))
                 return String.Format("~/{0}/{1}/", ViewsRootFolder, Name);
@@ -870,29 +870,29 @@ class ControllerInfo {
 
     public bool GeneratedCodeIsUpToDate { get; set; }
 
-    public string ClassName { get; set; }
-    public string Name {
+    public String ClassName { get; set; }
+    public String Name {
         get {
             // Trim the Controller suffix
             return ClassName.Substring(0, ClassName.Length - ControllerSuffix.Length);
         }
     }
 
-    public string Namespace { get; set; }
+    public String Namespace { get; set; }
 
-    public string FullClassName {
+    public String FullClassName {
         get {
             return MakeClassName(Namespace, ClassName);
         }
     }
 
-    public string DerivedClassName {
+    public String DerivedClassName {
         get {
             return "T4MVC_" + ClassName;
         }
     }
 
-    public string FullDerivedClassName {
+    public String FullDerivedClassName {
         get {
             if (NotRealController)
                 return FullClassName;
@@ -900,13 +900,13 @@ class ControllerInfo {
         }
     }
 
-    public string GeneratedFileName {
+    public String GeneratedFileName {
         get {
             return MakeClassName(AreaName, ClassName + ".generated.cs");
         }
     }
 
-    public string GeneratedFileFullPath {
+    public String GeneratedFileFullPath {
         get {
             return Path.Combine(T4Folder, GeneratedFileName);
         }
@@ -945,7 +945,7 @@ class ControllerInfo {
 
     public ViewsFolderInfo ViewsFolder { get; private set; }
 
-    public override string ToString() {
+    public override String ToString() {
         return Name;
     }
 
@@ -966,8 +966,8 @@ class ViewsFolderInfo {
     }
 
     public void AddView(ProjectItem item) {
-        string viewName = Path.GetFileName(item.Name);
-        string viewFieldName = Path.GetFileNameWithoutExtension(viewName);
+        String viewName = Path.GetFileName(item.Name);
+        String viewFieldName = Path.GetFileNameWithoutExtension(viewName);
 
         // If the simple view name is already in use, include the extension (e.g. foo_ascx instead of just foo)
         if (Views.ContainsKey(viewFieldName))
@@ -976,7 +976,7 @@ class ViewsFolderInfo {
         Views[viewFieldName] = GetVirtualPath(item);
     }
 
-    public string Name { get; set; }
+    public String Name { get; set; }
     public Dictionary<string, string> Views { get; private set; }
     public List<ViewsFolderInfo> SubFolders { get; set; }
 }
@@ -984,7 +984,7 @@ class ViewsFolderInfo {
 // Data structure to collect data about a method
 class FunctionInfo {
     protected CodeFunction2 _method;
-    private string _signature;
+    private String _signature;
 
     public FunctionInfo(CodeFunction2 method) {
         Parameters = new List<MethodParamInfo>();
@@ -1000,7 +1000,7 @@ class FunctionInfo {
 
         // Process all the parameters
         foreach (var p in method.Parameters.OfType<CodeParameter2>()) {
-            string routeNameExpression = "\"" + p.Name + "\"";
+            String routeNameExpression = "\"" + p.Name + "\"";
 
             // If there is a [Bind(Prefix = "someName")] attribute, use it
             if (p.InfoLocation != vsCMInfoLocation.vsCMInfoLocationExternal) {
@@ -1022,9 +1022,9 @@ class FunctionInfo {
         }
     }
 
-    public string Name { get { return _method.Name; } }
-    public string ReturnType { get { return _method.Type.CodeType.Name; } }
-    public string ReturnTypeFullName { get { return _method.Type.CodeType.FullName; } }
+    public String Name { get { return _method.Name; } }
+    public String ReturnType { get { return _method.Type.CodeType.Name; } }
+    public String ReturnTypeFullName { get { return _method.Type.CodeType.FullName; } }
     public bool IsPublic { get { return _method.Access == vsCMAccess.vsCMAccessPublic; } }
     public List<MethodParamInfo> Parameters { get; private set; }
 
@@ -1086,8 +1086,8 @@ class ActionMethodInfo : FunctionInfo {
         }
     }
 
-    public string ActionName { get { return Name; } }
-    public string ActionNameValueExpression { get; set; }
+    public String ActionName { get { return Name; } }
+    public String ActionNameValueExpression { get; set; }
 }
 
 // Data about an ActionResult derived type
@@ -1101,8 +1101,8 @@ class ResultTypeInfo {
         Constructor = new FunctionInfo(ctor);
     }
 
-    public string Name { get { return _codeType.Name; } }
-    public string FullName { get { return _codeType.FullName; } }
+    public String Name { get { return _codeType.Name; } }
+    public String FullName { get { return _codeType.FullName; } }
     public FunctionInfo Constructor { get; set; }
     public IEnumerable<FunctionInfo> AbstractMethods {
         get {
@@ -1113,9 +1113,9 @@ class ResultTypeInfo {
 }
 
 class MethodParamInfo {
-    public string Name { get; set; }
-    public string RouteNameExpression { get; set; }
-    public string Type { get; set; }
+    public String Name { get; set; }
+    public String RouteNameExpression { get; set; }
+    public String Type { get; set; }
 }
 
 
@@ -1233,7 +1233,7 @@ class Manager {
             }
         }
 
-        public override String GetCustomToolNamespace(string fileName) {
+        public override String GetCustomToolNamespace(String fileName) {
             return dte.Solution.FindProjectItem(fileName).Properties.Item("CustomToolNamespace").Value.ToString();
         }
 

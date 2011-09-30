@@ -12,7 +12,7 @@ namespace Core.Web.NHibernate.Mappings
             Id(pageRow => pageRow.Id);
             HasMany(pageRow => pageRow.Columns).KeyColumn("RowId")
                 .Table("PageLayoutColumns")
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
                 .Inverse()
                 .LazyLoad()
                 .Cascade.AllDeleteOrphan();

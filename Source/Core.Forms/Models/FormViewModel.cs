@@ -9,7 +9,7 @@ namespace Core.Forms.Models
 {
     public class FormViewModel : IMappedModel<Form, FormViewModel>
     {
-        private IDictionary<String, String> _cultures;
+        private IDictionary<String, String> cultures;
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -61,8 +61,8 @@ namespace Core.Forms.Models
         /// <value>The cultures.</value>
         public IDictionary<String, String> Cultures
         {
-            get { return _cultures ?? (_cultures = CultureHelper.GetAvailableCultures()); }
-            set { _cultures = value; }
+            get { return cultures ?? (cultures = CultureHelper.GetAvailableCultures()); }
+            set { cultures = value; }
         }
 
         public FormViewModel MapFrom(Form from)

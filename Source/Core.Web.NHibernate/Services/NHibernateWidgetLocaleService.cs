@@ -22,7 +22,7 @@ namespace Core.Web.NHibernate.Services
             return query.Where(locale => locale.Widget.Id == widgetId && locale.Culture == culture).FirstOrDefault();
         }
 
-        public ICriteria GetSearchCriteria(string searchString)
+        public ICriteria GetSearchCriteria(String searchString)
         {
             ICriteria criteria = Session.CreateCriteria<WidgetLocale>().CreateAlias("Widget", "widget");
 

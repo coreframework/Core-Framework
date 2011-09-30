@@ -17,11 +17,10 @@ using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Framework.Core.Extensions;
-using Framework.MVC.Extensions;
-using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Filters;
 using NHibernate;
@@ -35,17 +34,17 @@ namespace Core.Forms.Controllers
     {
         #region Fields
 
-        private readonly IFormService _formsService;
+        private readonly IFormService formsService;
 
-        private readonly IFormLocaleService _formsLocaleService;
+        private readonly IFormLocaleService formsLocaleService;
 
-        private readonly IFormElementService _formsElementService;
+        private readonly IFormElementService formsElementService;
 
-        private readonly IFormElementLocaleService _formsElementLocaleService;
+        private readonly IFormElementLocaleService formsElementLocaleService;
 
-        private readonly IPermissionCommonService _permissionService;
+        private readonly IPermissionCommonService permissionService;
 
-        private readonly IPermissionsHelper _permissionsHelper;
+        private readonly IPermissionsHelper permissionsHelper;
 
         #endregion
 
@@ -55,7 +54,7 @@ namespace Core.Forms.Controllers
         /// Gets the controller plugin identifier.
         /// </summary>
         /// <value>The controller plugin identifier.</value>
-        public override string ControllerPluginIdentifier
+        public override String ControllerPluginIdentifier
         {
             get { return FormsPlugin.Instance.Identifier; }
         }
@@ -66,12 +65,12 @@ namespace Core.Forms.Controllers
 
         public FormsController()
         {
-            _formsService = ServiceLocator.Current.GetInstance<IFormService>();
-            _formsLocaleService = ServiceLocator.Current.GetInstance<IFormLocaleService>();
-            _formsElementService = ServiceLocator.Current.GetInstance<IFormElementService>();
-            _formsElementLocaleService = ServiceLocator.Current.GetInstance<IFormElementLocaleService>();
-            _permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-            _permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
+            formsService = ServiceLocator.Current.GetInstance<IFormService>();
+            formsLocaleService = ServiceLocator.Current.GetInstance<IFormLocaleService>();
+            formsElementService = ServiceLocator.Current.GetInstance<IFormElementService>();
+            formsElementLocaleService = ServiceLocator.Current.GetInstance<IFormElementLocaleService>();
+            permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
 
         }
 
@@ -130,12 +129,12 @@ namespace Core.Forms.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            ICriteria searchQuery = _formsLocaleService.GetSearchCriteria(search, this.CorePrincipal(), (Int32)FormOperations.View);
-            long totalRecords = _formsLocaleService.Count(searchQuery);
+            ICriteria searchQuery = formsLocaleService.GetSearchCriteria(search, this.CorePrincipal(), (Int32)FormOperations.View);
+            long totalRecords = formsLocaleService.Count(searchQuery);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var forms = searchQuery.AddOrder(new Order(sidx, sord == "asc")).SetFirstResult(pageIndex * rows).SetMaxResults(rows).List<FormLocale>();
             var jsonData = new
@@ -165,14 +164,14 @@ namespace Core.Forms.Controllers
         [MvcSiteMapNode(Title = "$t:Titles.Permissions", AreaName = "Forms", ParentKey = "Forms.Edit")]
         public virtual ActionResult ShowPermissions(long formId)
         {
-            var form = _formsService.Find(formId);
+            var form = formsService.Find(formId);
 
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            if (form == null || !permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Notfound", ResourceHelper.GetControllerScope(this))/*"Not Found"*/);
             }
 
-            return View("FormPermissions", _permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
+            return View("FormPermissions", permissionsHelper.BindPermissionsModel(form.Id, typeof(Form), false));
         }
 
         /// <summary>
@@ -186,11 +185,11 @@ namespace Core.Forms.Controllers
         [ChildActionOnly]
         public virtual ActionResult FormTabs(long formId, bool activeDetails, bool activeElements, bool activePermissions)
         {
-            var form = _formsService.Find(formId);
+            var form = formsService.Find(formId);
             if (form != null)
             {
                 var result = new List<MenuItemModel>();
-                var formPermissions = _permissionService.GetAccess(OperationsHelper.GetOperations<FormOperations>(), this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form));
+                var formPermissions = permissionService.GetAccess(OperationsHelper.GetOperations<FormOperations>(), this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form));
                 if (formPermissions.ContainsKey((int)FormOperations.View) && formPermissions[(int)FormOperations.View])
                 {
                     result.Add(new MenuItemModel
@@ -230,10 +229,10 @@ namespace Core.Forms.Controllers
         /// <returns></returns>
         public virtual ActionResult Remove(long id)
         {
-            var form = _formsService.Find(id);
-            if (form != null && _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            var form = formsService.Find(id);
+            if (form != null && permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
-                _formsService.Delete(form);
+                formsService.Delete(form);
             }
 
             return RedirectToAction("ShowAll");
@@ -247,15 +246,15 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult ApplyPermissions(PermissionsModel model)
         {
-            var form = _formsService.Find(model.EntityId);
+            var form = formsService.Find(model.EntityId);
 
             if (form != null)
             {
-                if (_permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                if (permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
-                    _permissionsHelper.ApplyPermissions(model, typeof(Form));
+                    permissionsHelper.ApplyPermissions(model, typeof(Form));
                 }
-                if (_permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                if (permissionService.IsAllowed((Int32)FormOperations.Permissions, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
                     Success(HttpContext.Translate("Messages.PermitionsSuccess", ResourceHelper.GetControllerScope(this))/*"Successfully apply permissions."*/);
                     return Content(Url.Action("ShowPermissions", "Forms", new { formId = form.Id }));
@@ -284,9 +283,9 @@ namespace Core.Forms.Controllers
             if (ModelState.IsValid)
             {
                 var newForm = form.MapTo(new Form{UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null});
-                if (_formsService.Save(newForm))
+                if (formsService.Save(newForm))
                 {
-                    _permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormOperations>(), typeof(Form), newForm.Id);
+                    permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<FormOperations>(), typeof(Form), newForm.Id);
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
                     return RedirectToAction(FormsMVC.Forms.Edit(newForm.Id));
                 }
@@ -301,14 +300,14 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult ChangeLanguage(long formId, String culture)
         {
-            var form = _formsService.Find(formId);
+            var form = formsService.Find(formId);
 
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            if (form == null || !permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
-            bool allowManage = _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(),
+            bool allowManage = permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(),
                                                         typeof(Form), form.Id, IsFormOwner(form),
                                                         PermissionOperationLevel.Object);
 
@@ -335,14 +334,14 @@ namespace Core.Forms.Controllers
         [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long formId)
         {
-            var form = _formsService.Find(formId);
+            var form = formsService.Find(formId);
 
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            if (form == null || !permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
-            bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
+            bool allowManage = permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
                                                             typeof (Form), form.Id, IsFormOwner(form),
                                                             PermissionOperationLevel.Object);
 
@@ -355,14 +354,14 @@ namespace Core.Forms.Controllers
             FormsHelper.ValidateForm(model, ModelState);
             if (ModelState.IsValid)
             {
-                var form = _formsService.Find(model.Id);
+                var form = formsService.Find(model.Id);
 
-                if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                if (form == null || !permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
                 }
 
-                if (_formsService.Save(model.MapTo(form)))
+                if (formsService.Save(model.MapTo(form)))
                 {
                     //save locale
                     var localeService = ServiceLocator.Current.GetInstance<IFormLocaleService>();
@@ -392,9 +391,9 @@ namespace Core.Forms.Controllers
         [MvcSiteMapNode(Title = "$t:Titles.FormElements", AreaName = "Forms", ParentKey = "Forms.Edit", Key = "Forms.FormElements")]
         public virtual ActionResult ShowFormElements(long formId)
         {
-            var form = _formsService.Find(formId);
+            var form = formsService.Find(formId);
 
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            if (form == null || !permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
@@ -442,7 +441,7 @@ namespace Core.Forms.Controllers
                 IsRowNotClickable = true
             };
             
-            bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
+            bool allowManage = permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
                                                             typeof (Form), form.Id, IsFormOwner(form),
                                                             PermissionOperationLevel.Object);
 
@@ -452,22 +451,22 @@ namespace Core.Forms.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult FormElementsDynamicGridData(int formId, int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult FormElementsDynamicGridData(int formId, int page, int rows, String search, String sidx, String sord)
         {
-            var form = _formsService.Find(formId);
+            var form = formsService.Find(formId);
 
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            if (form == null || !permissionService.IsAllowed((Int32)FormOperations.View, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
-            bool allowManage = _permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
+            bool allowManage = permissionService.IsAllowed((Int32) FormOperations.Manage, this.CorePrincipal(),
                                                             typeof (Form), form.Id, IsFormOwner(form),
                                                             PermissionOperationLevel.Object);
 
-            ICriteria searchQuery = _formsElementLocaleService.GetSearchCriteria(form.Id, search);
-            long totalRecords = _formsLocaleService.Count(searchQuery);
-            const int totalPages = 1;
+            ICriteria searchQuery = formsElementLocaleService.GetSearchCriteria(form.Id, search);
+            long totalRecords = formsLocaleService.Count(searchQuery);
+            int totalPages = 1;
             var forms = searchQuery.AddOrder(new Order("formElement.OrderNumber", sord == "asc")).List<FormElementLocale>();
 
             var jsonData = new
@@ -506,8 +505,8 @@ namespace Core.Forms.Controllers
         [MvcSiteMapNode(Title = "New", AreaName = "Forms", ParentKey = "Forms.FormElements")]
         public virtual ActionResult NewElement(long formId)
         {
-            var form = _formsService.Find(formId);
-            if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+            var form = formsService.Find(formId);
+            if (form == null || !permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
@@ -520,9 +519,9 @@ namespace Core.Forms.Controllers
         [SiteMapTitle("Title")]
         public virtual ActionResult EditElement(long formId, long formElementId)
         {
-            var formElement = _formsElementService.Find(formElementId);
+            var formElement = formsElementService.Find(formElementId);
 
-            if (formElement == null || formElement.Form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
+            if (formElement == null || formElement.Form == null || !permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
@@ -533,9 +532,9 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult ChangeFormElementLanguage(long formElementId, String culture)
         {
-            var formElement = _formsElementService.Find(formElementId);
+            var formElement = formsElementService.Find(formElementId);
 
-            if (formElement == null || formElement.Form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
+            if (formElement == null || formElement.Form == null || !permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
@@ -556,14 +555,14 @@ namespace Core.Forms.Controllers
         [HttpPost]
         public virtual ActionResult SaveElement(long formId, FormElementViewModel model)
         {
-            FormsHelper.ValidateFormElement(this, model, ModelState);
+            FormsHelper.ValidateFormElement(model, ModelState);
 
             if (ModelState.IsValid)
             {
                 FormsHelper.UpdateFormElement(model);
 
-                var form = _formsService.Find(formId);
-                if (form == null || !_permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
+                var form = formsService.Find(formId);
+                if (form == null || !permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), form.Id, IsFormOwner(form), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
                 }
@@ -572,15 +571,15 @@ namespace Core.Forms.Controllers
                 bool isEdited = model.Id > 0;
                 if (isEdited)
                 {
-                    formElement = _formsElementService.Find(model.Id);
+                    formElement = formsElementService.Find(model.Id);
                 }
                 else
                 {
                     formElement.Form = form;
-                    formElement.OrderNumber = _formsElementService.GetLastOrderNumber(formElement.Form.Id);
+                    formElement.OrderNumber = formsElementService.GetLastOrderNumber(formElement.Form.Id);
                 }
 
-                if (_formsElementService.Save(model.MapTo(formElement)))
+                if (formsElementService.Save(model.MapTo(formElement)))
                 {
                     if (isEdited)
                     {
@@ -601,10 +600,10 @@ namespace Core.Forms.Controllers
 
         public virtual ActionResult RemoveElement(long id)
         {
-            var formElement = _formsElementService.Find(id);
-            if (formElement != null && _permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
+            var formElement = formsElementService.Find(id);
+            if (formElement != null && permissionService.IsAllowed((Int32)FormOperations.Manage, this.CorePrincipal(), typeof(Form), formElement.Form.Id, IsFormOwner(formElement.Form), PermissionOperationLevel.Object))
             {
-                var relatedElements = _formsElementService.GetSearchQuery(formElement.Form.Id, String.Empty).ToList();
+                var relatedElements = formsElementService.GetSearchQuery(formElement.Form.Id, String.Empty).ToList();
                 relatedElements.Update(el =>
                 {
                     el.OrderNumber =
@@ -613,12 +612,12 @@ namespace Core.Forms.Controllers
                            : el.OrderNumber;
                 });
 
-                _formsElementService.Delete(formElement);
+                formsElementService.Delete(formElement);
 
                 foreach (var element in relatedElements)
                 {
                     if (element.Id != formElement.Id)
-                        _formsElementService.Save(element);
+                        formsElementService.Save(element);
                 }
                 Success(HttpContext.Translate("Messages.RemoveSuccess", ResourceHelper.GetControllerScope(this))/*"Sucessfully remove form element."*/);
                 return RedirectToAction("ShowFormElements", new { formId = formElement.Form.Id });

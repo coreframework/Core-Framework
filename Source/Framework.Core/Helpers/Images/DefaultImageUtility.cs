@@ -227,7 +227,7 @@ namespace Framework.Core.Helpers.Images
             image.Save(targetFile, codecInfo, encoderParameters);
         }
 
-        private String GetMimeType(String fileName)
+        private static String GetMimeType(String fileName)
         {
             String mimeType;
             if (mimeTypesMapping.TryGetValue(Path.GetExtension(fileName).ToLowerInvariant(), out mimeType))

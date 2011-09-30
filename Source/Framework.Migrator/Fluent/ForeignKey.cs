@@ -59,9 +59,9 @@ namespace Framework.Migrator.Fluent
 
         private bool generateColumn = true;
 
-        private ForeignKeyConstraint _deleteConstraint = ForeignKeyConstraint.NoAction;
+        private ForeignKeyConstraint deleteConstraint = ForeignKeyConstraint.NoAction;
         
-        private ForeignKeyConstraint _updateConstraint = ForeignKeyConstraint.NoAction;
+        private ForeignKeyConstraint updateConstraint = ForeignKeyConstraint.NoAction;
 
         private DbType columnType = Defaults.PrimaryKeyType;
 
@@ -220,11 +220,11 @@ namespace Framework.Migrator.Fluent
         {
             get
             {
-                return _deleteConstraint;
+                return deleteConstraint;
             }
             private set
             {
-                _deleteConstraint = value;
+                deleteConstraint = value;
             }
         }
 
@@ -236,11 +236,11 @@ namespace Framework.Migrator.Fluent
         {
             get
             {
-                return _updateConstraint;
+                return updateConstraint;
             }
             private set
             {
-                _updateConstraint = value;
+                updateConstraint = value;
             }
         }
 

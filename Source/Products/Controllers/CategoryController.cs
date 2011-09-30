@@ -7,9 +7,9 @@ using System.Web;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
-using Framework.MVC.Extensions;
-using Framework.MVC.Grids;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
@@ -19,7 +19,6 @@ using Products.Models;
 using Products.NHibernate.Contracts;
 using Products.NHibernate.Models;
 using Products.Permissions.Operations;
-using System.Linq.Dynamic;
 
 namespace Products.Controllers
 {
@@ -39,7 +38,7 @@ namespace Products.Controllers
         /// <summary>
         /// Controller Plugin Identifier
         /// </summary>
-        public override string ControllerPluginIdentifier
+        public override String ControllerPluginIdentifier
         {
             get { return ProductPlugin.Instance.Identifier; }
         }
@@ -108,7 +107,7 @@ namespace Products.Controllers
 
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;

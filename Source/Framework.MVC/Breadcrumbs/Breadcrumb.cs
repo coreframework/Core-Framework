@@ -3,7 +3,9 @@
 //   Itransition (c) Copyright. All right reserved.
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
-namespace Framework.MVC.Breadcrumbs
+using System;
+
+namespace Framework.Mvc.Breadcrumbs
 {
     /// <summary>
     /// Provides IBreadcrumb implementation.
@@ -14,7 +16,7 @@ namespace Framework.MVC.Breadcrumbs
         /// Gets or sets the breadcrumb URL.
         /// </summary>
         /// <value>The breadcrumb URL.</value>
-        public string Url
+        public String Url
         {
             get; set;
         }
@@ -23,7 +25,7 @@ namespace Framework.MVC.Breadcrumbs
         /// Gets or sets the breadcrumb title.
         /// </summary>
         /// <value>The breadcrumb title.</value>
-        public string Text
+        public String Text
         {
             get; set;
         }

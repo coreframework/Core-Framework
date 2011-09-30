@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using System.Linq;
 using Core.Framework.Plugins.Web;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Configuration;
 using Framework.Migrator;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 
 namespace Core.Web.NHibernate.Migrator
 {
@@ -73,7 +73,7 @@ namespace Core.Web.NHibernate.Migrator
                     migration => pluginMigrationsVersions.Contains(migration));
                 if (appliedMigrations.Count > 0)
                 {
-                    IPluginService pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
+                    var pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
                     Plugin pluginEntity = pluginService.FindPluginByIdentifier(plugin.Identifier);
                     foreach (long appliedMigration in appliedMigrations)
                     {
@@ -98,7 +98,7 @@ namespace Core.Web.NHibernate.Migrator
             ECM7.Migrator.Migrator migrator = GetMigrator(plugin.GetPluginMigrationsAssembly());
             if (migrator.MigrationsTypes != null && migrator.MigrationsTypes.Count > 0)
             {
-                IMigrationService migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
+                var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
                 IEnumerable<Migration> pluginInstalledMigrations = FillPluginSchemaInfo(plugin, migrationService);
                 migrator.MigrateTo(0);
                 IEnumerable<long> pluginMigrations = (from migrationsType in migrator.MigrationsTypes select migrationsType.Version).AsEnumerable();

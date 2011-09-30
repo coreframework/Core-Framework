@@ -7,12 +7,12 @@
 using System;
 using System.Web.Mvc;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Provides helper method for HTML markup generation.
     /// </summary>
-    public class HtmlMarkupHelper
+    public static class HtmlMarkupHelper
     {
         /// <summary>
         /// Generate HTML element id using name.

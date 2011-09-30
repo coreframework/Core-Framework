@@ -14,7 +14,7 @@ namespace Core.ContentPages.Widgets
     {
         #region Singleton
 
-        private static ContentViewerWidget _instance;
+        private static ContentViewerWidget instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -24,7 +24,7 @@ namespace Core.ContentPages.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new ContentViewerWidget());
+                    return instance ?? (instance = new ContentViewerWidget());
                 }
             }
         }

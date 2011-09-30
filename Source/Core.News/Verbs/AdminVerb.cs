@@ -16,7 +16,7 @@ namespace Core.News.Verbs
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return HttpContext.GetGlobalResourceObject(String.Format("News.Verbs.AdminVerb"), String.Format("News")) as String ?? "News"; }
         }
@@ -24,7 +24,7 @@ namespace Core.News.Verbs
         /// <summary>
         /// Gets the action.
         /// </summary>
-        public string Action
+        public String Action
         {
             get { return "ShowAll"; }
         }
@@ -32,7 +32,7 @@ namespace Core.News.Verbs
         /// <summary>
         /// Gets the controller.
         /// </summary>
-        public string Controller
+        public String Controller
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Core.News.Verbs
         /// Gets the controller plugin identifier.
         /// </summary>
         /// <value>The controller plugin identifier.</value>
-        public string ControllerPluginIdentifier
+        public String ControllerPluginIdentifier
         {
             get { return NewsPlugin.Instance.Identifier; }
         }

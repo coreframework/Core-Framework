@@ -2,12 +2,12 @@
 {
     public enum PermissionArea
     {
-        Portal = 1,
+        Portal,
 
-        Applications = 2,
+        Applications,
 
-        ControlPanel = 3,
+        ControlPanel,
 
-        Content = 4
+        Content
     }
 }

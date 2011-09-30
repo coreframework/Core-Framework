@@ -7,7 +7,7 @@ namespace Products.Verbs.Widgets
     {
         #region Singleton
 
-        private static ProductWidgetEditorVerb _instance;
+        private static ProductWidgetEditorVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -17,7 +17,7 @@ namespace Products.Verbs.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new ProductWidgetEditorVerb());
+                    return instance ?? (instance = new ProductWidgetEditorVerb());
                 }
             }
         }
@@ -26,17 +26,17 @@ namespace Products.Verbs.Widgets
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "EditWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "ProductViewerWidget"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Product"; }
         }

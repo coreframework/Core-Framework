@@ -14,14 +14,10 @@ namespace Products.NHibernate.Mappings
             Table("Product_ProductWidgets");
             Id(productWidget => productWidget.Id);
             Map(productWidget => productWidget.PageSize);
-           
-       /*     HasMany(productWidget => productWidget.Categories)
-                .Table("Product_ProductWidgetToCategories").ParentKeyColumn("ProductWidgetId")
-                .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().AsSet().LazyLoad();*/
 
             HasMany(page => page.Categories).KeyColumn("ProductWidgetId")
               .Table("Product_ProductWidgetToCategories")
-              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
               .Inverse()
               .LazyLoad()
               .Cascade.AllDeleteOrphan();

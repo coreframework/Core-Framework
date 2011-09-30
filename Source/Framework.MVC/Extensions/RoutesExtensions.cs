@@ -8,7 +8,7 @@ using System;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for retrieving current area name, controller name and action name from route data.

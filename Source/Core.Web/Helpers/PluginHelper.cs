@@ -23,7 +23,7 @@ namespace Core.Web.Helpers
         /// <returns>
         /// 	<c>true</c> if [is plugin enabled] [the specified plugin identified]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsPluginEnabled(string pluginIdentifier)
+        public bool IsPluginEnabled(String pluginIdentifier)
         {
             var pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
             Plugin plugin = pluginService.FindPluginByIdentifier(pluginIdentifier);
@@ -84,7 +84,7 @@ namespace Core.Web.Helpers
         /// <returns></returns>
         public static int CountAvailablePlugins(ICriteria pluginCriteria)
         {
-            return (pluginCriteria.List<PluginLocale>().Where(plugin => Application.Plugins.FirstOrDefault(pl => pl.Identifier == plugin.Plugin.Identifier) != null)).Count();
+            return pluginCriteria.List<PluginLocale>().Where(plugin => Application.Plugins.FirstOrDefault(pl => pl.Identifier == plugin.Plugin.Identifier) != null).Count();
         }
     }
 }

@@ -9,13 +9,12 @@ using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
-using Framework.MVC.Controllers;
-using Framework.MVC.Grids;
-using Framework.MVC.Grids.jqGrid;
+using Framework.Mvc.Controllers;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Grids.JqGrid;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
@@ -25,9 +24,9 @@ namespace Core.Web.Areas.Admin.Controllers
     {
         #region Fields
 
-        private readonly IWidgetService _widgetService;
+        private readonly IWidgetService widgetService;
 
-        private readonly IWidgetLocaleService _widgetLocaleService;
+        private readonly IWidgetLocaleService widgetLocaleService;
 
         #endregion
 
@@ -38,8 +37,8 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         public WidgetController()
         {
-            _widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
-            _widgetLocaleService = ServiceLocator.Current.GetInstance<IWidgetLocaleService>();
+            widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
+            widgetLocaleService = ServiceLocator.Current.GetInstance<IWidgetLocaleService>();
         }
 
         #endregion
@@ -86,14 +85,14 @@ namespace Core.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
 
-            ICriteria searchCriteria = _widgetLocaleService.GetSearchCriteria(search);
+            ICriteria searchCriteria = widgetLocaleService.GetSearchCriteria(search);
 
-            long totalRecords = _widgetLocaleService.Count(searchCriteria);
+            long totalRecords = widgetLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var widgets = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<WidgetLocale>();
             var jsonData = new
@@ -101,8 +100,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 total = totalPages,
                 page,
                 records = totalRecords,
-                rows = (
-                           widgets.Select(widget => new
+                rows = widgets.Select(widget => new
                            {
                                id = JqGridConstants.NotClickableId,
                                cell = new[]
@@ -115,7 +113,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                 String.Empty,
                                                 String.Format(JqGridConstants.UrlTemplate, Url.Action(MVC.Admin.Widget.Edit(widget.Widget.Id)),Translate("Actions.Edit"))
                                             }
-                           }).ToArray())
+                           }).ToArray()
             };
             return Json(jsonData);
         }
@@ -129,7 +127,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long id)
         {
-            var widget = _widgetService.Find(id);
+            var widget = widgetService.Find(id);
             if (widget == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -141,7 +139,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult ChangeLanguage(long widgetId, String culture)
         {
-            var widget = _widgetService.Find(widgetId);
+            var widget = widgetService.Find(widgetId);
             if (widget == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.WidgetNotFound"));
@@ -167,7 +165,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult Update(long id, WidgetViewModel model)
         {
-            var widget = _widgetService.Find(id);
+            var widget = widgetService.Find(id);
             if (widget == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -196,7 +194,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Enable(long id)
         {
-            Widget widgetEntity = _widgetService.Find(id);
+            Widget widgetEntity = widgetService.Find(id);
             if (widgetEntity == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -204,12 +202,12 @@ namespace Core.Web.Areas.Admin.Controllers
             if (widgetEntity.Status.Equals(WidgetStatus.Disabled))
             {
                 widgetEntity.Status = WidgetStatus.Enabled;
-                _widgetService.Save(widgetEntity);
+                widgetService.Save(widgetEntity);
                 Success(Translate("Messages.InstallWidget"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
             Error(Translate("Messages.UnknownError"));
-            return View("Index", _widgetService.GetInstalledWidgets());
+            return View("Index", widgetService.GetInstalledWidgets());
         }
 
         /// <summary>
@@ -220,7 +218,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Disable(long id)
         {
-            Widget widgetEntity = _widgetService.Find(id);
+            Widget widgetEntity = widgetService.Find(id);
             if (widgetEntity == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -228,12 +226,12 @@ namespace Core.Web.Areas.Admin.Controllers
             if (widgetEntity.Status.Equals(WidgetStatus.Enabled))
             {
                 widgetEntity.Status = WidgetStatus.Disabled;
-                _widgetService.Save(widgetEntity);
+                widgetService.Save(widgetEntity);
                 Success(Translate("Messages.UninstallWidget"));
                 return RedirectToAction(MVC.Admin.Widget.Index());
             }
             Error(Translate("Messages.UnknownError"));
-            return View("Index", _widgetService.GetInstalledWidgets());
+            return View("Index", widgetService.GetInstalledWidgets());
         }
 
     }

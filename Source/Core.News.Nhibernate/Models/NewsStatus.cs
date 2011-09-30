@@ -2,7 +2,8 @@
 {
     public enum NewsStatus
     {
-        Pending = 1,
-        Published = 2
+        Pending,
+
+        Published
     }
 }

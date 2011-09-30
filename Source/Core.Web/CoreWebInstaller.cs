@@ -4,7 +4,7 @@ using Castle.Windsor;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Web.Helpers;
-using Framework.MVC.Breadcrumbs;
+using Framework.Mvc.Breadcrumbs;
 
 namespace Core.Web
 {

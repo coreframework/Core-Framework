@@ -9,7 +9,7 @@ using Framework.Facilities.NHibernate.Castle;
 
 namespace Core.Languages.NHibernate
 {
-    public class CoreLanguagesNHibernateModule
+    public static class CoreLanguagesNHibernateModule
     {
         public static void Install(IWindsorContainer container)
         {

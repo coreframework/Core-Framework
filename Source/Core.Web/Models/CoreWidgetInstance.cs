@@ -1,4 +1,5 @@
-﻿using Core.Framework.Plugins.Web;
+﻿using System;
+using Core.Framework.Plugins.Web;
 
 namespace Core.Web.Models
 {
@@ -6,7 +7,7 @@ namespace Core.Web.Models
     {
         public long? InstanceId { get; set; }
 
-        public string WidgetIdentifier { get; set; }
+        public String WidgetIdentifier { get; set; }
 
         public IPageSettings PageSettings { get; set; }
     }

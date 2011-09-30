@@ -34,7 +34,7 @@ namespace Core.Web.Helpers
             {
                 return new PermissionsModel
                     {
-                        Roles = roleService.GetAll().Where(role=>role.Id!=(int)SystemRoles.Administrator),
+                        Roles = roleService.GetAll().Where(role=>role.Id!=(int)SystemRole.Administrator),
                         EntityId = entityId,
                         Permissions = permissionsService.GetResourcePermissions(entityType, entityId, includeEntityNull),
                         Operations = permissibleItem.Operations.Where(operation => operation.OperationLevel != PermissionOperationLevel.Type).ToList()
@@ -89,11 +89,11 @@ namespace Core.Web.Helpers
                     {
                         if (model.Actions == null || !model.Actions.Contains(String.Format("{0}_{1}", role.Id, operation.Key)))
                         {
-                            rolePermission.Permissions = (rolePermission.Permissions & (~operation.Key));
+                            rolePermission.Permissions = rolePermission.Permissions & (~operation.Key);
                         }
                         else
                         {
-                            rolePermission.Permissions = (rolePermission.Permissions | operation.Key);
+                            rolePermission.Permissions = rolePermission.Permissions | operation.Key;
                         }
                     }
                     result = result && permissionsService.Save(rolePermission);

@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
 namespace Core.Framework.Plugins.Widgets
 {
+    [Flags]
     public enum BaseWidgetOperations
     {
         [OperationDescription(PermissionArea.Applications, PermissionOperationLevel.ObjectType, GuestDefaultAcess = true, OwnerDefaultAcess = true, UserDefaultAccess = true)]

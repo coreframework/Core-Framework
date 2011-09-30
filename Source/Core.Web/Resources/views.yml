@@ -5,23 +5,24 @@ Views:
        PanelView: "View" 
        PanelEdit: "Edit" 
        Widget: "Widget"
-       PageSettings: "Change Page Common Settings"
-       PageLayout: "Change Page Layout"
-       PageLookAndFeel: "Change Page Look and Feel"
-       CSS: "Change Page CSS"
+       PageSettings: "Change page common settings"
+       PageLayout: "Change page layout"
+       PageLookAndFeel: "Change page look and feel"
+       CSS: "Change page CSS"
+       DeletePage: "Delete this page"
        Permissions: "Permissions"
       PageLookAndFeelSettings:
-       LookAndFeel: "Look and Feel"
+       LookAndFeel: "Look and feel"
       PageLookAndFeelForm:
        Successful: "Your request processed successfully."
        Error: "Error"
       PageCommonSettings:
-       CommonSettings: "Common Settings"
+       CommonSettings: "Common settings"
       PageCSSSettings:
        CSS: "CSS"
        CurrentPageInformation: "Your current page information is as follows"
        PageClass: "Page class"
-       WidgetClasses: "Widget Classes"
+       WidgetClasses: "Widget classes"
        PageRule: "Add a CSS rule for this page."
        AllWidgetsRule: "Add a CSS rule for all widgets on this page."
       PageCSSForm:
@@ -32,14 +33,14 @@ Views:
     Shared:
       Widgets:
         WidgetSettings:
-            CommonSettings: "Common Settings"
+            CommonSettings: "Common settings"
             Common: "Common"
-            LookAndFeel: "Look and Feel"
+            LookAndFeel: "Look and feel"
             CSS: "CSS"
             Permissions: "Permissions"
             Save: "Save"
         WidgetLookAndFeelSettings:
-            LookAndFeel: "Look and Feel"
+            LookAndFeel: "Look and feel"
         WidgetLookAndFeelForm:
             Successful: "Your request processed successfully."
             Error: "Error"
@@ -47,7 +48,7 @@ Views:
             CSS: "CSS"
             CurrentWidgetInformation: "Your current widget information is as follows"
             WidgetID: "Widget ID"
-            WidgetClasses: "Widget Classes"
+            WidgetClasses: "Widget classes"
             WidgetRule: "Add a CSS rule for just this widget."
             AllWidgetsRule: "Add a CSS rule for all widgets like this one."
         WidgetCSSForm:
@@ -59,10 +60,10 @@ Views:
              Role: "Role"
              Permissions: "Permissions"
         WidgetsList:
-             AddWidget: "Click on any of the item to add it to your page"
+             AddWidget: "Click on a widget name to add it to the page"
       Layouts:
         ChangeLayout:
-            ChangeLayout: "Click on any of the layout template to change it on the page"
+            ChangeLayout: "Click on a layout template to apply it to the page"
             Successful: "Your request processed successfully."
             Error: "Error"
         LayoutSettings:
@@ -96,12 +97,12 @@ Navigation:
  Views:
     SiteMap:
       EditWidget:
-        RootPage: "Root Page"
-        IncludeRootInTree: "Include Root in Tree"
+        RootPage: "Root page"
+        IncludeRootInTree: "Include root in tree"
         PleaseSelect: "Please select"
     Breadcrumbs:
       EditWidget:
-        ShowHomePage: "Show Home Page"
+        ShowHomePage: "Show home page"
     ListMenu:
       EditWidget:
         SelectPagesToDisplay: "Select pages to display"

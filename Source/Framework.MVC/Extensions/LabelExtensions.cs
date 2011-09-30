@@ -13,9 +13,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Framework.Core.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for generating labels HTML-markup to <see cref="HtmlHelper"/>.
@@ -27,32 +27,32 @@ namespace Framework.MVC.Extensions
         /// <summary>
         /// Key for displayAsterix option (determines whether asterix should be rendered for required fields).
         /// </summary>
-        public const String DisplayAsterixKey = "displayAsterix";
+        public static readonly String DisplayAsterixKey = "displayAsterix";
 
         /// <summary>
         /// Key for asterix option (specifies asterix symbol).
         /// </summary>
-        public const String AsterixKey = "asterix";
+        public static readonly String AsterixKey = "asterix";
 
         /// <summary>
         /// Key for css class option.
         /// </summary>
-        public const String CssClassKey = "cssClass";
+        public static readonly String CssClassKey = "cssClass";
 
         /// <summary>
         /// CSS-class for required field labels.
         /// </summary>
-        public const String RequiredCssClass = "required";
+        public static readonly String RequiredCssClass = "required";
 
         /// <summary>
         /// CSS-class for invalid field's labels.
         /// </summary>
-        public const String LabelErrorCssClass = "label-validation-error";
+        public static readonly String LabelErrorCssClass = "label-validation-error";
 
         /// <summary>
         /// Areas constant.
         /// </summary>
-        public const String Areas = "Areas";
+        public static readonly String Areas = "Areas";
 
         /// <summary>
         /// Default extension options.
@@ -162,7 +162,7 @@ namespace Framework.MVC.Extensions
         /// <returns>HTML markup containing label specified.</returns>
         public static MvcHtmlString LabelFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, String labelText, IDictionary<String, Object> htmlAttributes)
         {
-            string inputName = ExpressionHelper.GetExpressionText(expression);
+            String inputName = ExpressionHelper.GetExpressionText(expression);
             return html.CustomLabel(inputName, labelText, htmlAttributes);
         }
 

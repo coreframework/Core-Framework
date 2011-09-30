@@ -13,7 +13,7 @@ using Omu.ValueInjecter;
 
 namespace Core.Web.Areas.Navigation.Helpers
 {
-    public class SiteMapWidgetHelper
+    public static class SiteMapWidgetHelper
     {
         #region Helper Methods
 

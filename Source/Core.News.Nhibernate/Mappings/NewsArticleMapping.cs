@@ -26,7 +26,7 @@ namespace Core.News.Nhibernate.Mappings
 
             HasMany(newsArticle => newsArticle.CurrentNewsArticleLocales).KeyColumn("NewsArticleId")
             .Table("News_ArticleLocales").ApplyFilter<CultureFilter>()
-            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();

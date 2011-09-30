@@ -8,10 +8,7 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Permissions;
-using Core.Web.NHibernate.Models.Static;
-using Framework.Core.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 
 namespace Core.Web.Helpers
 {
@@ -93,7 +90,7 @@ namespace Core.Web.Helpers
 
             foreach (var selid in selids)
             {
-                string selid1 = selid;
+                String selid1 = selid;
                 if (!role.Users.Any(t => t.Id.ToString() == selid1))
                 {
                     long selectedID;
@@ -180,7 +177,7 @@ namespace Core.Web.Helpers
 
             foreach (var selid in selids)
             {
-                string selid1 = selid;
+                String selid1 = selid;
                 if (!role.UserGroups.Any(t => t.Id.ToString() == selid1))
                 {
                     long selectedID;
@@ -327,7 +324,7 @@ namespace Core.Web.Helpers
                 {
                     foreach (var operation in model.OperationIds)
                     {
-                        permissions.Permissions = (permissions.Permissions | operation);
+                        permissions.Permissions = permissions.Permissions | operation;
                     }
                 }
             }
@@ -343,11 +340,11 @@ namespace Core.Web.Helpers
                     {
                          if (model.OperationIds==null || !model.OperationIds.Contains(operation.Key))
                          {
-                             permissions.Permissions = (permissions.Permissions & (~ operation.Key));
+                             permissions.Permissions = permissions.Permissions & (~ operation.Key);
                          }
                          else
                          {
-                             permissions.Permissions = (permissions.Permissions | operation.Key);
+                             permissions.Permissions = permissions.Permissions | operation.Key;
                          }
                     }
                 }

@@ -15,8 +15,8 @@ namespace Core.Framework.MEF.Composition
         #region Fields
         private static readonly Type partFactoryType = typeof(PartFactory<>);
         private static readonly IEnumerable<Export> emptyExports = Enumerable.Empty<Export>();
-        private static readonly string partFactoryContractPrefix =
-            partFactoryType.FullName.Substring(0, partFactoryType.FullName.IndexOf("`"));
+        private static readonly String partFactoryContractPrefix =
+            partFactoryType.FullName.Substring(0, partFactoryType.FullName.IndexOf('`'));
 
         private readonly ConcurrentCache<ContractBasedImportDefinition, PartFactoryImport> definitionCache =
             new ConcurrentCache<ContractBasedImportDefinition, PartFactoryImport>();
@@ -65,7 +65,7 @@ namespace Core.Framework.MEF.Composition
             Throw.Throw.IfArgumentNull(definition, "definition");
             if (SourceProvider == null)
                 Throw.Throw.InvalidOperation(
-                    string.Format(
+                    String.Format(
                         CultureInfo.CurrentUICulture,
                         Resources.Exceptions.PropertyCannotBeNull,
                         "Sourceprovider"));
@@ -149,8 +149,8 @@ namespace Core.Framework.MEF.Composition
         /// <returns>True if the specified event arguments were sent by this instance, otherwise false.</returns>
         private bool SelfSent(ExportsChangeEventArgs e)
         {
-            return (e is TaggedExportsChangeEventArgs
-                    && ((TaggedExportsChangeEventArgs)e).Sender == this);
+            return e is TaggedExportsChangeEventArgs
+                    && ((TaggedExportsChangeEventArgs)e).Sender == this;
         }
         #endregion
     }

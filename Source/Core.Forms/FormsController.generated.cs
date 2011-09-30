@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Forms.Controllers {
     public partial class FormsController {
@@ -115,33 +115,33 @@ namespace Core.Forms.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormsController Actions { get { return FormsMVC.Forms; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Forms";
+        public readonly String Name = "Forms";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ShowAll = "ShowAll";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string ShowPermissions = "ShowPermissions";
-            public readonly string FormTabs = "FormTabs";
-            public readonly string Remove = "Remove";
-            public readonly string ApplyPermissions = "ApplyPermissions";
-            public readonly string New = "New";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string Edit = "Edit";
-            public readonly string Save = "Save";
-            public readonly string ShowFormElements = "ShowFormElements";
-            public readonly string FormElementsDynamicGridData = "FormElementsDynamicGridData";
-            public readonly string UpdateFormElementPosition = "UpdateFormElementPosition";
-            public readonly string NewElement = "NewElement";
-            public readonly string EditElement = "EditElement";
-            public readonly string ChangeFormElementLanguage = "ChangeFormElementLanguage";
-            public readonly string SaveElement = "SaveElement";
-            public readonly string RemoveElement = "RemoveElement";
+            public readonly String ShowAll = "ShowAll";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String ShowPermissions = "ShowPermissions";
+            public readonly String FormTabs = "FormTabs";
+            public readonly String Remove = "Remove";
+            public readonly String ApplyPermissions = "ApplyPermissions";
+            public readonly String New = "New";
+            public readonly String ChangeLanguage = "ChangeLanguage";
+            public readonly String Edit = "Edit";
+            public readonly String Save = "Save";
+            public readonly String ShowFormElements = "ShowFormElements";
+            public readonly String FormElementsDynamicGridData = "FormElementsDynamicGridData";
+            public readonly String UpdateFormElementPosition = "UpdateFormElementPosition";
+            public readonly String NewElement = "NewElement";
+            public readonly String EditElement = "EditElement";
+            public readonly String ChangeFormElementLanguage = "ChangeFormElementLanguage";
+            public readonly String SaveElement = "SaveElement";
+            public readonly String RemoveElement = "RemoveElement";
         }
 
 
@@ -150,15 +150,15 @@ namespace Core.Forms.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Views/Forms/Edit.aspx";
-            public readonly string EditForm = "~/Views/Forms/EditForm.ascx";
-            public readonly string EditFormElement = "~/Views/Forms/EditFormElement.aspx";
-            public readonly string FormElementEditor = "~/Views/Forms/FormElementEditor.ascx";
-            public readonly string FormElements = "~/Views/Forms/FormElements.aspx";
-            public readonly string FormPermissions = "~/Views/Forms/FormPermissions.aspx";
-            public readonly string FormsList = "~/Views/Forms/FormsList.aspx";
-            public readonly string FormTabs = "~/Views/Forms/FormTabs.ascx";
-            public readonly string New = "~/Views/Forms/New.aspx";
+            public readonly String Edit = "~/Views/Forms/Edit.aspx";
+            public readonly String EditForm = "~/Views/Forms/EditForm.ascx";
+            public readonly String EditFormElement = "~/Views/Forms/EditFormElement.aspx";
+            public readonly String FormElementEditor = "~/Views/Forms/FormElementEditor.ascx";
+            public readonly String FormElements = "~/Views/Forms/FormElements.aspx";
+            public readonly String FormPermissions = "~/Views/Forms/FormPermissions.aspx";
+            public readonly String FormsList = "~/Views/Forms/FormsList.aspx";
+            public readonly String FormTabs = "~/Views/Forms/FormTabs.ascx";
+            public readonly String New = "~/Views/Forms/New.aspx";
         }
     }
 

@@ -10,10 +10,10 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 
-namespace Framework.MVC.Grids.jqGrid
+namespace Framework.Mvc.Grids.JqGrid
 {
     /// <summary>
     /// Extension class for HtmlHelper.

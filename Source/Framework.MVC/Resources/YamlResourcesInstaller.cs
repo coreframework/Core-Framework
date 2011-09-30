@@ -9,7 +9,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Framework.Core;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Registers bootstrapper task for initialization yaml resources cache.

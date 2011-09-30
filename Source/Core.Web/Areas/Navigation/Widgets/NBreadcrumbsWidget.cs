@@ -14,7 +14,7 @@ namespace Core.Web.Areas.Navigation.Widgets
     {
         #region Singleton
 
-        private static NBreadcrumbsWidget _instance;
+        private static NBreadcrumbsWidget instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -24,7 +24,7 @@ namespace Core.Web.Areas.Navigation.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NBreadcrumbsWidget());
+                    return instance ?? (instance = new NBreadcrumbsWidget());
                 }
             }
         }

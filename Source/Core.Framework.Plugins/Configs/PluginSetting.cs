@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Core.Framework.Plugins.Handlers;
@@ -18,66 +19,66 @@ namespace Core.Framework.Plugins.Configs
         /// </summary>
         /// <value>The identifier.</value>
         [XmlElement("Identifier")]
-        public string Identifier { get; set; }
+        public String Identifier { get; set; }
 
         /// <summary>
         /// Gets the title.
         /// </summary>
         /// <value>The title.</value>
         [XmlElement("Title")]
-        public string Title { get; set; }
+        public String Title { get; set; }
 
         /// <summary>
         /// Gets the resources directory.
         /// </summary>
         /// <value>The resources directory.</value>
         [XmlElement("ResourcesDirectory")]
-        public string ResourcesDirectory { get; set; }
+        public String ResourcesDirectory { get; set; }
 
         /// <summary>
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
         [XmlElement("Description")]
-        public string Description { get; set; }
+        public String Description { get; set; }
 
         /// <summary>
         /// Gets the Plugin Css and JS config path.
         /// </summary>
         [XmlElement("CssJsConfigPath")]
-        public string CssJsConfigPath { get; set; }
+        public String CssJsConfigPath { get; set; }
 
         /// <summary>
         /// Gets the Plugin images path.
         /// </summary>
         [XmlElement("ImagesPath")]
-        public string ImagesPath { get; set; }
+        public String ImagesPath { get; set; }
 
         /// <summary>
         /// Gets the Plugin CSS path.
         /// </summary>
         [XmlElement("CssPath")]
-        public string CssPath { get; set; }
+        public String CssPath { get; set; }
 
         /// <summary>
         /// Gets the Plugin CSS pack.
         /// </summary>
         [XmlElement("CssPack")]
-        public string CssPack { get; set; }
+        public String CssPack { get; set; }
 
         /// <summary>
         /// Gets or sets the js path.
         /// </summary>
         /// <value>The js path.</value>
         [XmlElement("JsPath")]
-        public string JsPath { get; set; }
+        public String JsPath { get; set; }
 
         /// <summary>
         /// Gets or sets the js pack.
         /// </summary>
         /// <value>The js pack.</value>
         [XmlElement("JsPack")]
-        public string JsPack { get; set; }
+        public String JsPack { get; set; }
 
         /// <summary>
         /// Gets or sets the widget settings.

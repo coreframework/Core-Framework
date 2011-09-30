@@ -6,7 +6,7 @@ namespace Core.Web.NHibernate.Models
 {
     public class PageLayoutTemplate : Entity
     {
-        private readonly IList<PageLayoutRow> _rows = new List<PageLayoutRow>();
+        private readonly IList<PageLayoutRow> rows = new List<PageLayoutRow>();
 
         public virtual String LayoutCssClass { get; set; }
 
@@ -18,7 +18,7 @@ namespace Core.Web.NHibernate.Models
         {
             get
             {
-                return _rows;
+                return rows;
             }
         }
     }

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
-using System.Web.UI;
-using Core.Forms.NHibernate.Models;
-using Framework.MVC.Extensions;
 using System.Web.Mvc.Html;
+using Core.Forms.NHibernate.Models;
+using Framework.Mvc.Extensions;
 
 namespace Core.Forms.Extensions
 {
@@ -14,13 +13,13 @@ namespace Core.Forms.Extensions
     {
         #region Fields
 
-        public const Int32 CaptchaDefaultHeight = 40; 
+        public static readonly Int32 CaptchaDefaultHeight = 40; 
 
-        public const Int32 CaptchaDefaultWidth = 120;
+        public static readonly Int32 CaptchaDefaultWidth = 120;
 
-        public const String FormElementNameFormat = "{0}_{1}";
+        public static readonly String FormElementNameFormat = "{0}_{1}";
 
-        public const char ElementValuesSeparator = ',';
+        public static readonly char ElementValuesSeparator = ',';
 
         #endregion
 
@@ -43,6 +42,21 @@ namespace Core.Forms.Extensions
             {
                 elementValue = collection[elementName];
             }
+
+            builder.Append(RenderElementByType(html, model, elementName, elementValue));
+            builder.Append("<br/>");
+            builder.Append(html.ValidationMessage(elementName));
+        
+            return MvcHtmlString.Create(builder.ToString());
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private static String RenderElementByType(HtmlHelper html, FormElement model, String elementName, String elementValue)
+        {
+            var builder = new StringBuilder();
             switch (model.Type)
             {
                 case FormElementType.TextField:
@@ -87,7 +101,7 @@ namespace Core.Forms.Extensions
                 case FormElementType.Captcha:
                     {
                         builder.Append(html.CaptchaImage(CaptchaDefaultHeight, CaptchaDefaultWidth));
-                        builder.Append(html.Label(elementName,""));
+                        builder.Append(html.Label(elementName, String.Empty));
                         builder.Append("<br/>");
                         builder.Append(html.CaptchaTextBox(elementName));
                         break;
@@ -97,15 +111,8 @@ namespace Core.Forms.Extensions
                     break;
             }
 
-            builder.Append("<br/>");
-            builder.Append(html.ValidationMessage(elementName));
-        
-            return MvcHtmlString.Create(builder.ToString());
+            return builder.ToString();
         }
-
-        #endregion
-
-        #region Private Methods
 
         /// <summary>
         /// Parses the element values for radio buttons.
@@ -118,7 +125,7 @@ namespace Core.Forms.Extensions
             var result = new Dictionary<String, String>();
             if (!String.IsNullOrEmpty(values))
             {
-                string[] valuesArray = values.Trim().Split(ElementValuesSeparator);
+                String[] valuesArray = values.Trim().Split(ElementValuesSeparator);
                 for (int i = 0; i < valuesArray.Length; i++)
                 {
                     if (!String.IsNullOrEmpty(valuesArray[i]))
@@ -140,7 +147,7 @@ namespace Core.Forms.Extensions
         {
             var valuesArray = values.Trim().Split(ElementValuesSeparator);
 
-            var result = new List<SelectListItem> {new SelectListItem {Text = @"Please select", Value = ""}};
+            var result = new List<SelectListItem> {new SelectListItem {Text = @"Please select", Value = String.Empty}};
             result.AddRange(from item in valuesArray
                             where !String.IsNullOrEmpty(item)
                             select new SelectListItem {Text = item, Value = item, Selected = item.Equals(selectedValue)});

@@ -79,6 +79,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
@@ -90,6 +91,8 @@
     <Reference Include="System.Web.Routing" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
@@ -169,9 +172,9 @@
       <Name>Framework.Core</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Framework.MVC\Framework.MVC.csproj">
+    <ProjectReference Include="..\Framework.MVC\Framework.Mvc.csproj">
       <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
-      <Name>Framework.MVC</Name>
+      <Name>Framework.Mvc</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

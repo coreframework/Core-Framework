@@ -94,31 +94,7 @@ namespace Framework.Facilities.NHibernate.Castle
 
         #region Helper methods
 
-        private Configuration BuildConfig(DatabaseConfiguration databaseConfiguration)
-        {
-            var fluenty = Fluently.Configure()
-                            .Database(GetDatabase(databaseConfiguration))
-                            .Mappings(m =>
-                                        {
-                                            foreach (var mapper in kernel.ResolveAll<INHibernateMapper>())
-                                            {
-                                                mapper.Map(m, databaseConfiguration);
-                                            }
-                                            m.FluentMappings.Add(typeof(CultureFilter));
-                                        });
-
-            return fluenty.ExposeConfiguration(ProcessConfiguration).BuildConfiguration().AddProperties(GetNHibernateProperties(databaseConfiguration));
-        }
-
-        private void ProcessConfiguration(Configuration configuration)
-        {
-            foreach (var configurationChain in kernel.ResolveAll<INHibernateConfigurationChain>())
-            {
-                configurationChain.Process(configuration);
-            }
-        }
-
-        private IPersistenceConfigurer GetDatabase(DatabaseConfiguration databaseConfiguration)
+        private static IPersistenceConfigurer GetDatabase(DatabaseConfiguration databaseConfiguration)
         {
             switch (databaseConfiguration.Platform)
             {
@@ -140,6 +116,30 @@ namespace Framework.Facilities.NHibernate.Castle
                     return OracleClientConfiguration.Oracle9.ConnectionString(databaseConfiguration.GetConnectionString());
                 default:
                     throw new ConfigurationErrorsException(String.Format("{0} platform is not supported by nhibernate facility.", databaseConfiguration.Platform));
+            }
+        }
+
+        private Configuration BuildConfig(DatabaseConfiguration databaseConfiguration)
+        {
+            var fluenty = Fluently.Configure()
+                            .Database(GetDatabase(databaseConfiguration))
+                            .Mappings(m =>
+                                        {
+                                            foreach (var mapper in kernel.ResolveAll<INHibernateMapper>())
+                                            {
+                                                mapper.Map(m, databaseConfiguration);
+                                            }
+                                            m.FluentMappings.Add(typeof(CultureFilter));
+                                        });
+
+            return fluenty.ExposeConfiguration(ProcessConfiguration).BuildConfiguration().AddProperties(GetNHibernateProperties(databaseConfiguration));
+        }
+
+        private void ProcessConfiguration(Configuration configuration)
+        {
+            foreach (var configurationChain in kernel.ResolveAll<INHibernateConfigurationChain>())
+            {
+                configurationChain.Process(configuration);
             }
         }
 

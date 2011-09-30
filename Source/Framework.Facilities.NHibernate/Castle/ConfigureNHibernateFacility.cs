@@ -48,6 +48,16 @@ namespace Framework.Facilities.NHibernate.Castle
 
         #region Helper methods
 
+        private static void AddDefaultFactory(MutableConfiguration config)
+        {
+            config.CreateChild("factory").Attribute("id", "nhibernate-factory.default");
+        }
+
+        private static void AddFactory(MutableConfiguration config, String alias)
+        {
+            config.CreateChild("factory").Attribute("id", String.Format("nhibernate-factory.{0}", alias)).Attribute("alias", alias);
+        }
+
         private MutableConfiguration GetFacilityConfig(IApplication application)
         {
             var currentEnvironment = EnumHelper.GetKey(application.Environment);
@@ -94,16 +104,6 @@ namespace Framework.Facilities.NHibernate.Castle
             }
 
             return facilityConfig;
-        }
-
-        private void AddDefaultFactory(MutableConfiguration config)
-        {
-            config.CreateChild("factory").Attribute("id", "nhibernate-factory.default");
-        }
-
-        private void AddFactory(MutableConfiguration config, String alias)
-        {
-            config.CreateChild("factory").Attribute("id", String.Format("nhibernate-factory.{0}", alias)).Attribute("alias", alias);
         }
 
         #endregion

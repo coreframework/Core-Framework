@@ -12,11 +12,11 @@ namespace Core.Framework.Permissions.Helpers
         /// Initializes a new instance of the <see cref="OperationDescriptionAttribute"/> class.
         /// </summary>
         /// <param name="area">The area.</param>
-        /// <param name="level">The level.</param>
-        public OperationDescriptionAttribute(PermissionArea area, PermissionOperationLevel level)
+        /// <param name="operationLevel">The operation level.</param>
+        public OperationDescriptionAttribute(PermissionArea area, PermissionOperationLevel operationLevel)
         {
             Area = area;
-            OperationLevel = level;
+            OperationLevel = operationLevel;
         }
 
         #endregion

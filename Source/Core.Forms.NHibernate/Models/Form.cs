@@ -18,26 +18,15 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<FormElement> _formElements;
+        private readonly IList<FormElement> formElements = new List<FormElement>();
 
-        private IList<FormLocale> _currentFormLocales = new List<FormLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private FormLocale _currentLocale;
+        private readonly IList<FormLocale> currentFormLocales = new List<FormLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private FormLocale currentLocale;
 
-        #endregion
+        private String permissionTitle = "Forms";
 
-        #region Constructor
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Form"/> class.
-        /// </summary>
-        public Form()
-        {
-            PermissionTitle = "Forms";
-            Operations = OperationsHelper.GetOperations<FormOperations>();
-
-            _formElements = new List<FormElement>();
-        }
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<FormOperations>();
 
         #endregion
 
@@ -67,7 +56,7 @@ namespace Core.Forms.NHibernate.Models
         /// <value>The form elements.</value>
         public virtual IEnumerable<FormElement> FormElements
         {
-            get { return _formElements; }
+            get { return formElements; }
         }
 
         public virtual String Title
@@ -79,35 +68,43 @@ namespace Core.Forms.NHibernate.Models
             set { ((FormLocale)CurrentLocale).Title = value; }
         }
 
-        #endregion
-
-        #region IPermissible Members
+         #region IPermissible Members
 
         /// <summary>
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle
+        {
+            get { return permissionTitle; }
+            set { permissionTitle = value; }
+        }
 
         /// <summary>
-        /// Gets or sets the permission groups.
+        /// Gets or sets the permission operations.
         /// </summary>
-        /// <value>The permission groups.</value>
-        public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+        /// <value>The permission operations.</value>
+        public virtual IEnumerable<IPermissionOperation> Operations
+        {
+            get { return operations; }
+            set { operations = value; }
+        }
+
+        #endregion
 
         public virtual IList<ILocale> CurrentLocales
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentFormLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentFormLocales.Count > 0)
                 {
-                    _currentLocales = _currentFormLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentFormLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -135,19 +132,19 @@ namespace Core.Forms.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as FormLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as FormLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new FormLocale
+                        currentLocale = new FormLocale
                         {
                             Form = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
 

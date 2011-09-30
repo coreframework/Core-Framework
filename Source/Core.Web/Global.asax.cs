@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using Castle.Core.Logging;
@@ -17,8 +15,8 @@ using Core.Web.NHibernate;
 using Core.Web.NHibernate.Contracts;
 using Framework.Core;
 using Framework.Facilities.NHibernate;
-using Framework.MVC.Metadata;
-using Framework.MVC.Resources;
+using Framework.Mvc.Metadata;
+using Framework.Mvc.Resources;
 using Microsoft.Practices.ServiceLocation;
 using Application = Framework.Core.Application;
 
@@ -28,11 +26,11 @@ namespace Core.Web
     {
         #region Fields
 
-        private static IApplication _application;
+        private static IApplication application;
 
-        private static ILogger _logger = NullLogger.Instance;
+        private static ILogger logger = NullLogger.Instance;
 
-        private CSLExportProvider _exportProvider;
+        private CSLExportProvider exportProvider;
 
         #endregion
 
@@ -50,7 +48,7 @@ namespace Core.Web
         {
             get
             {
-                return _application;
+                return application;
             }
         }
 
@@ -62,7 +60,7 @@ namespace Core.Web
         {
             get
             {
-                return _logger;
+                return logger;
             }
         }
 
@@ -74,8 +72,8 @@ namespace Core.Web
         /// </summary>
         protected override void PreCompose()
         {
-            _container = new WindsorContainer();
-            _exportProvider = new CSLExportProvider(new WindsorServiceLocator(_container));
+            Container = new WindsorContainer();
+            exportProvider = new CSLExportProvider(new WindsorServiceLocator(Container));
          
             RegisterTypes();
           
@@ -88,7 +86,7 @@ namespace Core.Web
 
             foreach (var plugin in Plugins)
             {
-                plugin.Register(_container);
+                plugin.Register(Container);
             }
 
             Widgets = Composer.ResolveAll<ICoreWidget>();
@@ -104,11 +102,11 @@ namespace Core.Web
         /// <summary>
         /// Executes the bootstrapper tasks.
         /// </summary>
-        private void ExecuteBootstrapperTasks()
+        private static void ExecuteBootstrapperTasks()
         {
-            foreach (var task in _container.ResolveAll<IBootstrapperTask>())
+            foreach (var task in Container.ResolveAll<IBootstrapperTask>())
             {
-                task.Execute(_application, _container.Kernel);
+                task.Execute(application, Container.Kernel);
             }
           
         }
@@ -118,8 +116,8 @@ namespace Core.Web
         /// </summary>
         private static void ConfigureApplication()
         {
-            _application = new Application();
-            _application.Configure(_container);
+            application = new Application();
+            application.Configure(Container);
 
         }
 
@@ -128,8 +126,8 @@ namespace Core.Web
         /// </summary>
         private static void InitializeLogger()
         {
-            _container.AddFacility("logging", new LoggingFacility(LoggerImplementation.Log4net, "Config/log4net.config"));
-            _logger = _container.Resolve<ILogger>();
+            Container.AddFacility("logging", new LoggingFacility(LoggerImplementation.Log4net, "Config/log4net.config"));
+            logger = Container.Resolve<ILogger>();
         }
 
         /// <summary>
@@ -137,11 +135,11 @@ namespace Core.Web
         /// </summary>
         private static void RegisterTypes()
         {
-            _container.Install(new CoreInstaller());
-            _container.Install(new NHibernateInstaller());
-            _container.Install(new YamlResourcesInstaller());
-            _container.Install(new CoreWebNHibernateModule());
-            _container.Install(new CoreWebInstaller());
+            Container.Install(new CoreInstaller());
+            Container.Install(new NHibernateInstaller());
+            Container.Install(new YamlResourcesInstaller());
+            Container.Install(new CoreWebNHibernateModule());
+            Container.Install(new CoreWebInstaller());
         }
 
         /// <summary>
@@ -177,12 +175,12 @@ namespace Core.Web
         protected override Composer CreateComposer()
         {
             var composer = base.CreateComposer();
-            composer.AddExportProvider(_exportProvider);
+            composer.AddExportProvider(exportProvider);
 
             return composer;
         }
 
-        protected void RegisterPermissibleObjects()
+        private static void RegisterPermissibleObjects()
         {
             PermissibleObjects = Composer.ResolveAll<IPermissible>().ToList();
         }

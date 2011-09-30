@@ -74,7 +74,7 @@ namespace Core.Web.Areas.Admin.Helpers
         /// Gets the image.
         /// </summary>
         /// <value>The image.</value>
-        public string Image
+        public String Image
         {
             get 
             {
@@ -85,11 +85,11 @@ namespace Core.Web.Areas.Admin.Helpers
         /// <summary>
         /// Gets the URL.
         /// </summary>
-        /// <param name="url">The URL helper.</param>
+        /// <param name="urlHelper">The URL helper.</param>
         /// <returns>Menu item link.</returns>
-        public String GetUrl(UrlHelper url)
+        public String GetUrl(UrlHelper urlHelper)
         {
-            return url.Action(action);
+            return urlHelper.Action(action);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Core.Web.Areas.Admin.Helpers
         /// <returns>
         /// Menu item image url.
         /// </returns>
-        public string GetImageUrl(UrlHelper urlHelper)
+        public String GetImageUrl(UrlHelper urlHelper)
         {
             return urlHelper.Content(Image);
         }
@@ -132,7 +132,7 @@ namespace Core.Web.Areas.Admin.Helpers
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <returns></returns>
-        private bool NullOrEquals(String left, String right)
+        private static bool NullOrEquals(String left, String right)
         {
             if (left == null && right == null)
             {

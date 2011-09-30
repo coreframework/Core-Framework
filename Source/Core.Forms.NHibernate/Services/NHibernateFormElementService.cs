@@ -20,7 +20,7 @@ namespace Core.Forms.NHibernate.Services
             return baseQuery.Count();
         }
 
-        public IQueryable<FormElement> GetSearchQuery(long formId,string searchString)
+        public IQueryable<FormElement> GetSearchQuery(long formId,String searchString)
         {
             var baseQuery = CreateQuery();
             if (String.IsNullOrEmpty(searchString))

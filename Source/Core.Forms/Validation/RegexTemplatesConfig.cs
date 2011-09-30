@@ -4,11 +4,11 @@ using Core.Forms.NHibernate.Models;
 
 namespace Core.Forms.Validation
 {
-    public class RegexTemplatesConfig
+    public static class RegexTemplatesConfig
     {
         #region Fields
 
-        public static Dictionary<RegexTemplate, String> ValidationTemplates = new Dictionary<RegexTemplate, String>
+        public readonly static Dictionary<RegexTemplate, String> ValidationTemplates = new Dictionary<RegexTemplate, String>
                                                                             {
             {RegexTemplate.PositiveIntValue, "^[1-9]\\d{0,6}$"},
             {RegexTemplate.IntValue, "^(-)?\\d{1,6}$"},

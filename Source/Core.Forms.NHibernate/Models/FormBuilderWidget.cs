@@ -9,7 +9,7 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<FormWidgetAnswer> _answers;
+        private readonly IList<FormWidgetAnswer> answers;
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace Core.Forms.NHibernate.Models
         /// </summary>
         public FormBuilderWidget()
         {
-            _answers = new List<FormWidgetAnswer>();
+            answers = new List<FormWidgetAnswer>();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Core.Forms.NHibernate.Models
         /// <value>The answers.</value>
         public virtual IEnumerable<FormWidgetAnswer> Answers
         {
-            get { return _answers; }
+            get { return answers; }
         }
 
         /// <summary>

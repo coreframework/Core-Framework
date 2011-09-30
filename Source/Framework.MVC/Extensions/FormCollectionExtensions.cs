@@ -7,7 +7,7 @@
 using System;
 using System.Web.Mvc;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extends functionality of <see cref="FormCollection"/> class.

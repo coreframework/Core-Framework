@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Serialization;
 using Core.Framework.Plugins.Web;
 
@@ -13,21 +14,21 @@ namespace Core.Framework.Plugins.Configs
         /// </summary>
         /// <value> The key. </value>
         [XmlElement("Key")]
-        public string Key { get; set; }
+        public String Key { get; set; }
 
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
         [XmlElement("Title")]
-        public string Title { get; set; }
+        public String Title { get; set; }
 
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         [XmlElement("Identifier")]
-        public string Identifier { get; set; }
+        public String Identifier { get; set; }
 
         #endregion
     }

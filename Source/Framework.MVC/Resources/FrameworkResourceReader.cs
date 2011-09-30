@@ -12,7 +12,7 @@ using System.Resources;
 
 using Microsoft.Practices.ServiceLocation;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Read resources from <see cref="IResourceCache"/>.

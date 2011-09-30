@@ -14,7 +14,7 @@ namespace Core.Web.NHibernate.Mappings
             References(pageSettings => pageSettings.Page).Column("PageId");
             HasMany(pageSettings => pageSettings.ColumnWidths).KeyColumn("PageLayoutId")
                 .Table("PageLayoutColumnWidthValues")
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
                 .Inverse()
                 .LazyLoad()
                 .Cascade.AllDeleteOrphan();

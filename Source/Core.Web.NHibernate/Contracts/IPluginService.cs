@@ -27,6 +27,6 @@ namespace Core.Web.NHibernate.Contracts
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        ICriteria GetSearchCriteria(string searchString);
+        ICriteria GetSearchCriteria(String searchString);
     }
 }

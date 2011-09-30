@@ -4,9 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Web.Routing;
 
-namespace Framework.MVC.T4MVC
+namespace Framework.Mvc.T4MVC
 {
     /// <summary>
     /// IT4MVCActionResult inteface.
@@ -17,19 +18,19 @@ namespace Framework.MVC.T4MVC
         /// Gets or sets the area.
         /// </summary>
         /// <value>The mvc area.</value>
-        string Area { get; set; }
+        String Area { get; set; }
 
         /// <summary>
         /// Gets or sets the controller.
         /// </summary>
         /// <value>The controller.</value>
-        string Controller { get; set; }
+        String Controller { get; set; }
 
         /// <summary>
         /// Gets or sets the action.
         /// </summary>
         /// <value>The action.</value>
-        string Action { get; set; }
+        String Action { get; set; }
 
         /// <summary>
         /// Gets or sets the route value dictionary.

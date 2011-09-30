@@ -10,15 +10,15 @@ namespace Core.Web.NHibernate.Models
     [Export(typeof(IPermissible))]
     public class User : BaseUser, IPermissible
     {
-        #region Constructor
+        #region Fields
 
-        public User()
-        {
-            Roles = new List<Role>();
-            UserGroups = new List<UserGroup>();
-            PermissionTitle = "Users";
-            Operations = OperationsHelper.GetOperations<BaseEntityOperations>();
-        }
+        private IList<Role> roles = new List<Role>();
+
+        private IList<UserGroup> userGroups = new List<UserGroup>();
+
+        private String permissionTitle = "Users";
+
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<BaseEntityOperations>();
 
         #endregion
 
@@ -28,7 +28,11 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the roles assigned to.
         /// </summary>
         /// <value>The roles assigned to.</value>
-        public virtual IList<Role> Roles { get; set; }
+        public virtual IList<Role> Roles
+        {
+            get { return roles; }
+            set { roles = value; }
+        }
 
         /// <summary>
         /// Gets or sets the email.
@@ -64,7 +68,11 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the user groups.
         /// </summary>
         /// <value>The user groups.</value>
-        public virtual IList<UserGroup> UserGroups { get; set; }
+        public virtual IList<UserGroup> UserGroups
+        {
+            get { return userGroups; }
+            set { userGroups = value; }
+        }
 
         #endregion
 
@@ -90,13 +98,21 @@ namespace Core.Web.NHibernate.Models
         /// Gets or sets the permission title.
         /// </summary>
         /// <value>The permission title.</value>
-        public virtual string PermissionTitle { get; set; }
+        public virtual String PermissionTitle
+        {
+            get { return permissionTitle; }
+            set { permissionTitle = value; }
+        }
 
         /// <summary>
-        /// Gets or sets the permission groups.
+        /// Gets or sets the permission operations.
         /// </summary>
-        /// <value>The permission groups.</value>
-        public virtual IEnumerable<IPermissionOperation> Operations { get; set; }
+        /// <value>The permission operations.</value>
+        public virtual IEnumerable<IPermissionOperation> Operations
+        {
+            get { return operations; }
+            set { operations = value; }
+        }
 
         #endregion
     }

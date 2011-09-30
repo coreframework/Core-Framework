@@ -18,7 +18,7 @@ namespace Core.Web.NHibernate.Mappings
                 WHERE PageLayoutColumns.RowId in (SELECT PageLayoutRows.Id FROM PageLayoutRows WHERE PageLayoutRows.TemplateId = Id))").LazyLoad();
             HasMany(pageLayoutTemplate => pageLayoutTemplate.Rows).KeyColumn("TemplateId")
                 .Table("PageLayoutRows")
-                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
                 .Inverse()
                 .LazyLoad()
                 .Cascade.AllDeleteOrphan();

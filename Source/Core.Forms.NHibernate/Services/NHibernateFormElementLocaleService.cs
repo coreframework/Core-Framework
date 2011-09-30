@@ -23,7 +23,7 @@ namespace Core.Forms.NHibernate.Services
             return query.Where(locale => locale.FormElement.Id == formElementId && locale.Culture == culture).FirstOrDefault();
         }
 
-        public ICriteria GetSearchCriteria(long formId, string searchString)
+        public ICriteria GetSearchCriteria(long formId, String searchString)
         {
             ICriteria criteria = Session.CreateCriteria<FormElementLocale>().CreateAlias("FormElement", "formElement");
 

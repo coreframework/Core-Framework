@@ -19,7 +19,7 @@ namespace Products.Verbs
         /// <summary>
         /// Gets the name.
         /// </summary>
-        public string Name
+        public String Name
         {
             get { return HttpContext.GetGlobalResourceObject(String.Format("Product.Verbs.AdminCategoryVerb"), String.Format("Categories")) as String ?? "Categories"; }
         }
@@ -27,7 +27,7 @@ namespace Products.Verbs
         /// <summary>
         /// Gets the action.
         /// </summary>
-        public string Action
+        public String Action
         {
             get { return "ShowAll"; }
         }
@@ -35,7 +35,7 @@ namespace Products.Verbs
         /// <summary>
         /// Gets the controller.
         /// </summary>
-        public string Controller
+        public String Controller
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Products.Verbs
         /// Gets the controller plugin identifier.
         /// </summary>
         /// <value>The controller plugin identifier.</value>
-        public string ControllerPluginIdentifier
+        public String ControllerPluginIdentifier
         {
             get { return ProductPlugin.Instance.Identifier; }
         }
@@ -66,7 +66,6 @@ namespace Products.Verbs
 
         public bool IsAllowed(ICorePrincipal user)
         {
-            return true;
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
 
             return permissionService.IsAllowed((int) ProductsPluginOperations.ManageCategory, user,

@@ -17,16 +17,16 @@ namespace Framework.Core.Configuration
         #region Connection Strings
 
         /// <summary>
-        /// Use connection string custom property to override default connection string.
+        /// Use connection String custom property to override default connection string.
         /// </summary>
-        public const String ConnectionStringKey = "connection-string";
+        public static readonly String ConnectionStringKey = "connection-string";
 
         /// <summary>
         /// Database name for sqlite in memory database.
         /// </summary>
-        public const String InMemoryDatabase = ":memory:";
+        public static readonly String InMemoryDatabase = ":memory:";
 
-        // Default connection string templates: {0} - Host, {1} - Database, {2} - Username, {3} - Password.
+        // Default connection String templates: {0} - Host, {1} - Database, {2} - Username, {3} - Password.
         private static readonly Dictionary<DatabasePlatform, String> templates = new Dictionary<DatabasePlatform, String> 
         {
             { DatabasePlatform.SqlServer, "Server={0};Database={1};User ID={2};Password={3};" },

@@ -26,9 +26,9 @@ namespace Framework.Core.Utilities
         /// <returns>The converted expression.</returns>
         public static String FilterToRegex(String filterExpression)
         {
-            filterExpression.Replace(AsterixFilterExpression, AsterixRegexExpression);
+            filterExpression = filterExpression.Replace(AsterixFilterExpression, AsterixRegexExpression);
 
-            //add string start&end expression
+            //add String start&end expression
             filterExpression = String.Format(StartEndRegexExpression, filterExpression);
 
             return filterExpression;

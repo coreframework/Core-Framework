@@ -9,28 +9,28 @@ namespace Core.Web.Helpers.HtmlExtensions.MenuTreeView
 {
     public class TreeRenderer<T> where T : IComposite<T>
     {
-        private readonly Func<T, string> _locationRenderer;
+        private readonly Func<T, String> locationRenderer;
 
-        private readonly IEnumerable<T> _rootLocations;
+        private readonly IEnumerable<T> rootLocations;
 
-        private readonly String _cssClass;
+        private readonly String cssClass;
 
-        private HtmlTextWriter _writer;
+        private HtmlTextWriter writer;
 
         public TreeRenderer(
             IEnumerable<T> rootLocations,String cssClass,
-            Func<T, string> locationRenderer)
+            Func<T, String> locationRenderer)
         {
-            _rootLocations = rootLocations;
-            _locationRenderer = locationRenderer;
-            _cssClass = cssClass;
+            this.rootLocations = rootLocations;
+            this.locationRenderer = locationRenderer;
+            this.cssClass = cssClass;
         }
 
-        public string Render()
+        public String Render()
         {
-            _writer = new HtmlTextWriter(new StringWriter());
-            RenderLocations(true,_rootLocations);
-            return _writer.InnerWriter.ToString();
+            writer = new HtmlTextWriter(new StringWriter());
+            RenderLocations(true,rootLocations);
+            return writer.InnerWriter.ToString();
         }
 
         /// <summary>
@@ -40,34 +40,34 @@ namespace Core.Web.Helpers.HtmlExtensions.MenuTreeView
         /// <param name="locations">The locations.</param>
         private void RenderLocations(bool renderCssClass,IEnumerable<T> locations)
         {
-            if (locations == null) return;
-            if (locations.Count() == 0) return;
+            if (locations == null || !locations.Any()) return;
+
             InUl(renderCssClass, () => locations.ForEach(location => InLi(() =>
                                                               {
-                                                                  _writer.Write(_locationRenderer(location));
+                                                                  writer.Write(locationRenderer(location));
                                                                   RenderLocations(false,location.Children);
                                                               })));
         }
 
         private void InUl(bool renderCssClass,Action action)
         {
-            _writer.WriteLine(); 
+            writer.WriteLine(); 
             if (renderCssClass)
-                _writer.AddAttribute("class", _cssClass);
+                writer.AddAttribute("class", cssClass);
             
-            _writer.RenderBeginTag(HtmlTextWriterTag.Ul);
+            writer.RenderBeginTag(HtmlTextWriterTag.Ul);
           
             action();
-            _writer.RenderEndTag();
-            _writer.WriteLine();
+            writer.RenderEndTag();
+            writer.WriteLine();
         }
 
         private void InLi(Action action)
         {
-            _writer.RenderBeginTag(HtmlTextWriterTag.Li);
+            writer.RenderBeginTag(HtmlTextWriterTag.Li);
             action();
-            _writer.RenderEndTag();
-            _writer.WriteLine();
+            writer.RenderEndTag();
+            writer.WriteLine();
         }
     }
 }

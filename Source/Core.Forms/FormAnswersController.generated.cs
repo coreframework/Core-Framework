@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Forms.Controllers {
     public partial class FormAnswersController {
@@ -50,19 +50,19 @@ namespace Core.Forms.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public FormAnswersController Actions { get { return FormsMVC.FormAnswers; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "FormAnswers";
+        public readonly String Name = "FormAnswers";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ShowAll = "ShowAll";
-            public readonly string FormAnswersDynamicGridData = "FormAnswersDynamicGridData";
-            public readonly string ShowAnswers = "ShowAnswers";
-            public readonly string ShowAnswerDetails = "ShowAnswerDetails";
+            public readonly String ShowAll = "ShowAll";
+            public readonly String FormAnswersDynamicGridData = "FormAnswersDynamicGridData";
+            public readonly String ShowAnswers = "ShowAnswers";
+            public readonly String ShowAnswerDetails = "ShowAnswerDetails";
         }
 
 
@@ -71,9 +71,9 @@ namespace Core.Forms.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string FormAnswerDetails = "~/Views/FormAnswers/FormAnswerDetails.aspx";
-            public readonly string FormAnswers = "~/Views/FormAnswers/FormAnswers.aspx";
-            public readonly string FormsAnswersList = "~/Views/FormAnswers/FormsAnswersList.aspx";
+            public readonly String FormAnswerDetails = "~/Views/FormAnswers/FormAnswerDetails.aspx";
+            public readonly String FormAnswers = "~/Views/FormAnswers/FormAnswers.aspx";
+            public readonly String FormsAnswersList = "~/Views/FormAnswers/FormsAnswersList.aspx";
         }
     }
 

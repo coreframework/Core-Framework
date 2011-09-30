@@ -23,7 +23,7 @@ namespace Core.News
 
         #region Singleton
 
-        private static NewsPlugin _instance;
+        private static NewsPlugin instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -33,7 +33,7 @@ namespace Core.News
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NewsPlugin());
+                    return instance ?? (instance = new NewsPlugin());
                 }
             }
         }
@@ -74,14 +74,14 @@ namespace Core.News
         /// <summary>
         /// Gets the Plugin Identifiers config path.
         /// </summary>
-        public override string PluginConfigPath
+        public override String PluginConfigPath
         {
             get { return NewsConfig; }
         }
 
         #region IPermissible members
 
-        public string PermissionTitle { get; set; }
+        public String PermissionTitle { get; set; }
 
         public IEnumerable<IPermissionOperation> Operations { get; set; }
 

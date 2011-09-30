@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
@@ -15,7 +16,7 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Permissions;
-using Framework.MVC.Routing;
+using Framework.Mvc.Routing;
 using Microsoft.Practices.ServiceLocation;
 
 
@@ -80,7 +81,7 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Roles.New", "admin/roles/new", MVC.Admin.Role.New());
             context.MapRoute("Admin.Roles.Create", "admin/roles", MVC.Admin.Role.Create(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
             context.MapRoute("Admin.Roles.Edit", "admin/role/{id}", new { controller = "Role", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.Roles.ChangeLanguage", "admin/role/change-language", new { controller = "Role", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.Roles.ChangeLanguage", "admin/role/change-language", new { controller = "Role", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Roles.Update", "admin/role/{id}", MVC.Admin.Role.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Roles.Remove", "admin/role/remove/{id}", new { controller = "Role", action = "Remove", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.ConfirmRemove", "admin/role/{id}", MVC.Admin.Role.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
@@ -97,7 +98,7 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Modules", "admin/modules", MVC.Admin.Module.Index());
             context.MapRoute("Admin.Modules.DynamicGridData", "admin/module/DynamicGridData", MVC.Admin.Module.DynamicGridData());
             context.MapRoute("Admin.Modules.Edit", "admin/module/{id}", new { controller = "Module", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.Modules.ChangeLanguage", "admin/module/change-language", new { controller = "Module", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.Modules.ChangeLanguage", "admin/module/change-language", new { controller = "Module", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Modules.Update", "admin/module/{id}", MVC.Admin.Module.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Modules.Install", "admin/install-module/{id}", new { controller = "Module", action = "Install", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Modules.Uninstall", "admin/uninstall-module/{id}", new { controller = "Module", action = "Uninstall", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
@@ -107,7 +108,7 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Widgets", "admin/widgets", MVC.Admin.Widget.Index());
             context.MapRoute("Admin.Widgets.DynamicGridData", "admin/widget/DynamicGridData", MVC.Admin.Widget.DynamicGridData());
             context.MapRoute("Admin.Widgets.Edit", "admin/widget/{id}", new { controller = "Widget", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.Widgets.ChangeLanguage", "admin/widget/change-language", new { controller = "Widget", action = "ChangeLanguage", id = "" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.Widgets.ChangeLanguage", "admin/widget/change-language", new { controller = "Widget", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Widgets.Update", "admin/widget/{id}", MVC.Admin.Widget.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Widgets.Enable", "admin/widget/enable/{id}", new { controller = "Widget", action = "Enable", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Widgets.Disable", "admin/widget/disable/{id}", new { controller = "Widget", action = "Disable", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
@@ -124,13 +125,13 @@ namespace Core.Web.Areas.Admin
         /// <summary>
         /// Setups the modules.
         /// </summary>
-        protected void SetupModules()
+        protected static void SetupModules()
         {
             var pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
 
             var existingPlugins =  pluginService.GetAll();
 
-            var registeredPlugins = MvcApplication.Plugins;
+            var registeredPlugins = Application.Plugins;
 
             foreach (var plugin in registeredPlugins)
             {
@@ -158,7 +159,7 @@ namespace Core.Web.Areas.Admin
         /// Setups the plugins.
         /// </summary>
         /// <param name="plugins">The plugins.</param>
-        protected void SetupPlugins(List<Plugin> plugins)
+        protected static void SetupPlugins(List<Plugin> plugins)
         {
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
 

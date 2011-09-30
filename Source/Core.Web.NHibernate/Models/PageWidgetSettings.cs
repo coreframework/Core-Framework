@@ -8,7 +8,7 @@ namespace Core.Web.NHibernate.Models
     /// </summary>
     public class PageWidgetSettings : Entity
     {
-        private LookAndFeelSettings _lookAndFeelSettings = new LookAndFeelSettings();
+        private LookAndFeelSettings lookAndFeelSettings = new LookAndFeelSettings();
 
         /// <summary>
         /// Gets or sets the custom CSS classes.
@@ -22,8 +22,8 @@ namespace Core.Web.NHibernate.Models
         /// <value>The settings.</value>
         public virtual LookAndFeelSettings LookAndFeelSettings
         {
-            get { return _lookAndFeelSettings; }
-            set { _lookAndFeelSettings = value; }
+            get { return lookAndFeelSettings; }
+            set { lookAndFeelSettings = value; }
         }
 
         /// <summary>

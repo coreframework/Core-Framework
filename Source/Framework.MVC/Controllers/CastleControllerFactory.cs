@@ -12,7 +12,7 @@ using System.Web.Routing;
 
 using Castle.MicroKernel;
 
-namespace Framework.MVC.Controllers
+namespace Framework.Mvc.Controllers
 {
     /// <summary>
     /// Instantinate controller throught castle kernel.

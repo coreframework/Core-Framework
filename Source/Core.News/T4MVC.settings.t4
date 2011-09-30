@@ -8,14 +8,14 @@ to fork the 'official' template in order to achieve what they want.
 
 
 // The prefix used for things like MVC.Dinners.Name and MVC.Dinners.Delete(Model.DinnerID)
-const string HelpersPrefix = "NewsMVC";
+const String HelpersPrefix = "NewsMVC";
 
 // Namespaces to be referenced by the generated code
 readonly string[] ReferencedNamespaces = new string[] {
 };
 
 // The folder under the project that contains the areas
-const string AreasFolder = "Areas";
+const String AreasFolder = "Areas";
 
 // Choose whether you want to include an 'Areas' token when referring to areas.
 // e.g. Assume the Area is called Blog and the Controller is Post:
@@ -24,13 +24,13 @@ const string AreasFolder = "Areas";
 static bool IncludeAreasToken = false;
 
 // The folder under the project that contains the controllers
-const string ControllersFolder = "Controllers";
+const String ControllersFolder = "Controllers";
 
 // The folder under the project that contains the views
-const string ViewsRootFolder = "Views";
+const String ViewsRootFolder = "Views";
 
 // The name of the interface that all T4MVC action results will implement
-const string ActionResultInterfaceName = "IT4MVCActionResult";
+const String ActionResultInterfaceName = "IT4MVCActionResult";
 
 // If true, the T4MVC action result interface will be generated
 // If false, the namespace of the interface must be referenced in the 'ReferencedNamespaces' setting
@@ -40,9 +40,9 @@ const bool GenerateActionResultInterface = false;
 const bool UseLowercaseRoutes = false;
 
 // The namespace that the links are generated in (e.g. "Links", as in Links.Content.nerd_jpg)
-const string LinksNamespace = "Links";
+const String LinksNamespace = "Links";
 
-// If true, links to static files include a query string containing the file's last change time. This way,
+// If true, links to static files include a query String containing the file's last change time. This way,
 // when the static file changes, the link changes and guarantees that the client will re-request the resource.
 // e.g. when true, the link looks like: "/Content/nerd.jpg?2009-09-04T12:25:48"
 const bool AddTimestampToStaticLinks = false;
@@ -73,9 +73,9 @@ static class T4MVCHelpers {
     // You can change the ProcessVirtualPath method to modify the path that gets returned to the client.
     // e.g. you can prepend a domain, or append a query string:
     //      return "http://localhost" + path + "?foo=bar";
-    private static string ProcessVirtualPathDefault(string virtualPath) {
+    private static String ProcessVirtualPathDefault(String virtualPath) {
         // The path that comes in starts with ~/ and must first be made absolute
-        string path = VirtualPathUtility.ToAbsolute(virtualPath);
+        String path = VirtualPathUtility.ToAbsolute(virtualPath);
         
         // Add your own modifications here before returning the path
         return path;

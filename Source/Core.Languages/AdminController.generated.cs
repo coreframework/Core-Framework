@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace T4MVC {
     public class AdminController {
@@ -28,9 +28,9 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Views/Admin/Edit.aspx";
-            public readonly string Index = "~/Views/Admin/Index.aspx";
-            public readonly string New = "~/Views/Admin/New.aspx";
+            public readonly String Edit = "~/Views/Admin/Edit.aspx";
+            public readonly String Index = "~/Views/Admin/Index.aspx";
+            public readonly String New = "~/Views/Admin/New.aspx";
         }
     }
 

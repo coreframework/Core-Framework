@@ -8,9 +8,9 @@ namespace Core.ContentPages.NHibernate.Models
 {
     public class ContentPage : Entity, ILocalizable
     {
-        private IList<ContentPageLocale> _currentContentPageLocales = new List<ContentPageLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private ContentPageLocale _currentLocale;
+        private readonly IList<ContentPageLocale> currentContentPageLocales = new List<ContentPageLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private ContentPageLocale currentLocale;
 
         #region Properties
 
@@ -50,15 +50,15 @@ namespace Core.ContentPages.NHibernate.Models
         {
             get
             {
-                if(_currentLocales.Count == 0 && _currentContentPageLocales.Count > 0)
+                if(currentLocales.Count == 0 && currentContentPageLocales.Count > 0)
                 {
-                    _currentLocales = _currentContentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentContentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -86,19 +86,19 @@ namespace Core.ContentPages.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ContentPageLocale;
-                    if(_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ContentPageLocale;
+                    if(currentLocale == null)
                     {
-                        _currentLocale = new ContentPageLocale
+                        currentLocale = new ContentPageLocale
                                              {
                                                  ContentPage = this,
                                                  Culture = null
                                              };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
         }
 

@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class AdminHomeController {
@@ -35,16 +35,16 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public AdminHomeController Actions { get { return MVC.Admin.AdminHome; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "AdminHome";
+        public readonly String Name = "AdminHome";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
+            public readonly String Index = "Index";
         }
 
 
@@ -53,7 +53,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Index = "~/Areas/Admin/Views/AdminHome/Index.aspx";
+            public readonly String Index = "~/Areas/Admin/Views/AdminHome/Index.aspx";
         }
     }
 

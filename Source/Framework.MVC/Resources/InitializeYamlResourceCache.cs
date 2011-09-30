@@ -11,7 +11,7 @@ using Castle.MicroKernel.Registration;
 using Framework.Core;
 using Framework.Core.Configuration;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Initializes resources cahce and injects it to IoC.

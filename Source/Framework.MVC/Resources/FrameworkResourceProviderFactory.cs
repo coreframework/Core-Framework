@@ -6,9 +6,9 @@
 
 using System;
 using System.Web.Compilation;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Provider factory that instantiates <see cref="FrameworkResourceProvider"/>.
@@ -45,7 +45,7 @@ namespace Framework.MVC.Resources
 
         #region Helper members
 
-        private String GetScope(String virtualPath)
+        private static String GetScope(String virtualPath)
         {
             return ResourceHelper.GetViewScope(virtualPath);
         }

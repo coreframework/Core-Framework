@@ -9,7 +9,7 @@ using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
 namespace Core.Forms
 {
@@ -76,14 +76,14 @@ namespace Core.Forms
         /// Gets the Identifiers config path. Default String.Empty.
         /// [Example: @"Config\asset_packages.yml"]
         /// </summary>
-        public override string PluginConfigPath
+        public override String PluginConfigPath
         {
             get { return FormsConfig; }
         }
 
         #region IPermissible members
 
-        public string PermissionTitle { get; set; }
+        public String PermissionTitle { get; set; }
 
         public IEnumerable<IPermissionOperation> Operations { get; set; }
 

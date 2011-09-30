@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Core.Framework.Plugins.Web;
 
 namespace Core.Web.Areas.Navigation.Verbs
@@ -10,7 +7,7 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static NavigationMenuEditorVerb _instance;
+        private static NavigationMenuEditorVerb instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -20,7 +17,7 @@ namespace Core.Web.Areas.Navigation.Verbs
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NavigationMenuEditorVerb());
+                    return instance ?? (instance = new NavigationMenuEditorVerb());
                 }
             }
         }
@@ -29,17 +26,17 @@ namespace Core.Web.Areas.Navigation.Verbs
 
         #region IWidgetActionVerb Members
 
-        public string Action
+        public String Action
         {
             get { return "EditWidget"; }
         }
 
-        public string Controller
+        public String Controller
         {
             get { return "NavigationMenu"; }
         }
 
-        public string Area
+        public String Area
         {
             get { return "Navigation"; }
         }

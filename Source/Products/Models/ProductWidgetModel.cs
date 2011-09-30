@@ -15,7 +15,7 @@ namespace Products.Models
     {
         #region Fields
 
-        private List<Category> _categories;
+        private List<Category> categories;
 
         #endregion
 
@@ -49,12 +49,12 @@ namespace Products.Models
         {
             get
             {
-                if (_categories == null)
+                if (categories == null)
                 {
                     var categoriesService = ServiceLocator.Current.GetInstance<ICategoryService>();
-                    _categories = (List<Category>)categoriesService.GetAll();
+                    categories = (List<Category>)categoriesService.GetAll();
                 }
-                return _categories;
+                return categories;
             }
         }
 

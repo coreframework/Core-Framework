@@ -117,6 +117,7 @@
     </Reference>
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -182,12 +183,10 @@
     <Compile Include="Areas\Admin\Models\PermissionOperationsModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginListingModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\RoleListModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleLocaleViewModel.cs" />
     <Compile Include="Areas\Admin\Models\RolePermissionsItem.cs" />
     <Compile Include="Areas\Admin\Models\RolePermissionsModel.cs" />
     <Compile Include="Areas\Admin\Models\RoleViewModel.cs" />
-    <Compile Include="Areas\Admin\Models\UserGroupListingModel.cs" />
     <Compile Include="Areas\Admin\Models\UserGroupToRoleAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserGroupToUserAssignmentModel.cs" />
     <Compile Include="Areas\Admin\Models\UserGroupViewModel.cs" />
@@ -204,7 +203,6 @@
     <Compile Include="Areas\Navigation\Helpers\NavigationMenuWidgetHelper.cs" />
     <Compile Include="Areas\Navigation\Helpers\SiteMapWidgetHelper.cs" />
     <Compile Include="Areas\Navigation\Models\BreadcrumbsItem.cs" />
-    <Compile Include="Areas\Navigation\Models\BreadcrumbsViewWidgetModel.cs" />
     <Compile Include="Areas\Navigation\Models\BreadcrumbsWidgetModel.cs" />
     <Compile Include="Areas\Navigation\Models\ListMenuPageItemModel.cs" />
     <Compile Include="Areas\Navigation\Models\ListMenuWidgetModel.cs" />
@@ -280,6 +278,7 @@
     <Compile Include="Models\PageModeModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\Routes\DefaultRouteRegistrar.cs" />
+    <Compile Include="Models\RowSettings.cs" />
     <Compile Include="Models\WidgetCSSModel.cs" />
     <Compile Include="Models\WidgetHolderViewModel.cs" />
     <Compile Include="Models\WidgetLookAndFeelModel.cs" />
@@ -1203,9 +1202,9 @@
       <Project>{832BAE45-2032-40A6-B889-1FF854885536}</Project>
       <Name>Framework.Facilities.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Framework.MVC\Framework.MVC.csproj">
+    <ProjectReference Include="..\Framework.MVC\Framework.Mvc.csproj">
       <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
-      <Name>Framework.MVC</Name>
+      <Name>Framework.Mvc</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

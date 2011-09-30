@@ -15,13 +15,13 @@ namespace Core.News.NHibernate.Services
         {
         }
 
-        public NewsCategoryLocale GetLocale(long newsCategoryId, string culture)
+        public NewsCategoryLocale GetLocale(long categoryId, String culture)
         {
             IQueryable<NewsCategoryLocale> query = CreateQuery();
-            return query.Where(locale => locale.Category.Id == newsCategoryId && locale.Culture == culture).FirstOrDefault();
+            return query.Where(locale => locale.Category.Id == categoryId && locale.Culture == culture).FirstOrDefault();
         }
 
-        public ICriteria GetSearchCriteria(string searchString)
+        public ICriteria GetSearchCriteria(String searchString)
         {
             ICriteria criteria = Session.CreateCriteria<NewsCategoryLocale>().CreateAlias("Category", "newsCategory");
 

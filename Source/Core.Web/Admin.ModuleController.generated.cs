@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class ModuleController {
@@ -75,24 +75,24 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ModuleController Actions { get { return MVC.Admin.Module; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Module";
+        public readonly String Name = "Module";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Index = "Index";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string Edit = "Edit";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string Update = "Update";
-            public readonly string Install = "Install";
-            public readonly string Uninstall = "Uninstall";
-            public readonly string ConfirmInstall = "ConfirmInstall";
-            public readonly string ConfirmUninstall = "ConfirmUninstall";
+            public readonly String Index = "Index";
+            public readonly String DynamicGridData = "DynamicGridData";
+            public readonly String Edit = "Edit";
+            public readonly String ChangeLanguage = "ChangeLanguage";
+            public readonly String Update = "Update";
+            public readonly String Install = "Install";
+            public readonly String Uninstall = "Uninstall";
+            public readonly String ConfirmInstall = "ConfirmInstall";
+            public readonly String ConfirmUninstall = "ConfirmUninstall";
         }
 
 
@@ -101,11 +101,11 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string Edit = "~/Areas/Admin/Views/Module/Edit.aspx";
-            public readonly string EditForm = "~/Areas/Admin/Views/Module/EditForm.ascx";
-            public readonly string Index = "~/Areas/Admin/Views/Module/Index.aspx";
-            public readonly string Install = "~/Areas/Admin/Views/Module/Install.aspx";
-            public readonly string Uninstall = "~/Areas/Admin/Views/Module/Uninstall.aspx";
+            public readonly String Edit = "~/Areas/Admin/Views/Module/Edit.aspx";
+            public readonly String EditForm = "~/Areas/Admin/Views/Module/EditForm.ascx";
+            public readonly String Index = "~/Areas/Admin/Views/Module/Index.aspx";
+            public readonly String Install = "~/Areas/Admin/Views/Module/Install.aspx";
+            public readonly String Uninstall = "~/Areas/Admin/Views/Module/Uninstall.aspx";
         }
     }
 

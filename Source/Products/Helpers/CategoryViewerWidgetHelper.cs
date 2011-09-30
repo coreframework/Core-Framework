@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Core.Framework.Plugins.Web;
 using Microsoft.Practices.ServiceLocation;
 using Products.Models;
@@ -7,7 +8,7 @@ using Products.NHibernate.Models;
 
 namespace Products.Helpers
 {
-    public class CategoryViewerWidgetHelper
+    public static class CategoryViewerWidgetHelper
     {
         #region Methods
 
@@ -38,13 +39,9 @@ namespace Products.Helpers
            
             if (widget != null)
             {
-                var model = new CategoryViewWidgetModel();
+                var model = new CategoryViewWidgetModel {Id = widget.Id, PageSize = widget.PageSize};
 
-                model.Id = widget.Id;
-                model.PageSize = widget.PageSize;
-
-
-                IQueryable<Category> searchQuery = categoryService.GetSearchQuery("");
+                IQueryable<Category> searchQuery = categoryService.GetSearchQuery(String.Empty);
                 model.TotalItemsCount = categoryService.GetCount(searchQuery);
                 model.Categories = widget.PageSize > 0 ? searchQuery.Skip((currentPage - 1) * widget.PageSize).Take(widget.PageSize).ToList() : searchQuery.ToList();
                 model.CurrentPage = currentPage;
@@ -78,11 +75,13 @@ namespace Products.Helpers
             {
                 var productService = ServiceLocator.Current.GetInstance<IProductService>();
 
-                var categoryModel = new CategoryModel();
-                categoryModel.Id = category.Id;
-                categoryModel.Title = category.Title;
-                categoryModel.Description = category.Description;
-                categoryModel.Products = productService.GetProductsByCategory(category).ToList();
+                var categoryModel = new CategoryModel
+                                        {
+                                            Id = category.Id,
+                                            Title = category.Title,
+                                            Description = category.Description,
+                                            Products = productService.GetProductsByCategory(category).ToList()
+                                        };
                 return categoryModel;
             }
 

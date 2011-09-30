@@ -42,7 +42,7 @@ namespace Core.Web.Helpers
                 return null;
 
             ICoreWidget coreWidget =
-                (MvcApplication.Widgets).FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
+                MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);
 
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
@@ -106,7 +106,7 @@ namespace Core.Web.Helpers
         /// <returns>
         /// 	<c>true</c> if [is widget enabled] [the specified widget identifier]; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsWidgetEnabled(string widgetIdentifier)
+        public bool IsWidgetEnabled(String widgetIdentifier)
         {
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
             Widget widget = widgetService.FindWidgetByIdentifier(widgetIdentifier);

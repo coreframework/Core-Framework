@@ -15,13 +15,13 @@ namespace Products.NHibernate.Services
         {
         }
 
-        public ProductLocale GetLocale(long productId, string culture)
+        public ProductLocale GetLocale(long productId, String culture)
         {
             IQueryable<ProductLocale> query = CreateQuery();
             return query.Where(locale => locale.Product.Id == productId && locale.Culture == culture).FirstOrDefault();
         }
 
-        public ICriteria GetSearchCriteria(string searchString)
+        public ICriteria GetSearchCriteria(String searchString)
         {
             ICriteria criteria = Session.CreateCriteria<ProductLocale>().CreateAlias("Product", "product");
 

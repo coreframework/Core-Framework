@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Core.ContentPages.NHibernate.Models;
 using Framework.Core.Services;
 
@@ -18,6 +19,6 @@ namespace Core.ContentPages.NHibernate.Contracts
         /// </summary>
         /// <param name="searchString">The search string.</param>
         /// <returns></returns>
-        IQueryable<ContentPage> GetSearchQuery(string searchString);        
+        IQueryable<ContentPage> GetSearchQuery(String searchString);        
     }
 }

@@ -18,7 +18,7 @@ namespace Products.Helpers
         /// <param name="id">Model id (for several pager in page)</param>
         /// <param name="values">Request params</param>
         /// <returns></returns>
-        public static string Pager(this HtmlHelper helper, int pageSize, int currentPage, int totalItemCount, long id, object values)
+        public static String Pager(this HtmlHelper helper, int pageSize, int currentPage, int totalItemCount, long id, object values)
         {
             return Pager(helper, id, pageSize, currentPage, totalItemCount, String.Empty, new RouteValueDictionary(values));
         }
@@ -34,12 +34,12 @@ namespace Products.Helpers
         /// <param name="preffix">Part of route values name</param>
         /// <param name="values">Request params</param>
         /// <returns></returns>
-        public static string Pager(this HtmlHelper helper, int pageSize, int currentPage, int totalItemCount, long id, string preffix, object values)
+        public static String Pager(this HtmlHelper helper, int pageSize, int currentPage, int totalItemCount, long id, String preffix, object values)
         {
             return Pager(helper, id, pageSize, currentPage, totalItemCount, preffix, new RouteValueDictionary(values));
         }
 
-        public static string Pager(this HtmlHelper helper, long id, int pageSize, int currentPage, int totalItemCount, string preffix, RouteValueDictionary valuesDictionary)
+        public static String Pager(this HtmlHelper helper, long id, int pageSize, int currentPage, int totalItemCount, String preffix, RouteValueDictionary valuesDictionary)
         {
             if (valuesDictionary == null)
             {
@@ -50,7 +50,7 @@ namespace Products.Helpers
             return pager.RenderHtml();
         }
 
-        public static string DetailsLink(this HtmlHelper helper, string linkText, long widgetId, long modelId, object values)
+        public static String DetailsLink(this HtmlHelper helper, String linkText, long widgetId, long modelId, object values)
         {
             var valuesDictionary = new RouteValueDictionary(values);
             valuesDictionary = GetParams(valuesDictionary);
@@ -58,7 +58,7 @@ namespace Products.Helpers
             var routeParams = String.Empty;
             foreach (var key in valuesDictionary.Keys.Where(key => key.StartsWith(ProductConstants.CurrentPageQueryRequestParam) || key.StartsWith(ProductConstants.ProductIdQueryRequestParam)))
             {
-                if (routeParams.Equals(String.Empty))
+                if (String.IsNullOrEmpty(routeParams))
                     routeParams += "?";
                 else
                     routeParams += "&";
@@ -71,7 +71,7 @@ namespace Products.Helpers
             return String.Empty;
         }
 
-        public static string ListLink(this HtmlHelper helper, string linkText, long widgetId, object values)
+        public static String ListLink(this HtmlHelper helper, String linkText, long widgetId, object values)
         {
             var valuesDictionary = new RouteValueDictionary(values);
             valuesDictionary = GetParams(valuesDictionary);
@@ -79,7 +79,7 @@ namespace Products.Helpers
             var routeParams = String.Empty;
             foreach (var key in valuesDictionary.Keys.Where(key => key.StartsWith(ProductConstants.CurrentPageQueryRequestParam) || key.StartsWith(ProductConstants.ProductIdQueryRequestParam)))
             {
-                if (routeParams.Equals(String.Empty))
+                if (String.IsNullOrEmpty(routeParams))
                     routeParams += "?";
                 else if (!routeParams.Equals("?"))
                     routeParams += "&";
@@ -102,7 +102,7 @@ namespace Products.Helpers
 
                 var routeValueDictionary = values as NameValueCollection;
                 if (routeValueDictionary != null)
-                    foreach (string key in routeValueDictionary.Keys)
+                    foreach (String key in routeValueDictionary.Keys)
                     {
                         if (key.StartsWith(ProductConstants.CurrentPageQueryRequestParam))
                             valuesDictionary.Add(key, routeValueDictionary[key]);

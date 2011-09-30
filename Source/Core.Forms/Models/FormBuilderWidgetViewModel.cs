@@ -8,7 +8,7 @@ using Core.Forms.NHibernate.Permissions.Operations;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Framework.Core.DomainModel;
-using Framework.MVC.Metadata.Attributes;
+using Framework.Mvc.Metadata.Attributes;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Forms.Models
@@ -17,8 +17,8 @@ namespace Core.Forms.Models
     {
         #region Fields
 
-        private List<Form> _forms;
-        private ICorePrincipal _user;
+        private List<Form> forms;
+        private ICorePrincipal user;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace Core.Forms.Models
         /// </summary>
         /// <value>The title.</value>
         [StringLength(255), Required]
-        public string Title { get; set; }
+        public String Title { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [save data].
@@ -58,7 +58,7 @@ namespace Core.Forms.Models
         /// <value>The user.</value>
         public ICorePrincipal User
         {
-            get { return _user ?? (_user = HttpContext.Current.CorePrincipal()); }
+            get { return user ?? (user = HttpContext.Current.CorePrincipal()); }
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace Core.Forms.Models
         {
             get
             {
-                if (_forms == null)
+                if (forms == null)
                 {
                     var formService = ServiceLocator.Current.GetInstance<IFormService>();
-                    _forms = (List<Form>) formService.GetAllowedFormsByOperation(User, (int) FormOperations.AddToWidget);
+                    forms = (List<Form>) formService.GetAllowedFormsByOperation(User, (int) FormOperations.AddToWidget);
                 }
-                return _forms;
+                return forms;
             }
         }
 

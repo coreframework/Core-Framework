@@ -18,7 +18,7 @@ namespace Core.Languages.Controllers
     {
         #region Properties
 
-        public override string ControllerWidgetIdentifier
+        public override String ControllerWidgetIdentifier
         {
             get
             {

@@ -37,19 +37,21 @@ namespace Core.Languages.NHibernate.Services
         {
         }
 
+        public Language DefaultLanguage
+        {
+            get
+            {
+                var query = CreateQuery().Where(language => language.IsDefault);
+                return query.FirstOrDefault();
+            }
+        }
+
         public int GetCount(IQueryable<Language> baseQuery)
         {
             return baseQuery.Count();
         }
 
-        public Language GetDefaultLanguage()
-        {
-            var query = CreateQuery().Where(language => language.IsDefault);
-
-            return query.FirstOrDefault();
-        }
-
-        public IQueryable<Language> GetSearchQuery(string searchString)
+        public IQueryable<Language> GetSearchQuery(String searchString)
         {
             var baseQuery = CreateQuery();
             if (String.IsNullOrEmpty(searchString))

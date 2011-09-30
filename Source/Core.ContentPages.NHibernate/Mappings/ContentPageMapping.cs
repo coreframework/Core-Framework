@@ -21,7 +21,7 @@ namespace Core.ContentPages.NHibernate.Mappings
             .Cascade.All();
             HasMany(contentPage => contentPage.CurrentContentPageLocales).KeyColumn("ContentPageId")
             .Table("ContentPageLocales").ApplyFilter<CultureFilter>()
-            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();

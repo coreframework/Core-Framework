@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Core.Framework.Plugins.Web;
 using Core.Web.NHibernate.Contracts;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using Core.Framework.MEF.Web;
 
@@ -57,7 +57,7 @@ namespace Core.Web.Handlers
                             context.Response.Cache.VaryByHeaders["Accept-Encoding"] = true;
                             context.Response.Cache.SetExpires(DateTime.Now.AddYears(1));
 
-                            var path = AssetsHelper.GetPluginInnerJsPath(currentPlugin, context.Request.PhysicalApplicationPath);
+                            var path = AssetsHelper.GetPluginInnerJsPath(currentPlugin);
 
                             if (File.Exists(path))
                             {

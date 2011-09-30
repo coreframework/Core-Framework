@@ -23,7 +23,7 @@ namespace Framework.Core.Controllers
         /// <summary>
         /// Key for flash messages queue.
         /// </summary>
-        public const String MessagesKey = "FlashMessages";
+        public static readonly String MessagesKey = "FlashMessages";
 
         private ILogger logger = NullLogger.Instance;
 
@@ -68,8 +68,7 @@ namespace Framework.Core.Controllers
         /// Adds notice message to message queue.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="parameters">The parameters.</param>
-        protected void Success(String message, params Object[] parameters)
+        protected void Success(String message)
         {
             AddMessage(message, MessageType.Success);
         }
@@ -78,8 +77,7 @@ namespace Framework.Core.Controllers
         /// Adds warning message to message queue.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="parameters">The parameters.</param>
-        protected void Notice(String message, params Object[] parameters)
+        protected void Notice(String message)
         {
             AddMessage(message, MessageType.Notice);
         }
@@ -88,8 +86,7 @@ namespace Framework.Core.Controllers
         /// Adds information message to message queue.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="parameters">The parameters.</param>
-        protected void Information(String message, params Object[] parameters)
+        protected void Information(String message)
         {
             AddMessage(message, MessageType.Info);
         }
@@ -98,8 +95,7 @@ namespace Framework.Core.Controllers
         /// Adds error message to message queue.
         /// </summary>
         /// <param name="message">The message.</param>
-        /// <param name="parameters">The parameters.</param>
-        protected void Error(String message, params Object[] parameters)
+        protected void Error(String message)
         {
             AddMessage(message, MessageType.Error);
         }

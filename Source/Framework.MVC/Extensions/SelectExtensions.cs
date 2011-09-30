@@ -16,9 +16,9 @@ using System.Web.Mvc.Html;
 using System.Linq;
 using System.Web.UI;
 using Framework.Core.DomainModel;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extends <see cref="HtmlHelper"/> functionality for dropdown list generation.
@@ -209,7 +209,7 @@ namespace Framework.MVC.Extensions
         /// <returns>
         /// An HTML select element with option groups.
         /// </returns>
-        public static string OptionGroupDropDownList<T, TProperty, TProperty1, TProperty2>(this HtmlHelper htmlHelper, string name, List<T> collection, Func<T, TProperty> optionGroupProperty, Func<T, TProperty1> optionValueProperty, Func<T, TProperty2> optionTextProperty, Func<T, bool> isSelectedCondition, bool showEmptyValue)
+        public static String OptionGroupDropDownList<T, TProperty, TProperty1, TProperty2>(this HtmlHelper htmlHelper, String name, List<T> collection, Func<T, TProperty> optionGroupProperty, Func<T, TProperty1> optionValueProperty, Func<T, TProperty2> optionTextProperty, Func<T, bool> isSelectedCondition, bool showEmptyValue)
         {
             IEnumerable<IGrouping<TProperty, T>> groupedCollection = collection.GroupBy(optionGroupProperty);
 
@@ -236,8 +236,8 @@ namespace Framework.MVC.Extensions
 
                     foreach (T option in optionGroup)
                     {
-                        string optionValue = optionValueProperty.Invoke(option).ToString();
-                        string optionText = optionTextProperty.Invoke(option).ToString();
+                        String optionValue = optionValueProperty.Invoke(option).ToString();
+                        String optionText = optionTextProperty.Invoke(option).ToString();
 
                         bool isOptionSelected = isSelectedCondition.Invoke(option);
 

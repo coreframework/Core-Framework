@@ -14,7 +14,7 @@ using System.Web.Mvc.Html;
 using Framework.Core.Controllers;
 using Framework.Core.Infrastructure;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for generating validation messages HTML-markup to <see cref="HtmlHelper"/>.
@@ -26,17 +26,17 @@ namespace Framework.MVC.Extensions
         /// <summary>
         /// Tooltip validation message CSS-class.
         /// </summary>
-        public const String TooltipCssClass = "tooltip";
+        public static readonly String TooltipCssClass = "tooltip";
 
         /// <summary>
         /// Path to image tooltip.
         /// </summary>
-        public const String DefaultToolTipImage = "~/Content/images/icons/tooltip.png";
+        public static readonly String DefaultToolTipImage = "~/Content/images/icons/tooltip.png";
 
         /// <summary>
         /// Validation message Css template.
         /// </summary>
-        public const String ValidationMessageCssTemplate = "validation_{0}";
+        public static readonly String ValidationMessageCssTemplate = "validation_{0}";
 
         #endregion
 

@@ -13,14 +13,13 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
 using Core.Web.NHibernate.Models;
-using Framework.MVC.Breadcrumbs;
-using Framework.MVC.Controllers;
-using Framework.MVC.Grids;
-using Framework.MVC.Grids.jqGrid;
+using Framework.Mvc.Breadcrumbs;
+using Framework.Mvc.Controllers;
+using Framework.Mvc.Grids;
+using Framework.Mvc.Grids.JqGrid;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;
-using System.Linq.Dynamic;
 using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
@@ -33,9 +32,9 @@ namespace Core.Web.Areas.Admin.Controllers
     {
         #region Fields
 
-        private readonly IPluginService _pluginService;
-        private readonly IPluginLocaleService _pluginLocaleService;
-        private readonly IBreadcrumbsBuilder _breadcrumbsBuilder;
+        private readonly IPluginService pluginService;
+        private readonly IPluginLocaleService pluginLocaleService;
+        private readonly IBreadcrumbsBuilder breadcrumbsBuilder;
 
         #endregion
 
@@ -46,9 +45,9 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         public ModuleController()
         {
-            _pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
-            _pluginLocaleService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
-            _breadcrumbsBuilder = ServiceLocator.Current.GetInstance<IBreadcrumbsBuilder>();
+            pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
+            pluginLocaleService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
+            breadcrumbsBuilder = ServiceLocator.Current.GetInstance<IBreadcrumbsBuilder>();
         }
 
         #endregion
@@ -100,7 +99,7 @@ namespace Core.Web.Areas.Admin.Controllers
             };
 
             //build breadcrumbs
-            _breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
+            breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
                                                            {
                                                                new Breadcrumb
                                                                    {
@@ -118,11 +117,11 @@ namespace Core.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public virtual JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord)
+        public virtual JsonResult DynamicGridData(int page, int rows, String search, String sidx, String sord)
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            ICriteria searchCriteria = _pluginLocaleService.GetSearchCriteria(search);
+            ICriteria searchCriteria = pluginLocaleService.GetSearchCriteria(search);
             int totalRecords = PluginHelper.CountAvailablePlugins(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
 
@@ -133,7 +132,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 total = totalPages,
                 page,
                 records = totalRecords,
-                rows = (plugins.Select(pluginLocale => new
+                rows = plugins.Select(pluginLocale => new
                                                         {
                                                             id = JqGridConstants.NotClickableId,
                                                             cell = new[]
@@ -147,7 +146,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                             String.Empty,
                                                                             String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Module.Edit(pluginLocale.Plugin.Id)), Translate("Actions.Edit"))
                                                                        }
-                                                        }).ToArray())
+                                                        }).ToArray()
             };
             return Json(jsonData);
         }
@@ -161,14 +160,14 @@ namespace Core.Web.Areas.Admin.Controllers
         [SiteMapTitle("Title")]
         public virtual ActionResult Edit(long id)
         {
-            var plugin = _pluginService.Find(id);
+            var plugin = pluginService.Find(id);
             if (plugin == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
 
             //build breadcrumbs
-            _breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
+            breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
                                                            {
                                                                new Breadcrumb
                                                                    {
@@ -192,7 +191,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult ChangeLanguage(long pluginId, String culture)
         {
-            var plugin = _pluginService.Find(pluginId);
+            var plugin = pluginService.Find(pluginId);
             if (plugin == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.PluginNotFound"));
@@ -219,7 +218,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult Update(long id, PluginViewModel pluginView)
         {
-            var plugin = _pluginService.Find(id);
+            var plugin = pluginService.Find(id);
             if (plugin == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -249,7 +248,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Install(long id)
         {
-            Plugin plugin = _pluginService.Find(id);
+            Plugin plugin = pluginService.Find(id);
             if (plugin == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -265,7 +264,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Uninstall(long id)
         {
-            Plugin plugin = _pluginService.Find(id);
+            Plugin plugin = pluginService.Find(id);
             if (plugin == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -281,7 +280,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult ConfirmInstall(long id)
         {
-            Plugin pluginEntity = _pluginService.Find(id);
+            Plugin pluginEntity = pluginService.Find(id);
             if (pluginEntity == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -297,7 +296,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 CoreMigrator.Current.MigrateUp(corePlugin);
                 corePlugin.Install();
                 pluginEntity.Status = PluginStatus.Installed;
-                _pluginService.Save(pluginEntity);
+                pluginService.Save(pluginEntity);
                 corePlugin.Start();
                 Success(Translate("Messages.InstallPlugin"));
                 return RedirectToAction(MVC.Admin.Module.Index());
@@ -314,7 +313,7 @@ namespace Core.Web.Areas.Admin.Controllers
         [HttpPost]
         public virtual ActionResult ConfirmUninstall(long id)
         {
-            Plugin pluginEntity = _pluginService.Find(id);
+            Plugin pluginEntity = pluginService.Find(id);
             if (pluginEntity == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
@@ -333,7 +332,7 @@ namespace Core.Web.Areas.Admin.Controllers
                 CoreMigrator.Current.MigrateDown(corePlugin);
 
                 pluginEntity.Status = PluginStatus.NotInstalled;
-                _pluginService.Save(pluginEntity);
+                pluginService.Save(pluginEntity);
                 Success(Translate("Messages.UninstallPlugin"));
                 return RedirectToAction(MVC.Admin.Module.Index());
             }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using Framework.Core.Configuration;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 
 namespace Framework.Core.Localization
 {
@@ -15,9 +15,9 @@ namespace Framework.Core.Localization
         ///<summary>
         /// Neutral culture name.
         ///</summary>
-        public const String NeutralCultureName = "Neutral";
+        public static readonly String NeutralCultureName = "Neutral";
 
-        private static CultureInfo defaultCulture = null;
+        private static CultureInfo defaultCulture;
 
         /// <summary>
         /// Gets the default culture.
@@ -31,10 +31,10 @@ namespace Framework.Core.Localization
                 {
                     try
                     {
-                        ICultureProvider cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
+                        var cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
                         if (cultureProvider != null)
                         {
-                            defaultCulture = cultureProvider.GetDefaultCulture();
+                            defaultCulture = cultureProvider.DefaultCulture;
                         }
                     }
                     catch (Exception)
@@ -72,16 +72,16 @@ namespace Framework.Core.Localization
         {
             try
             {
-                ICultureProvider cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
+                var cultureProvider = ServiceLocator.Current.GetInstance<ICultureProvider>();
                 if (cultureProvider != null)
                 {
-                    return cultureProvider.GetAvailableLanguages();
+                    return cultureProvider.AvailableLanguages;
                 }
             }
             catch (Exception)
             {
             }
-            IDictionary<String, String> cultures = new Dictionary<string, string> { { NeutralCultureName, null } };
+            IDictionary<String, String> cultures = new Dictionary<String, String> { { NeutralCultureName, null } };
             return cultures;
         }
 

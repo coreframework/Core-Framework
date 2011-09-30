@@ -29,7 +29,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Migrator", "Frame
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.MSBuild", "Framework.MSBuild\Framework.MSBuild.csproj", "{260CA38B-D626-443C-A5B0-61094CF8462B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.MVC", "Framework.MVC\Framework.MVC.csproj", "{930E0E39-8A09-4373-A077-33971E9F7BEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Mvc", "Framework.MVC\Framework.Mvc.csproj", "{930E0E39-8A09-4373-A077-33971E9F7BEE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Framework.MEF.ServiceLocation", "Core.Framework.MEF.ServiceLocation\Core.Framework.MEF.ServiceLocation.csproj", "{1A8F39D8-9D23-4518-B483-D7D2ADF3457D}"
 EndProject

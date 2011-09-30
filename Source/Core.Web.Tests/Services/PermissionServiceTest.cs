@@ -104,7 +104,7 @@ namespace Core.Web.Tests.Services
             var page = CreatePage();
             pageService.Save(page);
 
-            var permission = SetupPermissionsForPage(page, (int)SystemRoles.User);
+            var permission = SetupPermissionsForPage(page, (int)SystemRole.User);
             permissionService.Save(permission);
 
             var resultPermission = permissionService.GetPermission(permission.Role.Id, permission.EntityType.Id, page.Id);
@@ -124,10 +124,10 @@ namespace Core.Web.Tests.Services
             var page = CreatePage();
             pageService.Save(page);
 
-            var permission1 = SetupPermissionsForPage(page, (int)SystemRoles.User);
+            var permission1 = SetupPermissionsForPage(page, (int)SystemRole.User);
             permissionService.Save(permission1);
 
-            var permission2 = SetupPermissionsForPage(page, (int)SystemRoles.Guest);
+            var permission2 = SetupPermissionsForPage(page, (int)SystemRole.Guest);
             permissionService.Save(permission2);
 
             var resultPermissions = permissionService.GetResourcePermissions(typeof(Page), page.Id, false).ToList();

@@ -1,10 +1,12 @@
-﻿namespace Core.Framework.Permissions.Models
+﻿using System;
+
+namespace Core.Framework.Permissions.Models
 {
     public class PermissionOperation: IPermissionOperation
     {
         public int Key { get; set; }
 
-        public string Title { get; set; }
+        public String Title { get; set; }
 
         public PermissionArea Area { get; set; }
 

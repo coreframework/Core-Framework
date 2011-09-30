@@ -17,7 +17,7 @@ namespace Core.Web.Modules
             DynamicModuleUtility.RegisterModule(typeof(ContainerHttpModule));
         }
 
-        IEnumerable<IPluginHttpModule> modules;
+        private IEnumerable<IPluginHttpModule> modules;
 
         private static IEnumerable<IPluginHttpModule> RetrieveModules()
         {
@@ -32,7 +32,6 @@ namespace Core.Web.Modules
 
         private void OnBeginRequest(object sender, EventArgs e)
         {
-            HttpApplication context = (HttpApplication)sender;
             if(Application.ModulesChanged)
             {
                 modules = RetrieveModules();

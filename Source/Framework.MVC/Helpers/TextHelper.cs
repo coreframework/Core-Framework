@@ -7,24 +7,24 @@
 using System;
 using System.Text;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     ///  Provides helper functionality for strings.
     /// </summary>
-    public class TextHelper
+    public static class TextHelper
     {
         /// <summary>
         /// The space symbol.
         /// </summary>
-        public const String SpaceString = " ";
+        public static readonly String SpaceString = " ";
 
         /// <summary>
         /// Inserts the delimiter before capital letters.
         /// </summary>
         /// <param name="inputText">The input text.</param>
         /// <param name="delimiter">The delimiter.</param>
-        /// <returns>Returns string splitted by delimiter.</returns>
+        /// <returns>Returns String splitted by delimiter.</returns>
         public static String InsertDelimiterBeforeCapitalLetters(String inputText, String delimiter)
         {
             if (String.IsNullOrEmpty(inputText))
@@ -64,7 +64,7 @@ namespace Framework.MVC.Helpers
         /// Inserts the space before capital letters.
         /// </summary>
         /// <param name="inputText">The input text.</param>
-        /// <returns>>Returns string splitted by space .</returns>
+        /// <returns>>Returns String splitted by space .</returns>
         public static String InsertSpaceBeforeCapitalLetters(String inputText)
         {
             return InsertDelimiterBeforeCapitalLetters(inputText, SpaceString);

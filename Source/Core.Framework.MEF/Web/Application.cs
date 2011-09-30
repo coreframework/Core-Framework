@@ -7,7 +7,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Core.Framework.MEF.Composition;
@@ -16,7 +15,6 @@ using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.MEF.Extensions;
 using Core.Framework.Plugins.Modules;
 using Core.Framework.Plugins.Web;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Framework.MEF.Web
 {
@@ -33,17 +31,16 @@ namespace Core.Framework.MEF.Web
         [ImportMany]
         private IEnumerable<Lazy<AreaRegistration, IRouteRegistrarMetadata>> routeAreaRegistrars;
 
-        private static IEnumerable<Lazy<IActionVerb, IActionVerbMetadata>> actionVerbs;
-
         [Import]
         private ImportControllerFactory controllerFactory;
 #pragma warning restore 649
 
-        protected static WindsorContainer _container;
-
         #endregion
 
         #region Properties
+
+        protected static WindsorContainer Container { get; set; }
+
         /// <summary>
         /// Gets the <see cref="Composer" /> used to compose parts.
         /// </summary>
@@ -55,6 +52,16 @@ namespace Core.Framework.MEF.Web
         /// <value>The plugins.</value>
         public static IEnumerable<ICorePlugin> Plugins { get; set; }
 
+        /// <summary>
+        /// Gets or sets the action verbs.
+        /// </summary>
+        /// <value>The action verbs.</value>
+        private static IEnumerable<Lazy<IActionVerb, IActionVerbMetadata>> ActionVerbs { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [modules changed].
+        /// </summary>
+        /// <value><c>true</c> if [modules changed]; otherwise, <c>false</c>.</value>
         public static bool ModulesChanged { get; set; }
 
         #endregion
@@ -138,9 +145,9 @@ namespace Core.Framework.MEF.Web
                     .Cast<CatalogConfigurationElement>()
                     .ForEach(c =>
                     {
-                        if (!string.IsNullOrEmpty(c.Path))
+                        if (!String.IsNullOrEmpty(c.Path))
                         {
-                            string path = c.Path;
+                            String path = c.Path;
                             if (path.StartsWith("~") || path.StartsWith("/"))
                                 path = MapPath(path);
 
@@ -162,7 +169,7 @@ namespace Core.Framework.MEF.Web
         /// Registers the specified path for probing.
         /// </summary>
         /// <param name="path">The probable path.</param>
-        private void RegisterPath(string path)
+        private static void RegisterPath(String path)
         {
 #pragma warning disable 612,618
             AppDomain.CurrentDomain.AppendPrivatePath(path);
@@ -183,7 +190,7 @@ namespace Core.Framework.MEF.Web
                 return;
 
             Composer.Compose(this);
-            actionVerbs = Composer.ResolveAll<IActionVerb, IActionVerbMetadata>();
+            ActionVerbs = Composer.ResolveAll<IActionVerb, IActionVerbMetadata>();
             Plugins = Composer.ResolveAll<ICorePlugin>();
         }
 
@@ -200,7 +207,7 @@ namespace Core.Framework.MEF.Web
         /// </summary>
         protected virtual void RegisterRoutes()
         {
-            if (routeRegistrars == null || routeRegistrars.Count() == 0)
+            if (routeRegistrars == null || !routeRegistrars.Any())
                 return;
 
             var routes = RouteTable.Routes;
@@ -218,7 +225,7 @@ namespace Core.Framework.MEF.Web
         /// </summary>
         /// <param name="virtualPath">The virtual path to map.</param>
         /// <returns>The specified virtual path as a mapped path.</returns>
-        protected string MapPath(string virtualPath)
+        protected static String MapPath(String virtualPath)
         {
             Throw.Throw.IfArgumentNullOrEmpty(virtualPath, "virtualPath");
 
@@ -230,12 +237,14 @@ namespace Core.Framework.MEF.Web
         /// </summary>
         /// <param name="path">The starting path.</param>
         /// <returns>An <see cref="IEnumerable{DirectoryCatalog}" /> of directory catalogs.</returns>
-        protected IEnumerable<DirectoryCatalog> GetDirectoryCatalogs(string path)
+        protected static IEnumerable<DirectoryCatalog> GetDirectoryCatalogs(String path)
         {
             Throw.Throw.IfArgumentNullOrEmpty(path, "path");
 
-            List<DirectoryCatalog> list = new List<DirectoryCatalog>();
-            list.Add(new DirectoryCatalog(path));
+            var list = new List<DirectoryCatalog>
+                           {
+                               new DirectoryCatalog(path)
+                           };
 
             list.AddRange(
                 Directory.GetDirectories(path).Select(directory => new DirectoryCatalog(directory)));
@@ -248,20 +257,20 @@ namespace Core.Framework.MEF.Web
         /// </summary>
         /// <param name="category">The category of verbs to get.</param>
         /// <returns>An enumerable of verbs.</returns>
-        public static IEnumerable<IActionVerb> GetVerbsForCategory(string category)
+        public static IEnumerable<IActionVerb> GetVerbsForCategory(String category)
         {
             Throw.Throw.IfArgumentNullOrEmpty(category, "category");
 
-            return actionVerbs
+            return ActionVerbs
                 .Where(l => l.Metadata.Category.Equals(category, StringComparison.InvariantCultureIgnoreCase))
                 .Select(l => l.Value);
         }
 
         public static void RegisterHttpModule(Type moduleType)
         {
-            if (!_container.Kernel.HasComponent(GetHttpModuleComponentName(moduleType)))
+            if (!Container.Kernel.HasComponent(GetHttpModuleComponentName(moduleType)))
             {
-                _container.Register(
+                Container.Register(
                     Component.For<IPluginHttpModule>().ImplementedBy(moduleType).Named(
                         GetHttpModuleComponentName(moduleType)));
                 ModulesChanged = true;
@@ -270,7 +279,7 @@ namespace Core.Framework.MEF.Web
 
         public static void UnregisterHttpModule(Type moduleType)
         {
-            _container.Kernel.RemoveComponent(GetHttpModuleComponentName(moduleType));
+            Container.Kernel.RemoveComponent(GetHttpModuleComponentName(moduleType));
             ModulesChanged = true;
         }
 

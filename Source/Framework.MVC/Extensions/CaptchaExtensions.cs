@@ -28,9 +28,9 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Mvc;
 using Framework.Core;
-using Framework.MVC.Captcha;
+using Framework.Mvc.Captcha;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Contains extensions for captcha control.
@@ -43,7 +43,7 @@ namespace Framework.MVC.Extensions
         /// <param name="html">The HTML helper.</param>
         /// <param name="name">The name of textbox.</param>
         /// <returns>Captcha text box.</returns>
-        public static string CaptchaTextBox(this HtmlHelper html, string name)
+        public static String CaptchaTextBox(this HtmlHelper html, String name)
         {
             return System.Web.Mvc.Html.InputExtensions.TextBox(html, name, null, new { maxlength = Captcha.CaptchaImage.TextLength, autocomplete = "off" }).ToHtmlString();
         }
@@ -57,7 +57,7 @@ namespace Framework.MVC.Extensions
         /// <returns>
         /// Returns the <see cref="Uri"/> for the generated <see cref="CaptchaImage"/>.
         /// </returns>
-        public static string CaptchaImage(this HtmlHelper helper, int height, int width)
+        public static String CaptchaImage(this HtmlHelper helper, int height, int width)
         {
             var image = new CaptchaImage
                             {

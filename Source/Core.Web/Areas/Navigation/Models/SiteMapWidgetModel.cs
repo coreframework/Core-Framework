@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Web;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Contracts;
@@ -16,7 +15,7 @@ namespace Core.Web.Areas.Navigation.Models
     {
         #region Fields
 
-        private List<Page> _rootPages;
+        private List<Page> rootPages;
 
         #endregion
 
@@ -54,12 +53,12 @@ namespace Core.Web.Areas.Navigation.Models
         {
             get
             {
-                if (_rootPages == null)
+                if (rootPages == null)
                 {
                     var pageService = ServiceLocator.Current.GetInstance<IPageService>();
-                    _rootPages = (List<Page>)pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
+                    rootPages = (List<Page>)pageService.GetAllowedPagesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
                 }
-                return _rootPages;
+                return rootPages;
             }
         }
 

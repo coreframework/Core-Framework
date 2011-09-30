@@ -93,7 +93,7 @@ namespace Core.Web.Helpers
 
             foreach (var selid in selids)
             {
-                string selid1 = selid;
+                String selid1 = selid;
                 if (!userGroup.Users.Any(t => t.Id.ToString() == selid1))
                 {
                     long selectedID;

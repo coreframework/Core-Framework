@@ -20,7 +20,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(plugin => plugin.CreateDate);
             HasMany(plugin => plugin.CurrentPluginLocales).KeyColumn("PluginId")
             .Table("PluginLocales").ApplyFilter<CultureFilter>()
-            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();

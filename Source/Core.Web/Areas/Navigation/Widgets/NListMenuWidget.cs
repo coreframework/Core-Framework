@@ -14,7 +14,7 @@ namespace Core.Web.Areas.Navigation.Widgets
     {
         #region Singleton
 
-        private static NListMenuWidget _instance;
+        private static NListMenuWidget instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -24,7 +24,7 @@ namespace Core.Web.Areas.Navigation.Widgets
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NListMenuWidget());
+                    return instance ?? (instance = new NListMenuWidget());
                 }
             }
         }

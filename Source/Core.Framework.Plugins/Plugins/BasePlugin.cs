@@ -26,7 +26,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        public virtual string Identifier
+        public virtual String Identifier
         {
             get { return PluginSetting.Identifier; }
         }
@@ -35,7 +35,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        public virtual string Title
+        public virtual String Title
         {
             get { return PluginSetting.Title; }
         }
@@ -88,7 +88,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the resources directory.
         /// </summary>
         /// <value>The resources directory.</value>
-        public virtual string ResourcesDirectory
+        public virtual String ResourcesDirectory
         {
             get { return PluginSetting.ResourcesDirectory; }
         }
@@ -97,7 +97,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the description.
         /// </summary>
         /// <value>The description.</value>
-        public virtual string Description
+        public virtual String Description
         {
             get { return PluginSetting.Description; }
         }
@@ -136,7 +136,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the config path. Default String.Empty.
         /// [Example: @"Config\asset_packages.yml"]
         /// </summary>
-        public virtual string CssJsConfigPath
+        public virtual String CssJsConfigPath
         {
             get { return PluginSetting.CssJsConfigPath; }
         }
@@ -144,16 +144,16 @@ namespace Core.Framework.Plugins.Plugins
         /// <summary>
         /// Gets the Plugin Identifiers config path.
         /// </summary>
-        public virtual string PluginConfigPath
+        public virtual String PluginConfigPath
         {
-            get { return string.Empty; }
+            get { return String.Empty; }
         }
 
         /// <summary>
         /// Gets the images path. Default String.Empty.
         /// [Example: @"Content\Images\"]
         /// </summary>
-        public virtual string ImagesPath
+        public virtual String ImagesPath
         {
             get { return PluginSetting.ImagesPath; }
         }
@@ -162,7 +162,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the CSS path. Default String.Empty.
         /// [Example: @"Content\Css\"]
         /// </summary>
-        public virtual string CssPath
+        public virtual String CssPath
         {
             get { return PluginSetting.CssPath; }
         }
@@ -171,17 +171,17 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the CSS pack which placed in the config. Default String.Empty.
         /// [Example: "base1"]
         /// </summary>
-        public virtual string CssPack
+        public virtual String CssPack
         {
             get { return PluginSetting.CssPack; }
         }
 
-        public string JsPath
+        public String JsPath
         {
             get { return PluginSetting.JsPath; }
         }
 
-        public string JsPack
+        public String JsPack
         {
             get { return PluginSetting.JsPack; }
         }

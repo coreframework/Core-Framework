@@ -8,9 +8,9 @@ namespace Products.NHibernate.Models
 {
     public class Category : Entity, ILocalizable
     {
-        private IList<CategoryLocale> _currentCategoryLocales = new List<CategoryLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private CategoryLocale _currentLocale;
+        private readonly IList<CategoryLocale> currentCategoryLocales = new List<CategoryLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private CategoryLocale currentLocale;
 
         #region Properties
 
@@ -52,15 +52,15 @@ namespace Products.NHibernate.Models
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentCategoryLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentCategoryLocales.Count > 0)
                 {
-                    _currentLocales = _currentCategoryLocales.ToList().ConvertAll(mc => (ILocale)mc);
+                    currentLocales = currentCategoryLocales.ToList().ConvertAll(mc => (ILocale)mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
             set
             {
-                _currentLocales = value;
+                currentLocales = value;
             }
         }
 
@@ -88,25 +88,20 @@ namespace Products.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as CategoryLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as CategoryLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new CategoryLocale
+                        currentLocale = new CategoryLocale
                         {
                             Category = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
         }
     }
 }

@@ -11,9 +11,9 @@ using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
 
-using Framework.MVC.Helpers;
+using Framework.Mvc.Helpers;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Adds methods for generating file upload HTML-markup to <see cref="HtmlHelper"/>.
@@ -99,7 +99,7 @@ namespace Framework.MVC.Extensions
 
         #region Helper members
 
-        private static string FileBoxHelper(HtmlHelper htmlHelper, String name, IDictionary<String, Object> htmlAttributes)
+        private static String FileBoxHelper(HtmlHelper htmlHelper, String name, IDictionary<String, Object> htmlAttributes)
         {
             var tagBuilder = new TagBuilder("input");
             tagBuilder.MergeAttribute("type", "file", true);

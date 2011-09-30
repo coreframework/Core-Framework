@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Controllers {
     public partial class UsersController {
@@ -45,18 +45,18 @@ namespace Core.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UsersController Actions { get { return MVC.Users; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Users";
+        public readonly String Name = "Users";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string NewUserSession = "NewUserSession";
-            public readonly string CreateUserSession = "CreateUserSession";
-            public readonly string DeleteUserSession = "DeleteUserSession";
+            public readonly String NewUserSession = "NewUserSession";
+            public readonly String CreateUserSession = "CreateUserSession";
+            public readonly String DeleteUserSession = "DeleteUserSession";
         }
 
 
@@ -65,7 +65,7 @@ namespace Core.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string NewUserSession = "~/Views/Users/NewUserSession.aspx";
+            public readonly String NewUserSession = "~/Views/Users/NewUserSession.aspx";
         }
     }
 

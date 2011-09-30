@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Areas.Navigation.Models.NavigationMenuWidgetModel>"  %>
-<%@ Import Namespace="Framework.MVC.Helpers" %>
-<%@ Import Namespace="Framework.MVC.Extensions" %>
+<%@ Import Namespace="Framework.Mvc.Helpers" %>
+<%@ Import Namespace="Framework.Mvc.Extensions" %>
 <div class="form_area">
   <%: Html.ValidationSummary(true) %>
    <input type="hidden" id="widgetId" name="widgetId" value="<%= Html.Encode(Model.Id) %>" />

@@ -6,11 +6,12 @@
 
 using System;
 
-namespace Framework.MVC.Metadata.Attributes
+namespace Framework.Mvc.Metadata.Attributes
 {
     /// <summary>
     /// Specifies image upload options.
     /// </summary>
+    [AttributeUsage(AttributeTargets.All)]
     public class ImageUploadAttribute : Attribute
     {
         /// <summary>

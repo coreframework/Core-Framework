@@ -20,7 +20,7 @@ namespace Core.Web.NHibernate.Mappings
 
             HasMany(widget => widget.CurrentWidgetLocales).KeyColumn("WidgetId")
             .Table("WidgetLocales").ApplyFilter<CultureFilter>()
-            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();

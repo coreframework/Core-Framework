@@ -8,74 +8,74 @@ using System;
 using System.IO;
 using System.Web;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Provides helper methods to save uploaded files.
     /// </summary>
-    public class UploadHelper
+    public static class UploadHelper
     {
         #region Fields
 
         /// <summary>
         /// Path to temporary file upload directorty.
         /// </summary>
-        public const String TempDirectoryPath = "~/temp/";
+        public static readonly String TempDirectoryPath = "~/temp/";
 
         /// <summary>
         /// Key for file uploader option.
         /// </summary>
-        public const String ResizeImageFlag = "resize_image";
+        public static readonly String ResizeImageFlag = "resize_image";
 
         /// <summary>
         /// Key for file uploader option.
         /// </summary>
-        public const String ResizeImageWidth = "resize_image_width";
+        public static readonly String ResizeImageWidth = "resize_image_width";
 
         /// <summary>
         /// Key for file uploader option.
         /// </summary>
-        public const String ResizeImageHeight = "resize_image_height";
+        public static readonly String ResizeImageHeight = "resize_image_height";
 
         /// <summary>
         /// Key for file uploader option.
         /// </summary>
-        public const String GenerateThumbnailFlag = "generate_thumbnail";
+        public static readonly String GenerateThumbnailFlag = "generate_thumbnail";
 
         /// <summary>
         /// Key for file uploader option.
         /// </summary>
-        public const String ThumbnailWidth = "thumbnail_width";
+        public static readonly String ThumbnailWidth = "thumbnail_width";
 
         /// <summary>
         /// Key for file uploader option.
         /// </summary>
-        public const String ThumbnailHeight = "thumbnail_height";
+        public static readonly String ThumbnailHeight = "thumbnail_height";
 
         /// <summary>
         /// Key for upload options metadata.
         /// </summary>
-        public const String UploadOptionsKey = "upload_options";
+        public static readonly String UploadOptionsKey = "upload_options";
 
         /// <summary>
         /// Key for file types description metadata.
         /// </summary>
-        public const String FileTypesDescriptionKey = "file_types_description";
+        public static readonly String FileTypesDescriptionKey = "file_types_description";
 
         /// <summary>
         /// Key for file types metadata.
         /// </summary>
-        public const String FileTypesKey = "file_types";
+        public static readonly String FileTypesKey = "file_types";
 
         /// <summary>
         /// Key for default value metadata.
         /// </summary>
-        public const String DefaultValueKey = "default_value";
+        public static readonly String DefaultValueKey = "default_value";
 
         /// <summary>
         /// Key for authentication cookie.
         /// </summary>
-        public const String AuthenticationCookieKey = "authentication_cookie";
+        public static readonly String AuthenticationCookieKey = "authentication_cookie";
 
         private const int BufferSize = 4096;
 

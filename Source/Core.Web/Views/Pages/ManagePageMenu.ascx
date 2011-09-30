@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PageViewModel>" %>
 <%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
+<%@ Import Namespace="Framework.Core" %>
 
 <div class="curr_pg">
 	<div class="title"><%: Model.Title %></div>
@@ -33,6 +34,15 @@
                                 <li>
                                       <a class="change-css" href="javascript:void(0);"><%=Html.Translate(".CSS")%></a>
                                 </li>
+                                 <li>
+                                     <%= Ajax.ActionLink(Html.Translate(".DeletePage"), 
+                                        MVC.Pages.RemovePage(Model.Id.Value),
+                                        new AjaxOptions
+                                                    {
+                                                        Confirm = Html.Translate("Messages.DeleteConfirm"),
+                                                        OnSuccess = "function() {location.href='" + ApplicationUtility.Path + "';}"
+                                                    })%>
+                                 </li>
                                 <script type="text/javascript">
                                     jQuery(function () {
                                         $('a.show-widgets').click(function () {
@@ -45,7 +55,7 @@
                                             dialog.dialog();
                                         }
                                     );
-                                            dialog.dialog({ width: 500, resizable: false, modal: true });
+                                            dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150] });
                                             return false;
                                         });
                                         $('a.change-layout').click(function () {
@@ -58,7 +68,7 @@
                                             dialog.dialog();
                                         }
                                     );
-                                            dialog.dialog({ width: 500, resizable: false, modal: true, close: function (ev, ui) { $(this).remove(); } });
+                                        dialog.dialog({ width: 500, resizable: false, modal: true, close: function (ev, ui) { $(this).remove(); }, position: ['center', 150] });
                                             return false;
                                         });
                                         $('a.change-settings').click(function () {
@@ -71,7 +81,7 @@
                                             dialog.dialog();
                                         }
                                     );
-                                            dialog.dialog({ width: 500, resizable: false, modal: true });
+                                        dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150] });
                                             return false;
                                         });
                                         $('a.change-lookAndFeel').click(function () {
@@ -84,7 +94,7 @@
                                             dialog.dialog();
                                         }
                                     );
-                                            dialog.dialog({ width: 500, resizable: false, modal: true, position: 'top', close: function (ev, ui) { $(this).remove(); } });
+                                        dialog.dialog({ width: 500, resizable: false, modal: true, close: function (ev, ui) { $(this).remove(); }, position: ['center', 150] });
                                             return false;
                                         });
                                         $('a.change-css').click(function () {
@@ -97,7 +107,7 @@
                                             dialog.dialog();
                                         }
                                     );
-                                            dialog.dialog({ width: 500, resizable: false, modal: true, position: 'top', close: function (ev, ui) { $(this).remove(); } });
+                                        dialog.dialog({ width: 500, resizable: false, modal: true, close: function (ev, ui) { $(this).remove(); }, position: ['center', 150] });
                                             return false;
                                         });
                                     });
@@ -119,7 +129,7 @@
                                             dialog.dialog();
                                         }
                                     );
-                                            dialog.dialog({ width: 500, resizable: false, modal: true, position: 'top', close: function (ev, ui) { $(this).remove(); } });
+                                        dialog.dialog({ width: 500, resizable: false, modal: true, close: function (ev, ui) { $(this).remove(); }, position: ['center', 150] });
                                             return false;
                                         });
                                     });

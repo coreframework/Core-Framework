@@ -18,14 +18,14 @@ namespace Core.News.Helpers
         /// <param name="widgetId">Model id (for several pager in page)</param>
         /// <param name="url">Base URL</param>
         /// <returns></returns>
-        public static string Pager(this HtmlHelper helper, int pageSize, int currentPage, int totalItemCount, long widgetId, string url)
+        public static String Pager(this HtmlHelper helper, int pageSize, int currentPage, int totalItemCount, long widgetId, String url)
         {
-            int totalPages = (int)(totalItemCount - 0.5)/pageSize + 1;
+            int totalPages = ((int)(totalItemCount - 0.5)/pageSize) + 1;
             if (totalPages == 1)
                 return String.Empty;
 
-            url = url.Replace("&" + NewsConstants.CurrentPage + widgetId + "=" + currentPage, "");
-            url = url.Replace("?" + NewsConstants.Newsvidgetid + "=" + widgetId, "");
+            url = url.Replace("&" + NewsConstants.CurrentPage + widgetId + "=" + currentPage, String.Empty);
+            url = url.Replace("?" + NewsConstants.Newsvidgetid + "=" + widgetId, String.Empty);
             if (!url.Contains("?"))
             {
                 var index = url.IndexOf("&");
@@ -33,12 +33,12 @@ namespace Core.News.Helpers
                 {
                     var tempUrl = url.ToCharArray();
                     tempUrl[index] = '?';
-                    url = new string(tempUrl);
+                    url = new String(tempUrl);
                 }
             }
             else
             {
-                url = url.Replace("&" + NewsConstants.Newsvidgetid + "=" + widgetId, "");
+                url = url.Replace("&" + NewsConstants.Newsvidgetid + "=" + widgetId, String.Empty);
             }
 
 
@@ -54,7 +54,7 @@ namespace Core.News.Helpers
                     htmlControl += String.Format(NewsConstants.PagerLink,
                                                  url + (url.Contains("?") ? "&" : "?") + NewsConstants.Newsvidgetid +
                                                  "=" + widgetId + "&" +
-                                                 NewsConstants.CurrentPage + widgetId + "=" + (i), i + 1);
+                                                 NewsConstants.CurrentPage + widgetId + "=" + i, i + 1);
                 else
                     htmlControl += String.Format(NewsConstants.PagerCurrent, i + 1);
             }
@@ -63,10 +63,10 @@ namespace Core.News.Helpers
                                              url + (url.Contains("?") ? "&" : "?") + NewsConstants.Newsvidgetid + "=" +
                                              widgetId + "&" +
                                              NewsConstants.CurrentPage + widgetId + "=" + (currentPage + 1), " > ");
-            return string.Format(NewsConstants.Pager, htmlControl);
+            return String.Format(NewsConstants.Pager, htmlControl);
         }
 
-        public static string PageUrl(this HtmlHelper helper, object values)
+        public static String PageUrl(this HtmlHelper helper, object values)
         {
             var valuesDictionary = new RouteValueDictionary(values);
             valuesDictionary = GetParams(valuesDictionary);
@@ -77,7 +77,7 @@ namespace Core.News.Helpers
             return String.Empty;
         }
 
-        public static string DetailsLink(this HtmlHelper helper, string linkText, long widgetId, long modelId, object values)
+        public static String DetailsLink(this HtmlHelper helper, String linkText, long widgetId, long modelId, object values)
         {
             var valuesDictionary = new RouteValueDictionary(values);
             valuesDictionary = GetParams(valuesDictionary);
@@ -85,7 +85,7 @@ namespace Core.News.Helpers
             var routeParams = String.Empty;
             foreach (var key in valuesDictionary.Keys.Where(key => key.StartsWith(NewsConstants.CurrentPage) || key.StartsWith(NewsConstants.Articleid)))
             {
-                if (routeParams.Equals(String.Empty))
+                if (String.IsNullOrEmpty(routeParams))
                     routeParams += "?";
                 else
                     routeParams += "&";
@@ -106,7 +106,7 @@ namespace Core.News.Helpers
 
                 var routeValueDictionary = values as NameValueCollection;
                 if (routeValueDictionary != null)
-                    foreach (string key in routeValueDictionary.Keys)
+                    foreach (String key in routeValueDictionary.Keys)
                     {
                         if (key.StartsWith(NewsConstants.CurrentPage))
                             valuesDictionary.Add(key, routeValueDictionary[key]);

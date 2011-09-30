@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Routing;
 
-namespace Framework.MVC.Extensions
+namespace Framework.Mvc.Extensions
 {
     /// <summary>
     /// Extends <see cref="RouteValueDictionary"/> functionality.

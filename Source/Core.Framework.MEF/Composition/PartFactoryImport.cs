@@ -17,7 +17,7 @@ namespace Core.Framework.MEF.Composition
     {
         #region Fields
 
-        private const string setterPrefix = "set_";
+        private const String SetterPrefix = "set_";
         private static readonly Type partFactoryImportType = typeof(PartFactoryImport);
         private static readonly MethodInfo createPartFactoryMethod =
             partFactoryImportType.GetMethod("CreatePartCreatorOfT", BindingFlags.Static | BindingFlags.NonPublic);
@@ -50,7 +50,7 @@ namespace Core.Framework.MEF.Composition
         /// <summary>
         /// Gets the contract name.
         /// </summary>
-        public string ContractName { get; private set; }
+        public String ContractName { get; private set; }
 
         /// <summary>
         /// Gets the type of part factory.
@@ -89,9 +89,9 @@ namespace Core.Framework.MEF.Composition
         /// </summary>
         /// <param name="metadata">The original metadata collection.</param>
         /// <returns>A new collection of metadata.</returns>
-        private IDictionary<string, object> GetPartFactoryExportMetadata(IDictionary<string, object> metadata)
+        private IDictionary<String, object> GetPartFactoryExportMetadata(IDictionary<string, object> metadata)
         {
-            var result = new Dictionary<string, object>(metadata);
+            var result = new Dictionary<String, object>(metadata);
             result[CompositionConstants.ExportTypeIdentityMetadataName] =
                 AttributedModelServices.GetTypeIdentity(PartFactoryType);
             return result;
@@ -104,9 +104,9 @@ namespace Core.Framework.MEF.Composition
         /// <param name="createdType">The type created.</param>
         /// <param name="metadataViewType">The metadata view type.</param>
         /// <returns>A new instance of <see cref="ContractBasedImportDefinition" /> for the part definition.</returns>
-        private ContractBasedImportDefinition GetImportDefinition(ContractBasedImportDefinition definition, Type createdType, Type metadataViewType)
+        private static ContractBasedImportDefinition GetImportDefinition(ContractBasedImportDefinition definition, Type createdType, Type metadataViewType)
         {
-            string identity = AttributedModelServices.GetTypeIdentity(createdType);
+            String identity = AttributedModelServices.GetTypeIdentity(createdType);
             var contractName = definition.ContractName == definition.RequiredTypeIdentity
                                    ? identity
                                    : definition.ContractName;
@@ -127,13 +127,13 @@ namespace Core.Framework.MEF.Composition
         /// <param name="definition">The import definition.</param>
         /// <returns>The resolved part factory type.</returns>
         /// <exception cref="NotSupportedException">If the import type is not supported.</exception>
-        private Type ResolvePartFactoryType(ContractBasedImportDefinition definition)
+        private static Type ResolvePartFactoryType(ContractBasedImportDefinition definition)
         {
             Type importType;
 
             var member = ReflectionModelServices.GetImportingMember(definition);
             var setter = member.GetAccessors()
-                    .Where(a => a.Name.StartsWith(setterPrefix))
+                    .Where(a => a.Name.StartsWith(SetterPrefix))
                     .OfType<MethodInfo>()
                     .SingleOrDefault();
 
@@ -157,7 +157,7 @@ namespace Core.Framework.MEF.Composition
                     || importType.GetGenericTypeDefinition() == typeof(PartFactory<,>))))
             {
 
-                Throw.Throw.NotSupported(string.Format(CultureInfo.CurrentUICulture,
+                Throw.Throw.NotSupported(String.Format(CultureInfo.CurrentUICulture,
                                                  Resources.Exceptions.ImportTypeNotSupported, importType.FullName));
             }
 
@@ -170,7 +170,7 @@ namespace Core.Framework.MEF.Composition
         /// <param name="standardRequiredKeys">The standard keys for the source definition.</param>
         /// <param name="metadataViewType">The metadata view type.</param>
         /// <returns>The set of required meta data keys.</returns>
-        private IEnumerable<KeyValuePair<string, Type>> GetRequiredMetadataKeys(IEnumerable<KeyValuePair<string, Type>> standardRequiredKeys, Type metadataViewType)
+        private static IEnumerable<KeyValuePair<String, Type>> GetRequiredMetadataKeys(IEnumerable<KeyValuePair<String, Type>> standardRequiredKeys, Type metadataViewType)
         {
             var result = standardRequiredKeys;
 
@@ -178,7 +178,7 @@ namespace Core.Framework.MEF.Composition
                 result = result.Union(
                     metadataViewType
                         .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty)
-                        .Select(pi => new KeyValuePair<string, Type>(pi.Name, pi.PropertyType)));
+                        .Select(pi => new KeyValuePair<String, Type>(pi.Name, pi.PropertyType)));
 
             return result;
         }
@@ -228,7 +228,7 @@ namespace Core.Framework.MEF.Composition
         /// <param name="provider">The export provider.</param>
         /// <param name="exportDefinition">The export definition.</param>
         /// <returns>A part factory with metadata.</returns>
-        private static PartFactory<TPart> CreatePartCreatorOfTWithMetadata<TPart, TMetadata>(ImportDefinition importDefinition, ExportProvider provider, ExportDefinition exportDefinition)
+        protected static PartFactory<TPart> CreatePartCreatorOfTWithMetadata<TPart, TMetadata>(ImportDefinition importDefinition, ExportProvider provider, ExportDefinition exportDefinition)
         {
             Func<PartLifetimeContext<TPart>> creator = CreatePartlifeTimeContext<TPart>(importDefinition, provider, exportDefinition);
             return new PartFactory<TPart, TMetadata>(creator, AttributedModelServices.GetMetadataView<TMetadata>(exportDefinition.Metadata));
@@ -242,7 +242,7 @@ namespace Core.Framework.MEF.Composition
         /// <param name="provider">The export provider.</param>
         /// <param name="exportDefinition">The export definition.</param>
         /// <returns>A part factory with metadata.</returns>
-        private static PartFactory<TPart> CreatePartCreatorOfT<TPart>(ImportDefinition importDefinition, ExportProvider provider, ExportDefinition exportDefinition)
+        protected static PartFactory<TPart> CreatePartCreatorOfT<TPart>(ImportDefinition importDefinition, ExportProvider provider, ExportDefinition exportDefinition)
         {
             Func<PartLifetimeContext<TPart>> creator = CreatePartlifeTimeContext<TPart>(importDefinition, provider, exportDefinition);
             return new PartFactory<TPart>(creator);
@@ -256,7 +256,7 @@ namespace Core.Framework.MEF.Composition
         /// <param name="provider">The export provider.</param>
         /// <param name="exportDefinition">The export definition.</param>
         /// <returns>A part lifetime context for the given import definition.</returns>
-        private static Func<PartLifetimeContext<TPart>> CreatePartlifeTimeContext<TPart>(ImportDefinition importDefinition, ExportProvider provider, ExportDefinition exportDefinition)
+        protected static Func<PartLifetimeContext<TPart>> CreatePartlifeTimeContext<TPart>(ImportDefinition importDefinition, ExportProvider provider, ExportDefinition exportDefinition)
         {
             Func<PartLifetimeContext<TPart>> creator = () =>
             {

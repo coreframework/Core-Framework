@@ -15,7 +15,7 @@ namespace Core.Framework.MEF.ServiceLocation
     {
         #region Fields
         private IServiceLocator serviceLocator;
-        private IDictionary<string, Type> contractMapping;
+        private IDictionary<String, Type> contractMapping;
         #endregion
 
         #region Constructor

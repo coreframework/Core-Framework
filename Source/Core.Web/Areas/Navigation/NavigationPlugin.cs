@@ -21,13 +21,13 @@ namespace Core.Web.Areas.Navigation
 
         #region Fields
 
-        private String pluginDirectory = string.Empty;
+        private String pluginDirectory = String.Empty;
 
         #endregion
 
         #region Singleton
 
-        private static NavigationPlugin _instance;
+        private static NavigationPlugin instance;
 
         private static readonly Object SyncRoot = new Object();
 
@@ -37,7 +37,7 @@ namespace Core.Web.Areas.Navigation
             {
                 lock (SyncRoot)
                 {
-                    return _instance ?? (_instance = new NavigationPlugin());
+                    return instance ?? (instance = new NavigationPlugin());
                 }
             }
         }
@@ -57,7 +57,7 @@ namespace Core.Web.Areas.Navigation
             }
         }
 
-        public override string PluginConfigPath
+        public override String PluginConfigPath
         {
             get
             {

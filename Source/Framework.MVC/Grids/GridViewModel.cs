@@ -7,7 +7,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Framework.MVC.Grids
+namespace Framework.Mvc.Grids
 {
     /// <summary>
     /// Grid view model.

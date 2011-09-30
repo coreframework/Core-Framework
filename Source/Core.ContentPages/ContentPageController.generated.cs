@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.ContentPages.Controllers {
     public partial class ContentPageController {
@@ -55,21 +55,21 @@ namespace Core.ContentPages.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ContentPageController Actions { get { return ContentPagesMVC.ContentPage; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "";
+        public readonly String  Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "ContentPage";
+        public readonly String  Name = "ContentPage";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string ShowAll = "ShowAll";
-            public readonly string DynamicGridData = "DynamicGridData";
-            public readonly string Edit = "Edit";
-            public readonly string ChangeLanguage = "ChangeLanguage";
-            public readonly string New = "New";
-            public readonly string Remove = "Remove";
+            public readonly String  ShowAll = "ShowAll";
+            public readonly String  DynamicGridData = "DynamicGridData";
+            public readonly String  Edit = "Edit";
+            public readonly String  ChangeLanguage = "ChangeLanguage";
+            public readonly String  New = "New";
+            public readonly String  Remove = "Remove";
         }
 
 

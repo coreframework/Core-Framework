@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
+using System.Linq;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
-using Core.Framework.Plugins.Web;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
@@ -13,16 +13,27 @@ using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Core;
 using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
-using System.Linq;
 using Omu.ValueInjecter;
 
 namespace Core.Web.Helpers
 {
-    public class PageHelper
+    public static class PageHelper
     {
         #region Fields
 
         private const String PageWidgetTemplate = "#widget_{0}";
+
+        #endregion
+
+        #region Properties
+
+        public static PageMode CurrentUserPageMode
+        {
+            get
+            {
+                return (PageMode)HttpContext.Current.Items[typeof(PageMode)];
+            }
+        }
 
         #endregion
 
@@ -64,9 +75,9 @@ namespace Core.Web.Helpers
                         wd =>
                             {
                                 wd.OrderNumber =
-                                    (wd.ColumnNumber == 1
+                                    wd.ColumnNumber == 1
                                          ? wd.OrderNumber + 1
-                                         : wd.OrderNumber);
+                                         : wd.OrderNumber;
                             }
                         );
 
@@ -116,10 +127,10 @@ namespace Core.Web.Helpers
                         wd =>
                         {
                             wd.OrderNumber =
-                              (wd.ColumnNumber == pageWidget.ColumnNumber && wd.OrderNumber > pageWidget.OrderNumber ?
+                              wd.ColumnNumber == pageWidget.ColumnNumber && wd.OrderNumber > pageWidget.OrderNumber ?
 
                                   wd.OrderNumber - 1 :
-                                  wd.OrderNumber);
+                                  wd.OrderNumber;
                         }
                     );
 
@@ -163,19 +174,19 @@ namespace Core.Web.Helpers
                         wd =>
                             {
                                 wd.OrderNumber =
-                                    (wd.PageSection == pageWidget.PageSection && wd.ColumnNumber == pageWidget.ColumnNumber &&
+                                    wd.PageSection == pageWidget.PageSection && wd.ColumnNumber == pageWidget.ColumnNumber &&
                                      wd.OrderNumber > pageWidget.OrderNumber
                                          ? wd.OrderNumber - 1
-                                         : wd.OrderNumber);
+                                         : wd.OrderNumber;
                             }
                         );
                     pageWidget.Page.Widgets.Update(
                         wd =>
                             {
                                 wd.OrderNumber =
-                                    ((int)wd.PageSection == pageSection && wd.ColumnNumber == columnNumber && wd.OrderNumber >= orderNumber
+                                    (int)wd.PageSection == pageSection && wd.ColumnNumber == columnNumber && wd.OrderNumber >= orderNumber
                                          ? wd.OrderNumber + 1
-                                         : wd.OrderNumber);
+                                         : wd.OrderNumber;
                             }
                         );
                     pageService.Save(pageWidget.Page);
@@ -314,7 +325,7 @@ namespace Core.Web.Helpers
             var pages = pageService.GetAllowedPagesByOperation(user,(int)PageOperations.View).OrderBy(page=>page.OrderNumber);
             var pagesToRemove = pageService.GetAllowedPagesByOperation(user, (int)PageOperations.Delete).OrderBy(page => page.OrderNumber);
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-            var pageMode = GetCurrentUserPageMode();
+            var pageMode = CurrentUserPageMode;
             var menuItems = new List<NavigationMenuItemModel>();
 
             bool addNewPagesAccess = permissionService.IsAllowed((int) PageOperations.AddNewPages, user, typeof (Page), null,
@@ -366,11 +377,6 @@ namespace Core.Web.Helpers
                 flattened.Add(new NavigationMenuItemModel { Parent = root, PageMode = pageMode });
 
             return flattened;
-        }
-
-        public static PageMode GetCurrentUserPageMode()
-        {
-            return (PageMode)HttpContext.Current.Items[typeof(PageMode)];
         }
 
         public static void ChangePageMode(PageMode pageMode)

@@ -18,9 +18,9 @@ namespace Products.NHibernate.Services
           
         }
 
-        public int GetCount(IQueryable<Product> baseQuery)
+        public int GetCount(IQueryable<Product> searchQuery)
         {
-            return baseQuery.Count();
+            return searchQuery.Count();
         }
 
         public IQueryable<Product> GetProductsByCategory(Category category)
@@ -29,19 +29,20 @@ namespace Products.NHibernate.Services
             return baseQuery.Where(product => product.Categories.Contains(category));
         }
 
-        public IQueryable<Product> GetSearchQuery(string searchString)
+        public IQueryable<Product> GetSearchQuery(String search)
         {
             var baseQuery = CreateQuery();
            // if (String.IsNullOrEmpty(searchString))
            // {
                 return baseQuery;
           //  }
-            return baseQuery.Where(product => product.Title.Contains(searchString));
+
+            return baseQuery.Where(product => product.Title.Contains(search));
         }
 
-        public int GetCount(ICriteria baseQuery)
+        public int GetCount(ICriteria searchCriteria)
         {
-            return ((ICriteria)baseQuery.Clone()).SetProjection(Projections.Count("product.Id")).UniqueResult<int>();
+            return ((ICriteria)searchCriteria.Clone()).SetProjection(Projections.Count("product.Id")).UniqueResult<int>();
         }
 
         public ICriteria GetProductCriteria(long[] categoriesIds)

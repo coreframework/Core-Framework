@@ -21,7 +21,7 @@ namespace Core.Web.NHibernate.Mappings
                 .ChildKeyColumn("UserGroupId").Cascade.SaveUpdate().LazyLoad();
             HasMany(role => role.CurrentRoleLocales).KeyColumn("RoleId")
             .Table("RoleLocales").ApplyFilter<CultureFilter>()
-            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.Underscore)
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();

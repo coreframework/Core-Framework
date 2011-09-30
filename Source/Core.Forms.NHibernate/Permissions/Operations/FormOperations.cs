@@ -1,8 +1,10 @@
-﻿using Core.Framework.Permissions.Helpers;
+﻿using System;
+using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
 namespace Core.Forms.NHibernate.Permissions.Operations
 {
+    [Flags]
     public enum FormOperations
     {
         [OperationDescription(PermissionArea.Portal, PermissionOperationLevel.Object, OwnerDefaultAcess = true)]

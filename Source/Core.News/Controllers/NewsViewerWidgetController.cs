@@ -8,8 +8,8 @@ using Core.News.Models;
 using Core.News.Nhibernate.Contracts;
 using Core.News.Nhibernate.Models;
 using Core.News.Widgets;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.News.Controllers
@@ -20,7 +20,7 @@ namespace Core.News.Controllers
 
         #region Properties
 
-        public override string ControllerWidgetIdentifier
+        public override String ControllerWidgetIdentifier
         {
             get { return NewsViewerWidget.Instance.Identifier; }
         }
@@ -51,9 +51,9 @@ namespace Core.News.Controllers
                         basewidget = widget.MapTo(basewidget);
                         widgetService.Save(basewidget);
                     }
-                    else if (string.IsNullOrEmpty(basewidget.Url))
+                    else if (String.IsNullOrEmpty(basewidget.Url))
                     {
-                        basewidget.Url = string.Empty;
+                        basewidget.Url = String.Empty;
                         widgetService.Save(basewidget);
                     }
                     if (!String.IsNullOrEmpty(Request.Params[NewsConstants.Newsvidgetid]))
@@ -111,10 +111,10 @@ namespace Core.News.Controllers
                 if (instance.InstanceId != null)
                 {
                     var widgetService = ServiceLocator.Current.GetInstance<INewsArticleWidgetService>();
-                    var exWidget = widgetService.Find((long)instance.InstanceId);
+                    var existingWidget = widgetService.Find((long)instance.InstanceId);
 
-                    if (exWidget != null)
-                        widget = exWidget;
+                    if (existingWidget != null)
+                        widget = existingWidget;
                 }
                 //widget.Categories = ServiceLocator.Current.GetInstance<INewsCategoryService>().GetAll().ToList(); 
                 return PartialView(new NewsArticleWidgetModel().MapFrom(widget));

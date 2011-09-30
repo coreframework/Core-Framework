@@ -8,18 +8,11 @@ namespace Products.NHibernate.Models
 {
     public class Product : Entity, ILocalizable
     {
-        private IList<ProductLocale> _currentProductLocales = new List<ProductLocale>();
-        private IList<ILocale> _currentLocales = new List<ILocale>();
-        private ProductLocale _currentLocale;
+        private readonly IList<ProductLocale> currentProductLocales = new List<ProductLocale>();
+        private IList<ILocale> currentLocales = new List<ILocale>();
+        private ProductLocale currentLocale;
 
-        #region Constructor
-
-        public Product()
-        {
-            Categories = new List<Category>();
-        }
-
-        #endregion
+        private  IList<Category> categories = new List<Category>();
 
         #region Properties
 
@@ -64,7 +57,11 @@ namespace Products.NHibernate.Models
         /// Gets or sets the categories.
         /// </summary>
         /// <value>The categories.</value>
-        public virtual IList<Category> Categories { get; set; }
+        public virtual IList<Category> Categories
+        {
+            get { return categories; }
+            set { categories = value; }
+        }
 
         /// <summary>
         /// Gets or sets the Create Date
@@ -77,13 +74,13 @@ namespace Products.NHibernate.Models
         {
             get
             {
-                if (_currentLocales.Count == 0 && _currentProductLocales.Count > 0)
+                if (currentLocales.Count == 0 && currentProductLocales.Count > 0)
                 {
-                    _currentLocales = _currentProductLocales.ToList().ConvertAll(mc => (ILocale) mc);
+                    currentLocales = currentProductLocales.ToList().ConvertAll(mc => (ILocale) mc);
                 }
-                return _currentLocales;
+                return currentLocales;
             }
-            set { _currentLocales = value; }
+            set { currentLocales = value; }
         }
 
         public virtual IList<ProductLocale> CurrentProductLocales
@@ -111,25 +108,20 @@ namespace Products.NHibernate.Models
         {
             get
             {
-                if (_currentLocale == null)
+                if (currentLocale == null)
                 {
-                    _currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ProductLocale;
-                    if (_currentLocale == null)
+                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ProductLocale;
+                    if (currentLocale == null)
                     {
-                        _currentLocale = new ProductLocale
+                        currentLocale = new ProductLocale
                         {
                             Product = this,
                             Culture = null
                         };
                     }
                 }
-                return _currentLocale;
+                return currentLocale;
             }
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
         }
     }
 }

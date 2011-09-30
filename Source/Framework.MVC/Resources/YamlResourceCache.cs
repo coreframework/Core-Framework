@@ -7,6 +7,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -18,7 +19,7 @@ using Yaml.Grammar;
 
 using Environment = Framework.Core.Configuration.Environment;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Parses resources from yaml-files. Monitors resource files changes for development environment.
@@ -33,7 +34,7 @@ namespace Framework.MVC.Resources
         /// <summary>
         /// Scope separator.
         /// </summary>
-        public const String ScopeSeparator = ".";
+        public static readonly String ScopeSeparator = ".";
 
         private const String YamlFilesPattern = "*.yml";
 
@@ -140,6 +141,44 @@ namespace Framework.MVC.Resources
 
         #region Helper members
 
+        private static String Combine(String key, String prefix)
+        {
+            if (String.IsNullOrEmpty(prefix))
+            {
+                return key.ToLowerInvariant();
+            }
+
+            return prefix + ScopeSeparator + key.ToLowerInvariant();
+        }
+
+        /// <summary>
+        /// Check if the file is accesible.
+        /// </summary>
+        /// <param name="filename">The name of file to check.</param>
+        /// <returns>
+        /// <c>true</c> if the specified file is accessible; <c>false</c> otherwise.
+        /// </returns>
+        private static bool IsFileAccessible(String filename)
+        {
+            bool success;
+
+            // If the file can be opened for exclusive access it means that the file
+            // is no longer locked by another process.
+            try
+            {
+                using (File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None))
+                {
+                    success = true;
+                }
+            }
+            catch (IOException)
+            {
+                success = false;
+            }
+
+            return success;
+        }
+
         private void ResourcesChangedHandler(Object sender, FileSystemEventArgs e)
         {
             ReadResources();
@@ -164,7 +203,7 @@ namespace Framework.MVC.Resources
             var file = state as String;
             if (!String.IsNullOrEmpty(file) && File.Exists(file))
             {
-                DateTime startTime = DateTime.Now;
+                Stopwatch startTime = Stopwatch.StartNew();
 
                 while (true)
                 {
@@ -188,7 +227,7 @@ namespace Framework.MVC.Resources
 
                     // Calculate the elapsed time and stop if the maximum retry
                     // period has been reached.
-                    TimeSpan timeElapsed = DateTime.Now - startTime;
+                    TimeSpan timeElapsed = startTime.Elapsed;
 
                     if (timeElapsed > maximumRetryPeriod)
                     {
@@ -199,34 +238,6 @@ namespace Framework.MVC.Resources
                     Thread.Sleep(retryDelay);
                 }
             }
-        }
-
-        /// <summary>
-        /// Check if the file is accesible.
-        /// </summary>
-        /// <param name="filename">The name of file to check.</param>
-        /// <returns>
-        /// <c>true</c> if the specified file is accessible; <c>false</c> otherwise.
-        /// </returns>
-        private bool IsFileAccessible(string filename)
-        {
-            bool success;
-
-            // If the file can be opened for exclusive access it means that the file
-            // is no longer locked by another process.
-            try
-            {
-                using (File.Open(filename, FileMode.Open, FileAccess.Read, FileShare.None))
-                {
-                    success = true;
-                }
-            }
-            catch (IOException)
-            {
-                success = false;
-            }
-
-            return success;
         }
 
         private void AddNode(DataItem node, String path)
@@ -249,16 +260,6 @@ namespace Framework.MVC.Resources
             {
                 resources[path] = scalar.Text;
             }
-        }
-
-        private String Combine(String key, String prefix)
-        {
-            if (String.IsNullOrEmpty(prefix))
-            {
-                return key.ToLowerInvariant();
-            }
-
-            return prefix + ScopeSeparator + key.ToLowerInvariant();
         }
 
         #endregion

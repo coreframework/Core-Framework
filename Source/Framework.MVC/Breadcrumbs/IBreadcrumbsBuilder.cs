@@ -5,7 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System.Web.Mvc;
 
-namespace Framework.MVC.Breadcrumbs
+namespace Framework.Mvc.Breadcrumbs
 {
     /// <summary>
     /// Provides methods to buld breadcrumbs.

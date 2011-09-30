@@ -16,7 +16,7 @@ using Framework.Core.Helpers.Yaml;
 using Yahoo.Yui.Compressor;
 using Environment = Framework.Core.Configuration.Environment;
 
-namespace Framework.MVC.Helpers
+namespace Framework.Mvc.Helpers
 {
     /// <summary>
     /// Provides helper functionality for resources packaging.
@@ -28,7 +28,7 @@ namespace Framework.MVC.Helpers
         /// <summary>
         /// Default assets configuration application relative path.
         /// </summary>
-        public const String DefaultConfigPath = "Config/asset_packages.yml";
+        public static readonly String DefaultConfigPath = "Config/asset_packages.yml";
 
         private const String CssPackageNameTemplate = "{0}_packed.css";
 
@@ -265,7 +265,7 @@ namespace Framework.MVC.Helpers
         {
             if (String.IsNullOrEmpty(corePlugin.CssJsConfigPath) || String.IsNullOrEmpty(corePlugin.CssPath) || String.IsNullOrEmpty(corePlugin.CssPack))
             {
-                return string.Empty;
+                return String.Empty;
             }
 
             var pluginCssServerPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.CssPath);
@@ -346,7 +346,7 @@ namespace Framework.MVC.Helpers
         /// <returns>Returns javascript package virtual path.</returns>
         public static String GetPluginInnerJsVirtualPath(ICorePlugin corePlugin, String applicationVirtualPath, String applicationServerPath)
         {
-            var pluginPackageJsServerPath = GetPluginInnerJsPath(corePlugin, applicationServerPath);
+            var pluginPackageJsServerPath = GetPluginInnerJsPath(corePlugin);
 
             if (!String.IsNullOrEmpty(pluginPackageJsServerPath))
             {
@@ -361,13 +361,12 @@ namespace Framework.MVC.Helpers
         /// Gets the plugin inner js path.
         /// </summary>
         /// <param name="corePlugin">The core plugin.</param>
-        /// <param name="applicationServerPath">The application server path.</param>
         /// <returns>Returns javascript package path.</returns>
-        public static String GetPluginInnerJsPath(ICorePlugin corePlugin, String applicationServerPath)
+        public static String GetPluginInnerJsPath(ICorePlugin corePlugin)
         {
             if (String.IsNullOrEmpty(corePlugin.CssJsConfigPath) || String.IsNullOrEmpty(corePlugin.JsPath) || String.IsNullOrEmpty(corePlugin.JsPack))
             {
-                return string.Empty;
+                return String.Empty;
             }
 
             var pluginJsServerPath = Path.Combine(corePlugin.PluginDirectory, corePlugin.JsPath);
@@ -387,7 +386,7 @@ namespace Framework.MVC.Helpers
                     {
                         using (var reader = new StreamReader(Path.Combine(pluginJsServerPath, file)))
                         {
-                            string content = reader.ReadToEnd();
+                            String content = reader.ReadToEnd();
                             if (!String.IsNullOrEmpty(content))
                             {
                                 outputJs.Append(JavaScriptCompressor.Compress(content));
@@ -419,15 +418,12 @@ namespace Framework.MVC.Helpers
         /// <summary>
         /// Builds the plugins CSS pack.
         /// </summary>
-        /// <param name="environment">The environment.</param>
         /// <param name="corePlugins">The core widgets.</param>
         /// <param name="applicationServerPath">The application server path.</param>
         /// <param name="cssServerPath">The CSS server path.</param>
         /// <param name="fileName">Name of the file.</param>
-        /// <returns>
-        /// Return Html CSS links.
-        /// </returns>
-        public static String BuildPluginsCssPack(Environment environment, IEnumerable<ICorePlugin> corePlugins, String applicationServerPath, String cssServerPath, String fileName)
+        /// <returns>Return Html CSS links.</returns>
+        public static String BuildPluginsCssPack(IEnumerable<ICorePlugin> corePlugins, String applicationServerPath, String cssServerPath, String fileName)
         {
             var packageFileName = fileName;
             var packagePath = Path.Combine(cssServerPath, packageFileName);
@@ -491,13 +487,13 @@ namespace Framework.MVC.Helpers
         /// <param name="cssContent">Content of the CSS.</param>
         /// <param name="imagePluginPath">The image plugin path.</param>
         /// <returns>Return content Css with replaced urls.</returns>
-        private static String ReplaceCssUrls(string cssContent, string imagePluginPath)
+        private static String ReplaceCssUrls(String cssContent, String imagePluginPath)
         {
             var regex = new Regex(UrlRegex);
             var vals = regex.Matches(cssContent).Cast<Match>().ToDictionary(mathe => mathe.Index.ToString(),
                                                                       mathe => mathe.Groups[2].Value);
             return regex.Replace(cssContent,
-                                 match => string.Format(UrlPattern, imagePluginPath, vals[match.Index.ToString()]));
+                                 match => String.Format(UrlPattern, imagePluginPath, vals[match.Index.ToString()]));
         }
 
         /// <summary>

@@ -18,7 +18,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;
 using System.Web.Routing;
-using Framework.MVC.T4MVC;
+using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Web.Areas.Admin.Controllers {
     public partial class SiteSettingsController {
@@ -40,17 +40,17 @@ namespace Core.Web.Areas.Admin.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SiteSettingsController Actions { get { return MVC.Admin.SiteSettings; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Area = "Admin";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "SiteSettings";
+        public readonly String Name = "SiteSettings";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly string Show = "Show";
-            public readonly string Edit = "Edit";
+            public readonly String Show = "Show";
+            public readonly String Edit = "Edit";
         }
 
 
@@ -59,7 +59,7 @@ namespace Core.Web.Areas.Admin.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string ViewSettings = "~/Areas/Admin/Views/SiteSettings/ViewSettings.aspx";
+            public readonly String ViewSettings = "~/Areas/Admin/Views/SiteSettings/ViewSettings.aspx";
         }
     }
 

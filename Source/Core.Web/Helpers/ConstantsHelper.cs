@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 
 namespace Core.Web.Helpers
 {
     public static class ConstantsHelper
     {
-        public static string JqueryDateFormat
+        public static String JqueryDateFormat
         {
             get
             {
@@ -16,7 +13,7 @@ namespace Core.Web.Helpers
             }
         }
 
-        public static string DateFormat
+        public static String DateFormat
         {
             get
             {

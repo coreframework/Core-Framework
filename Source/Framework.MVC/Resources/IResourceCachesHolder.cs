@@ -6,7 +6,7 @@
 
 using System;
 
-namespace Framework.MVC.Resources
+namespace Framework.Mvc.Resources
 {
     /// <summary>
     /// Specifies interface for resource caches holder.
@@ -27,6 +27,6 @@ namespace Framework.MVC.Resources
         /// <returns>
         /// <c>true</c> if the specified cache key contains cache; otherwise, <c>false</c>.
         /// </returns>
-        bool ContainsCache(string cacheKey);
+        bool ContainsCache(String cacheKey);
     }
 }

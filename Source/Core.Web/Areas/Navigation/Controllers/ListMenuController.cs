@@ -9,8 +9,8 @@ using Core.Web.Areas.Navigation.Widgets;
 using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts.Widgets;
 using Core.Web.NHibernate.Models.Widgets;
-using Framework.MVC.Extensions;
-using Framework.MVC.Helpers;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Navigation.Controllers
@@ -19,7 +19,7 @@ namespace Core.Web.Areas.Navigation.Controllers
     {
         #region Properties
 
-        public override string ControllerWidgetIdentifier
+        public override String ControllerWidgetIdentifier
         {
             get { return NListMenuWidget.Instance.Identifier; }
         }
@@ -56,10 +56,10 @@ namespace Core.Web.Areas.Navigation.Controllers
                 if (instance.InstanceId != null)
                 {
                     var widgetService = ServiceLocator.Current.GetInstance<IListMenuWidgetService>();
-                    var exWidget = widgetService.Find((long)instance.InstanceId);
+                    var existingWidget = widgetService.Find((long)instance.InstanceId);
 
-                    if (exWidget != null)
-                        widget = exWidget;
+                    if (existingWidget != null)
+                        widget = existingWidget;
                 }
                 return PartialView(new ListMenuWidgetModel().MapFrom(widget));
             }

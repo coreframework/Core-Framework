@@ -1,9 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
 namespace Core.Languages.Permissions.Operations
 {
+    [Flags]
     public enum LanguageSelectorWidgetOperations
     {
         [OperationDescription(PermissionArea.Applications, PermissionOperationLevel.ObjectType, GuestDefaultAcess = true, OwnerDefaultAcess = true, UserDefaultAccess = true)]

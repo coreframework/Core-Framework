@@ -15,7 +15,7 @@ namespace Products.NHibernate.Contracts
         /// </summary>
         /// <param name="search">The search string.</param>
         /// <returns>Products</returns>
-        IQueryable<Product> GetSearchQuery(string search);
+        IQueryable<Product> GetSearchQuery(String search);
 
         /// <summary>
         /// Gets the count.
