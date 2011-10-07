@@ -26,7 +26,7 @@ Models:
    CustomCSSClasses: "Custom CSS classes"
    PageCssModel.CustomCSS: "Custom CSS"
   SiteSettings:
-   ShowPanel: "Show administration panel"
+   ShowPanel: "Show administration panel toolbar"
   PluginLocale:
    Title: "Title"
    Description: "Description"

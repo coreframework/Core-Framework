@@ -2,10 +2,10 @@ Admin:
   Views:
     AdminHome:
       Index:
-       Welcome: "Welcome to Core Framework!"
+       Welcome: "Welcome to CORE Framework!"
     Module:
       Edit:
-       Title: "Edit Module"
+       Title: "Edit module"
       Install:
        Title: "Install module \"{0}\""
        AreYouSure: "Are you sure want to install module \"{0}\"?"
@@ -14,45 +14,45 @@ Admin:
        AreYouSure: "Are you sure want to uninstall module \"{0}\"?"
     Widget:
        Edit:
-        Title: "Edit Widget"   
+        Title: "Edit widget"   
     User:
       Index:
-        Title: "Users Listing"
+        Title: "Users"
         User: "User"
         Status: "Status"
         Remove: "[Remove]"
-        UserGroups: "[User groups]"
-        New: "New User"
+        UserGroups: "Select [user groups]"
+        New: "Add user"
       New:
-        Title: "New User"
+        Title: "Add user"
       Edit:
         Title: "Edit user \"{0}\""
       Remove:
         Title: "Remove user \"{0}\""
         AreYouSure: "Are you sure want to remove user \"{0}\"?"
       UserGroups:
-        Title: "User Groups assigned to user \"{0}\""
+        Title: "User groups assigned to user \"{0}\""
         All: "All"
     UserGroup:
       Index:
-        Title: "User groups Listing"
+        Title: "User groups"
         UserGroup: "User group"
         Remove: "[Remove]"
         Users: "[Users]"
       New:
-        Title: "New User group"
+        Title: "Add user group"
       Edit:
         Title: "Edit user group \"{0}\""
       Remove:
         Title: "Remove user group \"{0}\""
         AreYouSure: "Are you sure want to remove user group \"{0}\"?"
       Users:
-        Title: "Users assigned to user group \"{0}\""
+        Title: "Users in {0}"
         All: "All"
     Shared:
       TopLinks:
        SignIn: "Sign in"
-       SignOut: "Sign Out"
+       SignOut: "Sign out"
       MainMenu:
         Home: "Home"
         Users: "Users"
@@ -62,7 +62,7 @@ Admin:
         Administration: "Administration"
         Modules: "Modules"
         AccountsAndPermissions: "Accounts & Permissions"
-        SiteSettings: "Site Settings"
+        SiteSettings: "Website Settings"
     Role:
       Index:
        Role: "Role"
@@ -70,17 +70,17 @@ Admin:
        Users: "Users"
        Title: "Roles"
       New:
-        Title: "New Role"
+        Title: "Add role"
       Edit:
         Title: "Edit role \"{0}\""
       Remove:
         Title: "Remove role \"{0}\""
         AreYouSure: "Are you sure want to remove role \"{0}\"?"
       Users:
-        Title: "Users assigned to role \"{0}\""
+        Title: "Users for {0}"
         All: "All"
       UserGroups:
-        Title: "User Groups assigned to role \"{0}\""
+        Title: "User groups for {0}"
         All: "All"
       Permissions:
        Permissions: "Permissions"

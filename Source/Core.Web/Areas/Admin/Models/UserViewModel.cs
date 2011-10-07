@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Mvc.Metadata.Attributes;
@@ -19,6 +20,7 @@ namespace Core.Web.Areas.Admin.Models
         /// </summary>
         /// <value>The email.</value>
         [Required ( ErrorMessage = @"Error"), StringLength(255), Email]
+        [AllowHtml]
         public String Email { get; set; }
 
         /// <summary>
@@ -26,6 +28,7 @@ namespace Core.Web.Areas.Admin.Models
         /// </summary>
         /// <value>The nickname.</value>
         [Required, StringLength(255)]
+        [AllowHtml]
         public String Nickname { get; set; }
 
         /// <summary>
@@ -34,6 +37,7 @@ namespace Core.Web.Areas.Admin.Models
         /// <value>The password.</value>
         [StringLength(255)]
         [DataType(DataType.Password)]
+        [AllowHtml]
         public String Password { get; set; }
 
         /// <summary>

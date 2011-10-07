@@ -1,7 +1,7 @@
 Views:
     Pages:
       Show:
-       WidgetNotFound: "Widget is not found"
+       WidgetNotFound: "Widget can not be found"
        PanelView: "View" 
        PanelEdit: "Edit" 
        Widget: "Widget"
@@ -14,13 +14,13 @@ Views:
       PageLookAndFeelSettings:
        LookAndFeel: "Look and feel"
       PageLookAndFeelForm:
-       Successful: "Your request processed successfully."
+       Successful: "Your request has been processed successfully."
        Error: "Error"
       PageCommonSettings:
        CommonSettings: "Common settings"
       PageCSSSettings:
        CSS: "CSS"
-       CurrentPageInformation: "Your current page information is as follows"
+       CurrentPageInformation: "Your current page information is as following"
        PageClass: "Page class"
        WidgetClasses: "Widget classes"
        PageRule: "Add a CSS rule for this page."
@@ -46,13 +46,13 @@ Views:
             Error: "Error"
         WidgetCSSSettings:
             CSS: "CSS"
-            CurrentWidgetInformation: "Your current widget information is as follows"
+            CurrentWidgetInformation: "Your current widget information is as following"
             WidgetID: "Widget ID"
             WidgetClasses: "Widget classes"
             WidgetRule: "Add a CSS rule for just this widget."
             AllWidgetsRule: "Add a CSS rule for all widgets like this one."
         WidgetCSSForm:
-            Successful: "Your request processed successfully."
+            Successful: "Your request has been processed successfully."
             Error: "Error"
             WidgetRule: "Add a CSS rule for just this widget."
             AllWidgetsRule: "Add a CSS rule for all widgets like this one."
@@ -64,16 +64,16 @@ Views:
       Layouts:
         ChangeLayout:
             ChangeLayout: "Click on a layout template to apply it to the page"
-            Successful: "Your request processed successfully."
+            Successful: "Your request has been processed successfully."
             Error: "Error"
         LayoutSettings:
-            Successful: "Your request processed successfully."
+            Successful: "Your request has been processed successfully."
             Error: "Error"
       Users:
         UserPanel:
-            SignIn: "Sign In"
-            SignOut: "Sign Out"
-            ControlPanel: "Control Panel"
+            SignIn: "Sign in"
+            SignOut: "Sign out"
+            ControlPanel: "Control panel"
     Users:
       NewUserSession:
           Title: "Sign in"

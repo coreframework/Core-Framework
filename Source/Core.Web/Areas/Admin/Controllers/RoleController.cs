@@ -111,7 +111,7 @@ namespace Core.Web.Areas.Admin.Controllers
                     from role in roles
                     select new
                     {
-                        id = !role.Role.IsSystemRole ? role.Id.ToString() : null,
+                        id = !role.Role.IsSystemRole ? role.Role.Id.ToString() : null,
                         cell = new[] { role.Role.Name,
                             !role.Role.NotAssignableRole ? String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.Role.Users(role.Role.Id)),

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Models
 {
@@ -22,6 +22,7 @@ namespace Core.Web.Areas.Admin.Models
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
+        [AllowHtml]
         public String Title { get; set; }
 
         #region IMappedModel members

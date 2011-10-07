@@ -105,7 +105,7 @@ namespace Core.Web.Areas.Admin.Controllers
                     select new
                     {
                         id = user.Id,
-                        cell = new[] {  user.Username, 
+                        cell = new[] {  HttpUtility.HtmlEncode(user.Username), 
                                         Translate(EnumHelper.Humanize(user.Status)),
                                         String.Format(JqGridConstants.UrlTemplate,
                                             Url.Action(MVC.Admin.User.UserGroups(user.Id)),

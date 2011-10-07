@@ -30,7 +30,6 @@
                 <img src="<%= Links.Content.Images.Admin.logo_png %>" width="145" height="19" alt="" title="" class="logo" />
             </a>
             <%= Html.PartialWithScope(MVC.Admin.Shared.Views.TopLinks)%>
-		<%--    <%= Html.Breadcrumbs()%>--%>
          <div class="breadcrumbs">
              <%=Html.MvcSiteMap().SiteMapPath()%>
          </div>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using Core.Languages.NHibernate.Models;
 using Framework.Core.DomainModel;
 
@@ -12,6 +13,7 @@ namespace Core.Languages.Models
         /// </summary>
         /// <value>The title.</value>
         [Required]
+        [AllowHtml]
         public virtual String Title { get; set; }
 
         /// <summary>
@@ -19,6 +21,7 @@ namespace Core.Languages.Models
         /// </summary>
         /// <value>The code.</value>
         [Required]
+        [AllowHtml]
         public virtual String Code { get; set; }
 
         /// <summary>
@@ -26,6 +29,7 @@ namespace Core.Languages.Models
         /// </summary>
         /// <value>The culture.</value>
         [Required]
+        [AllowHtml]
         public virtual String Culture { get; set; }
 
         /// <summary>

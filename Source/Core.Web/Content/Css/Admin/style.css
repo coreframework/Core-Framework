@@ -20,7 +20,7 @@ a:active{text-decoration:none; color:#0052b8;}
 * @section Headings
 */
 h1, h2, h3, h4, h5, h6 {color:#000;font-weight:normal;margin-top:0;padding-top:0}
-h1 {font-size:24px;color:#000000;font-weight:bold;margin-bottom:16px;}
+h1 {font-size: 24px; font-weight: normal;color: #000000;margin-bottom: 16px; }
 h2 {font-size:17px;color:#000000;font-weight:bold;margin-bottom:16px;}
 h3 {font-size:13px;color:#000000;font-weight:bold;}
 h4 {font-size:16px;color:#000000}
@@ -107,7 +107,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 * @section Content Page
 */
 .top_b {height:1px;border-bottom:1px solid #e2e2e2;padding-top:1px;}
-.content_i {padding:28px 20px}
+.content_i {padding:15px}
 	.e_table_area {margin-top:0px}
 		.e_table_top {background:url(../../images/admin/e_table_top_bg.gif) repeat-x 0 0;height:24px;padding:6px 0 4px}
 			.filter_l {float:left;margin-left:8px;}

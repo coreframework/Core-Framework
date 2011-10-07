@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<dynamic>" %>
-<div id="site_links" class="right_side clrfix" style="width: 110px;">
+<div id="site_links" class="right_side clrfix">
         <% if (Request.IsAuthenticated)
            { %>
 			    <span><%: Page.User.Identity.Name %></span>

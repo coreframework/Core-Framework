@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
-using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Areas.Admin.Models
 {
@@ -12,6 +12,8 @@ namespace Core.Web.Areas.Admin.Models
         public IDictionary<String, String> Cultures { get; set; }
         public long RoleId { get; set; }
         public String SelectedCulture { get; set; }
+        
+        [AllowHtml]
         public String Name { get; set; }
 
         public RoleLocaleViewModel MapFrom(Role from)
@@ -29,6 +31,11 @@ namespace Core.Web.Areas.Admin.Models
             to.Name = Name;
 
             return to;
+        }
+
+        public override string ToString()
+        {
+            return !String.IsNullOrEmpty(Name) ? Name : base.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Mvc;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
@@ -22,12 +23,14 @@ namespace Core.Web.Areas.Admin.Models
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
+        [AllowHtml]
         public String Title { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
+        [AllowHtml]
         public String Description { get; set; }
 
         #region IMappedModel members
