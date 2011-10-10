@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Core</groupId>
+  <artifactId>example</artifactId>
+  <version>3.0.0.7</version>
+  <name>CORE Framework 3.0</name>
+  <packaging>sln</packaging>
+
+  <properties>
+    <visual.studio.solution>Source/Core.sln</visual.studio.solution>
+   <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
+    <dotnet.tool.version>4.0</dotnet.tool.version>
+    <sonar.language>cs</sonar.language>
+    <!--<silverlight.version>4</silverlight.version>-->
+    <maven.compiler.debug>false</maven.compiler.debug>
+  </properties>
+  
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.sonar-plugins.dotnet</groupId>
+        <artifactId>maven-dotnet-plugin</artifactId>
+        <extensions>true</extensions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <configuration>
+          <language>cs</language>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

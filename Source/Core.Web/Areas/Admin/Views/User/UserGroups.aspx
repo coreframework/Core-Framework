@@ -14,6 +14,7 @@
         <%=Html.JqGrid(model => model.SearchString) %>
 		<div class="e_table_bottom clrfix">
 			<div class="btn1 clrfix"><em></em><input id="Save" type="button" class="button" value="<%: Html.Translate("Actions.Save") %>" /><strong></strong></div>
+             <%=Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.User.Index(), new {@Class="cancel"})%>
 		</div>
     </div>
     <script type="text/javascript">

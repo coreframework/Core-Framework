@@ -51,13 +51,11 @@ namespace Core.Web.Areas.Admin.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = Translate(".Model.UserGroup.UsersList"),
-                                                                 Width = 150,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = Translate("Actions.Actions"),
-                                                                 Width = 150,
+                                                                 Width = 10,
                                                                  Sortable = false
                                                              },
                                                          new GridColumnViewModel
@@ -96,10 +94,9 @@ namespace Core.Web.Areas.Admin.Controllers
                         cell = new[] { userGroup.Name,
                             String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.UserGroup.Users(userGroup.Id)),
-                                Translate(".Users")),
-                            String.Format(JqGridConstants.UrlTemplate,
-                                Url.Action(MVC.Admin.UserGroup.Remove(userGroup.Id)),
-                                Translate("Actions.Remove"))}
+                                Translate(".Model.UserGroup.Users")), String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
+                                            Url.Action(MVC.Admin.UserGroup.Remove(userGroup.Id)))
+                          }
                     }).ToArray()
             };
             return Json(jsonData);

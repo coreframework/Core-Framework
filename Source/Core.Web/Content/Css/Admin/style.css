@@ -59,7 +59,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 	.btn2 em {width:3px;height:24px;background:url(../../images/admin/btn2_left.png) no-repeat 0 0;float:left}
 	.btn2 input {background:url(../../images/admin/btn2_center.png) repeat-x 0 0;height:24px;float:left;padding:4px 7px 5px;color:#484848;font-size:13px;font-family:Arial;font-weight:bold;*display:inline;*zoom:1;*padding-left:0;*padding-right:0}
 	.btn2 strong {width:3px;height:24px;background:url(../../images/admin/btn2_right.png) no-repeat 0 0;float:left}
-	
+.e_table_bottom a.cancel {float:left;margin-top:6px;}	
 	
 /**
 * @section Main Layouts
@@ -156,9 +156,10 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 			table.ui-jqgrid-htable tr {vertical-align:top;}
 			table.ui-jqgrid-htable th, table.ui-jqgrid-htable td {text-align:left;}
 			table.ui-jqgrid-htable th {background:url(../../images/admin/e_table_th_bg.gif) repeat-x 0 0;height:33px;color:#fff;font-size:13px;vertical-align:middle} 
-				table.ui-jqgrid-htable th div {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px 20px;height:17px;}
+				table.ui-jqgrid-htable th div {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px;height:17px;}
+                table.ui-jqgrid-htable .ui-jqgrid-sortable {cursor:pointer;}
 				    table.ui-jqgrid-htable th div input[type=checkbox] { margin: 0;}
-				table.ui-jqgrid-htable th:first-child span {background:none}
+				/*table.ui-jqgrid-htable th:first-child span {background:none}*/
 			table.ui-jqgrid-htable td {border-bottom:#e7e7e7 solid 1px;padding:8px 0 3px 8px;color:#474747;}
 				table.ui-jqgrid-htable td a {text-decoration:none}
 					table.ui-jqgrid-htable td a:hover {text-decoration:underline}
@@ -180,6 +181,8 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 					table.ui-jqgrid-btable td a:hover {text-decoration:underline}
 			table.ui-jqgrid-btable tr:hover td {background:#cde6fc;color:#000000}
 			table.ui-jqgrid-btable tr:hover em.delete {background-position:0 -11px;}
+            table.ui-jqgrid-btable tr {cursor:pointer;}
+            table.ui-jqgrid-btable #not_clickabe {cursor:auto;}
 		.ui-jqgrid-btable_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
 		.ui-jqgrid-btable_bottom .btn1 {float:left;margin-right:5px;}
         .ui-widget-header { display: none; }	
@@ -341,7 +344,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 .ui-icon-carat-1-nw { background-position: -112px 0; }
 .ui-icon-carat-2-n-s { background-position: -128px 0; }
 .ui-icon-carat-2-e-w { background-position: -144px 0; }
-.ui-icon-triangle-1-n { background-position: 0 -16px; }
+.ui-icon-triangle-1-n { background-position: 0 -17px; }
 .ui-icon-triangle-1-ne { background-position: -16px -16px; }
 .ui-icon-triangle-1-e { background-position: -32px -16px; }
 .ui-icon-triangle-1-se { background-position: -48px -16px; }

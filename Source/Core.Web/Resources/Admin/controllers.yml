@@ -14,7 +14,8 @@ Admin:
         Title: "Name"
         UsersList: "Users"
         UserGroupsList: "User groups"
-        Permissions: "Permissions"
+        Permissions: "Change permissions"
+        PermissionsList: "Permissions"
         Users: "Select users"
         UserGroups: "Select user groups"
         UserName: "User"
@@ -31,8 +32,10 @@ Admin:
       Model:
        User:
         Name: "Name"
+        Email: "Email"
         Status: "Status"
-        UserGroups: "User groups"
+        UserGroups: "Select user groups"
+        UserGroupsList: "User groups"
       Admin:
         Models:
           UserStatus:
@@ -44,5 +47,6 @@ Admin:
        Model:
         UserGroup:
          Name: "Name"  
-         UsersList: "Users list"
+         UsersList: "Users"
+         Users: "Select users"
     

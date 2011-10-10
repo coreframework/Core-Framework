@@ -60,10 +60,10 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Users.Update", "admin/user/{id}", MVC.Admin.User.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Users.Remove", "admin/user/remove/{id}", new { controller = "User", action = "Remove", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Users.ConfirmRemove", "admin/user/{id}", MVC.Admin.User.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
+            context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/groups/{id}/UpdateUserGroups", MVC.Admin.User.UpdateUserGroups());
             context.MapRoute("Admin.Users.UserGroups", "admin/user/groups/{id}", new { controller = "User", action = "UserGroups", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Users.UserGroupsDynamicGridData", "admin/user/{id}/groups/UserGroupsDynamicGridData", MVC.Admin.User.UserGroupsDynamicGridData());
-            context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/{id}/groups/UpdateUserGroups", MVC.Admin.User.UpdateUserGroups());
-
+          
             context.MapRoute("Admin.UserGroups", "admin/groups", MVC.Admin.UserGroup.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.UserGroups.DynamicGridData", "admin/group/DynamicGridData", MVC.Admin.UserGroup.DynamicGridData());
             context.MapRoute("Admin.UserGroups.New", "admin/new-group/new", MVC.Admin.UserGroup.New());
@@ -73,8 +73,8 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.UserGroups.UsersDynamicGridData", "admin/group/{id}/groups/UsersDynamicGridData", MVC.Admin.UserGroup.UsersDynamicGridData());
             context.MapRoute("Admin.UserGroups.Remove", "admin/remove-group/{id}", new { controller = "UserGroup", action = "Remove", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.UserGroups.ConfirmRemove", "admin/remove-group/{id}", MVC.Admin.UserGroup.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
+            context.MapRoute("Admin.UserGroups.UpdateUsers", "admin/group/users/{id}/UpdateUsers", MVC.Admin.UserGroup.UpdateUsers());
             context.MapRoute("Admin.UserGroups.Users", "admin/group/users/{id}", new { controller = "UserGroup", action = "Users", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.UserGroups.UpdateUsers", "admin/group/{id}/users/UpdateUsers", MVC.Admin.UserGroup.UpdateUsers());
 
             context.MapRoute("Admin.Roles", "admin/roles", MVC.Admin.Role.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.DynamicGridData", "admin/roles/DynamicGridData", MVC.Admin.Role.DynamicGridData());
@@ -85,12 +85,12 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Roles.Update", "admin/role/{id}", MVC.Admin.Role.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Roles.Remove", "admin/role/remove/{id}", new { controller = "Role", action = "Remove", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.ConfirmRemove", "admin/role/{id}", MVC.Admin.Role.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
+            context.MapRoute("Admin.Roles.UpdateUsers", "admin/role/users/{id}/UpdateUsers", MVC.Admin.Role.UpdateUsers());
             context.MapRoute("Admin.Roles.Users", "admin/role/users/{id}", new { controller = "Role", action = "Users", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.Roles.UpdateUsers", "admin/role/{id}/users/UpdateUsers", MVC.Admin.Role.UpdateUsers());
             context.MapRoute("Admin.Roles.UsersDynamicGridData", "admin/role/{id}/users/UsersDynamicGridData", MVC.Admin.Role.UsersDynamicGridData());
+            context.MapRoute("Admin.Roles.UpdateUserGroups", "admin/role/groups/{id}/UpdateUserGroups", MVC.Admin.Role.UpdateUserGroups());
             context.MapRoute("Admin.Roles.UserGroups", "admin/role/groups/{id}",  new { controller = "Role", action = "UserGroups", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.UserGroupsDynamicGridData", "admin/role/{id}/groups/UserGroupsDynamicGridData", MVC.Admin.Role.UserGroupsDynamicGridData());
-            context.MapRoute("Admin.Roles.UpdateUserGroups", "admin/role/{id}/groups/UpdateUserGroups", MVC.Admin.Role.UpdateUserGroups());
             context.MapRoute("Admin.Roles.Permissions", "admin/role/permissions/{roleId}", new { controller = "Role", action = "Permissions", area = AreaName, roleId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.PermissionsByResource", "admin/role/{roleId}/permissions/{resource}", MVC.Admin.Role.Permissions());
             context.MapRoute(null, "admin/apply-permissions", MVC.Admin.Role.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

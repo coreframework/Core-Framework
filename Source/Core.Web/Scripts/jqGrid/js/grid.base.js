@@ -348,7 +348,7 @@ $.fn.jqGrid = function( p ) {
 				row.className = 'ui-widget-content jqgrow';
 				$(row).attr({"role":"row"})
 				if(t.p.multiselect) {
-					td = $("<td role='gridcell'></td>");
+					td = $("<td role='gridcell' style='padding-left:0px;'></td>");
 					$(td[0],t.grid.bDiv).html("<input type='checkbox'"+" id='jqg_"+rowid+"' class='cbox'/>");
 					row.appendChild(td[0]);
 					t.formatCol($(td[0],t.grid.bDiv),0,t.p.records);
@@ -733,7 +733,7 @@ $.fn.jqGrid = function( p ) {
 		},
 		addMulti = function(t,row,irow){
 			var cbid,td;
-			td = $("<td role='gridcell'></td>");
+			td = $("<td role='gridcell' style='padding-left:0px;'></td>");
 			cbid = "jqg_"+row.id;
 			$(td).html("<input type='checkbox'"+" id='"+cbid+"' class='cbox' name='"+cbid+"'/>");
 			formatCol(td, 0,irow);

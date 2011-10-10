@@ -75,9 +75,9 @@ namespace Core.Web.Areas.Admin.Controllers
                                                          new GridColumnViewModel
                                                              {Name = Translate(".Model.Role.UserGroupsList"), Width = 150, Sortable = false},
                                                          new GridColumnViewModel
-                                                             {Name = Translate(".Model.Role.Permissions"), Width = 150, Sortable = false},
+                                                             {Name = Translate(".Model.Role.PermissionsList"), Width = 150, Sortable = false},
                                                          new GridColumnViewModel
-                                                             {Name = Translate("Actions.Actions"), Width = 150, Sortable = false},
+                                                             {Width = 10, Sortable = false},
                                                          new GridColumnViewModel
                                                              {Name = "Id", Sortable = false, Hidden = true}
                                                      };
@@ -122,9 +122,8 @@ namespace Core.Web.Areas.Admin.Controllers
                             !role.Role.NotPermissible ? String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.Role.Permissions(role.Role.Id, null)),
                                 Translate(".Model.Role.Permissions")) : String.Empty,
-                            !role.Role.IsSystemRole ? String.Format(JqGridConstants.UrlTemplate,
-                                Url.Action(MVC.Admin.Role.Remove(role.Role.Id)),
-                                Translate("Actions.Remove")) : String.Empty
+                            !role.Role.IsSystemRole ? String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
+                                            Url.Action(MVC.Admin.Role.Remove(role.Role.Id))) : String.Empty
                             }
                     }).ToArray()
             };

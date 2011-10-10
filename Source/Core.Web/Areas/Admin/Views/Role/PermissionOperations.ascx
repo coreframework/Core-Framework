@@ -6,7 +6,7 @@
         <table class="e_table">
             <tbody>
                 <tr>
-                    <th class="chbx" style="text-align: center; width: 60px; padding: 8px 0 3px 0px;"><%: Html.CheckBox("checkAll")%></th>
+                    <th class="chbx" style="text-align: center; width: 60px;"><%: Html.CheckBox("checkAll")%></th>
                     <th class="row"><span></span><%: Html.Translate(".Operation") %></th>
                 </tr>
             <%foreach (var operation in Model.Operations) {%>

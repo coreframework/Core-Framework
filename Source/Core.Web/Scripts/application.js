@@ -27,3 +27,10 @@ function isjscssfileexists(filename, filetype) {
     }
     return false;
 }
+
+$.fn.bind_select_all = function () {
+    $(this).bind("click", function () {
+        $("INPUT[type='checkbox']").attr('checked', $(this).is(':checked'));
+    });
+};
+

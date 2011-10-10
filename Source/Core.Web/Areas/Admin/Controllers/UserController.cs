@@ -52,6 +52,11 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                  Name = Translate(".Model.User.Name"), 
                                                                  Index = "Username"
                                                              },
+                                                        new GridColumnViewModel
+                                                            {
+                                                                Name = Translate(".Model.User.Email"), 
+                                                                Index = "Email"
+                                                            },
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = Translate(".Model.User.Status"), 
@@ -59,7 +64,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = Translate(".Model.User.UserGroups"),
+                                                                 Name = Translate(".Model.User.UserGroupsList"),
                                                                  Width = 150,
                                                                  Sortable = false
                                                              },
@@ -105,11 +110,12 @@ namespace Core.Web.Areas.Admin.Controllers
                     select new
                     {
                         id = user.Id,
-                        cell = new[] {  HttpUtility.HtmlEncode(user.Username), 
+                        cell = new[] {  HttpUtility.HtmlEncode(user.Username),
+                                        HttpUtility.HtmlEncode(user.Email),
                                         Translate(EnumHelper.Humanize(user.Status)),
                                         String.Format(JqGridConstants.UrlTemplate,
                                             Url.Action(MVC.Admin.User.UserGroups(user.Id)),
-                                            Translate(".UserGroups")),
+                                            Translate(".Model.User.UserGroups")),
                                         String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action(MVC.Admin.User.Remove(user.Id)))}
                     }).ToArray()

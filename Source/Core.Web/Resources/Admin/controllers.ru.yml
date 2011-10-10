@@ -15,7 +15,8 @@ ru:
             Title: "Название"
             UsersList: "Список пользователей"
             UserGroupsList: "Список групп пользователей"
-            Permissions: "Права доступа"
+            Permissions: "Изменить права доступа"
+            PermissionsList: "Права доступа"
             Users: "Пользователи"
             UserGroups: "Группы пользователей"
             UserName: "Пользователь"
@@ -27,13 +28,15 @@ ru:
              Module: "Модуль"
              Status: "Статус"
         User:
-          UserGroups: "Список групп"
+          UserGroups: "Группы пользователей"
           Remove: "Удалить"
           Model:
            User:
             Name: "Имя"
+            Email: "Email"
             Status: "Статус"
-            UserGroups: "Группы пользователей"
+            UserGroups: "Выбрать группы"
+            UserGroupsList: "Список групп"
           Admin:
             Models:
               UserStatus:
@@ -45,4 +48,5 @@ ru:
            Model:
             UserGroup:
              Name: "Название"  
-             UsersList: "Список пользователей"
+             UsersList: "Выбрать пользователей"
+             Users: "Пользователи"
