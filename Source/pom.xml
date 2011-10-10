@@ -8,7 +8,7 @@
   <packaging>sln</packaging>
 
   <properties>
-    <visual.studio.solution>Source/Core.sln</visual.studio.solution>
+    <visual.studio.solution>Core.sln</visual.studio.solution>
    <visual.test.project.pattern>*.Tests</visual.test.project.pattern>
     <dotnet.tool.version>4.0</dotnet.tool.version>
     <sonar.language>cs</sonar.language>
