@@ -4,7 +4,6 @@ using Castle.Windsor;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
 using Core.Web.Helpers;
-using Framework.Mvc.Breadcrumbs;
 
 namespace Core.Web
 {
@@ -20,7 +19,6 @@ namespace Core.Web
             container.Register(Component.For<IPermissionsHelper>().ImplementedBy<ResourcePermissionsHelper>());
             container.Register(Component.For<IPluginHelper>().ImplementedBy<PluginHelper>().LifeStyle.Transient);
             container.Register(Component.For<IWidgetHelper>().ImplementedBy<WidgetHelper>().LifeStyle.Transient);
-            container.Register(Component.For<IBreadcrumbsBuilder>().ImplementedBy<BreadcrumbsBuilder>().LifeStyle.Transient);
         }
     }
 }

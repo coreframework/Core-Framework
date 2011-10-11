@@ -20,6 +20,8 @@ namespace Core.Web.Migrations
                 t.String("Url");
                 t.Long("ParentPageId").Null();
                 t.Integer("OrderNumber").Null();
+                t.Bool("HideInMainMenu").Null();
+                t.Bool("IsServicePage").Null();
                 t.ForeignKey("PageUser").Table("Users").Column("UserId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
             });
         }

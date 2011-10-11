@@ -322,7 +322,7 @@ namespace Core.Web.Helpers
         public static NavigationMenuModel GetNavigationMenu(PageViewModel currentPage,ICorePrincipal user)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
-            var pages = pageService.GetAllowedPagesByOperation(user,(int)PageOperations.View).OrderBy(page=>page.OrderNumber);
+            var pages = pageService.GetAllowedPagesForMainMenu(user).OrderBy(page => page.OrderNumber);
             var pagesToRemove = pageService.GetAllowedPagesByOperation(user, (int)PageOperations.Delete).OrderBy(page => page.OrderNumber);
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             var pageMode = CurrentUserPageMode;

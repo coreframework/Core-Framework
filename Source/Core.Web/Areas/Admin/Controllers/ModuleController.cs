@@ -13,7 +13,6 @@ using Core.Web.Helpers;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Migrator;
 using Core.Web.NHibernate.Models;
-using Framework.Mvc.Breadcrumbs;
 using Framework.Mvc.Controllers;
 using Framework.Mvc.Grids;
 using Framework.Mvc.Grids.JqGrid;
@@ -34,7 +33,6 @@ namespace Core.Web.Areas.Admin.Controllers
 
         private readonly IPluginService pluginService;
         private readonly IPluginLocaleService pluginLocaleService;
-        private readonly IBreadcrumbsBuilder breadcrumbsBuilder;
 
         #endregion
 
@@ -47,7 +45,6 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
             pluginLocaleService = ServiceLocator.Current.GetInstance<IPluginLocaleService>();
-            breadcrumbsBuilder = ServiceLocator.Current.GetInstance<IBreadcrumbsBuilder>();
         }
 
         #endregion
@@ -97,21 +94,6 @@ namespace Core.Web.Areas.Admin.Controllers
                 GridTitle =Translate(".Modules"),
                 Columns = columns
             };
-
-            //build breadcrumbs
-            breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
-                                                           {
-                                                               new Breadcrumb
-                                                                   {
-                                                                       Text = Translate("Titles.Home"),
-                                                                       Url = Url.Action(MVC.Admin.AdminHome.Index())
-                                                                   },
-                                                               new Breadcrumb
-                                                                   {
-                                                                       Text = Translate("Titles.Modules"),
-                                                                   }
-                                                           });
-
 
             return View(model);
         }
@@ -165,25 +147,6 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
-
-            //build breadcrumbs
-            breadcrumbsBuilder.BuildBreadcrumbs(this, new[]
-                                                           {
-                                                               new Breadcrumb
-                                                                   {
-                                                                       Text = Translate("Titles.Home"),
-                                                                       Url = Url.Action(MVC.Admin.AdminHome.Index())
-                                                                   },
-                                                               new Breadcrumb
-                                                                   {
-                                                                       Text = Translate("Titles.Modules"),
-                                                                        Url = Url.Action(MVC.Admin.Module.Index())
-                                                                   },
-                                                               new Breadcrumb
-                                                                   {
-                                                                       Text = Translate("Actions.Edit")
-                                                                   }
-                                                           });
 
             return View(new PluginViewModel().MapFrom(plugin));
         }

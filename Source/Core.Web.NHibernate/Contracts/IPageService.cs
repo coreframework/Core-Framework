@@ -38,6 +38,13 @@ namespace Core.Web.NHibernate.Contracts
         IEnumerable<Page> GetAllowedPagesByOperation(ICorePrincipal user, Int32 operationCode);
 
         /// <summary>
+        /// Gets the allowed pages for main menu.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <returns></returns>
+        IEnumerable<Page> GetAllowedPagesForMainMenu(ICorePrincipal user);
+
+        /// <summary>
         /// Gets the first allowed page.
         /// </summary>
         /// <param name="user">The user.</param>

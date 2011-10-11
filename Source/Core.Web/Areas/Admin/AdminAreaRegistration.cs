@@ -105,6 +105,9 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Modules.ConfirmInstall", "admin/install-module/{id}", MVC.Admin.Module.ConfirmInstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("Admin.Modules.ConfirmUninstall", "admin/uninstall-module/{id}", MVC.Admin.Module.ConfirmUninstall(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
+            context.MapRoute("Admin.Pages", "admin/pages", MVC.Admin.Page.Index());
+            context.MapRoute("Admin.Pages.DynamicGridData", "admin/pages/DynamicGridData", MVC.Admin.Page.DynamicGridData());
+
             context.MapRoute("Admin.Widgets", "admin/widgets", MVC.Admin.Widget.Index());
             context.MapRoute("Admin.Widgets.DynamicGridData", "admin/widget/DynamicGridData", MVC.Admin.Widget.DynamicGridData());
             context.MapRoute("Admin.Widgets.Edit", "admin/widget/{id}", new { controller = "Widget", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });

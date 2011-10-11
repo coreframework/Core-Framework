@@ -6,6 +6,7 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
+using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Facilities.NHibernate;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
@@ -64,6 +65,14 @@ namespace Core.Web.NHibernate.Services
         public IEnumerable<Page> GetAllowedPagesByOperation(ICorePrincipal user, Int32 operationCode)
         {
             var criteria = GetAllowedPagesCriteria(user, operationCode);
+
+            return criteria.SetCacheable(true).List<Page>();
+        }
+
+        public IEnumerable<Page> GetAllowedPagesForMainMenu(ICorePrincipal user)
+        {
+            var criteria = GetAllowedPagesCriteria(user, (int)PageOperations.View);
+            criteria.Add(Expression.Eq("HideInMainMenu", false));
 
             return criteria.SetCacheable(true).List<Page>();
         }

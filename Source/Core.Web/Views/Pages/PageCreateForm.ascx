@@ -25,6 +25,11 @@
                     <%:Html.DropDownListFor(model => model.ClonedPageId, new SelectList(Model.AvailablePages, "Id", "Title", Model.ClonedPageId), Html.Translate("Actions.PleaseSelect"), new { })%>
                     <%:Html.ValidationMessageFor(model => model.ClonedPageId)%>
                 </div>
+                <div class="form_i">
+                    <%:Html.LocalizedLabelFor(model=>model.HideInMainMenu) %>
+                    <%:Html.CheckBoxFor(model => model.HideInMainMenu)%>
+                    <%:Html.ValidationMessageFor(model => model.HideInMainMenu)%>
+                </div>
                 <%:Html.AntiForgeryToken()%>
         </div>
             <div class="p_footer clrfix">

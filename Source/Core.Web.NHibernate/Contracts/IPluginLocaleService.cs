@@ -8,7 +8,6 @@ namespace Core.Web.NHibernate.Contracts
     public interface IPluginLocaleService : IDataService<PluginLocale>
     {
         PluginLocale GetLocale(long pluginId, String culture);
-
         ICriteria GetSearchCriteria(String searchString);
     }
 }

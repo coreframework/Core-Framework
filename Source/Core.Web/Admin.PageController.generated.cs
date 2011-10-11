@@ -20,13 +20,10 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using Framework.Mvc.T4MVC;
 using T4MVC;
-namespace Core.Web.Controllers {
-    public partial class ErrorController {
+namespace Core.Web.Areas.Admin.Controllers {
+    public partial class PageController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ErrorController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ErrorController(Dummy d) { }
+        protected PageController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -34,13 +31,18 @@ namespace Core.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult DynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ErrorController Actions { get { return MVC.Error; } }
+        public PageController Actions { get { return MVC.Admin.Page; } }
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly String Area = "";
+        public readonly String Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly String Name = "Error";
+        public readonly String Name = "Page";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -48,6 +50,7 @@ namespace Core.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly String Index = "Index";
+            public readonly String DynamicGridData = "DynamicGridData";
         }
 
 
@@ -56,16 +59,26 @@ namespace Core.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly String Error = "~/Views/Error/Error.aspx";
+            public readonly String Index = "~/Areas/Admin/Views/Page/Index.aspx";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_ErrorController: Core.Web.Controllers.ErrorController {
-        public T4MVC_ErrorController() : base(Dummy.Instance) { }
+    public class T4MVC_PageController: Core.Web.Areas.Admin.Controllers.PageController {
+        public T4MVC_PageController() : base(Dummy.Instance) { }
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult DynamicGridData(int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.DynamicGridData);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
             return callInfo;
         }
 

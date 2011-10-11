@@ -15,6 +15,7 @@ namespace Core.Web.Models
         public String Url { get; set; }
         public long? ParentPageId { get; set; }
         public String LocalesString { get; set; }
+        public bool HideInMainMenu { get; set; }
         
         public PageLocaleViewModel MapFrom(Page from)
         {
@@ -24,6 +25,7 @@ namespace Core.Web.Models
             Title = from.Title;
             Url = from.Url;
             ParentPageId = from.ParentPageId;
+            HideInMainMenu = from.HideInMainMenu;
 
             return this;
         }
@@ -31,6 +33,7 @@ namespace Core.Web.Models
         public Page MapTo(Page to)
         {
             to.Url = Url;
+            to.HideInMainMenu = HideInMainMenu;
 
             return to;
         }

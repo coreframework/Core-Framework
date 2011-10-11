@@ -113,6 +113,8 @@ namespace Core.Web.Models
 
         public long? ClonedPageId { get; set; }
 
+        public bool HideInMainMenu { get; set; }
+
         #endregion
 
         #region IMappedModel members
@@ -126,6 +128,7 @@ namespace Core.Web.Models
         {
             Title = from.Title;
             Url = from.Url;
+            HideInMainMenu = from.HideInMainMenu;
             Layout = from.PageLayout;
             Id = from.Id;
             Settings = from.Settings;
@@ -192,6 +195,7 @@ namespace Core.Web.Models
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
             to.Title = Title;
             to.Url = Url = urlHelper.EncodeForSEO(Url);
+            to.HideInMainMenu = HideInMainMenu;
             to.ParentPageId = ParentPageId == 0 ? null : ParentPageId;
 
             return to;

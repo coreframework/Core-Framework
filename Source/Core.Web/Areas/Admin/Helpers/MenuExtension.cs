@@ -54,7 +54,8 @@ namespace Core.Web.Areas.Admin.Helpers
 
             var siteSettingsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (SiteSettings), null);
             var pluginsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (Plugin), null);
-            if (siteSettingsAccess || pluginsAccess)
+            var pagesAccess = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Page), null);
+            if (siteSettingsAccess || pluginsAccess || pagesAccess) 
             {
                 var administrationMenuItem = new List<IMenuItem>();
 
@@ -66,6 +67,10 @@ namespace Core.Web.Areas.Admin.Helpers
                 {
                     administrationMenuItem.Add(new ActionLink<ModuleController>(html.Translate(".Modules"), Links.Content.Images.Admin.ico5_png, c => c.Index()));
                     administrationMenuItem.Add(new ActionLink<WidgetController>(html.Translate(".Widgets"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
+                }
+                if(pagesAccess)
+                {
+                    administrationMenuItem.Add(new ActionLink<PageController>(html.Translate(".Pages"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
                 }
 
                 menuItems.Add(html.Translate(".Administration"), administrationMenuItem);

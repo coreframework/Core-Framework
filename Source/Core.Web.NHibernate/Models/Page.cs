@@ -95,6 +95,20 @@ namespace Core.Web.NHibernate.Models
         public virtual PageSettings Settings { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether [hide in main menu].
+        /// </summary>
+        /// <value><c>true</c> if [hide in main menu]; otherwise, <c>false</c>.</value>
+        public virtual bool HideInMainMenu { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is service page.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is service page; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool IsServicePage { get; set; }
+
+        /// <summary>
         /// Removes the widget.
         /// </summary>
         /// <param name="widget">The widget.</param>

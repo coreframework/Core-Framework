@@ -1,5 +1,6 @@
 ﻿using Core.Web.NHibernate.Models;
 using FluentNHibernate.Mapping;
+using Framework.Facilities.NHibernate.Filters;
 
 namespace Core.Web.NHibernate.Mappings
 {
@@ -16,6 +17,7 @@ namespace Core.Web.NHibernate.Mappings
             References(pageLocale => pageLocale.Page).Column("PageId").LazyLoad().Not.Nullable();
             Map(pageLocale => pageLocale.Culture).Length(5);
             Map(pageLocale => pageLocale.Title).Length(255);
+            Map(pageLocale => pageLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

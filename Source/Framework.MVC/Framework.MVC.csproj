@@ -156,9 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Breadcrumbs\Breadcrumb.cs" />
-    <Compile Include="Breadcrumbs\BreadcrumbsBuilder.cs" />
     <Compile Include="Breadcrumbs\IBreadcrumb.cs" />
-    <Compile Include="Breadcrumbs\IBreadcrumbsBuilder.cs" />
     <Compile Include="Captcha\CaptchaImage.cs" />
     <Compile Include="Captcha\CaptchaImageHandler.cs" />
     <Compile Include="Controllers\CastleControllerFactory.cs" />

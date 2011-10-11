@@ -32,7 +32,11 @@ Models:
    Description: "Description"
   Plugin:
    CreateDate: "Added"
-   Status: "Status" 
+   Status: "Status"
+  PageLocale:
+   Title: "Title"
+   Url: "URL"
+   InMainMenu: "In main menu"
 Navigation:
  Models:
   NavigationMenuWidgetModel:

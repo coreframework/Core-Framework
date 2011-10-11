@@ -29,6 +29,11 @@
             <%:Html.TextBoxFor(model => model.Url, new { Class = "inp_txt" })%>
             <%:Html.ValidationMessageFor(model => model.Url)%>
         </div>
+        <div class="form_i">
+            <%:Html.LocalizedLabelFor(model=>model.HideInMainMenu) %>
+            <%:Html.CheckBoxFor(model => model.HideInMainMenu)%>
+            <%:Html.ValidationMessageFor(model => model.HideInMainMenu)%>
+        </div>
         <%:Html.AntiForgeryToken()%>
     </div>
     <div class="p_footer clrfix">

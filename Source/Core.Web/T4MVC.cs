@@ -42,6 +42,7 @@ namespace T4MVC {
         public Core.Web.Areas.Admin.Controllers.AdminErrorController AdminError = new Core.Web.Areas.Admin.Controllers.T4MVC_AdminErrorController();
         public Core.Web.Areas.Admin.Controllers.AdminHomeController AdminHome = new Core.Web.Areas.Admin.Controllers.T4MVC_AdminHomeController();
         public Core.Web.Areas.Admin.Controllers.ModuleController Module = new Core.Web.Areas.Admin.Controllers.T4MVC_ModuleController();
+        public Core.Web.Areas.Admin.Controllers.PageController Page = new Core.Web.Areas.Admin.Controllers.T4MVC_PageController();
         public Core.Web.Areas.Admin.Controllers.RoleController Role = new Core.Web.Areas.Admin.Controllers.T4MVC_RoleController();
         public Core.Web.Areas.Admin.Controllers.SiteSettingsController SiteSettings = new Core.Web.Areas.Admin.Controllers.T4MVC_SiteSettingsController();
         public Core.Web.Areas.Admin.Controllers.UserController User = new Core.Web.Areas.Admin.Controllers.T4MVC_UserController();
