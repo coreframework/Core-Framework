@@ -20,6 +20,14 @@
                 </div>
             </div>
         </div>
+         <div class="cols clrfix">
+            <div class="fst_col colls_i">
+                 <div class="i_form_i">
+                    <%:Html.LocalizedLabelFor(model => model.WebsiteName)%>
+                    <%:Html.TextBoxFor(model => model.WebsiteName)%>
+                </div>
+            </div>
+        </div>
         <div class="i_buttons clrfix">
             <div class="btn1 clrfix">
                 <em></em>

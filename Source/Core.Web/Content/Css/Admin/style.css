@@ -165,6 +165,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 					table.ui-jqgrid-htable td a:hover {text-decoration:underline}
 			table.ui-jqgrid-htable tr:hover td {background:#cde6fc;color:#000000}
 			table.ui-jqgrid-htable tr:hover em.delete {background-position:0 -11px;}
+            table.ui-jqgrid-htable #jqgh_cb {padding-left:12px;}
 		.ui-jqgrid-htable_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
 		.ui-jqgrid-htable_bottom .btn1 {float:left;margin-right:5px;}
         .ui-widget-header { display: none; }	
@@ -174,7 +175,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 			table.ui-jqgrid-btable th, table.ui-jqgrid-btable td {text-align:left;}
 			table.ui-jqgrid-btable th {background:url(../../images/admin/e_table_th_bg.gif) repeat-x 0 0;height:33px;color:#fff;font-size:13px;vertical-align:middle} 
 				table.ui-jqgrid-btable th div {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px 8px;}
-				table.ui-jqgrid-btable th:first-child span {background:none}
+				table.ui-jqgrid-btable th div {background:url(../../images/admin/e_table_th_sep.gif) no-repeat 0 0;padding:8px 8px;}
 			table.ui-jqgrid-btable td {border-bottom:#e7e7e7 solid 1px;padding:8px 0px 3px 8px;color:#474747;}
 				table.ui-jqgrid-btable td a {text-decoration:none}
 				table.ui-jqgrid-btable td input[type=checkbox] {margin:0;}

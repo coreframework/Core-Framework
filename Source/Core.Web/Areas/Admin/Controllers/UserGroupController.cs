@@ -91,7 +91,7 @@ namespace Core.Web.Areas.Admin.Controllers
                     select new
                     {
                         id = userGroup.Id,
-                        cell = new[] { userGroup.Name,
+                        cell = new[] { HttpUtility.HtmlEncode(userGroup.Name),
                             String.Format(JqGridConstants.UrlTemplate,
                                 Url.Action(MVC.Admin.UserGroup.Users(userGroup.Id)),
                                 Translate(".Model.UserGroup.Users")), String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
@@ -276,7 +276,7 @@ namespace Core.Web.Areas.Admin.Controllers
                     select new
                     {
                         id = usr.Id,
-                        cell = new[] { usr.Username }
+                        cell = new[] { HttpUtility.HtmlEncode(usr.Username) }
                     }).ToArray()
             };
             return Json(jsonData);

@@ -2,7 +2,7 @@
     Inherits="System.Web.Mvc.ViewPage<Framework.Mvc.Grids.GridViewModel>" %>
 <%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 
-<asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent"><%: String.Format(Html.Translate(".Title"), Model) %></asp:Content>
+<asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent"><%: Model.Title%></asp:Content>
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent"></asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">

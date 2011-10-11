@@ -35,7 +35,7 @@ Actions:
   New: "Add"
 Titles:
     Modules: "Modules"
-    Home: "Home"
+    Home: "Administration dashboard"
     Widgets: "Widgets"
     User_UserGroups: "User groups for {0}"
     UserGroup_Users: "Users in {0}"
@@ -44,7 +44,7 @@ Titles:
     Permissions: "Permissions for {0}"
 Admin:
   Titles:
-    Home: "Home"
+    Home: "Dashboard"
     Modules: "Modules"
     Widgets: "Widgets"
     PageNotFound: "Page not found"

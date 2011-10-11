@@ -18,6 +18,7 @@ namespace Core.Web.Migrations
             {
                 t.PrimaryKey();
                 t.Bool("ShowPanel");
+                t.String("WebsiteName").Length(255).Null();
             });
         }
 

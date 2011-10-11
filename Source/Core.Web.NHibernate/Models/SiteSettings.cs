@@ -23,6 +23,8 @@ namespace Core.Web.NHibernate.Models
         /// </summary>
         /// <value>The show panel.</value>
         public virtual bool ShowPanel { get; set; }
+
+        public virtual String WebsiteName { get; set; }
         
         #endregion
 
