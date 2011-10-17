@@ -1,14 +1,14 @@
 development:
   platform: sqlserver
   host: chernogrebela
-  database: core_modules666
+  database: core
   username: coreLite
   password: coreLite
 
 test:
   platform: sqlserver
   host: chernogrebela
-  database: core_modules
+  database: core
   username: coreLite
   password: coreLite
 

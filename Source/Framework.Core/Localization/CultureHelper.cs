@@ -44,7 +44,11 @@ namespace Framework.Core.Localization
                     {
                         String cultureCode =
                             ServiceLocator.Current.GetInstance<IConfigurationManager>().AppSettings[Constants.DefaultCulture];
-                        defaultCulture = CultureInfo.GetCultureInfo(cultureCode);
+                        
+                        if (!String.IsNullOrEmpty(cultureCode))
+                        {
+                            defaultCulture = CultureInfo.GetCultureInfo(cultureCode);
+                        }
                     }
                 }
 

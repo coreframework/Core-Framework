@@ -1,14 +1,14 @@
 development:
   platform: sqlserver
-  host: wd-server-5
-  database: CoreFramework_v3
-  username: corev3
-  password: corev3
+  host: chernogrebela
+  database: core
+  username: coreLite
+  password: coreLite
 
 test:
   platform: sqlserver
   host: chernogrebela
-  database: core_modules
+  database: core
   username: coreLite
   password: coreLite
 

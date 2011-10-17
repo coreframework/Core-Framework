@@ -7,6 +7,8 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.RegularExpressions;
 
 using Castle.Core.Configuration;
@@ -37,6 +39,8 @@ namespace Framework.Facilities.NHibernate.Castle
 
         private readonly Regex nhibernatePropertyPattern = new Regex("^hibernate\\.", RegexOptions.IgnoreCase);
 
+        private BinaryFormatter binaryFormatter; 
+
         #endregion
 
         #region Constructors
@@ -50,6 +54,7 @@ namespace Framework.Facilities.NHibernate.Castle
         {
             this.application = application;
             this.kernel = kernel;
+            this.binaryFormatter = new BinaryFormatter(); 
         }
 
         #endregion
@@ -71,19 +76,19 @@ namespace Framework.Facilities.NHibernate.Castle
                 var environmentSpecific = String.Format("{0}-{1}", environment, alias);
                 if (application.DatabaseConfiguration.ContainsKey(environmentSpecific))
                 {
-                    return BuildConfig(application.DatabaseConfiguration[environmentSpecific]);
+                    return BuildConfig(application.DatabaseConfiguration[environmentSpecific], config);
                 }
 
                 if (application.DatabaseConfiguration.ContainsKey(alias))
                 {
-                    return BuildConfig(application.DatabaseConfiguration[alias]);
+                    return BuildConfig(application.DatabaseConfiguration[alias], config);
                 }
             }
             else
             {
                 if (application.DatabaseConfiguration.ContainsKey(environment))
                 {
-                    return BuildConfig(application.DatabaseConfiguration[environment]);
+                    return BuildConfig(application.DatabaseConfiguration[environment], config);
                 }
             }
 
@@ -93,6 +98,38 @@ namespace Framework.Facilities.NHibernate.Castle
         #endregion
 
         #region Helper methods
+
+        /// <summary>
+        /// Determines whether [is new configuration required] [the specified file name].
+        /// </summary>
+        /// <param name="fileName">Name of the file.</param>
+        /// <returns>
+        ///     <c>true</c> if [is new configuration required] [the specified file name]; otherwise, <c>false</c>.
+        /// </returns>
+        protected virtual bool IsNewConfigurationRequired(string fileName)
+        {
+            return !File.Exists(fileName);
+        }
+
+        /// <summary>
+        /// Writes the <see cref="Configuration"/> to stream.
+        /// </summary>
+        /// <param name="stream">The stream to be written.</param>
+        /// <param name="cfg">The configuration.</param>
+        protected virtual void WriteConfigurationToStream(Stream stream, Configuration cfg)
+        {
+            binaryFormatter.Serialize(stream, cfg);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="Configuration"/> from stream.
+        /// </summary>
+        /// <param name="fs">The stream from which the configuration will be deserialized.</param>
+        /// <returns>The <see cref="Configuration"/>.</returns>
+        protected virtual Configuration GetConfigurationFromStream(Stream fs)
+        {
+            return binaryFormatter.Deserialize(fs) as Configuration;
+        } 
 
         private static IPersistenceConfigurer GetDatabase(DatabaseConfiguration databaseConfiguration)
         {
@@ -119,20 +156,38 @@ namespace Framework.Facilities.NHibernate.Castle
             }
         }
 
-        private Configuration BuildConfig(DatabaseConfiguration databaseConfiguration)
+        private Configuration BuildConfig(DatabaseConfiguration databaseConfiguration, IConfiguration config)
         {
-            var fluenty = Fluently.Configure()
-                            .Database(GetDatabase(databaseConfiguration))
-                            .Mappings(m =>
-                                        {
-                                            foreach (var mapper in kernel.ResolveAll<INHibernateMapper>())
-                                            {
-                                                mapper.Map(m, databaseConfiguration);
-                                            }
-                                            m.FluentMappings.Add(typeof(CultureFilter));
-                                        });
+            string fileName = config.Attributes["fileName"];
 
-            return fluenty.ExposeConfiguration(ProcessConfiguration).BuildConfiguration().AddProperties(GetNHibernateProperties(databaseConfiguration));
+            Configuration cfg;
+            if (IsNewConfigurationRequired(fileName))
+            {
+                using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+                {
+                    var fluenty = Fluently.Configure()
+                        .Database(GetDatabase(databaseConfiguration))
+                        .Mappings(m =>
+                        {
+                            foreach (var mapper in kernel.ResolveAll<INHibernateMapper>())
+                            {
+                                mapper.Map(m, databaseConfiguration);
+                            }
+                            m.FluentMappings.Add(typeof(CultureFilter));
+                        });
+
+                    cfg = fluenty.ExposeConfiguration(ProcessConfiguration).BuildConfiguration().AddProperties(GetNHibernateProperties(databaseConfiguration));
+                    WriteConfigurationToStream(fileStream, cfg);
+                }
+            }
+            else
+            {
+                using (var fileStream = new FileStream(fileName, FileMode.OpenOrCreate))
+                {
+                    cfg = GetConfigurationFromStream(fileStream);
+                }
+            }
+            return cfg;
         }
 
         private void ProcessConfiguration(Configuration configuration)
