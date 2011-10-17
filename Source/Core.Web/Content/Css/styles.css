@@ -141,6 +141,7 @@ html, body {/*height:100%;*/}
                 .pages ul li a.remove:hover {background:url(../images/nav_del.gif) repeat-x;}
                 .pages ul li ul a.remove {margin-right:5px;}
 		.add_new_pg {float:right!important;padding:3px 0!important;height:24px!important;border:none !important;}
+        .add_new_pg .btn2 {width:120px;}
 	.curr_pg {margin-bottom:5px;}
 		.curr_pg .title {background:url(../images/curr_bg.gif) repeat-x;border:1px solid #525457;color:#fff;font-size:12px;font-weight:bold;padding:4px 10px;}
 		.curr_pg .functions {border:1px solid #808283;border-top:none}

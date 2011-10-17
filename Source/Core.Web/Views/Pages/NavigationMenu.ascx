@@ -8,7 +8,6 @@
          model=>Html.Partial(MVC.Pages.Views.NavigationMenuItem, model).ToString())%>
     </div>
 </div>
-<div class="clear"></div>
 
  <script type="text/javascript">
      jQuery(function () {
