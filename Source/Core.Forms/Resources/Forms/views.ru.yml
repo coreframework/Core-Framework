@@ -1,0 +1,28 @@
+ru:
+  Views:
+    Forms:
+      FormsList:
+        Permissions: "Права"
+        Details: "Детали"
+        Actions: "Действия"
+        Title: "Название"
+        CreateForm: "Создать форму"
+        Forms: "Формы"
+        AddForm: "Добавить форму"
+      EditForm:
+        NewForm: "Новая форма"
+        EditForm: "Редактировать форму"
+      FormElements:
+        Edit: "Редактировать"
+        Delete: "Удалить"
+      EditFormElement:
+        SeparateWithComma: "(через запятую)"
+      New:
+        NewForm: "Новая форма"
+      FormPermissions:
+       FormPermissions: "Права"
+       Role: "Роли"
+       View: "Просматривать"
+       Manage: "Изменять"
+       AddToWidget: "Добавлять виджет"
+       Permissions: "Изменять права доступа"

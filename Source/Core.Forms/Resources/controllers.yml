@@ -1,0 +1,38 @@
+Controllers:
+  FormsBuilderWidget:
+    Messages:
+      SuccessFormSubmit: "Form has been successfully submit."
+      ValidationError: "Validation errors occurred while processing this form."
+      SetupForm: "Setup form"
+      Error: "Error"
+      EmailRequired: "The Email field is required."
+  FormAnswers:
+    Form: "Form"
+    Answers: "Answers"
+    GridTitle: "Form Answers"
+    User: "User"
+    Date: "Date"
+    Title: "Title"
+    Messages:
+      NotFound: "Answer not found."
+  Forms:
+    Title: "Title"
+    Actions: "Actions"
+    Forms: "Forms"
+    Details: "Details"
+    Type: "Type"
+    Required: "Required"
+    GridTitle: "GridTitle"
+    Edit: "Edit"
+    Messages:
+      Notfound: "Not Found"
+      PermitionsSuccess: "Successfully apply permissions."
+      PermitionsUnSuccess: "Could not apply permissions to Form Entity: {0}"
+      NotFoundEntity: "Could not found Form Entity: {0}"
+      Success: "Permitions was successfully updated"
+      ValidationError: "Validation errors occurred while processing this form."
+      SuccessFormSubmit: "Form was successfully saved"
+      FormElementSaveSuccess: "Sucessfully save form element."
+      ElementValidationError: "Validation errors occurred while processing this form. Please take a moment to review the form and correct any input errors before continuing."
+      RemoveSuccess: "Sucessfully remove form element."
+      UnknownError: "Some error has been occured. Please try again."

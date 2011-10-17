@@ -1,0 +1,11 @@
+ru:
+ Controllers:
+  Tabs:
+      Details: "Детали" 
+      FormElements: "Элементы формы"
+      Permissions: "Права доступа"
+  Forms:
+    Messages:
+      SuccessFormSubmit: "Форма была успешно добавлена."
+      ValidationError: "В процессе обработки запроса были выявлены ошибки валидации."
+      RequiredErrorMessage: "Поле обязательно для заполнения."   

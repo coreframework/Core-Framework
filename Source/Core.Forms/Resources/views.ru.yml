@@ -1,0 +1,14 @@
+﻿ru:
+  Views:
+    FormsBuilderWidget:
+      EditWidget:
+        Form: "Форма"
+        SendEmail: "Отправить Email"
+        SaveData: "Сохранить данные"
+      ViewWidget:
+        Submit: "Отправить"
+    FormAnswers:
+      FormsAnswersList:
+         FormAnswers: "Ответы на форму"
+    
+    

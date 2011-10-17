@@ -1,0 +1,10 @@
+ru:
+ Titles:
+  NewForm: "Новая форма"
+  EditForm: "Редактирование формы"
+ ElementTypes:
+  TextField: "Текстовое поле"
+ Messages: 
+  EmailRequired: "Поле Адрес отправителя обязательно для заполнения."
+ Actions:
+  AddNewElement: "Новый элемент"

@@ -1,0 +1,30 @@
+Views:
+  Forms:
+    FormsList:
+      Permissions: "Permissions"
+      Details: "Details"
+      Actions: "Actions"
+      Title: "Title"
+      CreateForm: "Create Form"
+      Forms: "Forms"
+      AddForm: "Add Form"
+    EditForm:
+      NewForm: "New form"
+      EditForm: "Edit form"
+    FormElements:
+      Edit: "Edit"
+      Delete: "Delete"
+    EditFormElement:
+      SeparateWithComma: "(separate with comma)"
+    New:
+     NewForm: "New form"
+    FormPermissions:
+     FormPermissions: "Form Permissions"
+     Role: "Role"
+     View: "View"
+     Manage: "Manage"
+     AddToWidget: "Add To Widget"
+     Permissions: "Manage Permissions"
+  FormAnswers:
+    FormAnswers: "Form Answers"
+    FormAnswerDetails: "Form Answer Details"

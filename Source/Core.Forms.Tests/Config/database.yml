@@ -1,0 +1,17 @@
+development:
+  platform: sqlserver
+  host: chernogrebela
+  database: core
+  username: coreLite
+  password: coreLite
+
+test:
+  platform: sqlserver
+  host: chernogrebela
+  database: core
+  username: coreLite
+  password: coreLite
+
+production:
+  platform: sqlite
+  database: App_Data\production.sqlite
