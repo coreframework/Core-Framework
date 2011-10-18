@@ -1,0 +1,7 @@
+﻿ru:
+  Controllers:
+     Languages:
+        Title: "Название"
+        Edit: "Редактировать"
+        Default: "По умолчанию"
+        SetAsDefault: "Назначить по умолчанию"

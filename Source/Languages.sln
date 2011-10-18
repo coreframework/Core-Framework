@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Languages", "Core.Languages\Core.Languages.csproj", "{E2CF48ED-0792-4A25-896F-A662E581B55C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Languages.Migrations", "Core.Languages.Migrations\Core.Languages.Migrations.csproj", "{AF0A6F15-8E02-430B-A7D5-2DEF923B1E15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Languages.NHibernate", "Core.Languages.NHibernate\Core.Languages.NHibernate.csproj", "{70F4745D-6AE7-4A14-8514-92457D1D524C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2CF48ED-0792-4A25-896F-A662E581B55C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2CF48ED-0792-4A25-896F-A662E581B55C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2CF48ED-0792-4A25-896F-A662E581B55C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2CF48ED-0792-4A25-896F-A662E581B55C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0A6F15-8E02-430B-A7D5-2DEF923B1E15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0A6F15-8E02-430B-A7D5-2DEF923B1E15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0A6F15-8E02-430B-A7D5-2DEF923B1E15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0A6F15-8E02-430B-A7D5-2DEF923B1E15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F4745D-6AE7-4A14-8514-92457D1D524C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F4745D-6AE7-4A14-8514-92457D1D524C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F4745D-6AE7-4A14-8514-92457D1D524C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F4745D-6AE7-4A14-8514-92457D1D524C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

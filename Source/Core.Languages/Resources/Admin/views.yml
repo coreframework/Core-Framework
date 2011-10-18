@@ -1,0 +1,18 @@
+Views:
+  Admin:
+    Index:
+      Title: "Languages"
+      NewLanguage: "New Language"
+    New:
+      Title: "Languages"
+      Save: "Save"
+      Cancel: "Cancel"
+    Edit:
+      Title: "Edit language \"{0}\""
+      Save: "Save"
+      Cancel: "Cancel"
+Models:
+  LanguageViewModel:
+     Title: "Title"
+     Code : "Code"
+     Culture: "Culture"
