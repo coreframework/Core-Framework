@@ -1,0 +1,13 @@
+﻿ru:
+  Models:
+    NewsWidgetModel:
+      ItemsOnPage: "Количество новостей"
+    NewsArticleViewModel:
+      Title: "Заголовок"
+      Content: "Содержимое"
+      Summary: "Аннотация"
+    NewsArticleLocaleViewModel:
+      Cultures: "Культуры"
+      Title: "Заголовок"
+      Content: "Содержимое"
+      Summary: "Аннотация"

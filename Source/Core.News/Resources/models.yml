@@ -1,0 +1,10 @@
+﻿Models:
+  ProductWidgetModel:
+    ItemsOnPage: "News items count"
+  NewsArticleViewModel:
+    Title: "Title" 
+    Content: "Content"
+  NewsArticleLocaleViewModel:
+    Cultures: "Cultures"
+    Title: "Title"
+    Content: "Content"

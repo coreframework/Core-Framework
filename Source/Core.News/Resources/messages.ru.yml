@@ -1,0 +1,12 @@
+﻿ru:
+  Controllers:
+    News:
+      Messages:
+        SaveSuccess: "Новость сохранена успешно."
+        ValidationError: "Возникли валидационные ошибки. Пожалуйста, проверьте правильность заполнения полей."
+        UnknownError: "Возникла ошибка. Попробуйте еще раз."
+        RemoveSuccess: "Новость удалена успешно."
+        Pagenotfound: "Страница не найдена"
+    NewsViewerWidget:
+      Messages:
+        Nonews: "Нет новостей для отображения."
