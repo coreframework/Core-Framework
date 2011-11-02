@@ -108,6 +108,15 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Pages", "admin/pages", MVC.Admin.Page.Index());
             context.MapRoute("Admin.Pages.DynamicGridData", "admin/pages/DynamicGridData", MVC.Admin.Page.DynamicGridData());
 
+            context.MapRoute("Admin.PageTemplates", "admin/page-templates", MVC.Admin.PageTemplate.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.PageTemplates.DynamicGridData", "admin/page-templates/DynamicGridData", MVC.Admin.PageTemplate.DynamicGridData());
+            context.MapRoute("Admin.PageTemplates.New", "admin/page-templates/new", MVC.Admin.PageTemplate.New());
+            context.MapRoute("Admin.PageTemplates.Create", "admin/page-templates", MVC.Admin.PageTemplate.Create(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Put) });
+            context.MapRoute("Admin.PageTemplates.Edit", "admin/page-templates/{id}", new { controller = "PageTemplate", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.PageTemplates.Update", "admin/page-templates/{id}", MVC.Admin.PageTemplate.Update(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.PageTemplates.Remove", "admin/page-templates/remove/{id}", new { controller = "PageTemplate", action = "Remove", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.PageTemplates.ConfirmRemove", "admin/page-templates/{id}", MVC.Admin.PageTemplate.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
+
             context.MapRoute("Admin.Widgets", "admin/widgets", MVC.Admin.Widget.Index());
             context.MapRoute("Admin.Widgets.DynamicGridData", "admin/widget/DynamicGridData", MVC.Admin.Widget.DynamicGridData());
             context.MapRoute("Admin.Widgets.Edit", "admin/widget/{id}", new { controller = "Widget", action = "Edit", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });

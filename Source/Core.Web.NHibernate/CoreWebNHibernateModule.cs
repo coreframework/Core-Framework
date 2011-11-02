@@ -48,6 +48,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<IPageWidgetService>().ImplementedBy<NHibernatePageWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IPageWidgetSettingService>().ImplementedBy<NHibernatePageWidgetSettingService>().LifeStyle.Transient);
             container.Register(Component.For<IPageSettingService>().ImplementedBy<NHibernatePageSettingsService>().LifeStyle.Transient);
+            container.Register(Component.For<IPageTemplateService>().ImplementedBy<NHibernatePageTemplateService>().LifeStyle.Transient);
             container.Register(Component.For<ISiteMapWidgetService>().ImplementedBy<NHibernateSiteMapWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IListMenuWidgetService>().ImplementedBy<NHibernateListMenuWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IBreadcrumbsWidgetService>().ImplementedBy<NHibernateBreadcrumbsWidgetService>().LifeStyle.Transient);

@@ -14,6 +14,7 @@
     <AssemblyName>Core.Web</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -148,6 +149,9 @@
     <Compile Include="Admin.PageController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.PageTemplateController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.RoleController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -171,6 +175,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
     <Compile Include="Areas\Admin\Controllers\PageController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PageTemplateController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\SiteSettingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -184,6 +189,7 @@
     <Compile Include="Areas\Admin\Helpers\RouteLink.cs" />
     <Compile Include="Areas\Admin\Models\AssignedUserGroupModel.cs" />
     <Compile Include="Areas\Admin\Models\AssignedUserModel.cs" />
+    <Compile Include="Areas\Admin\Models\PageTemplateViewModel.cs" />
     <Compile Include="Areas\Admin\Models\PermissionOperationsModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginListingModel.cs" />
     <Compile Include="Areas\Admin\Models\PluginViewModel.cs" />
@@ -328,6 +334,10 @@
     <Content Include="Areas\Admin\Views\Module\Index.aspx" />
     <Content Include="Areas\Admin\Views\Module\Install.aspx" />
     <Content Include="Areas\Admin\Views\Module\Uninstall.aspx" />
+    <Content Include="Areas\Admin\Views\PageTemplate\Edit.aspx" />
+    <Content Include="Areas\Admin\Views\PageTemplate\Index.aspx" />
+    <Content Include="Areas\Admin\Views\PageTemplate\New.aspx" />
+    <Content Include="Areas\Admin\Views\PageTemplate\Remove.aspx" />
     <Content Include="Areas\Admin\Views\Page\Index.aspx" />
     <Content Include="Areas\Admin\Views\Role\Edit.aspx" />
     <Content Include="Areas\Admin\Views\Role\EditForm.ascx" />

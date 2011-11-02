@@ -24,6 +24,7 @@ namespace Core.Web.NHibernate.Mappings
             HasOne(page => page.PageLayout).PropertyRef(pageLayout => pageLayout.Page).Cascade.All().LazyLoad();
             Map(page => page.HideInMainMenu);
             Map(page => page.IsServicePage);
+            Map(page => page.IsTemplate);
 
             HasMany(page => page.Widgets).KeyColumn("PageId")
                 .Table("PageWidgets")

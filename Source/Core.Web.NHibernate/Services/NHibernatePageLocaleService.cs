@@ -27,15 +27,16 @@ namespace Core.Web.NHibernate.Services
             return query.Where(locale => locale.Page.Id == pageId).ToList();
         }
 
-        public ICriteria GetSearchCriteria(string searchString)
+        public ICriteria GetSearchCriteria(string searchString, bool isTemplate)
         {
             ICriteria criteria = Session.CreateCriteria<PageLocale>().CreateAlias("Page", "page");
 
             DetachedCriteria filter = DetachedCriteria.For<PageLocale>("filteredLocale").CreateAlias("Page", "filteredPage")
                 .SetProjection(Projections.Id()).SetMaxResults(1).AddOrder(Order.Desc("filteredLocale.Priority")).Add(
-                    Restrictions.EqProperty("filteredPage.Id", "page.Id"));
+                    Restrictions.EqProperty("filteredPage.Id", "page.Id")).Add(
+                    Restrictions.Eq("filteredPage.IsTemplate", isTemplate));
 
-            criteria.Add(Subqueries.PropertyIn("Id", filter));
+            criteria.Add(Subqueries.PropertyIn("Id", filter));            
 
             if (!String.IsNullOrEmpty(searchString))
             {

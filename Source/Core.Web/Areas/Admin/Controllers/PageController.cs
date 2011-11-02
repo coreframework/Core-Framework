@@ -23,7 +23,6 @@ namespace Core.Web.Areas.Admin.Controllers
     {
         #region Fields
 
-        private readonly IPageService pageService;
         private readonly IPageLocaleService pageLocaleService;
 
         #endregion
@@ -35,7 +34,6 @@ namespace Core.Web.Areas.Admin.Controllers
         /// </summary>
         public PageController()
         {
-            pageService = ServiceLocator.Current.GetInstance<IPageService>();
             pageLocaleService = ServiceLocator.Current.GetInstance<IPageLocaleService>();
         }
 
@@ -84,7 +82,7 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            ICriteria searchCriteria = pageLocaleService.GetSearchCriteria(search);
+            ICriteria searchCriteria = pageLocaleService.GetSearchCriteria(search, false);
             long totalRecords = pageLocaleService.Count(searchCriteria);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
             var pages = searchCriteria.SetMaxResults(pageSize).SetFirstResult(pageIndex * pageSize).AddOrder(sord == "asc" ? Order.Asc(sidx) : Order.Desc(sidx)).List<PageLocale>();

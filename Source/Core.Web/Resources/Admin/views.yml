@@ -15,6 +15,14 @@ Admin:
     Widget:
        Edit:
         Title: "Edit widget"   
+    PageTemplate:
+      New:
+        Title: "Add page template"
+      Edit:
+        Title: "Edit page template \"{0}\""
+      Remove:
+        Title: "Remove page template \"{0}\""
+        AreYouSure: "Are you sure want to remove page template \"{0}\"?"
     User:
       Index:
         Title: "Users"
@@ -62,6 +70,7 @@ Admin:
         Administration: "Administration"
         Modules: "Modules"
         Pages: "Pages"
+        PageTemplates: "Page Templates"
         AccountsAndPermissions: "Accounts & Permissions"
         SiteSettings: "Website Settings"
     Role:

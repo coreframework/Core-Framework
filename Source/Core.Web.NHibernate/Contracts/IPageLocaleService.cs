@@ -10,6 +10,6 @@ namespace Core.Web.NHibernate.Contracts
     {
         PageLocale GetLocale(long pageId, String culture);
         IList<PageLocale> GetLocales(long pageId);
-        ICriteria GetSearchCriteria(string searchString);
+        ICriteria GetSearchCriteria(string searchString, bool isTemplate);
     }
 }

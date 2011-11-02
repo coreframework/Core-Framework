@@ -26,6 +26,12 @@ namespace Core.Web.NHibernate.Services
 
         #region Methods
 
+        public override IQueryable<Page> CreateQuery()
+        {
+            var baseQuery = base.CreateQuery();
+            return baseQuery.Where(page => !page.IsTemplate);
+        }
+
         public Page FindByUrl(String url)
         {
             var query = from page in CreateQuery()
@@ -72,7 +78,7 @@ namespace Core.Web.NHibernate.Services
         public IEnumerable<Page> GetAllowedPagesForMainMenu(ICorePrincipal user)
         {
             var criteria = GetAllowedPagesCriteria(user, (int)PageOperations.View);
-            criteria.Add(Expression.Eq("HideInMainMenu", false));
+            //criteria.Add(Restrictions.Eq("pages.HideInMainMenu", false));
 
             return criteria.SetCacheable(true).List<Page>();
         }
@@ -87,11 +93,12 @@ namespace Core.Web.NHibernate.Services
         {
             ICriteria criteria = Session.CreateCriteria<Page>("pages").CreateAlias("User", "pageUser", JoinType.LeftOuterJoin);
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-
             var permissionCriteria = permissionCommonService.GetPermissionsCriteria(user, operationCode, typeof (Page),
                                                                                     "pages.Id", "pageUser.Id");
+            criteria.Add(Restrictions.Eq("pages.IsTemplate", false));
             if (permissionCriteria!=null)
                 criteria.Add(permissionCriteria);
+
             return criteria;
         }
 

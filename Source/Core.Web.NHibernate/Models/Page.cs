@@ -109,6 +109,14 @@ namespace Core.Web.NHibernate.Models
         public virtual bool IsServicePage { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is template.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is template; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool IsTemplate { get; set; }
+
+        /// <summary>
         /// Removes the widget.
         /// </summary>
         /// <param name="widget">The widget.</param>

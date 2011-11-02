@@ -1,7 +1,7 @@
 development:
   platform: sqlserver
   host: chernogrebela
-  database: core
+  database: corev3_4
   username: coreLite
   password: coreLite
   properties:
@@ -10,10 +10,10 @@ development:
 
 test:
   platform: sqlserver
-  host: chernogrebela
-  database: core
+  host: localhost
+  database: corev3_4
   username: coreLite
-  password: coreLite
+  password: 111111
   properties:
     hibernate.cache.use_second_level_cache: true
     hibernate.cache.provider_class: NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache

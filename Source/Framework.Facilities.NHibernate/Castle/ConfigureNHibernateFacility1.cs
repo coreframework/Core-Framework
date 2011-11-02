@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,8 @@ namespace Framework.Facilities.NHibernate.Castle
 
         private const String EnvironmentSpecificTemplate = "{0}-{1}";
 
+        private const String HibernateConfigPath = "Config/nhconfig";
+
         #region IBootstrapperTask members
 
         /// <summary>
@@ -47,6 +50,16 @@ namespace Framework.Facilities.NHibernate.Castle
         #endregion
 
         #region Helper methods
+
+        private static void AddDefaultFactory(MutableConfiguration config)
+        {
+            config.CreateChild("factory").Attribute("id", "nhibernate-factory.default").Attribute("fileName", Path.Combine(AppDomain.CurrentDomain.BaseDirectory, HibernateConfigPath));
+        }
+
+        private static void AddFactory(MutableConfiguration config, String alias)
+        {
+            config.CreateChild("factory").Attribute("id", String.Format("nhibernate-factory.{0}", alias)).Attribute("alias", alias);
+        }
 
         private MutableConfiguration GetFacilityConfig(IApplication application)
         {
@@ -94,16 +107,6 @@ namespace Framework.Facilities.NHibernate.Castle
             }
 
             return facilityConfig;
-        }
-
-        private void AddDefaultFactory(MutableConfiguration config)
-        {
-            config.CreateChild("factory").Attribute("id", "nhibernate-factory.default");
-        }
-
-        private void AddFactory(MutableConfiguration config, String alias)
-        {
-            config.CreateChild("factory").Attribute("id", String.Format("nhibernate-factory.{0}", alias)).Attribute("alias", alias);
         }
 
         #endregion

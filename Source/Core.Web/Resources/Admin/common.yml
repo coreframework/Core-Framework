@@ -24,6 +24,9 @@ Messages:
   InstallWidget: "Widget has been installed successfuly."
   UninstallWidget: "Widget has been uninstalled successfuly."
   SiteSettingsApplied: "Settings have been saved successfully."
+  PageTemplateCreated: "Page template has been created successfully."
+  PageTemplateUpdated: "Page template has been updated successfully."
+  PageTemplateDeleted: "Page template has been deleted successfully."
 Actions:
   Actions: "Actions"
   Install: "Install"
@@ -43,6 +46,7 @@ Titles:
     Role_UserGroups: "{0}'s User Groups"
     Permissions: "{0}'s Permissions"
     Pages: "Pages"
+    PageTemplates: "Page Templates"
 Admin:
   Titles:
     Home: "Dashboard"
