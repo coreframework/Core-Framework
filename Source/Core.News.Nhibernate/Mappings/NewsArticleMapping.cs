@@ -18,7 +18,7 @@ namespace Core.News.Nhibernate.Mappings
             Map(newsArticle => newsArticle.PublishDate);
             Map(newsArticle => newsArticle.LastModifiedDate);
             Map(newsArticle => newsArticle.StatusId);
-
+            Map(newsArticle => newsArticle.Url).Length(255);
             HasManyToMany(newsArticle => newsArticle.Categories)
                            .Table("News_ArticlesToCategories").ParentKeyColumn("ArticleId")
                            .ChildKeyColumn("CategoryId").Cascade.SaveUpdate().LazyLoad();

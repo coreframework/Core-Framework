@@ -24,6 +24,13 @@ namespace Core.News.Nhibernate.Contracts
 
         NewsArticle FindPublished(long id);
 
+        NewsArticle FindPublished(String url);
+
         IEnumerable<NewsArticle> FindPublished();
+
+        IEnumerable<NewsArticle> GetForListingWidget(NewsListingWidget listingWidget, int currentPage);
+        
+        int GetCountForListingWidget(NewsListingWidget listingWidget);
+
     }
 }

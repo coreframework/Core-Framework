@@ -193,6 +193,7 @@ namespace Core.Web.Areas.Admin
                                             {
                                                 Identifier = widget1.Identifier,
                                                 Title = widget1.Title,
+                                                IsDetailsWidget = widget1.IsDetailsWidget,
                                                 Plugin = plugin
                                             };
 

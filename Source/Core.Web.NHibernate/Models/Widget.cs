@@ -96,5 +96,7 @@ namespace Core.Web.NHibernate.Models
         }
 
         public virtual WidgetLocale Locale { get; set; }
+
+        public virtual bool IsDetailsWidget { get; set; }
     }
 }
