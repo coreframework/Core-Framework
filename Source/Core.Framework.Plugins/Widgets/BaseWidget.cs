@@ -95,6 +95,11 @@ namespace Core.Framework.Plugins.Widgets
             }
         }
 
+        public virtual bool IsDetailsWidget
+        {
+            get { return false; }
+        }
+
         #endregion
 
         #region Constructor

@@ -64,6 +64,7 @@
     <Compile Include="Migration_AddNewsCategoryLocales.cs" />
     <Compile Include="Migration_AddNewsCategoryWidget.cs" />
     <Compile Include="Migration_AddNewsArticleWidgetToCategories.cs" />
+    <Compile Include="Migration_InsertNewsDefaultRecords.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
