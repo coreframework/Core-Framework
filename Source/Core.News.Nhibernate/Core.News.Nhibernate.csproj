@@ -64,12 +64,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Comparers\ListCompareExtension.cs" />
+    <Compile Include="Comparers\NewsCategoryComparer.cs" />
     <Compile Include="Contracts\INewsCategoryLocaleService.cs" />
     <Compile Include="Contracts\INewsCategoryService.cs" />
     <Compile Include="Contracts\INewsCategoryWidgetService.cs" />
     <Compile Include="Contracts\INewsArticleLocaleService.cs" />
     <Compile Include="Contracts\INewsArticleService.cs" />
     <Compile Include="Contracts\INewsArticleWidgetService.cs" />
+    <Compile Include="Contracts\INewsDetailsWidgetService.cs" />
+    <Compile Include="Contracts\INewsListingWidgetService.cs" />
     <Compile Include="CoreNewsArticlesNHibernateModule.cs" />
     <Compile Include="Mappings\ArticleToCategoryMapping.cs" />
     <Compile Include="Mappings\NewsArticleLocaleMapping.cs" />
@@ -79,6 +83,9 @@
     <Compile Include="Mappings\NewsCategoryLocaleMapping.cs" />
     <Compile Include="Mappings\NewsCategoryMapping.cs" />
     <Compile Include="Mappings\NewsCategoryWidgetMapping.cs" />
+    <Compile Include="Mappings\NewsDetailsWidgetMapping.cs" />
+    <Compile Include="Mappings\NewsListingWidgetMapping.cs" />
+    <Compile Include="Mappings\NewsListingWidgetToCategoriesMapping.cs" />
     <Compile Include="Models\ArticleToCategory.cs" />
     <Compile Include="Models\NewsArticle.cs" />
     <Compile Include="Models\NewsArticleLocale.cs" />
@@ -87,6 +94,10 @@
     <Compile Include="Models\NewsCategory.cs" />
     <Compile Include="Models\NewsCategoryLocale.cs" />
     <Compile Include="Models\NewsCategoryWidget.cs" />
+    <Compile Include="Models\NewsDetailsLinkMode.cs" />
+    <Compile Include="Models\NewsDetailsWidget.cs" />
+    <Compile Include="Models\NewsListingWidget.cs" />
+    <Compile Include="Models\NewsListingWidgetToCategories.cs" />
     <Compile Include="Models\NewsStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NHibernateNewsCategoryLocaleService.cs" />
@@ -94,6 +105,8 @@
     <Compile Include="Services\NHibernateNewsArticleLocaleService.cs" />
     <Compile Include="Services\NHibernateNewsArticleService.cs" />
     <Compile Include="Services\NHibernateNewsArticleWidgetService.cs" />
+    <Compile Include="Services\NHibernateNewsDetailsWidgetService.cs" />
+    <Compile Include="Services\NHibernateNewsListingWidgetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework.Core\Framework.Core.csproj">

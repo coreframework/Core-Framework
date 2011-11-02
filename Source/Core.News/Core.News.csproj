@@ -14,6 +14,7 @@
     <AssemblyName>Core.News</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -110,9 +111,13 @@
   <ItemGroup>
     <Compile Include="Controllers\NewsCategoryController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\NewsDetailsWidgetController.cs" />
+    <Compile Include="Controllers\NewsListingWidgetController.cs" />
     <Compile Include="Controllers\NewsViewerWidgetController.cs" />
     <Compile Include="Helpers\NewsArticleHelper.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
+    <Compile Include="Helpers\NewsDetailsWidgetHelper.cs" />
+    <Compile Include="Helpers\NewsListingWidgetHelper.cs" />
     <Compile Include="Helpers\NewsViewerWidgetHelper.cs" />
     <Compile Include="Helpers\NewsConstants.cs" />
     <Compile Include="Models\CategoryLocaleViewModel.cs" />
@@ -121,6 +126,10 @@
     <Compile Include="Models\CategoryViewWidgetModel.cs" />
     <Compile Include="Models\CategoryWidgetModel.cs" />
     <Compile Include="Models\NewsArticleWidgetModel.cs" />
+    <Compile Include="Models\NewsDetailsWidgetEditModel.cs" />
+    <Compile Include="Models\NewsDetailsWidgetViewModel.cs" />
+    <Compile Include="Models\NewsListingWidgetEditModel.cs" />
+    <Compile Include="Models\NewsListingWidgetViewModel.cs" />
     <Compile Include="NewsCategoryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -147,9 +156,17 @@
     <Compile Include="Verbs\Widgets\NewsCategoryWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsCategoryWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsCategoryWidgetViewerVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsDetailsWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsDetailsWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsDetailsWidgetViewerVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsListingWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsListingWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\NewsListingWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\NewsWidgetViewerVerb.cs" />
+    <Compile Include="Widgets\NewsDetailsWidget.cs" />
+    <Compile Include="Widgets\NewsListingWidget.cs" />
     <Compile Include="Widgets\NewsViewerWidget.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +192,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\NewsCategory\ShowForm.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsDetailsWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsDetailsWidget\ViewWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsListingWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsListingWidget\ViewWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\NewsViewerWidget\NewsListing.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\News\Categories.aspx">
