@@ -167,9 +167,9 @@ namespace Framework.Facilities.NHibernate
             }
             else
             {
-                if (entity is ILocalizable)
+                if (entity is ILocalizable<ILocale>)
                 {
-                    ILocalizable localizableEntity = (ILocalizable)entity;
+                    var localizableEntity = (ILocalizable<ILocale>)entity;
                     if (!localizableEntity.CurrentLocales.Contains(localizableEntity.CurrentLocale))
                     {
                         localizableEntity.CurrentLocales.Add(localizableEntity.CurrentLocale);

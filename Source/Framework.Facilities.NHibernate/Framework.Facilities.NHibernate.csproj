@@ -175,6 +175,7 @@
     <Compile Include="Filters\CultureFilter.cs" />
     <Compile Include="NHibernateDataService.cs" />
     <Compile Include="NHibernateInstaller.cs" />
+    <Compile Include="Objects\LocalizableEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,6 +209,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
   <Import Project="$(StyleCopTargets)" />

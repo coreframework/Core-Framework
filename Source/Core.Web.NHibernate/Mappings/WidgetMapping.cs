@@ -18,7 +18,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(widget => widget.Status).CustomType(typeof(WidgetStatus));
             References(widget => widget.Plugin);
 
-            HasMany(widget => widget.CurrentWidgetLocales).KeyColumn("WidgetId")
+            HasMany(widget => widget.CurrentLocales).KeyColumn("WidgetId")
             .Table("WidgetLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

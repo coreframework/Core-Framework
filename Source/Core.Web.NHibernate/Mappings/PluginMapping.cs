@@ -18,7 +18,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(plugin => plugin.Status).CustomType(typeof(PluginStatus));
             Map(plugin => plugin.Version).Length(255);
             Map(plugin => plugin.CreateDate);
-            HasMany(plugin => plugin.CurrentPluginLocales).KeyColumn("PluginId")
+            HasMany(plugin => plugin.CurrentLocales).KeyColumn("PluginId")
             .Table("PluginLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

@@ -1,25 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
-    public class Plugin : Entity, IPermissible, ILocalizable
+    public class Plugin : LocalizableEntity<PluginLocale>, IPermissible
     {
-        #region Fields
-
-        private readonly IList<PluginLocale> currentPluginLocales = new List<PluginLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private PluginLocale currentLocale;
-
-        #endregion
-
         public Plugin()
         {
             PermissionTitle = "Modules";
@@ -80,52 +71,13 @@ namespace Core.Web.NHibernate.Models
             set { ((PluginLocale)CurrentLocale).Description = value; }
         }
 
-        public virtual IList<ILocale> CurrentLocales
+        public override ILocale InitializeLocaleEntity()
         {
-            get
-            {
-                if (currentLocales.Count == 0 && currentPluginLocales.Count > 0)
-                {
-                    currentLocales = currentPluginLocales.ToList().ConvertAll(mc => (ILocale)mc);
-                }
-                return currentLocales;
-            }
-            set
-            {
-                currentLocales = value;
-            }
-        }
-
-        public virtual IList<PluginLocale> CurrentPluginLocales
-        {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (PluginLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
-        }
-
-        public virtual ILocale CurrentLocale
-        {
-            get
-            {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as PluginLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new PluginLocale
+            return new PluginLocale
                         {
                             Plugin = this,
                             Culture = null
                         };
-                    }
-                }
-                return currentLocale;
-            }
         }
 
         #endregion

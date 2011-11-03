@@ -1,24 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Core.Forms.NHibernate.Models
 {
     /// <summary>
     /// Describes form element, which form can contain.
     /// </summary>
-    public class FormElement : Entity, ILocalizable
+    public class FormElement : LocalizableEntity<FormElementLocale>
     {
-        #region Fields
-
-        private readonly IList<FormElementLocale> currentFormElementLocales = new List<FormElementLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private FormElementLocale currentLocale;
-
-        #endregion
-
         #region Properties
         /// <summary>
         /// Gets or sets the title.
@@ -90,34 +80,6 @@ namespace Core.Forms.NHibernate.Models
         /// <value>The regex template.</value>
         public virtual RegexTemplate RegexTemplate { get; set; }
 
-        public virtual IList<ILocale> CurrentLocales
-        {
-            get
-            {
-                if (currentLocales.Count == 0 && currentFormElementLocales.Count > 0)
-                {
-                    currentLocales = currentFormElementLocales.ToList().ConvertAll(mc => (ILocale)mc);
-                }
-                return currentLocales;
-            }
-            set
-            {
-                currentLocales = value;
-            }
-        }
-
-        public virtual IList<FormElementLocale> CurrentFormElementLocales
-        {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (FormElementLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
-        }
-
         public virtual Type LocaleType
         {
             get
@@ -126,25 +88,15 @@ namespace Core.Forms.NHibernate.Models
             }
         }
 
-        public virtual ILocale CurrentLocale
+        public override ILocale InitializeLocaleEntity()
         {
-            get
-            {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as FormElementLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new FormElementLocale
+            return new FormElementLocale
                         {
                             FormElement = this,
                             Culture = null
                         };
-                    }
-                }
-                return currentLocale;
-            }
         }
+
         #endregion
     }
 }

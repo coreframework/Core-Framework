@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof (IPermissible))]
-    public class Role : Entity, IRole, IPermissible, ILocalizable
+    public class Role : LocalizableEntity<RoleLocale>, IPermissible, IRole
     {
         #region Fields
 
         private IList<User> users = new List<User>();
         private IList<UserGroup> userGroups = new List<UserGroup>();
-
-        private readonly IList<RoleLocale> currentRoleLocales = new List<RoleLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private RoleLocale currentLocale;
 
         private String permissionTitle = "Roles";
 
@@ -63,43 +58,13 @@ namespace Core.Web.NHibernate.Models
             set { userGroups = value; }
         }
 
-        public virtual IList<ILocale> CurrentLocales
+        public override ILocale InitializeLocaleEntity()
         {
-            get
+            return new RoleLocale
             {
-                if (currentLocales.Count == 0 && currentRoleLocales.Count > 0)
-                {
-                    currentLocales = currentRoleLocales.ToList().ConvertAll(mc => (ILocale) mc);
-                }
-                return currentLocales;
-            }
-            set { currentLocales = value; }
-        }
-
-        public virtual IList<RoleLocale> CurrentRoleLocales
-        {
-            get { return CurrentLocales.ToList().ConvertAll(mc => (RoleLocale) mc); }
-            set { CurrentLocales = value.ToList().ConvertAll(mc => (ILocale) mc); }
-        }
-
-        public virtual ILocale CurrentLocale
-        {
-            get
-            {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as RoleLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new RoleLocale
-                                             {
-                                                 Role = this,
-                                                 Culture = null
-                                             };
-                    }
-                }
-                return currentLocale;
-            }
+                Role = this,
+                Culture = null
+            };
         }
 
         #endregion

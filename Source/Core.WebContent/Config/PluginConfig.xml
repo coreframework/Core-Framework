@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Identifier>Core.WebContent</Identifier>
+  <Title>Web Content</Title>
+  <ResourcesDirectory>Resources</ResourcesDirectory>
+  <Description>Allow managing web content.</Description>
+  <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
+  <JsPath>Scripts\</JsPath>
+</PluginSetting>

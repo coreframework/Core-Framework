@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Core.Forms.NHibernate.Permissions.Operations;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Core.Forms.NHibernate.Models
 {
@@ -14,15 +13,11 @@ namespace Core.Forms.NHibernate.Models
     /// Describes form entity.
     /// </summary>
     [Export(typeof(IPermissible))]
-    public class Form : Entity, IPermissible, ILocalizable
+    public class Form : LocalizableEntity<FormLocale>, IPermissible
     {
         #region Fields
 
         private readonly IList<FormElement> formElements = new List<FormElement>();
-
-        private readonly IList<FormLocale> currentFormLocales = new List<FormLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private FormLocale currentLocale;
 
         private String permissionTitle = "Forms";
 
@@ -92,60 +87,13 @@ namespace Core.Forms.NHibernate.Models
 
         #endregion
 
-        public virtual IList<ILocale> CurrentLocales
+        public override ILocale InitializeLocaleEntity()
         {
-            get
+            return new FormLocale
             {
-                if (currentLocales.Count == 0 && currentFormLocales.Count > 0)
-                {
-                    currentLocales = currentFormLocales.ToList().ConvertAll(mc => (ILocale)mc);
-                }
-                return currentLocales;
-            }
-            set
-            {
-                currentLocales = value;
-            }
-        }
-
-        public virtual IList<FormLocale> CurrentFormLocales
-        {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (FormLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
-        }
-
-        public virtual Type LocaleType
-        {
-            get
-            {
-                return typeof(FormLocale);
-            }
-        }
-
-        public virtual ILocale CurrentLocale
-        {
-            get
-            {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as FormLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new FormLocale
-                        {
-                            Form = this,
-                            Culture = null
-                        };
-                    }
-                }
-                return currentLocale;
-            }
+                Form = this,
+                Culture = null
+            };
         }
 
         #endregion

@@ -10,7 +10,7 @@ development:
 
 test:
   platform: sqlserver
-  host: localhost
+  host: erohinr
   database: corev3_4
   username: coreLite
   password: 111111

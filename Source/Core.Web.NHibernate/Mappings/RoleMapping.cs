@@ -11,7 +11,6 @@ namespace Core.Web.NHibernate.Mappings
             Cache.Region("Roles").ReadWrite();
             Table("Roles");
             Id(role => role.Id);
-            //Map(role => role.Name).Length(255);
             Map(role => role.IsSystemRole);
             Map(role => role.NotAssignableRole);
             Map(role => role.NotPermissible);
@@ -19,7 +18,7 @@ namespace Core.Web.NHibernate.Mappings
                 .ChildKeyColumn("UserId").Cascade.SaveUpdate().LazyLoad();
             HasManyToMany(role => role.UserGroups).Table("UserGroupsToRoles").ParentKeyColumn("RoleId")
                 .ChildKeyColumn("UserGroupId").Cascade.SaveUpdate().LazyLoad();
-            HasMany(role => role.CurrentRoleLocales).KeyColumn("RoleId")
+            HasMany(role => role.CurrentLocales).KeyColumn("RoleId")
             .Table("RoleLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

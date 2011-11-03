@@ -172,6 +172,10 @@
       <Name>Framework.Core</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Framework.Facilities.NHibernate\Framework.Facilities.NHibernate.csproj">
+      <Project>{832BAE45-2032-40A6-B889-1FF854885536}</Project>
+      <Name>Framework.Facilities.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework.MVC\Framework.Mvc.csproj">
       <Project>{930E0E39-8A09-4373-A077-33971E9F7BEE}</Project>
       <Name>Framework.Mvc</Name>

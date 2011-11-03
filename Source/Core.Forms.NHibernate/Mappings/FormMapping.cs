@@ -21,7 +21,7 @@ namespace Core.Forms.NHibernate.Mappings
             Map(form => form.ShowResetButton);
             Map(form => form.UserId);
 
-            HasMany(form => form.CurrentFormLocales).KeyColumn("FormId")
+            HasMany(form => form.CurrentLocales).KeyColumn("FormId")
             .Table("Forms_FormLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

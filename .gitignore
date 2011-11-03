@@ -128,3 +128,10 @@
 /Source/Framework.MSBuild/.sonar
 /Source/Products/.sonar
 /Source/sonar-project.properties
+/Source/Core.Web/Areas/WebContent
+/Source/Core.WebContent/bin
+/Source/Core.WebContent/obj
+/Source/Core.WebContent.Migrations/bin
+/Source/Core.WebContent.Migrations/obj
+/Source/Core.WebContent.NHibernate/bin
+/Source/Core.WebContent.NHibernate/obj

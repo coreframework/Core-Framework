@@ -1,26 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Permissions.Operations;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Core.Web.NHibernate.Models
 {
     [Export(typeof(IPermissible))]
-    public class Page : Entity, IPermissible, ILocalizable
+    public class Page : LocalizableEntity<PageLocale>, IPermissible
     {
         #region Fields
 
         private readonly IList<PageWidget> widgets = new List<PageWidget>();
         private readonly IList<Page> children = new List<Page>();
-
-        private readonly IList<PageLocale> currentPageLocales = new List<PageLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private PageLocale currentLocale;
 
         private String permissionTitle = "Pages";
         private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<PageOperations>();
@@ -154,54 +149,15 @@ namespace Core.Web.NHibernate.Models
 
         #endregion
 
-        public virtual IList<ILocale> CurrentLocales
-        {
-            get
-            {
-                if (currentLocales.Count == 0 && currentPageLocales.Count > 0)
-                {
-                    currentLocales = currentPageLocales.ToList().ConvertAll(mc => (ILocale)mc);
-                }
-                return currentLocales;
-            }
-            set
-            {
-                currentLocales = value;
-            }
-        }
-
-        public virtual IList<PageLocale> CurrentPageLocales
-        {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (PageLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
-        }
-
-        public virtual ILocale CurrentLocale
-        {
-            get
-            {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as PageLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new PageLocale
-                        {
-                            Page = this,
-                            Culture = null
-                        };
-                    }
-                }
-                return currentLocale;
-            }
-        }
-
         #endregion
+
+        public override ILocale InitializeLocaleEntity()
+        {
+            return new PageLocale
+                       {
+                           Page = this,
+                           Culture = null
+                       };
+        }
     }
 }

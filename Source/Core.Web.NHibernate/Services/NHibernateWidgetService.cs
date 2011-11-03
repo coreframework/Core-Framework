@@ -74,7 +74,7 @@ namespace Core.Web.NHibernate.Services
                 return baseQuery;
             }
            
-            return baseQuery.Where(widget => widget.CurrentWidgetLocales.Where(item=>item.Title.Contains(searchString)).Count()>0);
+            return baseQuery.Where(widget => widget.CurrentLocales.Where(item=>item.Title.Contains(searchString)).Count()>0);
         }
 
         #endregion

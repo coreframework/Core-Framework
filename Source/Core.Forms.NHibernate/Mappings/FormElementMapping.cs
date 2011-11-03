@@ -21,7 +21,7 @@ namespace Core.Forms.NHibernate.Mappings
             Map(formElement => formElement.RegexTemplate).CustomType(typeof(RegexTemplate));
             References(form => form.Form).Column("FormId");
 
-            HasMany(formElement => formElement.CurrentFormElementLocales).KeyColumn("FormElementId")
+            HasMany(formElement => formElement.CurrentLocales).KeyColumn("FormElementId")
              .Table("Forms_FormElementLocales").ApplyFilter<CultureFilter>()
              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
              .Inverse()

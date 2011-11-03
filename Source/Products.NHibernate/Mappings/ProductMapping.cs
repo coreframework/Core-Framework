@@ -22,7 +22,7 @@ namespace Products.NHibernate.Mappings
                .Table("Product_ProductsToCategories").ParentKeyColumn("ProductId")
                .ChildKeyColumn("CategoryId").Cascade.None().LazyLoad();
 
-            HasMany(product => product.CurrentProductLocales).KeyColumn("ProductId")
+            HasMany(product => product.CurrentLocales).KeyColumn("ProductId")
             .Table("Product_ProductLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

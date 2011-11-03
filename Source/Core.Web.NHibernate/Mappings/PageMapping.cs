@@ -41,7 +41,7 @@ namespace Core.Web.NHibernate.Mappings
             .Cascade.AllDeleteOrphan();
 
             HasOne(page => page.Settings).PropertyRef(pageSettings => pageSettings.Page).Cascade.All().LazyLoad();
-            HasMany(page => page.CurrentPageLocales).KeyColumn("PageId")
+            HasMany(page => page.CurrentLocales).KeyColumn("PageId")
             .Table("PageLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

@@ -2,9 +2,9 @@
 
 namespace Framework.Core.Localization
 {
-    public interface ILocalizable
+    public interface ILocalizable<T> where T: ILocale
     {
-        IList<ILocale> CurrentLocales { get; set; }
+        IList<T> CurrentLocales { get; set; }
         ILocale CurrentLocale { get;}
     }
 }

@@ -16,7 +16,7 @@ namespace Products.NHibernate.Mappings
              Id(category => category.Id);
              Map(category => category.CreateDate);
             
-             HasMany(category => category.CurrentCategoryLocales).KeyColumn("CategoryId")
+             HasMany(category => category.CurrentLocales).KeyColumn("CategoryId")
             .Table("Product_CategoryLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()

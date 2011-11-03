@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Products.NHibernate.Models
 {
-    public class Product : Entity, ILocalizable
+    public class Product : LocalizableEntity<ProductLocale>
     {
-        private readonly IList<ProductLocale> currentProductLocales = new List<ProductLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private ProductLocale currentLocale;
-
         private  IList<Category> categories = new List<Category>();
 
         #region Properties
@@ -70,31 +65,6 @@ namespace Products.NHibernate.Models
 
         #endregion
 
-        public virtual IList<ILocale> CurrentLocales
-        {
-            get
-            {
-                if (currentLocales.Count == 0 && currentProductLocales.Count > 0)
-                {
-                    currentLocales = currentProductLocales.ToList().ConvertAll(mc => (ILocale) mc);
-                }
-                return currentLocales;
-            }
-            set { currentLocales = value; }
-        }
-
-        public virtual IList<ProductLocale> CurrentProductLocales
-        {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (ProductLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
-        }
-
         public virtual Type LocaleType
         {
             get
@@ -103,25 +73,13 @@ namespace Products.NHibernate.Models
             }
         }
 
-
-        public virtual ILocale CurrentLocale
+        public override ILocale InitializeLocaleEntity()
         {
-            get
+            return new ProductLocale
             {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as ProductLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new ProductLocale
-                        {
-                            Product = this,
-                            Culture = null
-                        };
-                    }
-                }
-                return currentLocale;
-            }
+                Product = this,
+                Culture = null
+            };
         }
     }
 }

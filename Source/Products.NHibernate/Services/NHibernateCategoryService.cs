@@ -38,7 +38,7 @@ namespace Products.NHibernate.Services
             {
                 return baseQuery;
             }
-            return baseQuery.Where(category => category.CurrentCategoryLocales.Any(item => item.Title.Contains(search)));
+            return baseQuery.Where(category => category.CurrentLocales.Any(item => item.Title.Contains(search)));
         }
 
         public int GetCount(String searchQuery)

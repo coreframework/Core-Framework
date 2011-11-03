@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Framework.Facilities.NHibernate.Objects;
 
 namespace Products.NHibernate.Models
 {
-    public class Category : Entity, ILocalizable
+    public class Category : LocalizableEntity<CategoryLocale>
     {
-        private readonly IList<CategoryLocale> currentCategoryLocales = new List<CategoryLocale>();
-        private IList<ILocale> currentLocales = new List<ILocale>();
-        private CategoryLocale currentLocale;
-
         #region Properties
 
         /// <summary>
@@ -48,34 +42,6 @@ namespace Products.NHibernate.Models
 
         #endregion
 
-        public virtual IList<ILocale> CurrentLocales
-        {
-            get
-            {
-                if (currentLocales.Count == 0 && currentCategoryLocales.Count > 0)
-                {
-                    currentLocales = currentCategoryLocales.ToList().ConvertAll(mc => (ILocale)mc);
-                }
-                return currentLocales;
-            }
-            set
-            {
-                currentLocales = value;
-            }
-        }
-
-        public virtual IList<CategoryLocale> CurrentCategoryLocales
-        {
-            get
-            {
-                return CurrentLocales.ToList().ConvertAll(mc => (CategoryLocale)mc);
-            }
-            set
-            {
-                CurrentLocales = value.ToList().ConvertAll(mc => (ILocale)mc);
-            }
-        }
-
         public virtual Type LocaleType
         {
             get
@@ -84,24 +50,13 @@ namespace Products.NHibernate.Models
             }
         }
 
-        public virtual ILocale CurrentLocale
+        public override ILocale InitializeLocaleEntity()
         {
-            get
+            return new CategoryLocale
             {
-                if (currentLocale == null)
-                {
-                    currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales) as CategoryLocale;
-                    if (currentLocale == null)
-                    {
-                        currentLocale = new CategoryLocale
-                        {
-                            Category = this,
-                            Culture = null
-                        };
-                    }
-                }
-                return currentLocale;
-            }
+                Category = this,
+                Culture = null
+            };
         }
     }
 }
