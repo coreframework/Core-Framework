@@ -8,7 +8,7 @@ namespace Core.Framework.Plugins.Web
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
-        String Title { get;}
+        String Title { get; }
         /// <summary>
         /// Gets or sets the plugin.
         /// </summary>
@@ -19,19 +19,19 @@ namespace Core.Framework.Plugins.Web
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
-        String Identifier { get;}
+        String Identifier { get; }
 
         /// <summary>
         /// Gets the view action.
         /// </summary>
         /// <value>The view action.</value>
-        IWidgetActionVerb ViewAction { get;}
+        IWidgetActionVerb ViewAction { get; }
 
         /// <summary>
         /// Gets the edit action.
         /// </summary>
         /// <value>The edit action.</value>
-        IWidgetActionVerb EditAction { get;}
+        IWidgetActionVerb EditAction { get; }
 
         /// <summary>
         /// Gets the save settings action.
@@ -56,5 +56,7 @@ namespace Core.Framework.Plugins.Web
         /// <param name="coreWidgetInstance">The core widget instance.</param>
         /// <returns></returns>
         long? Clone(ICoreWidgetInstance coreWidgetInstance);
+
+        bool IsDetailsWidget { get; }
     }
 }

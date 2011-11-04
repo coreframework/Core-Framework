@@ -136,6 +136,12 @@
     <Compile Include="NewsController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="NewsDetailsWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NewsListingWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="NewsPlugin.cs" />
     <Compile Include="Models\NewsArticleLocaleViewModel.cs" />
     <Compile Include="Models\NewsArticleViewModel.cs" />

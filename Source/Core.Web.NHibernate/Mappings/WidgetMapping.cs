@@ -17,6 +17,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(widget => widget.Identifier).Length(255);
             Map(widget => widget.Status).CustomType(typeof(WidgetStatus));
             References(widget => widget.Plugin);
+            Map(widget => widget.IsDetailsWidget);
 
             HasMany(widget => widget.CurrentLocales).KeyColumn("WidgetId")
             .Table("WidgetLocales").ApplyFilter<CultureFilter>()

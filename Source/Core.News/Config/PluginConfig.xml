@@ -14,5 +14,15 @@
       <Identifier>news12345678</Identifier>
       <Title>News visualisation</Title>
     </WidgetSetting>
+    <WidgetSetting>
+      <Key>Core.News.Widgets.NewsListingWidget</Key>
+      <Identifier>news12345asd</Identifier>
+      <Title>News listing</Title>
+    </WidgetSetting>
+    <WidgetSetting>
+      <Key>Core.News.Widgets.NewsDetailsWidget</Key>
+      <Identifier>news123vjdlk678</Identifier>
+      <Title>News details</Title>
+    </WidgetSetting>
   </WidgetSettings>
 </PluginSetting>

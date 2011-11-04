@@ -45,6 +45,7 @@ namespace Core.News.Nhibernate.Services
         private NewsDetailsLinkMode GetLinkMode()
         {
             NewsDetailsWidget detailsWidget = GetAll().FirstOrDefault();
+
             return detailsWidget.LinkMode;
         }
 

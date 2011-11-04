@@ -33,10 +33,26 @@ namespace Core.News.Nhibernate.Services
             return query.Where(article => article.Id == id && article.StatusId == (int)NewsStatus.Published && article.PublishDate <= DateTime.Now).OrderBy(article => article.LastModifiedDate).FirstOrDefault();
         }
 
+        public NewsArticle FindPublished(String url)
+        {
+            IQueryable<NewsArticle> query = CreateQuery();
+            return query.Where(article => article.Url == url && article.StatusId == (int)NewsStatus.Published && article.PublishDate <= DateTime.Now).OrderBy(article => article.LastModifiedDate).FirstOrDefault();
+        }
+
         public IEnumerable<NewsArticle> FindPublished()
         {
             IQueryable<NewsArticle> query = CreateQuery();
             return query.Where(article => article.StatusId == (int)NewsStatus.Published && article.PublishDate <= DateTime.Now).OrderBy(article => article.LastModifiedDate).AsEnumerable();
+        }
+
+        public IEnumerable<NewsArticle> GetForListingWidget(NewsListingWidget listingWidget, int currentPage)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetCountForListingWidget(NewsListingWidget listingWidget)
+        {
+            throw new NotImplementedException();
         }
     }
 }

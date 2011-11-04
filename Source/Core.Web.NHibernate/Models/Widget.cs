@@ -47,5 +47,7 @@ namespace Core.Web.NHibernate.Models
                            Culture = null
                        };
         }
+
+        public virtual bool IsDetailsWidget { get; set; }
     }
 }

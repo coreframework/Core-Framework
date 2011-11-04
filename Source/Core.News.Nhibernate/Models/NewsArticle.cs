@@ -32,6 +32,12 @@ namespace Core.News.Nhibernate.Models
         }
 
         /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
+        /// <value>The URL.</value>
+        public virtual String Url { get; set; }
+
+        /// <summary>
         /// Gets or sets the summary.
         /// </summary>
         /// <value>The summary.</value>
