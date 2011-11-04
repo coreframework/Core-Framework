@@ -23,7 +23,7 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class WebContentMVC {
-    public static Core.WebContents.Controllers.SectionController Section = new Core.WebContents.Controllers.T4MVC_SectionController();
+    public static Core.WebContent.Controllers.SectionController Section = new Core.WebContent.Controllers.T4MVC_SectionController();
 }
 
 namespace T4MVC {
@@ -61,6 +61,17 @@ public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResul
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public String  Area { get; set; }
+    public String  Controller { get; set; }
+    public String  Action { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
+    public T4MVC_JsonResult(String  area, String  controller, String  action): base()  {
+        this.InitMVCT4Result(area, controller, action);
+    }
     
     public String  Area { get; set; }
     public String  Controller { get; set; }

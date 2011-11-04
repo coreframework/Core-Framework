@@ -8,8 +8,8 @@
     <ProjectGuid>{611E7731-3948-4939-9173-2C1F52CF00BA}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core.ContentPages.Migrations</RootNamespace>
-    <AssemblyName>Core.ContentPages.Migrations</AssemblyName>
+    <RootNamespace>Core.WebContent.Migrations</RootNamespace>
+    <AssemblyName>Core.WebContent.Migrations</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <PublishUrl>publish\</PublishUrl>
@@ -76,8 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migration_AddContentPageLocales.cs" />
-    <Compile Include="Migration_AddContentPages.cs" />
+    <Compile Include="Migration_AddSectionLocales.cs" />
+    <Compile Include="Migration_AddSections.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

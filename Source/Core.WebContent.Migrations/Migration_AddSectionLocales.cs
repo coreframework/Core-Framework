@@ -7,20 +7,20 @@ namespace Core.ContentPages.Migrations
     /// Adds ContentPageLocales table.
     /// </summary>
     [Migration(3)]
-    public class Migration_AddContentPageLocales : Migration
+    public class Migration_AddSectionLocales : Migration
     {
         /// <summary>
         /// Executes migration.
         /// </summary>
         public override void Up()
         {
-            Database.AddTable("ContentPageLocales", t =>
+            Database.AddTable("WebContent_SectionLocales", t =>
             {
                 t.PrimaryKey();
-                t.String("Title");
-                t.Text("Content");
+                t.String("Title").Length(255);
+                t.Text("Description").Null();
                 t.Text("Culture").Length(10).Null();
-                t.ForeignKey("ContentPage").Table("ContentPages").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("Section").Table("WebContent_Sections").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
 
@@ -29,8 +29,8 @@ namespace Core.ContentPages.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.ChangeTable("ContentPageLocales", t => t.RemoveForeignKey("ContentPage").Table("ContentPages"));
-            Database.RemoveTable("ContentPageLocales");
+            Database.ChangeTable("WebContent_SectionLocales", t => t.RemoveForeignKey("Section").Table("WebContent_Sections"));
+            Database.RemoveTable("WebContent_SectionLocales");
         }
     }
 }

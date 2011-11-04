@@ -12,6 +12,12 @@ namespace Core.WebContent.NHibernate.Models
         #region Properties
 
         /// <summary>
+        /// Gets or sets the user.
+        /// </summary>
+        /// <value>The user.</value>
+        public virtual long? UserId { get; set; }
+
+        /// <summary>
         /// Gets or sets the create date.
         /// </summary>
         /// <value>The create date.</value>

@@ -7,18 +7,17 @@ namespace Core.ContentPages.Migrations
     /// Adds ContentPages table.
     /// </summary>
     [Migration(1)]
-    public class Migration_AddContentPages : Migration
+    public class Migration_AddSections : Migration
     {
         /// <summary>
         /// Executes migration.
         /// </summary>
         public override void Up()
         {
-            Database.AddTable("ContentPages", t =>
+            Database.AddTable("WebContent_Sections", t =>
             {
                 t.PrimaryKey();
                 t.DateTime("CreateDate").Null();
-                t.DateTime("LastModifiedDate").Null();
             });
         }
 
@@ -27,7 +26,7 @@ namespace Core.ContentPages.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.RemoveTable("ContentPages");
+            Database.RemoveTable("WebContent_Sections");
         }
     }
 }

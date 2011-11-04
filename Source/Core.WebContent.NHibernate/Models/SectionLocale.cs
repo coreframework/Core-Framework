@@ -35,6 +35,12 @@ namespace Core.WebContent.NHibernate.Models
         /// <value>The culture.</value>
         public virtual String Culture { get; set; }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
+        /// <value>The priority.</value>
+        public virtual int Priority { get; private set; }
+
         #endregion
     }
 }

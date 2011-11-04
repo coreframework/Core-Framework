@@ -21,7 +21,7 @@ namespace Core.WebContent.Verbs
         /// </summary>
         public String  Name
         {
-            get { return HttpContext.GetGlobalResourceObject("ContentPage.Verbs.AdminVerb", "ContentPages") as String ?? "Content Pages"; }
+            get { return HttpContext.GetGlobalResourceObject("WebContent.Verbs.SectionAdminVerb", "Sections") as String ?? "Web Content: Sections"; }
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Core.WebContent.Verbs
         {
             get
             {
-                return "Admin.WebContent";
+                return "Admin.WebContentSections";
             }
         }
 

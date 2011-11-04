@@ -11,6 +11,7 @@ namespace Core.WebContent.NHibernate.Mappings
             Cache.Region("WebContent_Sections").ReadWrite();
             Table("WebContent_Sections");
             Id(section => section.Id);
+            Map(section => section.UserId);
             HasMany(section => section.CurrentLocales).KeyColumn("SectionId")
             .Table("SectionLocales").ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)

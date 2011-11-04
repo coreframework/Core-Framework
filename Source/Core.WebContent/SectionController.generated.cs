@@ -20,11 +20,8 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using Framework.Mvc.T4MVC;
 using T4MVC;
-namespace Core.WebContents.Controllers {
+namespace Core.WebContent.Controllers {
     public partial class SectionController {
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SectionController() { }
-
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SectionController(Dummy d) { }
 
@@ -34,6 +31,11 @@ namespace Core.WebContents.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult LoadData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.LoadData);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SectionController Actions { get { return WebContentMVC.Section; } }
@@ -48,6 +50,8 @@ namespace Core.WebContents.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly String  Show = "Show";
+            public readonly String  LoadData = "LoadData";
+            public readonly String  New = "New";
         }
 
 
@@ -56,16 +60,38 @@ namespace Core.WebContents.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly String  New = "~/Views/Section/New.aspx";
             public readonly String  Show = "~/Views/Section/Show.aspx";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_SectionController: Core.WebContents.Controllers.SectionController {
+    public class T4MVC_SectionController: Core.WebContent.Controllers.SectionController {
         public T4MVC_SectionController() : base(Dummy.Instance) { }
 
         public override System.Web.Mvc.ActionResult Show() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Show);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult LoadData(int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.LoadData);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult New() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult New(Core.WebContent.Models.SectionViewModel form) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
+            callInfo.RouteValueDictionary.Add("form", form);
             return callInfo;
         }
 
