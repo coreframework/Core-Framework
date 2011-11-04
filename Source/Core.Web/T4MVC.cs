@@ -30,6 +30,7 @@ public static class MVC {
     public static Core.Web.Controllers.ErrorController Error = new Core.Web.Controllers.T4MVC_ErrorController();
     public static Core.Web.Controllers.HomeController Home = new Core.Web.Controllers.T4MVC_HomeController();
     public static Core.Web.Controllers.PagesController Pages = new Core.Web.Controllers.T4MVC_PagesController();
+    public static Core.Web.Controllers.PageTemplatesController PageTemplates = new Core.Web.Controllers.T4MVC_PageTemplatesController();
     public static Core.Web.Controllers.UploadController Upload = new Core.Web.Controllers.T4MVC_UploadController();
     public static Core.Web.Controllers.UsersController Users = new Core.Web.Controllers.T4MVC_UsersController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();

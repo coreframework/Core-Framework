@@ -32,6 +32,8 @@ namespace Core.Web.Models
 
         private List<Page> availablePages;
 
+        private List<Page> availableTemplates;
+
         #endregion
 
         #region Constructor
@@ -112,6 +114,21 @@ namespace Core.Web.Models
         }
 
         public long? ClonedPageId { get; set; }
+
+        public List<Page> AvailableTemplates
+        {
+            get
+            {
+                if (availableTemplates == null)
+                {
+                    var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+                    availableTemplates = (List<Page>)pageService.GetAllowedPageTemplatesByOperation(HttpContext.Current.User as ICorePrincipal, (Int32)PageOperations.View);
+                }
+                return availableTemplates;
+            }
+        }
+
+        public long? TemplateId { get; set; }
 
         public bool HideInMainMenu { get; set; }
 

@@ -23,6 +23,7 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class ContentPagesMVC {
+    public static Core.ContentPages.Controllers.ContentDetailsWidgetController ContentDetailsWidget = new Core.ContentPages.Controllers.T4MVC_ContentDetailsWidgetController();
     public static Core.ContentPages.Controllers.ContentPageController ContentPage = new Core.ContentPages.Controllers.T4MVC_ContentPageController();
     public static Core.ContentPages.Controllers.ContentViewerWidgetController ContentViewerWidget = new Core.ContentPages.Controllers.T4MVC_ContentViewerWidgetController();
     public static T4MVC.AdminController Admin = new T4MVC.AdminController();
@@ -88,7 +89,7 @@ namespace Links {
     public static class Scripts {
         private const String  URLPATH = "~/Scripts";
         public static String  Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-        public static String  Url(String  fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }              
+        public static String  Url(String  fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
     }
 
 }

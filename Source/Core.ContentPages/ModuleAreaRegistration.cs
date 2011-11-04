@@ -27,6 +27,8 @@ namespace Core.ContentPages
             context.MapRoute(null, String.Empty, ContentPagesMVC.ContentViewerWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, String.Empty, ContentPagesMVC.ContentViewerWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "content-widget/update", ContentPagesMVC.ContentViewerWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
+            context.MapRoute(null, "content-widget-details", ContentPagesMVC.ContentDetailsWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
     }
 }

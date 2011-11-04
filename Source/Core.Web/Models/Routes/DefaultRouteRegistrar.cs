@@ -70,6 +70,7 @@ namespace Core.Web.Models.Routes
             routes.MapRoute("Pages.Error", "error", MVC.Error.Index());
 
             routes.MapRoute("Pages.Show", "pages/{url}", MVC.Pages.Show(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            routes.MapRoute("PageTemplates.Show", "page-templates/{url}", MVC.PageTemplates.Show(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = String.Empty });
             routes.MapRoute("Login", "users/sign-in", MVC.Users.NewUserSession());
 

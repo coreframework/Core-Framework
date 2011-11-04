@@ -16,6 +16,13 @@ namespace Core.Web.NHibernate.Contracts
         Page FindByUrl(String url);
 
         /// <summary>
+        /// Finds the template by URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <returns></returns>
+        Page FindTemplateByUrl(String url);
+
+        /// <summary>
         /// Finds the sibling pages.
         /// </summary>
         /// <param name="parentPageId">The parent page id.</param>
@@ -36,6 +43,14 @@ namespace Core.Web.NHibernate.Contracts
         /// <param name="operationCode">The operation code.</param>
         /// <returns></returns>
         IEnumerable<Page> GetAllowedPagesByOperation(ICorePrincipal user, Int32 operationCode);
+
+        /// <summary>
+        /// Gets the allowed page templates by operation.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="operationCode">The operation code.</param>
+        /// <returns></returns>
+        IEnumerable<Page> GetAllowedPageTemplatesByOperation(ICorePrincipal user, Int32 operationCode);
 
         /// <summary>
         /// Gets the allowed pages for main menu.

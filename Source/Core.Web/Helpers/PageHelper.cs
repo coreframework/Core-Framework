@@ -58,7 +58,7 @@ namespace Core.Web.Helpers
         /// <param name="widgetId">The widget id.</param>
         /// <param name="user">The user.</param>
         /// <returns></returns>
-        public static PageWidget AddWidgetToPage(long pageId, long widgetId, ICorePrincipal user)
+        public static PageWidget AddWidgetToPage(long pageId, long? widgetId, ICorePrincipal user)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
@@ -68,21 +68,20 @@ namespace Core.Web.Helpers
 
             if (page != null)
             {
-                Widget widget = widgetService.Find(widgetId);
-                if (widget != null && widgetService.IsWidgetEnable(widget))
-                {
-                    page.Widgets.Update(
+                page.Widgets.Update(
                         wd =>
-                            {
-                                wd.OrderNumber =
-                                    wd.ColumnNumber == 1
-                                         ? wd.OrderNumber + 1
-                                         : wd.OrderNumber;
-                            }
+                        {
+                            wd.OrderNumber =
+                                wd.ColumnNumber == 1
+                                     ? wd.OrderNumber + 1
+                                     : wd.OrderNumber;
+                        }
                         );
 
-                    pageService.Save(page);
-
+                pageService.Save(page);
+                Widget widget = widgetService.Find(widgetId ?? 0);
+                if (widget == null || widgetService.IsWidgetEnable(widget))
+                {
                     var newPageWidget = new PageWidget
                                             {
                                                 Page = page,
@@ -94,7 +93,7 @@ namespace Core.Web.Helpers
                                             };
 
                     if (pageWidgetService.Save(newPageWidget))
-                        return newPageWidget;
+                        return newPageWidget;   
                 }
             }
 
@@ -390,8 +389,9 @@ namespace Core.Web.Helpers
         /// </summary>
         /// <param name="sourcePage">The source page.</param>
         /// <param name="targetPage">The target page.</param>
+        /// <param name="isTemplate">if set to <c>true</c> [is template].</param>
         /// <returns></returns>
-        public static bool ClonePageSettings(Page sourcePage, Page targetPage)
+        public static bool ClonePageSettings(Page sourcePage, Page targetPage, bool isTemplate)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();

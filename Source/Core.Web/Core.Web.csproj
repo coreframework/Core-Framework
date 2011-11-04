@@ -242,6 +242,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\PageTemplatesController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CoreWebInstaller.cs" />
@@ -308,6 +309,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PagesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageTemplatesController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -494,6 +498,8 @@
     <Content Include="Content\Images\colorpicker\slider.png" />
     <Content Include="Content\Images\ico_right.png" />
     <Content Include="Content\Images\ie_v.png" />
+    <Content Include="Content\Images\jquery-ui\ui-icons_000000_256x240.png" />
+    <Content Include="Content\Images\jquery-ui\ui-icons_cc0000_256x240.png" />
     <Content Include="Content\Images\jquery-ui\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\Images\layouts\Layout1-a.png" />
     <Content Include="Content\Images\layouts\Layout1.png" />

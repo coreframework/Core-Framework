@@ -41,6 +41,15 @@ namespace Core.Web.NHibernate.Services
             return query.FirstOrDefault();
         }
 
+        public Page FindTemplateByUrl(String url)
+        {
+            var query = from page in base.CreateQuery()
+                        where page.Url == url && page.IsTemplate
+                        select page;
+
+            return query.FirstOrDefault();
+        }
+
         public IEnumerable<Page> FindSiblingPages(long? parentPageId)
         {
             var query = from page in CreateQuery()
@@ -61,7 +70,7 @@ namespace Core.Web.NHibernate.Services
 
         public Page GetFirstAllowedPage(ICorePrincipal user, Int32 operationCode)
         {
-            var criteria = GetAllowedPagesCriteria(user, operationCode);
+            var criteria = GetAllowedPagesCriteria(user, operationCode, false);
 
             criteria.Add(Restrictions.IsNull("pages.ParentPageId"));
 
@@ -70,14 +79,21 @@ namespace Core.Web.NHibernate.Services
 
         public IEnumerable<Page> GetAllowedPagesByOperation(ICorePrincipal user, Int32 operationCode)
         {
-            var criteria = GetAllowedPagesCriteria(user, operationCode);
+            var criteria = GetAllowedPagesCriteria(user, operationCode, false);
+
+            return criteria.SetCacheable(true).List<Page>();
+        }
+
+        public IEnumerable<Page> GetAllowedPageTemplatesByOperation(ICorePrincipal user, Int32 operationCode)
+        {
+            var criteria = GetAllowedPagesCriteria(user, operationCode, true);
 
             return criteria.SetCacheable(true).List<Page>();
         }
 
         public IEnumerable<Page> GetAllowedPagesForMainMenu(ICorePrincipal user)
         {
-            var criteria = GetAllowedPagesCriteria(user, (int)PageOperations.View);
+            var criteria = GetAllowedPagesCriteria(user, (int)PageOperations.View, false);
             //criteria.Add(Restrictions.Eq("pages.HideInMainMenu", false));
 
             return criteria.SetCacheable(true).List<Page>();
@@ -89,13 +105,13 @@ namespace Core.Web.NHibernate.Services
         /// <param name="user">The user.</param>
         /// <param name="operationCode">The operation code.</param>
         /// <returns></returns>
-        private ICriteria GetAllowedPagesCriteria(ICorePrincipal user, Int32 operationCode)
+        private ICriteria GetAllowedPagesCriteria(ICorePrincipal user, Int32 operationCode, bool isTemplate)
         {
             ICriteria criteria = Session.CreateCriteria<Page>("pages").CreateAlias("User", "pageUser", JoinType.LeftOuterJoin);
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             var permissionCriteria = permissionCommonService.GetPermissionsCriteria(user, operationCode, typeof (Page),
                                                                                     "pages.Id", "pageUser.Id");
-            criteria.Add(Restrictions.Eq("pages.IsTemplate", false));
+            criteria.Add(Restrictions.Eq("pages.IsTemplate", isTemplate));
             if (permissionCriteria!=null)
                 criteria.Add(permissionCriteria);
 

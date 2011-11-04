@@ -7,6 +7,8 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
+using Core.Framework.Plugins.Web;
+using Core.Framework.Plugins.Widgets;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
 using Core.Web.Helpers.Layouts;
@@ -30,7 +32,6 @@ namespace Core.Web.Areas.Admin.Controllers
 
         private readonly IPageService pageService;
         private readonly IPageLocaleService pageLocaleService;
-        private readonly IPageTemplateService pageTemplateService;
         private readonly IPermissionCommonService permissionService;
 
         #endregion
@@ -44,7 +45,6 @@ namespace Core.Web.Areas.Admin.Controllers
         {
             pageService = ServiceLocator.Current.GetInstance<IPageService>();
             pageLocaleService = ServiceLocator.Current.GetInstance<IPageLocaleService>();
-            pageTemplateService = ServiceLocator.Current.GetInstance<IPageTemplateService>();
             permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
         }
 
@@ -116,7 +116,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                             pageLocale.Title, 
                                                                             pageLocale.Page.Url,
                                                                             pageLocale.Page.HideInMainMenu ? Translate("Boolean.False") : Translate("Boolean.True"),
-                                                                            String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Pages.Show(pageLocale.Page.Url)), Translate("Actions.View")),
+                                                                            String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.PageTemplates.Show(pageLocale.Page.Url)), Translate("Actions.View")),
                                                                             String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
                                             Url.Action(MVC.Admin.PageTemplate.Remove(pageLocale.Page.Id)))
                                                                        }
@@ -157,7 +157,9 @@ namespace Core.Web.Areas.Admin.Controllers
                 {
                     permissionService.SetupDefaultRolePermissions(
                         ResourcePermissionsHelper.GetResourceOperations(typeof(PageTemplate)), typeof(PageTemplate), pageTemplate.Id);
+                    PageHelper.AddWidgetToPage(pageTemplate.Id, null, this.CorePrincipal());
                     Success(Translate("Messages.PageTemplateCreated"));
+
                     return RedirectToAction(MVC.Admin.PageTemplate.Index());
                 }
             }

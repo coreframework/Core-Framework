@@ -115,12 +115,16 @@
     <Compile Include="AdminController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ContentDetailsWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ContentPageController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ContentViewerWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ContentDetailsWidgetController.cs" />
     <Compile Include="Helpers\ContentViewerWidgetHelper.cs" />
     <Compile Include="Models\ContentPageLocaleViewModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
@@ -137,9 +141,11 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Verbs\AdminVerb.cs" />
+    <Compile Include="Verbs\Widgets\ContentDetailsWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\ContentWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\ContentWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\ContentWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Widgets\ContentDetailsWidget.cs" />
     <Compile Include="Widgets\ContentViewerWidget.cs" />
   </ItemGroup>
   <ItemGroup>

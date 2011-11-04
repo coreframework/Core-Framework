@@ -516,7 +516,15 @@ namespace Core.Web.Controllers
                         var sourcePage = pageService.Find((long) model.ClonedPageId);
                         if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
                         {
-                            PageHelper.ClonePageSettings(sourcePage, page);
+                            PageHelper.ClonePageSettings(sourcePage, page, false);
+                        }
+                    }
+                    else if (model.TemplateId.HasValue)
+                    {
+                        var sourcePage = pageService.Find(model.TemplateId.Value);
+                        if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
+                        {
+                            PageHelper.ClonePageSettings(sourcePage, page, true);
                         }
                     }
 
