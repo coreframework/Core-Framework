@@ -32,7 +32,7 @@ namespace Core.Web.NHibernate.Services
         public IEnumerable<Widget> GetAvailableWidgets(ICorePrincipal user, bool isTemplate)
         {
             var query = from widget in CreateQuery()
-                        where widget.Plugin.Status == PluginStatus.Installed && widget.Status == WidgetStatus.Enabled && 
+                        where (widget.Plugin == null || widget.Plugin.Status == PluginStatus.Installed) && widget.Status == WidgetStatus.Enabled && 
                         (isTemplate || !widget.IsPlaceHolder)
                         select widget;
 

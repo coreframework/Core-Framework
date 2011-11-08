@@ -191,19 +191,19 @@ namespace Core.Web.Areas.Admin
                     {
                         plugin = plugins.Find(pl => pl.Identifier == widget1.Plugin.Identifier);
                     }
-                    //                    if (plugin != null)
-                    //                        {
                     var newWidget = new Widget
                                         {
                                             Identifier = widget1.Identifier,
                                             Title = widget1.Title,
                                             IsDetailsWidget = widget1.IsDetailsWidget,
                                             IsPlaceHolder = widget1.IsPlaceHolder,
-                                            Plugin = plugin
+                                            Plugin = plugin,
                                         };
-
+                    if(plugin == null)
+                    {
+                        newWidget.Status = WidgetStatus.Enabled;
+                    }
                     widgetService.Save(newWidget);
-                    //                        }
                 }
             }
         }
