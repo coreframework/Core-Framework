@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentNHibernate.Data;
@@ -52,6 +53,27 @@ namespace Framework.Facilities.NHibernate.Objects
             {
                 return currentLocale ?? (currentLocale = CultureHelper.GetCurrentLocale(CurrentLocales.ToList().ConvertAll(item => (ILocale)item)) ?? InitializeLocaleEntity());
             }
+        }
+
+        /// <summary>
+        /// Determines whether the specified locale contains locale.
+        /// </summary>
+        /// <param name="locale">The locale.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified locale contains locale; otherwise, <c>false</c>.
+        /// </returns>
+        public virtual bool ContainsLocale(ILocale locale)
+        {
+            return CurrentLocales.Contains((T)locale);
+        }
+
+        /// <summary>
+        /// Adds the locale.
+        /// </summary>
+        /// <param name="locale">The locale.</param>
+        public virtual void AddLocale(ILocale locale)
+        {
+            CurrentLocales.Add((T)locale);
         }
 
         /// <summary>

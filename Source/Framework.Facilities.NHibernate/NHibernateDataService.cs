@@ -13,6 +13,7 @@ using Castle.Facilities.NHibernateIntegration;
 using FluentNHibernate.Data;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Filters;
+using Framework.Facilities.NHibernate.Objects;
 using NHibernate;
 using NHibernate.Criterion;
 using NHibernate.Linq;
@@ -167,12 +168,12 @@ namespace Framework.Facilities.NHibernate
             }
             else
             {
-                if (entity is ILocalizable<ILocale>)
+                if (entity is ILocalizable)
                 {
-                    var localizableEntity = (ILocalizable<ILocale>)entity;
-                    if (!localizableEntity.CurrentLocales.Contains(localizableEntity.CurrentLocale))
+                    var localizableEntity = (ILocalizable) entity;
+                    if (!localizableEntity.ContainsLocale(localizableEntity.CurrentLocale))
                     {
-                        localizableEntity.CurrentLocales.Add(localizableEntity.CurrentLocale);
+                        localizableEntity.AddLocale(localizableEntity.CurrentLocale);
                     }
                 }
 

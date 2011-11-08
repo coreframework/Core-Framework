@@ -193,6 +193,7 @@
     <Compile Include="IBootstrapperTask.cs" />
     <Compile Include="Infrastructure\Message.cs" />
     <Compile Include="Infrastructure\MessageType.cs" />
+    <Compile Include="Localization\IBaseLocalizable.cs" />
     <Compile Include="Localization\CultureHelper.cs" />
     <Compile Include="Localization\ICultureProvider.cs" />
     <Compile Include="Localization\ILocale.cs" />

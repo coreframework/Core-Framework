@@ -17,6 +17,7 @@ namespace Core.WebContent.NHibernate
             // Register data services.
             container.Register(Component.For<ISectionService>().ImplementedBy<NHibernateSectionService>().LifeStyle.Transient);
             container.Register(Component.For<ISectionLocaleService>().ImplementedBy<NHibernateSectionLocaleService>().LifeStyle.Transient);
+            container.Register(Component.For<ISectionSettingsService>().ImplementedBy<NHibernateSectionSettingsService>().LifeStyle.Transient);
         }
     }
 }

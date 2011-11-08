@@ -87,14 +87,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\ISectionSettingsService.cs" />
     <Compile Include="Contracts\ISectionLocaleService.cs" />
     <Compile Include="Contracts\ISectionService.cs" />
     <Compile Include="CoreWebContentNHibernateModule.cs" />
+    <Compile Include="Mappings\SectionSettingsMapping.cs" />
     <Compile Include="Mappings\SectionLocaleMapping.cs" />
     <Compile Include="Mappings\SectionMapping.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\SectionLocale.cs" />
+    <Compile Include="Models\SectionSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateSectionSettingsService.cs" />
     <Compile Include="Services\NHibernateSectionLocaleService.cs" />
     <Compile Include="Services\NHibernateSectionService.cs" />
   </ItemGroup>

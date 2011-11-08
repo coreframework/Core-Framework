@@ -42,6 +42,12 @@ namespace Core.WebContent.Models
         public String SelectedCulture { get; set; }
 
         /// <summary>
+        /// Gets or sets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
+        public SectionSettings SectionSettings { get; set; }
+
+        /// <summary>
         /// Gets or sets the cultures.
         /// </summary>
         /// <value>The cultures.</value>
@@ -54,6 +60,7 @@ namespace Core.WebContent.Models
         public SectionViewModel MapFrom(Section from)
         {
             Id = from.Id;
+            SectionSettings = from.SectionSettings;
             MapLocaleFrom(from.CurrentLocale as SectionLocale);
             return this;
         }
@@ -61,6 +68,7 @@ namespace Core.WebContent.Models
         public Section MapTo(Section to)
         {
             to.Id = Id;
+            to.SectionSettings = SectionSettings;
             if (String.IsNullOrEmpty(SelectedCulture))
                 MapLocaleTo((SectionLocale)to.CurrentLocale);
 

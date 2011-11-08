@@ -23,6 +23,12 @@ namespace Core.WebContent.NHibernate.Models
         /// <value>The create date.</value>
         public virtual DateTime CreateDate { get; set; }
 
+        /// <summary>
+        /// Gets or sets the section settings.
+        /// </summary>
+        /// <value>The section settings.</value>
+        public virtual SectionSettings SectionSettings { get; set; }
+
         #endregion
 
         public override ILocale InitializeLocaleEntity()

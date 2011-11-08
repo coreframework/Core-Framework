@@ -1,7 +1,7 @@
 ﻿using ECM7.Migrator.Framework;
 using Framework.Migrator.Extensions;
 
-namespace Core.ContentPages.Migrations
+namespace Core.WebContent.Migrations
 {
     /// <summary>
     /// Adds ContentPages table.
@@ -18,6 +18,7 @@ namespace Core.ContentPages.Migrations
             {
                 t.PrimaryKey();
                 t.DateTime("CreateDate").Null();
+                t.Long("UserId").Null();
             });
         }
 

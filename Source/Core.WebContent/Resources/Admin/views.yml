@@ -2,6 +2,11 @@ Views:
   Section:
     Show:
       AddSection: "Add"
+    New:
+      NewSection: "New section"
+      EditSection: "Edit section"
+      Common: "Common information"
+      Settings: "Settings"
 Models:
   ContentPageLocaleViewModel:
      Title: "Title"

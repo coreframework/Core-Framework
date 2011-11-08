@@ -251,7 +251,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 				.cols .i_form_i {width:90%;margin-bottom:10px}
 				.cols .i_form_i label, .cols .i_form_i em {color:#474747;font-size:12px;font-weight: bold;font-style: normal; }				 		
 					.cols .i_form_i label span {color:#0f5cbb;}
-				.cols .i_form_i input[type=text] {width:380px;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;display:block;}
+				.cols .i_form_i input[type=text], .cols .i_form_i textarea {width:380px;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;display:block;}
 				.cols .i_form_i input[type=password] {width:380px;padding:3px 6px;border:1px solid #a6a6a6;*padding:3px 4px;display:block;}
 				/* .cols .i_form_i input[type=text]:active {background:#dff0ff} */
 				.cols .i_form_i input[type=text].inputHighlighted{background-color:#dff0ff;border:1px solid #747474}

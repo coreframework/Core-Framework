@@ -46,10 +46,10 @@ namespace Framework.Mvc.Helpers
             {
                 var memberExpression = (MemberExpression)expression;
 
-                if (memberExpression.Expression.NodeType == ExpressionType.MemberAccess)
+             /*   if (memberExpression.Expression.NodeType == ExpressionType.MemberAccess)
                 {
                     return GetMemberName(memberExpression.Expression) + "." + memberExpression.Member.Name;
-                }
+                }*/
 
                 return memberExpression.Member.Name;
             }

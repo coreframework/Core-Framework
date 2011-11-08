@@ -24,6 +24,6 @@
 		</div>
     </div>
     <script type="text/javascript">
-        $(function () { $('#New').click(function () { window.location = "<%: Url.Action("New","Forms") %>"; }); });
+        $(function () { $('#New').click(function () { window.location = "<%: Url.Action("New","Section") %>"; }); });
     </script>
 </asp:Content>

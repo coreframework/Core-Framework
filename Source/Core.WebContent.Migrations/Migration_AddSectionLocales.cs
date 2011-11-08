@@ -1,12 +1,12 @@
 ﻿using ECM7.Migrator.Framework;
 using Framework.Migrator.Extensions;
 
-namespace Core.ContentPages.Migrations
+namespace Core.WebContent.Migrations
 {
     /// <summary>
     /// Adds ContentPageLocales table.
     /// </summary>
-    [Migration(3)]
+    [Migration(2)]
     public class Migration_AddSectionLocales : Migration
     {
         /// <summary>

@@ -86,24 +86,22 @@ namespace Core.WebContent.Controllers
         }
 
         [HttpPost, ValidateInput(false)]
-        public virtual ActionResult New(SectionViewModel form)
+        public virtual ActionResult New(SectionViewModel section)
         {
-           // SectionsHelper.ValidateSection(form, ModelState);
             if (ModelState.IsValid)
             {
-                var newSection = form.MapTo(new Section { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null });
+                var newSection = section.MapTo(new Section { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null });
                 if (sectionService.Save(newSection))
                 {
                     permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<SectionOperations>(), typeof(Section), newSection.Id);
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
-                //    return RedirectToAction(SectionsMVC.Sections.Edit(newSection.Id));
                 }
             }
 
             Error(HttpContext.Translate("Messages.ValidationError", String.Empty));
 
-            form.AllowManage = true;
-            return View("New", form);
+            section.AllowManage = true;
+            return View("New", section);
         }
 
         #endregion

@@ -18,6 +18,8 @@ namespace Core.WebContent.NHibernate.Mappings
             .Inverse()
             .LazyLoad()
             .Cascade.All();
+
+            HasOne(section => section.SectionSettings).PropertyRef(sectionSettings => sectionSettings.Section).Cascade.All().LazyLoad();
         }
     }
 }

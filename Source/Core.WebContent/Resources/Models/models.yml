@@ -1,0 +1,18 @@
+Models:
+    SectionViewModel:
+        Title: "Title"
+        Description: "Description"
+    SectionSettings:
+        ShowTitle: "Show title"
+        TitleLinkable: "Title linkable"
+        ShowSummarytext: "Show summary text"
+        ShowSection: "Show section"
+        ShowCategory: "Show category"
+        ShowAuthor: "Show author"
+        ShowCreatedDate: "Show created date"
+        ShowModifiedDate: "Show modified date"
+        ShowPdfIcon: "Show PDF icon"
+        ShowPrintIcon: "Show print icon"
+        ShowEmailIcon: "Show email icon"
+        AlternativeReadMoreText: "alternative read more text"    
+    
