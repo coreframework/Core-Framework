@@ -20,7 +20,7 @@ namespace Core.Web.NHibernate.Contracts
         /// </summary>
         /// <param name="user">The user.</param>
         /// <returns></returns>
-        IEnumerable<Widget> GetAvailableWidgets(ICorePrincipal user);
+        IEnumerable<Widget> GetAvailableWidgets(ICorePrincipal user, bool isTemplate);
 
         /// <summary>
         /// Finds the widget by identifier.

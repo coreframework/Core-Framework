@@ -46,7 +46,7 @@
                                 <script type="text/javascript">
                                     jQuery(function () {
                                         $('a.show-widgets').click(function () {
-                                            var url = '<%=Url.Action(MVC.Pages.ShowAvailableWidgets(Model.Id??0))%>';
+                                            var url = '<%=Url.Action(MVC.Pages.ShowAvailableWidgets(Model.Id??0, Model.IsTemplate))%>';
                                             var dialog = $('<div title="<%=Html.Translate("Actions.AddWidget")%>" style="display:none"/>').appendTo('body');
                                             dialog.load(
                                         url,

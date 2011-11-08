@@ -157,7 +157,6 @@ namespace Core.Web.Areas.Admin.Controllers
                 {
                     permissionService.SetupDefaultRolePermissions(
                         ResourcePermissionsHelper.GetResourceOperations(typeof(PageTemplate)), typeof(PageTemplate), pageTemplate.Id);
-                    PageHelper.AddWidgetToPage(pageTemplate.Id, null, this.CorePrincipal());
                     Success(Translate("Messages.PageTemplateCreated"));
 
                     return RedirectToAction(MVC.Admin.PageTemplate.Index());

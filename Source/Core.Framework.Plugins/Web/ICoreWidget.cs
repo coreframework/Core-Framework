@@ -58,5 +58,7 @@ namespace Core.Framework.Plugins.Web
         long? Clone(ICoreWidgetInstance coreWidgetInstance);
 
         bool IsDetailsWidget { get; }
+
+        bool IsPlaceHolder { get; }
     }
 }

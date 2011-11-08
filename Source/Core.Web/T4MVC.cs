@@ -1739,6 +1739,8 @@ namespace Links {
                 private const String URLPATH = "~/Content/Images/jquery-ui";
                 public static String Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static String Url(String fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly String ui_icons_000000_256x240_png = Url("ui-icons_000000_256x240.png");
+                public static readonly String ui_icons_cc0000_256x240_png = Url("ui-icons_cc0000_256x240.png");
                 public static readonly String ui_icons_ffffff_256x240_png = Url("ui-icons_ffffff_256x240.png");
             }
         

@@ -336,13 +336,14 @@ namespace Core.Web.Controllers
         /// Shows the available widgets.
         /// </summary>
         /// <param name="pageId">The page id.</param>
+        /// <param name="isTemplate">if set to <c>true</c> [is template].</param>
         /// <returns></returns>
-        public virtual ActionResult ShowAvailableWidgets(long pageId)
+        public virtual ActionResult ShowAvailableWidgets(long pageId, bool isTemplate)
         {
             var service = ServiceLocator.Current.GetInstance<IWidgetService>();
             ViewData["pageId"] = pageId;
             ICorePrincipal user = this.CorePrincipal();
-            IEnumerable<Widget> availableWidgets = service.GetAvailableWidgets(user);
+            IEnumerable<Widget> availableWidgets = service.GetAvailableWidgets(user, isTemplate);
             IList<Widget> allowedWidgets = new List<Widget>();
             foreach (var widget in availableWidgets)
             {

@@ -336,9 +336,10 @@ namespace Core.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ShowAvailableWidgets(long pageId) {
+        public override System.Web.Mvc.ActionResult ShowAvailableWidgets(long pageId, bool isTemplate) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowAvailableWidgets);
             callInfo.RouteValueDictionary.Add("pageId", pageId);
+            callInfo.RouteValueDictionary.Add("isTemplate", isTemplate);
             return callInfo;
         }
 

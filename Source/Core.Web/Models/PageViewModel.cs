@@ -132,6 +132,8 @@ namespace Core.Web.Models
 
         public bool HideInMainMenu { get; set; }
 
+        public bool IsTemplate { get; set; }
+
         #endregion
 
         #region IMappedModel members
@@ -198,6 +200,7 @@ namespace Core.Web.Models
                 plugins.ForEach(t => { CssFileName += t.Id + "_"; });
                 CssFileName = CssFileName.Remove(CssFileName.Length - 1);
             }
+            IsTemplate = from.IsTemplate;
 
             return this;
         }

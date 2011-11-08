@@ -49,5 +49,7 @@ namespace Core.Web.NHibernate.Models
         }
 
         public virtual bool IsDetailsWidget { get; set; }
+
+        public virtual bool IsPlaceHolder { get; set; }
     }
 }

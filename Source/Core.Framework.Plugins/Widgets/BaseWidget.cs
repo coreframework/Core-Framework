@@ -87,7 +87,7 @@ namespace Core.Framework.Plugins.Widgets
         /// <summary>
         /// Gets the widget setting.
         /// </summary>
-        public IWidgetSetting WidgetSetting
+        public virtual IWidgetSetting WidgetSetting
         {
             get
             {
@@ -96,6 +96,11 @@ namespace Core.Framework.Plugins.Widgets
         }
 
         public virtual bool IsDetailsWidget
+        {
+            get { return false; }
+        }
+
+        public virtual bool IsPlaceHolder
         {
             get { return false; }
         }

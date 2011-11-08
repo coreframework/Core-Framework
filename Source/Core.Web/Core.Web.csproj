@@ -329,6 +329,8 @@
     <Compile Include="UsersController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Verbs\PlaceHolderWidgetViewVerb.cs" />
+    <Compile Include="Widgets\PlaceHolderWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\AdminError\AdminError.aspx" />
@@ -382,6 +384,9 @@
     <Content Include="Areas\Navigation\Views\NavigationMenu\ViewWidget.ascx" />
     <Content Include="Areas\Navigation\Views\SiteMap\EditWidget.ascx" />
     <Content Include="Areas\Navigation\Views\SiteMap\ViewWidget.ascx" />
+    <Content Include="Config\PlaceHolderWidgetConfig.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\Css\Admin\dd.css" />
     <Content Include="Content\Css\Admin\jqGridCss\blitzer\images\ui-bg_diagonals-thick_75_f3d8d8_40x40.png" />
     <Content Include="Content\Css\Admin\jqGridCss\blitzer\images\ui-bg_dots-small_65_a6a6a6_2x2.png" />
