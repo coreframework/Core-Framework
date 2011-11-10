@@ -16,14 +16,22 @@ namespace Core.WebContent
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute("Admin.WebContentSections", "admin/sections", new { controller = "Section", action = "Show", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
-            context.MapRoute("Admin.WebContentSections.DynamicGridData", "admin/sections/load-data", new { controller = "Section", action = "LoadData", id = String.Empty });
-            context.MapRoute("Admin.WebContentSections.New", "admin/sections/new", new { controller = "Section", action = "New", id = String.Empty });
-            /*  context.MapRoute("Admin.ContentPages.DynamicGridData", "admin/content-pages/DynamicGridData", new { controller = "ContentPage", action = "DynamicGridData", id = String.Empty });
-              context.MapRoute("Admin.ViewContentPage", "admin/content-page/view-{id}", new { controller = "ContentPage", action = "ShowById", id = String.Empty });
-              context.MapRoute("Admin.EditContentPage", "admin/content-page/edit-{id}", new { controller = "ContentPage", action = "Edit", id = String.Empty });
-              context.MapRoute("Admin.ChangeContentPageLanguage", "admin/content-page/change-language", new { controller = "ContentPage", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-              context.MapRoute("Admin.NewContentPage", "admin/content-page/new", new { controller = "ContentPage", action = "New", id = String.Empty });
-              context.MapRoute("Admin.RemoveContentPage", "admin/content-page/remove-{id}", ContentPagesMVC.ContentPage.Remove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });*/
+            context.MapRoute(null, "admin/sections/load-data", new { controller = "Section", action = "LoadData", id = String.Empty });
+            context.MapRoute(null, "admin/sections/new", new { controller = "Section", action = "New", id = String.Empty });
+            context.MapRoute(null, "admin/sections/details/{sectionId}", new { controller = "Section", action = "Edit", sectionId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/sections/change-language", new { controller = "Section", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/sections/save", WebContentMVC.Section.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/sections/permissions/{sectionId}", new { controller = "Section", action = "ShowPermissions", area = AreaName, sectionId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/sections/apply-permissions", WebContentMVC.Section.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
+            context.MapRoute("Admin.WebContentCategories", "admin/web-content-categories", new { controller = "WebContentCategory", action = "Show", Area = AreaName, id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/web-content-categories/load-data", new { controller = "WebContentCategory", action = "LoadData", id = String.Empty });
+            context.MapRoute(null, "admin/web-content-categories/new", new { controller = "WebContentCategory", action = "New", id = String.Empty });
+            context.MapRoute(null, "admin/web-content-categories/details/{categoryId}", new { controller = "WebContentCategory", action = "Edit", categoryId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/web-content-categories/change-language", new { controller = "WebContentCategory", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/web-content-categories/save", WebContentMVC.WebContentCategory.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/web-content-categories/permissions/{categoryId}", new { controller = "WebContentCategory", action = "ShowPermissions", area = AreaName, categoryId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/web-content-categories/apply-permissions", WebContentMVC.WebContentCategory.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
     }
 }

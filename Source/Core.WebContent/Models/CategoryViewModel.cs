@@ -1,15 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
+using Core.Framework.Permissions.Extensions;
+using Core.WebContent.NHibernate;
+using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
+using Core.WebContent.NHibernate.Permissions;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.WebContent.Models
 {
-    public class SectionViewModel : IMappedModel<Section, SectionViewModel>
+    public class CategoryViewModel : IMappedModel<WebContentCategory, CategoryViewModel>
     {
         private IDictionary<String, String> cultures;
+
+        private List<Section> sections;
+
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -42,10 +51,33 @@ namespace Core.WebContent.Models
         public String SelectedCulture { get; set; }
 
         /// <summary>
-        /// Gets or sets the settings.
+        /// Gets or sets the status.
         /// </summary>
-        /// <value>The settings.</value>
-        public SectionSettings SectionSettings { get; set; }
+        /// <value>The status.</value>
+        public CategoryStatus Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the section.
+        /// </summary>
+        /// <value>The section.</value>
+        public long SectionId { get; set; }
+
+        /// <summary>
+        /// Gets the forms.
+        /// </summary>
+        /// <value>The forms.</value>
+        public List<Section> Sections
+        {
+            get
+            {
+                if (sections == null)
+                {
+                    var sectionService = ServiceLocator.Current.GetInstance<ISectionService>();
+                    sections = (List<Section>)sectionService.GetAllowedSectionsByOperation(HttpContext.Current.CorePrincipal(), (int)SectionOperations.View);
+                }
+                return sections;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the cultures.
@@ -57,26 +89,23 @@ namespace Core.WebContent.Models
             set { cultures = value; }
         }
 
-        public SectionViewModel MapFrom(Section from)
+        public CategoryViewModel MapFrom(WebContentCategory from)
         {
             Id = from.Id;
-            SectionSettings = from.SectionSettings;
-            MapLocaleFrom(from.CurrentLocale as SectionLocale);
+            MapLocaleFrom(from.CurrentLocale as WebContentCategoryLocale);
             return this;
         }
 
-        public Section MapTo(Section to)
+        public WebContentCategory MapTo(WebContentCategory to)
         {
             to.Id = Id;
-            to.SectionSettings = SectionSettings;
-            to.SectionSettings.Section = to;
             if (String.IsNullOrEmpty(SelectedCulture))
-                MapLocaleTo((SectionLocale)to.CurrentLocale);
+                MapLocaleTo((WebContentCategoryLocale)to.CurrentLocale);
 
             return to;
         }
 
-        public SectionViewModel MapLocaleFrom(SectionLocale locale)
+        public CategoryViewModel MapLocaleFrom(WebContentCategoryLocale locale)
         {
             Title = locale.Title;
             Description = locale.Description;
@@ -85,7 +114,7 @@ namespace Core.WebContent.Models
             return this;
         }
 
-        public SectionLocale MapLocaleTo(SectionLocale locale)
+        public WebContentCategoryLocale MapLocaleTo(WebContentCategoryLocale locale)
         {
             locale.Title = Title;
             locale.Description = Description;

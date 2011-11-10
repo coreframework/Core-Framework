@@ -79,6 +79,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -87,17 +88,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryStatus.cs" />
+    <Compile Include="Contracts\ICategoryLocaleService.cs" />
+    <Compile Include="Contracts\ICategoryService.cs" />
     <Compile Include="Contracts\ISectionSettingsService.cs" />
     <Compile Include="Contracts\ISectionLocaleService.cs" />
     <Compile Include="Contracts\ISectionService.cs" />
     <Compile Include="CoreWebContentNHibernateModule.cs" />
+    <Compile Include="Mappings\CategoryLocaleMapping.cs" />
+    <Compile Include="Mappings\CategoryMapping.cs" />
     <Compile Include="Mappings\SectionSettingsMapping.cs" />
     <Compile Include="Mappings\SectionLocaleMapping.cs" />
     <Compile Include="Mappings\SectionMapping.cs" />
+    <Compile Include="Models\WebContentCategory.cs" />
+    <Compile Include="Models\WebContentCategoryLocale.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\SectionLocale.cs" />
     <Compile Include="Models\SectionSettings.cs" />
+    <Compile Include="Permissions\CategoryOperations.cs" />
+    <Compile Include="Permissions\SectionOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateCategoryLocaleService.cs" />
+    <Compile Include="Services\NHibernateCategoryService.cs" />
     <Compile Include="Services\NHibernateSectionSettingsService.cs" />
     <Compile Include="Services\NHibernateSectionLocaleService.cs" />
     <Compile Include="Services\NHibernateSectionService.cs" />

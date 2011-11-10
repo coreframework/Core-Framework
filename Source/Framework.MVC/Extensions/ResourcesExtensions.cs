@@ -11,7 +11,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 
 using Castle.Core.Logging;
-
+using Framework.Core.Extensions;
 using Framework.Mvc.Helpers;
 
 using Microsoft.Practices.ServiceLocation;
@@ -115,7 +115,12 @@ namespace Framework.Mvc.Extensions
 
         private static String DefaultTranslationMissing(String resourceKey, String scope, String culture)
         {
-            var message = String.Format(TranslationMissingTemplate, resourceKey, scope, culture);
+            var message = resourceKey.Humanize();
+
+            #if DEBUG
+                 message = String.Format(TranslationMissingTemplate, resourceKey, scope, culture);
+            #endif
+
             var logger = ServiceLocator.Current.GetInstance<ILogger>();
             logger.Warn(message);
             return message;

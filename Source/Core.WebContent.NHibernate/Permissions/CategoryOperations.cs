@@ -2,10 +2,10 @@
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
-namespace Core.WebContent.Permissions.Operations
+namespace Core.WebContent.NHibernate.Permissions
 {
     [Flags]
-    public enum SectionOperations
+    public enum CategoryOperations
     {
         [OperationDescription(PermissionArea.Portal, PermissionOperationLevel.Object, OwnerDefaultAcess = true)]
         View = 1,

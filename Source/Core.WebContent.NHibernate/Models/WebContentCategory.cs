@@ -10,16 +10,16 @@ using Framework.Facilities.NHibernate.Objects;
 namespace Core.WebContent.NHibernate.Models
 {
     /// <summary>
-    /// Web content section class.
+    /// Web content category class.
     /// </summary>
     [Export(typeof(IPermissible))]
-    public class Section : LocalizableEntity<SectionLocale>, IPermissible
+    public class WebContentCategory : LocalizableEntity<WebContentCategoryLocale>, IPermissible
     {
         #region Fields
 
-        private String permissionTitle = "Web Content: Sections";
+        private String permissionTitle = "Web Content: Categories";
 
-        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<SectionOperations>();
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<CategoryOperations>();
 
         #endregion
 
@@ -38,10 +38,16 @@ namespace Core.WebContent.NHibernate.Models
         public virtual DateTime CreateDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the section settings.
+        /// Gets or sets the status.
         /// </summary>
-        /// <value>The section settings.</value>
-        public virtual SectionSettings SectionSettings { get; set; }
+        /// <value>The status.</value>
+        public virtual CategoryStatus Status { get; set; }
+
+        /// <summary>
+        /// Gets or sets the section.
+        /// </summary>
+        /// <value>The section.</value>
+        public virtual Section Section { get; set; }
 
         #endregion
 
@@ -71,9 +77,9 @@ namespace Core.WebContent.NHibernate.Models
 
         public override ILocale InitializeLocaleEntity()
         {
-            return new SectionLocale
+            return new WebContentCategoryLocale
                        {
-                           Section = this,
+                           Category = this,
                            Culture = null
                        };
         }

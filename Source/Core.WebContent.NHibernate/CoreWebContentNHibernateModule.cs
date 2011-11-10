@@ -18,6 +18,9 @@ namespace Core.WebContent.NHibernate
             container.Register(Component.For<ISectionService>().ImplementedBy<NHibernateSectionService>().LifeStyle.Transient);
             container.Register(Component.For<ISectionLocaleService>().ImplementedBy<NHibernateSectionLocaleService>().LifeStyle.Transient);
             container.Register(Component.For<ISectionSettingsService>().ImplementedBy<NHibernateSectionSettingsService>().LifeStyle.Transient);
+
+            container.Register(Component.For<ICategoryService>().ImplementedBy<NHibernateCategoryService>().LifeStyle.Transient);
+            container.Register(Component.For<ICategoryLocaleService>().ImplementedBy<NHibernateCategoryLocaleService>().LifeStyle.Transient);
         }
     }
 }

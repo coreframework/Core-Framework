@@ -1,15 +1,33 @@
-﻿<%@ Assembly Name="Core.Forms" %>
-<%@ Assembly Name="Core.Forms.NHibernate" %>
-<%@ Assembly Name="Core.Framework.Permissions" %>
-<%@ Page Title="" Language="C#"  MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Framework.Permissions.Models.PermissionsModel>" %>
-<%@ Import Namespace="System.Web.Mvc.Ajax" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Framework.Permissions.Models.PermissionsModel>" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
+   <%:Html.Translate("Permissions", "WebContent.Views.Section")%>
+</asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-    <h1> <%:Html.Translate(".FormPermissions") %></h1>
- <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.EntityId, false, false, true));%>
+    <h1><%:Html.Translate("Permissions", "WebContent.Views.Section")%></h1>
+    <div class="tabs clrfix">
+	    <ul class="i-tab clrfix">
+            <li>
+                <em></em>
+                <span>
+                 <%:Html.ActionLink(Html.Translate("Details", "WebContent.Views.Section"), "Edit") %>
+                </span>
+                <strong></strong>
+            </li>
+            <li class="active">
+                <em></em>
+                <span>
+                 <%:Html.ActionLink(Html.Translate("Permissions", "WebContent.Views.Section"), "ShowPermissions") %>
+                </span>
+                <strong></strong>
+            </li>
+	    </ul>
+   </div>
+   <div class="tabs_b"></div>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   <% using (Ajax.BeginForm("ApplyPermissions", "Forms", new {area = "Forms"}, new AjaxOptions() { OnComplete = "completePermissionsUpdates"}))
+   <% using (Ajax.BeginForm("ApplyPermissions", "Section", new {area = "WebContent"}, new AjaxOptions() { OnComplete = "completePermissionsUpdates"}))
        { %>
        <%:Html.HiddenFor(model=>model.EntityId) %>
           <div class="e_table_area">
@@ -18,12 +36,12 @@
                     <tr>
                         <th>
                             <span></span>
-                            <%:Html.Translate(".Role") %>
+                            <%:Html.Translate("Role", "WebContent.Views.Section")%>
                         </th>
                         <%foreach (var operation in Model.Operations) {%>
                             <th>
                                 <span></span>
-                                <%=Html.Translate("." + Html.Encode(operation.Title))%>
+                                <%=Html.Translate("SectionOperations." + Html.Encode(operation.Title), "WebContent.Models")%>
                             </th>
                         <%} %>
                     </tr>

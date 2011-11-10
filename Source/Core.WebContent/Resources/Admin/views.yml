@@ -2,11 +2,16 @@ Views:
   Section:
     Show:
       AddSection: "Add"
-    New:
-      NewSection: "New section"
-      EditSection: "Edit section"
-      Common: "Common information"
-      Settings: "Settings"
+    NewSection: "New section"
+    EditSection: "Edit section"
+    Common: "Common information"
+    Settings: "Settings"
+    Language: "Language"
+    Permissions: "Permissions"
+    Details: "Details"
+    Role: "Role"
+  WebContentCategory:
+    AddCategory: "Add category"
 Models:
   ContentPageLocaleViewModel:
      Title: "Title"

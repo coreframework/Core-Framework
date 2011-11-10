@@ -14,5 +14,10 @@ Models:
         ShowPdfIcon: "Show PDF icon"
         ShowPrintIcon: "Show print icon"
         ShowEmailIcon: "Show email icon"
-        AlternativeReadMoreText: "alternative read more text"    
+        AlternativeReadMoreText: "alternative read more text"
+     SectionOperations:
+        View: "View"
+        Manage: "Manage"
+        AddToWidget: "Add to widget"
+        Permissions: "Permissions"    
     

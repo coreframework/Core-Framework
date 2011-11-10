@@ -21,9 +21,9 @@ using System.Web.Routing;
 using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.WebContent.Controllers {
-    public partial class SectionController {
+    public partial class WebContentCategoryController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected SectionController(Dummy d) { }
+        protected WebContentCategoryController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -63,11 +63,11 @@ namespace Core.WebContent.Controllers {
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public SectionController Actions { get { return WebContentMVC.Section; } }
+        public WebContentCategoryController Actions { get { return WebContentMVC.WebContentCategory; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly String  Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly String  Name = "Section";
+        public readonly String  Name = "WebContentCategory";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -90,17 +90,17 @@ namespace Core.WebContent.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly String  Edit = "~/Views/Section/Edit.aspx";
-            public readonly String  New = "~/Views/Section/New.aspx";
-            public readonly String  SectionDetails = "~/Views/Section/SectionDetails.ascx";
-            public readonly String  Show = "~/Views/Section/Show.aspx";
-            public readonly String  ShowPermissions = "~/Views/Section/ShowPermissions.aspx";
+            public readonly String  CategoryDetails = "~/Views/WebContentCategory/CategoryDetails.ascx";
+            public readonly String  Edit = "~/Views/WebContentCategory/Edit.aspx";
+            public readonly String  New = "~/Views/WebContentCategory/New.aspx";
+            public readonly String  Show = "~/Views/WebContentCategory/Show.aspx";
+            public readonly String  ShowPermissions = "~/Views/WebContentCategory/ShowPermissions.aspx";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_SectionController: Core.WebContent.Controllers.SectionController {
-        public T4MVC_SectionController() : base(Dummy.Instance) { }
+    public class T4MVC_WebContentCategoryController: Core.WebContent.Controllers.WebContentCategoryController {
+        public T4MVC_WebContentCategoryController() : base(Dummy.Instance) { }
 
         public override System.Web.Mvc.ActionResult Show() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Show);
@@ -122,34 +122,34 @@ namespace Core.WebContent.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult New(Core.WebContent.Models.SectionViewModel section) {
+        public override System.Web.Mvc.ActionResult New(Core.WebContent.Models.CategoryViewModel category) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
-            callInfo.RouteValueDictionary.Add("section", section);
+            callInfo.RouteValueDictionary.Add("category", category);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(long sectionId) {
+        public override System.Web.Mvc.ActionResult Edit(long categoryId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("sectionId", sectionId);
+            callInfo.RouteValueDictionary.Add("categoryId", categoryId);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ChangeLanguage(long sectionId, string culture) {
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long categoryId, string culture) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
-            callInfo.RouteValueDictionary.Add("sectionId", sectionId);
+            callInfo.RouteValueDictionary.Add("categoryId", categoryId);
             callInfo.RouteValueDictionary.Add("culture", culture);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Save(Core.WebContent.Models.SectionViewModel model) {
+        public override System.Web.Mvc.ActionResult Save(Core.WebContent.Models.CategoryViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Save);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ShowPermissions(long sectionId) {
+        public override System.Web.Mvc.ActionResult ShowPermissions(long categoryId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowPermissions);
-            callInfo.RouteValueDictionary.Add("sectionId", sectionId);
+            callInfo.RouteValueDictionary.Add("categoryId", categoryId);
             return callInfo;
         }
 

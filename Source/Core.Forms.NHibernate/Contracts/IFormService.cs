@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Core.Forms.NHibernate.Models;
 using Core.Framework.Permissions.Models;
 using Framework.Core.Services;
-using NHibernate;
 
 namespace Core.Forms.NHibernate.Contracts
 {
@@ -16,9 +15,5 @@ namespace Core.Forms.NHibernate.Contracts
         /// <param name="operation">The operation code.</param>
         /// <returns></returns>
         IEnumerable<Form> GetAllowedFormsByOperation(ICorePrincipal user, Int32 operation);
-
-        int GetCount(ICriteria searchCriteria);
-
-        ICriteria GetSearchQuery(String searchString, ICorePrincipal user, Int32 operationCode);
     }
 }

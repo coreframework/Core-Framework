@@ -272,28 +272,33 @@ namespace Framework.Mvc.Extensions
         /// <typeparam name="TModel">The type of the model.</typeparam>
         /// <param name="html">The HTML helper instance that this method extends.</param>
         /// <param name="propertyAccessor">The property accessor.</param>
-        /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <param name="options">The options.</param>
         /// <returns>
         /// An HTML label element and the property name of the property that is represented by the model.
         /// </returns>
-        public static MvcHtmlString LocalizedLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, Object>> propertyAccessor, Object htmlAttributes)
+        public static MvcHtmlString LocalizedLabelFor<TModel>(this HtmlHelper<TModel> html, Expression<Func<TModel, Object>> propertyAccessor, Object options)
         {
             var labelText = ResourceHelper.TranslatePropertyName(html.ViewContext.HttpContext, typeof(TModel), PropertyName.For(propertyAccessor));
-
             if (String.IsNullOrEmpty(labelText))
             {
                 labelText = PropertyName.For(propertyAccessor).Humanize();
             }
-               
+
             var builder = new TagBuilder("label");
             builder.Attributes.Add("for", html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(String.Empty));
 
-            var routeValues = new RouteValueDictionary(htmlAttributes);
+            var routeValues = new RouteValueDictionary(options);
+            routeValues = Defaults.Merge(routeValues);
 
             Object cssClass;
             if (routeValues.TryGetValue(CssClassKey, out cssClass))
             {
                 builder.AddCssClass(cssClass as String);
+            }
+ 
+            if (html.ViewData.ModelMetadata.IsRequired && (bool)routeValues[DisplayAsterixKey])
+            {
+                labelText = String.Format("{0}{1}", labelText, routeValues[AsterixKey]);
             }
 
             builder.SetInnerText(labelText);

@@ -25,13 +25,13 @@ using NHibernate.Criterion;
 
 namespace Core.WebContent.Controllers
 {
-    [Export(typeof(IController)), ExportMetadata("Name", "Section")]
-    public partial class SectionController : CorePluginController
+    [Export(typeof(IController)), ExportMetadata("Name", "WebContentCategory")]
+    public partial class WebContentCategoryController : CorePluginController
     {
         #region Fields
 
-        private readonly ISectionService sectionService;
-        private readonly ISectionLocaleService sectionLocaleService;
+        private readonly ICategoryService categoryService;
+        private readonly ICategoryLocaleService categoryLocaleService;
         private readonly IPermissionCommonService permissionService;
         private readonly IPermissionsHelper permissionsHelper;
 
@@ -39,10 +39,10 @@ namespace Core.WebContent.Controllers
 
         #region Constructor
 
-        public SectionController()
+        public WebContentCategoryController()
         {
-            sectionService = ServiceLocator.Current.GetInstance<ISectionService>();
-            sectionLocaleService = ServiceLocator.Current.GetInstance<ISectionLocaleService>();
+            categoryService = ServiceLocator.Current.GetInstance<ICategoryService>();
+            categoryLocaleService = ServiceLocator.Current.GetInstance<ICategoryLocaleService>();
             permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
         }
@@ -51,10 +51,10 @@ namespace Core.WebContent.Controllers
 
         #region Actions
 
-        [MvcSiteMapNode(Title = "$t:Titles.Sections", AreaName = "WebContent", ParentKey = "Home", Key = "WebContent.Section.Show")]
+        [MvcSiteMapNode(Title = "$t:Titles.Categories", AreaName = "WebContent", ParentKey = "Home", Key = "WebContent.Category.Show")]
         public virtual ActionResult Show()
         {
-            return View(BuildSectionsGrid());
+            return View(BuildCategoriesGrid());
         }
 
         [HttpPost]
@@ -62,24 +62,24 @@ namespace Core.WebContent.Controllers
         {
             int pageIndex = Convert.ToInt32(page) - 1;
             int pageSize = rows;
-            ICriteria searchQuery = sectionLocaleService.GetSearchCriteria(search, this.CorePrincipal(), (Int32)SectionOperations.View);
-            long totalRecords = sectionLocaleService.Count(searchQuery);
+            ICriteria searchQuery = categoryLocaleService.GetSearchCriteria(search, this.CorePrincipal(), (Int32)CategoryOperations.View);
+            long totalRecords = categoryLocaleService.Count(searchQuery);
             var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
-            var sections = searchQuery.AddOrder(new Order(sidx, sord == "asc")).SetFirstResult(pageIndex * rows).SetMaxResults(rows).List<SectionLocale>();
+            var categorys = searchQuery.AddOrder(new Order(sidx, sord == "asc")).SetFirstResult(pageIndex * rows).SetMaxResults(rows).List<WebContentCategoryLocale>();
             var jsonData = new
             {
                 total = totalPages,
                 page,
                 records = totalRecords,
                 rows = (
-                    from section in sections
+                    from category in categorys
                     select new
                     {
-                        id = section.Id,
+                        id = category.Id,
                         cell = new[] {  
-                                        section.Title, 
+                                        category.Title, 
                                         String.Format("<a href=\"{0}\">{1}</a>",
-                                            Url.Action("Edit","Section",new { sectionId = section.Section.Id }),HttpContext.Translate("Details", ResourceHelper.GetControllerScope(this)))
+                                            Url.Action("Edit","WebContentCategory",new { categoryId = category.Category.Id }),HttpContext.Translate("Details", ResourceHelper.GetControllerScope(this)))
                         }
                     }).ToArray()
             };
@@ -87,23 +87,23 @@ namespace Core.WebContent.Controllers
         }
 
         [HttpGet]
-        [MvcSiteMapNode(Title = "New", AreaName = "WebContent", ParentKey = "WebContent.Section.Show")]
+        [MvcSiteMapNode(Title = "New", AreaName = "WebContent", ParentKey = "WebContent.Category.Show")]
         public virtual ActionResult New()
         {
-            return View(new SectionViewModel { AllowManage = true, SectionSettings = new SectionSettings()});
+            return View(new CategoryViewModel { AllowManage = true});
         }
 
         [HttpPost, ValidateInput(false)]
-        public virtual ActionResult New(SectionViewModel section)
+        public virtual ActionResult New(CategoryViewModel category)
         {
             if (ModelState.IsValid)
             {
-                var newSection = section.MapTo(new Section { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null });
-                if (sectionService.Save(newSection))
+                var newCategory = category.MapTo(new WebContentCategory { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null });
+                if (categoryService.Save(newCategory))
                 {
-                    permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<SectionOperations>(), typeof(Section), newSection.Id);
+                    permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<CategoryOperations>(), typeof(WebContentCategory), newCategory.Id);
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
-                    return RedirectToAction(WebContentMVC.Section.Edit(newSection.Id));
+                    return RedirectToAction(WebContentMVC.WebContentCategory.Edit(newCategory.Id));
                 }
             }
             else
@@ -112,84 +112,84 @@ namespace Core.WebContent.Controllers
 
             }
 
-            section.AllowManage = true;
-            return View("New", section);
+            category.AllowManage = true;
+            return View("New", category);
         }
 
         /// <summary>
         /// Edit form action.
         /// </summary>
-        /// <param name="sectionId">The section id.</param>
+        /// <param name="categoryId">The category id.</param>
         /// <returns></returns>
         [HttpGet]
-        [MvcSiteMapNode(Title = "Edit", AreaName = "WebContent", ParentKey = "WebContent.Section.Show", Key = "WebContent.Section.Edit")]
+        [MvcSiteMapNode(Title = "Edit", AreaName = "WebContent", ParentKey = "WebContent.Category.Show", Key = "WebContent.Category.Edit")]
         [SiteMapTitle("Title")]
-        public virtual ActionResult Edit(long sectionId)
+        public virtual ActionResult Edit(long categoryId)
         {
-            var section = sectionService.Find(sectionId);
+            var category = categoryService.Find(categoryId);
 
-            if (section == null || !permissionService.IsAllowed((Int32)SectionOperations.View, this.CorePrincipal(), typeof(Section), section.Id, IsSectionOwner(section), PermissionOperationLevel.Object))
+            if (category == null || !permissionService.IsAllowed((Int32)CategoryOperations.View, this.CorePrincipal(), typeof(WebContentCategory), category.Id, IsCategoryOwner(category), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
-            bool allowManage = permissionService.IsAllowed((Int32)SectionOperations.Manage, this.CorePrincipal(),
-                                                            typeof(Section), section.Id, IsSectionOwner(section),
+            bool allowManage = permissionService.IsAllowed((Int32)CategoryOperations.Manage, this.CorePrincipal(),
+                                                            typeof(WebContentCategory), category.Id, IsCategoryOwner(category),
                                                             PermissionOperationLevel.Object);
 
-            return View("Edit", new SectionViewModel { AllowManage = allowManage }.MapFrom(section));
+            return View("Edit", new CategoryViewModel { AllowManage = allowManage }.MapFrom(category));
         }
 
         [HttpPost]
-        public virtual ActionResult ChangeLanguage(long sectionId, String culture)
+        public virtual ActionResult ChangeLanguage(long categoryId, String culture)
         {
-            var section = sectionService.Find(sectionId);
+            var category = categoryService.Find(categoryId);
 
-            if (section == null || !permissionService.IsAllowed((Int32)SectionOperations.View, this.CorePrincipal(), typeof(Section), section.Id, IsSectionOwner(section), PermissionOperationLevel.Object))
+            if (category == null || !permissionService.IsAllowed((Int32)CategoryOperations.View, this.CorePrincipal(), typeof(WebContentCategory), category.Id, IsCategoryOwner(category), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
             }
 
-            bool allowManage = permissionService.IsAllowed((Int32)SectionOperations.Manage, this.CorePrincipal(),
-                                                        typeof(Section), section.Id, IsSectionOwner(section),
+            bool allowManage = permissionService.IsAllowed((Int32)CategoryOperations.Manage, this.CorePrincipal(),
+                                                        typeof(WebContentCategory), category.Id, IsCategoryOwner(category),
                                                         PermissionOperationLevel.Object);
 
-            SectionViewModel model = new SectionViewModel { AllowManage = allowManage }.MapFrom(section);
+            CategoryViewModel model = new CategoryViewModel { AllowManage = allowManage }.MapFrom(category);
             model.SelectedCulture = culture;
 
             //get locale
-            var localeService = ServiceLocator.Current.GetInstance<ISectionLocaleService>();
-            SectionLocale locale = localeService.GetLocale(sectionId, culture);
+            var localeService = ServiceLocator.Current.GetInstance<ICategoryLocaleService>();
+            WebContentCategoryLocale locale = localeService.GetLocale(categoryId, culture);
 
             if (locale != null)
                 model.MapLocaleFrom(locale);
 
-            return PartialView("SectionDetails", model);
+            return PartialView("CategoryDetails", model);
         }
 
         [HttpPost]
-        public virtual ActionResult Save(SectionViewModel model)
+        public virtual ActionResult Save(CategoryViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var section = sectionService.Find(model.Id);
+                var category = categoryService.Find(model.Id);
 
-                if (section == null || !permissionService.IsAllowed((Int32)SectionOperations.Manage, this.CorePrincipal(), typeof(Section), section.Id, IsSectionOwner(section), PermissionOperationLevel.Object))
+                if (category == null || !permissionService.IsAllowed((Int32)CategoryOperations.Manage, this.CorePrincipal(), typeof(WebContentCategory), category.Id, IsCategoryOwner(category), PermissionOperationLevel.Object))
                 {
                     throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
                 }
 
-                if (sectionService.Save(model.MapTo(section)))
+                if (categoryService.Save(model.MapTo(category)))
                 {
                     //save locale
-                    var localeService = ServiceLocator.Current.GetInstance<ISectionLocaleService>();
-                    SectionLocale locale = localeService.GetLocale(section.Id, model.SelectedCulture);
-                    locale = model.MapLocaleTo(locale ?? new SectionLocale { Section = section });
+                    var localeService = ServiceLocator.Current.GetInstance<ICategoryLocaleService>();
+                    WebContentCategoryLocale locale = localeService.GetLocale(category.Id, model.SelectedCulture);
+                    locale = model.MapLocaleTo(locale ?? new WebContentCategoryLocale { Category = category });
 
                     localeService.Save(locale);
 
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
-                    return RedirectToAction(WebContentMVC.Section.Edit(model.Id));
+                    return RedirectToAction(WebContentMVC.WebContentCategory.Edit(model.Id));
                 }
             }
             else
@@ -202,34 +202,34 @@ namespace Core.WebContent.Controllers
             return View("Edit", model);
         }
 
-        [MvcSiteMapNode(Title = "$t:Titles.Permissions", AreaName = "WebContent", ParentKey = "WebContent.Section.Edit")]
-        public virtual ActionResult ShowPermissions(long sectionId)
+        [MvcSiteMapNode(Title = "$t:Titles.Permissions", AreaName = "WebContent", ParentKey = "WebContent.Category.Edit")]
+        public virtual ActionResult ShowPermissions(long categoryId)
         {
-            var section = sectionService.Find(sectionId);
+            var category = categoryService.Find(categoryId);
 
-            if (section == null || !permissionService.IsAllowed((Int32)SectionOperations.Permissions, this.CorePrincipal(), typeof(Section), section.Id, IsSectionOwner(section), PermissionOperationLevel.Object))
+            if (category == null || !permissionService.IsAllowed((Int32)CategoryOperations.Permissions, this.CorePrincipal(), typeof(WebContentCategory), category.Id, IsCategoryOwner(category), PermissionOperationLevel.Object))
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Notfound", ResourceHelper.GetControllerScope(this)));
             }
 
-            return View("ShowPermissions", permissionsHelper.BindPermissionsModel(section.Id, typeof(Section), false));
+            return View("ShowPermissions", permissionsHelper.BindPermissionsModel(category.Id, typeof(WebContentCategory), false));
         }
 
         [HttpPost]
         public virtual ActionResult ApplyPermissions(PermissionsModel model)
         {
-            var section = sectionService.Find(model.EntityId);
+            var category = categoryService.Find(model.EntityId);
 
-            if (section != null)
+            if (category != null)
             {
-                if (permissionService.IsAllowed((Int32)SectionOperations.Permissions, this.CorePrincipal(), typeof(Section), section.Id, IsSectionOwner(section), PermissionOperationLevel.Object))
+                if (permissionService.IsAllowed((Int32)CategoryOperations.Permissions, this.CorePrincipal(), typeof(WebContentCategory), category.Id, IsCategoryOwner(category), PermissionOperationLevel.Object))
                 {
-                    permissionsHelper.ApplyPermissions(model, typeof(Section));
+                    permissionsHelper.ApplyPermissions(model, typeof(WebContentCategory));
                 }
-                if (permissionService.IsAllowed((Int32)SectionOperations.Permissions, this.CorePrincipal(), typeof(Section), section.Id, IsSectionOwner(section), PermissionOperationLevel.Object))
+                if (permissionService.IsAllowed((Int32)CategoryOperations.Permissions, this.CorePrincipal(), typeof(WebContentCategory), category.Id, IsCategoryOwner(category), PermissionOperationLevel.Object))
                 {
                     Success(HttpContext.Translate("Messages.PermitionsSuccess", ResourceHelper.GetControllerScope(this)));
-                    return Content(Url.Action("ShowPermissions", "Section", new { sectionId = section.Id }));
+                    return Content(Url.Action("ShowPermissions", "WebContentCategory", new { categoryId = category.Id }));
                 }
                 Error(String.Format(HttpContext.Translate("Messages.PermitionsUnSuccess", ResourceHelper.GetControllerScope(this)), model.EntityId));
             }
@@ -242,13 +242,13 @@ namespace Core.WebContent.Controllers
 
         #region Helper Methods
 
-        private bool IsSectionOwner(Section section)
+        private bool IsCategoryOwner(WebContentCategory category)
         {
-            return section != null && this.CorePrincipal() != null && section.UserId != null &&
-                             section.UserId == this.CorePrincipal().PrincipalId;
+            return category != null && this.CorePrincipal() != null && category.UserId != null &&
+                             category.UserId == this.CorePrincipal().PrincipalId;
         }
 
-        public GridViewModel BuildSectionsGrid()
+        public GridViewModel BuildCategoriesGrid()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
@@ -273,9 +273,9 @@ namespace Core.WebContent.Controllers
                                                      };
             var model = new GridViewModel
             {
-                DataUrl = Url.Action("LoadData", "Section"),
+                DataUrl = Url.Action("LoadData", "WebContentCategory"),
                 DefaultOrderColumn = "Id",
-                GridTitle = HttpContext.Translate("Titles.Sections", String.Empty),
+                GridTitle = HttpContext.Translate("Titles.Categories", String.Empty),
                 Columns = columns,
                 IsRowNotClickable = true
             };
