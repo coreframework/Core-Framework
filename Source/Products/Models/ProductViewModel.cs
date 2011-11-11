@@ -18,11 +18,20 @@ namespace Products.Models
         public virtual String Title { get; set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        /// <value>The summary.</value>
+        [Required]
+        public virtual String Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the content.
         /// </summary>
         /// <value>The content.</value>
         [DataType("FckEditorText"), Required]
         public virtual String Description { get; set; }
+
+        public DateTime? PublishedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the content.

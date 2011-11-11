@@ -32,6 +32,15 @@ namespace Core.WebContent
             context.MapRoute(null, "admin/web-content-categories/save", WebContentMVC.WebContentCategory.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/web-content-categories/permissions/{categoryId}", new { controller = "WebContentCategory", action = "ShowPermissions", area = AreaName, categoryId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/web-content-categories/apply-permissions", WebContentMVC.WebContentCategory.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
+            context.MapRoute("Admin.WebContentArticles", "admin/web-content-articles", new { controller = "Article", action = "Show", Area = AreaName, id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/web-content-articles/load-data", new { controller = "Article", action = "LoadData", id = String.Empty });
+            context.MapRoute(null, "admin/web-content-articles/new", new { controller = "Article", action = "New", id = String.Empty });
+            context.MapRoute(null, "admin/web-content-articles/details/{categoryId}", new { controller = "Article", action = "Edit", categoryId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/web-content-articles/change-language", new { controller = "Article", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/web-content-articles/save", WebContentMVC.Article.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/web-content-articles/permissions/{categoryId}", new { controller = "Article", action = "ShowPermissions", area = AreaName, categoryId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/web-content-articles/apply-permissions", WebContentMVC.Article.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
     }
 }

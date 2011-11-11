@@ -76,6 +76,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddArticles.cs" />
+    <Compile Include="Migration_AddArticleLocales.cs" />
     <Compile Include="Migration_AddCategoryLocales.cs" />
     <Compile Include="Migration_AddCategories.cs" />
     <Compile Include="Migration_AddSectionSettings.cs" />

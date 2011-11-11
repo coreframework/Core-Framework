@@ -23,6 +23,7 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class WebContentMVC {
+    public static Core.WebContent.Controllers.ArticleController Article = new Core.WebContent.Controllers.T4MVC_ArticleController();
     public static Core.WebContent.Controllers.SectionController Section = new Core.WebContent.Controllers.T4MVC_SectionController();
     public static Core.WebContent.Controllers.WebContentCategoryController WebContentCategory = new Core.WebContent.Controllers.T4MVC_WebContentCategoryController();
 }

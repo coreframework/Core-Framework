@@ -5,11 +5,11 @@
 <%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 <%@ Import Namespace="System.Web.Mvc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%:Html.Translate("Titles.Sections")%>
+   <%:Html.Translate("Titles.Sections", "WebContent")%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
-  <h1><%:Html.Translate("Titles.Sections")%></h1>
+  <h1><%:Html.Translate("Titles.Sections", "WebContent")%></h1>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

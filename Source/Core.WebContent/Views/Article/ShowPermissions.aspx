@@ -1,23 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Framework.Permissions.Models.PermissionsModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%:Html.Translate("Permissions", "WebContent.Views.WebContentCategory")%>
+   <%:Html.Translate("Permissions", "WebContent.Views.Article")%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-    <h1><%:Html.Translate("Permissions", "WebContent.Views.WebContentCategory")%></h1>
+    <h1><%:Html.Translate("Permissions", "WebContent.Views.Article")%></h1>
     <div class="tabs clrfix">
 	    <ul class="i-tab clrfix">
             <li>
                 <em></em>
                 <span>
-                 <%:Html.ActionLink(Html.Translate("Details", "WebContent.Views.WebContentCategory"), "Edit") %>
+                 <%:Html.ActionLink(Html.Translate("Details", "WebContent.Views.Article"), "Edit") %>
                 </span>
                 <strong></strong>
             </li>
             <li class="active">
                 <em></em>
                 <span>
-                 <%:Html.ActionLink(Html.Translate("Permissions", "WebContent.Views.WebContentCategory"), "ShowPermissions") %>
+                 <%:Html.ActionLink(Html.Translate("Permissions", "WebContent.Views.Article"), "ShowPermissions") %>
                 </span>
                 <strong></strong>
             </li>
@@ -27,7 +27,7 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-   <% using (Ajax.BeginForm("ApplyPermissions", "WebContentCategory", new { area = "WebContent" }, new AjaxOptions() { OnComplete = "completePermissionsUpdates" }))
+   <% using (Ajax.BeginForm("ApplyPermissions", "Article", new { area = "WebContent" }, new AjaxOptions() { OnComplete = "completePermissionsUpdates" }))
        { %>
        <%:Html.HiddenFor(model=>model.EntityId) %>
           <div class="e_table_area">
@@ -36,12 +36,12 @@
                     <tr>
                         <th>
                             <span></span>
-                            <%:Html.Translate("Role", "WebContent.Views.WebContentCategory")%>
+                            <%:Html.Translate("Role", "WebContent.Views.Article")%>
                         </th>
                         <%foreach (var operation in Model.Operations) {%>
                             <th>
                                 <span></span>
-                                <%=Html.Translate("CategoryOperations." + Html.Encode(operation.Title), "WebContent.Models")%>
+                                <%=Html.Translate("ArticleOperations." + Html.Encode(operation.Title), "WebContent.Models")%>
                             </th>
                         <%} %>
                     </tr>

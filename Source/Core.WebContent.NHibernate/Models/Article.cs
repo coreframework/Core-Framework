@@ -4,7 +4,6 @@ using System.ComponentModel.Composition;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.WebContent.NHibernate.Permissions;
-using Core.WebContent.NHibernate.Static;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
 
@@ -14,13 +13,13 @@ namespace Core.WebContent.NHibernate.Models
     /// Web content category class.
     /// </summary>
     [Export(typeof(IPermissible))]
-    public class WebContentCategory : LocalizableEntity<WebContentCategoryLocale>, IPermissible
+    public class Article : LocalizableEntity<ArticleLocale>, IPermissible
     {
         #region Fields
 
-        private String permissionTitle = "Web Content: Categories";
+        private String permissionTitle = "Web Content: Articles";
 
-        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<CategoryOperations>();
+        private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<ArticleOperations>();
 
         #endregion
 
@@ -37,12 +36,6 @@ namespace Core.WebContent.NHibernate.Models
         /// </summary>
         /// <value>The create date.</value>
         public virtual DateTime CreateDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        /// <value>The status.</value>
-        public virtual CategoryStatus Status { get; set; }
 
         /// <summary>
         /// Gets or sets the section.
@@ -78,9 +71,9 @@ namespace Core.WebContent.NHibernate.Models
 
         public override ILocale InitializeLocaleEntity()
         {
-            return new WebContentCategoryLocale
+            return new ArticleLocale
                        {
-                           Category = this,
+                           Article = this,
                            Culture = null
                        };
         }

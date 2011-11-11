@@ -12,10 +12,19 @@ Views:
     Role: "Role"
   WebContentCategory:
     AddCategory: "Add category"
-Models:
-  ContentPageLocaleViewModel:
-     Title: "Title"
-     Content: "Content"
-  ContentPageViewModel:
-     Title: "Title"
-     Content: "Content"
+    NewCategory: "New category"
+    EditCategory: "Edit category"
+    Details: "Details"
+    Permissions: "Permissions"
+    Role: "Role"
+    Language: "Language"
+  Article:
+    AddArticle: "Add article"
+    NewArticle: "New article"
+    EditArticle: "Edit article"
+    Details: "Details"
+    Permissions: "Permissions"
+    Role: "Role"
+    Language: "Language"
+
+

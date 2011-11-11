@@ -1,4 +1,5 @@
 ﻿using Core.WebContent.NHibernate.Models;
+using Core.WebContent.NHibernate.Static;
 using FluentNHibernate.Mapping;
 using Framework.Facilities.NHibernate.Filters;
 

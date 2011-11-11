@@ -1,12 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"Inherits="System.Web.Mvc.ViewPage<Core.WebContent.Models.CategoryViewModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"Inherits="System.Web.Mvc.ViewPage<Core.WebContent.Models.ArticleViewModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%:Html.Translate("NewCategory", "WebContent.Views.WebContentCategory")%>
+   <%:Html.Translate("NewArticle", "WebContent.Views.Article")%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>
-    <%:Html.Translate("NewCategory", "WebContent.Views.WebContentCategory")%>
+    <%:Html.Translate("NewArticle", "WebContent.Views.Article")%>
   </h1>
 </asp:Content>
 
@@ -14,7 +14,7 @@
   <%: Html.ValidationSummary(true) %>
   <% using (Html.BeginForm()) {%>
         <div class="i_form clrfix">    
-            <% Html.RenderPartial("CategoryDetails", Model); %>
+            <% Html.RenderPartial("ArticleDetails", Model); %>
         </div>
   <% }%>
 </asp:Content>

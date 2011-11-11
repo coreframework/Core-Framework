@@ -2,23 +2,11 @@
 <%@ Import Namespace="Core.Web.Helpers" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Data" runat="server">
-    <%--
-    <%: Html.TextBoxFor(model => model, new { @class = "datePicker" })%>
+ <%: Html.TextBox("", Model.ToString(ConstantsHelper.DateFormat), new { @class = "datepicker" })%>
     <script type='text/javascript'>
         $(document).ready(function () {
-            $(".datePicker").datepicker({
-                showAnim: 'slideDown',
-             /*   dateFormat: 'dd/mm/yyyy'*/
-            });
+            $('.datepicker').datepicker({ dateFormat: "<%=ConstantsHelper.JqueryDateFormat %>" });
         });
     </script>
-    --%>
-    <%: Html.TextBox("", Model.ToString(ConstantsHelper.DateFormat),
-                          new { @class = "datepicker" })%>
-                  <script>
-                      $(document).ready(function () {
-                          $('.datepicker').datepicker({ dateFormat: "<%=ConstantsHelper.JqueryDateFormat %>" });
-                      });
-                  </script>
 </asp:Content>
 

@@ -1,4 +1,4 @@
-﻿namespace Core.WebContent.NHibernate
+﻿namespace Core.WebContent.NHibernate.Static
 {
     public enum CategoryStatus
     {

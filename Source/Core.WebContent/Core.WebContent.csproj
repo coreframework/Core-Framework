@@ -111,9 +111,14 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticleController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\WebContentCategoryController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\WebContentPluginOperations.cs" />
@@ -127,6 +132,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Verbs\CategoryAdminVerb.cs" />
+    <Compile Include="Verbs\ArticleAdminVerb.cs" />
     <Compile Include="Verbs\SectionAdminVerb.cs" />
     <Compile Include="WebContentCategoryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -227,6 +233,21 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Article\ArticleDetails.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Article\Edit.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Article\New.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Article\Show.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Article\ShowPermissions.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\WebContentCategory\Edit.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

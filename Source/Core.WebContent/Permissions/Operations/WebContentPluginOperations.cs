@@ -14,6 +14,10 @@ namespace Core.WebContent.Permissions.Operations
 
         [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
         [Description("Manage categories")]
-        ManageCategories = 2
+        ManageCategories = 2,
+
+        [OperationDescription(PermissionArea.ControlPanel, PermissionOperationLevel.Type)]
+        [Description("Manage articles")]
+        ManageArticles = 4
     }
 }

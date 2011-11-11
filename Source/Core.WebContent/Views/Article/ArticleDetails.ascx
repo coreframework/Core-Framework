@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.WebContent.Models.CategoryViewModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.WebContent.Models.ArticleViewModel>" %>
 <div>
     <div class="cols clrfix">
         <div class="fst_col colls_i">
@@ -15,15 +15,16 @@
                 <%:Html.ValidationMessageFor(model => model.Title) %>
             </div>
             <div class="i_form_i">
-                <%:Html.LocalizedLabelFor(model=>model.Description) %>
-                <%:Html.TextAreaFor(model => model.Description)%>
-                <%:Html.ValidationMessageFor(model => model.Description)%>
+                <%:Html.LocalizedLabelFor(model=>model.Summary) %>
+                <%:Html.TextAreaFor(model => model.Summary)%>
+                <%:Html.ValidationMessageFor(model => model.Summary)%>
             </div>
-             <div class="i_form_i">
-                <%:Html.LocalizedLabelFor(model => model.Status)%>
-                <%:Html.DropDownListFor(model => model.Status)%>
-                <%:Html.ValidationMessageFor(model=>model.Status) %>
-            </div>  
+            <div class="i_form_i">
+                <%:Html.EditorFor(model => model.Content)%>
+            </div> 
+               <div class="i_form_i">
+                <%:Html.EditorFor(model => model.PublishedDate)%>
+            </div> 
 		    <div class="i_form_i">
             <%:Html.AntiForgeryToken()%>
             </div>
@@ -35,6 +36,6 @@
             <%:Html.Submit(Html.Translate("Actions.Save"), new {@class = "button"})%>
             <strong></strong>
         </div>
-	    <span><%:Html.RouteLink(Html.Translate("Actions.Cancel"), new { controller = "WebContentCategory", action = "Show" })%></span>
+	    <span><%:Html.RouteLink(Html.Translate("Actions.Cancel"), new { controller = "Article", action = "Show" })%></span>
     </div>
 </div>

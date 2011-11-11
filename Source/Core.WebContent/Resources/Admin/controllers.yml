@@ -3,3 +3,15 @@ Controllers:
     Title: "Title"
     Actions: "Actions"
     Details: "Details"
+  WebContentCategory: 
+    Title: "Title"
+    Actions: "Actions"
+    Details: "Details"
+    Section: "Section"
+    Status: "Status"
+  Article: 
+    Title: "Title"
+    Actions: "Actions"
+    Details: "Details"
+    Article: "Section"
+    Status: "Status"

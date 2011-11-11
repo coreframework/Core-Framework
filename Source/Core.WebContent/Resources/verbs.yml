@@ -1,4 +1,8 @@
 Verbs:
   SectionAdminVerb:
     Sections: "Web Content: Sections"
+  CategoryAdminVerb:
+    Categories: "Web Content: Categories"
+  ArticleAdminVerb:
+    Articles: "Web Content: Articles"
  

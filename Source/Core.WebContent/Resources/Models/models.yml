@@ -19,5 +19,20 @@ Models:
         View: "View"
         Manage: "Manage"
         AddToWidget: "Add to widget"
-        Permissions: "Permissions"    
+        Permissions: "Permissions"
+     CategoryViewModel:
+        Title: "Title"
+        Description: "Description"
+        SectionId: "Section"
+        Status: "Status"
+     CategoryOperations:
+        View: "View"
+        Manage: "Manage"
+        AddToWidget: "Add to widget"
+        Permissions: "Permissions"
+    ArticleOperations:
+        View: "View"
+        Manage: "Manage"
+        AddToWidget: "Add to widget"
+        Permissions: "Permissions"           
     

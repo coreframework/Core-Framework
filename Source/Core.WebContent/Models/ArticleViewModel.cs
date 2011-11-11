@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using Core.Framework.Permissions.Extensions;
-using Core.WebContent.NHibernate;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
 using Core.WebContent.NHibernate.Permissions;
-using Core.WebContent.NHibernate.Static;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.WebContent.Models
 {
-    public class CategoryViewModel : IMappedModel<WebContentCategory, CategoryViewModel>
+    public class ArticleViewModel : IMappedModel<Article, ArticleViewModel>
     {
         private IDictionary<String, String> cultures;
 
@@ -28,10 +26,25 @@ namespace Core.WebContent.Models
         public virtual String Title { get; set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        /// <value>The summary.</value>
+        [Required]
+        public virtual String Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the description.
         /// </summary>
         /// <value>The description.</value>
-        public virtual String Description { get; set; }
+        [DataType("FckEditorText"), Required]
+        public virtual String Content { get; set; }
+
+        /// <summary>
+        /// Gets or sets the published date.
+        /// </summary>
+        /// <value>The published date.</value>
+        [DataType(DataType.Date)]
+        public virtual DateTime PublishedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the id.
@@ -50,12 +63,6 @@ namespace Core.WebContent.Models
         /// </summary>
         /// <value>The selected culture.</value>
         public String SelectedCulture { get; set; }
-
-        /// <summary>
-        /// Gets or sets the status.
-        /// </summary>
-        /// <value>The status.</value>
-        public CategoryStatus Status { get; set; }
 
         /// <summary>
         /// Gets or sets the section.
@@ -90,41 +97,39 @@ namespace Core.WebContent.Models
             set { cultures = value; }
         }
 
-        public CategoryViewModel MapFrom(WebContentCategory from)
+        public ArticleViewModel MapFrom(Article from)
         {
             Id = from.Id;
             SectionId = from.Section != null ? from.Section.Id : 0;
-            Status = from.Status;
 
-            MapLocaleFrom(from.CurrentLocale as WebContentCategoryLocale);
+            MapLocaleFrom(from.CurrentLocale as ArticleLocale);
             return this;
         }
 
-        public WebContentCategory MapTo(WebContentCategory to)
+        public Article MapTo(Article to)
         {
             to.Id = Id;
             to.Section = new Section { Id = SectionId };
-            to.Status = Status;
 
             if (String.IsNullOrEmpty(SelectedCulture))
-                MapLocaleTo((WebContentCategoryLocale)to.CurrentLocale);
+                MapLocaleTo((ArticleLocale)to.CurrentLocale);
 
             return to;
         }
 
-        public CategoryViewModel MapLocaleFrom(WebContentCategoryLocale locale)
+        public ArticleViewModel MapLocaleFrom(ArticleLocale locale)
         {
             Title = locale.Title;
-            Description = locale.Description;
+            Content = locale.Description;
             SelectedCulture = locale.Culture;
 
             return this;
         }
 
-        public WebContentCategoryLocale MapLocaleTo(WebContentCategoryLocale locale)
+        public ArticleLocale MapLocaleTo(ArticleLocale locale)
         {
             locale.Title = Title;
-            locale.Description = Description;
+            locale.Description = Content;
             if (SelectedCulture!=null)
                 locale.Culture = SelectedCulture;
             return locale;
