@@ -25,6 +25,10 @@ namespace Core.Web.NHibernate.Mappings
             Map(page => page.HideInMainMenu);
             Map(page => page.IsServicePage);
             Map(page => page.IsTemplate);
+            Map(page => page.PlaceHoldersCount).Formula(
+                @"(SELECT count(*)
+                FROM PageWidgets
+                WHERE PageWidgets.PageId = Id AND PageWidgets.WidgetId in (SELECT Widgets.Id FROM Widgets WHERE Widgets.IsPlaceHolder = 1))").LazyLoad();
 
             HasMany(page => page.Widgets).KeyColumn("PageId")
                 .Table("PageWidgets")
@@ -47,6 +51,8 @@ namespace Core.Web.NHibernate.Mappings
             .Inverse()
             .LazyLoad()
             .Cascade.All();
+
+            References(page => page.Template).Column("TemplateId").Nullable();
         }
     }
 }

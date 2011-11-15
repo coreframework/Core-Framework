@@ -243,6 +243,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
     <Compile Include="Controllers\PageTemplatesController.cs" />
+    <Compile Include="Controllers\PlaceHolderWidgetController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="CoreWebInstaller.cs" />
@@ -288,8 +289,10 @@
     <Compile Include="Models\CorePageSettings.cs" />
     <Compile Include="Models\PageModeModel.cs" />
     <Compile Include="Models\PageViewModel.cs" />
+    <Compile Include="Models\PlaceHolderWidgetViewModel.cs" />
     <Compile Include="Models\Routes\DefaultRouteRegistrar.cs" />
     <Compile Include="Models\RowSettings.cs" />
+    <Compile Include="Models\TemplateViewModel.cs" />
     <Compile Include="Models\WidgetCSSModel.cs" />
     <Compile Include="Models\WidgetHolderViewModel.cs" />
     <Compile Include="Models\WidgetLookAndFeelModel.cs" />
@@ -312,6 +315,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PageTemplatesController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PlaceHolderWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

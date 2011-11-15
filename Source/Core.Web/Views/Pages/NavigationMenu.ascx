@@ -70,7 +70,7 @@
                                         dialog.dialog();
                                     }
                                 );
-            dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150] });
+            dialog.dialog({ width: 500, resizable: false, modal: true, close: function (ev, ui) { $(this).remove(); }, position: ['center', 150] });
             return false;
         }
     </script>

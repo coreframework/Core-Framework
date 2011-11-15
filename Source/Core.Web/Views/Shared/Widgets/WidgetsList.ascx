@@ -8,7 +8,7 @@
         <%foreach (var item in Model){
               %>
            <li>
-                <%=Ajax.ActionLink(Html.Encode(item.Title), MVC.Pages.AddWidget((long)ViewData["pageId"], item.Id), new AjaxOptions { OnSuccess = "addWidget" }, new { @pluginID = item.Plugin != null ? item.Plugin.Identifier : "0" })%>
+                <%=Ajax.ActionLink(Html.Encode(item.Title), MVC.Pages.AddWidget((long)ViewData["pageId"], item.Id), new AjaxOptions { OnSuccess = "addWidget" }, new { @pluginID = item.Plugin != null ? item.Plugin.Identifier : String.Empty })%>
            </li>
         <%} %>
     </ul>
@@ -22,6 +22,7 @@
      }
      function addJsCss(link) {
          var uid = $(link).attr('pluginID');
+         if(uid) {
 
          //load css
          var cssInclude = '<%= ApplicationUtility.Path %>styles.cssx?package=' + uid;
@@ -30,5 +31,6 @@
          //load js file
          var jsInclude = '<%= ApplicationUtility.Path %>scripts.jsx?pageId=' + <%=(long)ViewData["pageId"]%>+'&id='+uid;
          loadjscssfile(jsInclude, "js");
+         }
      }
 </script>

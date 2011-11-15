@@ -112,6 +112,14 @@ namespace Core.Web.NHibernate.Models
         public virtual bool IsTemplate { get; set; }
 
         /// <summary>
+        /// Gets or sets the place holders count.
+        /// </summary>
+        /// <value>The place holders count.</value>
+        public virtual int PlaceHoldersCount { get; set; }
+
+        public virtual Page Template { get; set; }
+
+        /// <summary>
         /// Removes the widget.
         /// </summary>
         /// <param name="widget">The widget.</param>

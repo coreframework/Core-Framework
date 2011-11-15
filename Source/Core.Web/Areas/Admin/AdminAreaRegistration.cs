@@ -184,7 +184,7 @@ namespace Core.Web.Areas.Admin
                 ICoreWidget widget1 = widget;
 
                 if (!((List<Widget>)existingWidgets).Exists(
-                        wd => wd.Identifier == widget1.Identifier && (wd.Plugin != null && widget1.Plugin != null && wd.Plugin.Identifier == widget1.Plugin.Identifier)))
+                        wd => wd.Identifier == widget1.Identifier && ((wd.Plugin == null && widget1.Plugin == null) || (wd.Plugin != null && widget1.Plugin != null && wd.Plugin.Identifier == widget1.Plugin.Identifier))))
                 {
                     Plugin plugin = null;
                     if (widget1.Plugin != null)

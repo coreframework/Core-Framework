@@ -5,6 +5,5 @@ namespace Core.Web.NHibernate.Contracts
 {
     public interface IPageWidgetService : IDataService<PageWidget>
     {
-       
     }
 }

@@ -34,10 +34,15 @@
                 <h3>
                     <a href="#">Copy from template</a></h3>
                 <div>
-                    <div class="form_i">
+                    <div id="templatesList" class="form_i">
                         <%:Html.LocalizedLabelFor(model=>model.TemplateId) %><br />
                         <%:Html.DropDownListFor(model => model.TemplateId, new SelectList(Model.AvailableTemplates, "Id", "Title", Model.TemplateId), Html.Translate("Actions.PleaseSelect"), new { })%>
                         <%:Html.ValidationMessageFor(model => model.TemplateId)%>
+                    </div>
+                    <div id="widgetsList" class="form_i" style="display: none">
+                        <%:Html.LocalizedLabelFor(model=>model.WidgetId) %><br />
+                        <%:Html.DropDownListFor(model => model.WidgetId, new SelectList(Model.AvailableWidgets, "Id", "Title", Model.WidgetId), Html.Translate("Actions.PleaseSelect"), new { })%>
+                        <%:Html.ValidationMessageFor(model => model.WidgetId)%>
                     </div>
                 </div>
             </div>
@@ -54,13 +59,34 @@
             <em></em>
             <%: Html.Submit(Html.Translate("Actions.Save"), new { Class = "button" })%><strong></strong></div>
     </div>
-    <%} %>
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
     $(function () {
-        $("#pageTemplateAccordion").accordion({
-            collapsible: true
+        $("#pageTemplateAccordion").accordion('destroy').accordion({
+            collapsible: true,
+            autoHeight: false
         });
+        $("#templatesList select").change(function () {
+        var templsWithOneHolder = [<%foreach(var template in Model.AvailableTemplates)
+                                     {
+                                         if (template.PlaceHoldersCount == 1)
+                                         {%>'<%=template.Id%>',<%
+                                         }
+                                     }%>];
+        var templId = $(this).val();
+        var $widgetsList = $('#widgetsList');
+        $('#widgetsList').find('option:first').attr('selected', 'selected').parent('select');
+        if(templId && ($.inArray(templId, templsWithOneHolder) > -1))
+        {
+            if(!$widgetsList.is(":visible")) {
+                $('#widgetsList').toggle('fast');
+            }
+        }
+        else {
+            if($widgetsList.is(":visible")) {
+                $('#widgetsList').toggle('fast');
+            }
+        }
+    });
     });
     function completeUpdates(content) {
         if ($('input[type=hidden]#pageUrl', content.get_data()).length > 0) {
@@ -68,4 +94,6 @@
             location.href = pageUrl;
         }
     }
-</script>
+    </script>
+    <%} %>
+</div>

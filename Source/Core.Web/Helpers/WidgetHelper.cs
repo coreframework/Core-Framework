@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -206,6 +207,26 @@ namespace Core.Web.Helpers
             }
 
             return isAllowed;
+        }
+
+        public static IList<Widget> GetAvailableWidgets(bool isTemplate)
+        {
+            ICorePrincipal user = HttpContext.Current.CorePrincipal();
+            var service = ServiceLocator.Current.GetInstance<IWidgetService>();
+            var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            IEnumerable<Widget> availableWidgets = service.GetAvailableWidgets(user, isTemplate);
+            IList<Widget> allowedWidgets = new List<Widget>();
+            foreach (var widget in availableWidgets)
+            {
+                Widget widget1 = widget;
+                ICoreWidget coreWidget =
+                            MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == widget1.Identifier);
+                if (coreWidget is BaseWidget && permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode, user, coreWidget.GetType(), null))
+                {
+                    allowedWidgets.Add(widget);
+                }
+            }
+            return allowedWidgets;
         }
     }
 }

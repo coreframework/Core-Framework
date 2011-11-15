@@ -34,6 +34,8 @@ namespace Core.Web.Models
 
         private List<Page> availableTemplates;
 
+        private IList<Widget> availableWidgets;
+
         #endregion
 
         #region Constructor
@@ -134,6 +136,22 @@ namespace Core.Web.Models
 
         public bool IsTemplate { get; set; }
 
+        public IList<Widget> AvailableWidgets
+        {
+            get
+            {
+                if (availableWidgets == null)
+                {
+                    availableWidgets = WidgetHelper.GetAvailableWidgets(false);
+                }
+                return availableWidgets;
+            }
+        }
+
+        public long? WidgetId { get; set; }
+
+        public TemplateViewModel TemplateModel { get; set; }
+
         #endregion
 
         #region IMappedModel members
@@ -189,7 +207,7 @@ namespace Core.Web.Models
                                     SystemWidget = (isWidetEnabled && coreWidget != null) ? coreWidget : null
                 });
 
-                if (coreWidget!=null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                if (coreWidget!=null && coreWidget.Plugin != null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
                 {
                     PagePlugins.Add(coreWidget.Plugin);
                 }
@@ -201,6 +219,10 @@ namespace Core.Web.Models
                 CssFileName = CssFileName.Remove(CssFileName.Length - 1);
             }
             IsTemplate = from.IsTemplate;
+            if(from.Template != null)
+            {
+                TemplateModel = new TemplateViewModel().MapFrom(from.Template);
+            }
 
             return this;
         }

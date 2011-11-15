@@ -389,21 +389,19 @@ namespace Core.Web.Helpers
         /// </summary>
         /// <param name="sourcePage">The source page.</param>
         /// <param name="targetPage">The target page.</param>
-        /// <param name="isTemplate">if set to <c>true</c> [is template].</param>
         /// <returns></returns>
-        public static bool ClonePageSettings(Page sourcePage, Page targetPage, bool isTemplate)
+        public static bool ClonePageSettings(Page sourcePage, Page targetPage)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-
+            
             sourcePage.Widgets.AsParallel().ForAll(widget =>
             {
                 var pageWidget = new PageWidget();                        
                 pageWidget.InjectFrom<CloneEntityInjection>(widget);
                 pageWidget.Page = targetPage;
                 pageWidget.ParentWidgetId = widget.Id;
-
-
+                
                 //copy widget settings
                 if (widget.Settings != null)
                 {
@@ -449,6 +447,57 @@ namespace Core.Web.Helpers
                     if (sourceWidget!=null)
                     {
                         if (targetPage.Settings!=null && !String.IsNullOrEmpty(targetPage.Settings.CustomCSS))
+                        {
+                            targetPage.Settings.CustomCSS = targetPage.Settings.CustomCSS.Replace(String.Format(PageWidgetTemplate, sourceWidget.Id), String.Format(PageWidgetTemplate, item.Id));
+                        }
+                        permissionCommonService.CloneObjectPermisions(systemWidget.GetType(), sourceWidget.Id, item.Id);
+                    }
+                }
+                return pageService.Save(targetPage);
+            }
+            return false;
+        }
+
+        public static bool ClonePageSettingsFromTemplate(Page template, Page targetPage, long? widgetId)
+        {
+            var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+            var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+
+            template.Widgets.Where(widget => widget.Widget.IsPlaceHolder).AsParallel().ForAll(widget =>
+            {
+                var pageWidget = new PageWidget();
+                pageWidget.InjectFrom<CloneEntityInjection>(widget);
+                pageWidget.Page = targetPage;
+                pageWidget.ParentWidgetId = widget.Id;
+
+                //copy widget settings
+                if (widget.Settings != null)
+                {
+                    pageWidget.Settings = (PageWidgetSettings)new PageWidgetSettings().InjectFrom<CloneEntityInjection>(widget.Settings);
+                    pageWidget.Settings.LookAndFeelSettings = new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(widget.Settings.LookAndFeelSettings) as LookAndFeelSettings;
+                    pageWidget.Settings.Widget = pageWidget;
+                }
+                if(widgetId.HasValue)
+                {
+                    var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
+                    pageWidget.Widget = widgetService.Find(widgetId.Value);
+                }
+
+                targetPage.AddWidget(pageWidget);
+            });
+            targetPage.Template = template;
+
+            if (pageService.Save(targetPage))
+            {
+                //copy permissions and update page styles
+                foreach (var item in targetPage.Widgets)
+                {
+                    if (item.ParentWidgetId == null) continue;
+                    var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == item.Widget.Identifier);
+                    var sourceWidget = template.Widgets.FirstOrDefault(w => w.Id == item.ParentWidgetId);
+                    if (sourceWidget != null)
+                    {
+                        if (targetPage.Settings != null && !String.IsNullOrEmpty(targetPage.Settings.CustomCSS))
                         {
                             targetPage.Settings.CustomCSS = targetPage.Settings.CustomCSS.Replace(String.Format(PageWidgetTemplate, sourceWidget.Id), String.Format(PageWidgetTemplate, item.Id));
                         }

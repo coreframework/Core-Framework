@@ -340,21 +340,8 @@ namespace Core.Web.Controllers
         /// <returns></returns>
         public virtual ActionResult ShowAvailableWidgets(long pageId, bool isTemplate)
         {
-            var service = ServiceLocator.Current.GetInstance<IWidgetService>();
             ViewData["pageId"] = pageId;
-            ICorePrincipal user = this.CorePrincipal();
-            IEnumerable<Widget> availableWidgets = service.GetAvailableWidgets(user, isTemplate);
-            IList<Widget> allowedWidgets = new List<Widget>();
-            foreach (var widget in availableWidgets)
-            {
-                Widget widget1 = widget;
-                ICoreWidget coreWidget =
-                            MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == widget1.Identifier);
-                if (coreWidget is BaseWidget && permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode, user, coreWidget.GetType(), null))
-                {
-                    allowedWidgets.Add(widget);
-                }
-            }
+            var allowedWidgets = WidgetHelper.GetAvailableWidgets(isTemplate);
 
             return PartialView(MVC.Shared.Views.Widgets.WidgetsList, allowedWidgets);
         }
@@ -495,37 +482,42 @@ namespace Core.Web.Controllers
                 }
 
                 page.OrderNumber = pageService.GetLastOrderNumber(model.ParentPageId == 0 ? null : model.ParentPageId);
-                page.PageLayout = new PageLayout
-                {
-                    LayoutTemplate = LayoutHelper.DefaultLayoutTemplate,
-                    Page = page
-                };
-
                 if (this.CorePrincipal() != null)
                     page.User = new User
                     {
                         Id = this.CorePrincipal().PrincipalId
                     };
-
                 page = model.MapTo(page);
-
+                if (!model.TemplateId.HasValue)
+                {
+                    page.PageLayout = new PageLayout
+                                          {
+                                              LayoutTemplate = LayoutHelper.DefaultLayoutTemplate,
+                                              Page = page
+                                          };
+                }
                 if (pageService.Save(page))
                 {
-                    permissionService.SetupDefaultRolePermissions(ResourcePermissionsHelper.GetResourceOperations(typeof(Page)), typeof(Page), page.Id);
-                    if (model.ClonedPageId!=null)
+                    permissionService.SetupDefaultRolePermissions(
+                        ResourcePermissionsHelper.GetResourceOperations(typeof(Page)), typeof(Page), page.Id);
+                    if (model.ClonedPageId != null)
                     {
-                        var sourcePage = pageService.Find((long) model.ClonedPageId);
-                        if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
+                        var sourcePage = pageService.Find((long)model.ClonedPageId);
+                        if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(),
+                                                        typeof(Page), sourcePage.Id, IsPageOwner(sourcePage),
+                                                        PermissionOperationLevel.Object))
                         {
-                            PageHelper.ClonePageSettings(sourcePage, page, false);
+                            PageHelper.ClonePageSettings(sourcePage, page);
                         }
                     }
-                    else if (model.TemplateId.HasValue)
+                    else if(model.TemplateId.HasValue)
                     {
-                        var sourcePage = pageService.Find(model.TemplateId.Value);
-                        if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(), typeof(Page), sourcePage.Id, IsPageOwner(sourcePage), PermissionOperationLevel.Object))
+                        var sourceTemplate = pageService.Find((long)model.TemplateId);
+                        if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(),
+                                                        typeof(Page), sourceTemplate.Id, IsPageOwner(sourceTemplate),
+                                                        PermissionOperationLevel.Object))
                         {
-                            PageHelper.ClonePageSettings(sourcePage, page, true);
+                            PageHelper.ClonePageSettingsFromTemplate(sourceTemplate, page, model.WidgetId);
                         }
                     }
 
@@ -779,7 +771,7 @@ namespace Core.Web.Controllers
         {
             var widgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             PageWidget pageWidget = widgetService.Find(pageWidgetId);
-            if (pageWidget == null ||pageWidget.Widget==null)
+            if (pageWidget == null || pageWidget.Widget == null)
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
             }
@@ -801,7 +793,7 @@ namespace Core.Web.Controllers
         {
             var widgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             PageWidget pageWidget = widgetService.Find(model.EntityId);
-            if (pageWidget != null && pageWidget.Widget!=null)
+            if (pageWidget != null && pageWidget.Widget != null)
             {
                 ICoreWidget coreWidget =
                     MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == pageWidget.Widget.Identifier);

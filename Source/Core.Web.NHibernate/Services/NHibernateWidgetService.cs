@@ -49,7 +49,7 @@ namespace Core.Web.NHibernate.Services
 
         public bool IsWidgetEnable(Widget widget)
         {
-            return widget != null && widget.Plugin != null && widget.Plugin.Status.Equals(PluginStatus.Installed) && widget.Status.Equals(WidgetStatus.Enabled);
+            return widget != null && (widget.Plugin == null || widget.Plugin.Status.Equals(PluginStatus.Installed)) && widget.Status.Equals(WidgetStatus.Enabled);
         }
 
         /// <summary>
