@@ -121,7 +121,7 @@
                         $(options.disableDuringUpload).attr("disabled", "disabled");
                     }
 
-                    $.clear_messages();
+                  //  $.clear_messages();
                 },
 
                 // Called when upload completed successfully (puts success details into hidden fields)
@@ -178,6 +178,6 @@ function clearInputs(id, message) {
     $(".image-uploader img.preview").attr({ src: '', alt: '' });
     $(".image-uploader div.title").empty();
     $(".image-uploader div.file-preview").css('display', 'none');
-    $.clear_messages();
+  //  $.clear_messages();
     $.display_notice("File has been deleted successfully");
 }

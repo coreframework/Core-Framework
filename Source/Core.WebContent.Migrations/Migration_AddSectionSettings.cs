@@ -18,17 +18,16 @@ namespace Core.WebContent.Migrations
             {
                 t.PrimaryKey();
                 t.DateTime("CreateDate").Null();
-                t.Bool("ShowTitle");
-                t.Bool("TitleLinkable");
-                t.Bool("ShowSummaryText");
-                t.Bool("ShowSection");
-                t.Bool("ShowCategory");
-                t.Bool("ShowAuthor");
-                t.Bool("ShowCreatedDate");
-                t.Bool("ShowModifiedDate");
-                t.Bool("ShowPdfIcon");
-                t.Bool("ShowPrintIcon");
-                t.Bool("ShowEmailIcon");
+                t.Integer("ShowTitle");
+                t.Integer("TitleLinkable");
+                t.Integer("ShowSummaryText");
+                t.Integer("ShowContent");
+                t.Integer("ShowSection");
+                t.Integer("ShowCategory");
+                t.Integer("ShowAuthor");
+                t.Integer("ShowCreatedDate");
+                t.Integer("ShowModifiedDate");
+                t.Integer("ShowDownloadLink");
                 t.String("AlternativeReadMoreText").Null();
                 t.ForeignKey("Section").Table("WebContent_Sections").OnDelete(ForeignKeyConstraint.Cascade);
             });

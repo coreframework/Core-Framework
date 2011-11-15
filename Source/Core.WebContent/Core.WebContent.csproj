@@ -117,6 +117,7 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\WebContentCategoryController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Helpers\ArticleHelper.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
     <Compile Include="Models\SectionViewModel.cs" />

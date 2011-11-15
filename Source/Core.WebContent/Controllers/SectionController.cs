@@ -14,6 +14,7 @@ using Core.WebContent.Models;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
 using Core.WebContent.NHibernate.Permissions;
+using Core.WebContent.Permissions.Operations;
 using Framework.Mvc.Extensions;
 using Framework.Mvc.Grids;
 using Framework.Mvc.Helpers;
@@ -26,6 +27,7 @@ using NHibernate.Criterion;
 namespace Core.WebContent.Controllers
 {
     [Export(typeof(IController)), ExportMetadata("Name", "Section")]
+    [Permissions((int)WebContentPluginOperations.ManageSections, typeof(WebContentPlugin))]
     public partial class SectionController : CorePluginController
     {
         #region Fields
@@ -236,6 +238,17 @@ namespace Core.WebContent.Controllers
             Error(String.Format(HttpContext.Translate("Messages.NotFoundEntity", ResourceHelper.GetControllerScope(this)), model.EntityId));
 
             return Content(Url.Action("Show"));
+        }
+
+        public virtual ActionResult Remove(long sectionId)
+        {
+            var section = sectionService.Find(sectionId);
+            if (section != null && permissionService.IsAllowed((Int32)SectionOperations.Manage, this.CorePrincipal(), typeof(Section), sectionId, IsSectionOwner(section), PermissionOperationLevel.Object))
+            {
+                sectionService.Delete(section);
+            }
+
+            return RedirectToAction("Show");
         }
 
         #endregion

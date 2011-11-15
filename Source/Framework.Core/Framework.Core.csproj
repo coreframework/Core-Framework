@@ -186,6 +186,8 @@
     <Compile Include="Helpers\Images\DefaultImageUtility.cs" />
     <Compile Include="Helpers\Images\IImageUtility.cs" />
     <Compile Include="Helpers\Inflector.cs" />
+    <Compile Include="Helpers\Regex\RegexTemplates.cs" />
+    <Compile Include="Helpers\Regex\RegexValidationConfig.cs" />
     <Compile Include="Helpers\TransformationRule.cs" />
     <Compile Include="Helpers\Yaml\YamlDocument.cs" />
     <Compile Include="Helpers\Yaml\YamlMapping.cs" />

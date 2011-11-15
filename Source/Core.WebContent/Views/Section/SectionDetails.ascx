@@ -18,50 +18,46 @@
             <h3><%:Html.Translate("Settings", "WebContent.Views.Section")%>:</h3>
             <%:Html.HiddenFor(model=>model.SectionSettings.Id) %> 
             <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowTitle)%>
                 <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowTitle)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowTitle)%>
             </div>
                 <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.TitleLinkable)%>
                 <%:Html.LocalizedLabelFor(model => model.SectionSettings.TitleLinkable)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.TitleLinkable)%>
             </div>
                 <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowSummaryText)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowSummaryText)%>
+                  <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowSummaryText)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowSummaryText)%>
+            </div>
+              <div class="i_form_i">
+                  <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowContent)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowContent)%>
             </div>
                 <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowSection)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowSection)%>
+                 <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowSection)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowSection)%>
             </div>
                 <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowCategory)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowCategory)%>
+                  <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowCategory)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowCategory)%>
             </div>
                 <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowAuthor)%>
                 <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowAuthor)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowAuthor)%>
             </div>
             <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowCreatedDate)%>
                 <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowCreatedDate)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowCreatedDate)%>
             </div>
-                <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowModifiedDate)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowModifiedDate)%>
-                </div>
-                <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowPdfIcon)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowPdfIcon)%>
-                </div>
-                <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowPrintIcon)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowPrintIcon)%>
-                </div>
-                <div class="i_form_i">
-                <%:Html.CheckBoxFor(model => model.SectionSettings.ShowEmailIcon)%>
-                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowEmailIcon)%>
-                </div>
-                <div class="i_form_i">
+            <div class="i_form_i">
+                 <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowModifiedDate)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowModifiedDate)%>
+            </div>
+            <div class="i_form_i">
+                <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowDownloadLink)%>
+                <%:Html.DropDownListFor(model => model.SectionSettings.ShowDownloadLink)%>
+            </div>
+            <div class="i_form_i">
                 <%:Html.LocalizedLabelFor(model=>model.SectionSettings.AlternativeReadMoreText) %>
                 <%:Html.TextBoxFor(model => model.SectionSettings.AlternativeReadMoreText)%>
                 <%:Html.ValidationMessageFor(model => model.SectionSettings.AlternativeReadMoreText)%>
@@ -72,11 +68,16 @@
         </div>
     </div>
     <div class="i_buttons clrfix">
-        <div class="btn1 clrfix">
-            <em></em>
-            <%:Html.Submit(Html.Translate("Actions.Save"), new {@class = "button"})%>
-            <strong></strong>
-        </div>
+         <%if (Model.AllowManage){%>
+		    <div class="btn1 clrfix">
+                <em></em>
+                <%:Html.Submit(Html.Translate("Actions.Save"), new {@class = "button"})%>
+                <strong></strong>
+            </div>
+            <%if (Model.Id > 0) {%>
+                <span><%:Html.ActionLink(Html.Translate("Actions.Remove"), WebContentMVC.Section.Remove(Model.Id))%></span>
+            <%}%>
+         <%}%>
 	    <span><%:Html.RouteLink(Html.Translate("Actions.Cancel"), new { controller = "Section", action = "Show" })%></span>
     </div>
 </div>

@@ -20,7 +20,13 @@ namespace Core.WebContent.Migrations
                 t.DateTime("CreateDate").Null();
                 t.Long("UserId").Null();
                 t.Integer("Status");
-                t.ForeignKey("Section").Table("WebContent_Sections");
+                t.String("Author").Null();
+                t.DateTime("StartPublishingDate").Null();
+                t.DateTime("FinishPublishingDate").Null();
+                t.DateTime("LastModifiedDate").Null();
+                t.String("Url");
+                t.Integer("UrlType");
+                t.ForeignKey("Category").Table("WebContent_Categories");
             });
         }
 
@@ -29,7 +35,7 @@ namespace Core.WebContent.Migrations
         /// </summary>
         public override void Down()
         {
-            Database.ChangeTable("WebContent_Articles", t => t.RemoveForeignKey("Section").Table("WebContent_Sections"));
+            Database.ChangeTable("WebContent_Articles", t => t.RemoveForeignKey("Category").Table("WebContent_Categories"));
             Database.RemoveTable("WebContent_Articles");
         }
     }

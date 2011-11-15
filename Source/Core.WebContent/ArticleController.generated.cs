@@ -61,6 +61,16 @@ namespace Core.WebContent.Controllers {
         public System.Web.Mvc.ActionResult ApplyPermissions() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SectionCategories() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SectionCategories);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Remove() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ArticleController Actions { get { return WebContentMVC.Article; } }
@@ -82,6 +92,8 @@ namespace Core.WebContent.Controllers {
             public readonly String  Save = "Save";
             public readonly String  ShowPermissions = "ShowPermissions";
             public readonly String  ApplyPermissions = "ApplyPermissions";
+            public readonly String  SectionCategories = "SectionCategories";
+            public readonly String  Remove = "Remove";
         }
 
 
@@ -156,6 +168,19 @@ namespace Core.WebContent.Controllers {
         public override System.Web.Mvc.ActionResult ApplyPermissions(Core.Framework.Permissions.Models.PermissionsModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SectionCategories(long sectionId, long? categoryId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SectionCategories);
+            callInfo.RouteValueDictionary.Add("sectionId", sectionId);
+            callInfo.RouteValueDictionary.Add("categoryId", categoryId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Remove(long articleId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+            callInfo.RouteValueDictionary.Add("articleId", articleId);
             return callInfo;
         }
 

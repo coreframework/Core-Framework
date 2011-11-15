@@ -489,7 +489,7 @@ namespace Framework.Mvc.Helpers
         /// <returns>Return content Css with replaced urls.</returns>
         private static String ReplaceCssUrls(String cssContent, String imagePluginPath)
         {
-            var regex = new Regex(UrlRegex);
+            var regex = new System.Text.RegularExpressions.Regex(UrlRegex);
             var vals = regex.Matches(cssContent).Cast<Match>().ToDictionary(mathe => mathe.Index.ToString(),
                                                                       mathe => mathe.Groups[2].Value);
             return regex.Replace(cssContent,

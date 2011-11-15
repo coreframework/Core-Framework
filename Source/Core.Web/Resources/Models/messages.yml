@@ -1,7 +1,7 @@
 Models:
   ErrorMessages:
    Required: "The {0} field is required."
-   
+   regularexpression: "The {0} field is not in valid format"
 
    
   

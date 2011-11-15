@@ -10,10 +10,12 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
+using Core.WebContent.Helpers;
 using Core.WebContent.Models;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
 using Core.WebContent.NHibernate.Permissions;
+using Core.WebContent.Permissions.Operations;
 using Framework.Mvc.Extensions;
 using Framework.Mvc.Grids;
 using Framework.Mvc.Helpers;
@@ -26,6 +28,7 @@ using NHibernate.Criterion;
 namespace Core.WebContent.Controllers
 {
     [Export(typeof(IController)), ExportMetadata("Name", "Article")]
+    [Permissions((int)WebContentPluginOperations.ManageArticles, typeof(WebContentPlugin))]
     public partial class ArticleController : CorePluginController
     {
         #region Fields
@@ -34,6 +37,7 @@ namespace Core.WebContent.Controllers
         private readonly IArticleLocaleService articleLocaleService;
         private readonly IPermissionCommonService permissionService;
         private readonly IPermissionsHelper permissionsHelper;
+        private readonly ICategoryService categoryService;
 
         #endregion
 
@@ -45,6 +49,7 @@ namespace Core.WebContent.Controllers
             articleLocaleService = ServiceLocator.Current.GetInstance<IArticleLocaleService>();
             permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
+            categoryService = ServiceLocator.Current.GetInstance<ICategoryService>();
         }
 
         #endregion
@@ -78,8 +83,8 @@ namespace Core.WebContent.Controllers
                         id = article.Id,
                         cell = new[] {  
                                         article.Title,
-                                        ((SectionLocale)article.Article.Section.CurrentLocale).Title,
-                                        article.Article.CreateDate.ToString(),
+                                        ((WebContentCategoryLocale)article.Article.Category.CurrentLocale).Title,
+                                        article.Article.Status.ToString(),
                                         String.Format("<a href=\"{0}\">{1}</a>",
                                             Url.Action("Edit","Article",new { articleId = article.Article.Id }),HttpContext.Translate("Details", ResourceHelper.GetControllerScope(this)))
                         }
@@ -98,9 +103,14 @@ namespace Core.WebContent.Controllers
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult New(ArticleViewModel article)
         {
+            ArticleHelper.ValidateArticle(article, ModelState);
             if (ModelState.IsValid)
             {
-                var newArticle = article.MapTo(new Article { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null });
+                var newArticle = article.MapTo(new Article
+                                                   {
+                                                       UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null,
+                                                       CreateDate = DateTime.Now
+                                                   });
                 if (articleService.Save(newArticle))
                 {
                     permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<ArticleOperations>(), typeof(Article), newArticle.Id);
@@ -172,6 +182,7 @@ namespace Core.WebContent.Controllers
         [HttpPost]
         public virtual ActionResult Save(ArticleViewModel model)
         {
+            ArticleHelper.ValidateArticle(model, ModelState);
             if (ModelState.IsValid)
             {
                 var article = articleService.Find(model.Id);
@@ -240,6 +251,32 @@ namespace Core.WebContent.Controllers
             return Content(Url.Action("Show"));
         }
 
+        public virtual ActionResult SectionCategories(long sectionId, long? categoryId)
+        {
+
+            var categories = categoryService.GetAllowedSectionCategoriesByOperation(this.CorePrincipal(), (Int32)CategoryOperations.View, sectionId).ToList().Select(a => new SelectListItem()
+            {
+                Text = ((WebContentCategoryLocale)a.CurrentLocale).Title,
+                Value = a.Id.ToString(),
+                Selected = (categoryId != null && a.Id == categoryId)? true : false
+
+            });
+
+            return Json(categories);
+
+        }
+
+        public virtual ActionResult Remove(long articleId)
+        {
+            var article = articleService.Find(articleId);
+            if (article != null && permissionService.IsAllowed((Int32)CategoryOperations.Manage, this.CorePrincipal(), typeof(Article), articleId, IsArticleOwner(article), PermissionOperationLevel.Object))
+            {
+                articleService.Delete(article);
+            }
+
+            return RedirectToAction("Show");
+        }
+
         #endregion
 
         #region Helper Methods
@@ -262,8 +299,8 @@ namespace Core.WebContent.Controllers
                                                              },
                                                          new GridColumnViewModel
                                                              {
-                                                                 Name = HttpContext.Translate("Section", ResourceHelper.GetControllerScope(this)), 
-                                                                 Index = "Section.CurrentLocale.Title",
+                                                                 Name = HttpContext.Translate("Category", ResourceHelper.GetControllerScope(this)), 
+                                                                 Index = "Category.CurrentLocale.Title",
                                                                  Width = 400
                                                              },
                                                          new GridColumnViewModel

@@ -19,7 +19,7 @@ namespace Framework.Core.Helpers
     /// </example>
     public class TransformationRule
     {
-        private readonly Regex regex;
+        private readonly System.Text.RegularExpressions.Regex regex;
 
         private readonly String replacement;
 
@@ -30,7 +30,7 @@ namespace Framework.Core.Helpers
         /// <param name="replacement">The replacement.</param>
         public TransformationRule(String pattern, String replacement)
         {
-            regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            regex = new System.Text.RegularExpressions.Regex(pattern, RegexOptions.IgnoreCase);
             this.replacement = replacement;
         }
 

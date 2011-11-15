@@ -30,9 +30,20 @@ Models:
         Manage: "Manage"
         AddToWidget: "Add to widget"
         Permissions: "Permissions"
-    ArticleOperations:
+     ArticleOperations:
         View: "View"
         Manage: "Manage"
         AddToWidget: "Add to widget"
-        Permissions: "Permissions"           
+        Permissions: "Permissions"
+     ArticleViewModel:
+        SectionId: "Section"
+        CategoryId: "Category"
+        Title: "Title"
+        Summary: "Summary"
+        Description: "Description"
+        Author: "Author"
+        Status: "Status"
+        StartPublishingDate:"Start publishing date"
+        FinishPublishingDate: "Finish publishing date"
+        Content: "Content"           
     

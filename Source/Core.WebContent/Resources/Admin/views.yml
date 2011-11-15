@@ -26,5 +26,7 @@ Views:
     Permissions: "Permissions"
     Role: "Role"
     Language: "Language"
+    Common: "Common details"
+    Content: "Content"
 
 

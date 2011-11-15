@@ -31,6 +31,7 @@
     - Admin/jquery.ui.datepicker.js
     - Admin/jquery.dd.js
     - Admin/jquery.ui.progressbar.js
+    - jquery.cascadingDropDown.js
   admincustom:
     - Admin/scripts.js
     - Admin/highlight-active-input.js

@@ -133,8 +133,14 @@ namespace Framework.Mvc.Helpers
             {
                 message = GetResourceString(context, validatorKey, GetCommonMessagesScope(), null, null);
             }
-            var propertyNameText = TranslatePropertyName(context, modelType, propertyName);
-            return String.Format(message, propertyNameText, validationParams);
+
+            if (!String.IsNullOrEmpty(message))
+            {
+                var propertyNameText = TranslatePropertyName(context, modelType, propertyName);
+                return String.Format(message, propertyNameText, validationParams);
+            }
+
+            return String.Empty;
         }
 
         /// <summary>

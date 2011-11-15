@@ -30,11 +30,16 @@
         </div>
     </div>
     <div class="i_buttons clrfix">
-        <div class="btn1 clrfix">
-            <em></em>
-            <%:Html.Submit(Html.Translate("Actions.Save"), new {@class = "button"})%>
-            <strong></strong>
-        </div>
+          <%if (Model.AllowManage){%>
+		    <div class="btn1 clrfix">
+                <em></em>
+                <%:Html.Submit(Html.Translate("Actions.Save"), new {@class = "button"})%>
+                <strong></strong>
+            </div>
+            <%if (Model.Id > 0) {%>
+                <span><%:Html.ActionLink(Html.Translate("Actions.Remove"), WebContentMVC.WebContentCategory.Remove(Model.Id))%></span>
+            <%}%>
+         <%}%>
 	    <span><%:Html.RouteLink(Html.Translate("Actions.Cancel"), new { controller = "WebContentCategory", action = "Show" })%></span>
     </div>
 </div>

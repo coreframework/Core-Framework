@@ -61,6 +61,11 @@ namespace Core.WebContent.Controllers {
         public System.Web.Mvc.ActionResult ApplyPermissions() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Remove() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SectionController Actions { get { return WebContentMVC.Section; } }
@@ -82,6 +87,7 @@ namespace Core.WebContent.Controllers {
             public readonly String  Save = "Save";
             public readonly String  ShowPermissions = "ShowPermissions";
             public readonly String  ApplyPermissions = "ApplyPermissions";
+            public readonly String  Remove = "Remove";
         }
 
 
@@ -156,6 +162,12 @@ namespace Core.WebContent.Controllers {
         public override System.Web.Mvc.ActionResult ApplyPermissions(Core.Framework.Permissions.Models.PermissionsModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ApplyPermissions);
             callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Remove(long sectionId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
+            callInfo.RouteValueDictionary.Add("sectionId", sectionId);
             return callInfo;
         }
 

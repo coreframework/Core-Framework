@@ -24,6 +24,12 @@ namespace Core.WebContent.NHibernate.Models
         public virtual String Description { get; set; }
 
         /// <summary>
+        /// Gets or sets the summary.
+        /// </summary>
+        /// <value>The summary.</value>
+        public virtual String Summary { get; set; }
+
+        /// <summary>
         /// Gets or sets the category.
         /// </summary>
         /// <value>The category.</value>

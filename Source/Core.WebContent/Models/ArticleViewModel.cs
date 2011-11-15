@@ -6,8 +6,10 @@ using Core.Framework.Permissions.Extensions;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
 using Core.WebContent.NHibernate.Permissions;
+using Core.WebContent.NHibernate.Static;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
+using Framework.Mvc.Metadata.Attributes;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.WebContent.Models
@@ -40,11 +42,38 @@ namespace Core.WebContent.Models
         public virtual String Content { get; set; }
 
         /// <summary>
+        /// Gets or sets the author.
+        /// </summary>
+        /// <value>The author.</value>
+        public virtual String Author { get; set; }
+
+        /// <summary>
         /// Gets or sets the published date.
         /// </summary>
         /// <value>The published date.</value>
         [DataType(DataType.Date)]
-        public virtual DateTime PublishedDate { get; set; }
+        public virtual DateTime? StartPublishingDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the finish publishing date.
+        /// </summary>
+        /// <value>The finish publishing date.</value>
+        [DataType(DataType.Date)]
+        public virtual DateTime? FinishPublishingDate { get; set; }
+
+        /// <summary>
+        /// Gets or sets the content.
+        /// </summary>
+        /// <value>The content.</value>
+        [DataType("ImageUpload")]
+        [ImageUpload(Resize = true, ResizeWidth = 120, ResizeHeight = 100)]
+        public virtual String FileName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the status.
+        /// </summary>
+        /// <value>The status.</value>
+        public ArticleStatus Status { get; set; }
 
         /// <summary>
         /// Gets or sets the id.
@@ -68,7 +97,28 @@ namespace Core.WebContent.Models
         /// Gets or sets the section.
         /// </summary>
         /// <value>The section.</value>
+        [Required]
         public long SectionId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the category id.
+        /// </summary>
+        /// <value>The category id.</value>
+        [Required]
+        public long CategoryId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the URL.
+        /// </summary>
+        /// <value>The URL.</value>
+        [Required]
+        public String Url { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type of the URL.
+        /// </summary>
+        /// <value>The type of the URL.</value>
+        public ArticleUrlType UrlType { get; set; }
 
         /// <summary>
         /// Gets the forms.
@@ -100,8 +150,14 @@ namespace Core.WebContent.Models
         public ArticleViewModel MapFrom(Article from)
         {
             Id = from.Id;
-            SectionId = from.Section != null ? from.Section.Id : 0;
-
+            CategoryId = from.Category != null ? from.Category.Id : 0;
+            SectionId = from.Category != null && from.Category.Section!=null ? from.Category.Section.Id : 0;
+            Author = from.Author;
+            Status = from.Status;
+            Url = from.Url;
+            UrlType = from.UrlType;
+            StartPublishingDate = from.StartPublishingDate;
+            FinishPublishingDate = from.FinishPublishingDate;
             MapLocaleFrom(from.CurrentLocale as ArticleLocale);
             return this;
         }
@@ -109,7 +165,17 @@ namespace Core.WebContent.Models
         public Article MapTo(Article to)
         {
             to.Id = Id;
-            to.Section = new Section { Id = SectionId };
+            to.Category = new WebContentCategory { Id = CategoryId };
+            to.Author = Author;
+            to.Status = Status;
+            to.Url = Url;
+            to.UrlType = UrlType;
+            to.StartPublishingDate = StartPublishingDate;
+            to.FinishPublishingDate = FinishPublishingDate;
+            if (Id>0)
+            {
+                to.LastModifiedDate = DateTime.Now;
+            }
 
             if (String.IsNullOrEmpty(SelectedCulture))
                 MapLocaleTo((ArticleLocale)to.CurrentLocale);
@@ -120,6 +186,7 @@ namespace Core.WebContent.Models
         public ArticleViewModel MapLocaleFrom(ArticleLocale locale)
         {
             Title = locale.Title;
+            Summary = locale.Summary;
             Content = locale.Description;
             SelectedCulture = locale.Culture;
 
@@ -130,6 +197,7 @@ namespace Core.WebContent.Models
         {
             locale.Title = Title;
             locale.Description = Content;
+            locale.Summary = Summary;
             if (SelectedCulture!=null)
                 locale.Culture = SelectedCulture;
             return locale;

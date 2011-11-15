@@ -33,7 +33,7 @@ function highlightActiveInput()
 		currentlyActiveInputRef.className = currentlyActiveInputClassName;
 	}
 	currentlyActiveInputClassName = this.className;
-	this.className = 'inputHighlighted';
+	this.className = currentlyActiveInputClassName+" inputHighlighted";
 	currentlyActiveInputRef = this;
 	
 	

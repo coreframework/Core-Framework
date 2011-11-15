@@ -121,7 +121,10 @@
     <Compile Include="Services\NHibernateSectionSettingsService.cs" />
     <Compile Include="Services\NHibernateSectionLocaleService.cs" />
     <Compile Include="Services\NHibernateSectionService.cs" />
+    <Compile Include="Static\ArticleUrlType.cs" />
     <Compile Include="Static\CategoryStatus.cs" />
+    <Compile Include="Static\ArticleStatus.cs" />
+    <Compile Include="Static\SectionSettingsVisibility.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
