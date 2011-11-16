@@ -212,16 +212,17 @@ namespace Core.Web.Models
                     PagePlugins.Add(coreWidget.Plugin);
                 }
             }
+            IsTemplate = from.IsTemplate;
+            if(from.Template != null)
+            {
+                TemplateModel = new TemplateViewModel().MapFrom(from.Template);
+                PagePlugins.AddRange(TemplateModel.PagePlugins);
+            }
             var plugins = ServiceLocator.Current.GetInstance<IPluginService>().FindPluginsByIdentifiers(PagePlugins.Select(t => t.Identifier).ToList());
             if (plugins.Any())
             {
                 plugins.ForEach(t => { CssFileName += t.Id + "_"; });
                 CssFileName = CssFileName.Remove(CssFileName.Length - 1);
-            }
-            IsTemplate = from.IsTemplate;
-            if(from.Template != null)
-            {
-                TemplateModel = new TemplateViewModel().MapFrom(from.Template);
             }
 
             return this;

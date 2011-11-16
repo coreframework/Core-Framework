@@ -76,6 +76,8 @@ namespace Core.Web.NHibernate.Models
         /// <value>The parent widget id.</value>
         public virtual long? ParentWidgetId { get; set; }
 
+        public virtual long? TemplateWidgetId { get; set; }
+
         public virtual long EntityId
         {
             get { return Id; }

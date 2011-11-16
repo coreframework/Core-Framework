@@ -32,7 +32,14 @@ namespace Core.Web.Models
             set { widgets = value; }
         }
 
+        public List<ICorePlugin> PagePlugins { get; set; }
+
         #endregion
+
+        public TemplateViewModel()
+        {
+            PagePlugins = new List<ICorePlugin>();
+        }
 
         public TemplateViewModel MapFrom(Page from)
         {
@@ -52,7 +59,7 @@ namespace Core.Web.Models
 
                 bool isWidetEnabled = widgetService.IsWidgetEnable(widget1.Widget);
 
-                Widgets.Add(new WidgetHolderViewModel
+                var widgetModel = new WidgetHolderViewModel
                                 {
                                     WidgetInstance = new CoreWidgetInstance
                                                          {
@@ -62,7 +69,6 @@ namespace Core.Web.Models
                                                              PageSettings = new CorePageSettings { PageId = from.Id }
                                                          },
                                     Widget = widget1,
-
                                     Access = coreWidget is BaseWidget
                                                  ? permissionService.GetAccess(
                                                      ((BaseWidget)coreWidget).Operations,
@@ -73,7 +79,14 @@ namespace Core.Web.Models
                                                  : null,
                                     PageAccess = pageAccess,
                                     SystemWidget = (isWidetEnabled && coreWidget != null) ? coreWidget : null
-                                });
+                                };
+                widgetModel.Access[((BaseWidget) widgetModel.SystemWidget).ManageOperationCode] = false;
+                widgetModel.Access[((BaseWidget)widgetModel.SystemWidget).PermissionOperationCode] = false;
+                Widgets.Add(widgetModel);
+                if (coreWidget != null && coreWidget.Plugin != null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                {
+                    PagePlugins.Add(coreWidget.Plugin);
+                }
             }
 
             return this;

@@ -36,7 +36,7 @@
         var $stickyFooter;
         $(function () {
             $stickyFooter = $('.footer').stickyFooter();
-        <%if (Model.Access[(int)PageOperations.Update] && Model.PageMode == PageMode.Edit)
+        <%if (Model.TemplateModel == null && Model.Access[(int)PageOperations.Update] && Model.PageMode == PageMode.Edit)
       {%>
             iNettutsInit($stickyFooter);
             <% }%>

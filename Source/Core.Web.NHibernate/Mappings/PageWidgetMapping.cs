@@ -16,6 +16,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(pageWidget => pageWidget.ColumnNumber);
             Map(pageWidget => pageWidget.OrderNumber);
             Map(pageWidget => pageWidget.ParentWidgetId);
+            Map(pageWidget => pageWidget.TemplateWidgetId);
             References(pageWidget => pageWidget.Page);
             HasOne(pageWidget => pageWidget.Settings).PropertyRef(pageWidgetSettings => pageWidgetSettings.Widget).
                 Cascade.All().LazyLoad();

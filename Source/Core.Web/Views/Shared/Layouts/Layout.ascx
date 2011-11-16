@@ -48,12 +48,13 @@
    {
        foreach (PageLayoutRow row in Model.TemplateModel.Layout.LayoutTemplate.Rows)
        {%>
-       <table class="widgets">
+<table class="widgets">
     <tr rowid="<%=row.Id%>">
         <%
            foreach (var column in row.Columns)
            {%>
-        <td style="width: <%=LayoutHelper.GetColumnWidth(Model.TemplateModel.Layout, column)%>%;" colspan="<%=LayoutHelper.GetColumnColspan(Model.TemplateModel.Layout, column)%>"
+        <td style="width: <%=LayoutHelper.GetColumnWidth(Model.TemplateModel.Layout, column)%>%;"
+            colspan="<%=LayoutHelper.GetColumnColspan(Model.TemplateModel.Layout, column)%>"
             class="column">
             <%
                foreach (
@@ -64,11 +65,13 @@
             <%
                    if (widget.Widget == null || !(widget.SystemWidget is BaseWidget) ||
                        widget.Access[((BaseWidget)widget.SystemWidget).ViewOperationCode])
-                   {%>
+                   {
+                       var widgetToShow = widget.Widget.Widget.IsPlaceHolder ? Model.Widgets.Where(pageWidget => pageWidget.Widget.TemplateWidgetId == widget.Widget.Id).FirstOrDefault() :
+                       widget;%>
             <%
                        Html.RenderPartial(
                            MVC.Shared.Views.Widgets.WidgetContentHolder,
-                           widget);%>
+                           widgetToShow);%>
             <%
                    }%>
             <%

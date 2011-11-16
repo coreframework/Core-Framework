@@ -43,12 +43,12 @@ namespace Core.Web.Helpers
         /// <param name="page">The page.</param>
         /// <param name="user">The user.</param>
         /// <returns></returns>
-        public static PageViewModel BindPageViewModel(Page page,ICorePrincipal user)
+        public static PageViewModel BindPageViewModel(Page page, ICorePrincipal user)
         {
             bool isPageOwner = page != null && user != null && page.User != null &&
                             page.User.Id == user.PrincipalId;
 
-            return new PageViewModel {IsPageOwner = isPageOwner}.MapFrom(page);
+            return new PageViewModel { IsPageOwner = isPageOwner }.MapFrom(page);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Core.Web.Helpers
                                             };
 
                     if (pageWidgetService.Save(newPageWidget))
-                        return newPageWidget;   
+                        return newPageWidget;
                 }
             }
 
@@ -138,9 +138,9 @@ namespace Core.Web.Helpers
                     {
                         var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => widget.Identifier == pageWidget.Widget.Identifier);
 
-                        if (currentWidget!=null)
+                        if (currentWidget != null)
                         {
-                            currentWidget.Remove(new CoreWidgetInstance{InstanceId = pageWidget.InstanceId});
+                            currentWidget.Remove(new CoreWidgetInstance { InstanceId = pageWidget.InstanceId });
                         }
                     }
                 }
@@ -159,34 +159,34 @@ namespace Core.Web.Helpers
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var pageWidgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             var pageWidget = pageWidgetService.Find(pageWidgetId);
-            var permissionService  = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-         
+            var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+
             if (pageWidget != null)
             {
                 bool isPageOwner = user != null && pageWidget.Page.User != null &&
                          pageWidget.Page.User.Id == user.PrincipalId;
 
-                if (permissionService.IsAllowed((Int32) PageOperations.Update, user, typeof (Page), pageWidget.Page.Id,
+                if (permissionService.IsAllowed((Int32)PageOperations.Update, user, typeof(Page), pageWidget.Page.Id,
                                                 isPageOwner, PermissionOperationLevel.Object))
                 {
                     pageWidget.Page.Widgets.Update(
                         wd =>
-                            {
-                                wd.OrderNumber =
-                                    wd.PageSection == pageWidget.PageSection && wd.ColumnNumber == pageWidget.ColumnNumber &&
-                                     wd.OrderNumber > pageWidget.OrderNumber
-                                         ? wd.OrderNumber - 1
-                                         : wd.OrderNumber;
-                            }
+                        {
+                            wd.OrderNumber =
+                                wd.PageSection == pageWidget.PageSection && wd.ColumnNumber == pageWidget.ColumnNumber &&
+                                 wd.OrderNumber > pageWidget.OrderNumber
+                                     ? wd.OrderNumber - 1
+                                     : wd.OrderNumber;
+                        }
                         );
                     pageWidget.Page.Widgets.Update(
                         wd =>
-                            {
-                                wd.OrderNumber =
-                                    (int)wd.PageSection == pageSection && wd.ColumnNumber == columnNumber && wd.OrderNumber >= orderNumber
-                                         ? wd.OrderNumber + 1
-                                         : wd.OrderNumber;
-                            }
+                        {
+                            wd.OrderNumber =
+                                (int)wd.PageSection == pageSection && wd.ColumnNumber == columnNumber && wd.OrderNumber >= orderNumber
+                                     ? wd.OrderNumber + 1
+                                     : wd.OrderNumber;
+                        }
                         );
                     pageService.Save(pageWidget.Page);
                     pageWidget.PageSection = (PageSection)pageSection;
@@ -207,20 +207,20 @@ namespace Core.Web.Helpers
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
 
             var page = pageService.Find(pageId);
-            if (page!=null && page.OrderNumber!=orderNumber)
+            if (page != null && page.OrderNumber != orderNumber)
             {
                 var siblings = pageService.FindSiblingPages(page.ParentPageId);
-                siblings.Update(pg=>
+                siblings.Update(pg =>
                                     {
-                                         pg.OrderNumber =
-                                            pg.OrderNumber > page.OrderNumber
-                                                ? pg.OrderNumber - 1
-                                                : pg.OrderNumber;
+                                        pg.OrderNumber =
+                                           pg.OrderNumber > page.OrderNumber
+                                               ? pg.OrderNumber - 1
+                                               : pg.OrderNumber;
                                     });
                 siblings.Update(pg =>
                 {
                     pg.OrderNumber =
-                       pg.OrderNumber >=orderNumber
+                       pg.OrderNumber >= orderNumber
                            ? pg.OrderNumber + 1
                            : pg.OrderNumber;
                 });
@@ -230,7 +230,7 @@ namespace Core.Web.Helpers
 
                 foreach (var sibling in siblings)
                 {
-                    if (sibling.Id!=page.Id)
+                    if (sibling.Id != page.Id)
                         pageService.Save(page);
                 }
             }
@@ -254,7 +254,7 @@ namespace Core.Web.Helpers
                            ? pg.OrderNumber - 1
                            : pg.OrderNumber;
                 });
-              
+
                 pageService.Delete(page);
 
                 foreach (var sibling in siblings)
@@ -293,7 +293,7 @@ namespace Core.Web.Helpers
         /// <returns></returns>
         public static String GetPageInnerHolderStyles(PageSettings settings)
         {
-            if(settings != null && !String.IsNullOrEmpty(settings.LookAndFeelSettings.OtherStyles))
+            if (settings != null && !String.IsNullOrEmpty(settings.LookAndFeelSettings.OtherStyles))
             {
                 return settings.LookAndFeelSettings.OtherStyles;
             }
@@ -318,7 +318,7 @@ namespace Core.Web.Helpers
         /// Gets the navigation menu.
         /// </summary>
         /// <returns></returns>
-        public static NavigationMenuModel GetNavigationMenu(PageViewModel currentPage,ICorePrincipal user)
+        public static NavigationMenuModel GetNavigationMenu(PageViewModel currentPage, ICorePrincipal user)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var pages = pageService.GetAllowedPagesForMainMenu(user).OrderBy(page => page.OrderNumber);
@@ -327,7 +327,7 @@ namespace Core.Web.Helpers
             var pageMode = CurrentUserPageMode;
             var menuItems = new List<NavigationMenuItemModel>();
 
-            bool addNewPagesAccess = permissionService.IsAllowed((int) PageOperations.AddNewPages, user, typeof (Page), null,
+            bool addNewPagesAccess = permissionService.IsAllowed((int)PageOperations.AddNewPages, user, typeof(Page), null,
                                                   PermissionOperationLevel.Type);
 
             List<NavigationMenuItemModel> items = pages.Select(page => new NavigationMenuItemModel
@@ -346,7 +346,7 @@ namespace Core.Web.Helpers
                     menuItems.Add(item);
                 }
             }
-            if (addNewPagesAccess && pageMode==PageMode.Edit)
+            if (addNewPagesAccess && pageMode == PageMode.Edit)
                 menuItems.Add(new NavigationMenuItemModel
                                   {
                                       PageMode = pageMode
@@ -360,12 +360,12 @@ namespace Core.Web.Helpers
                        };
         }
 
-        public static List<NavigationMenuItemModel> Flatten(NavigationMenuItemModel root, List<NavigationMenuItemModel> items,int level, bool addNewPagesAccess, PageMode pageMode)
+        public static List<NavigationMenuItemModel> Flatten(NavigationMenuItemModel root, List<NavigationMenuItemModel> items, int level, bool addNewPagesAccess, PageMode pageMode)
         {
-            var flattened = new List<NavigationMenuItemModel>{};
+            var flattened = new List<NavigationMenuItemModel> { };
 
-            var children = items.Where(item => item.Page.ParentPageId!=null && item.Page.ParentPageId == root.Page.Id).ToList();
-           
+            var children = items.Where(item => item.Page.ParentPageId != null && item.Page.ParentPageId == root.Page.Id).ToList();
+
             foreach (var child in children)
             {
                 child.Children = Flatten(child, items, level + 1, addNewPagesAccess, pageMode);
@@ -381,7 +381,7 @@ namespace Core.Web.Helpers
         public static void ChangePageMode(PageMode pageMode)
         {
             HttpContext.Current.Response.Cookies.Add(new HttpCookie(Constants.PageModeCookieName, pageMode.ToString()));
-            HttpContext.Current.Items[typeof (PageMode)] = pageMode;
+            HttpContext.Current.Items[typeof(PageMode)] = pageMode;
         }
 
         /// <summary>
@@ -394,14 +394,14 @@ namespace Core.Web.Helpers
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
-            
+
             sourcePage.Widgets.AsParallel().ForAll(widget =>
             {
-                var pageWidget = new PageWidget();                        
+                var pageWidget = new PageWidget();
                 pageWidget.InjectFrom<CloneEntityInjection>(widget);
                 pageWidget.Page = targetPage;
                 pageWidget.ParentWidgetId = widget.Id;
-                
+
                 //copy widget settings
                 if (widget.Settings != null)
                 {
@@ -409,9 +409,9 @@ namespace Core.Web.Helpers
                     pageWidget.Settings.LookAndFeelSettings = new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(widget.Settings.LookAndFeelSettings) as LookAndFeelSettings;
                     pageWidget.Settings.Widget = pageWidget;
                 }
-               
+
                 //clone page widget instance
-                if (widget.InstanceId!=null)
+                if (widget.InstanceId != null)
                 {
                     pageWidget.InstanceId = CloneWidgetInstance(widget);
                 }
@@ -419,7 +419,7 @@ namespace Core.Web.Helpers
             });
 
             //copy page layout
-            targetPage.PageLayout = (PageLayout)new PageLayout{Id = targetPage.PageLayout.Id}.InjectFrom<CloneEntityInjection>(sourcePage.PageLayout);
+            targetPage.PageLayout = (PageLayout)new PageLayout { Id = targetPage.PageLayout.Id }.InjectFrom<CloneEntityInjection>(sourcePage.PageLayout);
             targetPage.PageLayout.Page = targetPage;
             sourcePage.PageLayout.ColumnWidths.AsParallel().ForAll(column =>
                                                                        {
@@ -429,13 +429,13 @@ namespace Core.Web.Helpers
                                                                        });
 
             //copy page settings)
-            if (sourcePage.Settings!=null)
+            if (sourcePage.Settings != null)
             {
-                targetPage.Settings = (PageSettings) new PageSettings().InjectFrom<CloneEntityInjection>(sourcePage.Settings);
+                targetPage.Settings = (PageSettings)new PageSettings().InjectFrom<CloneEntityInjection>(sourcePage.Settings);
                 targetPage.Settings.LookAndFeelSettings = (LookAndFeelSettings)new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(sourcePage.Settings.LookAndFeelSettings);
                 targetPage.Settings.Page = targetPage;
             }
-            
+
             if (pageService.Save(targetPage))
             {
                 //copy permissions and update page styles
@@ -444,9 +444,9 @@ namespace Core.Web.Helpers
                     if (item.ParentWidgetId == null) continue;
                     var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == item.Widget.Identifier);
                     var sourceWidget = sourcePage.Widgets.FirstOrDefault(w => w.Id == item.ParentWidgetId);
-                    if (sourceWidget!=null)
+                    if (sourceWidget != null)
                     {
-                        if (targetPage.Settings!=null && !String.IsNullOrEmpty(targetPage.Settings.CustomCSS))
+                        if (targetPage.Settings != null && !String.IsNullOrEmpty(targetPage.Settings.CustomCSS))
                         {
                             targetPage.Settings.CustomCSS = targetPage.Settings.CustomCSS.Replace(String.Format(PageWidgetTemplate, sourceWidget.Id), String.Format(PageWidgetTemplate, item.Id));
                         }
@@ -477,12 +477,12 @@ namespace Core.Web.Helpers
                     pageWidget.Settings.LookAndFeelSettings = new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(widget.Settings.LookAndFeelSettings) as LookAndFeelSettings;
                     pageWidget.Settings.Widget = pageWidget;
                 }
-                if(widgetId.HasValue)
+                if (widgetId.HasValue)
                 {
                     var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
                     pageWidget.Widget = widgetService.Find(widgetId.Value);
                 }
-
+                pageWidget.TemplateWidgetId = widget.Id;
                 targetPage.AddWidget(pageWidget);
             });
             targetPage.Template = template;
@@ -517,7 +517,7 @@ namespace Core.Web.Helpers
         private static long? CloneWidgetInstance(PageWidget widget)
         {
             var systemWidget = MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == widget.Widget.Identifier);
-            if (widget.InstanceId!=null)
+            if (widget.InstanceId != null)
             {
                 return systemWidget.Clone(new CoreWidgetInstance { InstanceId = widget.InstanceId, WidgetIdentifier = systemWidget.Identifier });
             }
