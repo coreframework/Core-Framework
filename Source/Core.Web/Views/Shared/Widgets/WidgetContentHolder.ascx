@@ -5,7 +5,7 @@
 <%@ Import Namespace="Core.Web.Models" %>
 <div class="widget <%=Model.Widget.Settings != null ? Model.Widget.Settings.CustomCSSClasses : String.Empty %>"
     id="<%=WidgetHelper.GetWidgetClientId(Model.Widget.Id) %>">
-    <div class="widget_container"  style="<%: WidgetHelper.GetWidgetStyles(Model.Widget.Settings) %>">
+    <div class="widget_container" style="<%: WidgetHelper.GetWidgetStyles(Model.Widget.Settings) %>">
         <%=Html.Hidden("pageWidgetId", Model.Widget.Id) %>
         <%=Html.Hidden("pageSection", Model.Widget.PageSection)%>
         <%=Html.Hidden("column", Model.Widget.ColumnNumber) %>
@@ -18,13 +18,13 @@
                     <%:Model.SystemWidget != null &&  Model.Widget!=null && Model.Widget.Widget!=null ? Model.Widget.Widget.Title : Html.Translate(".WidgetNotFound")%>
                 </h1>
                 <div class="widget_edit">
-                    <%if (Model.PageAccess[(int)PageOperations.Update] &&
+                    <%if ((Model.PageAccess[(int)PageOperations.Update] || Model.Widget.TemplateWidgetId.HasValue) &&
                 (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
                 Model.Access[((BaseWidget)Model.SystemWidget).ManageOperationCode] ||
                 Model.Access[((BaseWidget)Model.SystemWidget).PermissionOperationCode]))
                       {
-                          if (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
-                              Model.Access[((BaseWidget)Model.SystemWidget).ManageOperationCode])
+                          if (Model.PageAccess[(int)PageOperations.Update] && (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
+                              Model.Access[((BaseWidget)Model.SystemWidget).ManageOperationCode]))
                           {%>
                     <%=Ajax.ActionLink(" ",
                                                     MVC.Pages.RemovePageWidget(Model.Widget.Id),
@@ -36,8 +36,8 @@
                                                         },
                                                     new {@class = "remove"})%>
                     <%}
-                if (Model.SystemWidget != null)
-                {%>
+                          if (Model.SystemWidget != null)
+                          {%>
                     <a class="edit" href="javascript:void(0)"></a>
                     <% }%>
                     <% }%>

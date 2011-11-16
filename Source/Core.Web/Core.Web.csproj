@@ -292,7 +292,6 @@
     <Compile Include="Models\PlaceHolderWidgetViewModel.cs" />
     <Compile Include="Models\Routes\DefaultRouteRegistrar.cs" />
     <Compile Include="Models\RowSettings.cs" />
-    <Compile Include="Models\TemplateViewModel.cs" />
     <Compile Include="Models\WidgetCSSModel.cs" />
     <Compile Include="Models\WidgetHolderViewModel.cs" />
     <Compile Include="Models\WidgetLookAndFeelModel.cs" />

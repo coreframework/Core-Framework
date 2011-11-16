@@ -60,19 +60,9 @@ var iNettuts = {
                 if (thisWidgetSettings.editable) {
                     $('a.edit', $(settings.handleSelector, this)).mousedown(function (e) {
                         e.stopPropagation();
-                    }).click(function () {
-                        var url = settings.settingURLTemplate + $('#pageWidgetId', $(this).parents(settings.widgetSelector)).val();
-                        var dialog = $('<div title="Widget settings" style="display:none"/>').appendTo('body');
-                        dialog.load(
-                        url,
-                        {},
-                        function (responseText, textStatus, XMLHttpRequest) {
-                            dialog.dialog();
-                        }
-                    );
-                        dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150], close: function (ev, ui) { $(this).remove(); } });
-                        return false;
-                    });
+                    })/*.click(function () {
+                        editWidgetClicked(this, settings.settingURLTemplate, settings.widgetSelector);
+                    })*/;
                 }
                 $(this).attr('inettuts', true);
             }
@@ -107,12 +97,12 @@ var iNettuts = {
         }).mousedown(function (e) {
             /*$sortableItems.css({ width: '' });
             $(this).parent().css({
-                width: $(this).parent().width() + 'px'
+            width: $(this).parent().width() + 'px'
             });*/
             $(this).bind('mousemove', function () { $(settings.columns + ':not(:has(' + settings.widgetSelector + '))').height('50px'); });
         }).mouseup(function () {
             if (!$(this).parent().hasClass('dragging')) {
-            //    $(this).parent().css({ width: '' });
+                //    $(this).parent().css({ width: '' });
             } else {
                 $(settings.columns).sortable('disable');
             }
@@ -183,3 +173,16 @@ function updateAfterRemoving(removeLink, widgetSelector) {
     });
 }
 
+function editWidgetClicked(sender, settingURLTemplate, widgetSelector) {
+    var url = settingURLTemplate + $('#pageWidgetId', $(sender).parents(widgetSelector)).val();
+    var dialog = $('<div title="Widget settings" style="display:none"/>').appendTo('body');
+    dialog.load(
+                        url,
+                        {},
+                        function (responseText, textStatus, XMLHttpRequest) {
+                            dialog.dialog();
+                        }
+                    );
+    dialog.dialog({ width: 500, resizable: false, modal: true, position: ['center', 150], close: function (ev, ui) { $(this).remove(); } });
+    return false;
+}

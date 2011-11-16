@@ -4,11 +4,10 @@
 <%@ Import Namespace="Core.Framework.Plugins.Widgets" %>
 <%@ Import Namespace="Core.Web.NHibernate.Models.Static" %>
 <% int columnIndex = 1;
-   if (Model.TemplateModel == null)
-   {%>
+%>
 <%
-       foreach (PageLayoutRow row in Model.Layout.LayoutTemplate.Rows)
-       {%>
+    foreach (PageLayoutRow row in Model.Layout.LayoutTemplate.Rows)
+    {%>
 <table class="widgets">
     <tr rowid="<%=row.Id%>">
         <%
@@ -43,46 +42,4 @@
 </table>
 <%
        }
-   }
-   else
-   {
-       foreach (PageLayoutRow row in Model.TemplateModel.Layout.LayoutTemplate.Rows)
-       {%>
-<table class="widgets">
-    <tr rowid="<%=row.Id%>">
-        <%
-           foreach (var column in row.Columns)
-           {%>
-        <td style="width: <%=LayoutHelper.GetColumnWidth(Model.TemplateModel.Layout, column)%>%;"
-            colspan="<%=LayoutHelper.GetColumnColspan(Model.TemplateModel.Layout, column)%>"
-            class="column">
-            <%
-               foreach (
-                   var widget in
-                       Model.TemplateModel.Widgets.FindAll(
-                           wd => wd.Widget.PageSection == PageSection.Body && wd.Widget.ColumnNumber == columnIndex))
-               {%>
-            <%
-                   if (widget.Widget == null || !(widget.SystemWidget is BaseWidget) ||
-                       widget.Access[((BaseWidget)widget.SystemWidget).ViewOperationCode])
-                   {
-                       var widgetToShow = widget.Widget.Widget.IsPlaceHolder ? Model.Widgets.Where(pageWidget => pageWidget.Widget.TemplateWidgetId == widget.Widget.Id).FirstOrDefault() :
-                       widget;%>
-            <%
-                       Html.RenderPartial(
-                           MVC.Shared.Views.Widgets.WidgetContentHolder,
-                           widgetToShow);%>
-            <%
-                   }%>
-            <%
-               }%>
-        </td>
-        <%
-               columnIndex++;
-           }
-        %>
-    </tr>
-</table>
-<%
-       }
-   } %>
+%>
