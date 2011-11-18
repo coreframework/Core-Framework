@@ -18,7 +18,8 @@ namespace Core.WebContent.Migrations
             {
                 t.PrimaryKey();
                 t.String("Title").Length(255);
-                t.Text("Description").Null();
+                t.Text("Summary");
+                t.Text("Description");
                 t.Text("Culture").Length(10).Null();
                 t.ForeignKey("Article").Table("WebContent_Articles").OnDelete(ForeignKeyConstraint.Cascade);
             });

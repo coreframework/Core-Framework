@@ -26,6 +26,7 @@ public static class WebContentMVC {
     public static Core.WebContent.Controllers.ArticleController Article = new Core.WebContent.Controllers.T4MVC_ArticleController();
     public static Core.WebContent.Controllers.SectionController Section = new Core.WebContent.Controllers.T4MVC_SectionController();
     public static Core.WebContent.Controllers.WebContentCategoryController WebContentCategory = new Core.WebContent.Controllers.T4MVC_WebContentCategoryController();
+    public static Core.WebContent.Controllers.WebContentWidgetController WebContentWidget = new Core.WebContent.Controllers.T4MVC_WebContentWidgetController();
 }
 
 namespace T4MVC {

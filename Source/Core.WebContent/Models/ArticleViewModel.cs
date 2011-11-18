@@ -9,7 +9,6 @@ using Core.WebContent.NHibernate.Permissions;
 using Core.WebContent.NHibernate.Static;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
-using Framework.Mvc.Metadata.Attributes;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.WebContent.Models
@@ -60,14 +59,6 @@ namespace Core.WebContent.Models
         /// <value>The finish publishing date.</value>
         [DataType(DataType.Date)]
         public virtual DateTime? FinishPublishingDate { get; set; }
-
-        /// <summary>
-        /// Gets or sets the content.
-        /// </summary>
-        /// <value>The content.</value>
-        [DataType("ImageUpload")]
-        [ImageUpload(Resize = true, ResizeWidth = 120, ResizeHeight = 100)]
-        public virtual String FileName { get; set; }
 
         /// <summary>
         /// Gets or sets the status.

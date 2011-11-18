@@ -1,7 +1,7 @@
 Views:
   Section:
     Show:
-      AddSection: "Add"
+      AddSection: "Add Section"
     NewSection: "New section"
     EditSection: "Edit section"
     Common: "Common information"
@@ -11,7 +11,7 @@ Views:
     Details: "Details"
     Role: "Role"
   WebContentCategory:
-    AddCategory: "Add category"
+    AddCategory: "Add Category"
     NewCategory: "New category"
     EditCategory: "Edit category"
     Details: "Details"
@@ -19,7 +19,7 @@ Views:
     Role: "Role"
     Language: "Language"
   Article:
-    AddArticle: "Add article"
+    AddArticle: "Add Article"
     NewArticle: "New article"
     EditArticle: "Edit article"
     Details: "Details"
@@ -28,5 +28,7 @@ Views:
     Language: "Language"
     Common: "Common details"
     Content: "Content"
+    AddNewFile: "Add File"
+    Files: "Files"
 
 

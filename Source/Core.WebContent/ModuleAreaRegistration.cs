@@ -45,6 +45,20 @@ namespace Core.WebContent
             context.MapRoute(null, "admin/web-content-articles/apply-permissions", WebContentMVC.Article.ApplyPermissions(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/web-content-articles/get-categories", new { controller = "Article", action = "SectionCategories", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/web-content-articles/remove/{articleId}", WebContentMVC.Article.Remove());
+
+            context.MapRoute(null, "admin/web-content-articles/files/load-data/{articleId}", new { controller = "Article", action = "LoadFilesData" });
+            context.MapRoute(null, "admin/web-content-articles/files/new/{articleId}", new { controller = "Article", action = "NewFile", area = AreaName, articleId = UrlParameter.Optional });
+            context.MapRoute(null, "admin/web-content-articles/files/details/{articleId}/{articleFileId}", new { controller = "Article", action = "EditFile", area = AreaName, articleId = UrlParameter.Optional, articleFileId = UrlParameter.Optional });
+            context.MapRoute(null, "admin/web-content-articles/files/save/{articleId}", new { controller = "Article", action = "SaveFile", articleId = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "admin/web-content-articles/files/remove/{articleFileId}", WebContentMVC.Article.RemoveFile());
+            context.MapRoute(null, "admin/web-content-articles/files/{articleId}", new { controller = "Article", action = "ShowFiles", area = AreaName, articleId = UrlParameter.Optional });
+
+            //widget routs
+            context.MapRoute(null, String.Empty, WebContentMVC.WebContentWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, String.Empty, WebContentMVC.WebContentWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "web-content-widget/update", WebContentMVC.WebContentWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "web-content-widget/load-categories", WebContentMVC.WebContentWidget.LoadCategories(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute(null, "web-content-widget/load-articles", WebContentMVC.WebContentWidget.LoadArticles(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
     }
 }

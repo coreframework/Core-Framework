@@ -64,6 +64,12 @@ namespace Core.WebContent.Models
         public long SectionId { get; set; }
 
         /// <summary>
+        /// Gets or sets the name of the section.
+        /// </summary>
+        /// <value>The name of the section.</value>
+        public String SectionName { get; set; }
+
+        /// <summary>
         /// Gets the forms.
         /// </summary>
         /// <value>The forms.</value>
@@ -95,7 +101,7 @@ namespace Core.WebContent.Models
             Id = from.Id;
             SectionId = from.Section != null ? from.Section.Id : 0;
             Status = from.Status;
-
+            SectionName = from.Section != null ? ((SectionLocale)from.Section.CurrentLocale).Title : String.Empty;
             MapLocaleFrom(from.CurrentLocale as WebContentCategoryLocale);
             return this;
         }

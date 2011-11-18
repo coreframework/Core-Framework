@@ -117,10 +117,15 @@
     <Compile Include="Controllers\ArticleController.cs" />
     <Compile Include="Controllers\WebContentCategoryController.cs" />
     <Compile Include="Controllers\SectionController.cs" />
+    <Compile Include="Controllers\WebContentWidgetController.cs" />
     <Compile Include="Helpers\ArticleHelper.cs" />
+    <Compile Include="Helpers\WebContentWidgetHelper.cs" />
     <Compile Include="Models\CategoryViewModel.cs" />
     <Compile Include="Models\ArticleViewModel.cs" />
+    <Compile Include="Models\ArticleFileViewModel.cs" />
     <Compile Include="Models\SectionViewModel.cs" />
+    <Compile Include="Models\WebContentWidgetViewModel.cs" />
+    <Compile Include="Models\WidgetDetailsModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\WebContentPluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,10 +140,17 @@
     <Compile Include="Verbs\CategoryAdminVerb.cs" />
     <Compile Include="Verbs\ArticleAdminVerb.cs" />
     <Compile Include="Verbs\SectionAdminVerb.cs" />
+    <Compile Include="Verbs\Widgets\WebContentWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\WebContentWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\WebContentWidgetWidgetViewerVerb.cs" />
     <Compile Include="WebContentCategoryController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="WebContentPlugin.cs" />
+    <Compile Include="WebContentWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Widgets\ContentWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Framework.MEF.Contracts\Core.Framework.MEF.Contracts.csproj">
@@ -217,6 +229,9 @@
     <Content Include="Resources\Admin\controllers.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\asset_packages.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Resources\Admin\controllers.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -237,7 +252,14 @@
     <Content Include="Views\Article\ArticleDetails.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Views\Article\ArticleFileDetails.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Views\Article\Edit.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\Article\ArticleFiles.aspx">
+      <SubType>ASPXCodeBehind</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Article\New.aspx">
@@ -277,6 +299,21 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Section\ShowPermissions.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebContentWidget\DetailsMode.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebContentWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebContentWidget\GroupMode.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebContentWidget\ListingMode.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\WebContentWidget\ViewWidget.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Web.config" />

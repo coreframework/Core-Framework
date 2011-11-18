@@ -24,5 +24,14 @@ namespace Core.WebContent.NHibernate.Contracts
         /// <param name="sectionId">The section id.</param>
         /// <returns></returns>
         IEnumerable<WebContentCategory> GetAllowedSectionCategoriesByOperation(ICorePrincipal user, Int32 operation, long sectionId);
+
+        /// <summary>
+        /// Gets the published categories.
+        /// </summary>
+        /// <param name="user">The user.</param>
+        /// <param name="operation">The operation.</param>
+        /// <param name="sectionId">The section id.</param>
+        /// <returns></returns>
+        IEnumerable<WebContentCategory> GetPublishedCategories(ICorePrincipal user, Int32 operation, long sectionId);
     }
 }

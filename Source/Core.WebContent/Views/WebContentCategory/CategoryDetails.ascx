@@ -6,7 +6,14 @@
             <%:Html.HiddenFor(model => model.SelectedCulture) %>
             <div class="i_form_i">
                 <%:Html.LocalizedLabelFor(model => model.SectionId)%>
-                <%:Html.DropDownListFor(model => model.SectionId, new SelectList(Model.Sections, "Id", "CurrentLocale.Title", Model.SectionId), "Please select", new { })%>
+                <%if (Model.Id>0) {%>
+                    <%:Html.HiddenFor(model=>model.SectionId)%>
+                    <%:Html.Label(Model.SectionName) %>
+                <% } else {%>
+                    <%:Html.DropDownListFor(model => model.SectionId,
+                                                             new SelectList(Model.Sections, "Id", "CurrentLocale.Title",
+                                                                            Model.SectionId), "Please select", new {})%>
+                <% }%>
                 <%:Html.ValidationMessageFor(model=>model.SectionId) %>
             </div>  
 		    <div class="i_form_i">

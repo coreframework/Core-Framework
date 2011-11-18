@@ -52,9 +52,11 @@
                     },
                     reset: function () {
                         methods.clearItems();
-                        $this.append($(optionTag)
+                        if (config.showPromtText) {
+                            $this.append($(optionTag)
                             .attr("value", "")
                             .text(config.promptText));
+                        }
                         $this.trigger('change');
                     },
                     initialize: function () {
@@ -106,11 +108,12 @@
 
                 $(source).change(function () {
                     var parentSelect = $(source);
-                    if (parentSelect.val() != '') {
+                    if (parentSelect.val() != '' && parentSelect.val() != null) {
                         methods.post();
                     }
                     else {
                         methods.reset();
+                        $.isFunction(config.onReset) && config.onReset.call($this);
                     }
                 });
 
@@ -118,7 +121,7 @@
 
                 // try load values 
                 var parentSelect = $(source);
-                if (parentSelect.val() != '') {
+                if (parentSelect.val() != '' && parentSelect.val() != null) {
                     methods.post();
                 }
             })();
@@ -131,6 +134,8 @@
         errorText: 'Error loading data.',
         postData: null,
         onLoading: null,
-        onLoaded: null
+        onLoaded: null,
+        onReset: null,
+        showPromtText: true
     }
 })(jQuery);

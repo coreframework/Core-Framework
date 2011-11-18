@@ -39,7 +39,7 @@
                     <%: Html.TextBoxFor(model => model.MaxLength)%>
                     <%: Html.ValidationMessageFor(model => model.MaxLength)%>
             </div>
-                <%: Html.AntiForgeryToken()%>
+            <%: Html.AntiForgeryToken()%>
         </div>
     </div>
 	<div class="i_buttons clrfix">

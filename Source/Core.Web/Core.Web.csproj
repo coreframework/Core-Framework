@@ -1039,8 +1039,10 @@
     <Content Include="Scripts\jquery.corner.js" />
     <Content Include="Scripts\jquery.form.js" />
     <Content Include="Scripts\jquery.json-2.2.min.js" />
+    <Content Include="Scripts\jquery.multiselect.js" />
     <Content Include="Scripts\jquery.qtip-1.0.0.js" />
     <Content Include="Scripts\jquery.watermark.js" />
+    <Content Include="Scripts\AjaxLoadedContentScriptFix.js" />
     <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\stickyFooter.js" />
     <Content Include="Scripts\superfish.js" />

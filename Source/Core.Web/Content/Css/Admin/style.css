@@ -141,7 +141,8 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 				table.e_table td a {text-decoration:none}
 					table.e_table td a:hover {text-decoration:underline}
 			table.e_table tr:hover td {background:#cde6fc;color:#000000}
-			em.date-clear {background:url(../../images/admin/delete_ico.gif) no-repeat 0 0;height:11px;width:10px;display:block;position:relative;right:14px;top:10px;float:left;}
+			em.date-clear, em.delete  {background:url(../../images/admin/delete_ico.gif) no-repeat 0 0;height:11px;width:10px;display:block;}
+            em.date-clear {position:relative;right:14px;top:10px;float:left;}
 				em.date-clear:hover, table.e_table tr:hover em.delete {background-position:0 -11px;}
 		.e_table_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
 		.e_table_bottom .btn1 {float:left;margin-right:5px;}

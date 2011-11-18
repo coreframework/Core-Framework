@@ -13,6 +13,7 @@ namespace Core.WebContent.NHibernate.Mappings
             Id(article => article.Id);
             Map(articlelocale => articlelocale.Title).Length(255);
             Map(articlelocale => articlelocale.Culture);
+            Map(articlelocale => articlelocale.Summary);
             Map(articlelocale => articlelocale.Description);
             References(articlelocale => articlelocale.Article).Column("ArticleId").LazyLoad().Not.Nullable();
             Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());

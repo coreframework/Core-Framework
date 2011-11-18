@@ -1,7 +1,7 @@
 development:
   platform: sqlserver
   host: chernogrebela
-  database: corev3_4
+  database: coreframework
   username: coreLite
   password: coreLite
   properties:

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
@@ -38,6 +39,7 @@ namespace Core.WebContent.Controllers
         private readonly IPermissionCommonService permissionService;
         private readonly IPermissionsHelper permissionsHelper;
         private readonly ICategoryService categoryService;
+        private readonly IArticleFileService articleFileService;
 
         #endregion
 
@@ -50,6 +52,7 @@ namespace Core.WebContent.Controllers
             permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             permissionsHelper = ServiceLocator.Current.GetInstance<IPermissionsHelper>();
             categoryService = ServiceLocator.Current.GetInstance<ICategoryService>();
+            articleFileService = ServiceLocator.Current.GetInstance<IArticleFileService>();
         }
 
         #endregion
@@ -179,7 +182,7 @@ namespace Core.WebContent.Controllers
             return PartialView("ArticleDetails", model);
         }
 
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public virtual ActionResult Save(ArticleViewModel model)
         {
             ArticleHelper.ValidateArticle(model, ModelState);
@@ -253,9 +256,8 @@ namespace Core.WebContent.Controllers
 
         public virtual ActionResult SectionCategories(long sectionId, long? categoryId)
         {
-
-            var categories = categoryService.GetAllowedSectionCategoriesByOperation(this.CorePrincipal(), (Int32)CategoryOperations.View, sectionId).ToList().Select(a => new SelectListItem()
-            {
+            var categories = categoryService.GetAllowedSectionCategoriesByOperation(this.CorePrincipal(), (Int32)CategoryOperations.View, sectionId).ToList().Select(a => new SelectListItem
+                                                                                                                                                                              {
                 Text = ((WebContentCategoryLocale)a.CurrentLocale).Title,
                 Value = a.Id.ToString(),
                 Selected = (categoryId != null && a.Id == categoryId)? true : false
@@ -263,7 +265,6 @@ namespace Core.WebContent.Controllers
             });
 
             return Json(categories);
-
         }
 
         public virtual ActionResult Remove(long articleId)
@@ -276,6 +277,165 @@ namespace Core.WebContent.Controllers
 
             return RedirectToAction("Show");
         }
+
+        #region ArticleFiles
+
+        [MvcSiteMapNode(Title = "$t:Titles.ArticleFiles", AreaName = "WebContent", ParentKey = "WebContent.Article.Show", Key = "WebContent.Article.ShowFiles")]
+        public virtual ActionResult ShowFiles(long articleId)
+        {
+            var article = articleService.Find(articleId);
+
+            if (article == null || !permissionService.IsAllowed((Int32)ArticleOperations.View, this.CorePrincipal(), typeof(Article), article.Id, IsArticleOwner(article), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
+            }
+
+            IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
+                                                     {
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = HttpContext.Translate("Title", ResourceHelper.GetControllerScope(this)), 
+                                                                 Sortable = false,
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Width = 10,
+                                                                 Sortable = false
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = "Id", 
+                                                                 Sortable = false, 
+                                                                 Hidden = true
+                                                             }
+                                                     };
+            var model = new GridViewModel
+            {
+                DataUrl = Url.Action("LoadFilesData", "Article", new { articleId = article.Id }),
+                DefaultOrderColumn = "Title",
+                GridTitle = HttpContext.Translate("Titles.ArticleFiles", ResourceHelper.GetControllerScope(this)),
+                Columns = columns,
+                IsRowNotClickable = true
+            };
+
+            bool allowManage = permissionService.IsAllowed((Int32)ArticleOperations.Manage, this.CorePrincipal(),
+                                                            typeof(Article), article.Id, IsArticleOwner(article),
+                                                            PermissionOperationLevel.Object);
+
+            ViewData["Article"] = new ArticleViewModel { Id = article.Id, AllowManage = allowManage };
+
+            return View("ArticleFiles", model);
+        }
+
+        [HttpPost]
+        public virtual JsonResult LoadFilesData(int articleId, int page, int rows, String search, String sidx, String sord)
+        {
+            var article = articleService.Find(articleId);
+
+            if (article == null || !permissionService.IsAllowed((Int32)ArticleOperations.View, this.CorePrincipal(), typeof(Article), article.Id, IsArticleOwner(article), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
+            }
+
+            bool allowManage = permissionService.IsAllowed((Int32)ArticleOperations.Manage, this.CorePrincipal(),
+                                                            typeof(Article), article.Id, IsArticleOwner(article),
+                                                            PermissionOperationLevel.Object);
+
+            int pageIndex = Convert.ToInt32(page) - 1;
+            int pageSize = rows;
+            IQueryable<ArticleFile> searchQuery = articleFileService.GetSearchQuery(search);
+            int totalRecords = articleFileService.GetCount(searchQuery);
+
+            var totalPages = (int)Math.Ceiling((float)totalRecords / pageSize);
+            var files = searchQuery.OrderBy(sidx + " " + sord).Skip(pageIndex * pageSize).Take(pageSize).ToList();
+            var jsonData = new
+            {
+                total = totalPages,
+                page,
+                records = totalRecords,
+                rows = (
+                    from file in files
+                    select new
+                    {
+                        id = file.Id,
+                        cell = new[] {String.Format("<a href=\"{0}\">{1}</a>",
+                                            Url.Action("EditFile", "Article", new {articleFileId = file.Id, articleId = file.Article.Id}), HttpUtility.HtmlEncode(file.Title)),
+                            allowManage?String.Format("<a href=\"{0}\"><em class=\"delete\" style=\"margin-left: 10px;\"/></a>",
+                                            Url.Action("RemoveFile", "Article", new {articleFileId = file.Id})):String.Empty }
+                    }).ToArray()
+            };
+
+            return Json(jsonData);
+        }
+
+        [HttpGet]
+        [MvcSiteMapNode(Title = "$t:Titles.NewFile", AreaName = "WebContent", ParentKey = "WebContent.Article.Show")]
+        public virtual ActionResult NewFile(long articleId)
+        {
+            var article = articleService.Find(articleId);
+            if (article == null || !permissionService.IsAllowed((Int32)ArticleOperations.Manage, this.CorePrincipal(), typeof(Article), article.Id, IsArticleOwner(article), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", String.Empty));
+            }
+
+            return View("ArticleFileDetails", new ArticleFileViewModel { ArticleId = articleId, AllowManage = true});
+        }
+
+        [HttpGet]
+     /*   [MvcSiteMapNode(Title = "$t:Titles.EditFile", AreaName = "WebContent", ParentKey = "WebContent.Article.Show")]
+        [SiteMapTitle("Title")]*/
+        public virtual ActionResult EditFile(long articleId, long articleFileId)
+        {
+            var articleFile = articleFileService.Find(articleFileId);
+
+            if (articleFile == null || articleFile.Article == null || !permissionService.IsAllowed((Int32)ArticleOperations.Manage, this.CorePrincipal(), typeof(Article), articleFile.Article.Id, IsArticleOwner(articleFile.Article), PermissionOperationLevel.Object))
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", String.Empty));
+            }
+
+            return View("ArticleFileDetails", new ArticleFileViewModel { ArticleId = articleId, AllowManage = true}.MapFrom(articleFile));
+        }
+       
+        [HttpPost]
+        public virtual ActionResult SaveFile(long articleId, ArticleFileViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var article = articleService.Find(articleId);
+                if (article == null || !permissionService.IsAllowed((Int32)ArticleOperations.Manage, this.CorePrincipal(), typeof(Article), article.Id, IsArticleOwner(article), PermissionOperationLevel.Object))
+                {
+                    throw new HttpException((int)HttpStatusCode.NotFound, HttpContext.Translate("Messages.NotFound", ResourceHelper.GetControllerScope(this)));
+                }
+
+                if (articleFileService.Save(model.MapTo(new ArticleFile())))
+                {
+                    Success(HttpContext.Translate("Messages.Success", String.Empty));
+                    return RedirectToAction(WebContentMVC.Article.ShowFiles(articleId));
+                }
+            }
+
+            model.AllowManage = true;
+            Error(HttpContext.Translate("Messages.ValidationError", String.Empty));
+            return View("ArticleFileDetails", model);
+        }
+
+        public virtual ActionResult RemoveFile(long articleFileId)
+        {
+            var articleElement = articleFileService.Find(articleFileId);
+            if (articleElement != null && permissionService.IsAllowed((Int32)ArticleOperations.Manage, this.CorePrincipal(), typeof(Article), articleElement.Article.Id, IsArticleOwner(articleElement.Article), PermissionOperationLevel.Object))
+            {
+                if (articleFileService.Delete(articleElement))
+                {
+                    Success(HttpContext.Translate("Messages.Success", String.Empty));
+                    return RedirectToAction("ShowFiles", new {articleId = articleElement.Article.Id});
+                }
+            }
+
+            Error(HttpContext.Translate("Messages.UnknownError", String.Empty));
+            return Content(String.Empty);
+        }
+
+        #endregion
 
         #endregion
 

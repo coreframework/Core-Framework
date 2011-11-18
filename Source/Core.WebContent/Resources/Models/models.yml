@@ -1,4 +1,11 @@
 Models:
+    WebContentWidgetViewModel:
+        SectionId: "Section"
+        ArticleId: "Article"
+        CategoriesId: "Categories"
+        ViewMode: "Display mode"
+        ItemsNumber: "Items number"
+        ShowPagination: "Show pagination"
     SectionViewModel:
         Title: "Title"
         Description: "Description"
@@ -11,31 +18,28 @@ Models:
         ShowAuthor: "Show author"
         ShowCreatedDate: "Show created date"
         ShowModifiedDate: "Show modified date"
-        ShowPdfIcon: "Show PDF icon"
-        ShowPrintIcon: "Show print icon"
-        ShowEmailIcon: "Show email icon"
         AlternativeReadMoreText: "alternative read more text"
-     SectionOperations:
+    SectionOperations:
         View: "View"
         Manage: "Manage"
         AddToWidget: "Add to widget"
         Permissions: "Permissions"
-     CategoryViewModel:
+    CategoryViewModel:
         Title: "Title"
         Description: "Description"
         SectionId: "Section"
         Status: "Status"
-     CategoryOperations:
+    CategoryOperations:
         View: "View"
         Manage: "Manage"
         AddToWidget: "Add to widget"
         Permissions: "Permissions"
-     ArticleOperations:
+    ArticleOperations:
         View: "View"
         Manage: "Manage"
         AddToWidget: "Add to widget"
         Permissions: "Permissions"
-     ArticleViewModel:
+    ArticleViewModel:
         SectionId: "Section"
         CategoryId: "Category"
         Title: "Title"
@@ -43,7 +47,11 @@ Models:
         Description: "Description"
         Author: "Author"
         Status: "Status"
-        StartPublishingDate:"Start publishing date"
+        StartPublishingDate: "Start publishing date"
         FinishPublishingDate: "Finish publishing date"
-        Content: "Content"           
+        Content: "Content"
+    WebContentWidgetViewMode:
+        ListView: "List view"
+        GroupByCategory: "Group by category"       
+  
     

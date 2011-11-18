@@ -28,6 +28,13 @@ namespace Core.WebContent.NHibernate.Mappings
             .Inverse()
             .LazyLoad()
             .Cascade.All();
+
+            HasMany(article => article.Files).KeyColumn("ArticleId")
+               .Table("WebContent_ArticleFiles")
+               .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
+               .Inverse()
+               .LazyLoad()
+               .Cascade.AllDeleteOrphan();
         }
     }
 }

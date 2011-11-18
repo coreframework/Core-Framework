@@ -14,6 +14,13 @@
                 </span>
                 <strong></strong>
             </li>
+             <li>
+                <em></em>
+                <span>
+                 <%:Html.ActionLink(Html.Translate("Files", "WebContent.Views.Article"), "ShowFiles") %>
+                </span>
+                <strong></strong>
+            </li>
             <li class="active">
                 <em></em>
                 <span>

@@ -192,7 +192,7 @@ namespace Products.Controllers
         /// Updates product.
         /// </summary>
         /// <param name="id">The product id.</param>
-        /// <param name="product">The product model.</param>
+        /// <param name="productModel">The product model.</param>
         /// <returns></returns>
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult Edit(long? id, ProductLocaleViewModel productModel)

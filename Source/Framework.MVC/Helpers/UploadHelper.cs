@@ -18,9 +18,9 @@ namespace Framework.Mvc.Helpers
         #region Fields
 
         /// <summary>
-        /// Path to temporary file upload directorty.
+        /// Path to file upload directorty.
         /// </summary>
-        public static readonly String TempDirectoryPath = "~/temp/";
+        public static readonly String FileDirectoryPath = "~/UserFiles/";
 
         /// <summary>
         /// Key for file uploader option.
@@ -100,7 +100,7 @@ namespace Framework.Mvc.Helpers
         {
             var buffer = new byte[BufferSize];
             var targetFileName = GenerateFileName(Path.GetExtension(fileName));
-            var targetFileVirtualPath = VirtualPathUtility.Combine(TempDirectoryPath, targetFileName);
+            var targetFileVirtualPath = VirtualPathUtility.Combine(FileDirectoryPath, targetFileName);
             var targetFileServerPath = mapPath(targetFileVirtualPath);
 
             var targetDirectory = Path.GetDirectoryName(targetFileServerPath);
@@ -130,7 +130,7 @@ namespace Framework.Mvc.Helpers
         /// <returns>Generated file name virtual path.</returns>
         public static String GenerateFileName(String extension)
         {
-            return VirtualPathUtility.Combine(TempDirectoryPath, String.Format(FileNameTemplate, DateTime.UtcNow.ToString(TimeStampFormat), extension));
+            return VirtualPathUtility.Combine(FileDirectoryPath, String.Format(FileNameTemplate, DateTime.UtcNow.ToString(TimeStampFormat), extension));
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Framework.Mvc.Helpers
         /// <returns>Generated file name virtual path.</returns>
         public static String GenerateThumbnailFileName(String extension)
         {
-            return VirtualPathUtility.Combine(TempDirectoryPath, String.Format(ThumbnailFileNameTemplate, DateTime.UtcNow.ToString(TimeStampFormat), extension));
+            return VirtualPathUtility.Combine(FileDirectoryPath, String.Format(ThumbnailFileNameTemplate, DateTime.UtcNow.ToString(TimeStampFormat), extension));
         }
 
         #endregion

@@ -27,7 +27,7 @@
             </div>
                 <div class="i_form_i">
                   <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowSummaryText)%>
-                <%:Html.DropDownListFor(model => model.SectionSettings.ShowSummaryText)%>
+                <%:Html.DropDownListFor("SectionSettings.ShowSummaryText", Model.SectionSettings.ShowSummaryText, new {})%>
             </div>
               <div class="i_form_i">
                   <%:Html.LocalizedLabelFor(model => model.SectionSettings.ShowContent)%>

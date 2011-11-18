@@ -6,6 +6,7 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
+using Core.WebContent.NHibernate.Static;
 using Framework.Facilities.NHibernate;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
@@ -33,6 +34,14 @@ namespace Core.WebContent.NHibernate.Services
             return criteria.SetCacheable(true).List<WebContentCategory>();
         }
 
+        public IEnumerable<WebContentCategory> GetPublishedCategories(ICorePrincipal user, int operation, long sectionId)
+        {
+            var criteria = GetAllowedCategoriesCriteria(user, operation);
+            criteria.CreateAlias("Section", "section").Add(Restrictions.Eq("section.Id", sectionId));
+            criteria.Add(Restrictions.Eq("Status", CategoryStatus.Published));
+            return criteria.SetCacheable(true).List<WebContentCategory>();
+        }
+
         /// <summary>
         /// Gets the allowed categories criteria.
         /// </summary>
@@ -41,7 +50,7 @@ namespace Core.WebContent.NHibernate.Services
         /// <returns></returns>
         private ICriteria GetAllowedCategoriesCriteria(ICorePrincipal user, Int32 operationCode)
         {
-            ICriteria criteria = Session.CreateCriteria<WebContentCategory>("sections");
+            ICriteria criteria = Session.CreateCriteria<WebContentCategory>("categories");
 
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             var permissionCriteria = permissionCommonService.GetPermissionsCriteria(user, operationCode, typeof(WebContentCategory),

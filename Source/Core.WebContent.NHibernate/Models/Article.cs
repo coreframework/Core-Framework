@@ -22,6 +22,8 @@ namespace Core.WebContent.NHibernate.Models
 
         private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<ArticleOperations>();
 
+        private readonly IList<ArticleFile> files = new List<ArticleFile>();
+
         #endregion
 
         #region Properties
@@ -85,6 +87,18 @@ namespace Core.WebContent.NHibernate.Models
         /// </summary>
         /// <value>The finish publishing date.</value>
         public virtual DateTime? FinishPublishingDate { get; set; }
+
+        /// <summary>
+        /// Gets the files.
+        /// </summary>
+        /// <value>The files.</value>
+        public virtual IEnumerable<ArticleFile> Files
+        {
+            get
+            {
+                return files;
+            }
+        }
 
         #endregion
 

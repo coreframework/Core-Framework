@@ -71,6 +71,36 @@ namespace Core.WebContent.Controllers {
         public System.Web.Mvc.ActionResult Remove() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult ShowFiles() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.ShowFiles);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult LoadFilesData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.LoadFilesData);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult NewFile() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.NewFile);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult EditFile() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.EditFile);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult SaveFile() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.SaveFile);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult RemoveFile() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.RemoveFile);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ArticleController Actions { get { return WebContentMVC.Article; } }
@@ -94,6 +124,12 @@ namespace Core.WebContent.Controllers {
             public readonly String  ApplyPermissions = "ApplyPermissions";
             public readonly String  SectionCategories = "SectionCategories";
             public readonly String  Remove = "Remove";
+            public readonly String  ShowFiles = "ShowFiles";
+            public readonly String  LoadFilesData = "LoadFilesData";
+            public readonly String  NewFile = "NewFile";
+            public readonly String  EditFile = "EditFile";
+            public readonly String  SaveFile = "SaveFile";
+            public readonly String  RemoveFile = "RemoveFile";
         }
 
 
@@ -103,6 +139,8 @@ namespace Core.WebContent.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly String  ArticleDetails = "~/Views/Article/ArticleDetails.ascx";
+            public readonly String  ArticleFileDetails = "~/Views/Article/ArticleFileDetails.aspx";
+            public readonly String  ArticleFiles = "~/Views/Article/ArticleFiles.aspx";
             public readonly String  Edit = "~/Views/Article/Edit.aspx";
             public readonly String  New = "~/Views/Article/New.aspx";
             public readonly String  Show = "~/Views/Article/Show.aspx";
@@ -181,6 +219,49 @@ namespace Core.WebContent.Controllers {
         public override System.Web.Mvc.ActionResult Remove(long articleId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
             callInfo.RouteValueDictionary.Add("articleId", articleId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ShowFiles(long articleId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ShowFiles);
+            callInfo.RouteValueDictionary.Add("articleId", articleId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult LoadFilesData(int articleId, int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.LoadFilesData);
+            callInfo.RouteValueDictionary.Add("articleId", articleId);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult NewFile(long articleId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.NewFile);
+            callInfo.RouteValueDictionary.Add("articleId", articleId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditFile(long articleId, long articleFileId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditFile);
+            callInfo.RouteValueDictionary.Add("articleId", articleId);
+            callInfo.RouteValueDictionary.Add("articleFileId", articleFileId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult SaveFile(long articleId, Core.WebContent.Models.ArticleFileViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.SaveFile);
+            callInfo.RouteValueDictionary.Add("articleId", articleId);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RemoveFile(long articleFileId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RemoveFile);
+            callInfo.RouteValueDictionary.Add("articleFileId", articleFileId);
             return callInfo;
         }
 

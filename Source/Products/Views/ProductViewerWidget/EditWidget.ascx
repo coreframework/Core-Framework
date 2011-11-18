@@ -1,7 +1,6 @@
 ﻿<%@ Assembly Name="Products" %>
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Products.Models.ProductWidgetModel>" %>
 
-
 <div class="form_area">
     <%: Html.ValidationSummary(true) %>
     <input type="hidden" id="widgetId" name="widgetId" value="<%= Html.Encode(Model.Id) %>" />

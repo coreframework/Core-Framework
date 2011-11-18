@@ -3,3 +3,7 @@ Titles:
  Permissions: "Permissions"
  Categories: "Categories"
  Articles: "Articles"
+ ArticleFiles: "Files"
+ NewFile: "New file"
+ EditFile: "Edit file"
+

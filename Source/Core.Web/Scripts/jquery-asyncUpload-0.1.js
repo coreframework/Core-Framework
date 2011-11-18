@@ -16,7 +16,7 @@
                 previewContainer = $("<div class=\"file-preview\">");
                 title = $('#Title').val().replace(/ /g, '_') + '.' + image_url.substring(image_url.lastIndexOf('.') + 1);
 
-                previewContainer.append($("<div class=\"wrapper\"><img src=\"" + image_url + "\" alt=\"" + title + "\" class=\"preview\" /><div class=\"title\">" + title + "</div><div>"));
+                previewContainer.append($("<div class=\"wrapper\"><img src=\"" + image_url + "\" alt=\"" + title + "\" class=\"preview\" /><div class=\"title\"><a href=\"" + image_url + "\">" + title + "</a></div><div>"));
                 previewContainer.append($("<input type=\"hidden\" name=\"" + id + "\"  value=\"" + image_url + "\"/>"));
 
                 previewContainer.append($("<div class=\"action\"><input type=\"button\" name=\"" + id + "button\"  value=\"\" onclick=\"clearInputs('" + id + "','" + options.messages.confirm_delete + "')\" /></div>"));
@@ -129,7 +129,7 @@
                     var response = eval("(" + response + ")");
                     $("input[name=" + id + "]", container).val(response.FileName);
                     $("div.title", container).empty();
-                    $("div.title", container).append(response.FileTitle);
+                    $("div.title", container).append("<a href=\"" + response.FileName + "\">" + response.FileTitle + "</a>");
 
                     var thumbnailPath = response.Thumbnail ? response.Thumbnail : response.FileName;
                     $("img.preview", container).attr({ src: thumbnailPath, alt: response.FileTitle });

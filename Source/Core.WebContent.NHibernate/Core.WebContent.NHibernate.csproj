@@ -88,6 +88,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IWebContentWidgetCategoryService.cs" />
+    <Compile Include="Contracts\IWebContentWidgetService.cs" />
+    <Compile Include="Contracts\IArticleFileService.cs" />
     <Compile Include="Contracts\IArticleLocaleService.cs" />
     <Compile Include="Contracts\IArticleService.cs" />
     <Compile Include="Contracts\ICategoryLocaleService.cs" />
@@ -100,20 +103,29 @@
     <Compile Include="Mappings\CategoryMapping.cs" />
     <Compile Include="Mappings\ArticleLocaleMapping.cs" />
     <Compile Include="Mappings\ArticleMapping.cs" />
+    <Compile Include="Mappings\ArticleFileMapping.cs" />
+    <Compile Include="Mappings\WebContentWidgetCategoryMapping.cs" />
     <Compile Include="Mappings\SectionSettingsMapping.cs" />
     <Compile Include="Mappings\SectionLocaleMapping.cs" />
     <Compile Include="Mappings\SectionMapping.cs" />
+    <Compile Include="Mappings\WebContentWidgetMapping.cs" />
     <Compile Include="Models\Article.cs" />
+    <Compile Include="Models\ArticleFile.cs" />
     <Compile Include="Models\ArticleLocale.cs" />
     <Compile Include="Models\WebContentCategory.cs" />
     <Compile Include="Models\WebContentCategoryLocale.cs" />
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\SectionLocale.cs" />
     <Compile Include="Models\SectionSettings.cs" />
+    <Compile Include="Models\WebContentWidget.cs" />
+    <Compile Include="Models\WebContentWidgetCategory.cs" />
     <Compile Include="Permissions\CategoryOperations.cs" />
     <Compile Include="Permissions\ArticleOperations.cs" />
     <Compile Include="Permissions\SectionOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateWidgetCategoryService.cs" />
+    <Compile Include="Services\NHibernateWebContentWidgetService.cs" />
+    <Compile Include="Services\NHibernateArticleFileService.cs" />
     <Compile Include="Services\NHibernateArticleLocaleService.cs" />
     <Compile Include="Services\NHibernateArticleService.cs" />
     <Compile Include="Services\NHibernateCategoryLocaleService.cs" />
@@ -125,6 +137,7 @@
     <Compile Include="Static\CategoryStatus.cs" />
     <Compile Include="Static\ArticleStatus.cs" />
     <Compile Include="Static\SectionSettingsVisibility.cs" />
+    <Compile Include="Static\WebContentWidgetViewMode.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
