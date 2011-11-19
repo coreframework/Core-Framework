@@ -3,14 +3,20 @@ using System.Web.Mvc;
 using Core.Framework.MEF.Web;
 using Core.Framework.Plugins.Web;
 using Core.Web.Models;
+using Core.Web.NHibernate.Contracts;
 using Core.Web.Widgets;
-using Framework.Mvc.Extensions;
-using Framework.Mvc.Helpers;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Controllers
 {
     public partial class PlaceHolderWidgetController : CoreWidgetController
     {
+        #region Fields
+
+        private IPageWidgetService pageWidgetService;
+
+        #endregion
+
         #region Properties
 
         public override String ControllerWidgetIdentifier
@@ -20,11 +26,30 @@ namespace Core.Web.Controllers
 
         #endregion
 
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlaceHolderWidgetController"/> class.
+        /// </summary>
+        public PlaceHolderWidgetController()
+        {
+            pageWidgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
+        }
+
+        #endregion
+
         #region Actions
 
         public virtual ActionResult ViewWidget(ICoreWidgetInstance instance)
         {
-            return Content(HttpContext.Translate("PlaceHolder", ResourceHelper.GetControllerScope(this)));
+            if(instance.PageWidgetId.HasValue)
+            {
+                var pageWidget = pageWidgetService.Find(instance.PageWidgetId.Value);
+
+                return PartialView(new PlaceHolderWidgetViewModel().MapFrom(pageWidget));    
+            }
+
+            return Content(String.Empty);
         }
 
         /// <summary>

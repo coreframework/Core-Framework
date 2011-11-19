@@ -55,8 +55,8 @@ namespace Core.Web.Helpers
                 {
                     InstanceId = pageWidget.InstanceId,
                     WidgetIdentifier = pageWidget.Widget.Identifier,
-                    PageSettings = new CorePageSettings { PageId = pageWidget.Page.Id }
-
+                    PageSettings = new CorePageSettings { PageId = pageWidget.Page.Id },
+                    PageWidgetId = pageWidget.Id
                 },
 
                 SystemWidget = coreWidget,

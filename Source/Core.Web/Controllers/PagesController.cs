@@ -360,7 +360,7 @@ namespace Core.Web.Controllers
             if (currentPage != null)
             {
                 var curWidget = widgetService.Find(widgetId);
-
+                
                 if (curWidget != null && widgetService.IsWidgetEnable(curWidget) && permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page),
                                                 pageId, IsPageOwner(currentPage), PermissionOperationLevel.Object))
                 {
@@ -370,13 +370,29 @@ namespace Core.Web.Controllers
                     if (coreWidget != null && coreWidget is BaseWidget && permissionService.IsAllowed(((BaseWidget)coreWidget).AddToPageOperationCode,
                             this.CorePrincipal(), coreWidget.GetType(), null))
                     {
-                        var widget = PageHelper.AddWidgetToPage(pageId, widgetId, this.CorePrincipal());
+                        var widget = PageHelper.AddWidgetToPage(pageId, widgetId, this.CorePrincipal(), null);
                         if (widget != null)
                         {
 
                             permissionService.SetupDefaultRolePermissions(
                                 ResourcePermissionsHelper.GetResourceOperations(coreWidget.GetType()),
                                 coreWidget.GetType(), widget.Id);
+                            if(currentPage.IsTemplate && widget.Widget.IsPlaceHolder)
+                            {
+                                IEnumerable<Page> pagesFromTemplate = pageService.GetPagesFromTemplate(currentPage);
+                                foreach (var pageFromTemplate in pagesFromTemplate)
+                                {
+                                    var widgetFromTemplate = PageHelper.AddWidgetToPage(pageFromTemplate.Id, widgetId, this.CorePrincipal(), widget.Id);
+                                    if (widgetFromTemplate != null)
+                                    {
+
+                                        permissionService.SetupDefaultRolePermissions(
+                                            ResourcePermissionsHelper.GetResourceOperations(coreWidget.GetType()),
+                                            coreWidget.GetType(), widgetFromTemplate.Id);
+                                    }
+                                }
+                            }
+
                             return PartialView(MVC.Shared.Views.Widgets.WidgetContentHolder,
                                                WidgetHelper.GetWidgetViewModel(widget));
                         }

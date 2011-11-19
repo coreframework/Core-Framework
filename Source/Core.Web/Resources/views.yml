@@ -93,6 +93,9 @@ Views:
       Index:
           PanelView: "View" 
           PanelEdit: "Edit"
+    PlaceHolderWidget:
+      ViewWidget:
+        PlaceHolder: "Place holder widget. It can be replaced on page created using this template."
 Navigation:
  Views:
     SiteMap:

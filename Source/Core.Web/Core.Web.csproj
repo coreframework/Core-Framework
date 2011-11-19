@@ -1060,6 +1060,7 @@
     <Content Include="Views\Pages\NavigationMenu.ascx" />
     <Content Include="Views\Pages\PagePermissions.ascx" />
     <Content Include="Views\Pages\Show.aspx" />
+    <Content Include="Views\PlaceHolderWidget\ViewWidget.ascx" />
     <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.ascx" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.aspx" />
     <Content Include="Views\Shared\EditorTemplates\ColorPicker.aspx" />

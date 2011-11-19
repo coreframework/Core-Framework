@@ -118,6 +118,16 @@ namespace Core.Web.NHibernate.Services
             return criteria;
         }
 
+        /// <summary>
+        /// Gets the pages from template.
+        /// </summary>
+        /// <param name="template">The template.</param>
+        /// <returns></returns>
+        public IEnumerable<Page> GetPagesFromTemplate(Page template)
+        {
+            return CreateQuery().Where(page => !page.IsTemplate && page.Template == template).ToList();
+        }
+
         #endregion
     }
 }

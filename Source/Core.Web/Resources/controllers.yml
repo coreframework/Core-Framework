@@ -8,6 +8,3 @@ Navigation:
     SelectItemsToDisplay: "Select items to display"
   Breadcrumbs:
     SetupYourBreadcrumbs: "Setup your breadcrumbs"
-Controllers:
-  PlaceHolderWidget:
-    PlaceHolder: "Place holder widget. It can be replaced on page created using this template."

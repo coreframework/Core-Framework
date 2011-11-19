@@ -57,8 +57,9 @@ namespace Core.Web.Helpers
         /// <param name="pageId">The page id.</param>
         /// <param name="widgetId">The widget id.</param>
         /// <param name="user">The user.</param>
+        /// <param name="templateWidgetId">The template widget id.</param>
         /// <returns></returns>
-        public static PageWidget AddWidgetToPage(long pageId, long? widgetId, ICorePrincipal user)
+        public static PageWidget AddWidgetToPage(long pageId, long? widgetId, ICorePrincipal user, long? templateWidgetId)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
@@ -89,8 +90,12 @@ namespace Core.Web.Helpers
                                                 OrderNumber = 1,
                                                 User =
                                                     user != null ? new User { Id = user.PrincipalId } : null,
-                                                Widget = widget
+                                                Widget = widget,
                                             };
+                    if(templateWidgetId.HasValue)
+                    {
+                        newPageWidget.TemplateWidgetId = templateWidgetId;
+                    }
 
                     if (pageWidgetService.Save(newPageWidget))
                         return newPageWidget;

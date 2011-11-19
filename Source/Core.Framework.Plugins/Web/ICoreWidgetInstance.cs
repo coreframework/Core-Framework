@@ -9,5 +9,7 @@ namespace Core.Framework.Plugins.Web
         String WidgetIdentifier { get; set; }
 
         IPageSettings PageSettings { get; set; }
+
+        long? PageWidgetId { get; set; }
     }
 }

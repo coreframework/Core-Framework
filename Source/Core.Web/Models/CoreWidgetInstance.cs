@@ -10,5 +10,7 @@ namespace Core.Web.Models
         public String WidgetIdentifier { get; set; }
 
         public IPageSettings PageSettings { get; set; }
+
+        public long? PageWidgetId { get; set; }
     }
 }

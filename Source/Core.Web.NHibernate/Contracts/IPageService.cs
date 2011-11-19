@@ -66,5 +66,12 @@ namespace Core.Web.NHibernate.Contracts
         /// <param name="operationCode">The operation code.</param>
         /// <returns></returns>
         Page GetFirstAllowedPage(ICorePrincipal user, Int32 operationCode);
+
+        /// <summary>
+        /// Gets the pages from template.
+        /// </summary>
+        /// <param name="template">The template.</param>
+        /// <returns></returns>
+        IEnumerable<Page> GetPagesFromTemplate(Page template);
     }
 }

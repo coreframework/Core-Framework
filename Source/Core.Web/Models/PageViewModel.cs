@@ -226,7 +226,8 @@ namespace Core.Web.Models
                     {
                         InstanceId = widget.InstanceId,
                         WidgetIdentifier = coreWidget != null ? coreWidget.Identifier : null,
-                        PageSettings = new CorePageSettings { PageId = page.Id }
+                        PageSettings = new CorePageSettings { PageId = page.Id },
+                        PageWidgetId = widget.Id
                     },
                     Widget = widget1,
 
@@ -260,8 +261,13 @@ namespace Core.Web.Models
             {
                 var widgetToShow = !widget.Widget.IsPlaceHolder
                                        ? widget
-                                       : page.Widgets.Where(pageWidget => pageWidget.ParentWidgetId == widget.Id).
+                                       : page.Widgets.Where(pageWidget => pageWidget.TemplateWidgetId == widget.Id).
                                              FirstOrDefault();
+                if(widget.Widget.IsPlaceHolder)
+                {
+                    widgetToShow.PageSection = widget.PageSection;
+                    widgetToShow.ColumnNumber = widget.ColumnNumber;
+                }
                 PageWidget widget1 = widgetToShow;
                 ICoreWidget coreWidget =
                     widgetToShow.Widget != null ? MvcApplication.Widgets.FirstOrDefault(wd => wd.Identifier == widget1.Widget.Identifier) : null;
@@ -275,7 +281,8 @@ namespace Core.Web.Models
                                                                    WidgetIdentifier =
                                                                        coreWidget != null ? coreWidget.Identifier : null,
                                                                    PageSettings =
-                                                                       new CorePageSettings {PageId = page.Template.Id}
+                                                                       new CorePageSettings { PageId = page.Template.Id },
+                                                                   PageWidgetId = widgetToShow.Id
                                                                },
                                           Widget = widget1,
                                           Access = coreWidget is BaseWidget

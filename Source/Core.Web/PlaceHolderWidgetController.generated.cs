@@ -23,9 +23,6 @@ using T4MVC;
 namespace Core.Web.Controllers {
     public partial class PlaceHolderWidgetController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public PlaceHolderWidgetController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected PlaceHolderWidgetController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -67,6 +64,7 @@ namespace Core.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly String ViewWidget = "~/Views/PlaceHolderWidget/ViewWidget.ascx";
         }
     }
 

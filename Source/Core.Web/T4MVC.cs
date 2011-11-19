@@ -1498,6 +1498,8 @@ namespace Links {
                       
         public static readonly String jquery_blockUI_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.blockUI.min.js") ? Url("jquery.blockUI.min.js") : Url("jquery.blockUI.js");
                       
+        public static readonly String jquery_cascadingDropDown_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.cascadingDropDown.min.js") ? Url("jquery.cascadingDropDown.min.js") : Url("jquery.cascadingDropDown.js");
+                      
         public static readonly String jquery_corner_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.corner.min.js") ? Url("jquery.corner.min.js") : Url("jquery.corner.js");
                       
         public static readonly String jquery_form_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.form.min.js") ? Url("jquery.form.min.js") : Url("jquery.form.js");
