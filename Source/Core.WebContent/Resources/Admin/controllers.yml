@@ -16,3 +16,6 @@ Controllers:
     Article: "Section"
     Status: "Status"
     Category: "Category"
+  WebContentWidget:
+    Messages:
+     Setup: "Please setup widget"

@@ -14,12 +14,12 @@
     <%}%>
     <%if (Model.ShowCreatedDate) {%>
        <span class="add-info">
-        Added on <%=Model.Article.CreateDate.ToLongDateString()%>
+        <%=Model.Article.CreateDate.ToLongDateString()%>
        </span>
     <%} %>
-    <%if (Model.ShowAuthor && String.IsNullOrEmpty(Model.Article.Author)) {%>
+    <%if (Model.ShowAuthor && !String.IsNullOrEmpty(Model.Article.Author)) {%>
        <span class="add-info">
-        <%=Model.Article.Author%>
+        Added by <%=Model.Article.Author%>
        </span>
     <%} %>
     <%if (Model.ShowCategory) {%>

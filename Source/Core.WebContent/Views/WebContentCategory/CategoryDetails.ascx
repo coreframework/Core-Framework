@@ -28,7 +28,7 @@
             </div>
              <div class="i_form_i">
                 <%:Html.LocalizedLabelFor(model => model.Status)%>
-                <%:Html.DropDownListFor(model => model.Status)%>
+                <%:Html.DropDownListFor("Status", Model.Status, new { })%>
                 <%:Html.ValidationMessageFor(model=>model.Status) %>
             </div>  
 		    <div class="i_form_i">

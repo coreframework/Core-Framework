@@ -1,9 +1,10 @@
-﻿namespace Core.WebContent.NHibernate.Static
+﻿using System.ComponentModel;
+
+namespace Core.WebContent.NHibernate.Static
 {
     public enum WebContentWidgetViewMode
     {
-        ListView,
-
-        GroupByCategory
+        List,
+        Grouping
     }
 }

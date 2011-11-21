@@ -119,7 +119,7 @@ namespace Core.Web.Helpers
 
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
 
-            bool isPageOwner = user != null && pageWidget.Page.User != null &&
+            bool isPageOwner = user != null && pageWidget.Page!=null && pageWidget.Page.User != null &&
                        pageWidget.Page.User.Id == user.PrincipalId;
 
             if (pageWidget != null && permissionService.IsAllowed((Int32)PageOperations.Update, user, typeof(Page), pageWidget.Page.Id, isPageOwner, PermissionOperationLevel.Object))

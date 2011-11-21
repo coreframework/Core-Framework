@@ -26,7 +26,13 @@ namespace Core.WebContent.NHibernate.Services
             var criteria = GetAllowedArticlesCriteria(user, operation);
             criteria.CreateAlias("Category", "category").Add(Restrictions.Eq("category.Status", CategoryStatus.Published)).Add(
                 Restrictions.In("category.Id", categories));
-            criteria.Add(Restrictions.Eq("Status", ArticleStatus.Published));
+            criteria.Add(Restrictions.Eq("Status", ArticleStatus.Published)).Add(
+              Restrictions.Or(
+              Restrictions.IsNull("StartPublishingDate"),
+              Restrictions.Le("StartPublishingDate", DateTime.Now))).Add(
+              Restrictions.Or(
+              Restrictions.IsNull("FinishPublishingDate"),
+              Restrictions.Ge("FinishPublishingDate", DateTime.Now)));
             return criteria.SetCacheable(true).List<Article>();
         }
 
@@ -39,7 +45,13 @@ namespace Core.WebContent.NHibernate.Services
              Restrictions.In("category.Id", categories));
             
             //filter by article status
-            criteria.Add(Restrictions.Eq("Status", ArticleStatus.Published));
+            criteria.Add(Restrictions.Eq("Status", ArticleStatus.Published)).Add(
+                Restrictions.Or(
+                Restrictions.IsNull("StartPublishingDate"),
+                Restrictions.Le("StartPublishingDate", DateTime.Now))).Add(
+                Restrictions.Or(
+                Restrictions.IsNull("FinishPublishingDate"),
+                Restrictions.Ge("FinishPublishingDate", DateTime.Now)));
             return criteria;
         }
 
