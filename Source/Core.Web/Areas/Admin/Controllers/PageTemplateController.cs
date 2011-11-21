@@ -7,8 +7,6 @@ using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
-using Core.Framework.Plugins.Web;
-using Core.Framework.Plugins.Widgets;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
 using Core.Web.Helpers.Layouts;
@@ -62,12 +60,12 @@ namespace Core.Web.Areas.Admin.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = Translate("Models.PageLocale.Url"),
-                                                                 Index = "Url"
+                                                                 Index = "page.Url"
                                                              },
                                                         new GridColumnViewModel
                                                              {
                                                                  Name = Translate("Models.PageLocale.InMainMenu"),
-                                                                 Index = "Url"
+                                                                 Index = "page.InMainMenu"
                                                              },
                                                          new GridColumnViewModel
                                                              {
@@ -217,6 +215,7 @@ namespace Core.Web.Areas.Admin.Controllers
             var pageTemplate = pageService.Find(id);
             if (pageTemplate != null)
             {
+                PageHelper.UnlinkTemplatePages(pageTemplate);
                 pageService.Delete(pageTemplate);
                 Success(Translate("Messages.UserDeleted"));
             }

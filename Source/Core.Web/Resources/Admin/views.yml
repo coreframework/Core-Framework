@@ -22,7 +22,7 @@ Admin:
         Title: "Edit page template \"{0}\""
       Remove:
         Title: "Remove page template \"{0}\""
-        AreYouSure: "Are you sure want to remove page template \"{0}\"?"
+        AreYouSure: "Are you sure want to remove page template \"{0}\"? All pages created using this tempate will be unlink."
         TemplateHasChildren: "Template \"{0}\" has pages created using this template and can't be removed."
     User:
       Index:

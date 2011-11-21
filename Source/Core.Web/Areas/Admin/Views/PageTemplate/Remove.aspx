@@ -7,11 +7,8 @@
   <h1><%: String.Format(Html.Translate(".Title"), Model) %></h1>
 </asp:Content>
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
-  <%if (!Model.HasChildrent)
-    {%>
-  <p><%:String.Format(Html.Translate(".AreYouSure"), Model)%></p>
-  <%
-        using (Html.BeginForm(MVC.Admin.PageTemplate.ConfirmRemove(Model.Id), FormMethod.Post))
+<p><%:String.Format(Html.Translate(".AreYouSure"), Model)%></p>
+  <% using (Html.BeginForm(MVC.Admin.PageTemplate.ConfirmRemove(Model.Id), FormMethod.Post))
         {%>
     <%:Html.HttpMethodOverride(HttpVerbs.Delete)%>
     <div class="i_form clrfix">
@@ -24,13 +21,5 @@
             <span><%:Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.PageTemplate.Index())%></span>
         </div>
     </div>
-  <%
-        }%>
-  <%
-    }
-    else
-    {%>
-    <p><%:String.Format(Html.Translate(".TemplateHasChildren"), Model)%></p>
-    <%
-    }%>
+  <%}%>
 </asp:Content>

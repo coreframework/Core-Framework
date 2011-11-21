@@ -125,7 +125,7 @@ namespace Core.Web.NHibernate.Services
         /// <returns></returns>
         public IEnumerable<Page> GetPagesFromTemplate(Page template)
         {
-            return CreateQuery().Where(page => !page.IsTemplate && page.Template == template).ToList();
+            return CreateQuery().Where(page => page.Template == template).ToList();
         }
 
         #endregion

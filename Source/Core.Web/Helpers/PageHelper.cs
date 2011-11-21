@@ -270,6 +270,30 @@ namespace Core.Web.Helpers
             }
         }
 
+        /// <summary>
+        /// Unlinks the template pages.
+        /// </summary>
+        /// <param name="pageTemplate">The page template.</param>
+        public static void UnlinkTemplatePages(Page pageTemplate)
+        {
+            if (pageTemplate == null || !pageTemplate.IsTemplate)
+            {
+                return;
+            }
+
+            var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+            var pages = pageService.GetPagesFromTemplate(pageTemplate);
+
+            foreach (var page in pages)
+            {
+                UnlinkPage(page);
+            }
+        }
+
+        /// <summary>
+        /// Unlinks the page.
+        /// </summary>
+        /// <param name="page">The page.</param>
         public static void UnlinkPage(Page page)
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();

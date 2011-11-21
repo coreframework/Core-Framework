@@ -37,6 +37,7 @@ Models:
    Title: "Title"
    Url: "URL"
    InMainMenu: "In main menu"
+   Template: "Template"
 Navigation:
  Models:
   NavigationMenuWidgetModel:

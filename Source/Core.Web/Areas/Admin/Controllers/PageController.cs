@@ -51,12 +51,17 @@ namespace Core.Web.Areas.Admin.Controllers
                                                          new GridColumnViewModel
                                                              {
                                                                  Name = Translate("Models.PageLocale.Url"),
-                                                                 Index = "Url"
+                                                                 Index = "page.Url"
+                                                             },
+                                                         new GridColumnViewModel
+                                                             {
+                                                                 Name = Translate("Models.PageLocale.InMainMenu"),
+                                                                 Index = "page.HideInMainMenu"
                                                              },
                                                         new GridColumnViewModel
                                                              {
-                                                                 Name = Translate("Models.PageLocale.InMainMenu"),
-                                                                 Index = "Url"
+                                                                 Name = Translate("Models.PageLocale.Template"),
+                                                                 Sortable = false
                                                              },
                                                          new GridColumnViewModel
                                                              {
@@ -99,6 +104,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                                                             pageLocale.Title, 
                                                                             pageLocale.Page.Url,
                                                                             pageLocale.Page.HideInMainMenu ? Translate("Boolean.False") : Translate("Boolean.True"),
+                                                                            pageLocale.Page.Template!=null? pageLocale.Page.Template.Title : String.Empty,
                                                                             String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Pages.Show(pageLocale.Page.Url)), Translate("Actions.View"))
                                                                        }
                 }).ToArray())
