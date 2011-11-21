@@ -322,6 +322,8 @@ namespace Links {
                           
         }
     
+        public static readonly String AjaxLoadedContentScriptFix_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AjaxLoadedContentScriptFix.min.js") ? Url("AjaxLoadedContentScriptFix.min.js") : Url("AjaxLoadedContentScriptFix.js");
+                      
         public static readonly String application_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/application.min.js") ? Url("application.min.js") : Url("application.js");
                       
         public static readonly String colorpicker_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/colorpicker.min.js") ? Url("colorpicker.min.js") : Url("colorpicker.js");
@@ -1505,6 +1507,8 @@ namespace Links {
         public static readonly String jquery_form_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.form.min.js") ? Url("jquery.form.min.js") : Url("jquery.form.js");
                       
         public static readonly String jquery_json_2_2_min_js = Url("jquery.json-2.2.min.js");
+        public static readonly String jquery_multiselect_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.multiselect.min.js") ? Url("jquery.multiselect.min.js") : Url("jquery.multiselect.js");
+                      
         public static readonly String jquery_qtip_1_0_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.qtip-1.0.0.min.js") ? Url("jquery.qtip-1.0.0.min.js") : Url("jquery.qtip-1.0.0.js");
                       
         public static readonly String jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js") : Url("jquery.validate-vsdoc.js");

@@ -14,6 +14,7 @@ Messages:
   UploadUnknownError: "Unknown error occured. Please try again."
   FileUploaded: "File \"{0}\" has been uploaded successfully. Do not forget to save changes."
   ConfirmDeleteFile: "Are you sure you want to delete the file?"
+  UnlinkPage: "Are you sure you want to unlink this page from template?"
 Actions:
   View: "View"
   Edit: "Edit"

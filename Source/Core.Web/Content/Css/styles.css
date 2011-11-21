@@ -188,7 +188,7 @@ html, body {/*height:100%;*/}
 		.form_i label span{color:#0f5cbb;}
 	.form_i input.inp_txt,.form_i textarea.inp_txt {width:460px;margin-top:3px;color:#313131}
 	.form_i select {width:468px;margin-top:3px;color:#313131;height:20px;}
-	.minimized_form_i select {width:auto !important;}
+	.minimized_form_i select {width:100% !important;}
 	#pageTemplateAccordion .form_i select {width:411px !important;}
 .chb_i {line-height:12px;}
 	.chb_i input {float:left;margin-left:0}

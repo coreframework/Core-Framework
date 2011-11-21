@@ -48,6 +48,11 @@ namespace Core.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Unlink() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Unlink);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult CreateNewPage() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.CreateNewPage);
         }
@@ -207,6 +212,7 @@ namespace Core.Web.Controllers {
             public readonly String Index = "Index";
             public readonly String Show = "Show";
             public readonly String RemovePage = "RemovePage";
+            public readonly String Unlink = "Unlink";
             public readonly String CreateNewPage = "CreateNewPage";
             public readonly String UpdatePagePosition = "UpdatePagePosition";
             public readonly String ChangePageMode = "ChangePageMode";
@@ -276,6 +282,12 @@ namespace Core.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult RemovePage(long pageId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RemovePage);
+            callInfo.RouteValueDictionary.Add("pageId", pageId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Unlink(long pageId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Unlink);
             callInfo.RouteValueDictionary.Add("pageId", pageId);
             return callInfo;
         }

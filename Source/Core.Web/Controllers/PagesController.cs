@@ -124,6 +124,24 @@ namespace Core.Web.Controllers
             return Content(String.Empty);
         }
 
+        [HttpPost]
+        public virtual ActionResult Unlink(long pageId)
+        {
+            var page = pageService.Find(pageId);
+
+            if (page == null)
+            {
+                throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.NotFound"));
+            }
+
+            if (permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page), page.Id, IsPageOwner(page), PermissionOperationLevel.Object))
+            {
+                PageHelper.UnlinkPage(page);
+            }
+
+            return Content(String.Empty);
+        }
+
         /// <summary>
         /// Creates the new page.
         /// </summary>

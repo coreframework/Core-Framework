@@ -92,7 +92,7 @@ namespace Core.Web.Helpers
                                                     user != null ? new User { Id = user.PrincipalId } : null,
                                                 Widget = widget,
                                             };
-                    if(templateWidgetId.HasValue)
+                    if (templateWidgetId.HasValue)
                     {
                         newPageWidget.TemplateWidgetId = templateWidgetId;
                     }
@@ -141,7 +141,7 @@ namespace Core.Web.Helpers
                     page.RemoveWidget(pageWidget);
                     if (pageService.Save(page))
                     {
-                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => pageWidget.Widget !=null && widget.Identifier == pageWidget.Widget.Identifier);
+                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => pageWidget.Widget != null && widget.Identifier == pageWidget.Widget.Identifier);
 
                         if (currentWidget != null)
                         {
@@ -266,6 +266,117 @@ namespace Core.Web.Helpers
                 {
                     if (sibling.Id != page.Id)
                         pageService.Save(sibling);
+                }
+            }
+        }
+
+        public static void UnlinkPage(Page page)
+        {
+            var pageService = ServiceLocator.Current.GetInstance<IPageService>();
+            var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            if (page.Template != null)
+            {
+                page.Template.Widgets.AsParallel().ForAll(widget =>
+                                                              {
+                                                                  PageWidget pageWidget = null;
+                                                                  if(widget.Widget.IsPlaceHolder)
+                                                                  {
+                                                                      pageWidget =
+                                                                          page.Widgets.FirstOrDefault(
+                                                                              currentPageWidget =>
+                                                                              currentPageWidget.TemplateWidgetId ==
+                                                                              widget.Id);
+                                                                      pageWidget.ColumnNumber = widget.ColumnNumber;
+                                                                      pageWidget.OrderNumber = widget.OrderNumber;
+                                                                      pageWidget.TemplateWidgetId = null;
+                                                                  }
+                                                                  if (pageWidget == null)
+                                                                  {
+                                                                      pageWidget = new PageWidget();
+                                                                      pageWidget.InjectFrom<CloneEntityInjection>(widget);
+                                                                      pageWidget.Page = page;
+                                                                      pageWidget.ParentWidgetId = widget.Id;
+                                                                      //copy widget settings
+                                                                      if (widget.Settings != null)
+                                                                      {
+                                                                          pageWidget.Settings =
+                                                                              (PageWidgetSettings)
+                                                                              new PageWidgetSettings().InjectFrom
+                                                                                  <CloneEntityInjection>(widget.Settings);
+                                                                          pageWidget.Settings.LookAndFeelSettings =
+                                                                              new LookAndFeelSettings().InjectFrom
+                                                                                  <CloneEntityInjection>(
+                                                                                      widget.Settings.
+                                                                                          LookAndFeelSettings) as
+                                                                              LookAndFeelSettings;
+                                                                          pageWidget.Settings.Widget = pageWidget;
+                                                                      }
+
+                                                                      //clone page widget instance
+                                                                      if (widget.InstanceId != null)
+                                                                      {
+                                                                          pageWidget.InstanceId =
+                                                                              CloneWidgetInstance(widget);
+                                                                      }
+                                                                      page.AddWidget(pageWidget);
+                                                                  }
+                                                              });
+
+                //copy page layout
+                page.PageLayout =
+                    (PageLayout)
+                    new PageLayout().InjectFrom<CloneEntityInjection>(
+                        page.Template.PageLayout);
+                page.PageLayout.Page = page;
+                page.Template.PageLayout.ColumnWidths.AsParallel().ForAll(column =>
+                                                                           {
+                                                                               var columnWidth =
+                                                                                   (PageLayoutColumnWidthValue)
+                                                                                   new PageLayoutColumnWidthValue().
+                                                                                       InjectFrom<CloneEntityInjection>(
+                                                                                           column);
+                                                                               columnWidth.PageLayout =
+                                                                                   page.PageLayout;
+                                                                               page.PageLayout.AddColumnWidth(
+                                                                                   columnWidth);
+                                                                           });
+
+                //copy page settings)
+                if (page.Template.Settings != null)
+                {
+                    page.Settings =
+                        (PageSettings)new PageSettings().InjectFrom<CloneEntityInjection>(page.Template.Settings);
+                    page.Settings.LookAndFeelSettings =
+                        (LookAndFeelSettings)
+                        new LookAndFeelSettings().InjectFrom<CloneEntityInjection>(
+                            page.Template.Settings.LookAndFeelSettings);
+                    page.Settings.Page = page;
+                }
+
+                if (pageService.Save(page))
+                {
+                    //copy permissions and update page styles
+                    foreach (var item in page.Widgets)
+                    {
+                        if (item.ParentWidgetId == null) continue;
+                        var systemWidget =
+                            MvcApplication.Widgets.FirstOrDefault(w => w.Identifier == item.Widget.Identifier);
+                        var sourceWidget = page.Template.Widgets.FirstOrDefault(w => w.Id == item.ParentWidgetId);
+                        if (sourceWidget != null)
+                        {
+                            if (page.Settings != null && !String.IsNullOrEmpty(page.Settings.CustomCSS))
+                            {
+                                page.Settings.CustomCSS =
+                                    page.Settings.CustomCSS.Replace(
+                                        String.Format(PageWidgetTemplate, sourceWidget.Id),
+                                        String.Format(PageWidgetTemplate, item.Id));
+                            }
+                            permissionCommonService.CloneObjectPermisions(systemWidget.GetType(), sourceWidget.Id,
+                                                                          item.Id);
+                        }
+                    }
+                    page.Template = null;
+                    pageService.Save(page);
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PageViewModel>" %>
 <%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
 <%@ Import Namespace="Framework.Core" %>
+<%@ Import Namespace="Core.Web.NHibernate.Models" %>
 <div class="clear">
 </div>
 <div class="curr_pg">
@@ -103,7 +104,20 @@
                                 });
                             </script>
                             <% }%>
-                            <%if (!Model.IsTemplate && Model.Access[(int)PageOperations.Delete] )
+                            <%if (Model.HasTemplate && Model.Access[PageTemplate.UnlinkOperationCode])
+                              {%>
+                            <li>
+                                <%= Ajax.ActionLink(Html.Translate(".UnlinkPage"), 
+                                        MVC.Pages.Unlink(Model.Id.Value),
+                                        new AjaxOptions
+                                                    {
+                                                        Confirm = Html.Translate("Messages.UnlinkPage"),
+                                                        OnSuccess = "function() {window.location.href=window.location.href;}"
+                                                    })%>
+                            </li>
+                            <%
+                              }%>
+                            <%if (!Model.IsTemplate && Model.Access[(int)PageOperations.Delete])
                               {%>
                             <li>
                                 <%= Ajax.ActionLink(Html.Translate(".DeletePage"), 

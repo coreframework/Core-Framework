@@ -136,6 +136,8 @@ namespace Core.Web.Models
 
         public bool IsTemplate { get; set; }
 
+        public bool HasTemplate { get; set; }
+
         public IList<Widget> AvailableWidgets
         {
             get
@@ -252,8 +254,10 @@ namespace Core.Web.Models
 
         private void MapFromTemplate(Page page)
         {
+            HasTemplate = true;
             Layout = page.Template.PageLayout;
             Settings = page.Template.Settings;
+            Access[PageTemplate.UnlinkOperationCode] = Access[(int)PageOperations.Update];
             Access[(int) PageOperations.Update] = false;
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();

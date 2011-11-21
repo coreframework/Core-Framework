@@ -11,6 +11,7 @@ Views:
        CSS: "Change page CSS"
        DeletePage: "Delete this page"
        Permissions: "Permissions"
+       UnlinkPage: "Unlink page from template"
       PageLookAndFeelSettings:
        LookAndFeel: "Look and feel"
       PageLookAndFeelForm:

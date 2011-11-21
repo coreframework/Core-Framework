@@ -66,6 +66,7 @@ namespace Core.Web.Models.Routes
             routes.MapRoute(null, "pages/available-widgets", MVC.Pages.ShowAvailableWidgets());
             routes.MapRoute(null, "pages/remove-widget/{pageWidgetId}", MVC.Pages.RemovePageWidget());
             routes.MapRoute(null, "pages/remove/{pageId}", MVC.Pages.RemovePage());
+            routes.MapRoute(null, "pages/unlink/{pageId}", MVC.Pages.Unlink());
             routes.MapRoute("Pages.ChangePageMode", "pages/change-page-mode", MVC.Pages.ChangePageMode(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             routes.MapRoute("Pages.Error", "error", MVC.Error.Index());
             routes.MapRoute("PlaceHolderWidget.View", "place-holder-widget/view", MVC.PlaceHolderWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
