@@ -106,7 +106,7 @@ namespace Core.Web.Areas.Admin.Controllers
                                cell = new[]
                                             {
                                                 widget.Title, 
-                                                widget.Widget.Plugin.Title,
+                                                widget.Widget.Plugin != null ? widget.Widget.Plugin.Title : String.Empty,
                                                 widget.Widget.Status.ToString(),
                                                 widget.Widget.Status.Equals(WidgetStatus.Disabled) ? String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Widget.Enable(widget.Widget.Id)), Translate("Actions.Install")) :
                                                 widget.Widget.Status.Equals(WidgetStatus.Enabled) ? String.Format(JqGridConstants.UrlTemplate,Url.Action(MVC.Admin.Widget.Disable(widget.Widget.Id)), Translate("Actions.Uninstall")) : 

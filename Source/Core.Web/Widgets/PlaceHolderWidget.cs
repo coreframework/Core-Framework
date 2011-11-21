@@ -68,7 +68,14 @@ namespace Core.Web.Widgets
 
         public override IWidgetSetting WidgetSetting
         {
-            get { return widgetSetting ?? GetSettings(HttpContext.Current.Server.MapPath(WidgetConfig)); }
+            get
+            {
+                if(widgetSetting == null)
+                {
+                    widgetSetting = GetSettings(HttpContext.Current.Server.MapPath(WidgetConfig));
+                }
+                return widgetSetting;
+            }
         }
 
         private static IWidgetSetting GetSettings(String configPath)
