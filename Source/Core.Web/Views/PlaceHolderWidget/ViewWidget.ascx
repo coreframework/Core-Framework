@@ -35,6 +35,7 @@
         }
         else {
         $('#<%=containerId %>').parents('.widget').replaceWith(result.get_data());
+        $('.widget_title a.edit').unbind('click').click(function() {editWidgetClicked(this, '<%=Url.Action(MVC.Pages.ShowSettings())%>?pageWidgetId=', '.widget');});
         }
     }
 </script>

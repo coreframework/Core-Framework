@@ -5,6 +5,7 @@ using Core.Framework.Plugins.Web;
 using Core.Web.Helpers;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
+using Core.Web.NHibernate.Permissions.Operations;
 using Core.Web.Widgets;
 using Microsoft.Practices.ServiceLocation;
 
@@ -68,7 +69,10 @@ namespace Core.Web.Controllers
                 pageWidget.Widget = widgetService.Find(model.WidgetId.Value);
                 if (pageWidgetService.Save(pageWidget))
                 {
-                    return PartialView("Widgets/WidgetContentHolder", WidgetHelper.GetWidgetViewModel(pageWidget));
+                    var widgetModel = WidgetHelper.GetWidgetViewModel(pageWidget);
+                    widgetModel.PageAccess[(int) PageOperations.Update] = false;
+
+                    return PartialView("Widgets/WidgetContentHolder", widgetModel);
                 }
             }
 
