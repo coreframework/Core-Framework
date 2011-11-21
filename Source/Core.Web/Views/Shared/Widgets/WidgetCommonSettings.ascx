@@ -43,8 +43,10 @@
                     var widget = $('input[type=hidden][name=pageWidgetId][value=<%=Model.Widget.Id %>]').parents('.widget');
                     $(widget).replaceWith(data);
                     iNettutsInit($stickyFooter);
+                    $('.widget_title a.edit').unbind('click').click(function () { editWidgetClicked(this, '<%=Url.Action(MVC.Pages.ShowSettings())%>?pageWidgetId=', '.widget'); });
                 });
             }
+
         }
     }
 </script>

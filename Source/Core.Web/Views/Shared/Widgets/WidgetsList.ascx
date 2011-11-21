@@ -20,7 +20,7 @@
         $('#tblLayoutHolder table td.column').first().prepend(contentData);
         iNettutsInit($stickyFooter);
         $stickyFooter.positionFooter();
-        $('.widget_title a.edit').unbind('click').click(function() {editWidgetClicked(this, '<%=Url.Action(MVC.Pages.ShowSettings())%>?pageWidgetId=', '.widget');});        
+        $('.widget_title a.edit').unbind('click').click(function() {editWidgetClicked(this, '<%=Url.Action(MVC.Pages.ShowSettings())%>?pageWidgetId=', '.widget');});
      }
      function addJsCss(link) {
          var uid = $(link).attr('pluginID');
