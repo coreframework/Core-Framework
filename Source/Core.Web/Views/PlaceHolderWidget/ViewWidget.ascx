@@ -13,7 +13,7 @@
     <%:Html.Messages() %>
     <div class="form_area">
         <%:Html.HiddenFor(model => model.Id)%>
-        <div class="form_i">
+        <div class="form_i minimized_form_i">
             <%:Html.LocalizedLabelFor(model=>model.WidgetId) %><br />
             <%:Html.DropDownListFor(model => model.WidgetId, new SelectList(Model.AvailableWidgets, "Id", "Title", Model.WidgetId), Html.Translate("Actions.PleaseSelect"), new { })%>
             <%:Html.ValidationMessageFor(model => model.WidgetId)%>

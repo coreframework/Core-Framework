@@ -119,6 +119,8 @@ namespace Core.Web.NHibernate.Models
 
         public virtual Page Template { get; set; }
 
+        public virtual int InheritedPagesCount { get; set; }
+
         /// <summary>
         /// Removes the widget.
         /// </summary>

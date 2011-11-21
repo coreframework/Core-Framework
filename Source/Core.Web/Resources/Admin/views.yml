@@ -23,6 +23,7 @@ Admin:
       Remove:
         Title: "Remove page template \"{0}\""
         AreYouSure: "Are you sure want to remove page template \"{0}\"?"
+        TemplateHasChildren: "Template \"{0}\" has pages created using this template and can't be removed."
     User:
       Index:
         Title: "Users"

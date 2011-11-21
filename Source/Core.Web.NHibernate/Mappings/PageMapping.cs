@@ -29,6 +29,10 @@ namespace Core.Web.NHibernate.Mappings
                 @"(SELECT count(*)
                 FROM PageWidgets
                 WHERE PageWidgets.PageId = Id AND PageWidgets.WidgetId in (SELECT Widgets.Id FROM Widgets WHERE Widgets.IsPlaceHolder = 1))").LazyLoad();
+            Map(page => page.InheritedPagesCount).Formula(
+                @"(SELECT count(*)
+                FROM Pages
+                WHERE Pages.TemplateId = Id)").LazyLoad();
 
             HasMany(page => page.Widgets).KeyColumn("PageId")
                 .Table("PageWidgets")

@@ -30,11 +30,14 @@ namespace Core.Web.Areas.Admin.Models
         [Required]
         public String Url { get; set; }
 
+        public bool HasChildrent { get; set; }
+
         public PageTemplateViewModel MapFrom(Page from)
         {
             Id = from.Id;
             Title = from.Title;
             Url = from.Url;
+            HasChildrent = from.InheritedPagesCount > 0;
 
             return this;
         }

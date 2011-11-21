@@ -7,18 +7,30 @@
   <h1><%: String.Format(Html.Translate(".Title"), Model) %></h1>
 </asp:Content>
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
-  <p><%: String.Format(Html.Translate(".AreYouSure"), Model) %></p>
-  <% using (Html.BeginForm(MVC.Admin.PageTemplate.ConfirmRemove(Model.Id), FormMethod.Post)) {%>
-    <%: Html.HttpMethodOverride(HttpVerbs.Delete) %>
+  <%if (!Model.HasChildrent)
+    {%>
+  <p><%:String.Format(Html.Translate(".AreYouSure"), Model)%></p>
+  <%
+        using (Html.BeginForm(MVC.Admin.PageTemplate.ConfirmRemove(Model.Id), FormMethod.Post))
+        {%>
+    <%:Html.HttpMethodOverride(HttpVerbs.Delete)%>
     <div class="i_form clrfix">
 		<div class="i_buttons clrfix">
 			<div class="btn1 clrfix">
                 <em></em>
-                <%: Html.Submit(Html.Translate("Actions.Remove"), new { @class = "button" })%>
+                <%:Html.Submit(Html.Translate("Actions.Remove"), new { @class = "button" })%>
                 <strong></strong>
 		    </div>
-            <span><%: Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.PageTemplate.Index())%></span>
+            <span><%:Html.ActionLink(Html.Translate("Actions.Cancel"), MVC.Admin.PageTemplate.Index())%></span>
         </div>
     </div>
-  <% } %>
+  <%
+        }%>
+  <%
+    }
+    else
+    {%>
+    <p><%:String.Format(Html.Translate(".TemplateHasChildren"), Model)%></p>
+    <%
+    }%>
 </asp:Content>
