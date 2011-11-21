@@ -62,15 +62,15 @@ Sys.Mvc.MvcHelpers.AjaxLoadedContentScriptFix._ajaxOptionsOnSuccess = function S
 Sys.Mvc.MvcHelpers.AjaxLoadedContentScriptFix._globalEvalScriptInElementId = function GlobalEvalScriptInElementId(element) {
     if (jQuery) {
         // jQuery.globalEval($("#" + element.id).find("script").text());
-
-        // It seems jQuery 1.4.1 & 1.4.2 has a problem in IE with .text() on script nodes… so do the loop ourselves…
-        var scripts = $("#" + element.id).find("script");
-        var allScriptText = "";
-        for (var i = 0; i < scripts.length; i++) {
-            allScriptText += scripts[i].text;
+        if (element != null) {
+            // It seems jQuery 1.4.1 & 1.4.2 has a problem in IE with .text() on script nodes… so do the loop ourselves…
+            var scripts = $("#" + element.id).find("script");
+            var allScriptText = "";
+            for (var i = 0; i < scripts.length; i++) {
+                allScriptText += scripts[i].text;
+            }
+            jQuery.globalEval(allScriptText);
         }
-        jQuery.globalEval(allScriptText);
-
     } else {
         alert("Error: jQuery must be loaded in order to use Sys.Mvc.MvcHelpers.AjaxLoadedContentScriptFix");
     }

@@ -106,7 +106,7 @@ namespace Core.WebContent.Models
             to.Article = ArticleId != null ? new Article { Id = (long) ArticleId } : null;
             to.ViewMode = ViewMode;
             to.Section = new Section { Id = SectionId };
-
+            to.CleaCategories();
             foreach (var categoryId in CategoriesId)
             {
                 to.AddCategory(new WebContentWidgetCategory { Category = new WebContentCategory { Id = categoryId }, WebContentWidget = to });

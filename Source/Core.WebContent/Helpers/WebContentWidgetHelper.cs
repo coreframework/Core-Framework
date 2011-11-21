@@ -31,7 +31,7 @@ namespace Core.WebContent.Helpers
         public static WidgetListingModel BindListingModel(WebContentWidget widget, int currentPage)
         {
             var articleService = ServiceLocator.Current.GetInstance<IArticleService>();
-            var categories = widget.Categories.Select(selectedCategory => selectedCategory.Id).ToList();
+            var categories = widget.Categories.Select(selectedCategory => selectedCategory.Category.Id).ToList();
 
             var articleCriteria = articleService.GetArticlesCriteria(categories);
             

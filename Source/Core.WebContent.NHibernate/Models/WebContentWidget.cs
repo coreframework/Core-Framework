@@ -76,6 +76,11 @@ namespace Core.WebContent.NHibernate.Models
             categories.Add(category);
         }
 
+        public virtual void CleaCategories()
+        {
+            categories.Clear();
+        }
+
         #endregion
     }
 }

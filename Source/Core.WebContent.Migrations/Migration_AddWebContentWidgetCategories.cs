@@ -17,8 +17,8 @@ namespace Core.WebContent.Migrations
             Database.AddTable("WebContent_WebContentWidgetCategories", t =>
             {
                 t.PrimaryKey();
-                t.ForeignKey("WebContentWidget").Table("WebContent_WebContentWidgets");
-                t.ForeignKey("Category").Table("WebContent_Categories");
+                t.ForeignKey("WebContentWidget").Table("WebContent_WebContentWidgets").OnDelete(ForeignKeyConstraint.Cascade);
+                t.ForeignKey("Category").Table("WebContent_Categories").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
 
