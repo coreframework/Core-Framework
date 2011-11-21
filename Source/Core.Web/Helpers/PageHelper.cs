@@ -141,7 +141,7 @@ namespace Core.Web.Helpers
                     page.RemoveWidget(pageWidget);
                     if (pageService.Save(page))
                     {
-                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => widget.Identifier == pageWidget.Widget.Identifier);
+                        var currentWidget = MvcApplication.Widgets.FirstOrDefault(widget => pageWidget.Widget !=null && widget.Identifier == pageWidget.Widget.Identifier);
 
                         if (currentWidget != null)
                         {

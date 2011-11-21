@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
 using Core.Framework.Plugins.Web;
+using Core.Web.Helpers;
 using Core.Web.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.Widgets;
@@ -42,11 +43,11 @@ namespace Core.Web.Controllers
 
         public virtual ActionResult ViewWidget(ICoreWidgetInstance instance)
         {
-            if(instance.PageWidgetId.HasValue)
+            if (instance.PageWidgetId.HasValue)
             {
                 var pageWidget = pageWidgetService.Find(instance.PageWidgetId.Value);
 
-                return PartialView(new PlaceHolderWidgetViewModel().MapFrom(pageWidget));    
+                return PartialView(new PlaceHolderWidgetViewModel().MapFrom(pageWidget));
             }
 
             return Content(String.Empty);
@@ -60,12 +61,18 @@ namespace Core.Web.Controllers
         [HttpPost]
         public virtual ActionResult ReplaceWidget(PlaceHolderWidgetViewModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.WidgetId.HasValue)
             {
-                //model = BreadcrumbsWidgetHelper.SaveBreadcrumbsWidget(model);
+                var pageWidget = pageWidgetService.Find(model.Id);
+                var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
+                pageWidget.Widget = widgetService.Find(model.WidgetId.Value);
+                if (pageWidgetService.Save(pageWidget))
+                {
+                    return PartialView("Widgets/WidgetContentHolder", WidgetHelper.GetWidgetViewModel(pageWidget));
+                }
             }
 
-            return Content(String.Empty);// PartialView("EditWidget", model);
+            return PartialView("ViewWidget", model);
         }
 
         #endregion

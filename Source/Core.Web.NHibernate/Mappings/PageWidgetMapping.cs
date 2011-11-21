@@ -22,6 +22,12 @@ namespace Core.Web.NHibernate.Mappings
                 Cascade.All().LazyLoad();
             References(pageWidget => pageWidget.User).Column("UserId").Nullable();
             References(pageWidget => pageWidget.Widget).Column("WidgetId").Nullable();
+            HasMany(pageWidget => pageWidget.HolderInstances).KeyColumn("TemplateWidgetId")
+            .Table("PageWidgets")
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
+            .Inverse()
+            .LazyLoad()
+            .Cascade.AllDeleteOrphan();
         }
     }
 }
