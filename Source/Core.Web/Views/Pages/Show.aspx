@@ -39,7 +39,7 @@
         <%if (Model.Access[(int)PageOperations.Update] && Model.PageMode == PageMode.Edit)
       {%>
             iNettutsInit($stickyFooter);
-            <% }%>
+            <% }%>            
             $('.widget_title a.edit').click(function() {editWidgetClicked(this, '<%=Url.Action(MVC.Pages.ShowSettings())%>?pageWidgetId=', '.widget');});
         });
         function iNettutsInit($stickyFooter) {

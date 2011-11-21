@@ -6,9 +6,9 @@
   else
   {
       var containerId = String.Format("placeHolder_{0}", Model.Id);
-      %>
+%>
 <div id="<%=containerId %>">
-    <% using (Ajax.BeginForm("ReplaceWidget", "PlaceHolderWidget", new AjaxOptions { UpdateTargetId = containerId, OnComplete = "replaceWidget" }))
+    <% using (Ajax.BeginForm("ReplaceWidget", "PlaceHolderWidget", new AjaxOptions { OnComplete = String.Format("replaceWidget{0}", containerId) }))
        { %>
     <%:Html.Messages() %>
     <div class="form_area">
@@ -28,8 +28,14 @@
     <%} %>
 </div>
 <script type="text/javascript">
-    function replaceWidget(result) {
-        $('#<%=containerId %>').parents('.widget').replaceWith(result);
+    function replaceWidget<%=containerId %>(result) {
+        var resultData = result.get_data();
+        if($('<div />').html(resultData).find('#<%=containerId %>').length){
+        $('#<%=containerId %>').replaceWith(result.get_data());
+        }
+        else {
+        $('#<%=containerId %>').parents('.widget').replaceWith(result.get_data());
+        }
     }
 </script>
 <%} %>
