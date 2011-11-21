@@ -30,6 +30,19 @@ namespace Core.WebContent.NHibernate.Services
             return criteria.SetCacheable(true).List<Article>();
         }
 
+        public ICriteria GetArticlesCriteria(ICollection categories)
+        {
+            var criteria = Session.CreateCriteria<Article>();
+            
+            //filter by categories
+            criteria.CreateAlias("Category", "category").Add(Restrictions.Eq("category.Status", CategoryStatus.Published)).Add(
+             Restrictions.In("category.Id", categories));
+            
+            //filter by article status
+            criteria.Add(Restrictions.Eq("Status", ArticleStatus.Published));
+            return criteria;
+        }
+
         private ICriteria GetAllowedArticlesCriteria(ICorePrincipal user, Int32 operationCode)
         {
             ICriteria criteria = Session.CreateCriteria<Article>("articles");

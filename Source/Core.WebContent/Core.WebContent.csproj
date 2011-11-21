@@ -126,6 +126,7 @@
     <Compile Include="Models\SectionViewModel.cs" />
     <Compile Include="Models\WebContentWidgetViewModel.cs" />
     <Compile Include="Models\WidgetDetailsModel.cs" />
+    <Compile Include="Models\WidgetListingModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\WebContentPluginOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -217,6 +218,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Css\webcontent.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Admin\views.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

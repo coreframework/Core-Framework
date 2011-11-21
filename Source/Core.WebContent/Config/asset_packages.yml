@@ -3,3 +3,6 @@
    outer:
      - jquery.cascadingDropDown.js
      - jquery.multiselect.js
+stylesheets:
+  base:
+    - webcontent.css

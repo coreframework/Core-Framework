@@ -67,10 +67,10 @@ namespace Core.WebContent.Controllers
                 {
                     if (widget.Article != null)
                     {
-                        return PartialView("DetailsMode", new WidgetDetailsModel(widget.Article));
+                        return PartialView("DetailsMode", new WidgetDetailsModel(widget.Article, true));
                     }
 
-                    return PartialView("ListingMode", widget);
+                    return PartialView("ListingMode", WebContentWidgetHelper.BindListingModel(widget, 1));
                 }
             }
             return Content(HttpContext.Translate("Messages.Setup", ResourceHelper.GetControllerScope(this)));
@@ -119,6 +119,7 @@ namespace Core.WebContent.Controllers
             return PartialView("EditWidget", model);
         }
 
+        [HttpPost]
         public virtual ActionResult LoadCategories(String categoriesId, long sectionId)
         {
             string[] selectedCategories = categoriesId.Trim().Split(',');
@@ -132,6 +133,7 @@ namespace Core.WebContent.Controllers
             return Json(categories);
         }
 
+        [HttpPost]
         public virtual ActionResult LoadArticles(String categoriesId, long? articleId)
         {
             String[] selectedCategories = categoriesId.Trim().Split(',');
