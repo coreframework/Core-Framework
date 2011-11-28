@@ -1,0 +1,6 @@
+Views:
+  WebContentWidget:
+    DetailsMode:
+      AddedBy: "Added by"
+      Category: "Category"
+      Section: "Section"

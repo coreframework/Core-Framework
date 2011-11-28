@@ -21,11 +21,6 @@
         <%:Html.DropDownListFor(model => model.ArticleId)%>
         <%:Html.ValidationMessageFor(model => model.ArticleId)%>
     </div>
-    <div class="form_i">
-        <%:Html.LocalizedLabelFor(model => model.ViewMode)%><br/>
-        <%:Html.DropDownListFor(model => model.ViewMode)%>
-        <%:Html.ValidationMessageFor(model => model.ViewMode)%><br/>
-    </div>
      <div class="form_i">
         <%:Html.CheckBoxFor(model => model.ShowPagination)%>
         <%:Html.LocalizedLabelFor(model => model.ShowPagination, new { Class = "checkbx-label" })%>

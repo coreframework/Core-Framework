@@ -19,17 +19,17 @@
     <%} %>
     <%if (Model.ShowAuthor && !String.IsNullOrEmpty(Model.Article.Author)) {%>
        <span class="add-info">
-        Added by <%=Model.Article.Author%>
+        <%:Html.Translate(".AddedBy")%> <%=Model.Article.Author%>
        </span>
     <%} %>
     <%if (Model.ShowCategory) {%>
        <span class="add-info">
-        Category: <%=((WebContentCategoryLocale)Model.Article.Category.CurrentLocale).Title%>
+        <%:Html.Translate(".Category")%>: <%=((WebContentCategoryLocale)Model.Article.Category.CurrentLocale).Title%>
        </span>
     <%} %>
     <%if (Model.ShowSection) {%>
        <span class="add-info">
-        Section: <%=((SectionLocale)Model.Article.Category.Section.CurrentLocale).Title%>
+        <%:Html.Translate(".Section")%>: <%=((SectionLocale)Model.Article.Category.Section.CurrentLocale).Title%>
        </span>
     <%} %>
     <%if (Model.ShowSummaryText) {%>
