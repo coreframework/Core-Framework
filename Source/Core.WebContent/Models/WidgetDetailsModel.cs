@@ -121,10 +121,25 @@ namespace Core.WebContent.Models
             ShowDownloadLink = GetVisibility(settings.ShowDownloadLink);
             if (TitleLinkable)
             {
-                var url = new UrlHelper(HttpContext.Current.Request.RequestContext);
-                var service = ServiceLocator.Current.GetInstance<IWebContentDetailsWidgetService>();
-                var values = new RouteValueDictionary { { "webContentId", service.LinkMode.Equals(WebContentDetailsLinkMode.Url) ? Article.Url : Article.Id.ToString()} };
-                DetailsUrl = url.RouteUrl("WebContentDetals.Show", values);
+                if (Article.UrlType.Equals(ArticleUrlType.Internal))
+                {
+                    var url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+                    var service = ServiceLocator.Current.GetInstance<IWebContentDetailsWidgetService>();
+                    var values = new RouteValueDictionary
+                                     {
+                                         {
+                                             "webContentId",
+                                             service.LinkMode.Equals(WebContentDetailsLinkMode.Url)
+                                                 ? Article.Url
+                                                 : Article.Id.ToString()
+                                             }
+                                     };
+                    DetailsUrl = url.RouteUrl("WebContentDetals.Show", values);
+                }
+                else
+                {
+                    DetailsUrl = Article.Url;
+                }
             }
         }
 
