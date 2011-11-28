@@ -31,6 +31,7 @@
             success: function (response) {
                 $('#layoutSettings').html('');
                 $('#layoutSettings').html(response);
+                $('.widget_title a.edit').unbind('click').click(function () { editWidgetClicked(this, '<%=Url.Action(MVC.Pages.ShowSettings())%>?pageWidgetId=', '.widget'); });
             }
         });
     }

@@ -48,7 +48,7 @@ namespace Core.Web.Helpers
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             ICorePrincipal currentPrincipal = HttpContext.Current.CorePrincipal();
 
-            return new WidgetHolderViewModel
+            var widgetModel = new WidgetHolderViewModel
             {
                 Widget = pageWidget,
                 WidgetInstance = new CoreWidgetInstance
@@ -70,7 +70,16 @@ namespace Core.Web.Helpers
                                         && pageWidget.Page.User.PrincipalId == currentPrincipal.PrincipalId),
 
 
+
             };
+
+            if (pageWidget.Page.IsTemplate && pageWidget.Widget.IsPlaceHolder)
+            {
+                widgetModel.Access[((BaseWidget)widgetModel.SystemWidget).PermissionOperationCode] = false;
+            }
+
+            return widgetModel;
+
         }
 
         /// <summary>

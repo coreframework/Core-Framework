@@ -223,28 +223,35 @@ namespace Core.Web.Models
 
                 bool isWidetEnabled = widgetService.IsWidgetEnable(widget1.Widget);
 
-                Widgets.Add(new WidgetHolderViewModel
-                {
-                    WidgetInstance = new CoreWidgetInstance
-                    {
-                        InstanceId = widget.InstanceId,
-                        WidgetIdentifier = coreWidget != null ? coreWidget.Identifier : null,
-                        PageSettings = new CorePageSettings { PageId = page.Id },
-                        PageWidgetId = widget.Id
-                    },
-                    Widget = widget1,
+                var widgetModel = new WidgetHolderViewModel
+                                      {
+                                          WidgetInstance = new CoreWidgetInstance
+                                                               {
+                                                                   InstanceId = widget.InstanceId,
+                                                                   WidgetIdentifier =
+                                                                       coreWidget != null ? coreWidget.Identifier : null,
+                                                                   PageSettings =
+                                                                       new CorePageSettings {PageId = page.Id},
+                                                                   PageWidgetId = widget.Id
+                                                               },
+                                          Widget = widget1,
 
-                    Access = coreWidget is BaseWidget
-                                 ? permissionService.GetAccess(
-                                     ((BaseWidget)coreWidget).Operations,
-                                     HttpContext.Current.CorePrincipal(), coreWidget.GetType(),
-                                     widget1.EntityId,
-                                     currentPrincipal != null && widget1.User != null &&
-                                     widget1.User.PrincipalId == currentPrincipal.PrincipalId)
-                                 : null,
-                    PageAccess = Access,
-                    SystemWidget = (isWidetEnabled && coreWidget != null) ? coreWidget : null
-                });
+                                          Access = coreWidget is BaseWidget
+                                                       ? permissionService.GetAccess(
+                                                           ((BaseWidget) coreWidget).Operations,
+                                                           HttpContext.Current.CorePrincipal(), coreWidget.GetType(),
+                                                           widget1.EntityId,
+                                                           currentPrincipal != null && widget1.User != null &&
+                                                           widget1.User.PrincipalId == currentPrincipal.PrincipalId)
+                                                       : null,
+                                          PageAccess = Access,
+                                          SystemWidget = (isWidetEnabled && coreWidget != null) ? coreWidget : null
+                                      };
+                if (page.IsTemplate && widget.Widget.IsPlaceHolder)
+                {
+                    widgetModel.Access[((BaseWidget)widgetModel.SystemWidget).PermissionOperationCode] = false;
+                }
+                Widgets.Add(widgetModel);
 
                 if (coreWidget != null && coreWidget.Plugin != null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
                 {
