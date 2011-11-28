@@ -67,7 +67,7 @@ namespace Core.WebContent.Controllers
                 {
                     if (widget.Article != null)
                     {
-                        return PartialView("DetailsMode", new WidgetDetailsModel(widget.Article, true));
+                        return PartialView("WebContentWidget/DetailsMode", new WidgetDetailsModel(widget.Article, true));
                     }
 
                     return PartialView("ListingMode", WebContentWidgetHelper.BindListingModel(widget, 1));

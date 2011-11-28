@@ -59,6 +59,12 @@ namespace Core.WebContent
             context.MapRoute(null, "web-content-widget/update", WebContentMVC.WebContentWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "web-content-widget/load-categories", WebContentMVC.WebContentWidget.LoadCategories(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "web-content-widget/load-articles", WebContentMVC.WebContentWidget.LoadArticles(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("WebContentDetalsWidget.View", "web-content-details-widget/view", WebContentMVC.WebContentDetailsWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("WebContentDetalsWidget.Edit", "web-content-details-widget/edit", WebContentMVC.WebContentDetailsWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("WebContentDetalsWidget.Update", "web-content-details-widget/update", WebContentMVC.WebContentDetailsWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
+            //details page
+            context.MapRoute("WebContentDetals.Show", "pages/web-content/details/{webContentId}", new { controller = "Pages", action = "Show", area = "", url = "web-content/details/{webContentId}" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
         }
     }
 }

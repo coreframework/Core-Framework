@@ -16,7 +16,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             SetupDefaultPageLayoutTemplates();
             SetupDefaultPageLayoutRows();
@@ -25,7 +25,7 @@ namespace Core.Web.Migrations
             SetupDefaultUsers();
         }
 
-        public override void Down()
+        public override void Revert()
         {
         }
 

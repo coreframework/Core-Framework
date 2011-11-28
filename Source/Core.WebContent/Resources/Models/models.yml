@@ -52,6 +52,8 @@ Models:
         Content: "Content"
     WebContentWidgetViewMode:
         ListView: "List view"
-        GroupByCategory: "Group by category"       
+        GroupByCategory: "Group by category"
+    DetailsWidgetEditModel:
+        LinkByUrl: "Use URL for links"
   
     

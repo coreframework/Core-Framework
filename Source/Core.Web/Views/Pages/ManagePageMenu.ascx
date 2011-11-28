@@ -117,7 +117,7 @@
                             </li>
                             <%
                               }%>
-                            <%if (!Model.IsTemplate && Model.Access[(int)PageOperations.Delete])
+                            <%if (!Model.IsTemplate && !Model.IsServicePage && Model.Access[(int)PageOperations.Delete])
                               {%>
                             <li>
                                 <%= Ajax.ActionLink(Html.Translate(".DeletePage"), 

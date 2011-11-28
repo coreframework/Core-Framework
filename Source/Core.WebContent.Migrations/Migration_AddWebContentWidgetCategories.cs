@@ -12,7 +12,7 @@ namespace Core.WebContent.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("WebContent_WebContentWidgetCategories", t =>
             {
@@ -25,7 +25,7 @@ namespace Core.WebContent.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("WebContent_WebContentWidgetCategories", t => t.RemoveForeignKey("WebContentWidget").Table("WebContent_WebContentWidgets"));
             Database.ChangeTable("WebContent_WebContentWidgetCategories", t => t.RemoveForeignKey("Category").Table("WebContent_Categories"));

@@ -226,6 +226,7 @@ namespace Core.Web.Helpers
                     allowedWidgets.Add(widget);
                 }
             }
+
             return allowedWidgets;
         }
     }

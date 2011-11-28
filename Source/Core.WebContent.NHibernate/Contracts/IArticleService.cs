@@ -13,5 +13,9 @@ namespace Core.WebContent.NHibernate.Contracts
         IEnumerable<Article> GetPublishedArticles(ICorePrincipal user, Int32 operation, ICollection categories);
 
         ICriteria GetArticlesCriteria(ICollection categories);
+
+        Article FindPublished(ICorePrincipal user, long id);
+
+        Article FindPublished(ICorePrincipal user, String url);
     }
 }

@@ -32,7 +32,9 @@ namespace Framework.Migrator.Fluent
         /// <param name="database">The database.</param>
         public override void Migrate(ITransformationProvider database)
         {
-            database.ChangeColumn(TableName, GetColumn());
+            var column = GetColumn();
+            
+            database.ChangeColumn(TableName, column.Name, column.ColumnType, false);
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace Core.Navigation.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("SiteMapWidgets", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Navigation.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("SiteMapWidgets", t => t.RemoveForeignKey("SiteMapWidgetRoorPage").Table("Pages"));
 

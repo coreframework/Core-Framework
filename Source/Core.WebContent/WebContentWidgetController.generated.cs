@@ -83,6 +83,8 @@ namespace Core.WebContent.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly String  EditWidget = "~/Views/WebContentWidget/EditWidget.ascx";
+            public readonly String  GroupMode = "~/Views/WebContentWidget/GroupMode.ascx";
+            public readonly String  ListingMode = "~/Views/WebContentWidget/ListingMode.ascx";
             public readonly String  ViewWidget = "~/Views/WebContentWidget/ViewWidget.ascx";
         }
     }

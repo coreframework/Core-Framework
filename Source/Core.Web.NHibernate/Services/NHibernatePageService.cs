@@ -94,7 +94,8 @@ namespace Core.Web.NHibernate.Services
         public IEnumerable<Page> GetAllowedPagesForMainMenu(ICorePrincipal user)
         {
             var criteria = GetAllowedPagesCriteria(user, (int)PageOperations.View, false);
-            //criteria.Add(Restrictions.Eq("pages.HideInMainMenu", false));
+            criteria.Add(Expression.Eq("HideInMainMenu", false));
+            criteria.Add(Expression.Eq("IsServicePage", false));
 
             return criteria.SetCacheable(true).List<Page>();
         }
@@ -112,6 +113,7 @@ namespace Core.Web.NHibernate.Services
             var permissionCriteria = permissionCommonService.GetPermissionsCriteria(user, operationCode, typeof (Page),
                                                                                     "pages.Id", "pageUser.Id");
             criteria.Add(Restrictions.Eq("pages.IsTemplate", isTemplate));
+            criteria.Add(Restrictions.Eq("pages.IsServicePage", false));
             if (permissionCriteria!=null)
                 criteria.Add(permissionCriteria);
 

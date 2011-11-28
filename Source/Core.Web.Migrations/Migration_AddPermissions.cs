@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("Permissions", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("Permissions", t => t.RemoveForeignKey("FK_Permissions_EntityType").Table("EntityTypes"));
             Database.ChangeTable("Permissions", t => t.RemoveForeignKey("FK_Permissions_Users").Table("Roles"));

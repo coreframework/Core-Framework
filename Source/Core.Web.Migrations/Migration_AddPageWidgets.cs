@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("PageWidgets", t =>
             {
@@ -25,17 +25,19 @@ namespace Core.Web.Migrations
                 t.ForeignKey("PageWidgetsUser").Table("Users").Column("UserId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
                 t.ForeignKey("PageWidgetsPage").Table("Pages").Column("PageId").OnDelete(ForeignKeyConstraint.Cascade);
                 t.ForeignKey("PageWidgetsWidget").Table("Widgets").Column("WidgetId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
+                t.ForeignKey("PageWidgetsTemplateWidget").Table("Widgets").Column("TemplateWidgetId").NotRequired().OnDelete(ForeignKeyConstraint.SetNull);
             });
         }
 
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("PageWidgets", t => t.RemoveForeignKey("PageWidgetsUser").Table("Users"));
             Database.ChangeTable("PageWidgets", t => t.RemoveForeignKey("PageWidgetsPage").Table("Pages"));
             Database.ChangeTable("PageWidgets", t => t.RemoveForeignKey("PageWidgetsWidget").Table("Widgets"));
+            Database.ChangeTable("PageWidgets", t => t.RemoveForeignKey("PageWidgetsTemplateWidget").Table("Widgets"));
 
             Database.RemoveTable("PageWidgets");
         }

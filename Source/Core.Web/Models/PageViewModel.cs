@@ -152,6 +152,8 @@ namespace Core.Web.Models
 
         public long? WidgetId { get; set; }
 
+        public bool IsServicePage { get; set; }
+
         #endregion
 
         #region IMappedModel members
@@ -179,8 +181,6 @@ namespace Core.Web.Models
             {
                 MapFromTemplate(from);
             }
-            
-
             IsTemplate = from.IsTemplate && from.Template == null;
             var plugins = ServiceLocator.Current.GetInstance<IPluginService>().FindPluginsByIdentifiers(PagePlugins.Select(t => t.Identifier).ToList());
             if (plugins.Any())
@@ -188,6 +188,7 @@ namespace Core.Web.Models
                 plugins.ForEach(t => { CssFileName += t.Id + "_"; });
                 CssFileName = CssFileName.Remove(CssFileName.Length - 1);
             }
+            IsServicePage = from.IsServicePage;
 
             return this;
         }

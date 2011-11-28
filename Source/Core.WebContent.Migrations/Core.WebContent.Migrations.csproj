@@ -61,10 +61,6 @@
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="ECM7.Migrator.Providers.SqlServer">
-      <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Providers.SqlServer.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Microsoft.Build.Framework" />
     <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="System" />
@@ -76,6 +72,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddWebContentDetailsWidgets.cs" />
     <Compile Include="Migration_AddWebContentWidgetCategories.cs" />
     <Compile Include="Migration_AddWebContentWidgets.cs" />
     <Compile Include="Migration_AddArticleFiles.cs" />
@@ -86,6 +83,7 @@
     <Compile Include="Migration_AddSectionSettings.cs" />
     <Compile Include="Migration_AddSectionLocales.cs" />
     <Compile Include="Migration_AddSections.cs" />
+    <Compile Include="Migration_InsertDefaultRecords.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

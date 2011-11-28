@@ -29,6 +29,7 @@ namespace Core.WebContent.NHibernate
             // Widgets
             container.Register(Component.For<IWebContentWidgetService>().ImplementedBy<NHibernateWebContentWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IWebContentWidgetCategoryService>().ImplementedBy<NHibernateWebContentWidgetCategoryService>().LifeStyle.Transient);
+            container.Register(Component.For<IWebContentDetailsWidgetService>().ImplementedBy<NHibernateWebContentDetailsWidgetService>().LifeStyle.Transient);
         }
     }
 }

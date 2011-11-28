@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("PageSettings", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Web.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("PageSettings", t => t.RemoveForeignKey("PageSettingsLookAndFeel").Table("LookAndFeelSettings"));
             Database.ChangeTable("PageSettings", t => t.RemoveForeignKey("PageSettingsPage").Table("Pages"));

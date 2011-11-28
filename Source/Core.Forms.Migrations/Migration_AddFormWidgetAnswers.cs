@@ -12,7 +12,7 @@ namespace Core.Forms.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("Forms_FormWidgetAnswers", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Forms.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("Forms_FormWidgetAnswers", t => t.RemoveForeignKey("FormWidget").Table("Forms_FormsBuilderWidgets"));
             Database.ChangeTable("Forms_FormWidgetAnswers", t => t.RemoveForeignKey("AnswerUser").Table("Users"));

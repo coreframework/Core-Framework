@@ -12,7 +12,7 @@ namespace Core.Navigation.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("ListMenuWidgetPages", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Navigation.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("ListMenuWidgetPages", t => t.RemoveForeignKey("ListMenuWidgetPagesPage").Table("Pages"));
             Database.ChangeTable("ListMenuWidgetPages", t => t.RemoveForeignKey("ListMenuWidgetPagesWidget").Table("ListMenuWidgets"));

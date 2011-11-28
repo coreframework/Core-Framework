@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("EntityTypes", t =>
             {
@@ -24,7 +24,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.RemoveTable("EntityTypes");
         }

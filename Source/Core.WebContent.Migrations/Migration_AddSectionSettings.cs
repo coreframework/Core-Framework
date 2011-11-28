@@ -12,7 +12,7 @@ namespace Core.WebContent.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("WebContent_SectionSettings", t =>
             {
@@ -36,7 +36,7 @@ namespace Core.WebContent.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("WebContent_SectionSettings", t => t.RemoveForeignKey("Section").Table("WebContent_Sections"));
             Database.RemoveTable("WebContent_SectionSettings");

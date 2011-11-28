@@ -12,7 +12,7 @@ namespace Core.WebContent.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("WebContent_ArticleLocales", t =>
             {
@@ -28,7 +28,7 @@ namespace Core.WebContent.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("WebContent_ArticleLocales", t => t.RemoveForeignKey("Article").Table("WebContent_Articles"));
             Database.RemoveTable("WebContent_ArticleLocales");

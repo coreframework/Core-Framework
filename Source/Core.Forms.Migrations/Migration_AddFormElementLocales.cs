@@ -12,7 +12,7 @@ namespace Core.Forms.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("Forms_FormElementLocales", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Forms.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("Forms_FormElementLocales", t => t.RemoveForeignKey("FormElement").Table("Forms_FormElements"));
             Database.RemoveTable("Forms_FormElementLocales");

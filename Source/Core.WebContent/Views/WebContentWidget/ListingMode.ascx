@@ -5,7 +5,7 @@
  
 <%var curIndex = 1; %>
 <%foreach (var article in Model.Articles) {%>
-    <%Html.RenderPartial("DetailsMode", new WidgetDetailsModel(article, false));%>
+    <%Html.RenderPartial("WebContentWidget/DetailsMode", new WidgetDetailsModel(article, false));%>
     <%if (curIndex!= Model.Articles.Count())
       {%>
         <div class="delimiter"></div>

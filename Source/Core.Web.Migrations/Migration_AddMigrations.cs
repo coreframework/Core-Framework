@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("Migrations", t =>
             {
@@ -25,7 +25,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("Migrations", t => t.RemoveForeignKey("MigrationsPlugin").Table("Plugins"));
             Database.RemoveTable("Migrations");

@@ -16,5 +16,10 @@
             <Identifier>Core.WebContent.Widgets.ContentWidget</Identifier>
             <Title>Web Content</Title>
         </WidgetSetting>
+      <WidgetSetting>
+        <Key>Core.WebContent.Widgets.ContentDetailsWidget</Key>
+        <Identifier>Core.WebContent.Widgets.ContentDetailsWidget</Identifier>
+        <Title>Web Content Details</Title>
+      </WidgetSetting>
     </WidgetSettings>
 </PluginSetting>

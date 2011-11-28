@@ -12,13 +12,15 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("Widgets", t =>
             {
                 t.PrimaryKey();
                 t.String("Identifier");
                 t.Integer("Status");
+                t.Bool("IsDetailsWidget");
+                t.Bool("IsPlaceHolder");
                 t.ForeignKey("WidgetPlugin").Table("Plugins").Column("PluginId").OnDelete(ForeignKeyConstraint.Cascade);
             });
         }
@@ -26,7 +28,7 @@ namespace Core.Web.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("Widgets", t => t.RemoveForeignKey("WidgetPlugin").Table("Plugins"));
             Database.RemoveTable("Widgets");

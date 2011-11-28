@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("WidgetLocales", t =>
             {
@@ -26,7 +26,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("WidgetLocales", t => t.RemoveForeignKey("Widget").Table("Widgets"));
             Database.RemoveTable("WidgetLocales");

@@ -36,7 +36,7 @@ namespace Framework.Migrator.Fluent
         /// <param name="database">The database.</param>
         public override void Migrate(ITransformationProvider database)
         {
-            database.RemoveForeignKey(ForeignKeyTable, Name);
+            database.RemoveConstraint(ForeignKeyTable, Name);
             
             if (GenerateColumn)
             {

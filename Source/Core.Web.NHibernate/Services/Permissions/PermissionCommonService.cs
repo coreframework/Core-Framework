@@ -11,7 +11,6 @@ using Core.Web.NHibernate.Models.Permissions;
 using Core.Web.NHibernate.Models.Static;
 using Framework.Core.Extensions;
 using Framework.Facilities.NHibernate;
-using LinqKit;
 using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Criterion;

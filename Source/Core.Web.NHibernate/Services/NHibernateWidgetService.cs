@@ -33,7 +33,7 @@ namespace Core.Web.NHibernate.Services
         {
             var query = from widget in CreateQuery()
                         where (widget.Plugin == null || widget.Plugin.Status == PluginStatus.Installed) && widget.Status == WidgetStatus.Enabled && 
-                        (isTemplate || !widget.IsPlaceHolder)
+                        !widget.IsDetailsWidget && (isTemplate || !widget.IsPlaceHolder)
                         select widget;
 
             return query.ToList();

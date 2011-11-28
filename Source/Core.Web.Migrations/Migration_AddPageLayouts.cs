@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("PageLayouts", t =>
             {
@@ -25,7 +25,7 @@ namespace Core.Web.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("PageLayouts", t => t.RemoveForeignKey("PageLayoutsTemplate").Table("PageLayoutTemplates"));
             Database.ChangeTable("PageLayouts", t => t.RemoveForeignKey("PageLayoutsPage").Table("Pages"));

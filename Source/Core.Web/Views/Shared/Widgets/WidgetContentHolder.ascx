@@ -24,7 +24,7 @@
                 Model.Access[((BaseWidget)Model.SystemWidget).PermissionOperationCode]))
                       {
                           if (Model.PageAccess[(int)PageOperations.Update] && (Model.SystemWidget == null || !(Model.SystemWidget is BaseWidget) ||
-                              Model.Access[((BaseWidget)Model.SystemWidget).ManageOperationCode]))
+                              Model.Access[((BaseWidget)Model.SystemWidget).ManageOperationCode] && !Model.Widget.Widget.IsDetailsWidget))
                           {%>
                     <%=Ajax.ActionLink(" ",
                                                     MVC.Pages.RemovePageWidget(Model.Widget.Id),

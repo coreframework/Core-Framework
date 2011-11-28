@@ -77,9 +77,6 @@
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="LinqKit">
-      <HintPath>..\..\Libs\LinqLit\LinqKit.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>

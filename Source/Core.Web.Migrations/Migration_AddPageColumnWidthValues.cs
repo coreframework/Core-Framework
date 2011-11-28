@@ -12,7 +12,7 @@ namespace Core.Web.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("PageLayoutColumnWidthValues", t =>
             {
@@ -28,7 +28,7 @@ namespace Core.Web.Migrations
        /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.ChangeTable("PageLayoutColumnWidthValues", t => t.RemoveForeignKey("PageLayoutColumnWidthValuesColumn").Table("PageLayoutColumns"));
             Database.ChangeTable("PageLayoutColumnWidthValues", t => t.RemoveForeignKey("PageLayoutColumnWidthValuesLayout").Table("PageLayouts"));

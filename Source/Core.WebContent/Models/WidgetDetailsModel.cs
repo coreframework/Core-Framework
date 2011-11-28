@@ -1,5 +1,10 @@
-﻿using Core.WebContent.NHibernate.Models;
+﻿using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Core.WebContent.NHibernate.Contracts;
+using Core.WebContent.NHibernate.Models;
 using Core.WebContent.NHibernate.Static;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.WebContent.Models
 {
@@ -77,6 +82,12 @@ namespace Core.WebContent.Models
         /// </value>
         public bool IsDetailsItem { get; set; }
 
+        /// <summary>
+        /// Gets or sets the details URL.
+        /// </summary>
+        /// <value>The details URL.</value>
+        public string DetailsUrl { get; set; }
+
         #endregion
 
         #region Constructor
@@ -85,7 +96,10 @@ namespace Core.WebContent.Models
         {
             Article = article;
             IsDetailsItem = isDetailsItem;
-            BindSettings();
+            if (article.Id > 0)
+            {
+                BindSettings();
+            }
         }
 
         #endregion
@@ -105,13 +119,20 @@ namespace Core.WebContent.Models
             ShowCreatedDate = GetVisibility(settings.ShowCreatedDate);
             ShowModifiedDate = GetVisibility(settings.ShowModifiedDate);
             ShowDownloadLink = GetVisibility(settings.ShowDownloadLink);
+            if (TitleLinkable)
+            {
+                var url = new UrlHelper(HttpContext.Current.Request.RequestContext);
+                var service = ServiceLocator.Current.GetInstance<IWebContentDetailsWidgetService>();
+                var values = new RouteValueDictionary { { "webContentId", service.LinkMode.Equals(WebContentDetailsLinkMode.Url) ? Article.Url : Article.Id.ToString()} };
+                DetailsUrl = url.RouteUrl("WebContentDetals.Show", values);
+            }
         }
 
         private bool GetVisibility(SectionSettingsVisibility visibility)
         {
             if (IsDetailsItem)
             {
-                 return visibility == SectionSettingsVisibility.Details || visibility == SectionSettingsVisibility.Both;
+                return visibility == SectionSettingsVisibility.Details || visibility == SectionSettingsVisibility.Both;
             }
 
             return visibility == SectionSettingsVisibility.Listing || visibility == SectionSettingsVisibility.Both;

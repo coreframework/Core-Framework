@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using System.Linq;
@@ -60,16 +61,18 @@ namespace Core.Web.NHibernate.Migrator
         public void MigrateUp(ICorePlugin plugin)
         {
             Debug.Assert(plugin != null);
+            try
+            {
             var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
             IEnumerable<Migration> pluginMigrations = FillPluginSchemaInfo(plugin, migrationService);
             ECM7.Migrator.Migrator migrator = GetMigrator(plugin.GetPluginMigrationsAssembly());
-            migrator.MigrateToLastVersion();
-            if (migrator.AppliedMigrations != null && migrator.AppliedMigrations.Count > 0)
+            migrator.Migrate();
+            IList<long> appliedMigrations = migrator.GetAppliedMigrations();
+            if (appliedMigrations != null && appliedMigrations.Count > 0)
             {
                 IEnumerable<long> pluginMigrationsVersions = (from pluginMigration in pluginMigrations
                                                               select pluginMigration.Version).AsEnumerable();
-                List<long> appliedMigrations = migrator.AppliedMigrations;
-                appliedMigrations.RemoveAll(
+                appliedMigrations.ToList().RemoveAll(
                     migration => pluginMigrationsVersions.Contains(migration));
                 if (appliedMigrations.Count > 0)
                 {
@@ -86,6 +89,11 @@ namespace Core.Web.NHibernate.Migrator
                     }
                 }
             }
+            }
+            catch (Exception)
+            {
+                //TODO: Error in ECM7 Migrator. Wait for fix.
+            }
         }
 
         /// <summary>
@@ -96,12 +104,12 @@ namespace Core.Web.NHibernate.Migrator
         {
             Debug.Assert(plugin != null);
             ECM7.Migrator.Migrator migrator = GetMigrator(plugin.GetPluginMigrationsAssembly());
-            if (migrator.MigrationsTypes != null && migrator.MigrationsTypes.Count > 0)
+            if (migrator.AvailableMigrations != null && migrator.AvailableMigrations.Count > 0)
             {
                 var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
                 IEnumerable<Migration> pluginInstalledMigrations = FillPluginSchemaInfo(plugin, migrationService);
-                migrator.MigrateTo(0);
-                IEnumerable<long> pluginMigrations = (from migrationsType in migrator.MigrationsTypes select migrationsType.Version).AsEnumerable();
+                migrator.Migrate(0);
+                IEnumerable<long> pluginMigrations = (from migrationsType in migrator.AvailableMigrations select migrationsType.Version).AsEnumerable();
                 foreach (var pluginInstalledMigration in pluginInstalledMigrations)
                 {
                     if(pluginMigrations.Contains(pluginInstalledMigration.Version))

@@ -12,7 +12,7 @@ namespace Core.Languages.Migrations
         /// <summary>
         /// Executes migration.
         /// </summary>
-        public override void Up()
+        public override void Apply()
         {
             Database.AddTable("Languages_Languages", t =>
             {
@@ -27,7 +27,7 @@ namespace Core.Languages.Migrations
         /// <summary>
         /// Rollbacks migration.
         /// </summary>
-        public override void Down()
+        public override void Revert()
         {
             Database.RemoveTable("Languages_Languages");
         }

@@ -26,7 +26,9 @@ public static class WebContentMVC {
     public static Core.WebContent.Controllers.ArticleController Article = new Core.WebContent.Controllers.T4MVC_ArticleController();
     public static Core.WebContent.Controllers.SectionController Section = new Core.WebContent.Controllers.T4MVC_SectionController();
     public static Core.WebContent.Controllers.WebContentCategoryController WebContentCategory = new Core.WebContent.Controllers.T4MVC_WebContentCategoryController();
+    public static Core.WebContent.Controllers.WebContentDetailsWidgetController WebContentDetailsWidget = new Core.WebContent.Controllers.T4MVC_WebContentDetailsWidgetController();
     public static Core.WebContent.Controllers.WebContentWidgetController WebContentWidget = new Core.WebContent.Controllers.T4MVC_WebContentWidgetController();
+    public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
 namespace T4MVC {
@@ -85,6 +87,21 @@ public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
 
 
 namespace Links {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static class Content {
+        private const String  URLPATH = "~/Content";
+        public static String  Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static String  Url(String  fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class Css {
+            private const String  URLPATH = "~/Content/Css";
+            public static String  Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static String  Url(String  fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly String  webcontent_css = Url("webcontent.css");
+        }
+    
+    }
+
 }
 
 static class T4MVCHelpers {
