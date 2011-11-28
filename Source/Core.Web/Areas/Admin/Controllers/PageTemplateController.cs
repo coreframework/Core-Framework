@@ -217,7 +217,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 PageHelper.UnlinkTemplatePages(pageTemplate);
                 pageService.Delete(pageTemplate);
-                Success(Translate("Messages.UserDeleted"));
+                Success(Translate("Messages.PageTemplateDeleted"));
             }
 
             return RedirectToAction(MVC.Admin.PageTemplate.Index());

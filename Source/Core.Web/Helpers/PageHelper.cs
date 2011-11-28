@@ -14,6 +14,7 @@ using Framework.Core;
 using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using Omu.ValueInjecter;
+using FluentNHibernate.Utils;
 
 namespace Core.Web.Helpers
 {
@@ -300,7 +301,7 @@ namespace Core.Web.Helpers
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
             if (page.Template != null)
             {
-                page.Template.Widgets.AsParallel().ForAll(widget =>
+                page.Template.Widgets.AsEnumerable().Each(widget =>
                                                               {
                                                                   PageWidget pageWidget = null;
                                                                   if(widget.Widget.IsPlaceHolder)
