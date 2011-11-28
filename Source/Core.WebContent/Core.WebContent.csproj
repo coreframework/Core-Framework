@@ -193,10 +193,6 @@
       <Name>Core.Framework.Plugins</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\Core.Navigation.Migrations\Core.Navigation.Migrations.csproj">
-      <Project>{7EDB58EA-ACE9-429A-8458-BC4F32DA732D}</Project>
-      <Name>Core.Navigation.Migrations</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core.WebContent.Migrations\Core.WebContent.Migrations.csproj">
       <Project>{611E7731-3948-4939-9173-2C1F52CF00BA}</Project>
       <Name>Core.WebContent.Migrations</Name>

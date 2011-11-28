@@ -484,6 +484,7 @@
     <Content Include="Content\Images\btn2_c.gif" />
     <Content Include="Content\Images\btn2_l.gif" />
     <Content Include="Content\Images\btn2_r.gif" />
+    <Content Include="Content\Images\calendar.gif" />
     <Content Include="Content\Images\colorpicker\blank.gif" />
     <Content Include="Content\Images\colorpicker\colorpicker_background.png" />
     <Content Include="Content\Images\colorpicker\colorpicker_hex.png" />

@@ -30,7 +30,19 @@ namespace Core.Web.Areas.Admin.Models
         [Required]
         public String Url { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has childrent.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance has childrent; otherwise, <c>false</c>.
+        /// </value>
         public bool HasChildrent { get; set; }
+
+        /// <summary>
+        /// Gets or sets the inherited pages count.
+        /// </summary>
+        /// <value>The inherited pages count.</value>
+        public int InheritedPagesCount { get; set; }
 
         public PageTemplateViewModel MapFrom(Page from)
         {
@@ -38,6 +50,7 @@ namespace Core.Web.Areas.Admin.Models
             Title = from.Title;
             Url = from.Url;
             HasChildrent = from.InheritedPagesCount > 0;
+            InheritedPagesCount = from.InheritedPagesCount;
 
             return this;
         }

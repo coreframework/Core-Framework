@@ -4,6 +4,9 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Web;
 
 namespace Core.Framework.MEF.Composition
 {
@@ -103,7 +106,20 @@ namespace Core.Framework.MEF.Composition
                 return;
 
             EnsureContainer();
-            Container.ComposeParts(@object);
+            try
+            {
+                Container.ComposeParts(@object);
+            }
+            catch(ReflectionTypeLoadException e)
+            {
+                StringBuilder builder = new StringBuilder(e.Message);
+                foreach (var loaderException in e.LoaderExceptions)
+                {
+                    builder.AppendLine(loaderException.Message);
+                }
+
+                throw new Exception(builder.ToString());
+            }
         }
 
         /// <summary>

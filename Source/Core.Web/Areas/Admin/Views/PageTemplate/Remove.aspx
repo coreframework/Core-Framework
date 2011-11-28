@@ -7,7 +7,12 @@
   <h1><%: String.Format(Html.Translate(".Title"), Model) %></h1>
 </asp:Content>
 <asp:Content runat="server" ID="Content2" ContentPlaceHolderID="MainContent">
-<p><%:String.Format(Html.Translate(".AreYouSure"), Model)%></p>
+<p>
+  <%if (Model.InheritedPagesCount > 0){%>
+    <%:String.Format(Html.Translate(".PagesUsing"), Model.InheritedPagesCount)%>
+  <%}%>
+  <%:String.Format(Html.Translate(".AreYouSure"), Model)%>
+</p>
   <% using (Html.BeginForm(MVC.Admin.PageTemplate.ConfirmRemove(Model.Id), FormMethod.Post))
         {%>
     <%:Html.HttpMethodOverride(HttpVerbs.Delete)%>

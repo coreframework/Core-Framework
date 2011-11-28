@@ -22,8 +22,8 @@ Admin:
         Title: "Edit page template \"{0}\""
       Remove:
         Title: "Remove page template \"{0}\""
-        AreYouSure: "Are you sure want to remove page template \"{0}\"? All pages created using this tempate will be unlink."
-        TemplateHasChildren: "Template \"{0}\" has pages created using this template and can't be removed."
+        AreYouSure: "Are you sure you what to proceed?"
+        PagesUsing: "There are {0} page(s) using this template."
     User:
       Index:
         Title: "Users"

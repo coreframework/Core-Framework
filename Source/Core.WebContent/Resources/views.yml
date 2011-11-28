@@ -1,6 +1,7 @@
 Views:
-  WebContentWidget:
-    DetailsMode:
-      AddedBy: "Added by"
-      Category: "Category"
-      Section: "Section"
+  Shared:
+    WebContentWidget
+      DetailsMode:
+        AddedBy: "Added by"
+        Category: "Category"
+        Section: "Section"
