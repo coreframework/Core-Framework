@@ -29,8 +29,8 @@ namespace Core.Navigation.Migrations
         /// </summary>
         public override void Revert()
         {
-            Database.ChangeTable("ListMenuWidgetPages", t => t.RemoveForeignKey("ListMenuWidgetPagesPage").Table("Pages"));
-            Database.ChangeTable("ListMenuWidgetPages", t => t.RemoveForeignKey("ListMenuWidgetPagesWidget").Table("ListMenuWidgets"));
+            Database.ChangeTable("ListMenuWidgetPages", t => t.RemoveForeignKey("ListMenuWidgetPagesPage").Table("Pages").Column("PageId"));
+            Database.ChangeTable("ListMenuWidgetPages", t => t.RemoveForeignKey("ListMenuWidgetPagesWidget").Table("ListMenuWidgets").Column("ListMenuWidgetId"));
 
             Database.RemoveTable("ListMenuWidgetPages");
         }

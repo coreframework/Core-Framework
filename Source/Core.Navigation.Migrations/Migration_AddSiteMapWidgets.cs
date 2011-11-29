@@ -29,7 +29,7 @@ namespace Core.Navigation.Migrations
         /// </summary>
         public override void Revert()
         {
-            Database.ChangeTable("SiteMapWidgets", t => t.RemoveForeignKey("SiteMapWidgetRoorPage").Table("Pages"));
+            Database.ChangeTable("SiteMapWidgets", t => t.RemoveForeignKey("SiteMapWidgetRootPage").Table("Pages").Column("RootPageId"));
 
             Database.RemoveTable("SiteMapWidgets");
         }
