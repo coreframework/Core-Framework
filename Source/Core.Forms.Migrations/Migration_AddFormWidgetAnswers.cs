@@ -29,8 +29,8 @@ namespace Core.Forms.Migrations
         /// </summary>
         public override void Revert()
         {
-            Database.ChangeTable("Forms_FormWidgetAnswers", t => t.RemoveForeignKey("FormWidget").Table("Forms_FormsBuilderWidgets"));
-            Database.ChangeTable("Forms_FormWidgetAnswers", t => t.RemoveForeignKey("AnswerUser").Table("Users"));
+            Database.ChangeTable("Forms_FormWidgetAnswers", t => t.RemoveForeignKey("FormWidget").Table("Forms_FormsBuilderWidgets").Column("FormWidgetId"));
+            Database.ChangeTable("Forms_FormWidgetAnswers", t => t.RemoveForeignKey("AnswerUser").Table("Users").Column("UserId"));
             Database.RemoveTable("Forms_FormWidgetAnswers");
         }
     }

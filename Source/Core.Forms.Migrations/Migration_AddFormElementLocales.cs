@@ -29,7 +29,7 @@ namespace Core.Forms.Migrations
         /// </summary>
         public override void Revert()
         {
-            Database.ChangeTable("Forms_FormElementLocales", t => t.RemoveForeignKey("FormElement").Table("Forms_FormElements"));
+            Database.ChangeTable("Forms_FormElementLocales", t => t.RemoveForeignKey("FormElement").Table("Forms_FormElements").Column("FormElementId"));
             Database.RemoveTable("Forms_FormElementLocales");
         }
     }
