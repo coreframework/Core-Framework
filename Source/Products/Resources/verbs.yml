@@ -1,5 +1,0 @@
-Verbs:
-  AdminCategoryVerb:
-    Categories: "Products: Categories"
-  AdminVerb:
-    Products: "Products: Listing"
