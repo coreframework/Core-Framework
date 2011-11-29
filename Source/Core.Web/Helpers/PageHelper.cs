@@ -299,6 +299,7 @@ namespace Core.Web.Helpers
         {
             var pageService = ServiceLocator.Current.GetInstance<IPageService>();
             var permissionCommonService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();
+            var pageWidgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             if (page.Template != null)
             {
                 page.Template.Widgets.AsEnumerable().Each(widget =>
@@ -343,6 +344,8 @@ namespace Core.Web.Helpers
                                                                           pageWidget.InstanceId =
                                                                               CloneWidgetInstance(widget);
                                                                       }
+                                                                      //TODO: save collection
+                                                                      pageWidgetService.Save(pageWidget);
                                                                       page.AddWidget(pageWidget);
                                                                   }
                                                               });

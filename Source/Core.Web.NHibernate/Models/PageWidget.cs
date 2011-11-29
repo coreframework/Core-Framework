@@ -10,7 +10,6 @@ namespace Core.Web.NHibernate.Models
         #region Fields
 
         private Widget widget = new Widget();
-        private readonly IList<PageWidget> holderInstances = new List<PageWidget>();
         private PageSection pageSection = PageSection.Body;
 
         #endregion
@@ -82,14 +81,6 @@ namespace Core.Web.NHibernate.Models
         public virtual long EntityId
         {
             get { return Id; }
-        }
-
-        public virtual IEnumerable<PageWidget> HolderInstances
-        {
-            get
-            {
-                return holderInstances;
-            }
         }
     }
 }
