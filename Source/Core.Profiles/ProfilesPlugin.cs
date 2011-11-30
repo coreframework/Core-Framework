@@ -75,7 +75,7 @@ namespace Core.Profiles
         /// <summary>
         /// Gets the Plugin Identifiers config path.
         /// </summary>
-        public override String  PluginConfigPath
+        public override String PluginConfigPath
         {
             get { return ProfilesConfig; }
         }

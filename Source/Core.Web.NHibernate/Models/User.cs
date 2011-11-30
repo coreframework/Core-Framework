@@ -35,30 +35,6 @@ namespace Core.Web.NHibernate.Models
         }
 
         /// <summary>
-        /// Gets or sets the email.
-        /// </summary>
-        /// <value>The email.</value>
-        public virtual String Email { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password hash.
-        /// </summary>
-        /// <value>The password hash.</value>
-        public virtual String Hash { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password salt.
-        /// </summary>
-        /// <value>The password salt.</value>
-        public virtual String Salt { get; set; }
-
-        /// <summary>
-        /// Gets or sets the password encryption mode.
-        /// </summary>
-        /// <value>The encryption mode.</value>
-        public virtual PasswordMode EncryptionMode { get; set; }
-
-        /// <summary>
         /// Gets or sets the status.
         /// </summary>
         /// <value>The status.</value>

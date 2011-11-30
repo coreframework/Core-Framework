@@ -275,7 +275,6 @@
     <Compile Include="Helpers\UrlExtensions.cs" />
     <Compile Include="Helpers\UserGroupHelper.cs" />
     <Compile Include="Helpers\UserHelper.cs" />
-    <Compile Include="Helpers\UserSessionHelper.cs" />
     <Compile Include="Helpers\WidgetHelper.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>

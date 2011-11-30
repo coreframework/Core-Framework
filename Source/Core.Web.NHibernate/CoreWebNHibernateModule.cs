@@ -2,11 +2,13 @@
 using Castle.MicroKernel;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
+using Core.Framework.Permissions.Authentication;
 using Core.Framework.Permissions.Contracts;
+using Core.Framework.Permissions.Services;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Contracts.Widgets;
-using Core.Web.NHibernate.Helpers;
+using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Services;
 using Core.Web.NHibernate.Services.Common;
 using Core.Web.NHibernate.Services.Permissions;
@@ -51,6 +53,7 @@ namespace Core.Web.NHibernate
             container.Register(Component.For<ISiteMapWidgetService>().ImplementedBy<NHibernateSiteMapWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IListMenuWidgetService>().ImplementedBy<NHibernateListMenuWidgetService>().LifeStyle.Transient);
             container.Register(Component.For<IBreadcrumbsWidgetService>().ImplementedBy<NHibernateBreadcrumbsWidgetService>().LifeStyle.Transient);
+            container.Register(Component. For<IBaseUserService>().ImplementedBy<NHibernateBaseUserService<User>>().LifeStyle.Transient);
             container.Register(Component.For<IUserService>().ImplementedBy<NHibernateUserService>().LifeStyle.Transient);
             container.Register(Component.For<IUserGroupService>().ImplementedBy<NHibernateUserGroupService>().LifeStyle.Transient);
             container.Register(Component.For<IRoleService>().ImplementedBy<NHibernateRoleService>().LifeStyle.Transient);

@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using Core.Framework.Permissions.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Core.Services;
 
 namespace Core.Web.NHibernate.Contracts
 {
-    public interface IUserService : IDataService<User>
+    public interface IUserService : IDataService<User>, IBaseUserService
     {
         /// <summary>
         /// Determines whether email used by specified user is unique.
@@ -60,30 +61,11 @@ namespace Core.Web.NHibernate.Contracts
         User FindByUsername(String username);
 
         /// <summary>
-        /// Gets the user by email or username.
-        /// </summary>
-        /// <param name="emailOrUsername">The email or username.</param>
-        /// <returns>
-        /// User with specified email or username or <c>null</c>.
-        /// </returns>
-        User FindByEmailOrUsername(String emailOrUsername);
-
-        /// <summary>
         /// Encrypts <paramref name="user"/> password using default mode.
         /// </summary>
         /// <param name="user">The user to process.</param>
         /// <param name="password">The password.</param>
         void SetPassword(User user, String password);
-
-        /// <summary>
-        /// Determines whether <paramref name="user"/> password is valid for <paramref name="user"/>.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="password">The password.</param>
-        /// <returns>
-        ///     <c>true</c> if <paramref name="user"/> password is valid; otherwise <c>false</c>.
-        /// </returns>
-        bool VerifyPassword(User user, String password);
 
         /// <summary>
         /// Gets the count.

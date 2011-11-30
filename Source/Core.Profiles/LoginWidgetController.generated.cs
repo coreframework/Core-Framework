@@ -39,6 +39,11 @@ namespace Core.Profiles.Controllers {
         public System.Web.Mvc.ActionResult ViewWidget() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult CreateUserSession() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateUserSession);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public LoginWidgetController Actions { get { return ProfilesMVC.LoginWidget; } }
@@ -53,6 +58,8 @@ namespace Core.Profiles.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly String  ViewWidget = "ViewWidget";
+            public readonly String  CreateUserSession = "CreateUserSession";
+            public readonly String  DeleteUserSession = "DeleteUserSession";
         }
 
 
@@ -72,6 +79,17 @@ namespace Core.Profiles.Controllers {
         public override System.Web.Mvc.ActionResult ViewWidget(Core.Framework.Plugins.Web.ICoreWidgetInstance instance) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
             callInfo.RouteValueDictionary.Add("instance", instance);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateUserSession(Core.Profiles.Models.LoginWidgetViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateUserSession);
+            callInfo.RouteValueDictionary.Add("model", model);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult DeleteUserSession() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DeleteUserSession);
             return callInfo;
         }
 

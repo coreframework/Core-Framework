@@ -93,6 +93,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
+      <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
+      <Name>Core.Framework.Permissions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Web.NHibernate\Core.Web.NHibernate.csproj">
       <Project>{7C4A374D-775B-4C2D-AAF3-3E9B94011AE9}</Project>
       <Name>Core.Web.NHibernate</Name>

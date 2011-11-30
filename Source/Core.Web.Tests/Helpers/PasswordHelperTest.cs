@@ -1,5 +1,5 @@
-﻿using Core.Web.NHibernate.Helpers;
-using Core.Web.NHibernate.Models;
+﻿using Core.Framework.Permissions.Helpers;
+using Core.Framework.Permissions.Models;
 using NUnit.Framework;
 
 namespace Core.Web.Tests.Helpers

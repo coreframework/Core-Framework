@@ -1,5 +1,6 @@
 ﻿using System;
-using Core.Web.NHibernate.Helpers;
+using Core.Framework.Permissions.Helpers;
+using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Static;
 using ECM7.Migrator.Framework;

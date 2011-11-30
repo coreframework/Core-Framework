@@ -48,6 +48,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Facilities.NHibernateIntegration">
+      <HintPath>..\..\Libs\Castle\Castle.Facilities.NHibernateIntegration.dll</HintPath>
+    </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
@@ -69,12 +72,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authentication\FormsAuthenticationHelper.cs" />
+    <Compile Include="Authentication\IAuthenticationHelper.cs" />
+    <Compile Include="Contracts\IBaseUserService.cs" />
     <Compile Include="Contracts\IPageCommonService.cs" />
     <Compile Include="Contracts\IPermissionCommonService.cs" />
     <Compile Include="Contracts\IPermissionsHelper.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
     <Compile Include="Helpers\OperationDescriptionAttribute.cs" />
     <Compile Include="Helpers\OperationsHelper.cs" />
+    <Compile Include="Helpers\PasswordHash.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Helpers\PermissionsHelper.cs" />
     <Compile Include="Helpers\PermissionsAttribute.cs" />
     <Compile Include="Models\BaseEntityOperations.cs" />
@@ -84,11 +92,13 @@
     <Compile Include="Models\IPermissionModel.cs" />
     <Compile Include="Models\IPermissionOperation.cs" />
     <Compile Include="Models\IRole.cs" />
+    <Compile Include="Models\PasswordMode.cs" />
     <Compile Include="Models\PermissionArea.cs" />
     <Compile Include="Models\PermissionOperationLevel.cs" />
     <Compile Include="Models\PermissionOperation.cs" />
     <Compile Include="Models\PermissionsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateBaseUserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -111,6 +121,16 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj">
+      <Project>{8548D8D8-F616-42B6-9271-DB8E600CF652}</Project>
+      <Name>Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Framework.Facilities.NHibernate\Framework.Facilities.NHibernate.csproj">
+      <Project>{832BAE45-2032-40A6-B889-1FF854885536}</Project>
+      <Name>Framework.Facilities.NHibernate</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

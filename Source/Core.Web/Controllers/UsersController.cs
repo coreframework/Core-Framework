@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Web.Mvc;
-using Core.Web.Helpers;
+using Core.Framework.Permissions.Authentication;
+using Core.Framework.Permissions.Helpers;
+using Core.Framework.Permissions.Models;
 using Core.Web.Models;
-using Core.Web.NHibernate.Helpers;
+using Core.Web.NHibernate.Contracts;
+using Core.Web.NHibernate.Models;
 using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
@@ -47,17 +50,25 @@ namespace Core.Web.Controllers
         /// <returns>Authentication result.</returns>
         public virtual ActionResult CreateUserSession(LoginViewModel model)
         {
-            var user = UserSessionHelper.Validate(model, ModelState);
+            var userService = ServiceLocator.Current.GetInstance<IUserService>();
             var authenticationHelper = ServiceLocator.Current.GetInstance<IAuthenticationHelper>();
             if (ModelState.IsValid)
             {
-                authenticationHelper.LoginUser(user, model.RememberMe);
-                var returnUrl = model.ReturnUrl;
-                if (String.IsNullOrEmpty(returnUrl))
+                BaseUser user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
+                if (user == null || !userService.VerifyPassword(user, model.Password))
                 {
-                    returnUrl = Url.Action(MVC.Home.Index());
+                    Error(Translate("Messages.InvalidUserCredentials"));
                 }
-                return new RedirectResult(returnUrl);
+                else
+                {
+                    authenticationHelper.LoginUser(user, model.RememberMe);
+                    var returnUrl = model.ReturnUrl;
+                    if (String.IsNullOrEmpty(returnUrl))
+                    {
+                        returnUrl = Url.Action(MVC.Home.Index());
+                    }
+                    return new RedirectResult(returnUrl);
+                }
             }
 
             return View("NewUserSession", model);

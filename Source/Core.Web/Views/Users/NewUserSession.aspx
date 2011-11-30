@@ -9,7 +9,7 @@
             <% using (Html.BeginForm(MVC.Users.CreateUserSession(), FormMethod.Post))
                {%>
                 <h3><%: Html.Translate(".Title")%></h3>
-                <%: Html.ValidationSummary(true) %>
+                <%:Html.Messages() %>
                 <div class="form_i">
                     <label><%:Html.Translate(".UsernameOrEmail")%></label><br/>
                     <%: Html.TextBoxFor(model => model.UsernameOrEmail, new { Class = "inp_txt w_365" })%>

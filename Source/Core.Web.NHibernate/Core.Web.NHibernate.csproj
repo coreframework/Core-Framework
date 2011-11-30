@@ -133,10 +133,6 @@
     <Compile Include="Contracts\Widgets\INavigationMenuWidgetService.cs" />
     <Compile Include="Contracts\Widgets\ISiteMapWidgetService.cs" />
     <Compile Include="CoreWebNHibernateModule.cs" />
-    <Compile Include="Helpers\FormsAuthenticationHelper.cs" />
-    <Compile Include="Helpers\IAuthenticationHelper.cs" />
-    <Compile Include="Helpers\PasswordHash.cs" />
-    <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Mappings\PageTemplateMapping.cs" />
     <Compile Include="Mappings\SiteSettingsMapping.cs" />
     <Compile Include="Mappings\PageLocaleMapping.cs" />
@@ -186,7 +182,6 @@
     <Compile Include="Models\PageLayoutTemplate.cs" />
     <Compile Include="Models\PageSettings.cs" />
     <Compile Include="Models\PageWidgetSettings.cs" />
-    <Compile Include="Models\PasswordMode.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Static\Orientation.cs" />
     <Compile Include="Models\UserGroup.cs" />
@@ -279,7 +274,9 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

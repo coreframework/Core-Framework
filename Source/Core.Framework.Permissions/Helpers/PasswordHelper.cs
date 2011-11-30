@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 
-namespace Core.Web.NHibernate.Helpers
+namespace Core.Framework.Permissions.Helpers
 {
     /// <summary>
     /// Provides helper methods for password encryption and veryfication.

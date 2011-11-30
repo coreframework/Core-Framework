@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
+using Core.Framework.Permissions.Helpers;
+using Core.Framework.Permissions.Models;
+using Core.Framework.Permissions.Services;
 using Core.Web.NHibernate.Contracts;
-using Core.Web.NHibernate.Helpers;
 using Core.Web.NHibernate.Models;
-using Framework.Facilities.NHibernate;
 
 namespace Core.Web.NHibernate.Services
 {
-    public class NHibernateUserService : NHibernateDataService<User>, IUserService
+    public class NHibernateUserService : NHibernateBaseUserService<User>, IUserService
     {
 
         #region Fields
@@ -145,21 +146,7 @@ namespace Core.Web.NHibernate.Services
             return query.FirstOrDefault();
         }
 
-        /// <summary>
-        /// Gets the user by email or username.
-        /// </summary>
-        /// <param name="emailOrUsername">The email or username.</param>
-        /// <returns>
-        /// User with specified email or username or <c>null</c>.
-        /// </returns>
-        public User FindByEmailOrUsername(String emailOrUsername)
-        {
-            var query = from user in CreateQuery()
-                        where user.Email == emailOrUsername || user.Username == emailOrUsername
-                        select user;
-
-            return query.FirstOrDefault();
-        }
+        
 
         /// <summary>
         /// Encrypts <paramref name="user"/> password using <see cref="EncryptionMode"/>.
@@ -174,18 +161,7 @@ namespace Core.Web.NHibernate.Services
             user.EncryptionMode = EncryptionMode;
         }
 
-        /// <summary>
-        /// Determines whether <paramref name="user"/> password is valid for <paramref name="user"/>.
-        /// </summary>
-        /// <param name="user">The user.</param>
-        /// <param name="password">The password.</param>
-        /// <returns>
-        ///     <c>true</c> if <paramref name="user"/> password is valid; otherwise <c>false</c>.
-        /// </returns>
-        public bool VerifyPassword(User user, String password)
-        {
-            return PasswordHelper.Verify(password, new PasswordHash { Hash = user.Hash, Salt = user.Salt }, user.EncryptionMode);
-        }
+        
 
         public int GetCount(IQueryable<User> baseQuery)
         {
