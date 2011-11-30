@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <Identifier>Core.Profiles</Identifier>
+    <Title>Profiles</Title>
+    <ResourcesDirectory>Resources</ResourcesDirectory>
+    <Description>Allow managing profiles.</Description>
+    <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
+    <CssPath>Content\Css\</CssPath>
+    <ImagesPath>Content\</ImagesPath>
+    <CssPack>base</CssPack>
+    <JsPath></JsPath>
+    <JsPack>base</JsPack>
+    <WidgetSettings>
+        <WidgetSetting>
+            <Key>Core.Profiles.Widgets.LoginWidget</Key>
+            <Identifier>Core.Profiles.Widgets.LoginWidget</Identifier>
+            <Title>Login</Title>
+        </WidgetSetting>
+<!--      <WidgetSetting>-->
+<!--        <Key>Core.WebContent.Widgets.ContentDetailsWidget</Key>-->
+<!--        <Identifier>Core.WebContent.Widgets.ContentDetailsWidget</Identifier>-->
+<!--        <Title>Web Content Details</Title>-->
+<!--      </WidgetSetting>-->
+    </WidgetSettings>
+</PluginSetting>

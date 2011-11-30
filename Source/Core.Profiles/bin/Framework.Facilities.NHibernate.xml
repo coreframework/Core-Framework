@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Framework.Facilities.NHibernate</name>
+    </assembly>
+    <members>
+        <member name="T:Framework.Facilities.NHibernate.Castle.INHibernateMapper">
+            <summary>
+            Specifies interface for modules nhibernate mappers. Each mapper can add fluent mappings, hbm mappings or use auto-mapping.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.INHibernateMapper.Map(FluentNHibernate.Cfg.MappingConfiguration,Framework.Core.Configuration.DatabaseConfiguration)">
+            <summary>
+            Adds mappings to session configuration.
+            </summary>
+            <param name="mapping">The mapping configuration.</param>
+            <param name="databaseConfiguration">The database configuration.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Filters.CultureFilter">
+            <summary>
+            NHibernate filter for culture.
+            </summary>
+        </member>
+        <member name="F:Framework.Facilities.NHibernate.Filters.CultureFilter.FilterParamName">
+            <summary>
+            Filter param name constant.
+            </summary>
+        </member>
+        <member name="F:Framework.Facilities.NHibernate.Filters.CultureFilter.DefaultCultureFilterParamName">
+            <summary>
+            Default culture filter param name constant.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Filters.CultureFilter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Facilities.NHibernate.Filters.CultureFilter"/> class.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Filters.CultureFilter.CultureFilterPriorityExpression">
+            <summary>
+            Returns the culture priority filter expression.
+            </summary>
+            <returns>Returns the culture priority filter.</returns>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Castle.INHibernateConfigurationChain">
+            <summary>
+            Allows altering of the raw NHibernate Configuration object before creation.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.INHibernateConfigurationChain.Process(NHibernate.Cfg.Configuration)">
+            <summary>
+            Processes the specified configuration.
+            </summary>
+            <param name="configuration">The configuration.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Castle.ConfigureNHibernateFacility">
+            <summary>
+            Configures and registers castle nhibernate facility.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.ConfigureNHibernateFacility.Execute(Framework.Core.IApplication,Castle.MicroKernel.IKernel)">
+            <summary>
+            Executes task.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="kernel">IoC container.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.NHibernateDataService`1">
+            <summary>
+            Default NHibernate implementation for <see cref="T:Framework.Core.Services.IDataService`1"/>.
+            </summary>
+            <typeparam name="TEntity">The type of the entity.</typeparam>
+        </member>
+        <member name="F:Framework.Facilities.NHibernate.NHibernateDataService`1.SessionManager">
+            <summary>
+            Session manager.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.#ctor(Castle.Facilities.NHibernateIntegration.ISessionManager)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Facilities.NHibernate.NHibernateDataService`1"/> class.
+            </summary>
+            <param name="sessionManager">The session manager.</param>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.Find(System.Int64)">
+            <summary>
+            Finds entity by id specified.
+            </summary>
+            <param name="id">Entity identifier.</param>
+            <returns>Entity or null if a record is not found matching the provided Id.</returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.GetAll">
+            <summary>
+            Retrieves all items of <typeparamref name="TEntity"/> from repository.
+            </summary>
+            <returns>Not nullable collection of <typeparamref name="TEntity"/>.</returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.GetPaged(System.Int32,System.Int32)">
+            <summary>
+            Retrieves items of <typeparamref name="TEntity"/> from repository paged.
+            </summary>
+            <param name="page">Zero-based index of page.</param>
+            <param name="pageSize">Size of the page.</param>
+            <returns>Not nullable collection of <typeparamref name="TEntity"/>.</returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.Count(NHibernate.ICriteria)">
+            <summary>
+            Gets the count of entities.
+            </summary>
+            <param name="criteria">The criteria.</param>
+            <returns>The entity count.</returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.Save(`0)">
+            <summary>
+            Saves specified entity to repository.
+            </summary>
+            <param name="entity">The entity to save.</param>
+            <returns><c>true</c> if instance instance has been saved successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.Delete(`0)">
+            <summary>
+            Removes specified entity from repository.
+            </summary>
+            <param name="entity">The entity to remove.</param>
+            <returns><c>true</c> if instance instance has been deleted successfully; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.DeleteAll">
+            <summary>
+            Deletes all entities of type <typeparamref name="TEntity"/> from repository.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateDataService`1.CreateQuery">
+            <summary>
+            Creates the LINQ query used to evaluate an expression tree.
+            </summary>
+            <returns>Query object used to evaluate an expression tree.</returns>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.NHibernateDataService`1.Alias">
+            <summary>
+            Gets or sets the alias.
+            </summary>
+            <value>The alias.</value>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.NHibernateDataService`1.Logger">
+            <summary>
+            Gets or sets the logger.
+            </summary>
+            <value>The logger.</value>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.NHibernateDataService`1.Session">
+            <summary>
+            Gets the nhibernate session associated with current service.
+            </summary>
+            <value>The nhibernate session.</value>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Objects.LocalizableEntity`1">
+            <summary>
+            Describes localizable entity.
+            </summary>
+            <typeparam name="T">ILocale type.</typeparam>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Objects.LocalizableEntity`1.ContainsLocale(Framework.Core.Localization.ILocale)">
+            <summary>
+            Determines whether the specified locale contains locale.
+            </summary>
+            <param name="locale">The locale.</param>
+            <returns>
+                <c>true</c> if the specified locale contains locale; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Objects.LocalizableEntity`1.AddLocale(Framework.Core.Localization.ILocale)">
+            <summary>
+            Adds the locale.
+            </summary>
+            <param name="locale">The locale.</param>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Objects.LocalizableEntity`1.InitializeLocaleEntity">
+            <summary>
+            Initializes the new locale entity instance.
+            </summary>
+            <returns>New instance of locale.</returns>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.Objects.LocalizableEntity`1.CurrentLocales">
+            <summary>
+            Gets or sets the current locales.
+            </summary>
+            <value>The current locales.</value>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.Objects.LocalizableEntity`1.CurrentLocale">
+            <summary>
+            Gets the current entity locale.
+            </summary>
+            <value>The current locale.</value>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Conventions.PrimaryKeyConvention">
+            <summary>
+            Specifies primary key accept convention.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Conventions.PrimaryKeyConvention.Apply(FluentNHibernate.Conventions.Instances.IIdentityInstance)">
+            <summary>
+            Applies the specified instance.
+            </summary>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Conventions.ForeignKeyConvention">
+            <summary>
+            Specifies foreign key naming convention.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Conventions.ForeignKeyConvention.Apply(FluentNHibernate.Conventions.Instances.IManyToOneInstance)">
+            <summary>
+            Applies the specified instance.
+            </summary>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.NHibernateInstaller">
+            <summary>
+            Registers nhibernate facility components.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.NHibernateInstaller.Install(Castle.Windsor.IWindsorContainer,Castle.MicroKernel.IConfigurationStore)">
+            <summary>
+            Performs the installation in the <see cref="T:Castle.Windsor.IWindsorContainer"/>.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="store">The configuration store.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Conventions.TableConvention">
+            <summary>
+            Specifies table convention.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Conventions.TableConvention.Apply(FluentNHibernate.Conventions.Instances.IClassInstance)">
+            <summary>
+            Applies the specified instance.
+            </summary>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Castle.StandardFluentMapper">
+            <summary>
+            Uses fluent mappings from specified assembly.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.StandardFluentMapper.#ctor(System.Reflection.Assembly)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Facilities.NHibernate.Castle.StandardFluentMapper"/> class.
+            </summary>
+            <param name="assembly">The assembly.</param>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.StandardFluentMapper.Map(FluentNHibernate.Cfg.MappingConfiguration,Framework.Core.Configuration.DatabaseConfiguration)">
+            <summary>
+            Adds mappings to session configuration.
+            </summary>
+            <param name="mapping">The mapping configuration.</param>
+            <param name="databaseConfiguration">The database configuration.</param>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.Castle.StandardFluentMapper.Assembly">
+            <summary>
+            Gets the assembly.
+            </summary>
+            <value>The assembly.</value>
+        </member>
+        <member name="P:Framework.Facilities.NHibernate.Castle.StandardFluentMapper.Conventions">
+            <summary>
+            Gets the conventions.
+            </summary>
+            <value>The conventions.</value>
+        </member>
+        <member name="T:Framework.Facilities.NHibernate.Castle.NHibernateConfigurator">
+            <summary>
+            Builds nhibernate configuration.
+            </summary>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.NHibernateConfigurator.#ctor(Framework.Core.IApplication,Castle.MicroKernel.IKernel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Framework.Facilities.NHibernate.Castle.NHibernateConfigurator"/> class.
+            </summary>
+            <param name="application">The application.</param>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="M:Framework.Facilities.NHibernate.Castle.NHibernateConfigurator.GetConfiguration(Castle.Core.Configuration.IConfiguration)">
+            <summary>
+            Gets the configuration.
+            </summary>
+            <param name="config">The config.</param>
+            <returns>nhibernate configuration.</returns>
+        </member>
+    </members>
+</doc>

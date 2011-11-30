@@ -1,0 +1,5 @@
+F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.Migrations\bin\Debug\Core.Profiles.Migrations.dll
+F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.Migrations\bin\Debug\Core.Profiles.Migrations.pdb
+F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.Migrations\obj\Debug\ResolveAssemblyReference.cache
+F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.Migrations\obj\Debug\Core.Profiles.Migrations.dll
+F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.Migrations\obj\Debug\Core.Profiles.Migrations.pdb
