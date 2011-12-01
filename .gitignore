@@ -136,3 +136,12 @@
 /Source/Core.WebContent.NHibernate/bin
 /Source/Core.WebContent.NHibernate/obj
 /Source/Core.Web/UserFiles
+/Source/Core.Profiles/Core.Profiles.csproj.user
+/Source/Core.Profiles/bin
+/Source/Core.Profiles/obj
+/Source/Core.Profiles.Migrations/bin
+/Source/Core.Profiles.Migrations/obj
+/Source/Core.Profiles.NHibernate/bin
+/Source/Core.Profiles.NHibernate/obj
+/Source/Core.Web/Areas/Profiles
+/Source/Core.Web.Migrations/Core.Web.Migrations.csproj.user

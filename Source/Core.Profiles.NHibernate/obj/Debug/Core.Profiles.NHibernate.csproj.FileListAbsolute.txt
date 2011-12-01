@@ -1,5 +1,0 @@
-F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.NHibernate\bin\Debug\Core.Profiles.NHibernate.dll
-F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.NHibernate\bin\Debug\Core.Profiles.NHibernate.pdb
-F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.NHibernate\obj\Debug\ResolveAssemblyReference.cache
-F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.NHibernate\obj\Debug\Core.Profiles.NHibernate.dll
-F:\Work\Projects\Core-Framework\Core-Framework\Source\Core.Profiles.NHibernate\obj\Debug\Core.Profiles.NHibernate.pdb

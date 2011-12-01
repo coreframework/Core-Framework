@@ -24,6 +24,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class ProfilesMVC {
     public static Core.Profiles.Controllers.LoginWidgetController LoginWidget = new Core.Profiles.Controllers.T4MVC_LoginWidgetController();
+    public static Core.Profiles.Controllers.ProfileTypeController ProfileType = new Core.Profiles.Controllers.T4MVC_ProfileTypeController();
 }
 
 namespace T4MVC {
@@ -61,6 +62,17 @@ public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResul
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public String  Area { get; set; }
+    public String  Controller { get; set; }
+    public String  Action { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
+    public T4MVC_JsonResult(String  area, String  controller, String  action): base()  {
+        this.InitMVCT4Result(area, controller, action);
+    }
     
     public String  Area { get; set; }
     public String  Controller { get; set; }

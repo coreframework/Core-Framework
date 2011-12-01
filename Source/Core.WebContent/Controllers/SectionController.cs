@@ -261,7 +261,7 @@ namespace Core.WebContent.Controllers
                              section.UserId == this.CorePrincipal().PrincipalId;
         }
 
-        public GridViewModel BuildSectionsGrid()
+        private GridViewModel BuildSectionsGrid()
         {
             IList<GridColumnViewModel> columns = new List<GridColumnViewModel>
                                                      {
