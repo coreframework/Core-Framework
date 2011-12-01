@@ -71,18 +71,22 @@
   <ItemGroup>
     <Compile Include="Contracts\IProfileTypeLocaleService.cs" />
     <Compile Include="Contracts\IProfileTypeService.cs" />
+    <Compile Include="Contracts\IRegistrationWidgetService.cs" />
     <Compile Include="CoreProfilesNHibernateModule.cs" />
     <Compile Include="Mappings\ProfileTypeLocaleMapping.cs" />
     <Compile Include="Mappings\ProfileTypeMapping.cs" />
+    <Compile Include="Mappings\RegistrationWidgetMapping.cs" />
     <Compile Include="Models\ProfileElement.cs" />
     <Compile Include="Models\ProfileElementLocale.cs" />
     <Compile Include="Models\ProfileHeader.cs" />
     <Compile Include="Models\ProfileHeaderLocale.cs" />
     <Compile Include="Models\ProfileType.cs" />
     <Compile Include="Models\ProfileTypeLocale.cs" />
+    <Compile Include="Models\RegistrationWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\NHibernateProfileTypeLocaleService.cs" />
     <Compile Include="Services\NHibernateProfileTypeService.cs" />
+    <Compile Include="Services\NHibernateRegistrationWidgetService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">

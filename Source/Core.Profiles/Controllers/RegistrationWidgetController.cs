@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
 using Core.Framework.Plugins.Web;
+using Core.Profiles.Helpers;
 using Core.Profiles.Models;
+using Core.Profiles.NHibernate.Contracts;
 using Core.Profiles.Widgets;
+using Framework.Mvc.Extensions;
+using Framework.Mvc.Helpers;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Profiles.Controllers
 {
@@ -73,24 +75,23 @@ namespace Core.Profiles.Controllers
         [ChildActionOnly]
         public virtual ActionResult EditWidget(ICoreWidgetInstance instance)
         {
-            /*if (instance != null)
+            if (instance != null)
             {
-                var widget = new WebContentWidget();
+                var widget = new NHibernate.Models.RegistrationWidget();
 
                 if (instance.InstanceId != null)
                 {
-                    var widgetService = ServiceLocator.Current.GetInstance<IWebContentWidgetService>();
+                    var widgetService = ServiceLocator.Current.GetInstance<IRegistrationWidgetService>();
                     var existingWidget = widgetService.Find((long)instance.InstanceId);
 
                     if (existingWidget != null)
                         widget = existingWidget;
                 }
 
-                return PartialView(new WebContentWidgetViewModel().MapFrom(widget));
+                return PartialView(new RegistrationWidgetEditModel().MapFrom(widget));
             }
 
-            return Content(HttpContext.Translate("Messages.SetupForm", ResourceHelper.GetControllerScope(this)));*/
-            return Content(String.Empty);
+            return Content(HttpContext.Translate("Messages.SetupRegistrationForm", ResourceHelper.GetControllerScope(this)));
         }
 
         /// <summary>
@@ -101,13 +102,12 @@ namespace Core.Profiles.Controllers
         [HttpPost]
         public virtual ActionResult UpdateWidget(RegistrationWidgetEditModel model)
         {
-            /*if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                model = WebContentWidgetHelper.SaveWidget(model);
+                model = RegistrationWidgetHelper.SaveWidget(model);
             }
 
-            return PartialView("EditWidget", model);*/
-            return Content(String.Empty);
+            return PartialView("EditWidget", model);
         }
 
         #endregion

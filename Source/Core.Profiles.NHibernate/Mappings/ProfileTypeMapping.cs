@@ -8,8 +8,8 @@ namespace Core.Profiles.NHibernate.Mappings
     {
         public ProfileTypeMapping()
         {
-            Cache.Region("WebContent_ProfileTypes").ReadWrite();
-            Table("WebContent_ProfileTypes");
+            Cache.Region("Profiles_ProfileTypes").ReadWrite();
+            Table("Profiles_ProfileTypes");
             Id(profileType => profileType.Id);
             Map(profileType => profileType.UserId);
             Map(profileType => profileType.CreateDate);

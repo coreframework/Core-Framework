@@ -16,10 +16,10 @@
             <Identifier>Core.Profiles.Widgets.LoginWidget</Identifier>
             <Title>Login</Title>
         </WidgetSetting>
-<!--      <WidgetSetting>-->
-<!--        <Key>Core.WebContent.Widgets.ContentDetailsWidget</Key>-->
-<!--        <Identifier>Core.WebContent.Widgets.ContentDetailsWidget</Identifier>-->
-<!--        <Title>Web Content Details</Title>-->
-<!--      </WidgetSetting>-->
+      <WidgetSetting>
+        <Key>Core.Profiles.Widgets.RegistrationWidget</Key>
+        <Identifier>Core.Profiles.Widgets.RegistrationWidget</Identifier>
+        <Title>Registration</Title>
+      </WidgetSetting>
     </WidgetSettings>
 </PluginSetting>
