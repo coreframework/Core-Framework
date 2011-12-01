@@ -97,11 +97,13 @@
   <ItemGroup>
     <Compile Include="Controllers\LoginWidgetController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
+    <Compile Include="Controllers\RegistrationWidgetController.cs" />
     <Compile Include="LoginWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginWidgetViewModel.cs" />
     <Compile Include="Models\ProfileTypeViewModel.cs" />
+    <Compile Include="Models\RegistrationWidgetEditModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\ProfilesPluginOperations.cs" />
     <Compile Include="ProfilesPlugin.cs" />
@@ -109,6 +111,9 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegistrationWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -116,7 +121,11 @@
     </Compile>
     <Compile Include="Verbs\ProfileTypeAdminVerb.cs" />
     <Compile Include="Verbs\Widgets\LoginWidgetViewerVerb.cs" />
+    <Compile Include="Verbs\Widgets\RegistrationWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\RegistrationWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\RegistrationWidgetViewerVerb.cs" />
     <Compile Include="Widgets\LoginWidget.cs" />
+    <Compile Include="Widgets\RegistrationWidget.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\PluginConfig.xml">

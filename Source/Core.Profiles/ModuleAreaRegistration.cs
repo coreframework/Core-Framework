@@ -19,6 +19,9 @@ namespace Core.Profiles
             context.MapRoute("LoginWidget.View", "login-widget/view", ProfilesMVC.LoginWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("LoginWidget.PostForm", "login-widget/create-session", ProfilesMVC.LoginWidget.CreateUserSession(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("LoginWidget.Logout", "login-widget/delete-session", ProfilesMVC.LoginWidget.DeleteUserSession(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("RegistrationWidget.View", "registration-widget/view", ProfilesMVC.RegistrationWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("RegistrationWidget.Edit", "registration-widget/edit", ProfilesMVC.RegistrationWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("RegistrationWidget.Update", "registration-widget/update", ProfilesMVC.RegistrationWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
             context.MapRoute("Admin.ProfileTypes", "admin/profiles", new { controller = "ProfileType", action = "Show", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/profiles/load-data", new { controller = "ProfileType", action = "LoadData", id = String.Empty });
@@ -27,7 +30,6 @@ namespace Core.Profiles
             context.MapRoute(null, "admin/profiles/change-language", new { controller = "ProfileType", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/profiles/save", ProfilesMVC.ProfileType.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/profiles/remove/{profileTypeId}", ProfilesMVC.ProfileType.Remove());
-
         }
     }
 }
