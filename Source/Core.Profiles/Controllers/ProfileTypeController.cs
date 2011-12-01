@@ -93,7 +93,7 @@ namespace Core.Profiles.Controllers
         {
             if (ModelState.IsValid)
             {
-                var newProfileType = profileType.MapTo(new ProfileType { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null });
+                var newProfileType = profileType.MapTo(new ProfileType { UserId = this.CorePrincipal() != null ? this.CorePrincipal().PrincipalId : (long?)null, CreateDate = DateTime.Now });
                 if (profileTypeService.Save(newProfileType))
                 {
                     Success(HttpContext.Translate("Messages.Success", String.Empty));

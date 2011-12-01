@@ -5,6 +5,7 @@ using Core.Profiles.NHibernate.Contracts;
 using Core.Profiles.NHibernate.Models;
 using Framework.Facilities.NHibernate;
 using NHibernate;
+using NHibernate.Criterion;
 
 namespace Core.Profiles.NHibernate.Services
 {
@@ -24,7 +25,14 @@ namespace Core.Profiles.NHibernate.Services
 
         public ICriteria GetSearchCriteria(string searchString)
         {
-            throw new NotImplementedException();
+            ICriteria criteria = Session.CreateCriteria<ProfileTypeLocale>();
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                criteria.Add(Restrictions.Like("Title", searchString, MatchMode.Anywhere));
+            }
+
+            return criteria.SetCacheable(true);
         }
     }
 }

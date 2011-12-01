@@ -1,0 +1,10 @@
+Views:
+  ProfileType:
+    Show:
+      AddProfileType: "Add Profile Type"
+    NewProfileType: "New profile type"
+    EditProfileType: "Edit profile type"
+    Common: "Common information"
+    Language: "Language"
+    Details: "Details"
+ 

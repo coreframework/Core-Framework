@@ -1,0 +1,5 @@
+Controllers:
+  ProfileType:
+    Title: "Title"
+    Actions: "Actions"
+    Details: "Details"
