@@ -4,9 +4,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
 using Core.Framework.Permissions.Models;
-using Framework.Core.DomainModel;
+using FluentNHibernate.Data;
 
 namespace Core.Web.NHibernate.Models.Permissions
 {

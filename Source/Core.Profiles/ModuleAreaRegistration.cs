@@ -30,6 +30,11 @@ namespace Core.Profiles
             context.MapRoute(null, "admin/profiles/change-language", new { controller = "ProfileType", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/profiles/save", ProfilesMVC.ProfileType.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/profiles/remove/{profileTypeId}", ProfilesMVC.ProfileType.Remove());
+
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/elements", new { controller = "ProfileElement", action = "Show", area = AreaName, profileTypeId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/load-data", new { controller = "ProfileElement", action = "LoadData", id = String.Empty, area = AreaName });
+            context.MapRoute(null, "admin/profiles/elements/update-positions", ProfilesMVC.ProfileElement.UpdateProfileElementPosition());
+
         }
     }
 }

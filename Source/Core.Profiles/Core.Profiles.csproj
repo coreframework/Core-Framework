@@ -96,17 +96,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\LoginWidgetController.cs" />
+    <Compile Include="Controllers\ProfileElementController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
     <Compile Include="Controllers\RegistrationWidgetController.cs" />
     <Compile Include="Helpers\RegistrationWidgetHelper.cs" />
+    <Compile Include="Helpers\ProfileHelper.cs" />
     <Compile Include="LoginWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginWidgetViewModel.cs" />
+    <Compile Include="Models\ProfileElementGridModel.cs" />
+    <Compile Include="Models\ProfileElementGridModelType.cs" />
+    <Compile Include="Models\ProfileElementViewModel.cs" />
     <Compile Include="Models\ProfileTypeViewModel.cs" />
     <Compile Include="Models\RegistrationWidgetEditModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\ProfilesPluginOperations.cs" />
+    <Compile Include="ProfileElementController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ProfilesPlugin.cs" />
     <Compile Include="ProfileTypeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -136,6 +144,23 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\LoginWidget\ViewWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileElement\EditFormElement.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileElement\FormElementEditor.ascx">
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileElement\FormElements.aspx">
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileElement\New.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileElement\Show.aspx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\ProfileType\Edit.aspx">

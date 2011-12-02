@@ -69,21 +69,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\IProfileHeaderLocaleService.cs" />
+    <Compile Include="Contracts\IProfileHeaderService.cs" />
+    <Compile Include="Contracts\IProfileElementLocaleService.cs" />
+    <Compile Include="Contracts\IProfileElementService.cs" />
     <Compile Include="Contracts\IProfileTypeLocaleService.cs" />
     <Compile Include="Contracts\IProfileTypeService.cs" />
     <Compile Include="Contracts\IRegistrationWidgetService.cs" />
     <Compile Include="CoreProfilesNHibernateModule.cs" />
+    <Compile Include="Mappings\ProfileHeaderLocaleMapping.cs" />
+    <Compile Include="Mappings\ProfileHeaderMapping.cs" />
+    <Compile Include="Mappings\ProfileElementLocaleMapping.cs" />
+    <Compile Include="Mappings\ProfileElementMapping.cs" />
     <Compile Include="Mappings\ProfileTypeLocaleMapping.cs" />
     <Compile Include="Mappings\ProfileTypeMapping.cs" />
     <Compile Include="Mappings\RegistrationWidgetMapping.cs" />
     <Compile Include="Models\ProfileElement.cs" />
     <Compile Include="Models\ProfileElementLocale.cs" />
+    <Compile Include="Models\ProfileElementType.cs" />
     <Compile Include="Models\ProfileHeader.cs" />
     <Compile Include="Models\ProfileHeaderLocale.cs" />
     <Compile Include="Models\ProfileType.cs" />
     <Compile Include="Models\ProfileTypeLocale.cs" />
     <Compile Include="Models\RegistrationWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\NHibernateProfileHeaderLocaleService.cs" />
+    <Compile Include="Services\NHibernateProfileHeaderService.cs" />
+    <Compile Include="Services\NHibernateProfileElementLocaleService.cs" />
+    <Compile Include="Services\NHibernateProfileElementService.cs" />
     <Compile Include="Services\NHibernateProfileTypeLocaleService.cs" />
     <Compile Include="Services\NHibernateProfileTypeService.cs" />
     <Compile Include="Services\NHibernateRegistrationWidgetService.cs" />
@@ -105,9 +118,7 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Permissions\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

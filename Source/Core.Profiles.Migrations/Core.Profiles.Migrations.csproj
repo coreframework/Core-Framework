@@ -52,8 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migration_AddPageTypeLocales.cs" />
-    <Compile Include="Migration_AddPageTypes.cs" />
+    <Compile Include="Migration_AddProfileElementLocales.cs" />
+    <Compile Include="Migration_AddProfileElements.cs" />
+    <Compile Include="Migration_AddProfileHeaderLocales.cs" />
+    <Compile Include="Migration_AddProfileHeaders.cs" />
+    <Compile Include="Migration_AddProfileTypeLocales.cs" />
+    <Compile Include="Migration_AddProfileTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
