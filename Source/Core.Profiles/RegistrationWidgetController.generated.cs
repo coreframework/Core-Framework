@@ -38,6 +38,11 @@ namespace Core.Profiles.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult RegisterUser() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.RegisterUser);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult EditWidget() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.EditWidget);
         }
@@ -60,6 +65,7 @@ namespace Core.Profiles.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly String  ViewWidget = "ViewWidget";
+            public readonly String  RegisterUser = "RegisterUser";
             public readonly String  EditWidget = "EditWidget";
             public readonly String  UpdateWidget = "UpdateWidget";
         }
@@ -70,6 +76,8 @@ namespace Core.Profiles.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly String  EditWidget = "~/Views/RegistrationWidget/EditWidget.ascx";
+            public readonly String  ViewWidget = "~/Views/RegistrationWidget/ViewWidget.ascx";
         }
     }
 
@@ -80,6 +88,12 @@ namespace Core.Profiles.Controllers {
         public override System.Web.Mvc.ActionResult ViewWidget(Core.Framework.Plugins.Web.ICoreWidgetInstance instance) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
             callInfo.RouteValueDictionary.Add("instance", instance);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RegisterUser(Core.Profiles.Models.RegistrationWidgetViewModel model) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RegisterUser);
+            callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 

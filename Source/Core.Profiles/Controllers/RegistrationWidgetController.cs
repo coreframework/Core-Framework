@@ -2,6 +2,8 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Contracts;
+using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Profiles.Helpers;
 using Core.Profiles.Models;
@@ -50,21 +52,46 @@ namespace Core.Profiles.Controllers
         [ChildActionOnly]
         public virtual ActionResult ViewWidget(ICoreWidgetInstance instance)
         {
-            /*if (instance != null)
+            if (instance != null && instance.InstanceId.HasValue)
             {
-                var widget = WebContentWidgetHelper.BindWidgetModel(instance);
-                if (widget != null)
-                {
-                    if (widget.Article != null)
-                    {
-                        return PartialView("WebContentWidget/DetailsMode", new WidgetDetailsModel(widget.Article, true));
-                    }
+                var widgetModel = RegistrationWidgetHelper.BindWidgetModel(instance);
 
-                    return PartialView("ListingMode", WebContentWidgetHelper.BindListingModel(widget, 1));
-                }
+                return PartialView(widgetModel);
             }
-            return Content(HttpContext.Translate("Messages.Setup", ResourceHelper.GetControllerScope(this)));*/
-            return Content(String.Empty);
+
+            return Content(HttpContext.Translate("Messages.SetupRegistrationForm", ResourceHelper.GetControllerScope(this)));
+        }
+
+        public virtual ActionResult RegisterUser(RegistrationWidgetViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var userService = ServiceLocator.Current.GetInstance<IBaseUserService>();
+                var user = new BaseUser();
+                model.MapTo(user);
+                
+                /*userService.SetPassword(user, model.Password);
+                userService.Save(user);
+                Success(Translate("Messages.UserCreated"));
+                return RedirectToAction(MVC.Admin.User.Index());*/
+            }
+            
+
+//            if (ModelState.IsValid)
+//            {
+//                BaseUser user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
+//                if (user == null || !userService.VerifyPassword(user, model.Password))
+//                {
+//                    Error(HttpContext.Translate("Messages.InvalidUserCredentials", String.Empty));
+//                }
+//                else
+//                {
+//                    authenticationHelper.LoginUser(user, model.RememberMe);
+//                    model.IsSuccessfulLogin = true;
+//                }
+//            }
+
+            return PartialView("ViewWidget", model);
         }
 
         /// <summary>

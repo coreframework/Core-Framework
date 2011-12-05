@@ -110,6 +110,7 @@
     <Compile Include="Models\ProfileElementViewModel.cs" />
     <Compile Include="Models\ProfileTypeViewModel.cs" />
     <Compile Include="Models\RegistrationWidgetEditModel.cs" />
+    <Compile Include="Models\RegistrationWidgetViewModel.cs" />
     <Compile Include="ModuleAreaRegistration.cs" />
     <Compile Include="Permissions\Operations\ProfilesPluginOperations.cs" />
     <Compile Include="ProfileElementController.generated.cs">
@@ -176,6 +177,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\RegistrationWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\RegistrationWidget\ViewWidget.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Web.config" />

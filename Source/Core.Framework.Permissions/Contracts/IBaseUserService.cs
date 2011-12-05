@@ -1,9 +1,10 @@
 ﻿using System;
 using Core.Framework.Permissions.Models;
+using Framework.Core.Services;
 
 namespace Core.Framework.Permissions.Contracts
 {
-    public interface IBaseUserService
+    public interface IBaseUserService// : IDataService<BaseUser>
     {
         /// <summary>
         /// Gets the user by email or username.
