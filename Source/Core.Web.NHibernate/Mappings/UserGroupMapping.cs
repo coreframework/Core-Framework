@@ -1,4 +1,4 @@
-﻿using Core.Web.NHibernate.Models;
+﻿using Core.Framework.NHibernate.Models;
 using FluentNHibernate.Mapping;
 
 namespace Core.Web.NHibernate.Mappings

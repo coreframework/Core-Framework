@@ -1,0 +1,4 @@
+Controllers:
+  RegistrationWidget:
+    Messages:
+      SetupRegistrationForm: "Setup registration form."

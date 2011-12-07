@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.NHibernate.Contracts;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
@@ -66,7 +67,7 @@ namespace Core.Profiles.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userService = ServiceLocator.Current.GetInstance<IBaseUserService>();
+                var userService = ServiceLocator.Current.GetInstance<IUserService>();
                 var user = new BaseUser();
                 model.MapTo(user);
                 

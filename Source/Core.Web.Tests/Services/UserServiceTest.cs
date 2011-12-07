@@ -1,5 +1,5 @@
-﻿using Core.Web.NHibernate.Contracts;
-using Core.Web.NHibernate.Models;
+﻿using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using NUnit.Framework;
 
 namespace Core.Web.Tests.Services

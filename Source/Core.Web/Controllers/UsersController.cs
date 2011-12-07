@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Web.Mvc;
+using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Authentication;
-using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.Models;
-using Core.Web.NHibernate.Contracts;
-using Core.Web.NHibernate.Models;
 using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;
 
@@ -54,7 +53,7 @@ namespace Core.Web.Controllers
             var authenticationHelper = ServiceLocator.Current.GetInstance<IAuthenticationHelper>();
             if (ModelState.IsValid)
             {
-                BaseUser user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
+                User user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
                 if (user == null || !userService.VerifyPassword(user, model.Password))
                 {
                     Error(Translate("Messages.InvalidUserCredentials"));

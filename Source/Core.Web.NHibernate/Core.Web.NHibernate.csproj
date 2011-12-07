@@ -113,10 +113,6 @@
     <Compile Include="Contracts\IPageSettingService.cs" />
     <Compile Include="Contracts\IPageWidgetSettingService.cs" />
     <Compile Include="Contracts\IPluginLocaleService.cs" />
-    <Compile Include="Contracts\IRoleLocaleService.cs" />
-    <Compile Include="Contracts\IRoleService.cs" />
-    <Compile Include="Contracts\IUserGroupService.cs" />
-    <Compile Include="Contracts\IUserService.cs" />
     <Compile Include="Contracts\IWidgetLocaleService.cs" />
     <Compile Include="Contracts\IWidgetService.cs" />
     <Compile Include="Contracts\IPageWidgetService.cs" />
@@ -169,11 +165,9 @@
     <Compile Include="Models\Permissions\EntityType.cs" />
     <Compile Include="Models\Permissions\Permission.cs" />
     <Compile Include="Models\PluginLocale.cs" />
-    <Compile Include="Models\RoleLocale.cs" />
     <Compile Include="Models\SiteSettings.cs" />
     <Compile Include="Models\Static\PageSection.cs" />
     <Compile Include="Models\Static\SystemRole.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\LookAndFeelSettings.cs" />
     <Compile Include="Models\PageLayout.cs" />
     <Compile Include="Models\PageLayoutColumn.cs" />
@@ -182,10 +176,7 @@
     <Compile Include="Models\PageLayoutTemplate.cs" />
     <Compile Include="Models\PageSettings.cs" />
     <Compile Include="Models\PageWidgetSettings.cs" />
-    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Static\Orientation.cs" />
-    <Compile Include="Models\UserGroup.cs" />
-    <Compile Include="Models\UserStatus.cs" />
     <Compile Include="Models\WidgetLocale.cs" />
     <Compile Include="Models\WidgetStatus.cs" />
     <Compile Include="Models\Migration.cs" />
@@ -231,6 +222,10 @@
     <Compile Include="Services\Widgets\NHibernateSiteMapWidgetService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core.Framework.NHibernate\Core.Framework.NHibernate.csproj">
+      <Project>{C7924D8F-ABD9-4E2A-8525-4E7508384DA5}</Project>
+      <Name>Core.Framework.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
       <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
       <Name>Core.Framework.Permissions</Name>

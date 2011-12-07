@@ -1217,6 +1217,10 @@
       <Project>{A9E75C6E-5446-4A42-A9F3-84B0BE3859C0}</Project>
       <Name>Core.Framework.MEF</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.NHibernate\Core.Framework.NHibernate.csproj">
+      <Project>{C7924D8F-ABD9-4E2A-8525-4E7508384DA5}</Project>
+      <Name>Core.Framework.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
       <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
       <Name>Core.Framework.Permissions</Name>

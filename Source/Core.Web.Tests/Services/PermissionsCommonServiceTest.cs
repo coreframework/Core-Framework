@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using Core.Framework.NHibernate.Models;
 using Core.Web.NHibernate.Models.Static;
 using FluentNHibernate.Data;
 

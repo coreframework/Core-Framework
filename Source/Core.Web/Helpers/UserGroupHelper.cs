@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using Core.Web.Areas.Admin.Models;
-using Core.Web.NHibernate.Contracts;
-using Core.Web.NHibernate.Models;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Web.Helpers

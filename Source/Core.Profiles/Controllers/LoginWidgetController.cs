@@ -2,6 +2,8 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Authentication;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
@@ -41,11 +43,11 @@ namespace Core.Profiles.Controllers
         /// <returns>Authentication result.</returns>
         public virtual ActionResult CreateUserSession(LoginWidgetViewModel model)
         {
-            var userService = ServiceLocator.Current.GetInstance<IBaseUserService>();
+            var userService = ServiceLocator.Current.GetInstance<IUserService>();
             var authenticationHelper = ServiceLocator.Current.GetInstance<IAuthenticationHelper>();
             if (ModelState.IsValid)
             {
-                BaseUser user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
+                User user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
                 if (user == null || !userService.VerifyPassword(user, model.Password))
                 {
                     Error(HttpContext.Translate("Messages.InvalidUserCredentials", String.Empty));

@@ -212,6 +212,10 @@
       <Name>Core.Framework.MEF</Name>
       <Private>False</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.NHibernate\Core.Framework.NHibernate.csproj">
+      <Project>{C7924D8F-ABD9-4E2A-8525-4E7508384DA5}</Project>
+      <Name>Core.Framework.NHibernate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
       <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
       <Name>Core.Framework.Permissions</Name>
@@ -271,6 +275,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Models\models.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\controllers.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\verbs.ru.yml">

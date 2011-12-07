@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Core.Web.NHibernate.Models;
+using Core.Framework.NHibernate.Models;
 using Framework.Core.DomainModel;
 
 namespace Core.Web.Areas.Admin.Models

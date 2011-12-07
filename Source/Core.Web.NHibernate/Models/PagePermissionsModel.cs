@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Models.Permissions;
 

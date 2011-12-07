@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Contracts.Permissions;
-using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Permissions;
 using Core.Web.NHibernate.Models.Static;
 using Framework.Core.Extensions;

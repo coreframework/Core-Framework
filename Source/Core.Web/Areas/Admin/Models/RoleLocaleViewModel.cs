@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
-using Core.Web.NHibernate.Models;
+using Core.Framework.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
 

@@ -74,7 +74,6 @@
   <ItemGroup>
     <Compile Include="Authentication\FormsAuthenticationHelper.cs" />
     <Compile Include="Authentication\IAuthenticationHelper.cs" />
-    <Compile Include="Contracts\IBaseUserService.cs" />
     <Compile Include="Contracts\IPageCommonService.cs" />
     <Compile Include="Contracts\IPermissionCommonService.cs" />
     <Compile Include="Contracts\IPermissionsHelper.cs" />

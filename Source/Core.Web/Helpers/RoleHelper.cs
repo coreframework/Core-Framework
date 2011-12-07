@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Permissions;
-using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Permissions;
 using Microsoft.Practices.ServiceLocation;
 

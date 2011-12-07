@@ -144,3 +144,6 @@
 /Source/Core.Profiles.NHibernate/obj
 /Source/Core.Web/Areas/Profiles
 /Source/Core.Web.Migrations/Core.Web.Migrations.csproj.user
+/Source/Core.Framework.NHibernate/bin
+/Source/Core.Framework.NHibernate/obj
+/Source/Core.Framework.Permissions/Core.Framework.Permissions.csproj.user

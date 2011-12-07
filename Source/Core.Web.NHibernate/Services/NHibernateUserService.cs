@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Security.Policy;
 using Castle.Facilities.NHibernateIntegration;
-using Core.Framework.Permissions.Contracts;
+using Core.Framework.NHibernate.Contracts;
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
-using Core.Web.NHibernate.Contracts;
-using Core.Web.NHibernate.Models;
 using Framework.Facilities.NHibernate;
 
 namespace Core.Web.NHibernate.Services
@@ -187,7 +185,7 @@ namespace Core.Web.NHibernate.Services
         /// <returns>
         /// User with specified email or username or <c>null</c>.
         /// </returns>
-        public BaseUser FindByEmailOrUsername(String emailOrUsername)
+        public User FindByEmailOrUsername(String emailOrUsername)
         {
             var query = from user in CreateQuery()
                         where user.Email == emailOrUsername || user.Username == emailOrUsername
@@ -204,7 +202,7 @@ namespace Core.Web.NHibernate.Services
         /// <returns>
         ///     <c>true</c> if <paramref name="user"/> password is valid; otherwise <c>false</c>.
         /// </returns>
-        public bool VerifyPassword(BaseUser user, String password)
+        public bool VerifyPassword(User user, String password)
         {
             return PasswordHelper.Verify(password, new PasswordHash { Hash = user.Hash, Salt = user.Salt }, user.EncryptionMode);
         }

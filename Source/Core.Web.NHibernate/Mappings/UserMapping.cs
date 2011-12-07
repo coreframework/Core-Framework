@@ -1,5 +1,5 @@
-﻿using Core.Framework.Permissions.Models;
-using Core.Web.NHibernate.Models;
+﻿using Core.Framework.NHibernate.Models;
+using Core.Framework.Permissions.Models;
 using FluentNHibernate.Mapping;
 
 namespace Core.Web.NHibernate.Mappings

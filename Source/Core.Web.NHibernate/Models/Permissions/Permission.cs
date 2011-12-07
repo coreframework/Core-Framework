@@ -4,6 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
 

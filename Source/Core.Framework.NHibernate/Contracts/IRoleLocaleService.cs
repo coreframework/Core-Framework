@@ -3,7 +3,7 @@ using Core.Framework.NHibernate.Models;
 using Framework.Core.Services;
 using NHibernate;
 
-namespace Core.Web.NHibernate.Contracts
+namespace Core.Framework.NHibernate.Contracts
 {
     public interface IRoleLocaleService : IDataService<RoleLocale>
     {
