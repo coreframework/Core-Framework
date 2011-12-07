@@ -61,8 +61,6 @@
       <HintPath>..\..\Libs\ECM7.Migrator\ECM7.Migrator.Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.Build.Framework" />
-    <Reference Include="Microsoft.Build.Utilities.v4.0" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -90,11 +88,6 @@
     <ProjectReference Include="..\Framework.Migrator\Framework.Migrator.csproj">
       <Project>{06ADA971-CAD6-42DC-8E42-AD242B594784}</Project>
       <Name>Framework.Migrator</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\Framework.MSBuild\Framework.MSBuild.csproj">
-      <Project>{260CA38B-D626-443C-A5B0-61094CF8462B}</Project>
-      <Name>Framework.MSBuild</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
