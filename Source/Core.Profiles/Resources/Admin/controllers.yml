@@ -3,3 +3,7 @@ Controllers:
     Title: "Title"
     Actions: "Actions"
     Details: "Details"
+  ProfileElement:
+    Title: "Title"
+    Type: "Type"
+    Edit: "Edit"

@@ -1,12 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"Inherits="System.Web.Mvc.ViewPage<Core.Profiles.Models.ProfileElementViewModel>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Profiles.Models.ProfileHeaderViewModel>" %>
+<%@ Assembly Name="Core.Profiles"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%:Html.Translate("NewProfileElement", "Profiles.Views.ProfileType")%>
+   <%:Html.Translate("NewProfileHeader", "Profiles.Views.ProfileType")%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>
-    <%:Html.Translate("NewProfileElement", "Profiles.Views.ProfileType")%>
+    <%:Html.Translate("NewProfileHeader", "Profiles.Views.ProfileType")%>
   </h1>
   <div class="tabs clrfix">
 	<ul class="i-tab clrfix">
@@ -31,10 +32,9 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
   <%: Html.ValidationSummary(true) %>
-  <% using (Html.BeginForm(FormMethod.Post))
-           {%> 
+  <% using (Html.BeginForm()) {%>
         <div class="i_form clrfix">    
-            <% Html.RenderPartial("ProfileElementDetails", Model); %>
+            <% Html.RenderPartial("HeaderDetails", Model); %>
         </div>
   <% }%>
 </asp:Content>

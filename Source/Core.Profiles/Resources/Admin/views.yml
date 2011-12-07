@@ -7,4 +7,12 @@ Views:
     Common: "Common information"
     Language: "Language"
     Details: "Details"
+    Elements: "Elements"
+    NewProfileHeader: "New profile header"
+    Language: "Language"
+    EdetElementHeader: "Edet element header"
+    Title: "Title"
+    NewProfileElement: "New profile element"
+    EdetElement: "Edit element"
+    ProfileElements: "Profile elements"
  

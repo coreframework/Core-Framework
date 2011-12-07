@@ -19,6 +19,9 @@ namespace Core.Profiles.Migrations
                 t.PrimaryKey();
                 t.Integer("Type");
                 t.Bool("IsRequired").Default(0);
+                t.Bool("ShowOnMemberProfile");
+                t.Bool("ShowOnMemberPublicProfile");
+                t.Bool("ShowOnMemberRegistration");
                 t.Integer("OrderNumber");
                 t.Long("MaxLength").Null();
                 t.ForeignKey("ProfileHeader").Table("Profiles_ProfileHeaders").Column("ProfileHeaderId").OnDelete(ForeignKeyConstraint.Cascade);

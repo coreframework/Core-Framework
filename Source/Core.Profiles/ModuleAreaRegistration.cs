@@ -32,10 +32,21 @@ namespace Core.Profiles
             context.MapRoute(null, "admin/profiles/save", ProfilesMVC.ProfileType.Save(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute(null, "admin/profiles/remove/{profileTypeId}", ProfilesMVC.ProfileType.Remove());
 
-            context.MapRoute(null, "admin/profiles/{profileTypeId}/elements", new { controller = "ProfileElement", action = "Show", area = AreaName, profileTypeId = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/elements", new { controller = "ProfileElement", action = "Show", area = AreaName, profileTypeId = UrlParameter.Optional, parentController = "ProfileType" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/profiles/{profileTypeId}/load-data", new { controller = "ProfileElement", action = "LoadData", id = String.Empty, area = AreaName });
             context.MapRoute(null, "admin/profiles/elements/update-positions", ProfilesMVC.ProfileElement.UpdateProfileElementPosition());
 
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/headers/new", new { controller = "ProfileHeader", action = "New", area = AreaName, profileTypeId = UrlParameter.Optional, parentController = "ProfileType" });
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/headers/remove", new { controller = "ProfileHeader", action = "Remove", area = AreaName, profileTypeId = UrlParameter.Optional });
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/headers/details/{profileHeaderId}", new { controller = "ProfileHeader", action = "Edit", area = AreaName, profileTypeId = UrlParameter.Optional, profileHeaderId = UrlParameter.Optional, parentController = "ProfileType" });
+            context.MapRoute("Admin.ChangeProfileHeaderLanguage", "admin/profiles/header/change-language", new { controller = "ProfileHeader", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.SaveProfileHeader", "admin/profiles/{profileTypeId}/headers/save", new { controller = "ProfileHeader", action = "Save", id = String.Empty, parentController = "ProfileType" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/elements/new", new { controller = "ProfileElement", action = "New", area = AreaName, profileTypeId = UrlParameter.Optional, parentController = "ProfileType" });
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/elements/remove", new { controller = "ProfileElement", action = "Remove", area = AreaName, profileTypeId = UrlParameter.Optional });
+            context.MapRoute(null, "admin/profiles/{profileTypeId}/elements/details/{profileElementId}", new { controller = "ProfileElement", action = "Edit", area = AreaName, profileTypeId = UrlParameter.Optional, profileElementId = UrlParameter.Optional, parentController = "ProfileType" });
+            context.MapRoute("Admin.ChangeProfileElementLanguage", "admin/profiles/element/change-language", new { controller = "ProfileElement", action = "ChangeLanguage", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("Admin.SaveProfileElement", "admin/profiles/{profileTypeId}/elements/save", new { controller = "ProfileElement", action = "Save", id = String.Empty, parentController = "ProfileType" }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
         }
     }
 }

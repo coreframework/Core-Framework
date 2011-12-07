@@ -1,2 +1,6 @@
 Titles:
  ProfileTypes: "Profile types"
+ ProfileElements: "Profile elements"
+Actions:
+ AddNewElement: "Add new element"
+ AddHeader: "Add header"

@@ -143,7 +143,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 			table.e_table tr:hover td {background:#cde6fc;color:#000000}
 			em.date-clear, em.delete  {background:url(../../images/admin/delete_ico.gif) no-repeat 0 0;height:11px;width:10px;display:block;}
             em.date-clear {position:relative;right:14px;top:10px;float:left;}
-				em.date-clear:hover, table.e_table tr:hover em.delete {background-position:0 -11px;}
+				em.date-clear:hover, table.e_table tr:hover em.delete, .e_table_area a.delete:hover em.delete {background-position:0 -11px;}
 		.e_table_bottom {background:url(../../images/admin/e_table_bottom_bg.gif) repeat-x 0 0;height:27px;padding:5px 0 4px 5px;}	
 		.e_table_bottom .btn1 {float:left;margin-right:5px;}
 /*-------------------------------------------------JQUERY GRID-------------------------------------------------------------------*/
@@ -213,6 +213,19 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
         .ui-jqgrid .ui-paging-info {font-weight: normal;height:19px; margin-top:3px;padding-right: 5px;}
         .ui-jqgrid .ui-jqgrid-pager .ui-pg-div {padding:1px 0;cursor:pointer; float:left;list-style-image:none;list-style-position:outside;list-style-type:none;position:relative;}
         .ui-jqgrid .ui-jqgrid-pager .ui-pg-div  span.ui-icon {float:left;margin:0 2px;}
+
+        /****Groping*****/
+
+        .e_table_area ul.grouping {color:#474747;}
+        .e_table_area ul.grouping li {padding:8px 0 3px 0;border-bottom:1px solid #E7E7E7;}
+        .e_table_area ul.grouping > li {background:#EDEDED;padding-bottom:0px;}
+        .e_table_area ul.grouping > li span {padding-left:10px;}
+        .e_table_area ul.grouping li ul {background:#fff;margin-top:5px;border-top:1px solid #E7E7E7;}
+        .e_table_area ul.grouping li ul li span {padding-left:15px;}
+        .e_table_area .ui-sortable {cursor:move;}
+        .e_table_area .no-items {border:none !important;}
+        .e_table_area form {float:right;margin-right:10px;cursor:pointer;}
+
 
 /*--------------------------------------------------------------------------------------------------------------------------------*/
 	.info_block {margin-top:16px;}

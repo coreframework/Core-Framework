@@ -69,19 +69,33 @@ namespace Core.Profiles.NHibernate.Models
         public virtual ProfileHeader ProfileHeader { get; set; }
 
         /// <summary>
-        /// Gets or sets the length of the max.
+        /// Gets or sets a value indicating whether [show on member profile].
         /// </summary>
-        /// <value>The length of the max.</value>
-        public virtual long? MaxLength { get; set; }
+        /// <value>
+        /// 	<c>true</c> if [show on member profile]; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool ShowOnMemberProfile { get; set; }
 
-        public virtual Type LocaleType
-        {
-            get
-            {
-                return typeof(ProfileElementLocale);
-            }
-        }
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member public profile].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member public profile]; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool ShowOnMemberPublicProfile { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member registration].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member registration]; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool ShowOnMemberRegistration { get; set; }
+
+        /// <summary>
+        /// Initializes the locale entity.
+        /// </summary>
+        /// <returns></returns>
         public override ILocale InitializeLocaleEntity()
         {
             return new ProfileElementLocale

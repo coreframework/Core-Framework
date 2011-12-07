@@ -5,6 +5,6 @@ namespace Core.Profiles.NHibernate.Contracts
 {
     public interface IProfileElementService : IDataService<ProfileElement>
     {
-
+        int GetLastOrderNumber(long profileHeaderId);
     }
 }

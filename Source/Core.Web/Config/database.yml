@@ -10,10 +10,10 @@ development:
 
 test:
   platform: sqlserver
-  host: erohinr
-  database: corev3_4
+  host: chernogrebela
+  database: coreframework
   username: coreLite
-  password: 111111
+  password: coreLite
   properties:
     hibernate.cache.use_second_level_cache: true
     hibernate.cache.provider_class: NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache

@@ -9,11 +9,28 @@ namespace Core.Profiles.NHibernate.Models
     {
         #region Fields
 
-        private readonly List<ProfileElement> profileElements = new List<ProfileElement>();
+        private readonly IList<ProfileElement> profileElements = new List<ProfileElement>();
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member profile].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member profile]; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool ShowOnMemberProfile { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member registration].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member registration]; otherwise, <c>false</c>.
+        /// </value>
+        public virtual bool ShowOnMemberRegistration { get; set; }
+
         /// <summary>
         /// Gets or sets the title.
         /// </summary>
@@ -40,9 +57,12 @@ namespace Core.Profiles.NHibernate.Models
         /// Gets or sets the profile elements.
         /// </summary>
         /// <value>The profile elements.</value>
-        public virtual IEnumerable<ProfileElement> ProfileElements
+        public virtual IList<ProfileElement> ProfileElements
         {
-            get { return profileElements; }
+            get
+            {
+                return profileElements;
+            }
         }
 
         /// <summary>

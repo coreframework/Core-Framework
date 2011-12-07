@@ -14,7 +14,10 @@ namespace Core.Profiles.NHibernate.Mappings
             Map(profileElement => profileElement.Type).CustomType(typeof(ProfileElementType)).Nullable();
             Map(profileElement => profileElement.OrderNumber);
             Map(profileElement => profileElement.IsRequired);
-            Map(profileElement => profileElement.MaxLength);
+            Map(profileElement => profileElement.ShowOnMemberProfile);
+            Map(profileElement => profileElement.ShowOnMemberPublicProfile);
+            Map(profileElement => profileElement.ShowOnMemberRegistration);
+
             References(profileElement => profileElement.ProfileHeader).Column("ProfileHeaderId");
 
             HasMany(profileElement => profileElement.CurrentLocales).KeyColumn("ProfileElementId")

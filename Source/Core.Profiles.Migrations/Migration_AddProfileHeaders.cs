@@ -18,6 +18,8 @@ namespace Core.Profiles.Migrations
             {
                 t.PrimaryKey();
                 t.Integer("OrderNumber");
+                t.Bool("ShowOnMemberProfile");
+                t.Bool("ShowOnMemberRegistration");
                 t.ForeignKey("ProfileType").Table("Profiles_ProfileTypes").OnDelete(ForeignKeyConstraint.Cascade);
 
             });

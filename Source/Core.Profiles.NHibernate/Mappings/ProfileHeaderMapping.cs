@@ -12,6 +12,8 @@ namespace Core.Profiles.NHibernate.Mappings
             Table("Profiles_ProfileHeaders");
             Id(profileHeader => profileHeader.Id);
             Map(profileHeader => profileHeader.OrderNumber);
+            Map(profileHeader => profileHeader.ShowOnMemberProfile);
+            Map(profileHeader => profileHeader.ShowOnMemberRegistration);
             References(profileHeader => profileHeader.ProfileType);
 
             HasMany(profileHeader => profileHeader.ProfileElements).KeyColumn("ProfileHeaderId")

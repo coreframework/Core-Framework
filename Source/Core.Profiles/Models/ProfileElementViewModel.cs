@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
+using Core.Profiles.NHibernate.Contracts;
 using Core.Profiles.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Profiles.Models
 {
@@ -16,6 +17,8 @@ namespace Core.Profiles.Models
 
         private IDictionary<String, String> cultures;
 
+        private List<ProfileHeader> profileHeaders;
+
         #endregion
 
         /// <summary>
@@ -23,6 +26,35 @@ namespace Core.Profiles.Models
         /// </summary>
         /// <value>The id.</value>
         public virtual long Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the profile type id.
+        /// </summary>
+        /// <value>The profile type id.</value>
+        public long ProfileTypeId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member profile].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member profile]; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowOnMemberProfile { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member public profile].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member public profile]; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowOnMemberPublicProfile { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [show on member registration].
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if [show on member registration]; otherwise, <c>false</c>.
+        /// </value>
+        public bool ShowOnMemberRegistration { get; set; } 
 
         /// <summary>
         /// Gets or sets the title.
@@ -46,15 +78,6 @@ namespace Core.Profiles.Models
         public virtual bool IsRequired { get; set; }
 
         /// <summary>
-        /// Gets or sets the types.
-        /// </summary>
-        /// <value>The types.</value>
-    /*    public List<ElementTypeDescriptionModel> Types
-        {
-            get { return types ?? (types = BindElementTypes()); }
-        }*/
-
-        /// <summary>
         /// Gets or sets the type.
         /// </summary>
         /// <value>The type.</value>
@@ -70,7 +93,7 @@ namespace Core.Profiles.Models
         /// Gets or sets the form id.
         /// </summary>
         /// <value>The form id.</value>
-        public long? FormId { get; set; }
+        public long ProfileHeaderId { get; set; }
 
         /// <summary>
         /// Gets or sets the selected culture.
@@ -88,12 +111,29 @@ namespace Core.Profiles.Models
             set { cultures = value; }
         }
 
+        /// <summary>
+        /// Gets the forms.
+        /// </summary>
+        /// <value>The forms.</value>
+        public List<ProfileHeader> ProfileHeaders
+        {
+            get
+            {
+                if (profileHeaders == null)
+                {
+                    var profileHeaderService = ServiceLocator.Current.GetInstance<IProfileHeaderService>();
+                    profileHeaders = (List<ProfileHeader>)profileHeaderService.GetProfileHeaders(ProfileTypeId);
+                }
+                return profileHeaders;
+            }
+        }
+
         public ProfileElementViewModel MapFrom(ProfileElement from)
         {
             Id = from.Id;
-            MaxLength = from.MaxLength;
             Type = from.Type;
             IsRequired = from.IsRequired;
+            ProfileHeaderId = from.ProfileHeader != null ? from.ProfileHeader.Id : 0;
             MapLocaleFrom(from.CurrentLocale as ProfileElementLocale);
 
             return this;
@@ -104,7 +144,7 @@ namespace Core.Profiles.Models
             to.Id = Id;
             to.IsRequired = IsRequired;
             to.Type = Type;
-            to.MaxLength = MaxLength;
+            to.ProfileHeader = new ProfileHeader { Id = ProfileHeaderId };
             if (String.IsNullOrEmpty(SelectedCulture))
                 MapLocaleTo((ProfileElementLocale)to.CurrentLocale);
             return to;
@@ -127,34 +167,5 @@ namespace Core.Profiles.Models
                 locale.Culture = SelectedCulture;
             return locale;
         }
-
-        /// <summary>
-        /// Binds the element types.
-        /// </summary>
-        /// <returns></returns>
-      /*  private static List<ElementTypeDescriptionModel> BindElementTypes()
-        {
-            var result = new List<ElementTypeDescriptionModel>();
-
-            foreach (var value in Enum.GetValues(typeof(ProfileElementType)))
-            {
-                var elementType = new ElementTypeDescriptionModel { Type = Enum.GetName(typeof(ProfileElementType), value) };
-
-                var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(
-                       typeof(ElementTypeDescriptionAttribute), false).FirstOrDefault() as
-                   ElementTypeDescriptionAttribute;
-
-                if (description != null)
-                {
-                    elementType.IsRequiredEnabled = description.IsRequiredEnabled;
-                    elementType.IsValidationEnabled = description.IsValidationEnabled;
-                    elementType.IsValuesEnabled = description.IsValuesEnabled;
-                    elementType.IsMaxLengthEnabled = description.IsMaxLengthEnabled;
-                }
-
-                result.Add(elementType);
-            }
-            return result;
-        }*/
     }
 }

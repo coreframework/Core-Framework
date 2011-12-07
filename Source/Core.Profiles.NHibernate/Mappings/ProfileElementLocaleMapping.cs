@@ -8,13 +8,13 @@ namespace Core.Profiles.NHibernate.Mappings
     {
         public ProfileElementLocaleMapping()
         {
-            Cache.Region("Profiles_ProfileTypeLocales").ReadWrite();
-            Table("Profiles_ProfileTypeLocales");
-            Id(article => article.Id);
-            Map(profileTypeLocale => profileTypeLocale.Title).Length(255);
-            Map(profileTypeLocale => profileTypeLocale.Culture);
-            References(profileTypeLocale => profileTypeLocale.ProfileElement).Column("ProfileTypeId").LazyLoad().Not.Nullable();
-            Map(widgetLocale => widgetLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
+            Cache.Region("Profiles_ProfileElementLocales").ReadWrite();
+            Table("Profiles_ProfileElementLocales");
+            Id(profileElementLocale => profileElementLocale.Id);
+            Map(profileElementLocale => profileElementLocale.Title).Length(255);
+            Map(profileElementLocale => profileElementLocale.Culture);
+            References(profileElementLocale => profileElementLocale.ProfileElement).Column("ProfileElementId").LazyLoad().Not.Nullable();
+            Map(profileElementLocale => profileElementLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());
         }
     }
 }

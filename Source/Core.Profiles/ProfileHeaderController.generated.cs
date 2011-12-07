@@ -21,9 +21,9 @@ using System.Web.Routing;
 using Framework.Mvc.T4MVC;
 using T4MVC;
 namespace Core.Profiles.Controllers {
-    public partial class ProfileElementController {
+    public partial class ProfileHeaderController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected ProfileElementController(Dummy d) { }
+        protected ProfileHeaderController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
@@ -31,16 +31,6 @@ namespace Core.Profiles.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult Show() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.Show);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult UpdateProfileElementPosition() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.UpdateProfileElementPosition);
-        }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult New() {
@@ -68,19 +58,17 @@ namespace Core.Profiles.Controllers {
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ProfileElementController Actions { get { return ProfilesMVC.ProfileElement; } }
+        public ProfileHeaderController Actions { get { return ProfilesMVC.ProfileHeader; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly String  Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly String  Name = "ProfileElement";
+        public readonly String  Name = "ProfileHeader";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
-            public readonly String  Show = "Show";
-            public readonly String  UpdateProfileElementPosition = "UpdateProfileElementPosition";
             public readonly String  New = "New";
             public readonly String  Edit = "Edit";
             public readonly String  ChangeLanguage = "ChangeLanguage";
@@ -94,30 +82,15 @@ namespace Core.Profiles.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly String  Edit = "~/Views/ProfileElement/Edit.aspx";
-            public readonly String  New = "~/Views/ProfileElement/New.aspx";
-            public readonly String  ProfileElementDetails = "~/Views/ProfileElement/ProfileElementDetails.ascx";
-            public readonly String  Show = "~/Views/ProfileElement/Show.aspx";
+            public readonly String  Edit = "~/Views/ProfileHeader/Edit.aspx";
+            public readonly String  HeaderDetails = "~/Views/ProfileHeader/HeaderDetails.ascx";
+            public readonly String  New = "~/Views/ProfileHeader/New.aspx";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_ProfileElementController: Core.Profiles.Controllers.ProfileElementController {
-        public T4MVC_ProfileElementController() : base(Dummy.Instance) { }
-
-        public override System.Web.Mvc.ActionResult Show(long profileTypeId) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Show);
-            callInfo.RouteValueDictionary.Add("profileTypeId", profileTypeId);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult UpdateProfileElementPosition(long? profileElementId, long? profileHeaderId, int orderNumber) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.UpdateProfileElementPosition);
-            callInfo.RouteValueDictionary.Add("profileElementId", profileElementId);
-            callInfo.RouteValueDictionary.Add("profileHeaderId", profileHeaderId);
-            callInfo.RouteValueDictionary.Add("orderNumber", orderNumber);
-            return callInfo;
-        }
+    public class T4MVC_ProfileHeaderController: Core.Profiles.Controllers.ProfileHeaderController {
+        public T4MVC_ProfileHeaderController() : base(Dummy.Instance) { }
 
         public override System.Web.Mvc.ActionResult New(long profileTypeId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
@@ -125,38 +98,38 @@ namespace Core.Profiles.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult New(long profileTypeId, Core.Profiles.Models.ProfileElementViewModel model) {
+        public override System.Web.Mvc.ActionResult New(long profileTypeId, Core.Profiles.Models.ProfileHeaderViewModel profileHeader) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.New);
             callInfo.RouteValueDictionary.Add("profileTypeId", profileTypeId);
-            callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("profileHeader", profileHeader);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Edit(long profileTypeId, long profileElementId) {
+        public override System.Web.Mvc.ActionResult Edit(long profileTypeId, long profileHeaderId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
             callInfo.RouteValueDictionary.Add("profileTypeId", profileTypeId);
-            callInfo.RouteValueDictionary.Add("profileElementId", profileElementId);
+            callInfo.RouteValueDictionary.Add("profileHeaderId", profileHeaderId);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult ChangeLanguage(long profileElementId, string culture) {
+        public override System.Web.Mvc.ActionResult ChangeLanguage(long profileHeaderId, string culture) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangeLanguage);
-            callInfo.RouteValueDictionary.Add("profileElementId", profileElementId);
+            callInfo.RouteValueDictionary.Add("profileHeaderId", profileHeaderId);
             callInfo.RouteValueDictionary.Add("culture", culture);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Save(long profileTypeId, Core.Profiles.Models.ProfileElementViewModel model) {
+        public override System.Web.Mvc.ActionResult Save(long profileTypeId, Core.Profiles.Models.ProfileHeaderViewModel model) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Save);
             callInfo.RouteValueDictionary.Add("profileTypeId", profileTypeId);
             callInfo.RouteValueDictionary.Add("model", model);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult Remove(long profileElementId, long profileTypeId) {
+        public override System.Web.Mvc.ActionResult Remove(long profileTypeId, long profileHeaderId) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Remove);
-            callInfo.RouteValueDictionary.Add("profileElementId", profileElementId);
             callInfo.RouteValueDictionary.Add("profileTypeId", profileTypeId);
+            callInfo.RouteValueDictionary.Add("profileHeaderId", profileHeaderId);
             return callInfo;
         }
 

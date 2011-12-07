@@ -7,5 +7,7 @@ namespace Core.Profiles.NHibernate.Contracts
     public interface IProfileHeaderService : IDataService<ProfileHeader>
     {
         IEnumerable<ProfileHeader> GetProfileHeaders(long profileId);
+
+        int GetLastOrderNumber(long profileTypeId);
     }
 }

@@ -25,6 +25,7 @@ using T4MVC;
 public static class ProfilesMVC {
     public static Core.Profiles.Controllers.LoginWidgetController LoginWidget = new Core.Profiles.Controllers.T4MVC_LoginWidgetController();
     public static Core.Profiles.Controllers.ProfileElementController ProfileElement = new Core.Profiles.Controllers.T4MVC_ProfileElementController();
+    public static Core.Profiles.Controllers.ProfileHeaderController ProfileHeader = new Core.Profiles.Controllers.T4MVC_ProfileHeaderController();
     public static Core.Profiles.Controllers.ProfileTypeController ProfileType = new Core.Profiles.Controllers.T4MVC_ProfileTypeController();
     public static Core.Profiles.Controllers.RegistrationWidgetController RegistrationWidget = new Core.Profiles.Controllers.T4MVC_RegistrationWidgetController();
 }

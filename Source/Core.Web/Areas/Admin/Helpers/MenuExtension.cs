@@ -72,12 +72,9 @@ namespace Core.Web.Areas.Admin.Helpers
                 if(pagesAccess)
                 {
                     administrationMenuItem.Add(new ActionLink<PageController>(html.Translate(".Pages"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
-                }
-                if (pagesAccess)
-                {
                     administrationMenuItem.Add(new ActionLink<PageTemplateController>(html.Translate(".PageTemplates"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
                 }
-
+   
                 menuItems.Add(html.Translate(".Administration"), administrationMenuItem);
             }
 

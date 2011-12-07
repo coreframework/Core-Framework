@@ -88,7 +88,11 @@ namespace Core.Web.Areas.Admin.Helpers
         /// </returns>
         public bool IsCurrent(RequestContext context)
         {
-            return ((Route)RouteTable.Routes[routeName]).Defaults["Controller"] ==  ((Route)context.RouteData.Route).Defaults["Controller"];
+            return ((Route) RouteTable.Routes[routeName]).Defaults["Controller"] ==
+                   ((Route) context.RouteData.Route).Defaults["Controller"] ||
+                   (((Route) context.RouteData.Route).Defaults["ParentController"] != null &&
+                    ((Route) RouteTable.Routes[routeName]).Defaults["Controller"] ==
+                    ((Route) context.RouteData.Route).Defaults["ParentController"]);
         }
 
         #endregion

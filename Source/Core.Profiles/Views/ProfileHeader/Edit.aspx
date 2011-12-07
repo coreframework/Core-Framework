@@ -1,22 +1,23 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Profiles.Models.ProfileTypeViewModel>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Profiles.Models.ProfileHeaderViewModel>" %>
+<%@ Assembly Name="Core.Profiles"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-   <%:Html.Translate("EditProfileType", "Profiles.Views.ProfileType")%>
+   <%:Html.Translate("EdetElementHeader", "Profiles.Views.ProfileType")%>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="PageTitleContent" runat="server">
   <h1>
-      <%:Html.Translate("EditProfileType", "Profiles.Views.ProfileType")%>
+      <%:Html.Translate("EdetElementHeader", "Profiles.Views.ProfileType")%>
   </h1>
   <div class="tabs clrfix">
 	<ul class="i-tab clrfix">
-        <li class="active">
+        <li>
             <em></em>
             <span>
              <%:Html.ActionLink(Html.Translate("Details", "Profiles.Views.ProfileType"), "Edit", "ProfileType")%>
             </span>
             <strong></strong>
         </li>
-        <li>
+        <li class="active">
             <em></em>
             <span>
              <%:Html.ActionLink(Html.Translate("Elements", "Profiles.Views.ProfileType"), "Show", "ProfileElement")%>
@@ -42,9 +43,10 @@
                 </div>
             </div>
         </div>
-        <% using (Html.BeginForm(ProfilesMVC.ProfileType.Save(), FormMethod.Post)) {%> 
+        <% using (Html.BeginForm(ProfilesMVC.ProfileHeader.Save(), FormMethod.Post))
+           {%> 
             <div id="localeForm">
-                <%Html.RenderPartial("ProfileTypeDetails", Model);%>
+                <%Html.RenderPartial("HeaderDetails", Model);%>
             </div>
          <% }%>
     </div>
@@ -52,11 +54,11 @@
         $(document).ready(function () {
             $('#SelectedCulture').change(function () {
                 var postData = {};
-                postData.sectionId = <%=Model.Id %>;
+                postData.articleId = <%=Model.Id %>;
                 postData.culture = $(this).val();
                 $.ajax({
                 type: "POST",
-                url: "<%=Url.Action("ChangeLanguage", "ProfileType") %>",
+                url: "<%=Url.Action("ChangeLanguage", "ProfileHeader") %>",
                 data: postData,
                 success: function (response) {
                     $('#localeForm div:first').replaceWith(response);
