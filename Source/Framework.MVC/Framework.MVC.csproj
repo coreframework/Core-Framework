@@ -161,6 +161,22 @@
     <Compile Include="Captcha\CaptchaImageHandler.cs" />
     <Compile Include="Controllers\CastleControllerFactory.cs" />
     <Compile Include="Controllers\FrameworkController.cs" />
+    <Compile Include="ElementsTypes\CustomElementAttribute.cs" />
+    <Compile Include="ElementsTypes\Custom\BirthdateAttribute.cs" />
+    <Compile Include="ElementsTypes\Custom\GenderAttribute.cs" />
+    <Compile Include="ElementsTypes\ElementDescriptionAttribute.cs" />
+    <Compile Include="ElementsTypes\ElementType.cs" />
+    <Compile Include="ElementsTypes\Custom\EmailAttribute.cs" />
+    <Compile Include="ElementsTypes\ElementTypeUtility.cs" />
+    <Compile Include="ElementsTypes\Generic\CheckBoxAttribute.cs" />
+    <Compile Include="ElementsTypes\Generic\CaptchaAttribute.cs" />
+    <Compile Include="ElementsTypes\Generic\RadioButtonsAttribute.cs" />
+    <Compile Include="ElementsTypes\Generic\SelectBoxAttribute.cs" />
+    <Compile Include="ElementsTypes\Generic\TextAreaAttribute.cs" />
+    <Compile Include="ElementsTypes\Generic\DateAttribute.cs" />
+    <Compile Include="ElementsTypes\Generic\TextBoxAttribute.cs" />
+    <Compile Include="ElementsTypes\IValidatableElement.cs" />
+    <Compile Include="ElementsTypes\Static\Gender.cs" />
     <Compile Include="Extensions\AssetsExtensions.cs">
       <SubType>Code</SubType>
     </Compile>

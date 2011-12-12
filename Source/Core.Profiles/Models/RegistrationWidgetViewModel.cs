@@ -54,6 +54,16 @@ namespace Core.Profiles.Models
         [DataType(DataType.Password)]
         public String PasswordConfirmation { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is successful registration.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this instance is successful registration; otherwise, <c>false</c>.
+        /// </value>
+        public bool IsSuccessfulRegistration { get; set; }
+
+        public NHibernate.Models.RegistrationWidget Widget { get; set; } 
+
         #endregion
 
         public RegistrationWidgetViewModel MapFrom(BaseUser from)

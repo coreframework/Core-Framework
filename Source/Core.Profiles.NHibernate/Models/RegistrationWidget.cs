@@ -9,6 +9,5 @@ namespace Core.Profiles.NHibernate.Models
         public virtual ProfileType ProfileType { get; set; }
 
         #endregion
-
     }
 }

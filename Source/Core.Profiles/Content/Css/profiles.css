@@ -1,2 +1,15 @@
 ﻿.login-widget .r_info {float:none; padding:0;}
 .login-widget .form_i input.inp_txt {width: 100% !important; min-width:121px; max-width:365px;}
+.register-widget input[type=text], .register-widget textarea {width:365px;}
+.register-widget select {width:371px;}
+.register-widget .field-validation-error {display:block;}
+.register-widget .ui-accordion-content {border:none; padding:0;}
+.register-widget p.profile-header 
+{
+    background: none repeat scroll 0 0 #F2F2F3;
+    margin: 15px 0;
+    padding: 4px;
+    color:#555E6A;
+    font-weight:bold;
+    padding-left:21px;
+}

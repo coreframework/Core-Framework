@@ -5,7 +5,7 @@ a:link{text-decoration:underline;color:#1e65be}
 a:visited{text-decoration:underline;color:#1e65be}
 a:hover{text-decoration:none;color:#1e65be}
 a:active{text-decoration:none;color:#1e65be}
-h1,h2,h3,h4,h5,h6{color:#000;font-weight:normal;margin-top:0;padding-top:0}
+h1,h2,h3,h4,h5,h6{color:#000;font-weight:normal;margin-top:0;padding-top:0;margin-bottom:10px}
 h1{font-size:28px;color:#222}
 h2{font-size:20px;color:#222}
 h3{font-size:18px;color:#222}
@@ -115,7 +115,7 @@ table.widgets,table .widgets td,table.widgets tr{vertical-align:top}
 .form_i label{color:#222;font-weight:bold}
 .form_i label.checkbx-label{position:relative}
 .form_i label span{color:#0f5cbb}
-.form_i input.inp_txt,.form_i textarea.inp_txt{width:460px;margin-top:3px;color:#313131}
+.form_i input[type=text],.form_i textarea{width:460px;margin-top:3px;color:#313131}
 .form_i select{width:468px;margin-top:3px;color:#313131;height:20px}
 .minimized_form_i select{width:100%!important}
 #pageTemplateAccordion .form_i select{width:411px!important}
@@ -238,10 +238,10 @@ img.add_new{margin-right:5px;margin-bottom:-2px}
 .pages-menu ul li ul li .rightarrowclass{position:absolute;top:12px;right:5px;height:7px;width:4px;overflow:hidden;background:url(../images/nav_r.gif) no-repeat 0 -7px}
 .pages-menu ul li ul li:hover .rightarrowclass{background:url(../images/nav_r.gif) no-repeat 0 0}
 .field-validation-error{color:#c00202;font-size:11px}
-.validation_error{color:#c00202;background:url(../images/v_ico_red.gif) no-repeat 14px 10px #fae2e2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px}
-.validation_success{color:#195302;background:url(../images/v_ico_green.gif) no-repeat 14px 10px #ddf7d2;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px}
-.validation_note{color:#2e2d2d;background:url(../images/v_ico_yell.gif) no-repeat 14px 10px #fdf3c9;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px}
-.validation_info{color:#003577;background:url(../images/v_ico_blue.gif) no-repeat 14px 10px #cde6fc;margin-bottom:1px;padding:10px 14px 10px 36px;font-size:12px}.widget-head a.remove,.widget-head a.edit{float:right;margin-right:5px}
+.validation_error{color:#c00202;background:url(../images/v_ico_red.gif) no-repeat 14px 10px #fae2e2;margin-bottom:10px;padding:10px 14px 10px 36px;font-size:12px}
+.validation_success{color:#195302;background:url(../images/v_ico_green.gif) no-repeat 14px 10px #ddf7d2;margin-bottom:10px;padding:10px 14px 10px 36px;font-size:12px}
+.validation_note{color:#2e2d2d;background:url(../images/v_ico_yell.gif) no-repeat 14px 10px #fdf3c9;margin-bottom:10px;padding:10px 14px 10px 36px;font-size:12px}
+.validation_info{color:#003577;background:url(../images/v_ico_blue.gif) no-repeat 14px 10px #cde6fc;margin-bottom:10px;padding:10px 14px 10px 36px;font-size:12px}.widget-head a.remove,.widget-head a.edit{float:right;margin-right:5px}
 .column-placeholder{border:2px solid #999}
 .widget-placeholder{border:1px dashed #999;margin:3px}.colorpicker{width:356px;height:176px;overflow:hidden;position:absolute;background:url(../images/colorpicker/colorpicker_background.png);font-family:Arial,Helvetica,sans-serif;display:none;z-index:1050}
 .colorpicker_color{width:150px;height:150px;left:14px;top:13px;position:absolute;background:#f00;overflow:hidden;cursor:crosshair}

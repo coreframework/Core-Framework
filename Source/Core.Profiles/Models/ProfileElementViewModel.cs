@@ -5,6 +5,7 @@ using Core.Profiles.NHibernate.Contracts;
 using Core.Profiles.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
+using Framework.Mvc.ElementsTypes;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Profiles.Models
@@ -12,8 +13,6 @@ namespace Core.Profiles.Models
     public class ProfileElementViewModel : IMappedModel<ProfileElement, ProfileElementViewModel>
     {
         #region Fields
-
-       /* private List<ElementTypeDescriptionModel> types;*/
 
         private IDictionary<String, String> cultures;
 
@@ -81,7 +80,7 @@ namespace Core.Profiles.Models
         /// Gets or sets the type.
         /// </summary>
         /// <value>The type.</value>
-        public ProfileElementType Type { get; set; }
+        public ElementType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the length of the max.
@@ -131,8 +130,12 @@ namespace Core.Profiles.Models
         public ProfileElementViewModel MapFrom(ProfileElement from)
         {
             Id = from.Id;
-            Type = from.Type;
+            Type = (ElementType) from.Type;
             IsRequired = from.IsRequired;
+            Values = from.ElementValues;
+            ShowOnMemberProfile = from.ShowOnMemberProfile;
+            ShowOnMemberPublicProfile = from.ShowOnMemberPublicProfile;
+            ShowOnMemberRegistration = from.ShowOnMemberRegistration;
             ProfileHeaderId = from.ProfileHeader != null ? from.ProfileHeader.Id : 0;
             MapLocaleFrom(from.CurrentLocale as ProfileElementLocale);
 
@@ -143,7 +146,11 @@ namespace Core.Profiles.Models
         {
             to.Id = Id;
             to.IsRequired = IsRequired;
-            to.Type = Type;
+            to.Type = (int) Type;
+            to.ElementValues = Values;
+            to.ShowOnMemberProfile = ShowOnMemberProfile;
+            to.ShowOnMemberPublicProfile = ShowOnMemberPublicProfile;
+            to.ShowOnMemberRegistration = ShowOnMemberRegistration;
             to.ProfileHeader = new ProfileHeader { Id = ProfileHeaderId };
             if (String.IsNullOrEmpty(SelectedCulture))
                 MapLocaleTo((ProfileElementLocale)to.CurrentLocale);

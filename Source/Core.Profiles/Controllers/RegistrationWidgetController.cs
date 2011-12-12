@@ -2,9 +2,8 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
-using Core.Framework.NHibernate.Contracts;
-using Core.Framework.Permissions.Contracts;
-using Core.Framework.Permissions.Models;
+using Core.Framework.NHibernate.Models;
+using Core.Framework.Permissions.Authentication;
 using Core.Framework.Plugins.Web;
 using Core.Profiles.Helpers;
 using Core.Profiles.Models;
@@ -63,34 +62,40 @@ namespace Core.Profiles.Controllers
             return Content(HttpContext.Translate("Messages.SetupRegistrationForm", ResourceHelper.GetControllerScope(this)));
         }
 
-        public virtual ActionResult RegisterUser(RegistrationWidgetViewModel model)
+        /// <summary>
+        /// Registers the user.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <param name="collection">The collection.</param>
+        /// <returns></returns>
+        public virtual ActionResult RegisterUser(RegistrationWidgetViewModel model, FormCollection collection)
         {
-            if (ModelState.IsValid)
-            {
-                var userService = ServiceLocator.Current.GetInstance<IUserService>();
-                var user = new BaseUser();
-                model.MapTo(user);
-                
-                /*userService.SetPassword(user, model.Password);
-                userService.Save(user);
-                Success(Translate("Messages.UserCreated"));
-                return RedirectToAction(MVC.Admin.User.Index());*/
-            }
-            
+            var widgetService = ServiceLocator.Current.GetInstance<IRegistrationWidgetService>();
+            var authenticationHelper = ServiceLocator.Current.GetInstance<IAuthenticationHelper>();
+            var widget = widgetService.Find(model.PageWidgetId);
 
-//            if (ModelState.IsValid)
-//            {
-//                BaseUser user = userService.FindByEmailOrUsername(model.UsernameOrEmail);
-//                if (user == null || !userService.VerifyPassword(user, model.Password))
-//                {
-//                    Error(HttpContext.Translate("Messages.InvalidUserCredentials", String.Empty));
-//                }
-//                else
-//                {
-//                    authenticationHelper.LoginUser(user, model.RememberMe);
-//                    model.IsSuccessfulLogin = true;
-//                }
-//            }
+            if (widget != null)
+            {
+                RegistrationWidgetHelper.Validate(widget, collection, ModelState);
+                if (ModelState.IsValid)
+                {
+                    User user;
+                    if (RegistrationWidgetHelper.RegisterUser(widget, model, collection, out user) && user.Id > 0)
+                    {
+                        Success(HttpContext.Translate("Messages.UserCreated", String.Empty));
+
+                        authenticationHelper.LoginUser(user, true);
+                        model.IsSuccessfulRegistration = true;
+                    }
+                }
+                else
+                {
+                    ViewData[String.Format("FormCollection{0}", widget.Id)] = collection;
+                    Error(HttpContext.Translate("Messages.ValidationError", String.Empty));
+                }
+
+                model.Widget = widget;
+            }
 
             return PartialView("ViewWidget", model);
         }

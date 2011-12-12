@@ -21,6 +21,8 @@ namespace Core.Profiles.NHibernate
             container.Register(Component.For<IProfileElementLocaleService>().ImplementedBy<NHibernateProfileElementLocaleService>().LifeStyle.Transient);
             container.Register(Component.For<IProfileHeaderService>().ImplementedBy<NHibernateProfileHeaderService>().LifeStyle.Transient);
             container.Register(Component.For<IProfileHeaderLocaleService>().ImplementedBy<NHibernateProfileHeaderLocaleService>().LifeStyle.Transient);
+            container.Register(Component.For<IUserProfileService>().ImplementedBy<NHibernateUserProfileService>().LifeStyle.Transient);
+            container.Register(Component.For<IUserProfileElementService>().ImplementedBy<NHibernateUserProfileElementService>().LifeStyle.Transient);
         }
     }
 }

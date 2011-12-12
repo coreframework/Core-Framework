@@ -91,9 +91,10 @@ namespace Core.Profiles.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult RegisterUser(Core.Profiles.Models.RegistrationWidgetViewModel model) {
+        public override System.Web.Mvc.ActionResult RegisterUser(Core.Profiles.Models.RegistrationWidgetViewModel model, System.Web.Mvc.FormCollection collection) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RegisterUser);
             callInfo.RouteValueDictionary.Add("model", model);
+            callInfo.RouteValueDictionary.Add("collection", collection);
             return callInfo;
         }
 

@@ -12,6 +12,7 @@ namespace Core.Profiles.NHibernate.Mappings
             Table("Profiles_ProfileElementLocales");
             Id(profileElementLocale => profileElementLocale.Id);
             Map(profileElementLocale => profileElementLocale.Title).Length(255);
+            Map(profileElement => profileElement.ElementValues);
             Map(profileElementLocale => profileElementLocale.Culture);
             References(profileElementLocale => profileElementLocale.ProfileElement).Column("ProfileElementId").LazyLoad().Not.Nullable();
             Map(profileElementLocale => profileElementLocale.Priority).Formula(CultureFilter.CultureFilterPriorityExpression());

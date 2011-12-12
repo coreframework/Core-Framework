@@ -11,7 +11,7 @@ namespace Core.Profiles.NHibernate.Mappings
             Cache.Region("Profiles_ProfileElements").ReadWrite();
             Table("Profiles_ProfileElements");
             Id(profileElement => profileElement.Id);
-            Map(profileElement => profileElement.Type).CustomType(typeof(ProfileElementType)).Nullable();
+            Map(profileElement => profileElement.Type);
             Map(profileElement => profileElement.OrderNumber);
             Map(profileElement => profileElement.IsRequired);
             Map(profileElement => profileElement.ShowOnMemberProfile);

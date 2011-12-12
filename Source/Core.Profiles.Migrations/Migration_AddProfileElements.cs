@@ -33,7 +33,7 @@ namespace Core.Profiles.Migrations
         /// </summary>
         public override void Revert()
         {
-            Database.ChangeTable("Profiles_ProfileElements", t => t.RemoveForeignKey("ProfileElementHeader").Table("Profiles_ProfileHeaders").Column("ProfileHeaderId"));
+            Database.ChangeTable("Profiles_ProfileElements", t => t.RemoveForeignKey("ProfileHeader").Table("Profiles_ProfileHeaders").Column("ProfileHeaderId"));
             Database.RemoveTable("Profiles_ProfileElements");
         }
     }

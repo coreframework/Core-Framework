@@ -22,6 +22,15 @@
                 <%:Html.ValidationMessageFor(model => model.Title) %>
             </div>
             <div class="i_form_i">
+                <%:Html.CheckBoxFor(model => model.IsRequired)%>
+                <%:Html.LocalizedLabelFor(model => model.IsRequired)%>
+            </div>
+             <div class="i_form_i">
+                <%:Html.LocalizedLabelFor(model=>model.Values) %>
+                <%:Html.TextBoxFor(model => model.Values)%>
+                <%:Html.ValidationMessageFor(model => model.Values)%>
+            </div>
+            <div class="i_form_i">
                 <%:Html.CheckBoxFor(model => model.ShowOnMemberProfile)%>
                 <%:Html.LocalizedLabelFor(model => model.ShowOnMemberProfile)%>
             </div>

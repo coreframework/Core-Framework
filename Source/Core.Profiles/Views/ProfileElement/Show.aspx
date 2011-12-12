@@ -3,6 +3,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<System.Collections.Generic.List<Core.Profiles.NHibernate.Models.ProfileHeader>>" %>
 <%@ Import Namespace="System.Web.Mvc" %>
 <%@ Import Namespace="Framework.Mvc.Grids" %>
+<%@ Import Namespace="Framework.Mvc.ElementsTypes" %>
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent">
    <%= Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>
@@ -70,6 +71,7 @@
                                      <a href="<%:Url.Action("Edit", "ProfileElement", new {profileElementId = element.Id})%>">
                                         <%:element.Title%>
                                     </a>
+                                    (<%:Enum.GetName(typeof(ElementType), element.Type)%>)
                                 </span>
                                  <%
         using (Html.BeginForm("Remove", "ProfileElement", FormMethod.Post))

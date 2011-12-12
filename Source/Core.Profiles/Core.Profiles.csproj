@@ -28,7 +28,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>..\Core.Web\Areas\Profiles\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -100,6 +100,7 @@
     <Compile Include="Controllers\ProfileHeaderController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
     <Compile Include="Controllers\RegistrationWidgetController.cs" />
+    <Compile Include="Extensions\ProfileExtensions.cs" />
     <Compile Include="Helpers\RegistrationWidgetHelper.cs" />
     <Compile Include="Helpers\ProfileHelper.cs" />
     <Compile Include="LoginWidgetController.generated.cs">

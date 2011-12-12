@@ -9,6 +9,14 @@ namespace Core.Profiles.NHibernate.Models
     /// </summary>
     public class ProfileElement : LocalizableEntity<ProfileElementLocale>
     {
+        #region Fields
+
+        private bool showOnMemberProfile = true;
+        private bool showOnMemberPublicProfile = true;
+        private bool showOnMemberRegistration = true;
+
+        #endregion
+
         #region Properties
         /// <summary>
         /// Gets or sets the title.
@@ -30,7 +38,7 @@ namespace Core.Profiles.NHibernate.Models
         /// Gets or sets the type of element.
         /// </summary>
         /// <value>The type.</value>
-        public virtual ProfileElementType Type { get; set; }
+        public virtual Int32 Type { get; set; }
 
         /// <summary>
         /// Gets or sets the values.
@@ -74,7 +82,11 @@ namespace Core.Profiles.NHibernate.Models
         /// <value>
         /// 	<c>true</c> if [show on member profile]; otherwise, <c>false</c>.
         /// </value>
-        public virtual bool ShowOnMemberProfile { get; set; }
+        public virtual bool ShowOnMemberProfile
+        {
+            get { return showOnMemberProfile; }
+            set { showOnMemberProfile = value; }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether [show on member public profile].
@@ -82,7 +94,11 @@ namespace Core.Profiles.NHibernate.Models
         /// <value>
         /// 	<c>true</c> if [show on member public profile]; otherwise, <c>false</c>.
         /// </value>
-        public virtual bool ShowOnMemberPublicProfile { get; set; }
+        public virtual bool ShowOnMemberPublicProfile
+        {
+            get { return showOnMemberPublicProfile; }
+            set { showOnMemberPublicProfile = value; }
+        }
 
         /// <summary>
         /// Gets or sets a value indicating whether [show on member registration].
@@ -90,7 +106,11 @@ namespace Core.Profiles.NHibernate.Models
         /// <value>
         /// 	<c>true</c> if [show on member registration]; otherwise, <c>false</c>.
         /// </value>
-        public virtual bool ShowOnMemberRegistration { get; set; }
+        public virtual bool ShowOnMemberRegistration
+        {
+            get { return showOnMemberRegistration; }
+            set { showOnMemberRegistration = value; }
+        }
 
         /// <summary>
         /// Initializes the locale entity.

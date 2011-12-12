@@ -48,7 +48,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Contracts\IRoleLocaleService.cs" />
     <Compile Include="Contracts\IRoleService.cs" />
     <Compile Include="Contracts\IUserGroupService.cs" />
