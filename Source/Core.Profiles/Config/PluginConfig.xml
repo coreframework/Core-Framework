@@ -21,5 +21,10 @@
         <Identifier>Core.Profiles.Widgets.RegistrationWidget</Identifier>
         <Title>Registration</Title>
       </WidgetSetting>
+       <WidgetSetting>
+            <Key>Core.Profiles.Widgets.ProfileWidget</Key>
+            <Identifier>Core.Profiles.Widgets.ProfileWidget</Identifier>
+            <Title>Member profile</Title>
+       </WidgetSetting>
     </WidgetSettings>
 </PluginSetting>

@@ -24,6 +24,11 @@ namespace Core.Profiles
             context.MapRoute("RegistrationWidget.Edit", "registration-widget/edit", ProfilesMVC.RegistrationWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("RegistrationWidget.Update", "registration-widget/update", ProfilesMVC.RegistrationWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
 
+            context.MapRoute("ProfileWidget.View", "profile-widget/view", ProfilesMVC.ProfileWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("ProfileWidget.Register", "profile-widget/save", ProfilesMVC.ProfileWidget.SaveUser(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("ProfileWidget.Edit", "profile-widget/edit", ProfilesMVC.ProfileWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+            context.MapRoute("ProfileWidget.Update", "profile-widget/update", ProfilesMVC.ProfileWidget.UpdateWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
+
             context.MapRoute("Admin.ProfileTypes", "admin/profiles", new { controller = "ProfileType", action = "Show", id = String.Empty }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute(null, "admin/profiles/load-data", new { controller = "ProfileType", action = "LoadData", id = String.Empty });
             context.MapRoute(null, "admin/profiles/new", new { controller = "ProfileType", action = "New", id = String.Empty });

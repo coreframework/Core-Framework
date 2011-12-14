@@ -99,13 +99,17 @@
     <Compile Include="Controllers\ProfileElementController.cs" />
     <Compile Include="Controllers\ProfileHeaderController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
+    <Compile Include="Controllers\ProfileWidgetController.cs" />
     <Compile Include="Controllers\RegistrationWidgetController.cs" />
     <Compile Include="Extensions\ProfileExtensions.cs" />
+    <Compile Include="Helpers\ProfileWidgetHelper.cs" />
     <Compile Include="Helpers\RegistrationWidgetHelper.cs" />
     <Compile Include="Helpers\ProfileHelper.cs" />
     <Compile Include="LoginWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProfileWidgetEditModel.cs" />
+    <Compile Include="Models\ProfileWidgetViewModel.cs" />
     <Compile Include="Models\LoginWidgetViewModel.cs" />
     <Compile Include="Models\ProfileElementViewModel.cs" />
     <Compile Include="Models\ProfileHeaderViewModel.cs" />
@@ -124,6 +128,9 @@
     <Compile Include="ProfileTypeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProfileWidgetController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrationWidgetController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -134,11 +141,15 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Verbs\ProfileTypeAdminVerb.cs" />
+    <Compile Include="Verbs\Widgets\ProfileWidgetEditorVerb.cs" />
+    <Compile Include="Verbs\Widgets\ProfileWidgetSaveSettingsVerb.cs" />
+    <Compile Include="Verbs\Widgets\ProfileWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\LoginWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\RegistrationWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\RegistrationWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\RegistrationWidgetViewerVerb.cs" />
     <Compile Include="Widgets\LoginWidget.cs" />
+    <Compile Include="Widgets\ProfileWidget.cs" />
     <Compile Include="Widgets\RegistrationWidget.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +193,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\ProfileType\Show.aspx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileWidget\EditWidget.ascx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Views\ProfileWidget\ViewWidget.ascx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\RegistrationWidget\EditWidget.ascx">

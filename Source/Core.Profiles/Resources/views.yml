@@ -16,3 +16,7 @@ Views:
       Email: "Email"
       Password: "Password"
       PasswordConfirmation: "Confirm password"
+  ProfileWidget:
+    ViewWidget:
+      Profile: "Profile"
+      

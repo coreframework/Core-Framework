@@ -45,5 +45,30 @@ namespace Core.Profiles.Extensions
 
             return MvcHtmlString.Create(builder.ToString());
         }
+
+        public static MvcHtmlString ProfileElementRenderer(this HtmlHelper html, ProfileElement element, FormCollection collection, UserProfileElement userProfileElement)
+        {
+            var builder = new StringBuilder();
+
+            var elementName = String.Format(ElementNameFormat, (ElementType)element.Type, element.Id);
+            String elementValue = String.Empty;
+
+            if (collection != null && collection[elementName] != null)
+            {
+                elementValue = collection[elementName];
+            }
+            else if (userProfileElement != null)
+            {
+                elementValue = userProfileElement.Value;
+            }
+
+            builder.Append(html.Label(elementName, element.Title));
+            builder.Append("<br/>");
+            builder.Append(ElementTypeUtility.RenderElementType(html, (ElementType)element.Type, elementName,
+                                                               elementValue, element.ElementValues));
+            builder.Append(html.ValidationMessage(elementName));
+
+            return MvcHtmlString.Create(builder.ToString());
+        }
     }
 }

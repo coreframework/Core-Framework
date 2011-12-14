@@ -9,28 +9,28 @@ namespace Core.Profiles.Widgets
 {
     [Export(typeof(ICoreWidget))]
     [Export(typeof(IPermissible))]
-    public class RegistrationWidget : BaseWidget
+    public class ProfileWidget : BaseWidget
     {
         #region Singleton
 
-        private static RegistrationWidget instance;
+        private static ProfileWidget instance;
 
         private static readonly Object syncRoot = new Object();
 
-        public static RegistrationWidget Instance
+        public static ProfileWidget Instance
         {
             get
             {
                 lock (syncRoot)
                 {
-                    return instance ?? (instance = new RegistrationWidget());
+                    return instance ?? (instance = new ProfileWidget());
                 }
             }
         }
 
-        private RegistrationWidget()
+        private ProfileWidget()
         {
-            
+
         }
 
         #endregion
@@ -42,27 +42,27 @@ namespace Core.Profiles.Widgets
 
         public override IWidgetActionVerb ViewAction
         {
-            get { return RegistrationWidgetViewerVerb.Instance; }
+            get { return ProfileWidgetViewerVerb.Instance; }
 
         }
         public override IWidgetActionVerb EditAction
         {
-            get { return RegistrationWidgetEditorVerb.Instance; }
+            get { return ProfileWidgetEditorVerb.Instance; ; }
         }
 
         public override IWidgetActionVerb SaveAction
         {
-            get { return RegistrationWidgetSaveSettingsVerb.Instance; }
+            get { return ProfileWidgetSaveSettingsVerb.Instance; ; }
         }
 
-      /*  public override void Remove(ICoreWidgetInstance coreWidgetInstance)
-        {
-            WebContentWidgetHelper.Remove(coreWidgetInstance);
-        }
+        /*  public override void Remove(ICoreWidgetInstance coreWidgetInstance)
+          {
+              WebContentWidgetHelper.Remove(coreWidgetInstance);
+          }
 
-        public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
-        {
-            return WebContentWidgetHelper.CloneWebContentWidget(coreWidgetInstance);
-        }*/
+          public override long? Clone(ICoreWidgetInstance coreWidgetInstance)
+          {
+              return WebContentWidgetHelper.CloneWebContentWidget(coreWidgetInstance);
+          }*/
     }
 }

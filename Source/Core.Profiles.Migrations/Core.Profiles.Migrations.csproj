@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migration_AddProfileWidgets.cs" />
     <Compile Include="Migration_AddRegistrationWidgets.cs" />
     <Compile Include="Migration_AddUserProfileElements.cs" />
     <Compile Include="Migration_AddUserProfiles.cs" />

@@ -38,7 +38,7 @@ namespace Framework.Mvc.ElementsTypes.Generic
                 DateTime date;
                 if (DateTime.TryParse(value, out date))
                 {
-                    value = date.ToString(DateFormat);
+                    value = date.ToString("MM/dd/yy");
                 }
             }
 
