@@ -147,3 +147,8 @@
 /Source/Core.Framework.NHibernate/bin
 /Source/Core.Framework.NHibernate/obj
 /Source/Core.Framework.Permissions/Core.Framework.Permissions.csproj.user
+/Source/FormLogin/bin
+/Source/FormLogin/obj
+/Source/Core.OpenIDLogin/bin
+/Source/Core.OpenIDLogin/obj
+/Source/Core.Web/Areas/OpenIDLogin

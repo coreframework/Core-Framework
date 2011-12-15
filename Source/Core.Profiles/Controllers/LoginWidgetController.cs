@@ -5,8 +5,6 @@ using Core.Framework.MEF.Web;
 using Core.Framework.NHibernate.Contracts;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Authentication;
-using Core.Framework.Permissions.Contracts;
-using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Profiles.Models;
 using Core.Profiles.Widgets;

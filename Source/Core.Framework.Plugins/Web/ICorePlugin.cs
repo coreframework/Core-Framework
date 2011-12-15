@@ -17,6 +17,12 @@ namespace Core.Framework.Plugins.Web
         String Identifier { get;}
 
         /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
+        /// <value>The version.</value>
+        String Version { get;}
+
+        /// <summary>
         /// Gets the title.
         /// </summary>
         /// <value>The title.</value>

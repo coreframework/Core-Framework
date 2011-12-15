@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Identifier>Core.OpenIDLogin</Identifier>
+  <Title>OpenID Login</Title>
+  <ResourcesDirectory>Resources</ResourcesDirectory>
+  <Description>Extend Core.Profiles plugin, allowing login using OpenID.</Description>
+  <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
+  <CssPath>Content\Css\</CssPath>
+  <ImagesPath>Content\</ImagesPath>
+  <CssPack>base</CssPack>
+  <JsPath></JsPath>
+  <JsPack>base</JsPack>
+  <WidgetSettings>
+  </WidgetSettings>
+  <PluginDependencies>
+    <PluginDependency>
+      <Identifier>Core.Profiles</Identifier>
+    </PluginDependency>
+  </PluginDependencies>
+</PluginSetting>

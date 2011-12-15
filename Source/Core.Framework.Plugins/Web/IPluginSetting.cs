@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using Core.Framework.Plugins.Configs;
 using Core.Framework.Plugins.Handlers;
+using Core.Framework.Plugins.Plugins;
 
 namespace Core.Framework.Plugins.Web
 {
@@ -21,6 +21,12 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The title.</value>
         String Title { get; set; }
+
+        /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
+        /// <value>The version.</value>
+        String Version { get; set; }
 
         /// <summary>
         /// Gets the resources directory.
@@ -79,5 +85,7 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The HTTP handlers.</value>
         PluginHttpHandler[] HttpHandlers { get; set; }
+
+        PluginDependency[] PluginDependencies { get; set; }
     }
 }

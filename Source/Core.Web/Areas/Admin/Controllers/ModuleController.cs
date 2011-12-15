@@ -216,6 +216,8 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 throw new HttpException((int)HttpStatusCode.NotFound, Translate("Messages.CouldNotFoundEntity"));
             }
+            
+
             return View(new PluginViewModel().MapFrom(plugin));
         }
 

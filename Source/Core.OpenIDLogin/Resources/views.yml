@@ -1,0 +1,18 @@
+Views:
+  LoginWidget:
+    ViewWidget:
+      Title: "Sign in"
+      SignIn: "Sign in"
+      UsernameOrEmail: "Username or Email"
+      Password: "Password"
+      RememberMe: "Remember me"
+      SignOut: "Sign out"
+      ControlPanel: "Control panel"
+  RegistrationWidget:
+    ViewWidget:
+      Title: "Registration"
+      Register: "Register"
+      Username: "Username"
+      Email: "Email"
+      Password: "Password"
+      PasswordConfirmation: "Confirm password"

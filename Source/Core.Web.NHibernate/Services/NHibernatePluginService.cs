@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
+using Core.Framework.Plugins.Plugins;
+using Core.Framework.Plugins.Web;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Facilities.NHibernate;

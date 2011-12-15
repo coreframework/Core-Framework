@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using Core.Framework.MEF.Web;
+using Core.Framework.Plugins.Plugins;
 using Core.Web.NHibernate.Models;
 using Framework.Core.DomainModel;
 using Framework.Core.Localization;
 using Microsoft.Practices.ServiceLocation;
+using System.Linq;
 
 namespace Core.Web.Areas.Admin.Models
 {
@@ -33,6 +36,12 @@ namespace Core.Web.Areas.Admin.Models
         [AllowHtml]
         public String Description { get; set; }
 
+        /// <summary>
+        /// Gets or sets the missing dependencies.
+        /// </summary>
+        /// <value>The missing dependencies.</value>
+        public IList<PluginDependency> MissingDependencies { get; set; }
+
         #region IMappedModel members
 
         public PluginViewModel MapFrom(Plugin from)
@@ -42,7 +51,9 @@ namespace Core.Web.Areas.Admin.Models
             Description = from.Description;
             Cultures = CultureHelper.GetAvailableCultures();
             SelectedCulture = from.CurrentLocale.Culture;
-            
+            MissingDependencies = ServiceLocator.Current.GetInstance<IPluginHelper>().GetMissingPlugins(
+                MvcApplication.Plugins.Where(plugin => plugin.Identifier.Equals(from.Identifier)).FirstOrDefault());
+
             return this;
         }
 

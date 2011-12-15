@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Xml.Serialization;
 using Core.Framework.Plugins.Handlers;
+using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
 
 namespace Core.Framework.Plugins.Configs
@@ -20,6 +20,13 @@ namespace Core.Framework.Plugins.Configs
         /// <value>The identifier.</value>
         [XmlElement("Identifier")]
         public String Identifier { get; set; }
+
+        /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
+        /// <value>The version.</value>
+        [XmlElement("Version")]
+        public string Version { get; set; }
 
         /// <summary>
         /// Gets the title.
@@ -95,6 +102,13 @@ namespace Core.Framework.Plugins.Configs
         /// <value>The HTTP handlers.</value>
         [XmlArray("httphandlers", IsNullable = true), XmlArrayItem("handler", typeof(PluginHttpHandler))]
         public PluginHttpHandler[] HttpHandlers { get; set; }
+
+        /// <summary>
+        /// Gets or sets the plugin dependencies.
+        /// </summary>
+        /// <value>The plugin dependencies.</value>
+        [XmlArray("PluginDependencies", IsNullable = true), XmlArrayItem("PluginDependency", typeof(PluginDependency))]
+        public PluginDependency[] PluginDependencies { get; set; }
 
         #endregion
     }

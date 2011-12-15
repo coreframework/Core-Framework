@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Framework.MEF.Web;
+using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.NHibernate.Contracts;
@@ -85,6 +86,30 @@ namespace Core.Web.Helpers
         public static int CountAvailablePlugins(ICriteria pluginCriteria)
         {
             return pluginCriteria.List<PluginLocale>().Where(plugin => Application.Plugins.FirstOrDefault(pl => pl.Identifier == plugin.Plugin.Identifier) != null).Count();
+        }
+
+        public IList<PluginDependency> GetMissingPlugins(ICorePlugin plugin)
+        {
+            IList<PluginDependency> missingDependencies = new List<PluginDependency>();
+            var installedPlugins = GetInstalledPlugins();
+            foreach (var pluginDependency in plugin.PluginSetting.PluginDependencies)
+            {
+                if (!installedPlugins.Where(installedPlugin => installedPlugin.Identifier.Equals(pluginDependency.Identifier)
+                    && IsAppropriateVersion(installedPlugin.Version, pluginDependency.MinVersion, pluginDependency.MaxVersion)).Any())
+                {
+                    missingDependencies.Add(pluginDependency);
+                }
+
+            }
+
+            return missingDependencies;
+        }
+
+        private bool IsAppropriateVersion(String version, String minVersion, String maxVersion)
+        {
+            //            ((String.IsNullOrEmpty(pluginDependency.MinVersion) && String.IsNullOrEmpty(pluginDependency.MaxVersion))
+            //                    || (String.IsNullOrEmpty(installedPlugin.Version)))
+            return false;
         }
     }
 }

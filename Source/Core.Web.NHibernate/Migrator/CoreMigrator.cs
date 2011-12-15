@@ -61,31 +61,34 @@ namespace Core.Web.NHibernate.Migrator
         public void MigrateUp(ICorePlugin plugin)
         {
             Debug.Assert(plugin != null);
-            var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
-            IEnumerable<Migration> pluginMigrations = FillPluginSchemaInfo(plugin, migrationService);
-            using (ECM7.Migrator.Migrator migrator = GetMigrator(plugin.GetPluginMigrationsAssembly()))
+            Assembly pluginMigrationsAssembly = plugin.GetPluginMigrationsAssembly();
+            if (pluginMigrationsAssembly != null)
             {
-                //ECM7.Migrator.Migrator migrator = GetMigrator(plugin.GetPluginMigrationsAssembly());
-                migrator.Migrate();
-                IList<long> appliedMigrations = migrator.GetAppliedMigrations();
-                if (appliedMigrations != null && appliedMigrations.Count > 0)
+                var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
+                IEnumerable<Migration> pluginMigrations = FillPluginSchemaInfo(plugin, migrationService);
+                using (ECM7.Migrator.Migrator migrator = GetMigrator(pluginMigrationsAssembly))
                 {
-                    IEnumerable<long> pluginMigrationsVersions = (from pluginMigration in pluginMigrations
-                                                                  select pluginMigration.Version).AsEnumerable();
-                    appliedMigrations.ToList().RemoveAll(
-                        migration => pluginMigrationsVersions.Contains(migration));
-                    if (appliedMigrations.Count > 0)
+                    migrator.Migrate();
+                    IList<long> appliedMigrations = migrator.GetAppliedMigrations();
+                    if (appliedMigrations != null && appliedMigrations.Count > 0)
                     {
-                        var pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
-                        Plugin pluginEntity = pluginService.FindPluginByIdentifier(plugin.Identifier);
-                        foreach (long appliedMigration in appliedMigrations)
+                        IEnumerable<long> pluginMigrationsVersions = (from pluginMigration in pluginMigrations
+                                                                      select pluginMigration.Version).AsEnumerable();
+                        appliedMigrations.ToList().RemoveAll(
+                            migration => pluginMigrationsVersions.Contains(migration));
+                        if (appliedMigrations.Count > 0)
                         {
-                            Migration migration = new Migration
-                                                      {
-                                                          Plugin = pluginEntity,
-                                                          Version = appliedMigration
-                                                      };
-                            migrationService.Save(migration);
+                            var pluginService = ServiceLocator.Current.GetInstance<IPluginService>();
+                            Plugin pluginEntity = pluginService.FindPluginByIdentifier(plugin.Identifier);
+                            foreach (long appliedMigration in appliedMigrations)
+                            {
+                                Migration migration = new Migration
+                                                          {
+                                                              Plugin = pluginEntity,
+                                                              Version = appliedMigration
+                                                          };
+                                migrationService.Save(migration);
+                            }
                         }
                     }
                 }
@@ -99,21 +102,26 @@ namespace Core.Web.NHibernate.Migrator
         public void MigrateDown(ICorePlugin plugin)
         {
             Debug.Assert(plugin != null);
-            using (ECM7.Migrator.Migrator migrator = GetMigrator(plugin.GetPluginMigrationsAssembly()))
+            Assembly pluginMigrationsAssembly = plugin.GetPluginMigrationsAssembly();
+            if (pluginMigrationsAssembly != null)
             {
-                if (migrator.AvailableMigrations != null && migrator.AvailableMigrations.Count > 0)
+                using (ECM7.Migrator.Migrator migrator = GetMigrator(pluginMigrationsAssembly))
                 {
-                    var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
-                    IEnumerable<Migration> pluginInstalledMigrations = FillPluginSchemaInfo(plugin, migrationService);
-                    migrator.Migrate(0);
-                    IEnumerable<long> pluginMigrations =
-                        (from migrationsType in migrator.AvailableMigrations select migrationsType.Version).AsEnumerable
-                            ();
-                    foreach (var pluginInstalledMigration in pluginInstalledMigrations)
+                    if (migrator.AvailableMigrations != null && migrator.AvailableMigrations.Count > 0)
                     {
-                        if (pluginMigrations.Contains(pluginInstalledMigration.Version))
+                        var migrationService = ServiceLocator.Current.GetInstance<IMigrationService>();
+                        IEnumerable<Migration> pluginInstalledMigrations = FillPluginSchemaInfo(plugin, migrationService);
+                        migrator.Migrate(0);
+                        IEnumerable<long> pluginMigrations =
+                            (from migrationsType in migrator.AvailableMigrations select migrationsType.Version).
+                                AsEnumerable
+                                ();
+                        foreach (var pluginInstalledMigration in pluginInstalledMigrations)
                         {
-                            migrationService.Delete(pluginInstalledMigration);
+                            if (pluginMigrations.Contains(pluginInstalledMigration.Version))
+                            {
+                                migrationService.Delete(pluginInstalledMigration);
+                            }
                         }
                     }
                 }

@@ -32,6 +32,15 @@ namespace Core.Framework.Plugins.Plugins
         }
 
         /// <summary>
+        /// Gets or sets the version.
+        /// </summary>
+        /// <value>The version.</value>
+        public string Version
+        {
+            get { return PluginSetting.Version; }
+        }
+
+        /// <summary>
         /// Gets or sets the title.
         /// </summary>
         /// <value>The title.</value>
@@ -60,7 +69,7 @@ namespace Core.Framework.Plugins.Plugins
         /// Gets the plugin's directory.
         /// </summary>
         /// <value>The plugin's directory.</value>
-		public virtual String PluginDirectory
+        public virtual String PluginDirectory
         {
             get
             {
@@ -123,7 +132,7 @@ namespace Core.Framework.Plugins.Plugins
         /// </summary>
         public virtual void Start()
         {
-            
+
         }
 
         /// <summary>
@@ -201,7 +210,7 @@ namespace Core.Framework.Plugins.Plugins
             {
                 PluginSetting doc;
                 var serializer = new XmlSerializer(typeof(PluginSetting));
-                using (var reader = new FileStream(configPath,FileMode.Open))
+                using (var reader = new FileStream(configPath, FileMode.Open))
                 {
                     doc = serializer.Deserialize(reader) as PluginSetting;
                 }
