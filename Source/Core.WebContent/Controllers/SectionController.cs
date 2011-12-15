@@ -105,7 +105,7 @@ namespace Core.WebContent.Controllers
                 {
                     permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<SectionOperations>(), typeof(Section), newSection.Id);
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
-                    return RedirectToAction(WebContentMVC.Section.Edit(newSection.Id));
+                    return RedirectToAction(WebContentMVC.Section.Show());
                 }
             }
             else

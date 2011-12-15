@@ -46,7 +46,7 @@ namespace Framework.Mvc.ElementsTypes.Generic
                 var valuesArray = values.Trim().Split(ValueSeparator);
                 result.AddRange(from item in valuesArray
                                 where !String.IsNullOrEmpty(item)
-                                select new SelectListItem { Text = item.Trim(), Value = item.Trim(), Selected = item.Equals(selectedValue) });
+                                select new SelectListItem { Text = item.Trim(), Value = item.Trim(), Selected = item.Trim().Equals(selectedValue) });
             }
             return result;
         } 

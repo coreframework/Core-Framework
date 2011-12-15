@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
 
@@ -14,6 +15,7 @@ namespace Core.Profiles.NHibernate.Models
         private bool showOnMemberProfile = true;
         private bool showOnMemberPublicProfile = true;
         private bool showOnMemberRegistration = true;
+        private readonly IList<UserProfileElement> userProfileElements = new List<UserProfileElement>();
 
         #endregion
 
@@ -54,6 +56,11 @@ namespace Core.Profiles.NHibernate.Models
             {
                 ((ProfileElementLocale)CurrentLocale).ElementValues = value;
             }
+        }
+
+        public virtual IList<UserProfileElement> UserProfileElements
+        {
+            get { return userProfileElements; }
         }
 
         /// <summary>

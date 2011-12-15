@@ -118,7 +118,7 @@ namespace Core.WebContent.Controllers
                 {
                     permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<ArticleOperations>(), typeof(Article), newArticle.Id);
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
-                    return RedirectToAction(WebContentMVC.Article.Edit(newArticle.Id));
+                    return RedirectToAction(WebContentMVC.Article.Show());
                 }
             }
             else

@@ -8,6 +8,7 @@ using Core.Framework.Plugins.Web;
 using Core.Profiles.Models;
 using Core.Profiles.NHibernate.Contracts;
 using Core.Profiles.NHibernate.Models;
+using Core.Profiles.NHibernate.Static;
 using Framework.Mvc.ElementsTypes;
 using Microsoft.Practices.ServiceLocation;
 
@@ -106,11 +107,13 @@ namespace Core.Profiles.Helpers
         /// <param name="collection">The collection.</param>
         /// <param name="userProfile">The user profile.</param>
         /// <param name="currentUser">The current user.</param>
+        /// <param name="widget">The widget.</param>
         /// <param name="user">The user.</param>
         /// <returns></returns>
-        public static bool SaveUser(ProfileWidgetViewModel model, FormCollection collection, UserProfile userProfile, ICorePrincipal currentUser, out User user)
+        public static bool SaveUser(ProfileWidgetViewModel model, FormCollection collection, UserProfile userProfile, ICorePrincipal currentUser, ProfileWidget widget, out User user)
         {
             user = null;
+            var isSuccess = true;
 
             if (currentUser == null)
                 return false;
@@ -120,12 +123,14 @@ namespace Core.Profiles.Helpers
             if (user == null)
                 return false;
 
-            model.MapTo(user);
-            userService.SetPassword(user, model.Password);
+            if (widget.DisplayMode != ProfileWidgetDisplayMode.ProfileDetails)
+            {
+                model.MapTo(user);
+                userService.SetPassword(user, model.Password);
+                isSuccess = userService.Save(user);
+            }
 
-            var isSuccess = userService.Save(user);
-
-            if (isSuccess)
+            if (isSuccess && widget.DisplayMode != ProfileWidgetDisplayMode.CommonDetails)
             {
                 if (userProfile != null)
                 {

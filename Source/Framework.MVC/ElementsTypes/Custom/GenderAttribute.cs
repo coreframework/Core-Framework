@@ -5,6 +5,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 using System;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Framework.Mvc.ElementsTypes.Generic;
 using Framework.Mvc.ElementsTypes.Static;
 
@@ -25,9 +26,7 @@ namespace Framework.Mvc.ElementsTypes.Custom
         /// <returns>Returns element html code.</returns>
         public override string Render(HtmlHelper html, string name, string value, string values)
         {
-            Gender selectedValue;
-            Enum.TryParse(value, out selectedValue);
-            return Extensions.SelectExtensions.DropDownListFor(html, name, selectedValue, null).ToString();
+            return html.DropDownList(name, ParseValues(Gender.Female + "," + Gender.Male, value)).ToString();
         }
     }
 }

@@ -27,13 +27,13 @@ namespace Framework.Mvc.ElementsTypes.Custom
                 DateTime date;
                 if (!DateTime.TryParse(value, out date))
                 {
-                    modelState.AddModelError(name, @"Error");
+                    modelState.AddModelError(name, @"The field format is not valid.");
                 }
                 else
                 {
                     if (date.Date >= DateTime.Now.Date)
                     {
-                        modelState.AddModelError(name, @"Wrong format");
+                        modelState.AddModelError(name, @"The field value should be less than current date.");
                     }
                 }
             }

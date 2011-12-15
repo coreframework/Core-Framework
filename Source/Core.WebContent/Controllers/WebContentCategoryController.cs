@@ -107,7 +107,7 @@ namespace Core.WebContent.Controllers
                 {
                     permissionService.SetupDefaultRolePermissions(OperationsHelper.GetOperations<CategoryOperations>(), typeof(WebContentCategory), newCategory.Id);
                     Success(HttpContext.Translate("Messages.Success", String.Empty));
-                    return RedirectToAction(WebContentMVC.WebContentCategory.Edit(newCategory.Id));
+                    return RedirectToAction(WebContentMVC.WebContentCategory.Show());
                 }
             }
             else

@@ -6,6 +6,7 @@
 using System;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Framework.Mvc.Extensions;
 
 namespace Framework.Mvc.ElementsTypes.Generic
 {
@@ -27,7 +28,7 @@ namespace Framework.Mvc.ElementsTypes.Generic
             bool selected;
             Boolean.TryParse(value, out selected);
 
-            return html.CheckBox(name, selected).ToString();
+            return html.SimpleCheckBox(name, selected);
         }
     }
 }

@@ -31,7 +31,7 @@ namespace Framework.Mvc.ElementsTypes.Custom
 
             if (!Regex.IsMatch(value, RegexValidationConfig.GetPattern(RegexTemplates.Email)))
             {
-                modelState.AddModelError(name, @"Email error");
+                modelState.AddModelError(name, @"The field format is not valid.");
             }
         }
     }

@@ -56,13 +56,6 @@ namespace Framework.Mvc.ElementsTypes
         Date,
 
         /// <summary>
-        /// Captcha element type.
-        /// </summary>
-        [ElementDescription(IsRequiredEnabled = false, IsValuesEnabled = true)]
-        [Captcha]
-        Captcha,
-
-        /// <summary>
         /// First name element type.
         /// </summary>
         [TextBox]

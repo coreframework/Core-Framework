@@ -21,7 +21,7 @@
         <%:Html.HiddenFor(model => model.PageWidgetId) %>
         <%:Html.HiddenFor(model => model.ProfileTypeId) %>
 
-        <%if (Model.Widget.DisplayMode == ProfileWidgetDisplayMode.All || Model.Widget.DisplayMode == ProfileWidgetDisplayMode.CommonDetails) {%>
+        <%if (Model.Widget.DisplayMode != ProfileWidgetDisplayMode.ProfileDetails) {%>
         <div class="form_i">
             <%:Html.LocalizedLabelFor(model=>model.Email)%><br />
             <%:Html.TextBoxFor(model => model.Email, new {Class = "inp_txt w_365"})%>
@@ -43,29 +43,32 @@
             <%:Html.ValidationMessageFor(model => model.PasswordConfirmation)%>
         </div>
         <% } %>
-        <%if (Model.Profile != null && Model.Profile.ProfileType != null)
+        <%if (Model.Widget.DisplayMode != ProfileWidgetDisplayMode.CommonDetails)
           {%>
-            <%foreach (var item in (Model.Profile.ProfileType.ProfileHeaders.OrderBy(header => header.OrderNumber)))
-            {%>
-            <div <%=item.ShowOnMemberProfile? "class=accordion":String.Empty%>>
-                <%if (item.ShowOnMemberProfile)
-                  { %>
-                    <%:Html.ProfileHeaderRenderer(item)%>
-                <%}%>
-                <div>
-                    <%foreach (var element in (item.ProfileElements.OrderBy(element => element.OrderNumber)))
-                      {%>
-                        <%if (element.ShowOnMemberProfile)
-                          { %>
-                           <div class="form_i">
-                                <%:Html.ProfileElementRenderer(element, ViewData[String.Format("FormCollection{0}", Model.Widget.Id)] as FormCollection, Model.Profile.ProfileElements.FirstOrDefault(el=>el.ProfileElement.Id == element.Id))%>
-                            </div>
-                        <%}%>   
+            <%if (Model.Profile != null && Model.Profile.ProfileType != null)
+              {%>
+                <%foreach (var item in (Model.Profile.ProfileType.ProfileHeaders.OrderBy(header => header.OrderNumber)))
+                  {%>
+                <div <%=item.ShowOnMemberProfile? "class=accordion":String.Empty%>>
+                    <%if (item.ShowOnMemberProfile)
+                      { %>
+                        <%:Html.ProfileHeaderRenderer(item)%>
                     <%}%>
-                </div>
-              </div>
+                    <div>
+                        <%foreach (var element in (item.ProfileElements.OrderBy(element => element.OrderNumber)))
+                          {%>
+                            <%if (element.ShowOnMemberProfile)
+                              { %>
+                               <div class="form_i">
+                                    <%:Html.ProfileElementRenderer(element, ViewData[String.Format("FormCollection{0}", Model.Widget.Id)] as FormCollection, Model.Profile.ProfileElements.FirstOrDefault(el => el.ProfileElement.Id == element.Id))%>
+                                </div>
+                            <%}%>   
+                        <%}%>
+                    </div>
+                  </div>
+              <%}%>
+            <%}%>
           <%}%>
-        <%}%>
         <script type="text/javascript">
             $(function () {
                 $(".accordion").accordion('destroy').accordion({

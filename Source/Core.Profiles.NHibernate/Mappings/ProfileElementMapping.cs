@@ -26,6 +26,13 @@ namespace Core.Profiles.NHibernate.Mappings
              .Inverse()
              .LazyLoad()
              .Cascade.All();
+
+            HasMany(profileElement => profileElement.UserProfileElements).KeyColumn("ProfileElementId")
+            .Table("Profiles_UserProfileElements")
+            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
+            .Inverse()
+            .LazyLoad()
+            .Cascade.All();
         }
     }
 }

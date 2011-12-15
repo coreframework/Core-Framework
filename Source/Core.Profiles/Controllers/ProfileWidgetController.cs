@@ -9,6 +9,7 @@ using Core.Framework.Plugins.Web;
 using Core.Profiles.Helpers;
 using Core.Profiles.Models;
 using Core.Profiles.NHibernate.Contracts;
+using Core.Profiles.NHibernate.Static;
 using Core.Profiles.Widgets;
 using Framework.Mvc.Extensions;
 using Framework.Mvc.Helpers;
@@ -78,22 +79,33 @@ namespace Core.Profiles.Controllers
 
             if (widget != null)
             {
+                if (widget.DisplayMode == ProfileWidgetDisplayMode.ProfileDetails)
+                {
+                    ModelState.Clear();
+                }
+
                 var userProfile = userProfileService.GetUserProfile(this.CorePrincipal());
 
-                if (userProfile != null)
+                if (widget.DisplayMode != ProfileWidgetDisplayMode.CommonDetails)
                 {
-                    ProfileWidgetHelper.Validate(collection, ModelState, userProfile);
+                    if (userProfile != null)
+                    {
+                        ProfileWidgetHelper.Validate(collection, ModelState, userProfile);
+                    }
                 }
               
                 if (ModelState.IsValid)
                 {
                     User user;
-                    if (ProfileWidgetHelper.SaveUser(model, collection, userProfile, this.CorePrincipal(), out user))
+                    if (ProfileWidgetHelper.SaveUser(model, collection, userProfile, this.CorePrincipal(), widget, out user))
                     {
                         Success(HttpContext.Translate("Messages.UserUpdated", String.Empty));
 
-                        authenticationHelper.LogoutUser();
-                        authenticationHelper.LoginUser(user, true);
+                        if (widget.DisplayMode != ProfileWidgetDisplayMode.ProfileDetails)
+                        {
+                            authenticationHelper.LogoutUser();
+                            authenticationHelper.LoginUser(user, true);
+                        }
                     }
                 }
                 else
