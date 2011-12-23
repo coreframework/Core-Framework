@@ -92,14 +92,21 @@ namespace Core.Web.Helpers
         {
             IList<PluginDependency> missingDependencies = new List<PluginDependency>();
             var installedPlugins = GetInstalledPlugins();
-            foreach (var pluginDependency in plugin.PluginSetting.PluginDependencies)
+            if (plugin.PluginSetting.PluginDependencies != null)
             {
-                if (!installedPlugins.Where(installedPlugin => installedPlugin.Identifier.Equals(pluginDependency.Identifier)
-                    && IsAppropriateVersion(installedPlugin.Version, pluginDependency.MinVersion, pluginDependency.MaxVersion)).Any())
+                foreach (var pluginDependency in plugin.PluginSetting.PluginDependencies)
                 {
-                    missingDependencies.Add(pluginDependency);
-                }
+                    if (
+                        !installedPlugins.Where(
+                            installedPlugin => installedPlugin.Identifier.Equals(pluginDependency.Identifier)
+                                               &&
+                                               IsAppropriateVersion(installedPlugin.Version, pluginDependency.MinVersion,
+                                                                    pluginDependency.MaxVersion)).Any())
+                    {
+                        missingDependencies.Add(pluginDependency);
+                    }
 
+                }
             }
 
             return missingDependencies;

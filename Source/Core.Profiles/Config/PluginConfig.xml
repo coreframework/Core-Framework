@@ -11,11 +11,6 @@
     <JsPath></JsPath>
     <JsPack>base</JsPack>
     <WidgetSettings>
-        <WidgetSetting>
-            <Key>Core.Profiles.Widgets.LoginWidget</Key>
-            <Identifier>Core.Profiles.Widgets.LoginWidget</Identifier>
-            <Title>Login</Title>
-        </WidgetSetting>
       <WidgetSetting>
         <Key>Core.Profiles.Widgets.RegistrationWidget</Key>
         <Identifier>Core.Profiles.Widgets.RegistrationWidget</Identifier>

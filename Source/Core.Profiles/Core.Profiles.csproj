@@ -95,7 +95,6 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\LoginWidgetController.cs" />
     <Compile Include="Controllers\ProfileElementController.cs" />
     <Compile Include="Controllers\ProfileHeaderController.cs" />
     <Compile Include="Controllers\ProfileTypeController.cs" />
@@ -110,7 +109,6 @@
     </Compile>
     <Compile Include="Models\ProfileWidgetEditModel.cs" />
     <Compile Include="Models\ProfileWidgetViewModel.cs" />
-    <Compile Include="Models\LoginWidgetViewModel.cs" />
     <Compile Include="Models\ProfileElementViewModel.cs" />
     <Compile Include="Models\ProfileHeaderViewModel.cs" />
     <Compile Include="Models\ProfileTypeViewModel.cs" />
@@ -144,11 +142,9 @@
     <Compile Include="Verbs\Widgets\ProfileWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\ProfileWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\ProfileWidgetViewerVerb.cs" />
-    <Compile Include="Verbs\Widgets\LoginWidgetViewerVerb.cs" />
     <Compile Include="Verbs\Widgets\RegistrationWidgetEditorVerb.cs" />
     <Compile Include="Verbs\Widgets\RegistrationWidgetSaveSettingsVerb.cs" />
     <Compile Include="Verbs\Widgets\RegistrationWidgetViewerVerb.cs" />
-    <Compile Include="Widgets\LoginWidget.cs" />
     <Compile Include="Widgets\ProfileWidget.cs" />
     <Compile Include="Widgets\RegistrationWidget.cs" />
   </ItemGroup>
@@ -296,6 +292,18 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\controllers.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\controllers.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\views.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Models\models.ru.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Admin\common.ru.yml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Resources\verbs.ru.yml">

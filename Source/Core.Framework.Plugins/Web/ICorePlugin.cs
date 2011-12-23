@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using System.Xml.Linq;
 using Castle.Windsor;
 
 namespace Core.Framework.Plugins.Web
@@ -39,6 +38,12 @@ namespace Core.Framework.Plugins.Web
         /// </summary>
         /// <value>The plugin directory.</value>
         String PluginDirectory { get; }
+
+        /// <summary>
+        /// Gets the name of the plugin area directory.
+        /// </summary>
+        /// <value>The name of the plugin area directory.</value>
+        String PluginAreaDirectoryName { get; }
 
         /// <summary>
         /// Gets the plugin identifiers config.

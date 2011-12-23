@@ -16,9 +16,6 @@ namespace Core.Profiles
         public override void RegisterArea(AreaRegistrationContext context)
         {
             //widget routs
-            context.MapRoute("LoginWidget.View", "login-widget/view", ProfilesMVC.LoginWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-            context.MapRoute("LoginWidget.PostForm", "login-widget/create-session", ProfilesMVC.LoginWidget.CreateUserSession(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
-            context.MapRoute("LoginWidget.Logout", "login-widget/delete-session", ProfilesMVC.LoginWidget.DeleteUserSession(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("RegistrationWidget.View", "registration-widget/view", ProfilesMVC.RegistrationWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("RegistrationWidget.Register", "registration-widget/register", ProfilesMVC.RegistrationWidget.RegisterUser(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             context.MapRoute("RegistrationWidget.Edit", "registration-widget/edit", ProfilesMVC.RegistrationWidget.EditWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });

@@ -3,6 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
+using Core.Framework.Plugins.Helpers;
 using Core.Web.Helpers;
 
 namespace Core.Web
@@ -19,6 +20,7 @@ namespace Core.Web
             container.Register(Component.For<IPermissionsHelper>().ImplementedBy<ResourcePermissionsHelper>());
             container.Register(Component.For<IPluginHelper>().ImplementedBy<PluginHelper>().LifeStyle.Transient);
             container.Register(Component.For<IWidgetHelper>().ImplementedBy<WidgetHelper>().LifeStyle.Transient);
+            container.Register(Component.For<ICoreWidgetInstanceBuilder>().ImplementedBy<CoreWidgetInstanceBuilder>().LifeStyle.Transient);
         }
     }
 }

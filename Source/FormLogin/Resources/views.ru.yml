@@ -1,0 +1,12 @@
+ru:
+	Views:
+	  LoginWidget:
+		ViewWidget:
+		  Title: "Войти"
+		  SignIn: "Войти"
+		  UsernameOrEmail: "Имя пользователя или Email"
+		  Password: "Пароль"
+		  RememberMe: "Запомнить"
+		  SignOut: "Выход"
+		  ControlPanel: "Панель управления"
+      

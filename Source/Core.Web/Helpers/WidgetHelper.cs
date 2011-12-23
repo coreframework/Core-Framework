@@ -82,13 +82,18 @@ namespace Core.Web.Helpers
 
         }
 
+        public void UpdatePageWidgetInstance(long pageWidgetId, long instanceId, ICorePrincipal user)
+        {
+            UpdatePageWidgetInstanceId(pageWidgetId, instanceId, user);
+        }
+
         /// <summary>
         /// Updates the page widget instance.
         /// </summary>
         /// <param name="pageWidgetId">The page widget id.</param>
         /// <param name="instanceId">The instance id.</param>
         /// <param name="user">The user.</param>
-        public static void UpdatePageWidgetInstance(long pageWidgetId, long instanceId, ICorePrincipal user)
+        public static void UpdatePageWidgetInstanceId(long pageWidgetId, long instanceId, ICorePrincipal user)
         {
             var pageWidgetService = ServiceLocator.Current.GetInstance<IPageWidgetService>();
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionCommonService>();

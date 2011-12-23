@@ -73,6 +73,7 @@
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Handlers\IPluginHttpHandler.cs" />
     <Compile Include="Handlers\PluginHttpHandler.cs" />
+    <Compile Include="Helpers\ICoreWidgetInstanceBuilder.cs" />
     <Compile Include="Modules\IPluginHttpModule.cs" />
     <Compile Include="Plugins\BasePlugin.cs" />
     <Compile Include="Plugins\BasePluginOperations.cs" />

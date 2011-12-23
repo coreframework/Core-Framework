@@ -18,6 +18,8 @@ namespace Core.Framework.Plugins.Plugins
 
         private IPluginSetting pluginConfig;
 
+        private String pluginAreaDirectoryName;
+
         #endregion
 
         #region Properties
@@ -82,6 +84,22 @@ namespace Core.Framework.Plugins.Plugins
                     }
                 }
                 return pluginDirectory;
+            }
+        }
+
+        public virtual String PluginAreaDirectoryName
+        {
+            get
+            {
+                if(String.IsNullOrEmpty(pluginAreaDirectoryName))
+                {
+                    var file = new FileInfo(PluginLocation);
+                    if (file.Exists)
+                    {
+                        pluginAreaDirectoryName = file.Directory.Name;
+                    }
+                }
+                return pluginAreaDirectoryName;
             }
         }
 

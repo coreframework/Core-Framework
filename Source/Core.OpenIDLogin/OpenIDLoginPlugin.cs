@@ -4,6 +4,7 @@ using System.Reflection;
 using Castle.Windsor;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
+using Core.OpenIDLogin.NHibernate;
 
 namespace Core.OpenIDLogin
 {
@@ -45,7 +46,7 @@ namespace Core.OpenIDLogin
         /// <param name="container">The container.</param>
         public override void Register(IWindsorContainer container)
         {
-            //CoreProfilesNHibernateModule.Install(container);
+            CoreOpenIDLoginNHibernateModule.Install(container);
         }
 
         public override void Install()
@@ -60,7 +61,7 @@ namespace Core.OpenIDLogin
 
         public override Assembly GetPluginMigrationsAssembly()
         {
-            return null;
+            return Assembly.Load("Core.OpenIDLogin.Migrations");
         }
 
 

@@ -434,7 +434,7 @@ namespace Core.Web.Controllers
         {
             //check if user has privileges to manage current page and manage current widget
             //check permissions inside UpdatePageWidgetInstance method
-            WidgetHelper.UpdatePageWidgetInstance(pageWidgetId, instanceId, this.CorePrincipal());
+            WidgetHelper.UpdatePageWidgetInstanceId(pageWidgetId, instanceId, this.CorePrincipal());
 
             return PartialView(MVC.Shared.Views.Widgets.WidgetContentHolder, WidgetHelper.GetWidgetViewModel(pageWidgetId));
         }

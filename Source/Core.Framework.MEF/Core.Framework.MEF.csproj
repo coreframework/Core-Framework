@@ -119,6 +119,10 @@
       <Project>{1FCA1EA6-B397-4F77-AE18-0277214AE3B7}</Project>
       <Name>Core.Framework.MEF.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core.Framework.Permissions\Core.Framework.Permissions.csproj">
+      <Project>{1E3A569C-E5B6-475D-9341-54C0933AFB9D}</Project>
+      <Name>Core.Framework.Permissions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core.Framework.Plugins\Core.Framework.Plugins.csproj">
       <Project>{7EE54877-FD43-4458-BB95-15B93164BA80}</Project>
       <Name>Core.Framework.Plugins</Name>

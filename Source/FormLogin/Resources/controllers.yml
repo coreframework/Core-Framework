@@ -1,0 +1,4 @@
+Controllers:
+  LoginWidget:
+    Messages:
+      Success: "Your request has been processed successfully."

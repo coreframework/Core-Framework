@@ -1,1 +1,10 @@
-﻿
+﻿ru:
+	Controllers:
+	  ProfileType:
+		Title: "Название"
+		Actions: "Действия"
+		Details: "Детали"
+	  ProfileElement:
+		Title: "Название"
+		Type: "Тип"
+		Edit: "Редактировать"

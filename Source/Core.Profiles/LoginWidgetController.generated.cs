@@ -20,48 +20,8 @@ using System.Web.Mvc.Html;
 using System.Web.Routing;
 using Framework.Mvc.T4MVC;
 using T4MVC;
-namespace Core.Profiles.Controllers {
-    public partial class LoginWidgetController {
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public LoginWidgetController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected LoginWidgetController(Dummy d) { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
-            var callInfo = result.GetT4MVCResult();
-            return RedirectToRoute(callInfo.RouteValueDictionary);
-        }
-
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult ViewWidget() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public System.Web.Mvc.ActionResult CreateUserSession() {
-            return new T4MVC_ActionResult(Area, Name, ActionNames.CreateUserSession);
-        }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public LoginWidgetController Actions { get { return ProfilesMVC.LoginWidget; } }
-        [GeneratedCode("T4MVC", "2.0")]
-        public readonly String  Area = "";
-        [GeneratedCode("T4MVC", "2.0")]
-        public readonly String  Name = "LoginWidget";
-
-        static readonly ActionNamesClass s_actions = new ActionNamesClass();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionNamesClass ActionNames { get { return s_actions; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionNamesClass {
-            public readonly String  ViewWidget = "ViewWidget";
-            public readonly String  CreateUserSession = "CreateUserSession";
-            public readonly String  DeleteUserSession = "DeleteUserSession";
-        }
-
+namespace T4MVC {
+    public class LoginWidgetController {
 
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -72,28 +32,6 @@ namespace Core.Profiles.Controllers {
         }
     }
 
-    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class T4MVC_LoginWidgetController: Core.Profiles.Controllers.LoginWidgetController {
-        public T4MVC_LoginWidgetController() : base(Dummy.Instance) { }
-
-        public override System.Web.Mvc.ActionResult ViewWidget(Core.Framework.Plugins.Web.ICoreWidgetInstance instance) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ViewWidget);
-            callInfo.RouteValueDictionary.Add("instance", instance);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult CreateUserSession(Core.Profiles.Models.LoginWidgetViewModel model) {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateUserSession);
-            callInfo.RouteValueDictionary.Add("model", model);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ActionResult DeleteUserSession() {
-            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.DeleteUserSession);
-            return callInfo;
-        }
-
-    }
 }
 
 #endregion T4MVC

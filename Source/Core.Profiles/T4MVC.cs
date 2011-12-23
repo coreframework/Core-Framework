@@ -23,12 +23,12 @@ using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static class ProfilesMVC {
-    public static Core.Profiles.Controllers.LoginWidgetController LoginWidget = new Core.Profiles.Controllers.T4MVC_LoginWidgetController();
     public static Core.Profiles.Controllers.ProfileElementController ProfileElement = new Core.Profiles.Controllers.T4MVC_ProfileElementController();
     public static Core.Profiles.Controllers.ProfileHeaderController ProfileHeader = new Core.Profiles.Controllers.T4MVC_ProfileHeaderController();
     public static Core.Profiles.Controllers.ProfileTypeController ProfileType = new Core.Profiles.Controllers.T4MVC_ProfileTypeController();
     public static Core.Profiles.Controllers.ProfileWidgetController ProfileWidget = new Core.Profiles.Controllers.T4MVC_ProfileWidgetController();
     public static Core.Profiles.Controllers.RegistrationWidgetController RegistrationWidget = new Core.Profiles.Controllers.T4MVC_RegistrationWidgetController();
+    public static T4MVC.LoginWidgetController LoginWidget = new T4MVC.LoginWidgetController();
 }
 
 namespace T4MVC {

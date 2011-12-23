@@ -1,0 +1,12 @@
+ru:
+	Models:
+		ProfileTypeViewModel:
+			Title: "Название"
+		ProfileElementViewModel:
+			ProfileHeaderId: "Заголовок"
+			Title: "Название"
+			ShowOnMemberProfile: "Показывать в профайле"
+			ShowOnMemberPublicProfile: "Показывать в публичном профайле"
+			ShowOnMemberRegistration: "Показывать на регистрации"
+
+

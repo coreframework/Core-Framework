@@ -1,1 +1,19 @@
-﻿
+﻿ru:
+	Views:
+	  ProfileType:
+		Show:
+		  AddProfileType: "Добавить тип профиля"
+		NewProfileType: "Новый тип профиля"
+		EditProfileType: "Редактировать тип профиля"
+		Common: "Общая информация"
+		Language: "Язык"
+		Details: "Детали"
+		Elements: "Элементы"
+		NewProfileHeader: "Новый заголовок профиля"
+		Language: "Язык"
+		EdetElementHeader: "Редактировать заголовок элемента"
+		Title: "Название"
+		NewProfileElement: "Новый элемент профиля"
+		EdetElement: "Редактировать элемент"
+		ProfileElements: "Элементы профиля"
+ 

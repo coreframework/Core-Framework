@@ -1,0 +1,5 @@
+ru:
+	Controllers:
+	  RegistrationWidget:
+		Messages:
+		  SetupRegistrationForm: "Настройте форму регистрации."

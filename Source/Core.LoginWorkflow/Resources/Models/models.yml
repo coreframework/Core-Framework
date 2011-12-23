@@ -1,0 +1,11 @@
+Models:
+    ProfileTypeViewModel:
+        Title: "Title"
+    ProfileElementViewModel:
+        ProfileHeaderId: "Header"
+        Title: "Title"
+        ShowOnMemberProfile: "Show on member profile"
+        ShowOnMemberPublicProfile: "Show on member public profile"
+        ShowOnMemberRegistration: "Show on member registration"
+
+

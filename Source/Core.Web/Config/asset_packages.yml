@@ -4,6 +4,7 @@
     - jquery.json-2.2.min.js
     - MicrosoftAjax.js
     - MicrosoftMvcAjax.js
+    - jquery.unobtrusive-ajax.js    
     - AjaxLoadedContentScriptFix.js
   adminbase:
     - jquery-1.5.1.js
@@ -18,6 +19,7 @@
   ajax:
     - MicrosoftAjax.js
     - MicrosoftMvcAjax.js
+    - jquery.unobtrusive-ajax.js
     - AjaxLoadedContentScriptFix.js
   custom:
     - application.js

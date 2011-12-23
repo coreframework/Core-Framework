@@ -1,4 +1,6 @@
 Controllers:
-  RegistrationWidget:
+  OpenIDLoginWidget:
     Messages:
-      SetupRegistrationForm: "Setup registration form."
+      Success: "Your request has been processed successfully."
+      InvalidIdentifier: "Invalid identifier"
+      CanceledAtProvider: "Canceled at provider"
