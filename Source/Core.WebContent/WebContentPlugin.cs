@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Reflection;
 using Castle.Windsor;
-using Core.WebContent.NHibernate;
-using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Plugins;
 using Core.Framework.Plugins.Web;
-using Core.WebContent.Permissions.Operations;
+using Core.WebContent.NHibernate;
 
 namespace Core.WebContent
 {
@@ -24,28 +22,21 @@ namespace Core.WebContent
 
         #region Singleton
 
-        private static WebContentPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<WebContentPlugin> instance = new Lazy<WebContentPlugin>(() => new WebContentPlugin());
 
         public static WebContentPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new WebContentPlugin());
-                }
+                return instance.Value;
             }
         }
 
-        #endregion
-
         private WebContentPlugin()
         {
-            PermissionTitle = Title;
-            Operations = OperationsHelper.GetOperations<WebContentPluginOperations>();
         }
+
+        #endregion
 
         /// <summary>
         /// Registers the specified container.

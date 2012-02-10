@@ -4,7 +4,7 @@ using System.Globalization;
 namespace Core.Framework.MEF.Extensions
 {
     /// <summary>
-    /// Provides extension methods for the <see cref="String" /> type.
+    /// Provides extension methods for the <see cref="string" /> type.
     /// </summary>
     public static class StringExtensions
     {

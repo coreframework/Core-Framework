@@ -24,18 +24,13 @@ namespace Core.Profiles
 
         #region Singleton
 
-        private static ProfilesPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<ProfilesPlugin> instance = new Lazy<ProfilesPlugin>(() => new ProfilesPlugin());
 
         public static ProfilesPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new ProfilesPlugin());
-                }
+                return instance.Value;
             }
         }
 

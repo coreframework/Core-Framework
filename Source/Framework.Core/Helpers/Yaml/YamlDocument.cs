@@ -6,7 +6,6 @@
 
 using System;
 using System.Linq;
-
 using Yaml.Grammar;
 
 namespace Framework.Core.Helpers.Yaml

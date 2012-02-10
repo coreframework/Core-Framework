@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
-using System.Linq;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
@@ -337,10 +337,10 @@ namespace Core.Web.Controllers
 
                 var pageSettingService = ServiceLocator.Current.GetInstance<IPageSettingService>();
                 PageSettings pageSetting = model.MapTo(new PageSettings
-                                                        {
-                                                            Id = model.SettingId,
-                                                            Page = new Page { Id = model.PageId }
-                                                        });
+                {
+                    Id = model.SettingId,
+                    Page = new Page { Id = model.PageId }
+                });
                 isSuccessed = pageSettingService.Save(pageSetting);
                 model.SettingId = pageSetting.Id;
             }
@@ -379,7 +379,7 @@ namespace Core.Web.Controllers
             if (currentPage != null)
             {
                 var curWidget = widgetService.Find(widgetId);
-                
+
                 if (curWidget != null && widgetService.IsWidgetEnable(curWidget) && permissionService.IsAllowed((Int32)PageOperations.Update, this.CorePrincipal(), typeof(Page),
                                                 pageId, IsPageOwner(currentPage), PermissionOperationLevel.Object))
                 {
@@ -396,7 +396,7 @@ namespace Core.Web.Controllers
                             permissionService.SetupDefaultRolePermissions(
                                 ResourcePermissionsHelper.GetResourceOperations(coreWidget.GetType()),
                                 coreWidget.GetType(), widget.Id);
-                            if(currentPage.IsTemplate && widget.Widget.IsPlaceHolder)
+                            if (currentPage.IsTemplate && widget.Widget.IsPlaceHolder)
                             {
                                 IEnumerable<Page> pagesFromTemplate = pageService.GetPagesFromTemplate(currentPage);
                                 foreach (var pageFromTemplate in pagesFromTemplate)
@@ -421,6 +421,13 @@ namespace Core.Web.Controllers
             }
 
             return null;
+        }
+
+        [HttpPost]
+        public virtual ActionResult RefreshWidget(long pageWidgetId)
+        {
+            return PartialView(MVC.Shared.Views.Widgets.WidgetContentHolder,
+                                               WidgetHelper.GetWidgetViewModel(pageWidgetId));
         }
 
         /// <summary>
@@ -526,10 +533,10 @@ namespace Core.Web.Controllers
                 if (!model.TemplateId.HasValue)
                 {
                     page.PageLayout = new PageLayout
-                                          {
-                                              LayoutTemplate = LayoutHelper.DefaultLayoutTemplate,
-                                              Page = page
-                                          };
+                    {
+                        LayoutTemplate = LayoutHelper.DefaultLayoutTemplate,
+                        Page = page
+                    };
                 }
                 if (pageService.Save(page))
                 {
@@ -545,7 +552,7 @@ namespace Core.Web.Controllers
                             PageHelper.ClonePageSettings(sourcePage, page);
                         }
                     }
-                    else if(model.TemplateId.HasValue)
+                    else if (model.TemplateId.HasValue)
                     {
                         var sourceTemplate = pageService.Find((long)model.TemplateId);
                         if (permissionService.IsAllowed((Int32)PageOperations.View, this.CorePrincipal(),
@@ -772,19 +779,19 @@ namespace Core.Web.Controllers
                 var widgetSettingService = ServiceLocator.Current.GetInstance<IPageWidgetSettingService>();
                 PageWidgetSettings widgetSetting = widgetSettingService.Find(model.SettingId) ??
                                                    new PageWidgetSettings
-                                                       {
-                                                           Id = model.SettingId,
-                                                           Widget = new PageWidget { Id = model.WidgetId }
-                                                       };
+                                                   {
+                                                       Id = model.SettingId,
+                                                       Widget = new PageWidget { Id = model.WidgetId }
+                                                   };
                 widgetSetting = model.MapTo(widgetSetting);
                 isSuccessed = widgetSettingService.Save(widgetSetting);
                 model.SettingId = widgetSetting.Id;
                 var pageSettingService = ServiceLocator.Current.GetInstance<IPageSettingService>();
                 PageSettings pageSettings = pageSettingService.Find(model.PageCssModel.SettingId) ?? new PageSettings
-                                                                                                         {
-                                                                                                             Id = model.PageCssModel.SettingId,
-                                                                                                             Page = new Page { Id = model.PageCssModel.PageId }
-                                                                                                         };
+                {
+                    Id = model.PageCssModel.SettingId,
+                    Page = new Page { Id = model.PageCssModel.PageId }
+                };
                 pageSettings = model.PageCssModel.MapTo(pageSettings);
                 isSuccessed = isSuccessed && pageSettingService.Save(pageSettings);
                 model.PageCssModel.SettingId = pageSettings.Id;

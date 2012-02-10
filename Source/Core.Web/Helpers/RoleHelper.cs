@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Framework.MEF.Web;
 using Core.Framework.NHibernate.Contracts;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Models;
-using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Models.Permissions;
 using Microsoft.Practices.ServiceLocation;
@@ -94,10 +94,10 @@ namespace Core.Web.Helpers
                 String selid1 = selid;
                 if (!role.Users.Any(t => t.Id.ToString() == selid1))
                 {
-                    long selectedID;
-                    if (long.TryParse(selid1, out selectedID))
+                    long selectedId;
+                    if (long.TryParse(selid1, out selectedId))
                     {
-                        role.Users.Add(userService.Find(selectedID));
+                        role.Users.Add(userService.Find(selectedId));
                     }
                 }
             }
@@ -181,10 +181,10 @@ namespace Core.Web.Helpers
                 String selid1 = selid;
                 if (!role.UserGroups.Any(t => t.Id.ToString() == selid1))
                 {
-                    long selectedID;
-                    if (long.TryParse(selid1, out selectedID))
+                    long selectedId;
+                    if (long.TryParse(selid1, out selectedId))
                     {
-                        role.UserGroups.Add(userGroupService.Find(selectedID));
+                        role.UserGroups.Add(userGroupService.Find(selectedId));
                     }
                 }
             }
@@ -203,7 +203,7 @@ namespace Core.Web.Helpers
             var objectTypeService = ServiceLocator.Current.GetInstance<IEntityTypeService>();
             IEnumerable<EntityType> items = objectTypeService.GetAll();
 
-            PermissionOperationsModel operationsModel = null;
+            IList<PermissionOperationsModel> operationsModels = new List<PermissionOperationsModel>();
 
             long resourceId = 0;
             int areaId = 0;
@@ -213,44 +213,80 @@ namespace Core.Web.Helpers
             {
                 //try parse resource
                 var parts = resource.Trim().Split('_');
-                if (parts.Length==2)
+                if (parts.Length == 2)
                 {
                     Int64.TryParse(parts[0], out resourceId);
                     Int32.TryParse(parts[1], out areaId);
                 }
 
-                if (resourceId>0 && areaId>0)
+                if (resourceId > 0 && areaId > 0)
                 {
-                    if (Enum.TryParse(areaId.ToString(),out area))
+                    if (Enum.TryParse(areaId.ToString(), out area))
                     {
-                        var permissionService = ServiceLocator.Current.GetInstance<IPermissionService>();
-                        var permissions  = permissionService.GetPermission(roleId, (long) resourceId, null);
-
-                        var currentResource = items.FirstOrDefault(item => item.Id == resourceId);
-
-                        if (currentResource != null)
+                        if (!area.Equals(PermissionArea.Plugin))
                         {
-                            operationsModel = new PermissionOperationsModel
-                                                  {
-                                                      Permissions = permissions,
-                                                      ResourceId = resourceId,
-                                                      RoleId = roleId,
-                                                      Area = area,
-                                                      Operations = GetResourceOperations(currentResource,area)
-                                                  };
+                            operationsModels.Add(GetPermissionOperationModel(roleId, resourceId, items, area));
+                        }
+                        else
+                        {
+                            var entityType = items.FirstOrDefault(item => item.Id == resourceId);
+                            var permissionObject =
+                                MvcApplication.PermissibleObjects.FirstOrDefault(
+                                    perm => PermissionsHelper.GetEntityType(perm.GetType()) == entityType.Name) as IPluginPermissable;
+                            if (permissionObject != null)
+                            {
+                                var pluginPermissionObjects =
+                                    MvcApplication.PermissibleObjects.Where(
+                                        perm =>
+                                        perm is IPluginPermissable &&
+                                        ((IPluginPermissable)perm).PluginIdentifier ==
+                                        permissionObject.PluginIdentifier).Select(perm => (IPluginPermissable)perm);
+                                foreach (var pluginPermissionObject in pluginPermissionObjects)
+                                {
+                                    var objectType = objectTypeService.GetByType(pluginPermissionObject.GetType());
+                                    var operationModel = GetPermissionOperationModel(roleId, objectType.Id, items, area);
+                                    operationModel.Title =
+                                        pluginPermissionObject.PluginPermissionLevel.Equals(PluginPermissionLevel.Plugin)
+                                            ? "General"
+                                            : pluginPermissionObject.PermissionTitle;
+                                    operationsModels.Add(operationModel);
+                                }
+                            }
                         }
                     }
                 }
             }
 
             return new RolePermissionsModel
-                       {
-                           RoleId = roleId,
-                           ResourceId = resourceId,
-                           Area = area,
-                           PermissibleObjects = BindRolePermissionItems(items),
-                           OperationsModel = operationsModel
-                       };
+            {
+                RoleId = roleId,
+                ResourceId = resourceId,
+                Area = area,
+                PermissibleObjects = BindRolePermissionItems(items),
+                OperationsModels = operationsModels
+            };
+        }
+
+        private static PermissionOperationsModel GetPermissionOperationModel(long roleId, long resourceId, IEnumerable<EntityType> items, PermissionArea area)
+        {
+            var permissionService = ServiceLocator.Current.GetInstance<IPermissionService>();
+            var permissions = permissionService.GetPermission(roleId, resourceId, null);
+
+            var currentResource = items.FirstOrDefault(item => item.Id == resourceId);
+
+            if (currentResource != null)
+            {
+                return new PermissionOperationsModel
+                {
+                    Permissions = permissions,
+                    ResourceId = resourceId,
+                    RoleId = roleId,
+                    Area = area,
+                    Operations = GetResourceOperations(currentResource, area)
+                };
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -261,6 +297,7 @@ namespace Core.Web.Helpers
         private static List<RolePermissionsItem> BindRolePermissionItems(IEnumerable<EntityType> permissionResources)
         {
             var resultList = new List<RolePermissionsItem>();
+            var plugins = new List<RolePermissionsItem>();
             foreach (var resource in permissionResources)
             {
                 EntityType res = resource;
@@ -271,11 +308,27 @@ namespace Core.Web.Helpers
 
                 if (item != null)
                 {
-                    resultList.AddRange(item.Operations.Where(operation => operation.OperationLevel != PermissionOperationLevel.Object).GroupBy(operation => operation.Area).Select(
-                        area =>
-                        new RolePermissionsItem { Id = res.Id, Title = item.PermissionTitle, Area = area.Key }));
+                    if (!(item is IPluginPermissable))
+                    {
+                        resultList.AddRange(item.Operations.Where(
+                            operation => operation.OperationLevel != PermissionOperationLevel.Object).GroupBy(
+                                operation => operation.Area).Select(
+                                    area =>
+                                    new RolePermissionsItem { Id = res.Id, Title = item.PermissionTitle, Area = area.Key }));
+                    }
+                    else
+                    {
+                        var pluginItem = (IPluginPermissable)item;
+                        var plugin =
+                            Application.Plugins.FirstOrDefault(pl => pl.Identifier == pluginItem.PluginIdentifier);
+                        if (plugin != null && !plugins.Any(pl => pl.Title == plugin.Title))
+                        {
+                            plugins.Add(new RolePermissionsItem { Id = res.Id, Title = plugin.Title, Area = PermissionArea.Plugin });
+                        }
+                    }
                 }
             }
+            resultList.AddRange(plugins);
 
             return resultList;
         }
@@ -292,9 +345,9 @@ namespace Core.Web.Helpers
                 perm =>
                 PermissionsHelper.GetEntityType(perm.GetType()) ==
                 resource.Name);
-            if (permissibleObject!=null)
+            if (permissibleObject != null)
             {
-                return permissibleObject.Operations.Where(operation=>operation.Area==area && operation.OperationLevel!=PermissionOperationLevel.Object);
+                return permissibleObject.Operations.Where(operation => (area == PermissionArea.Plugin || operation.Area == area) && operation.OperationLevel != PermissionOperationLevel.Object);
             }
             return null;
         }
@@ -308,20 +361,20 @@ namespace Core.Web.Helpers
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionService>();
             var permissions = permissionService.GetPermission(model.RoleId, model.ResourceId, null);
 
-            if (permissions==null)
+            if (permissions == null)
             {
                 permissions = new Permission
-                                  {
-                                      Role =
-                                          {
-                                              Id = model.RoleId
-                                          },
-                                      EntityType =
-                                          {
-                                              Id = model.ResourceId
-                                          },
-                                  };
-                if (model.OperationIds!=null)
+                {
+                    Role =
+                    {
+                        Id = model.RoleId
+                    },
+                    EntityType =
+                    {
+                        Id = model.ResourceId
+                    },
+                };
+                if (model.OperationIds != null)
                 {
                     foreach (var operation in model.OperationIds)
                     {
@@ -333,20 +386,20 @@ namespace Core.Web.Helpers
             {
                 var objectTypeService = ServiceLocator.Current.GetInstance<IEntityTypeService>();
                 var resourceType = objectTypeService.Find(model.ResourceId);
-                if (resourceType!=null)
+                if (resourceType != null)
                 {
                     var operations = GetResourceOperations(resourceType, model.Area);
 
                     foreach (var operation in operations)
                     {
-                         if (model.OperationIds==null || !model.OperationIds.Contains(operation.Key))
-                         {
-                             permissions.Permissions = permissions.Permissions & (~ operation.Key);
-                         }
-                         else
-                         {
-                             permissions.Permissions = permissions.Permissions | operation.Key;
-                         }
+                        if (model.OperationIds == null || !model.OperationIds.Contains(operation.Key))
+                        {
+                            permissions.Permissions = permissions.Permissions & (~operation.Key);
+                        }
+                        else
+                        {
+                            permissions.Permissions = permissions.Permissions | operation.Key;
+                        }
                     }
                 }
             }

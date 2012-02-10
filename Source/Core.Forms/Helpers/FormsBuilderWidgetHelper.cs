@@ -12,6 +12,7 @@ using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Framework.Core.Extensions;
 using Framework.Mvc.Captcha;
+using Iesi.Collections.Generic;
 using Microsoft.Practices.ServiceLocation;
 using Omu.ValueInjecter;
 
@@ -177,7 +178,7 @@ namespace Core.Forms.Helpers
 
                             if (!String.IsNullOrEmpty(value))
                             {
-                                ((List<FormWidgetAnswerValue>) answer.AnswerValues).Add(new FormWidgetAnswerValue
+                                ((HashedSet<FormWidgetAnswerValue>)answer.AnswerValues).Add(new FormWidgetAnswerValue
                                                                                         {
                                                                                             Field = item.Title,
                                                                                             Value = value,

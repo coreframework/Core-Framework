@@ -10,15 +10,13 @@ using System.Linq;
 using System.Threading;
 using Castle.Core.Logging;
 using Castle.Facilities.NHibernateIntegration;
-using FluentNHibernate.Data;
+using Castle.Services.Transaction;
 using Framework.Core.Localization;
+using Framework.Core.Services;
 using Framework.Facilities.NHibernate.Filters;
-using Framework.Facilities.NHibernate.Objects;
+using Framework.Facilities.NHibernate.Helpers;
 using NHibernate;
 using NHibernate.Criterion;
-using NHibernate.Linq;
-
-using Framework.Core.Services;
 
 namespace Framework.Facilities.NHibernate
 {
@@ -26,7 +24,8 @@ namespace Framework.Facilities.NHibernate
     /// Default NHibernate implementation for <see cref="IDataService{TEntity}"/>.
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
-    public class NHibernateDataService<TEntity> : IDataService<TEntity>
+    [Transactional]
+    public class NHibernateDataService<TEntity> : IDataService<TEntity> where TEntity : class
     {
         #region Fields
 
@@ -47,7 +46,7 @@ namespace Framework.Facilities.NHibernate
         /// <param name="sessionManager">The session manager.</param>
         public NHibernateDataService(ISessionManager sessionManager)
         {
-            this.SessionManager = sessionManager;
+            SessionManager = sessionManager;
         }
 
         #endregion
@@ -123,8 +122,9 @@ namespace Framework.Facilities.NHibernate
         /// <returns>Not nullable collection of <typeparamref name="TEntity"/>.</returns>
         public virtual IEnumerable<TEntity> GetAll()
         {
-            ICriteria criteria = Session.CreateCriteria(typeof(TEntity));
-            return criteria.List<TEntity>();
+            var query = CreateQuery();
+
+            return query.AsEnumerable();
         }
 
         /// <summary>
@@ -135,10 +135,9 @@ namespace Framework.Facilities.NHibernate
         /// <returns>Not nullable collection of <typeparamref name="TEntity"/>.</returns>
         public virtual IEnumerable<TEntity> GetPaged(int page, int pageSize)
         {
-            ICriteria criteria = Session.CreateCriteria(typeof(TEntity));
-            criteria.SetFirstResult(page * pageSize);
-            criteria.SetMaxResults(pageSize);
-            return criteria.List<TEntity>();
+            var query = CreateQuery().Skip(page * pageSize).Take(pageSize);
+
+            return query.AsEnumerable();
         }
 
         /// <summary>
@@ -148,10 +147,11 @@ namespace Framework.Facilities.NHibernate
         /// <returns>The entity count.</returns>
         public virtual long Count(ICriteria criteria)
         {
-            var countCriteria = (ICriteria) criteria.Clone();
+            var countCriteria = (ICriteria)criteria.Clone();
             countCriteria.SetProjection(Projections.RowCount());
             long count;
             Int64.TryParse(countCriteria.List()[0].ToString(), out count);
+
             return count;
         }
 
@@ -160,26 +160,19 @@ namespace Framework.Facilities.NHibernate
         /// </summary>
         /// <param name="entity">The entity to save.</param>
         /// <returns><c>true</c> if instance instance has been saved successfully; otherwise, <c>false</c>.</returns>
+        [Transaction]
         public virtual bool Save(TEntity entity)
         {
-            if (entity is Entity && (entity as Entity).Id > 0)
+            if (entity is ILocalizable)
             {
-                Session.Merge(entity);
-            }
-            else
-            {
-                if (entity is ILocalizable)
+                var localizableEntity = (ILocalizable)entity;
+                if (!localizableEntity.ContainsLocale(localizableEntity.CurrentLocale))
                 {
-                    var localizableEntity = (ILocalizable) entity;
-                    if (!localizableEntity.ContainsLocale(localizableEntity.CurrentLocale))
-                    {
-                        localizableEntity.AddLocale(localizableEntity.CurrentLocale);
-                    }
+                    localizableEntity.AddLocale(localizableEntity.CurrentLocale);
                 }
-
-                Session.SaveOrUpdate(entity);
             }
 
+            Session.SaveOrUpdate(entity);
             Session.Flush();
             return true;
         }
@@ -189,19 +182,22 @@ namespace Framework.Facilities.NHibernate
         /// </summary>
         /// <param name="entity">The entity to remove.</param>
         /// <returns><c>true</c> if instance instance has been deleted successfully; otherwise, <c>false</c>.</returns>
+        [Transaction]
         public virtual bool Delete(TEntity entity)
         {
             Session.Delete(entity);
             Session.Flush();
+
             return true;
         }
 
         /// <summary>
         /// Deletes all entities of type <typeparamref name="TEntity"/> from repository.
         /// </summary>
+        [Transaction]
         public void DeleteAll()
         {
-            Session.Delete(String.Format("from {0}", typeof(TEntity).Name));
+            Session.Delete(String.Format("from {0}", typeof(TEntity).FullName));
             Session.Flush();
         }
 

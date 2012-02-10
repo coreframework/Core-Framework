@@ -8,11 +8,8 @@ using System;
 using System.Configuration;
 using System.IO;
 using Castle.MicroKernel;
-
 using Framework.Core.Helpers;
-
-using String = System.String;
-using YamlDocument = Framework.Core.Helpers.Yaml.YamlDocument;
+using Framework.Core.Helpers.Yaml;
 
 namespace Framework.Core.Configuration
 {

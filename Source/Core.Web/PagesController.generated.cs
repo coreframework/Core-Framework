@@ -108,6 +108,11 @@ namespace Core.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult RefreshWidget() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.RefreshWidget);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult UpdatePageWidgetInstance() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.UpdatePageWidgetInstance);
         }
@@ -224,6 +229,7 @@ namespace Core.Web.Controllers {
             public readonly String UpdatePageLookAndFeel = "UpdatePageLookAndFeel";
             public readonly String ShowAvailableWidgets = "ShowAvailableWidgets";
             public readonly String AddWidget = "AddWidget";
+            public readonly String RefreshWidget = "RefreshWidget";
             public readonly String UpdatePageWidgetInstance = "UpdatePageWidgetInstance";
             public readonly String RemovePageWidget = "RemovePageWidget";
             public readonly String UpdateWidgetsPositions = "UpdateWidgetsPositions";
@@ -359,6 +365,12 @@ namespace Core.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.AddWidget);
             callInfo.RouteValueDictionary.Add("pageId", pageId);
             callInfo.RouteValueDictionary.Add("widgetId", widgetId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RefreshWidget(long pageWidgetId) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RefreshWidget);
+            callInfo.RouteValueDictionary.Add("pageWidgetId", pageWidgetId);
             return callInfo;
         }
 

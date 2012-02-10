@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
 using Core.WebContent.NHibernate.Contracts;
-using Core.WebContent.NHibernate.Mappings;
 using Core.WebContent.NHibernate.Models;
 using Framework.Facilities.NHibernate;
 

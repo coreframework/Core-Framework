@@ -5,14 +5,12 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using Microsoft.Build.Framework;
-using Microsoft.Build.Utilities;
-
 using Castle.Windsor;
-
 using Framework.Core;
 using Framework.Core.Configuration;
 using Framework.Migrator;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 namespace Framework.MSBuild.Database
 {

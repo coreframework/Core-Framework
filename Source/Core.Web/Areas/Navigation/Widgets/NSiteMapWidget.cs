@@ -14,19 +14,18 @@ namespace Core.Web.Areas.Navigation.Widgets
     {
         #region Singleton
 
-        private static NSiteMapWidget instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<NSiteMapWidget> instance = new Lazy<NSiteMapWidget>(() => new NSiteMapWidget());
 
         public static NSiteMapWidget Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new NSiteMapWidget());
-                }
+                return instance.Value;
             }
+        }
+
+        private NSiteMapWidget()
+        {
         }
 
         #endregion

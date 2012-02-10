@@ -1,9 +1,8 @@
 ﻿<%@ Assembly Name="Core.Forms" %>
 <%@ Assembly Name="Core.Forms.NHibernate" %>
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Framework.Mvc.Grids.GridViewModel>" %>
-<%@ Import Namespace="System.Web.Mvc" %>
-<%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 <%@ Import Namespace="Core.Forms.Models" %>
+<%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 
 <asp:Content runat="server" ID="Content1" ContentPlaceHolderID="HeadContent">
    <%= Html.JavascriptInclude("jquery-ui/jquery-ui-1.8.11.custom.min.js")%>

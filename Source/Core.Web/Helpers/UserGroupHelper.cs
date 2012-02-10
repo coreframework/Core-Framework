@@ -106,5 +106,34 @@ namespace Core.Web.Helpers
 
             return userGroupService.Save(userGroup);
         }
+
+        public static bool UpdateUserGroupToRolesAssignment(UserGroup userGroup, IEnumerable<String> ids, IEnumerable<String> selids)
+        {
+            var roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+            var userGroupService = ServiceLocator.Current.GetInstance<IUserGroupService>();
+
+            var notselids = ids.Where(t => !selids.Contains(t)).ToList();
+
+            var noselected = userGroup.Roles.Where(t => notselids.Contains(t.Id.ToString())).ToList();
+            foreach (var role in noselected)
+            {
+                userGroup.Roles.Remove(role);
+            }
+
+            foreach (var selid in selids)
+            {
+                String selid1 = selid;
+                if (!userGroup.Roles.Any(t => t.Id.ToString() == selid1))
+                {
+                    long selectedID;
+                    if (long.TryParse(selid1, out selectedID))
+                    {
+                        userGroup.Roles.Add(roleService.Find(selectedID));
+                    }
+                }
+            }
+
+            return userGroupService.Save(userGroup);
+        }
     }
 }

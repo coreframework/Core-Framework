@@ -7,19 +7,18 @@ namespace Core.WebContent.Verbs.Widgets
     {
         #region Singleton
 
-        private static WebContentWidgetViewerVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<WebContentWidgetViewerVerb> instance = new Lazy<WebContentWidgetViewerVerb>(() => new WebContentWidgetViewerVerb());
 
         public static WebContentWidgetViewerVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new WebContentWidgetViewerVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private WebContentWidgetViewerVerb()
+        {
         }
 
         #endregion

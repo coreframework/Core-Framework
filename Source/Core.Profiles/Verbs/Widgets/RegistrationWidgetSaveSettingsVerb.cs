@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Core.Framework.Plugins.Web;
 
 namespace Core.Profiles.Verbs.Widgets
@@ -10,19 +7,18 @@ namespace Core.Profiles.Verbs.Widgets
     {
         #region Singleton
 
-        private static RegistrationWidgetSaveSettingsVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<RegistrationWidgetSaveSettingsVerb> instance = new Lazy<RegistrationWidgetSaveSettingsVerb>(() => new RegistrationWidgetSaveSettingsVerb());
 
         public static RegistrationWidgetSaveSettingsVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new RegistrationWidgetSaveSettingsVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private RegistrationWidgetSaveSettingsVerb()
+        {
         }
 
         #endregion

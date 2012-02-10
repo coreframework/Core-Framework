@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.WidgetCSSModel>" %>
-<%@ Import Namespace="Framework.Core" %>
 <%@ Import Namespace="Core.Web.Helpers" %>
 
 <div id="CSSForm">

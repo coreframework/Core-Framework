@@ -39,8 +39,9 @@
     <Reference Include="Castle.Core">
       <HintPath>..\..\Libs\Castle\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.DynamicProxy2">
-      <HintPath>..\..\Libs\Castle\Castle.DynamicProxy2.dll</HintPath>
+    <Reference Include="Castle.Facilities.AutoTx, Version=2.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Castle\Castle.Facilities.AutoTx.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Facilities.Logging">
       <HintPath>..\..\Libs\Castle\Castle.Facilities.Logging.dll</HintPath>
@@ -48,13 +49,11 @@
     <Reference Include="Castle.Facilities.NHibernateIntegration">
       <HintPath>..\..\Libs\Castle\Castle.Facilities.NHibernateIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.MicroKernel">
-      <HintPath>..\..\Libs\Castle\Castle.MicroKernel.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Services.Logging.log4netIntegration">
       <HintPath>..\..\Libs\Castle\Castle.Services.Logging.log4netIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Services.Transaction">
+    <Reference Include="Castle.Services.Transaction, Version=2.5.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Castle\Castle.Services.Transaction.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
@@ -185,6 +184,7 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserGroupController.cs" />
     <Compile Include="Areas\Admin\Controllers\WidgetController.cs" />
+    <Compile Include="Areas\Admin\Helpers\AccountsHelper.cs" />
     <Compile Include="Areas\Admin\Helpers\ActionLink.cs" />
     <Compile Include="Areas\Admin\Helpers\ExpressionsHelper.cs" />
     <Compile Include="Areas\Admin\Helpers\GridHelper.cs" />
@@ -370,11 +370,13 @@
     <Content Include="Areas\Admin\Views\UserGroup\Index.aspx" />
     <Content Include="Areas\Admin\Views\UserGroup\New.aspx" />
     <Content Include="Areas\Admin\Views\UserGroup\Remove.aspx" />
+    <Content Include="Areas\Admin\Views\UserGroup\Roles.aspx" />
     <Content Include="Areas\Admin\Views\UserGroup\Users.aspx" />
     <Content Include="Areas\Admin\Views\User\Edit.aspx" />
     <Content Include="Areas\Admin\Views\User\Index.aspx" />
     <Content Include="Areas\Admin\Views\User\New.aspx" />
     <Content Include="Areas\Admin\Views\User\Remove.aspx" />
+    <Content Include="Areas\Admin\Views\User\Roles.aspx" />
     <Content Include="Areas\Admin\Views\User\UserGroups.aspx" />
     <Content Include="Areas\Admin\Views\Widget\Edit.aspx" />
     <Content Include="Areas\Admin\Views\Widget\EditForm.ascx" />
@@ -1127,7 +1129,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\castle.config" />
-    <Content Include="Config\log4net.config" />
+    <Content Include="Config\log4net.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\Shared\Admin.Master" />

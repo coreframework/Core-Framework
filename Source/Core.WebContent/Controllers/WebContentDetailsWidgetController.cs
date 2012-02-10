@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel.Composition;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.WebContent.Helpers;
@@ -11,10 +10,7 @@ using Core.WebContent.Models;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
 using Core.WebContent.Widgets;
-using Framework.Mvc.Extensions;
-using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using Core.Framework.Permissions.Extensions;
 
 namespace Core.WebContent.Controllers
 {

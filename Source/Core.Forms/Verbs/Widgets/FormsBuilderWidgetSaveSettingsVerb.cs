@@ -7,19 +7,18 @@ namespace Core.Forms.Verbs.Widgets
     {
         #region Singleton
 
-        private static FormsBuilderWidgetSaveSettingsVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<FormsBuilderWidgetSaveSettingsVerb> instance = new Lazy<FormsBuilderWidgetSaveSettingsVerb>(() => new FormsBuilderWidgetSaveSettingsVerb());
 
         public static FormsBuilderWidgetSaveSettingsVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new FormsBuilderWidgetSaveSettingsVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private FormsBuilderWidgetSaveSettingsVerb()
+        {
         }
 
         #endregion

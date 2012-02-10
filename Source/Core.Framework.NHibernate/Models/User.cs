@@ -31,7 +31,7 @@ namespace Core.Framework.NHibernate.Models
         public virtual IList<Role> Roles
         {
             get { return roles; }
-            set { roles = value; }
+            protected set { roles = value; }
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Core.Framework.NHibernate.Models
         public virtual IList<UserGroup> UserGroups
         {
             get { return userGroups; }
-            set { userGroups = value; }
+            protected set { userGroups = value; }
         }
 
         #endregion

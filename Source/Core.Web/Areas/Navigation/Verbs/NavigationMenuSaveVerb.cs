@@ -7,19 +7,18 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static NavigationMenuSaveVerb instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<NavigationMenuSaveVerb> instance = new Lazy<NavigationMenuSaveVerb>(() => new NavigationMenuSaveVerb());
 
         public static NavigationMenuSaveVerb Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new NavigationMenuSaveVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private NavigationMenuSaveVerb()
+        {
         }
 
         #endregion

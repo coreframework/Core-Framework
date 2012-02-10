@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-
 using ECM7.Migrator.Framework;
 
 namespace Framework.Migrator.Fluent

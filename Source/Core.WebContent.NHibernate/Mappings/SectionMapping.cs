@@ -13,7 +13,7 @@ namespace Core.WebContent.NHibernate.Mappings
             Id(section => section.Id);
             Map(section => section.UserId);
             HasMany(section => section.CurrentLocales).KeyColumn("SectionId")
-            .Table("SectionLocales").ApplyFilter<CultureFilter>()
+            .Table("SectionLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

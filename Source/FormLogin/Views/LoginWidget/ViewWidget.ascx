@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.FormLogin.Models.LoginWidgetViewModel>" %>
 <%@ Assembly Name="Core.FormLogin" %>
 <%@ Import Namespace="Framework.Mvc.Extensions" %>
-<div id="login-form<%=Model.PageWidgetId %>" class="login-widget">
+<div id="login-form<%=Model.PageWidgetId %>" class="login-widget test-login">
     <% if (Request.IsAuthenticated)
        { %>
     <div class="r_info">

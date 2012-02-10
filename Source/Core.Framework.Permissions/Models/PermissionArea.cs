@@ -8,6 +8,8 @@
 
         ControlPanel,
 
-        Content
+        Content,
+
+        Plugin
     }
 }

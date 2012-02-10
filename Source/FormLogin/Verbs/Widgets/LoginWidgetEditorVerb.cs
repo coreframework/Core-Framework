@@ -7,19 +7,18 @@ namespace Core.FormLogin.Verbs.Widgets
     {
         #region Singleton
 
-        private static LoginWidgetEditorVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<LoginWidgetEditorVerb> instance = new Lazy<LoginWidgetEditorVerb>(() => new LoginWidgetEditorVerb());
 
         public static LoginWidgetEditorVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new LoginWidgetEditorVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private LoginWidgetEditorVerb()
+        {
         }
 
         #endregion

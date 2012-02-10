@@ -6,14 +6,12 @@
 
 using System;
 using System.Collections.Generic;
-
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
-using Microsoft.Practices.ServiceLocation;
 using CommonServiceLocator.WindsorAdapter;
-
 using Framework.Core.Configuration;
 using Framework.Core.Helpers;
-
+using Microsoft.Practices.ServiceLocation;
 using Environment = Framework.Core.Configuration.Environment;
 
 namespace Framework.Core
@@ -80,7 +78,7 @@ namespace Framework.Core
         {
             ServiceLocator.SetLocatorProvider(() => new WindsorServiceLocator(container));
 
-            container.Kernel.AddComponentInstance<IApplication>(this);
+            container.Kernel.Register(Component.For<IApplication>().Instance(this).LifeStyle.Singleton);
 
             var environmentSetting = container.Resolve<IConfigurationManager>().AppSettings[Constants.Environment];
             if (!String.IsNullOrEmpty(environmentSetting))

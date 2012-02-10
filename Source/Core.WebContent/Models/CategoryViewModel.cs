@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
 using Core.Framework.Permissions.Extensions;
-using Core.WebContent.NHibernate;
 using Core.WebContent.NHibernate.Contracts;
 using Core.WebContent.NHibernate.Models;
 using Core.WebContent.NHibernate.Permissions;

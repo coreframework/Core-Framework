@@ -1,5 +1,5 @@
-﻿using Castle.MicroKernel;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Core.Framework.MEF.Web;
 using Core.Framework.Permissions.Contracts;
@@ -18,9 +18,9 @@ namespace Core.Web
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IPermissionsHelper>().ImplementedBy<ResourcePermissionsHelper>());
-            container.Register(Component.For<IPluginHelper>().ImplementedBy<PluginHelper>().LifeStyle.Transient);
-            container.Register(Component.For<IWidgetHelper>().ImplementedBy<WidgetHelper>().LifeStyle.Transient);
-            container.Register(Component.For<ICoreWidgetInstanceBuilder>().ImplementedBy<CoreWidgetInstanceBuilder>().LifeStyle.Transient);
+            container.Register(Component.For<IPluginHelper>().ImplementedBy<PluginHelper>().LifeStyle.Singleton);
+            container.Register(Component.For<IWidgetHelper>().ImplementedBy<WidgetHelper>().LifeStyle.Singleton);
+            container.Register(Component.For<ICoreWidgetInstanceBuilder>().ImplementedBy<CoreWidgetInstanceBuilder>().LifeStyle.Singleton);
         }
     }
 }

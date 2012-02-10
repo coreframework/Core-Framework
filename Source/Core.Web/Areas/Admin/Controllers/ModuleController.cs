@@ -17,9 +17,9 @@ using Framework.Mvc.Controllers;
 using Framework.Mvc.Grids;
 using Framework.Mvc.Grids.JqGrid;
 using Microsoft.Practices.ServiceLocation;
+using MvcSiteMapProvider.Filters;
 using NHibernate;
 using NHibernate.Criterion;
-using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {

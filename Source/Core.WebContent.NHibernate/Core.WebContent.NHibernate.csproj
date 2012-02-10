@@ -71,6 +71,9 @@
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\Libs\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\Libs\CommonServiceLocator\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>

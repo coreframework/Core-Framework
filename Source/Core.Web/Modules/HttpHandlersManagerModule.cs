@@ -7,7 +7,6 @@ using Core.Framework.Plugins.Handlers;
 using Framework.Core;
 using Framework.Core.Utilities;
 using Microsoft.Practices.ServiceLocation;
-using Application = Core.Framework.MEF.Web.Application;
 
 namespace Core.Web.Modules
 {

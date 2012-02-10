@@ -33,14 +33,32 @@ namespace Core.Framework.MEF.Web
         /// <returns>An instance of a controller for the specified name.</returns>
         public override IController CreateController(System.Web.Routing.RequestContext requestContext, String controllerName)
         {
-            var factory = controllerFactories
-                .Where(f => f.Metadata.Name.Equals(controllerName, StringComparison.InvariantCultureIgnoreCase))
-                .FirstOrDefault();
-
+            object areaNameObj = requestContext.RouteData.Values["area"];
+            if (String.IsNullOrEmpty(areaNameObj as String))
+            {
+                requestContext.RouteData.DataTokens.TryGetValue("area", out areaNameObj);
+            }
+            var areaName = areaNameObj as String;
+            PartFactory<IController, IControllerMetadata> factory = null;
+            var matchedFactories = controllerFactories.Where(
+                        f => f.Metadata.Name.Equals(controllerName, StringComparison.InvariantCultureIgnoreCase));
+            var matchedFactoriesCount = matchedFactories.Count();
+            if (matchedFactoriesCount > 1)
+            {
+                factory = controllerFactories
+                    .Where(
+                        f =>
+                        f.Metadata.Name.Equals(controllerName, StringComparison.InvariantCultureIgnoreCase) &&
+                        (String.IsNullOrEmpty(areaName) || areaName.Equals(f.Metadata.Area))).FirstOrDefault();
+            }
+            if (factory == null && matchedFactoriesCount > 0)
+            {
+                factory = matchedFactories.FirstOrDefault();
+            }
             if (factory != null)
             {
                 IController controller = factory.CreatePart();
-                if(controller != null)
+                if (controller != null)
                 {
                     if (controller is CorePluginController)
                     {

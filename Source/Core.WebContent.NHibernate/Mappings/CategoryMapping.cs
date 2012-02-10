@@ -16,7 +16,7 @@ namespace Core.WebContent.NHibernate.Mappings
             References(category => category.Section);
             Map(category => category.Status).CustomType(typeof(CategoryStatus));
             HasMany(category => category.CurrentLocales).KeyColumn("CategoryId")
-            .Table("CategoryLocales").ApplyFilter<CultureFilter>()
+            .Table("CategoryLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

@@ -1,5 +1,4 @@
-﻿
-using Core.Web.NHibernate.Models.Static;
+﻿using Core.Web.NHibernate.Models.Static;
 using Core.Web.NHibernate.Models.Widgets;
 using FluentNHibernate.Mapping;
 

@@ -6,11 +6,8 @@
 
 using System;
 using System.Collections.Generic;
-
 using Castle.Windsor;
-
 using Framework.Core.Configuration;
-
 using Environment = Framework.Core.Configuration.Environment;
 
 namespace Framework.Core

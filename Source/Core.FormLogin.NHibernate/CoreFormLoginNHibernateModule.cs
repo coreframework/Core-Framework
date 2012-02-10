@@ -12,10 +12,10 @@ namespace Core.FormLogin.NHibernate
         public static void Install(IWindsorContainer container)
         {
             // Register nhibernate fluent mapper.
-            container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("formlogin_mapper").LifeStyle.Transient);
+            container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("formlogin_mapper").LifeStyle.Singleton);
 
             // Register data services.
-            container.Register(Component.For<IFormLoginWidgetService>().ImplementedBy<NHibernateFormLoginWidgetService>().LifeStyle.Transient);
+            container.Register(Component.For<IFormLoginWidgetService>().ImplementedBy<NHibernateFormLoginWidgetService>().LifeStyle.Singleton);
         }
     }
 }

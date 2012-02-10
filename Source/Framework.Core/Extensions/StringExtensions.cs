@@ -11,7 +11,7 @@ using Framework.Core.Helpers;
 namespace Framework.Core.Extensions
 {
     /// <summary>
-    /// Extends <see cref="String"/> class functionality.
+    /// Extends <see cref="string"/> class functionality.
     /// </summary>
     public static class StringExtensions
     {

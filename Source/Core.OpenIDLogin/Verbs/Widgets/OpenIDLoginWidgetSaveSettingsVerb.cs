@@ -7,19 +7,18 @@ namespace Core.OpenIDLogin.Verbs.Widgets
     {
         #region Singleton
 
-        private static OpenIDLoginWidgetSaveSettingsVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<OpenIDLoginWidgetSaveSettingsVerb> instance = new Lazy<OpenIDLoginWidgetSaveSettingsVerb>(() => new OpenIDLoginWidgetSaveSettingsVerb());
 
         public static OpenIDLoginWidgetSaveSettingsVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new OpenIDLoginWidgetSaveSettingsVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private OpenIDLoginWidgetSaveSettingsVerb()
+        {
         }
 
         #endregion

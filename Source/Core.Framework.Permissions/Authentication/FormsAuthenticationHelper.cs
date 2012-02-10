@@ -1,5 +1,7 @@
 ﻿using System.Web.Security;
+using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Core.Framework.Permissions.Authentication
 {
@@ -22,6 +24,11 @@ namespace Core.Framework.Permissions.Authentication
         public void LogoutUser()
         {
             FormsAuthentication.SignOut();
+            var commands = ServiceLocator.Current.GetAllInstances<ISignOutCommand>();
+            foreach (var command in commands)
+            {
+                command.Execute();
+            }
         }
 
         #endregion

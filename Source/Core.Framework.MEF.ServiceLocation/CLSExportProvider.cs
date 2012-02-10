@@ -28,7 +28,7 @@ namespace Core.Framework.MEF.ServiceLocation
             Throw.Throw.IfArgumentNull(serviceLocator, "serviceLocator");
 
             this.serviceLocator = serviceLocator;
-            this.contractMapping = new Dictionary<string, Type>();
+            contractMapping = new Dictionary<string, Type>();
         }
         #endregion
 

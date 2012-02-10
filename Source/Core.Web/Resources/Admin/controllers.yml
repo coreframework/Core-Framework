@@ -28,14 +28,17 @@ Admin:
          Status: "Status"
     User:
       UserGroups: "User groups"
+      Roles: "Roles"
       Remove: "Remove"
       Model:
        User:
         Name: "Name"
         Email: "Email"
         Status: "Status"
-        UserGroups: "Select user groups"
+        UserGroups: "Edit"
+        Roles: "Edit"
         UserGroupsList: "User groups"
+        RolesList: "Roles"
       Admin:
         Models:
           UserStatus:
@@ -44,9 +47,12 @@ Admin:
             Deleted: "Deleted"
     UserGroup:
        Users: "Users"
+       Roles: "Roles"
        Model:
         UserGroup:
          Name: "Name"  
          UsersList: "Users"
          Users: "Select users"
+         Roles: "Edit"
+         RolesList: "Roles"
     

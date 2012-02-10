@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Web.Areas.Admin.Models.RolePermissionsModel>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	<%: Html.Translate(".Permissions") %>
+	<%: Model.Title%>
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
-    <h1><%: Html.Translate(".Permissions") %></h1>
+    <h1><%: Model.Title %></h1>
 
     <%using (Html.BeginForm(MVC.Admin.Role.Permissions(), FormMethod.Get)) {%>
         <%= Html.OptionGroupDropDownList(
@@ -32,15 +32,21 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <%if (Model.OperationsModel != null && Model.OperationsModel.Operations != null)
+<%foreach (var operationsModel in Model.OperationsModels)
+  {%>
+    <%
+      if (operationsModel.Operations != null)
       {%>
-        <% Html.RenderPartial(MVC.Admin.Role.Views.PermissionOperations, Model.OperationsModel);%>
-    <% }
+        <%
+          Html.RenderPartial(MVC.Admin.Role.Views.PermissionOperations, operationsModel);%>
+    <%
+      }
       else
       {%>
-       <%: Html.Translate(".SelectPermissionSection") %>
-    <% }%>
+       <%:Html.Translate(".SelectPermissionSection")%>
+    <%
+      }
+  }%>
 </asp:Content>
 
 <asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">

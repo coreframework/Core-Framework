@@ -5,7 +5,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-
 using ECM7.Migrator.Framework;
 
 namespace Framework.Migrator.Fluent

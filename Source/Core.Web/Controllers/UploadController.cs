@@ -35,7 +35,7 @@ namespace Core.Web.Controllers
         #region Constructors
         public UploadController()
         {
-            this.imageUtility = ServiceLocator.Current.GetInstance<IImageUtility>();
+            imageUtility = ServiceLocator.Current.GetInstance<IImageUtility>();
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="UploadController"/> class.

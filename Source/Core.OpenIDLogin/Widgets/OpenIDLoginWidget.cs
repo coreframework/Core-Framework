@@ -13,24 +13,18 @@ namespace Core.OpenIDLogin.Widgets
     {
         #region Singleton
 
-        private static OpenIDLoginWidget instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<OpenIDLoginWidget> instance = new Lazy<OpenIDLoginWidget>(() => new OpenIDLoginWidget());
 
         public static OpenIDLoginWidget Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new OpenIDLoginWidget());
-                }
+                return instance.Value;
             }
         }
 
         private OpenIDLoginWidget()
         {
-
         }
 
         #endregion

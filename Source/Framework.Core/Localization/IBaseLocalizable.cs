@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Framework.Core.Localization
+﻿namespace Framework.Core.Localization
 {
     public interface ILocalizable
     {

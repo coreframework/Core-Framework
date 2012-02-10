@@ -1,6 +1,6 @@
 ﻿using System;
-using Core.WebContent.NHibernate.Models;
 using Core.Framework.Permissions.Models;
+using Core.WebContent.NHibernate.Models;
 using Framework.Core.Services;
 using NHibernate;
 

@@ -3,6 +3,7 @@ Admin:
     AdminHome:
       Index:
        Welcome: "Welcome to CORE Framework!"
+       Home: "Go to front page" 
     Module:
       Edit:
        Title: "Edit module"
@@ -94,7 +95,7 @@ Admin:
         Title: "User groups for {0}"
         All: "All"
       Permissions:
-       Permissions: "Permissions"
+       Permissions: "Permissions for role \"{0}\""
        Operation: "Operation"
        SelectPermissionSection: "Please select permission section to setup permissions for role."
     SiteSettings:

@@ -42,5 +42,7 @@ namespace Core.Web.Areas.Admin.Models
         /// </summary>
         /// <value>The operation ids.</value>
         public IEnumerable<Int32> OperationIds { get; set; }
+
+        public String Title { get; set; }
     }
 }

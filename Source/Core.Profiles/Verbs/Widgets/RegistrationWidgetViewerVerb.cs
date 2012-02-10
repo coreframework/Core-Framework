@@ -7,19 +7,18 @@ namespace Core.Profiles.Verbs.Widgets
     {
         #region Singleton
 
-        private static RegistrationWidgetViewerVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<RegistrationWidgetViewerVerb> instance = new Lazy<RegistrationWidgetViewerVerb>(() => new RegistrationWidgetViewerVerb());
 
         public static RegistrationWidgetViewerVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new RegistrationWidgetViewerVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private RegistrationWidgetViewerVerb()
+        {
         }
 
         #endregion

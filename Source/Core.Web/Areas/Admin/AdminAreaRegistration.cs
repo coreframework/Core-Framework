@@ -19,7 +19,6 @@ using Core.Web.NHibernate.Models.Permissions;
 using Framework.Mvc.Routing;
 using Microsoft.Practices.ServiceLocation;
 
-
 namespace Core.Web.Areas.Admin
 {
     /// <summary>
@@ -63,6 +62,9 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.Users.UpdateUserGroups", "admin/user/groups/{id}/UpdateUserGroups", MVC.Admin.User.UpdateUserGroups());
             context.MapRoute("Admin.Users.UserGroups", "admin/user/groups/{id}", new { controller = "User", action = "UserGroups", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Users.UserGroupsDynamicGridData", "admin/user/{id}/groups/UserGroupsDynamicGridData", MVC.Admin.User.UserGroupsDynamicGridData());
+            context.MapRoute("Admin.Users.UpdateRoles", "admin/user/roles/{id}/UpdateRoles", MVC.Admin.User.UpdateRoles());
+            context.MapRoute("Admin.Users.UserRoles", "admin/user/roles/{id}", new { controller = "User", action = "Roles", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.Users.RolesDynamicGridData", "admin/user/{id}/roles/RolesDynamicGridData", MVC.Admin.User.RolesDynamicGridData());
 
             context.MapRoute("Admin.UserGroups", "admin/groups", MVC.Admin.UserGroup.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.UserGroups.DynamicGridData", "admin/group/DynamicGridData", MVC.Admin.UserGroup.DynamicGridData());
@@ -75,6 +77,9 @@ namespace Core.Web.Areas.Admin
             context.MapRoute("Admin.UserGroups.ConfirmRemove", "admin/remove-group/{id}", MVC.Admin.UserGroup.ConfirmRemove(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Delete) });
             context.MapRoute("Admin.UserGroups.UpdateUsers", "admin/group/users/{id}/UpdateUsers", MVC.Admin.UserGroup.UpdateUsers());
             context.MapRoute("Admin.UserGroups.Users", "admin/group/users/{id}", new { controller = "UserGroup", action = "Users", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.UserGroups.UpdateRoles", "admin/group/roles/{id}/UpdateRoles", MVC.Admin.UserGroup.UpdateRoles());
+            context.MapRoute("Admin.UserGroups.UserRoles", "admin/group/roles/{id}", new { controller = "UserGroup", action = "Roles", area = AreaName, id = UrlParameter.Optional }, new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
+            context.MapRoute("Admin.UserGroups.RolesDynamicGridData", "admin/group/{id}/roles/RolesDynamicGridData", MVC.Admin.UserGroup.RolesDynamicGridData());
 
             context.MapRoute("Admin.Roles", "admin/roles", MVC.Admin.Role.Index(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             context.MapRoute("Admin.Roles.DynamicGridData", "admin/roles/DynamicGridData", MVC.Admin.Role.DynamicGridData());
@@ -149,29 +154,29 @@ namespace Core.Web.Areas.Admin
             {
                 ICorePlugin plugin1 = plugin;
 
-                if (!((List<Plugin>)existingPlugins).Exists(pl => pl.Identifier == plugin1.Identifier))
+                if (!existingPlugins.Any(pl => pl.Identifier == plugin1.Identifier))
                 {
                     var newPlugin = new Plugin
-                                        {
-                                            Title = plugin1.Title,
-                                            Description = plugin1.Description,
-                                            Identifier = plugin1.Identifier,
-                                            Status = PluginStatus.NotInstalled,
-                                            CreateDate = DateTime.Now
+                    {
+                        Title = plugin1.Title,
+                        Description = plugin1.Description,
+                        Identifier = plugin1.Identifier,
+                        Status = PluginStatus.NotInstalled,
+                        CreateDate = DateTime.Now
 
-                                        };
+                    };
                     pluginService.Save(newPlugin);
                 }
             }
 
-            SetupPlugins((List<Plugin>)pluginService.GetAll());
+            SetupPlugins(pluginService.GetAll());
         }
 
         /// <summary>
         /// Setups the plugins.
         /// </summary>
         /// <param name="plugins">The plugins.</param>
-        protected static void SetupPlugins(List<Plugin> plugins)
+        protected static void SetupPlugins(IEnumerable<Plugin> plugins)
         {
             var widgetService = ServiceLocator.Current.GetInstance<IWidgetService>();
 
@@ -183,23 +188,23 @@ namespace Core.Web.Areas.Admin
             {
                 ICoreWidget widget1 = widget;
 
-                if (!((List<Widget>)existingWidgets).Exists(
+                if (!existingWidgets.Any(
                         wd => wd.Identifier == widget1.Identifier && ((wd.Plugin == null && widget1.Plugin == null) || (wd.Plugin != null && widget1.Plugin != null && wd.Plugin.Identifier == widget1.Plugin.Identifier))))
                 {
                     Plugin plugin = null;
                     if (widget1.Plugin != null)
                     {
-                        plugin = plugins.Find(pl => pl.Identifier == widget1.Plugin.Identifier);
+                        plugin = plugins.FirstOrDefault(pl => pl.Identifier == widget1.Plugin.Identifier);
                     }
                     var newWidget = new Widget
-                                        {
-                                            Identifier = widget1.Identifier,
-                                            Title = widget1.Title,
-                                            IsDetailsWidget = widget1.IsDetailsWidget,
-                                            IsPlaceHolder = widget1.IsPlaceHolder,
-                                            Plugin = plugin,
-                                        };
-                    if(plugin == null)
+                    {
+                        Identifier = widget1.Identifier,
+                        Title = widget1.Title,
+                        IsDetailsWidget = widget1.IsDetailsWidget,
+                        IsPlaceHolder = widget1.IsPlaceHolder,
+                        Plugin = plugin,
+                    };
+                    if (plugin == null)
                     {
                         newWidget.Status = WidgetStatus.Enabled;
                     }
@@ -220,10 +225,10 @@ namespace Core.Web.Areas.Admin
             foreach (IPermissible item in itemsToAdd)
             {
                 var entityType = new EntityType
-                                     {
-                                         Name = PermissionsHelper.GetEntityType(item.GetType()),
+                {
+                    Name = PermissionsHelper.GetEntityType(item.GetType()),
 
-                                     };
+                };
 
                 entityTypeService.Save(entityType);
             }

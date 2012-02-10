@@ -1,6 +1,4 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.OpenIDLogin.Models.OpenIDLoginWidgetEditModel>" %>
-
-<%@ Import Namespace="Framework.Mvc.Extensions" %>
 <div class="form_area">
     <%if (!Model.ChildView)
       {%>

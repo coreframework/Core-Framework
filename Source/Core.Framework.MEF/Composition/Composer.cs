@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Web;
+using Castle.Windsor;
+using CommonServiceLocator.WindsorAdapter;
+using Core.Framework.MEF.Configuration;
+using Core.Framework.MEF.Extensions;
+using Core.Framework.MEF.ServiceLocation;
 
 namespace Core.Framework.MEF.Composition
 {
@@ -16,23 +22,18 @@ namespace Core.Framework.MEF.Composition
     public class Composer
     {
         #region Fields
+
         private bool modified;
 
         private readonly IDictionary<ExportProvider, Action<ExportProvider, CompositionContainer>> postContainerModifiers =
                 new Dictionary<ExportProvider, Action<ExportProvider, CompositionContainer>>();
-        #endregion
 
-        #region Constructor
-        /// <summary>
-        /// Initialises a new instance of <see cref="Composer" />.
-        /// </summary>
-        public Composer()
-        {
-            ExportProviders = new List<ExportProvider>();
-        }
         #endregion
 
         #region Properties
+        
+        public WindsorContainer WindsorContainer { get; private set; }
+
         /// <summary>
         /// Gets the catalog to use for composition.
         /// </summary>
@@ -47,9 +48,46 @@ namespace Core.Framework.MEF.Composition
         /// Gets the export provider to use for composition.
         /// </summary>
         public IList<ExportProvider> ExportProviders { get; private set; }
+
+        #endregion
+
+        #region Singleton
+
+        private static readonly Lazy<Composer> instance = new Lazy<Composer>(() => new Composer());
+
+        public static Composer Instance
+        {
+            get
+            {
+                return instance.Value;
+            }
+        }
+
+        private Composer()
+        {
+            Initialize();
+        }
+
         #endregion
 
         #region Methods
+
+        private void Initialize()
+        {
+            ExportProviders = new List<ExportProvider>();
+            GetDirectoryCatalogs()
+                .ForEach(AddCatalog);
+
+            AddExportProvider(
+                new DynamicInstantiationExportProvider(),
+                (provider, container) => ((DynamicInstantiationExportProvider)provider).SourceProvider = container);
+
+            WindsorContainer = new WindsorContainer();
+            AddExportProvider(new CslExportProvider(new WindsorServiceLocator(WindsorContainer)));
+
+            //Compose(this);
+        }
+
         /// <summary>
         /// Adds the specified catalog to the composer.
         /// </summary>
@@ -110,9 +148,9 @@ namespace Core.Framework.MEF.Composition
             {
                 Container.ComposeParts(@object);
             }
-            catch(ReflectionTypeLoadException e)
+            catch (ReflectionTypeLoadException e)
             {
-                StringBuilder builder = new StringBuilder(e.Message);
+                var builder = new StringBuilder(e.Message);
                 foreach (var loaderException in e.LoaderExceptions)
                 {
                     builder.AppendLine(loaderException.Message);
@@ -254,6 +292,80 @@ namespace Core.Framework.MEF.Composition
                 modified = false;
             }
         }
+
+        /// <summary>
+        /// Gets an list of <see cref="DirectoryCatalog" />s of configured directories.
+        /// </summary>
+        /// <returns>An lsit of <see cref="DirectoryCatalog" />s of configured directories.</returns>
+        private static List<DirectoryCatalog> GetDirectoryCatalogs()
+        {
+            var list = new List<DirectoryCatalog>();
+
+            GetDirectoryCatalogs(HttpContext.Current.Server.MapPath("~/bin")).ForEach(list.Add);
+
+            GetDirectoryCatalogs(HttpContext.Current.Server.MapPath("~/Areas")).ForEach(catalog =>
+            {
+                list.Add(catalog);
+                RegisterPath(catalog.FullPath);
+            });
+
+            var config = CompositionConfigurationSection.GetInstance();
+            if (config != null && config.Catalogs != null)
+            {
+                config.Catalogs
+                    .Cast<CatalogConfigurationElement>()
+                    .ForEach(c =>
+                    {
+                        if (!String.IsNullOrEmpty(c.Path))
+                        {
+                            String path = c.Path;
+                            if (path.StartsWith("~") || path.StartsWith("/"))
+                                path = HttpContext.Current.Server.MapPath(path);
+
+                            GetDirectoryCatalogs(path)
+                                .ForEach(catalog =>
+                                {
+                                    list.Add(catalog);
+                                    RegisterPath(catalog.FullPath);
+                                });
+                        }
+                    });
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Gets a set of <see cref="DirectoryCatalog" /> for the specified path and it's immediate child directories.
+        /// </summary>
+        /// <param name="path">The starting path.</param>
+        /// <returns>An <see cref="IEnumerable{DirectoryCatalog}" /> of directory catalogs.</returns>
+        protected static IEnumerable<DirectoryCatalog> GetDirectoryCatalogs(String path)
+        {
+            Throw.Throw.IfArgumentNullOrEmpty(path, "path");
+
+            var list = new List<DirectoryCatalog>
+                           {
+                               new DirectoryCatalog(path)
+                           };
+
+            list.AddRange(
+                Directory.GetDirectories(path).Select(directory => new DirectoryCatalog(directory)));
+
+            return list;
+        }
+
+        /// <summary>
+        /// Registers the specified path for probing.
+        /// </summary>
+        /// <param name="path">The probable path.</param>
+        private static void RegisterPath(String path)
+        {
+#pragma warning disable 612,618
+            AppDomain.CurrentDomain.AppendPrivatePath(path);
+#pragma warning restore 612,618
+        }
+
         #endregion
     }
 }

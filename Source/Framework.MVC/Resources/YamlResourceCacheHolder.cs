@@ -7,8 +7,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Framework.MEF.Web;
 using Framework.Mvc.Helpers;
-using Application = Core.Framework.MEF.Web.Application;
 using Environment = Framework.Core.Configuration.Environment;
 
 namespace Framework.Mvc.Resources

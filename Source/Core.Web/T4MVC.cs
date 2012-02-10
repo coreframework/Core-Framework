@@ -8,10 +8,9 @@
 #region T4MVC
 
 using System;
-using System.Diagnostics;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
+using System.Diagnostics;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
@@ -1495,6 +1494,9 @@ namespace Links {
             public static readonly String jquery_ui_1_8_11_custom_min_js = Url("jquery-ui-1.8.11.custom.min.js");
         }
     
+        public static readonly String jquery_ui_1_8_11_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.8.11.min.js") ? Url("jquery-ui-1.8.11.min.js") : Url("jquery-ui-1.8.11.js");
+                      
+        public static readonly String jquery_ui_1_8_11_min_js = Url("jquery-ui-1.8.11.min.js");
         public static readonly String jquery_ui_personalized_1_6rc2_min_js = Url("jquery-ui-personalized-1.6rc2.min.js");
         public static readonly String jquery_ui_packed_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui_packed.min.js") ? Url("jquery-ui_packed.min.js") : Url("jquery-ui_packed.js");
                       
@@ -1511,11 +1513,17 @@ namespace Links {
                       
         public static readonly String jquery_qtip_1_0_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.qtip-1.0.0.min.js") ? Url("jquery.qtip-1.0.0.min.js") : Url("jquery.qtip-1.0.0.js");
                       
+        public static readonly String jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
+                      
+        public static readonly String jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
         public static readonly String jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js") : Url("jquery.validate-vsdoc.js");
                       
         public static readonly String jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.min.js") ? Url("jquery.validate.min.js") : Url("jquery.validate.js");
                       
         public static readonly String jquery_validate_min_js = Url("jquery.validate.min.js");
+        public static readonly String jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
+                      
+        public static readonly String jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
         public static readonly String jquery_watermark_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.watermark.min.js") ? Url("jquery.watermark.min.js") : Url("jquery.watermark.js");
                       
         public static readonly String json2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/json2.min.js") ? Url("json2.min.js") : Url("json2.js");
@@ -1532,6 +1540,9 @@ namespace Links {
                       
         public static readonly String MicrosoftMvcValidation_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftMvcValidation.min.js") ? Url("MicrosoftMvcValidation.min.js") : Url("MicrosoftMvcValidation.js");
                       
+        public static readonly String modernizr_1_7_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-1.7.min.js") ? Url("modernizr-1.7.min.js") : Url("modernizr-1.7.js");
+                      
+        public static readonly String modernizr_1_7_min_js = Url("modernizr-1.7.min.js");
         public static readonly String stickyFooter_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/stickyFooter.min.js") ? Url("stickyFooter.min.js") : Url("stickyFooter.js");
                       
         public static readonly String superfish_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/superfish.min.js") ? Url("superfish.min.js") : Url("superfish.js");
@@ -1699,6 +1710,7 @@ namespace Links {
             public static readonly String btn2_c_gif = Url("btn2_c.gif");
             public static readonly String btn2_l_gif = Url("btn2_l.gif");
             public static readonly String btn2_r_gif = Url("btn2_r.gif");
+            public static readonly String calendar_gif = Url("calendar.gif");
             public static readonly String close_ico_png = Url("close_ico.png");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class colorpicker {

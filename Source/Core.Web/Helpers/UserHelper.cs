@@ -115,7 +115,7 @@ namespace Core.Web.Helpers
 
             var notselids = ids.Where(t => !selids.Contains(t)).ToList();
 
-            var noselected = user.UserGroups.Where(t=>notselids.Contains(t.Id.ToString())).ToList();
+            var noselected = user.UserGroups.Where(t => notselids.Contains(t.Id.ToString())).ToList();
             foreach (var userGroup in noselected)
             {
                 user.UserGroups.Remove(userGroup);
@@ -124,12 +124,41 @@ namespace Core.Web.Helpers
             foreach (var selid in selids)
             {
                 String selid1 = selid;
-                if (!user.UserGroups.Any(t=>t.Id.ToString() == selid1))
+                if (!user.UserGroups.Any(t => t.Id.ToString() == selid1))
                 {
                     long selectedID;
-                    if (long.TryParse(selid1,out selectedID))
+                    if (long.TryParse(selid1, out selectedID))
                     {
                         user.UserGroups.Add(userGroupService.Find(selectedID));
+                    }
+                }
+            }
+
+            return userService.Save(user);
+        }
+
+        public static bool UpdatRoleToUsersAssignment(User user, IEnumerable<String> ids, IEnumerable<String> selids)
+        {
+            var roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+            var userService = ServiceLocator.Current.GetInstance<IUserService>();
+
+            var notselids = ids.Where(t => !selids.Contains(t)).ToList();
+
+            var noselected = user.Roles.Where(t => notselids.Contains(t.Id.ToString())).ToList();
+            foreach (var role in noselected)
+            {
+                user.Roles.Remove(role);
+            }
+
+            foreach (var selid in selids)
+            {
+                String selid1 = selid;
+                if (!user.Roles.Any(t => t.Id.ToString() == selid1))
+                {
+                    long selectedID;
+                    if (long.TryParse(selid1, out selectedID))
+                    {
+                        user.Roles.Add(roleService.Find(selectedID));
                     }
                 }
             }

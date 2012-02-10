@@ -1,8 +1,8 @@
 ﻿<%@ Assembly Name="Core.Forms" %>
 <%@ Assembly Name="Core.Forms.NHibernate" %>
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Framework.Mvc.Grids.GridViewModel>" %>
-<%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 <%@ Import Namespace="Core.WebContent.Models" %>
+<%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
    <%:Html.Translate("Titles.ArticleFiles", "WebContent")%>

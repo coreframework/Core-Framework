@@ -4,7 +4,6 @@ using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Models.Static;
 using ECM7.Migrator.Framework;
-using Migration = ECM7.Migrator.Framework.Migration;
 
 namespace Core.Web.Migrations
 {

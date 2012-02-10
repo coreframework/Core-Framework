@@ -10,7 +10,6 @@ using System.Web.Mvc;
 using Castle.Core.Logging;
 using Framework.Core.Infrastructure;
 
-
 namespace Framework.Core.Controllers
 {
     /// <summary>

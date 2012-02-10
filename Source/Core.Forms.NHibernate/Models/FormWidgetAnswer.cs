@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
+using Iesi.Collections.Generic;
 
 namespace Core.Forms.NHibernate.Models
 {
@@ -9,7 +10,7 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private readonly IEnumerable<FormWidgetAnswerValue> answerValues = new List<FormWidgetAnswerValue>();
+        private readonly IEnumerable<FormWidgetAnswerValue> answerValues = new HashedSet<FormWidgetAnswerValue>();
 
         private BaseUser user = new BaseUser();
 

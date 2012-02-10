@@ -18,7 +18,7 @@ namespace Core.Forms.NHibernate.Mappings
             References(formBuilderWidget => formBuilderWidget.Form).Column("FormId");
 
             HasMany(formBuilderWidget => formBuilderWidget.Answers).KeyColumn("FormWidgetId")
-             .Table("Forms_FormsBuilderWidgets")
+             .Table("Forms_FormsBuilderWidgets").AsSet()
              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
              .Inverse()
              .LazyLoad()

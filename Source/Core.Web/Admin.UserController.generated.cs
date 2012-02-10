@@ -76,6 +76,21 @@ namespace Core.Web.Areas.Admin.Controllers {
         public System.Web.Mvc.JsonResult UpdateUserGroups() {
             return new T4MVC_JsonResult(Area, Name, ActionNames.UpdateUserGroups);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Roles() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Roles);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult RolesDynamicGridData() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.RolesDynamicGridData);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.JsonResult UpdateRoles() {
+            return new T4MVC_JsonResult(Area, Name, ActionNames.UpdateRoles);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UserController Actions { get { return MVC.Admin.User; } }
@@ -100,6 +115,9 @@ namespace Core.Web.Areas.Admin.Controllers {
             public readonly String UserGroups = "UserGroups";
             public readonly String UserGroupsDynamicGridData = "UserGroupsDynamicGridData";
             public readonly String UpdateUserGroups = "UpdateUserGroups";
+            public readonly String Roles = "Roles";
+            public readonly String RolesDynamicGridData = "RolesDynamicGridData";
+            public readonly String UpdateRoles = "UpdateRoles";
         }
 
 
@@ -112,6 +130,7 @@ namespace Core.Web.Areas.Admin.Controllers {
             public readonly String Index = "~/Areas/Admin/Views/User/Index.aspx";
             public readonly String New = "~/Areas/Admin/Views/User/New.aspx";
             public readonly String Remove = "~/Areas/Admin/Views/User/Remove.aspx";
+            public readonly String Roles = "~/Areas/Admin/Views/User/Roles.aspx";
             public readonly String UserGroups = "~/Areas/Admin/Views/User/UserGroups.aspx";
         }
     }
@@ -190,6 +209,31 @@ namespace Core.Web.Areas.Admin.Controllers {
 
         public override System.Web.Mvc.JsonResult UpdateUserGroups(long id, System.Collections.Generic.IEnumerable<string> ids, System.Collections.Generic.IEnumerable<string> selids) {
             var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.UpdateUserGroups);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("ids", ids);
+            callInfo.RouteValueDictionary.Add("selids", selids);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Roles(long id) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Roles);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult RolesDynamicGridData(int id, int page, int rows, string search, string sidx, string sord) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.RolesDynamicGridData);
+            callInfo.RouteValueDictionary.Add("id", id);
+            callInfo.RouteValueDictionary.Add("page", page);
+            callInfo.RouteValueDictionary.Add("rows", rows);
+            callInfo.RouteValueDictionary.Add("search", search);
+            callInfo.RouteValueDictionary.Add("sidx", sidx);
+            callInfo.RouteValueDictionary.Add("sord", sord);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult UpdateRoles(long id, System.Collections.Generic.IEnumerable<string> ids, System.Collections.Generic.IEnumerable<string> selids) {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.UpdateRoles);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("ids", ids);
             callInfo.RouteValueDictionary.Add("selids", selids);

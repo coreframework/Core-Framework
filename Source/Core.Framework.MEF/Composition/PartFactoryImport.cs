@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
@@ -178,6 +179,7 @@ namespace Core.Framework.MEF.Composition
                 result = result.Union(
                     metadataViewType
                         .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty)
+                        .Where(pi => pi.GetCustomAttributes(typeof(DefaultValueAttribute), false).Length == 0)
                         .Select(pi => new KeyValuePair<String, Type>(pi.Name, pi.PropertyType)));
 
             return result;

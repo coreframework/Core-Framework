@@ -73,7 +73,7 @@ namespace Core.Framework.Permissions.Contracts
         /// <param name="operations">The operations.</param>
         /// <param name="type">The type.</param>
         /// <param name="entityId">The entity id.</param>
-        void SetupDefaultRolePermissions(IEnumerable<IPermissionOperation> operations, Type type, long entityId);
+        void SetupDefaultRolePermissions(IEnumerable<IPermissionOperation> operations, Type type, long? entityId);
 
         /// <summary>
         /// Clones the object permisions.

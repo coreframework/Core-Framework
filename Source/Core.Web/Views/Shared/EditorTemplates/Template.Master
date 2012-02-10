@@ -1,7 +1,5 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
 
-<%@ Import Namespace="Framework.Mvc.Extensions" %>
-
 <script runat="server">
   
     protected override void OnInit(EventArgs e) 

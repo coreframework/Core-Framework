@@ -7,19 +7,18 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static SiteMapEditorVerb instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<SiteMapEditorVerb> instance = new Lazy<SiteMapEditorVerb>(() => new SiteMapEditorVerb());
 
         public static SiteMapEditorVerb Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new SiteMapEditorVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private SiteMapEditorVerb()
+        {
         }
 
         #endregion

@@ -6,6 +6,8 @@ namespace Core.Web.Areas.Admin.Models
 {
     public class RolePermissionsModel
     {
+        #region Properties
+
         /// <summary>
         /// Gets or sets the role id.
         /// </summary>
@@ -34,9 +36,20 @@ namespace Core.Web.Areas.Admin.Models
         /// Gets or sets the operations model.
         /// </summary>
         /// <value>The operations model.</value>
-        public PermissionOperationsModel OperationsModel { get; set; }
+        public IEnumerable<PermissionOperationsModel> OperationsModels { get; set; }
 
         public String Title { get; set; }
+
+        #endregion
+
+        #region Constructors
+
+        public RolePermissionsModel()
+        {
+            OperationsModels = new List<PermissionOperationsModel>();
+        }
+
+        #endregion
 
     }
 }

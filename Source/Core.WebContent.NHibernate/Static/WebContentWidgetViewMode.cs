@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace Core.WebContent.NHibernate.Static
+﻿namespace Core.WebContent.NHibernate.Static
 {
     public enum WebContentWidgetViewMode
     {

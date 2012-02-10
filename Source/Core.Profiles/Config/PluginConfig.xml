@@ -1,25 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Identifier>Core.Profiles</Identifier>
-    <Title>Profiles</Title>
-    <ResourcesDirectory>Resources</ResourcesDirectory>
-    <Description>Allow managing profiles.</Description>
-    <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
-    <CssPath>Content\Css\</CssPath>
-    <ImagesPath>Content\</ImagesPath>
-    <CssPack>base</CssPack>
-    <JsPath></JsPath>
-    <JsPack>base</JsPack>
-    <WidgetSettings>
-      <WidgetSetting>
-        <Key>Core.Profiles.Widgets.RegistrationWidget</Key>
-        <Identifier>Core.Profiles.Widgets.RegistrationWidget</Identifier>
-        <Title>Registration</Title>
-      </WidgetSetting>
-       <WidgetSetting>
-            <Key>Core.Profiles.Widgets.ProfileWidget</Key>
-            <Identifier>Core.Profiles.Widgets.ProfileWidget</Identifier>
-            <Title>Member profile</Title>
-       </WidgetSetting>
-    </WidgetSettings>
+  <Identifier>Core.Profiles</Identifier>
+  <Title>Profiles</Title>
+  <ResourcesDirectory>Resources</ResourcesDirectory>
+  <Description>
+    Allow managing profiles.
+  </Description>
+  <CssJsConfigPath>
+    Config\asset_packages.yml
+  </CssJsConfigPath>
+  <CssPath>Content\Css\</CssPath>
+  <ImagesPath>Content\</ImagesPath>
+  <CssPack>base</CssPack>
+  <JsPath></JsPath>
+  <JsPack>base</JsPack>
+  <WidgetSettings>
+    <WidgetSetting>
+      <Key>Core.Profiles.Widgets.RegistrationWidget</Key>
+      <Identifier>Core.Profiles.Widgets.RegistrationWidget</Identifier>
+      <Title>Registration</Title>
+    </WidgetSetting>
+    <WidgetSetting>
+      <Key>Core.Profiles.Widgets.ProfileWidget</Key>
+      <Identifier>Core.Profiles.Widgets.ProfileWidget</Identifier>
+      <Title>Member profile</Title>
+    </WidgetSetting>
+  </WidgetSettings>
 </PluginSetting>

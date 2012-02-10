@@ -13,7 +13,7 @@ namespace Core.Framework.NHibernate.Models
     {
         #region Fields
 
-        private IList<User> users = new List<User>();
+        private  IList<User> users = new List<User>();
         private IList<UserGroup> userGroups = new List<UserGroup>();
 
         private String permissionTitle = "Roles";
@@ -49,13 +49,13 @@ namespace Core.Framework.NHibernate.Models
         public virtual IList<User> Users
         {
             get { return users; }
-            set { users = value; }
+            protected set { users = value; }
         }
 
         public virtual IList<UserGroup> UserGroups
         {
             get { return userGroups; }
-            set { userGroups = value; }
+            protected set { userGroups = value; }
         }
 
         public override ILocale InitializeLocaleEntity()

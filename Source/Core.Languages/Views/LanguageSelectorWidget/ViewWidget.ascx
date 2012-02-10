@@ -1,7 +1,5 @@
 ﻿<%@ Assembly Name="Core.Languages.NHibernate" %>
-<%@ Import Namespace="Core.Languages.NHibernate.Models" %>
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<IEnumerable<Language>>" %>
-<%@ Import Namespace="Framework.Core" %>
 <div class="list-menu-widget horizontal">
     <%foreach (var language in Model)
       {%>

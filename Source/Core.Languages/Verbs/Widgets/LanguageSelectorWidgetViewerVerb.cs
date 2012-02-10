@@ -7,19 +7,18 @@ namespace Core.Languages.Verbs.Widgets
     {
         #region Singleton
 
-        private static LanguageSelectorWidgetViewerVerb instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<LanguageSelectorWidgetViewerVerb> instance = new Lazy<LanguageSelectorWidgetViewerVerb>(() => new LanguageSelectorWidgetViewerVerb());
 
         public static LanguageSelectorWidgetViewerVerb Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new LanguageSelectorWidgetViewerVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private LanguageSelectorWidgetViewerVerb()
+        {
         }
 
         #endregion

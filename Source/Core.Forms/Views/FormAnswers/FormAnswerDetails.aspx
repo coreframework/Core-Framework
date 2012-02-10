@@ -1,7 +1,6 @@
 ﻿<%@ Assembly Name="Core.Forms" %>
 <%@ Assembly Name="Core.Forms.NHibernate" %>
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Forms.NHibernate.Models.FormWidgetAnswer>" %>
-<%@ Import Namespace="System.Web.Mvc" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="PageTitleContent" runat="server">
     <h1><%:Html.Translate(".FormAnswerDetails") %></h1>

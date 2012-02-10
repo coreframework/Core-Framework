@@ -17,7 +17,10 @@ namespace Core.Web.NHibernate.Mappings
             Map(userGroups => userGroups.Description).Length(4096);
             HasManyToMany(userGroups => userGroups.Users)
                 .Table("UserGroupsMembers").ParentKeyColumn("UserGroupId")
-                .ChildKeyColumn("UserId").Cascade.SaveUpdate();
+                .ChildKeyColumn("UserId").Cascade.SaveUpdate().LazyLoad();
+            HasManyToMany(userGroups => userGroups.Roles)
+               .Table("UserGroupsToRoles").ParentKeyColumn("UserGroupId")
+               .ChildKeyColumn("RoleId").Cascade.SaveUpdate().LazyLoad();
         }
     }
 }

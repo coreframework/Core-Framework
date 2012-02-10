@@ -19,26 +19,21 @@ namespace Core.FormLogin
 
         #region Singleton
 
-        private static FormLoginPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<FormLoginPlugin> instance = new Lazy<FormLoginPlugin>(() => new FormLoginPlugin());
 
         public static FormLoginPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new FormLoginPlugin());
-                }
+                return instance.Value;
             }
         }
-
-        #endregion
 
         private FormLoginPlugin()
         {
         }
+
+        #endregion
 
         /// <summary>
         /// Registers the specified container.

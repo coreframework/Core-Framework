@@ -20,9 +20,9 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Web;
 
 namespace Framework.Mvc.Captcha
 {

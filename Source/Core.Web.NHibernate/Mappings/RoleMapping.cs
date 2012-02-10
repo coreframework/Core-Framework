@@ -19,7 +19,7 @@ namespace Core.Web.NHibernate.Mappings
             HasManyToMany(role => role.UserGroups).Table("UserGroupsToRoles").ParentKeyColumn("RoleId")
                 .ChildKeyColumn("UserGroupId").Cascade.SaveUpdate().LazyLoad();
             HasMany(role => role.CurrentLocales).KeyColumn("RoleId")
-            .Table("RoleLocales").ApplyFilter<CultureFilter>()
+            .Table("RoleLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

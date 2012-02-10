@@ -1,9 +1,12 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Identifier>Core.OpenIDLogin</Identifier>
   <Title>OpenID Login</Title>
   <ResourcesDirectory>Resources</ResourcesDirectory>
-  <Description>Allow user sign-in using OpenID.</Description>
+  <Description>
+    Allow user sign-in using OpenID.
+  </Description>
   <JsPath></JsPath>
   <JsPack>base</JsPack>
   <WidgetSettings>

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Core.Framework.Plugins.Web;
 
 namespace Core.WebContent.Verbs.Widgets
@@ -10,19 +7,18 @@ namespace Core.WebContent.Verbs.Widgets
     {
         #region Singleton
 
-        private static WebContentDetailsWidgetSaveSettingsVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<WebContentDetailsWidgetSaveSettingsVerb> instance = new Lazy<WebContentDetailsWidgetSaveSettingsVerb>(() => new WebContentDetailsWidgetSaveSettingsVerb());
 
         public static WebContentDetailsWidgetSaveSettingsVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new WebContentDetailsWidgetSaveSettingsVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private WebContentDetailsWidgetSaveSettingsVerb()
+        {
         }
 
         #endregion

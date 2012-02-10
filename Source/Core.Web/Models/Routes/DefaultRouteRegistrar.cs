@@ -34,7 +34,7 @@ namespace Core.Web.Models.Routes
         public void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute("UploadImage", "upload/image", MVC.Upload.Image());
-            routes.MapRoute("UploadFile", "upload/file", MVC.Upload.File()); 
+            routes.MapRoute("UploadFile", "upload/file", MVC.Upload.File());
 
             routes.MapRoute(null, "pages/changelayout/{pageId}/{layoutTemplateId}", MVC.Pages.ChangeLayout());
             routes.MapRoute(null, "pages/show-layout-setting", MVC.Pages.ShowLayoutSettingsForm());
@@ -67,6 +67,7 @@ namespace Core.Web.Models.Routes
             routes.MapRoute(null, "pages/remove-widget/{pageWidgetId}", MVC.Pages.RemovePageWidget());
             routes.MapRoute(null, "pages/remove/{pageId}", MVC.Pages.RemovePage());
             routes.MapRoute(null, "pages/unlink/{pageId}", MVC.Pages.Unlink());
+            routes.MapRoute(null, "pages/refresh-widget/{pageWidgetId}", MVC.Pages.RefreshWidget());
             routes.MapRoute("Pages.ChangePageMode", "pages/change-page-mode", MVC.Pages.ChangePageMode(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
             routes.MapRoute("Pages.Error", "error", MVC.Error.Index());
             routes.MapRoute("PlaceHolderWidget.View", "place-holder-widget/view", MVC.PlaceHolderWidget.ViewWidget(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Post) });
@@ -76,8 +77,6 @@ namespace Core.Web.Models.Routes
             routes.MapRoute("PageTemplates.Show", "page-templates/{url}", MVC.PageTemplates.Show(), new { httpVerbs = new HttpVerbConstraint(HttpVerbs.Get) });
             routes.MapRoute("Default", "{controller}/{action}/{id}", new { controller = "Home", action = "Index", id = String.Empty });
             routes.MapRoute("Login", "users/sign-in", MVC.Users.NewUserSession());
-
-          
         }
 
         #endregion

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace Core.Framework.MEF.Contracts.Web
 {
@@ -13,6 +14,13 @@ namespace Core.Framework.MEF.Contracts.Web
         /// Gets the name of the controller.
         /// </summary>
         String Name { get; }
+
+        /// <summary>
+        /// Gets the area.
+        /// </summary>
+        /// <value>The area.</value>
+        [DefaultValue("")]
+        String Area { get; }
 
         #endregion
     }

@@ -9,8 +9,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Resources;
-using System.Threading;
 using System.Web.Compilation;
+using Framework.Core.Localization;
 using Microsoft.Practices.ServiceLocation;
 
 namespace Framework.Mvc.Resources
@@ -92,7 +92,7 @@ namespace Framework.Mvc.Resources
             }
             else
             {
-                cultureName = Thread.CurrentThread.CurrentUICulture.Name;
+                cultureName = CultureHelper.DefaultCultureName;
             }
 
             String resource = null;
@@ -142,12 +142,12 @@ namespace Framework.Mvc.Resources
                 {
                     if (scopeChains.Count() > 1)
                     {
-                        chains.Add(String.Join(YamlResourceCache.ScopeSeparator, scopeChains.Skip(1))); 
-                    }   
+                        chains.Add(String.Join(YamlResourceCache.ScopeSeparator, scopeChains.Skip(1)));
+                    }
                 }
                 else
                 {
-                    chains.Add(scope);    
+                    chains.Add(scope);
                 }
             }
             chains.Add(resourceKey);

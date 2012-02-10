@@ -12,10 +12,10 @@ namespace Core.LoginWorkflow.NHibernate
         public static void Install(IWindsorContainer container)
         {
             // Register nhibernate fluent mapper.
-            container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("loginworkflow_mapper").LifeStyle.Transient);
+            container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("loginworkflow_mapper").LifeStyle.Singleton);
 
             // Register data services.
-            container.Register(Component.For<ILoginHolderWidgetService>().ImplementedBy<NHibernateLoginHolderWidgetService>().LifeStyle.Transient);
+            container.Register(Component.For<ILoginHolderWidgetService>().ImplementedBy<NHibernateLoginHolderWidgetService>().LifeStyle.Singleton);
         }
     }
 }

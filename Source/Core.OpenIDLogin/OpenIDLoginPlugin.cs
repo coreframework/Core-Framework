@@ -19,18 +19,13 @@ namespace Core.OpenIDLogin
 
         #region Singleton
 
-        private static OpenIDLoginPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<OpenIDLoginPlugin> instance = new Lazy<OpenIDLoginPlugin>(() => new OpenIDLoginPlugin());
 
         public static OpenIDLoginPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new OpenIDLoginPlugin());
-                }
+                return instance.Value;
             }
         }
 

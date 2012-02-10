@@ -10,5 +10,7 @@ namespace Core.Framework.NHibernate.Contracts
         RoleLocale GetLocale(long roleId, String culture);
 
         ICriteria GetSearchCriteria(String searchString);
+
+        ICriteria GetSearchCriteriaForAssign(String searchString);
     }
 }

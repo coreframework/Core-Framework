@@ -10,13 +10,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-
 using Castle.Core.Logging;
-
 using Microsoft.Practices.ServiceLocation;
-
 using Yaml.Grammar;
-
 using Environment = Framework.Core.Configuration.Environment;
 
 namespace Framework.Mvc.Resources
@@ -221,7 +217,7 @@ namespace Framework.Mvc.Resources
                         }
                         catch (Exception e)
                         {
-                            logger.Error("Some erro was occured during \"{0}\" processing ({1}).", file, e.Message);
+                            logger.ErrorFormat("Some erro was occured during \"{0}\" processing ({1}).", file, e.Message);
                         }
                     }
 
@@ -231,7 +227,7 @@ namespace Framework.Mvc.Resources
 
                     if (timeElapsed > maximumRetryPeriod)
                     {
-                        logger.Error("The file \"{0}\" could not be processed.", file);
+                        logger.ErrorFormat("The file \"{0}\" could not be processed.", file);
                         break;
                     }
 

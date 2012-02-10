@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web;
-using System.Linq;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Models;
@@ -11,11 +11,11 @@ using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Models.Static;
 using Core.Web.NHibernate.Permissions.Operations;
+using FluentNHibernate.Utils;
 using Framework.Core;
 using Framework.Core.Extensions;
 using Microsoft.Practices.ServiceLocation;
 using Omu.ValueInjecter;
-using FluentNHibernate.Utils;
 
 namespace Core.Web.Helpers
 {

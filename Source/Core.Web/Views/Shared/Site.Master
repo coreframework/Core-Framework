@@ -1,11 +1,10 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
-
-<%@ Import Namespace="Core.Web.Models" %>
 <%@ Import Namespace="Core.Web.Helpers" %>
-<%@ Import Namespace="Microsoft.Practices.ServiceLocation" %>
-<%@ Import Namespace="Core.Web.NHibernate.Contracts" %>
-<%@ Import Namespace="Framework.Core" %>
 <%@ Import Namespace="Core.Web.Helpers.HtmlExtensions" %>
+<%@ Import Namespace="Framework.Core" %>
+<%@ Import Namespace="Core.Web.Models" %>
+<%@ Import Namespace="Core.Web.NHibernate.Contracts" %>
+<%@ Import Namespace="Microsoft.Practices.ServiceLocation" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head id="Head1" runat="server">

@@ -7,8 +7,7 @@ using Core.Framework.Permissions.Helpers;
 using Core.Web.NHibernate.Contracts.Permissions;
 using Core.Web.NHibernate.Models.Permissions;
 using Framework.Facilities.NHibernate;
-using NHibernate;
-using NHibernate.Linq;
+using Framework.Facilities.NHibernate.Helpers;
 
 namespace Core.Web.NHibernate.Services.Permissions
 {
@@ -46,7 +45,7 @@ namespace Core.Web.NHibernate.Services.Permissions
         public override IQueryable<Permission> CreateQuery()
         {
             var query = Session.Linq<Permission>();
-            query.QueryOptions.SetCachable(true).SetCacheMode(CacheMode.Normal);
+            //query.QueryOptions.SetCachable(true).SetCacheMode(CacheMode.Normal);
             return query.AsQueryable();
         }
 

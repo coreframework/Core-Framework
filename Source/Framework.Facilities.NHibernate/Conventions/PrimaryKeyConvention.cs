@@ -5,8 +5,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using FluentNHibernate.Conventions;
-using FluentNHibernate.Conventions.AcceptanceCriteria;
-using FluentNHibernate.Conventions.Inspections;
 using FluentNHibernate.Conventions.Instances;
 
 namespace Framework.Facilities.NHibernate.Conventions

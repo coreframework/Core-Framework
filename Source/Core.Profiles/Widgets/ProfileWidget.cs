@@ -13,24 +13,18 @@ namespace Core.Profiles.Widgets
     {
         #region Singleton
 
-        private static ProfileWidget instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<ProfileWidget> instance = new Lazy<ProfileWidget>(() => new ProfileWidget());
 
         public static ProfileWidget Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new ProfileWidget());
-                }
+                return instance.Value;
             }
         }
 
         private ProfileWidget()
         {
-
         }
 
         #endregion

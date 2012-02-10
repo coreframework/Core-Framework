@@ -14,19 +14,18 @@ namespace Core.Web.Areas.Navigation.Widgets
     {
         #region Singleton
 
-        private static NListMenuWidget instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<NListMenuWidget> instance = new Lazy<NListMenuWidget>(() => new NListMenuWidget());
 
         public static NListMenuWidget Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new NListMenuWidget());
-                }
+                return instance.Value;
             }
+        }
+
+        private NListMenuWidget()
+        {
         }
 
         #endregion

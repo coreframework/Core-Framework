@@ -15,7 +15,7 @@ namespace Core.Profiles.NHibernate.Mappings
             References(item => item.User);
 
             HasMany(item => item.ProfileElements).KeyColumn("UserProfileId")
-             .Table("Profiles_UserProfileElements")
+             .Table("Profiles_UserProfileElements").AsSet()
              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
              .Inverse()
              .LazyLoad()

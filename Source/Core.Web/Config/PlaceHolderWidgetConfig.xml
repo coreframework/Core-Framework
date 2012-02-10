@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <WidgetSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Key>Core.Web.Verbs.PlaceHolderWidget</Key>
   <Identifier>4224B2133-4aE1-11E0-B8AF-801Adfg3D92185</Identifier>

@@ -22,7 +22,7 @@ namespace Core.Forms.NHibernate.Mappings
             References(formWidgetAnswer => formWidgetAnswer.FormBuilderWidget).Column("FormWidgetId");
 
             HasMany(form => form.AnswerValues).KeyColumn("FormAnswerId")
-           .Table("Forms_FormAnswerValues")
+           .Table("Forms_FormAnswerValues").AsSet()
            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
            .Inverse()
            .LazyLoad()

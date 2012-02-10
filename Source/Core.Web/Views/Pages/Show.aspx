@@ -1,9 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<Core.Web.Models.PageViewModel>" %>
-
+<%@ Import Namespace="Core.Framework.Plugins.Widgets" %>
 <%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
 <%@ Import Namespace="Core.Web.Models" %>
 <%@ Import Namespace="Core.Web.NHibernate.Models.Static" %>
-<%@ Import Namespace="Core.Framework.Plugins.Widgets" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     <%:Model.Title %>
 </asp:Content>

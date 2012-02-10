@@ -13,24 +13,18 @@ namespace Core.WebContent.Widgets
     {
         #region Singleton
 
-        private static ContentDetailsWidget instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<ContentDetailsWidget> instance = new Lazy<ContentDetailsWidget>(() => new ContentDetailsWidget());
 
         public static ContentDetailsWidget Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new ContentDetailsWidget());
-                }
+                return instance.Value;
             }
         }
 
         private ContentDetailsWidget()
         {
-            
         }
 
         #endregion

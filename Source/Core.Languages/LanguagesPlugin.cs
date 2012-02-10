@@ -27,18 +27,13 @@ namespace Core.Languages
 
         #region Singleton
 
-        private static LanguagesPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<LanguagesPlugin> instance = new Lazy<LanguagesPlugin>(() => new LanguagesPlugin());
 
         public static LanguagesPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new LanguagesPlugin());
-                }
+                return instance.Value;
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PageViewModel>" %>
-<%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
-<%@ Import Namespace="Framework.Core" %>
 <%@ Import Namespace="Core.Web.NHibernate.Models" %>
+<%@ Import Namespace="Framework.Core" %>
+<%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
 <div class="clear">
 </div>
 <div class="curr_pg">

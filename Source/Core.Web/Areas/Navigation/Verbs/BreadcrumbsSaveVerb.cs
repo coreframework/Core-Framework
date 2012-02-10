@@ -7,19 +7,18 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static BreadcrumbsSaveVerb instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<BreadcrumbsSaveVerb> instance = new Lazy<BreadcrumbsSaveVerb>(() => new BreadcrumbsSaveVerb());
 
         public static BreadcrumbsSaveVerb Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new BreadcrumbsSaveVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private BreadcrumbsSaveVerb()
+        {
         }
 
         #endregion

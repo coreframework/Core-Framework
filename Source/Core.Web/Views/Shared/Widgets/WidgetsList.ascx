@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<System.Collections.Generic.IEnumerable<Core.Web.NHibernate.Models.Widget>>" %>
-<%@ Import Namespace="Framework.Core.Infrastructure" %>
 <%@ Import Namespace="Framework.Core" %>
+<%@ Import Namespace="Framework.Core.Infrastructure" %>
 
 <%:Html.Message(MessageType.Info, Html.Translate(".AddWidget")) %>
 <div class="form_area">

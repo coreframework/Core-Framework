@@ -35,14 +35,14 @@ namespace Core.Web.NHibernate.Mappings
                 WHERE Pages.TemplateId = Id)").LazyLoad();
 
             HasMany(page => page.Widgets).KeyColumn("PageId")
-                .Table("PageWidgets")
+                .Table("PageWidgets").AsSet()
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
                 .Inverse()
                 .LazyLoad()
                 .Cascade.AllDeleteOrphan();
 
             HasMany(page => page.Children).KeyColumn("ParentPageId")
-            .Table("Pages")
+            .Table("Pages").AsSet()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
@@ -50,7 +50,7 @@ namespace Core.Web.NHibernate.Mappings
 
             HasOne(page => page.Settings).PropertyRef(pageSettings => pageSettings.Page).Cascade.All().LazyLoad();
             HasMany(page => page.CurrentLocales).KeyColumn("PageId")
-            .Table("PageLocales").ApplyFilter<CultureFilter>()
+            .Table("PageLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

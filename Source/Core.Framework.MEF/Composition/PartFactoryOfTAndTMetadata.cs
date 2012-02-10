@@ -27,6 +27,7 @@ namespace Core.Framework.MEF.Composition
         /// Gets the metadata for the part.
         /// </summary>
         public TMetadata Metadata { get; private set; }
+
         #endregion
     }
 }

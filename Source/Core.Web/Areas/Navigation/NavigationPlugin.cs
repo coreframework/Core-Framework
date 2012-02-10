@@ -27,19 +27,18 @@ namespace Core.Web.Areas.Navigation
 
         #region Singleton
 
-        private static NavigationPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<NavigationPlugin> instance = new Lazy<NavigationPlugin>(() => new NavigationPlugin());
 
         public static NavigationPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new NavigationPlugin());
-                }
+                return instance.Value;
             }
+        }
+
+        private NavigationPlugin()
+        {
         }
 
         #endregion

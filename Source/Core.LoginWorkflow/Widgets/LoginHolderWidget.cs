@@ -1,36 +1,34 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Core.FormLogin;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Framework.Plugins.Widgets;
 using Core.LoginWorkflow.Verbs;
+using Core.OpenIDLogin;
 
 namespace Core.LoginWorkflow.Widgets
 {
     [Export(typeof(ICoreWidget))]
     [Export(typeof(IPermissible))]
-    public class LoginHolderWidget : BaseWidget
+    public class LoginHolderWidget : BaseWorkflowWidget
     {
         #region Singleton
 
-        private static LoginHolderWidget instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<LoginHolderWidget> instance = new Lazy<LoginHolderWidget>(() => new LoginHolderWidget());
 
         public static LoginHolderWidget Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new LoginHolderWidget());
-                }
+                return instance.Value;
             }
         }
 
         private LoginHolderWidget()
         {
-
+            innerPlugins.Add(FormLoginPlugin.Instance);
+            innerPlugins.Add(OpenIDLoginPlugin.Instance);
         }
 
         #endregion

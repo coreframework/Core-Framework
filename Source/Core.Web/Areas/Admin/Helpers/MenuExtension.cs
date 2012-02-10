@@ -6,10 +6,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using System.Linq;
 using Core.Framework.MEF.Web;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Contracts;
@@ -53,11 +53,11 @@ namespace Core.Web.Areas.Admin.Helpers
                 menuItems.Add(html.Translate(".AccountsAndPermissions"), usersMenuItem);
             }
 
-            var siteSettingsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (SiteSettings), null);
-            var pluginsAccess = permissionService.IsAllowed((int) BaseEntityOperations.Manage, user, typeof (Plugin), null);
+            var siteSettingsAccess = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(SiteSettings), null);
+            var pluginsAccess = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Plugin), null);
             var pagesAccess = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(Page), null);
             var pagesTemplateAccess = permissionService.IsAllowed((int)BaseEntityOperations.Manage, user, typeof(PageTemplate), null);
-            if (siteSettingsAccess || pluginsAccess || pagesAccess || pagesTemplateAccess) 
+            if (siteSettingsAccess || pluginsAccess || pagesAccess || pagesTemplateAccess)
             {
                 var administrationMenuItem = new List<IMenuItem>();
 
@@ -70,12 +70,12 @@ namespace Core.Web.Areas.Admin.Helpers
                     administrationMenuItem.Add(new ActionLink<ModuleController>(html.Translate(".Modules"), Links.Content.Images.Admin.ico5_png, c => c.Index()));
                     administrationMenuItem.Add(new ActionLink<WidgetController>(html.Translate(".Widgets"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
                 }
-                if(pagesAccess)
+                if (pagesAccess)
                 {
                     administrationMenuItem.Add(new ActionLink<PageController>(html.Translate(".Pages"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
                     administrationMenuItem.Add(new ActionLink<PageTemplateController>(html.Translate(".PageTemplates"), Links.Content.Images.Admin.ico6_png, c => c.Index()));
                 }
-   
+
                 menuItems.Add(html.Translate(".Administration"), administrationMenuItem);
             }
 
@@ -84,7 +84,7 @@ namespace Core.Web.Areas.Admin.Helpers
                                   where pluginHelper.IsPluginEnabled(verb.ControllerPluginIdentifier) && verb.IsAllowed(context.CorePrincipal())
                                   select new RouteLink(verb.Name, Links.Content.Images.Admin.ico3_png, verb.RouteName)).Cast<IMenuItem>().ToList();
 
-            if (usersMenuItem1.Count>0)
+            if (usersMenuItem1.Count > 0)
                 menuItems.Add(html.Translate(".Modules"), usersMenuItem1);
 
             return menuItems;
@@ -131,7 +131,7 @@ namespace Core.Web.Areas.Admin.Helpers
                 buffer.Append(RenderSection(html, url, section.Key, section.Value, isCurrent, number));
                 number++;
             }
-            return buffer.ToString(); 
+            return buffer.ToString();
         }
 
         private static String RenderSection(HtmlHelper html, UrlHelper url, String title, IEnumerable<IMenuItem> items, bool isCurrent, int number)
@@ -181,21 +181,20 @@ namespace Core.Web.Areas.Admin.Helpers
             foreach (var item in items)
             {
                 var itemTag = new TagBuilder("li");
+                var link = new TagBuilder("a");
+                link.Attributes["href"] = item.GetUrl(url);
                 var em = new TagBuilder("em");
                 if (!String.IsNullOrEmpty(item.Image))
                 {
                     em.Attributes["style"] = String.Format("background: url(\"{0}\") no-repeat scroll 5px 50% transparent;", item.GetImageUrl(url));
                 }
-                var link = new TagBuilder("a");
-                link.Attributes["href"] = item.GetUrl(url);
-                link.InnerHtml = (new TagBuilder("spam") { InnerHtml =item.Title }).ToString();
+                em.InnerHtml = (new TagBuilder("spam") { InnerHtml = item.Title }).ToString();
                 if (item.IsCurrent(html.ViewContext.RequestContext))
                 {
                     itemTag.Attributes["class"] = "active";
                 }
-
-                em.InnerHtml = link.ToString();
-                itemTag.InnerHtml = em.ToString();
+                link.InnerHtml = em.ToString();
+                itemTag.InnerHtml = link.ToString();
 
                 itemsContent.Append(itemTag.ToString());
             }

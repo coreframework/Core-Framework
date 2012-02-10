@@ -19,12 +19,11 @@ namespace Core.Web.NHibernate.Mappings
             Map(plugin => plugin.Version).Length(255);
             Map(plugin => plugin.CreateDate);
             HasMany(plugin => plugin.CurrentLocales).KeyColumn("PluginId")
-            .Table("PluginLocales").ApplyFilter<CultureFilter>()
+            .Table("PluginLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();
-
         }
     }
 }

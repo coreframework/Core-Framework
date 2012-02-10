@@ -7,6 +7,7 @@ using Core.WebContent.NHibernate.Permissions;
 using Core.WebContent.NHibernate.Static;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
+using Iesi.Collections.Generic;
 
 namespace Core.WebContent.NHibernate.Models
 {
@@ -22,7 +23,7 @@ namespace Core.WebContent.NHibernate.Models
 
         private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<ArticleOperations>();
 
-        private readonly IList<ArticleFile> files = new List<ArticleFile>();
+        private readonly Iesi.Collections.Generic.ISet<ArticleFile> files = new HashedSet<ArticleFile>();
 
         #endregion
 

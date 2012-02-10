@@ -7,19 +7,18 @@ namespace Core.LoginWorkflow.Verbs
     {
         #region Singleton
 
-        private static LoginHolderWidgetEditorVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<LoginHolderWidgetEditorVerb> instance = new Lazy<LoginHolderWidgetEditorVerb>(() => new LoginHolderWidgetEditorVerb());
 
         public static LoginHolderWidgetEditorVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new LoginHolderWidgetEditorVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private LoginHolderWidgetEditorVerb()
+        {
         }
 
         #endregion

@@ -3,7 +3,6 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master"
     Inherits="System.Web.Mvc.ViewPage<Framework.Mvc.Grids.GridViewModel>" %>
 <%@ Import Namespace="Framework.Mvc.Grids.JqGrid" %>
-<%@ Import Namespace="System.Web.Mvc" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
    <%:Html.Translate("Titles.Categories", "WebContent")%>
 </asp:Content>

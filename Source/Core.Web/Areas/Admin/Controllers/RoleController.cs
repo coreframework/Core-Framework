@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Dynamic;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using System.Linq.Dynamic;
 using Core.Framework.NHibernate.Contracts;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Core.Web.Areas.Admin.Models;
 using Core.Web.Helpers;
-using Core.Web.NHibernate.Contracts;
 using Framework.Mvc.Controllers;
 using Framework.Mvc.Grids;
 using Framework.Mvc.Grids.JqGrid;
 using Microsoft.Practices.ServiceLocation;
+using MvcSiteMapProvider.Filters;
 using NHibernate;
 using NHibernate.Criterion;
-using MvcSiteMapProvider.Filters;
 
 namespace Core.Web.Areas.Admin.Controllers
 {
@@ -298,7 +297,7 @@ namespace Core.Web.Areas.Admin.Controllers
             {
                 DataUrl = Url.Action(MVC.Admin.Role.UsersDynamicGridData()),
                 DefaultOrderColumn = "Username",
-                GridTitle =Translate(".Model.Users"),
+                GridTitle = Translate(".Model.Users"),
                 Columns = columns,
                 MultiSelect = true,
                 IsRowNotClickable = true,

@@ -2,6 +2,7 @@
 using System.ComponentModel.Composition;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Extensions;
 using Core.Framework.Plugins.Helpers;
 using Core.Framework.Plugins.Web;
 using Core.LoginWorkflow.Models;
@@ -10,7 +11,6 @@ using Core.LoginWorkflow.Widgets;
 using Framework.Mvc.Extensions;
 using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
-using Core.Framework.Permissions.Extensions;
 
 namespace Core.LoginWorkflow.Controllers
 {

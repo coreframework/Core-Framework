@@ -1,14 +1,14 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.PageViewModel>" %>
-<%@ Import Namespace="Core.Web.NHibernate.Models" %>
-<%@ Import Namespace="Core.Web.Helpers.Layouts" %>
 <%@ Import Namespace="Core.Framework.Plugins.Widgets" %>
+<%@ Import Namespace="Core.Web.Helpers.Layouts" %>
 <%@ Import Namespace="Core.Web.NHibernate.Models.Static" %>
+<%@ Import Namespace="Core.Web.NHibernate.Models" %>
 <% int columnIndex = 1;
 %>
 <%
     foreach (PageLayoutRow row in Model.Layout.LayoutTemplate.Rows)
     {%>
-<table class="widgets">
+<table class="widgets" cellpadding="0" cellspacing="0">
     <tr rowid="<%=row.Id%>">
         <%
            foreach (var column in row.Columns)

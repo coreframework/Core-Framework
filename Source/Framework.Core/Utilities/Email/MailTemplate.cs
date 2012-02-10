@@ -251,7 +251,7 @@ namespace Framework.Core.Utilities.Email
         /// <param name="bodyTemplate">The body template.</param>
         public MailTemplate(String templateDirectory, String bodyTemplate)
         {
-            this.TemplateDirectory = templateDirectory;
+            TemplateDirectory = templateDirectory;
             ReadTemplates(bodyTemplate);
         }
 

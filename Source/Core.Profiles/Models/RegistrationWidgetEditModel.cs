@@ -11,7 +11,7 @@ namespace Core.Profiles.Models
     {
         #region Fields
 
-        private List<ProfileType> profileTypes;
+        private IEnumerable<ProfileType> profileTypes;
 
         #endregion
 
@@ -34,14 +34,14 @@ namespace Core.Profiles.Models
         /// Gets the profile types.
         /// </summary>
         /// <value>The profile types.</value>
-        public List<ProfileType> ProfileTypes
+        public IEnumerable<ProfileType> ProfileTypes
         {
             get
             {
                 if (profileTypes == null)
                 {
                     var profileTypeService = ServiceLocator.Current.GetInstance<IProfileTypeService>();
-                    profileTypes = (List<ProfileType>) profileTypeService.GetAll();
+                    profileTypes = profileTypeService.GetAll();
                 }
                 return profileTypes;
             }

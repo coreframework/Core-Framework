@@ -23,13 +23,14 @@ namespace Core.Web.NHibernate.Services.Permissions
 {
     public class PermissionCommonService : NHibernateDataService<Permission>, IPermissionCommonService
     {
-        public PermissionCommonService(ISessionManager sessionManager) : base(sessionManager)
+        public PermissionCommonService(ISessionManager sessionManager)
+            : base(sessionManager)
         {
         }
 
         public bool IsAllowed(int operation, ICorePrincipal user, Type entityType, long? entityId)
         {
-            return IsAllowed(operation, user, entityType, entityId, false, entityId!=null? PermissionOperationLevel.Object: PermissionOperationLevel.Type);
+            return IsAllowed(operation, user, entityType, entityId, false, entityId != null ? PermissionOperationLevel.Object : PermissionOperationLevel.Type);
         }
 
         public bool IsAllowed(int operation, ICorePrincipal user, Type entityType, long? entityId, PermissionOperationLevel level)
@@ -97,7 +98,7 @@ namespace Core.Web.NHibernate.Services.Permissions
                     criteria.Add(Restrictions.Eq("EntityId", entityId));
                     break;
                 case PermissionOperationLevel.ObjectType:
-                    criteria.Add(Restrictions.Or(Restrictions.IsNull("EntityId"), Restrictions.Eq("EntityId",entityId)));
+                    criteria.Add(Restrictions.Or(Restrictions.IsNull("EntityId"), Restrictions.Eq("EntityId", entityId)));
                     break;
             }
 
@@ -179,58 +180,58 @@ namespace Core.Web.NHibernate.Services.Permissions
         /// <param name="operations">The operations.</param>
         /// <param name="type">The type.</param>
         /// <param name="entityId">The entity id.</param>
-        public void SetupDefaultRolePermissions(IEnumerable<IPermissionOperation> operations, Type type, long entityId)
+        public void SetupDefaultRolePermissions(IEnumerable<IPermissionOperation> operations, Type type, long? entityId)
         {
             var permissionService = ServiceLocator.Current.GetInstance<IPermissionService>();
             var entityTypeService = ServiceLocator.Current.GetInstance<IEntityTypeService>();
 
             EntityType entityType = entityTypeService.GetByType(type);
 
-            if (operations!=null && entityType != null)
+            if (operations != null && entityType != null)
             {
                 //setup permissions for Owner
                 var ownerPermissions = new Permission
-                                           {
-                                               EntityId = entityId,
-                                               EntityType = entityType,
-                                               Role = new Role {Id = (long) SystemRole.Owner},
-                                               Permissions =
-                                                   operations.Where(
-                                                       permissionOperation => permissionOperation.OwnerDefaultAcess).
-                                                   Aggregate(0,
-                                                             (current, permissionOperation) =>
-                                                             current | permissionOperation.Key)
-                                           };
+                {
+                    EntityId = entityId,
+                    EntityType = entityType,
+                    Role = new Role { Id = (long)SystemRole.Owner },
+                    Permissions =
+                        operations.Where(
+                            permissionOperation => permissionOperation.OwnerDefaultAcess).
+                        Aggregate(0,
+                                  (current, permissionOperation) =>
+                                  current | permissionOperation.Key)
+                };
                 permissionService.Save(ownerPermissions);
 
                 //setup permissions for User
                 var userPermissions = new Permission
-                                          {
-                                              EntityId = entityId,
-                                              EntityType = entityType,
-                                              Role = new Role {Id = (long) SystemRole.User},
-                                              Permissions =
-                                                  operations.Where(
-                                                      permissionOperation => permissionOperation.UserDefaultAccess).
-                                                  Aggregate(0,
-                                                            (current, permissionOperation) =>
-                                                            current | permissionOperation.Key)
-                                          };
+                {
+                    EntityId = entityId,
+                    EntityType = entityType,
+                    Role = new Role { Id = (long)SystemRole.User },
+                    Permissions =
+                        operations.Where(
+                            permissionOperation => permissionOperation.UserDefaultAccess).
+                        Aggregate(0,
+                                  (current, permissionOperation) =>
+                                  current | permissionOperation.Key)
+                };
                 permissionService.Save(userPermissions);
 
                 //setup permissions for Guest
                 var guestPermissions = new Permission
-                                           {
-                                               EntityId = entityId,
-                                               EntityType = entityType,
-                                               Role = new Role {Id = (long) SystemRole.Guest},
-                                               Permissions =
-                                                   operations.Where(
-                                                       permissionOperation => permissionOperation.GuestDefaultAcess).
-                                                   Aggregate(0,
-                                                             (current, permissionOperation) =>
-                                                             current | permissionOperation.Key)
-                                           };
+                {
+                    EntityId = entityId,
+                    EntityType = entityType,
+                    Role = new Role { Id = (long)SystemRole.Guest },
+                    Permissions =
+                        operations.Where(
+                            permissionOperation => permissionOperation.GuestDefaultAcess).
+                        Aggregate(0,
+                                  (current, permissionOperation) =>
+                                  current | permissionOperation.Key)
+                };
 
                 permissionService.Save(guestPermissions);
             }
@@ -287,7 +288,7 @@ namespace Core.Web.NHibernate.Services.Permissions
                                           Restrictions.Eq(Projections.SqlProjection(String.Format("Permissions & {0} as result", operationCode), new[] { "result" }, new IType[] { NHibernateUtil.Int32 }), operationCode))
                                 .SetProjection(Projections.Id());
 
-               return Subqueries.Exists(permissionsSubQuery);
+                return Subqueries.Exists(permissionsSubQuery);
             }
             else
             {

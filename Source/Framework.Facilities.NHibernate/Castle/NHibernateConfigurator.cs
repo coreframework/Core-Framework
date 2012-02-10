@@ -8,14 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Text.RegularExpressions;
-
 using Castle.Core.Configuration;
 using Castle.Facilities.NHibernateIntegration;
 using Castle.MicroKernel;
-
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-
+using FluentNHibernate.Conventions.Helpers;
 using Framework.Core;
 using Framework.Core.Configuration;
 using Framework.Core.Helpers;
@@ -104,7 +102,7 @@ namespace Framework.Facilities.NHibernate.Castle
                                             {
                                                 mapper.Map(m, databaseConfiguration);
                                             }
-                                            m.FluentMappings.Add(typeof(CultureFilter));
+                                            m.FluentMappings.Add(typeof(CultureFilter)).Conventions.Setup(x => x.Add(AutoImport.Never()));
                                         });
 
             return fluenty.ExposeConfiguration(ProcessConfiguration).BuildConfiguration().AddProperties(GetNHibernateProperties(databaseConfiguration));

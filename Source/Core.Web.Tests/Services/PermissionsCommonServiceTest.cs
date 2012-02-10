@@ -50,7 +50,7 @@ namespace Core.Web.Tests.Services
            {
                var role = Container.Resolve<IRoleService>().Find((int)roleId);
                if (role!=null)
-                   user.Roles = new List<Role> {role};
+                   user.Roles.Add(role);
            }
                 
             Container.Resolve<IUserService>().SetPassword(user, "123456");

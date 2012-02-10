@@ -21,14 +21,14 @@ namespace Core.Profiles.NHibernate.Mappings
             References(profileElement => profileElement.ProfileHeader).Column("ProfileHeaderId");
 
             HasMany(profileElement => profileElement.CurrentLocales).KeyColumn("ProfileElementId")
-             .Table("Profiles_ProfileElementLocales").ApplyFilter<CultureFilter>()
+             .Table("Profiles_ProfileElementLocales").AsSet().ApplyFilter<CultureFilter>()
              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
              .Inverse()
              .LazyLoad()
              .Cascade.All();
 
             HasMany(profileElement => profileElement.UserProfileElements).KeyColumn("ProfileElementId")
-            .Table("Profiles_UserProfileElements")
+            .Table("Profiles_UserProfileElements").AsSet()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

@@ -9,11 +9,9 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-
 using Castle.Core.Logging;
 using Framework.Core.Extensions;
 using Framework.Mvc.Helpers;
-
 using Microsoft.Practices.ServiceLocation;
 
 namespace Framework.Mvc.Extensions

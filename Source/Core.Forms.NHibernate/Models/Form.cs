@@ -6,6 +6,7 @@ using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
+using Iesi.Collections.Generic;
 
 namespace Core.Forms.NHibernate.Models
 {
@@ -17,7 +18,7 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<FormElement> formElements = new List<FormElement>();
+        private readonly Iesi.Collections.Generic.ISet<FormElement> formElements = new HashedSet<FormElement>();
 
         private String permissionTitle = "Forms";
 

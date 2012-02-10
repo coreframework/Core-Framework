@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
+using Iesi.Collections.Generic;
 
 namespace Core.Profiles.NHibernate.Models
 {
@@ -9,7 +9,7 @@ namespace Core.Profiles.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<ProfileElement> profileElements = new List<ProfileElement>();
+        private readonly ISet<ProfileElement> profileElements = new HashedSet<ProfileElement>();
 
         #endregion
 
@@ -57,7 +57,7 @@ namespace Core.Profiles.NHibernate.Models
         /// Gets or sets the profile elements.
         /// </summary>
         /// <value>The profile elements.</value>
-        public virtual IList<ProfileElement> ProfileElements
+        public virtual ISet<ProfileElement> ProfileElements
         {
             get
             {

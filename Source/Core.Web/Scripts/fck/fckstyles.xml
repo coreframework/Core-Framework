@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <!--
  * FCKeditor - The text editor for Internet - http://www.fckeditor.net
  * Copyright (C) 2003-2009 Frederico Caldeira Knabben
@@ -26,9 +27,9 @@
 -->
 <Styles>
 
-	<!-- Block Styles -->
+  <!-- Block Styles -->
 
-	<!--
+  <!--
 	# These styles are already available in the "Format" combo, so they are not
 	# needed here by default.
 
@@ -44,9 +45,9 @@
 	<Style name="Address" element="address" />
 	-->
 
-	<!-- Inline Styles -->
+  <!-- Inline Styles -->
 
-	<!--
+  <!--
 	# These are core styles available as toolbar buttons.
 
 	<Style name="Bold" element="b">
@@ -61,51 +62,51 @@
 	<Style name="Superscript" element="sup" />
 	-->
 
-	<Style name="Marker: Yellow" element="span">
-		<Style name="background-color" value="Yellow" />
-	</Style>
-	<Style name="Marker: Green" element="span">
-		<Style name="background-color" value="Lime" />
-	</Style>
+  <Style name="Marker: Yellow" element="span">
+    <Style name="background-color" value="Yellow" />
+  </Style>
+  <Style name="Marker: Green" element="span">
+    <Style name="background-color" value="Lime" />
+  </Style>
 
-	<Style name="Big" element="big" />
-	<Style name="Small" element="small" />
-	<Style name="Typewriter" element="tt" />
+  <Style name="Big" element="big" />
+  <Style name="Small" element="small" />
+  <Style name="Typewriter" element="tt" />
 
-	<Style name="Computer Code" element="code" />
-	<Style name="Keyboard Phrase" element="kbd" />
-	<Style name="Sample Text" element="samp" />
-	<Style name="Variable" element="var" />
+  <Style name="Computer Code" element="code" />
+  <Style name="Keyboard Phrase" element="kbd" />
+  <Style name="Sample Text" element="samp" />
+  <Style name="Variable" element="var" />
 
-	<Style name="Deleted Text" element="del" />
-	<Style name="Inserted Text" element="ins" />
+  <Style name="Deleted Text" element="del" />
+  <Style name="Inserted Text" element="ins" />
 
-	<Style name="Cited Work" element="cite" />
-	<Style name="Inline Quotation" element="q" />
+  <Style name="Cited Work" element="cite" />
+  <Style name="Inline Quotation" element="q" />
 
-	<Style name="Language: RTL" element="span">
-		<Attribute name="dir" value="rtl" />
-	</Style>
-	<Style name="Language: LTR" element="span">
-		<Attribute name="dir" value="ltr" />
-	</Style>
-	<Style name="Language: RTL Strong" element="bdo">
-		<Attribute name="dir" value="rtl" />
-	</Style>
-	<Style name="Language: LTR Strong" element="bdo">
-		<Attribute name="dir" value="ltr" />
-	</Style>
+  <Style name="Language: RTL" element="span">
+    <Attribute name="dir" value="rtl" />
+  </Style>
+  <Style name="Language: LTR" element="span">
+    <Attribute name="dir" value="ltr" />
+  </Style>
+  <Style name="Language: RTL Strong" element="bdo">
+    <Attribute name="dir" value="rtl" />
+  </Style>
+  <Style name="Language: LTR Strong" element="bdo">
+    <Attribute name="dir" value="ltr" />
+  </Style>
 
-	<!-- Object Styles -->
+  <!-- Object Styles -->
 
-	<Style name="Image on Left" element="img">
-		<Attribute name="style" value="padding: 5px; margin-right: 5px" />
-		<Attribute name="border" value="2" />
-		<Attribute name="align" value="left" />
-	</Style>
-	<Style name="Image on Right" element="img">
-		<Attribute name="style" value="padding: 5px; margin-left: 5px" />
-		<Attribute name="border" value="2" />
-		<Attribute name="align" value="right" />
-	</Style>
+  <Style name="Image on Left" element="img">
+    <Attribute name="style" value="padding: 5px; margin-right: 5px" />
+    <Attribute name="border" value="2" />
+    <Attribute name="align" value="left" />
+  </Style>
+  <Style name="Image on Right" element="img">
+    <Attribute name="style" value="padding: 5px; margin-left: 5px" />
+    <Attribute name="border" value="2" />
+    <Attribute name="align" value="right" />
+  </Style>
 </Styles>

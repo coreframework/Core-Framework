@@ -23,19 +23,18 @@ namespace Core.Web.Widgets
 
         #region Singleton
 
-        private static PlaceHolderWidget instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<PlaceHolderWidget> instance = new Lazy<PlaceHolderWidget>(() => new PlaceHolderWidget());
 
         public static PlaceHolderWidget Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new PlaceHolderWidget());
-                }
+                return instance.Value;
             }
+        }
+
+        private PlaceHolderWidget()
+        {
         }
 
         #endregion

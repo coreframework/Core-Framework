@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.WidgetHolderViewModel>" %>
-<%@ Import Namespace="Core.Web.Helpers" %>
 <%@ Import Namespace="Core.Framework.Plugins.Widgets" %>
-<%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
+<%@ Import Namespace="Core.Web.Helpers" %>
 <%@ Import Namespace="Core.Web.Models" %>
+<%@ Import Namespace="Core.Web.NHibernate.Permissions.Operations" %>
 <div class="widget <%=Model.Widget.Settings != null ? Model.Widget.Settings.CustomCSSClasses : String.Empty %>"
     id="<%=WidgetHelper.GetWidgetClientId(Model.Widget.Id) %>">
     <div class="widget_container" style="<%: WidgetHelper.GetWidgetStyles(Model.Widget.Settings) %>">

@@ -5,14 +5,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Collections.Generic;
 using System.Reflection;
-using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Framework.Core.Localization;
 using Framework.Mvc.Extensions;
 
 namespace Framework.Mvc.Helpers
@@ -73,7 +73,7 @@ namespace Framework.Mvc.Helpers
         {
             if (culture == null)
             {
-                culture = Thread.CurrentThread.CurrentUICulture;
+                culture = CultureHelper.DefaultCulture;
             }
 
             var result = context.GetGlobalResourceObject(scope, key, culture) as String;
@@ -239,7 +239,7 @@ namespace Framework.Mvc.Helpers
         /// <returns>Controller localization scope.</returns>
         public static String GetControllerScope(String areaName, String controllerName)
         {
-            var chains = new List<String>();            
+            var chains = new List<String>();
             if (!String.IsNullOrEmpty(areaName))
             {
                 chains.Add(areaName);

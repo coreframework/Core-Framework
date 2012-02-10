@@ -1,9 +1,9 @@
-﻿namespace Core.Framework.MEF.Throw
-{
-    using System;
-    using System.Configuration;
-    using System.Diagnostics;
+﻿using System;
+using System.Configuration;
+using System.Diagnostics;
 
+namespace Core.Framework.MEF.Throw
+{
     /// <summary>
     /// Throws handled exceptions.
     /// </summary>

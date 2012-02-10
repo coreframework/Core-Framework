@@ -13,24 +13,18 @@ namespace Core.FormLogin.Widgets
     {
         #region Singleton
 
-        private static LoginWidget instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<LoginWidget> instance = new Lazy<LoginWidget>(() => new LoginWidget());
 
         public static LoginWidget Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new LoginWidget());
-                }
+                return instance.Value;
             }
         }
 
         private LoginWidget()
         {
-
         }
 
         #endregion

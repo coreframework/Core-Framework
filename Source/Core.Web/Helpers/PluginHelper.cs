@@ -38,7 +38,7 @@ namespace Core.Web.Helpers
 
             IEnumerable<Plugin> plugins = pluginService.GetAll();
 
-            var registeredPlugins = MvcApplication.Plugins;
+            var registeredPlugins = Application.Plugins;
 
             return (from plugin in registeredPlugins
                     where plugins.Any(pl => pl.Identifier == plugin.Identifier && pl.Status.Equals(PluginStatus.Installed))
@@ -55,15 +55,15 @@ namespace Core.Web.Helpers
 
             IEnumerable<Plugin> plugins = pluginService.GetAll();
 
-            var registeredPlugins = MvcApplication.Plugins;
+            var registeredPlugins = Application.Plugins;
 
             return (from plugin in plugins
                     where registeredPlugins.FirstOrDefault(pl => pl.Identifier == plugin.Identifier) != null
                     select new PluginListModel
-                               {
-                                   Title = plugin.Title,
-                                   Description = plugin.Description
-                               }.MapFrom(plugin)).ToList();
+                    {
+                        Title = plugin.Title,
+                        Description = plugin.Description
+                    }.MapFrom(plugin)).ToList();
         }
 
         /// <summary>
@@ -73,7 +73,9 @@ namespace Core.Web.Helpers
         /// <returns></returns>
         public static IEnumerable<PluginLocale> GetAvailablePlugins(ICriteria pluginCriteria)
         {
-            return (from plugin in pluginCriteria.List<PluginLocale>()
+            var plugins = pluginCriteria.List<PluginLocale>();
+
+            return (from plugin in plugins
                     where Application.Plugins.FirstOrDefault(pl => pl.Identifier == plugin.Plugin.Identifier) != null
                     select plugin).ToList();
         }
@@ -96,23 +98,23 @@ namespace Core.Web.Helpers
             {
                 foreach (var pluginDependency in plugin.PluginSetting.PluginDependencies)
                 {
+                    PluginDependency dependency = pluginDependency;
                     if (
                         !installedPlugins.Where(
-                            installedPlugin => installedPlugin.Identifier.Equals(pluginDependency.Identifier)
+                            installedPlugin => installedPlugin.Identifier.Equals(dependency.Identifier)
                                                &&
-                                               IsAppropriateVersion(installedPlugin.Version, pluginDependency.MinVersion,
-                                                                    pluginDependency.MaxVersion)).Any())
+                                               IsAppropriateVersion(installedPlugin.Version, dependency.MinVersion,
+                                                                    dependency.MaxVersion)).Any())
                     {
                         missingDependencies.Add(pluginDependency);
                     }
-
                 }
             }
 
             return missingDependencies;
         }
 
-        private bool IsAppropriateVersion(String version, String minVersion, String maxVersion)
+        private static bool IsAppropriateVersion(String version, String minVersion, String maxVersion)
         {
             //            ((String.IsNullOrEmpty(pluginDependency.MinVersion) && String.IsNullOrEmpty(pluginDependency.MaxVersion))
             //                    || (String.IsNullOrEmpty(installedPlugin.Version)))

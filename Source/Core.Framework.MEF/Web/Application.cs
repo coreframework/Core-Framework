@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Castle.MicroKernel.Registration;
-using Castle.Windsor;
 using Core.Framework.MEF.Composition;
-using Core.Framework.MEF.Configuration;
 using Core.Framework.MEF.Contracts.Web;
 using Core.Framework.MEF.Extensions;
 using Core.Framework.Plugins.Modules;
@@ -38,13 +34,6 @@ namespace Core.Framework.MEF.Web
         #endregion
 
         #region Properties
-
-        protected static WindsorContainer Container { get; set; }
-
-        /// <summary>
-        /// Gets the <see cref="Composer" /> used to compose parts.
-        /// </summary>
-        public static Composer Composer { get; private set; }
 
         /// <summary>
         /// Gets or sets the plugins.
@@ -75,9 +64,6 @@ namespace Core.Framework.MEF.Web
             // Perform any tasks required before composition.
             PreCompose();
 
-            // Create the composer used for composition.
-            Composer = CreateComposer();
-
             // Compose the application.
             Compose();
 
@@ -105,78 +91,6 @@ namespace Core.Framework.MEF.Web
         protected virtual void Initialise() { }
 
         /// <summary>
-        /// Creates a <see cref="Composer" /> used to compose parts.
-        /// </summary>
-        /// <returns></returns>
-        protected virtual Composer CreateComposer()
-        {
-            var composer = new Composer();
-
-            GetDirectoryCatalogs()
-                .ForEach(composer.AddCatalog);
-
-            composer.AddExportProvider(
-                new DynamicInstantiationExportProvider(),
-                (provider, container) => ((DynamicInstantiationExportProvider)provider).SourceProvider = container);
-
-            return composer;
-        }
-
-        /// <summary>
-        /// Gets an list of <see cref="DirectoryCatalog" />s of configured directories.
-        /// </summary>
-        /// <returns>An lsit of <see cref="DirectoryCatalog" />s of configured directories.</returns>
-        private List<DirectoryCatalog> GetDirectoryCatalogs()
-        {
-            var list = new List<DirectoryCatalog>();
-
-            GetDirectoryCatalogs(MapPath("~/bin")).ForEach(catalog => list.Add(catalog));
-
-            GetDirectoryCatalogs(MapPath("~/Areas")).ForEach(catalog =>
-            {
-                list.Add(catalog);
-                RegisterPath(catalog.FullPath);
-            });
-
-            var config = CompositionConfigurationSection.GetInstance();
-            if (config != null && config.Catalogs != null)
-            {
-                config.Catalogs
-                    .Cast<CatalogConfigurationElement>()
-                    .ForEach(c =>
-                    {
-                        if (!String.IsNullOrEmpty(c.Path))
-                        {
-                            String path = c.Path;
-                            if (path.StartsWith("~") || path.StartsWith("/"))
-                                path = MapPath(path);
-
-                            GetDirectoryCatalogs(path)
-                                .ForEach(catalog =>
-                                {
-                                    list.Add(catalog);
-                                    RegisterPath(catalog.FullPath);
-                                });
-                        }
-                    });
-            }
-
-            return list;
-        }
-
-
-        /// <summary>
-        /// Registers the specified path for probing.
-        /// </summary>
-        /// <param name="path">The probable path.</param>
-        private static void RegisterPath(String path)
-        {
-#pragma warning disable 612,618
-            AppDomain.CurrentDomain.AppendPrivatePath(path);
-#pragma warning restore 612,618
-        }
-
-        /// <summary>
         /// Fired before the application is composed.
         /// </summary>
         protected virtual void PreCompose() { }
@@ -186,18 +100,17 @@ namespace Core.Framework.MEF.Web
         /// </summary>
         protected virtual void Compose()
         {
-            if (Composer == null)
+            if (Composer.Instance == null)
                 return;
 
-            Composer.Compose(this);
-            ActionVerbs = Composer.ResolveAll<IActionVerb, IActionVerbMetadata>();
-            Plugins = Composer.ResolveAll<ICorePlugin>();
+            Composer.Instance.Compose(this);
+            ActionVerbs = Composer.Instance.ResolveAll<IActionVerb, IActionVerbMetadata>();
+            Plugins = Composer.Instance.ResolveAll<ICorePlugin>();
         }
 
         protected virtual void RegisterAreas()
         {
             var routes = RouteTable.Routes;
-
             var areaRegistrars = routeAreaRegistrars.Select(lazy => lazy.Value);
             areaRegistrars.ForEach(r => r.RegisterArea(new AreaRegistrationContext(r.AreaName, routes)));
         }
@@ -233,26 +146,6 @@ namespace Core.Framework.MEF.Web
         }
 
         /// <summary>
-        /// Gets a set of <see cref="DirectoryCatalog" /> for the specified path and it's immediate child directories.
-        /// </summary>
-        /// <param name="path">The starting path.</param>
-        /// <returns>An <see cref="IEnumerable{DirectoryCatalog}" /> of directory catalogs.</returns>
-        protected static IEnumerable<DirectoryCatalog> GetDirectoryCatalogs(String path)
-        {
-            Throw.Throw.IfArgumentNullOrEmpty(path, "path");
-
-            var list = new List<DirectoryCatalog>
-                           {
-                               new DirectoryCatalog(path)
-                           };
-
-            list.AddRange(
-                Directory.GetDirectories(path).Select(directory => new DirectoryCatalog(directory)));
-
-            return list;
-        }
-
-        /// <summary>
         /// Gets the available verbs for the given category.
         /// </summary>
         /// <param name="category">The category of verbs to get.</param>
@@ -268,9 +161,9 @@ namespace Core.Framework.MEF.Web
 
         public static void RegisterHttpModule(Type moduleType)
         {
-            if (!Container.Kernel.HasComponent(GetHttpModuleComponentName(moduleType)))
+            if (!Composer.Instance.WindsorContainer.Kernel.HasComponent(GetHttpModuleComponentName(moduleType)))
             {
-                Container.Register(
+                Composer.Instance.WindsorContainer.Register(
                     Component.For<IPluginHttpModule>().ImplementedBy(moduleType).Named(
                         GetHttpModuleComponentName(moduleType)));
                 ModulesChanged = true;
@@ -279,13 +172,13 @@ namespace Core.Framework.MEF.Web
 
         public static void UnregisterHttpModule(Type moduleType)
         {
-            Container.Kernel.RemoveComponent(GetHttpModuleComponentName(moduleType));
+            //Composer.Instance.WindsorContainer.Kernel.RemoveComponent(GetHttpModuleComponentName(moduleType));
             ModulesChanged = true;
         }
 
         private static String GetHttpModuleComponentName(Type moduleType)
         {
-            return String.Format("{0} / {1}", typeof (IHttpHandler).Name, moduleType.Name);
+            return String.Format("{0} / {1}", typeof(IHttpHandler).Name, moduleType.Name);
         }
 
         public static void StartPlugins()

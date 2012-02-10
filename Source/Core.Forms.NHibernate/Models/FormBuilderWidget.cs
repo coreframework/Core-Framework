@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.Framework.Permissions.Models;
 using FluentNHibernate.Data;
+using Iesi.Collections.Generic;
 
 namespace Core.Forms.NHibernate.Models
 {
@@ -9,7 +10,7 @@ namespace Core.Forms.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<FormWidgetAnswer> answers;
+        private readonly Iesi.Collections.Generic.ISet<FormWidgetAnswer> answers;
 
         #endregion
 
@@ -20,7 +21,7 @@ namespace Core.Forms.NHibernate.Models
         /// </summary>
         public FormBuilderWidget()
         {
-            answers = new List<FormWidgetAnswer>();
+            answers = new HashedSet<FormWidgetAnswer>();
         }
 
         /// <summary>

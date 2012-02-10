@@ -51,7 +51,7 @@ namespace Core.Languages.Controllers
         /// </summary>
         public LanguagesController()
         {
-            this.languageService = ServiceLocator.Current.GetInstance<ILanguageService>();
+            languageService = ServiceLocator.Current.GetInstance<ILanguageService>();
         }
 
         #endregion

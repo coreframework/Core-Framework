@@ -4,6 +4,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Core.Framework.MEF.Web;
+using Core.Framework.Permissions.Helpers;
 using Core.Profiles.Helpers;
 using Core.Profiles.Models;
 using Core.Profiles.NHibernate.Contracts;
@@ -11,11 +12,9 @@ using Core.Profiles.NHibernate.Models;
 using Core.Profiles.Permissions.Operations;
 using Framework.Core.Extensions;
 using Framework.Mvc.Extensions;
-using Framework.Mvc.Helpers;
 using Microsoft.Practices.ServiceLocation;
 using MvcSiteMapProvider;
 using MvcSiteMapProvider.Filters;
-using Core.Framework.Permissions.Helpers;
 
 namespace Core.Profiles.Controllers
 {

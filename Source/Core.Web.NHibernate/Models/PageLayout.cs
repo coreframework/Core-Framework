@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using FluentNHibernate.Data;
+using Iesi.Collections.Generic;
 
 namespace Core.Web.NHibernate.Models
 {
     public class PageLayout : Entity
     {
-        private readonly IList<PageLayoutColumnWidthValue> columnWidths = new List<PageLayoutColumnWidthValue>();
+        private readonly Iesi.Collections.Generic.ISet<PageLayoutColumnWidthValue> columnWidths = new HashedSet<PageLayoutColumnWidthValue>();
 
         /// <summary>
         /// Gets or sets the layout template.

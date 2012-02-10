@@ -7,19 +7,18 @@ namespace Core.LoginWorkflow.Verbs
     {
         #region Singleton
 
-        private static LoginHolderWidgetSaveSettingsVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<LoginHolderWidgetSaveSettingsVerb> instance = new Lazy<LoginHolderWidgetSaveSettingsVerb>(() => new LoginHolderWidgetSaveSettingsVerb());
 
         public static LoginHolderWidgetSaveSettingsVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new LoginHolderWidgetSaveSettingsVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private LoginHolderWidgetSaveSettingsVerb()
+        {
         }
 
         #endregion

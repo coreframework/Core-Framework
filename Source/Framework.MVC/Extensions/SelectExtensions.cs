@@ -8,15 +8,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Routing;
 using System.Web.Mvc.Html;
-using System.Linq;
+using System.Web.Routing;
 using System.Web.UI;
 using Framework.Core.DomainModel;
-using Framework.Mvc.Helpers;
 
 namespace Framework.Mvc.Extensions
 {
@@ -68,7 +67,7 @@ namespace Framework.Mvc.Extensions
         /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
         /// </returns>
         public static MvcHtmlString DropDownListFor<TModel, TProperty>(this HtmlHelper<TModel> html, Expression<Func<TModel, TProperty>> expression, IDictionary<String, Object> htmlAttributes)
-        {          
+        {
             var items = new List<SelectListItem>();
             var metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
             if (metadata != null && metadata.ModelType.IsEnum)
@@ -88,7 +87,7 @@ namespace Framework.Mvc.Extensions
                     }
                 }
             }
-           
+
             return html.DropDownListFor(expression, items, null, htmlAttributes);
         }
 
@@ -100,13 +99,31 @@ namespace Framework.Mvc.Extensions
         /// <param name="name">The select element name.</param>
         /// <param name="selectedValue">The selected value.</param>
         /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <param name="optionLabel">The option label.</param>
+        /// <returns>
+        /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
+        /// </returns>
+        public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum selectedValue, Object htmlAttributes, String optionLabel)
+         where TEnum : struct
+        {
+            return html.DropDownListFor(name, selectedValue, new RouteValueDictionary(htmlAttributes), optionLabel);
+        }
+
+        /// <summary>
+        /// Generate a select element for enum.
+        /// </summary>
+        /// <typeparam name="TEnum">The type of the enum.</typeparam>
+        /// <param name="html">The HTML helper instance that this method extends.</param>
+        /// <param name="name">The select element name.</param>
+        /// <param name="selectedValue">The selected value.</param>
+        /// <param name="htmlAttributes">The HTML attributes.</param>        
         /// <returns>
         /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
         /// </returns>
         public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum selectedValue, Object htmlAttributes)
          where TEnum : struct
         {
-            return html.DropDownListFor(name, selectedValue, new RouteValueDictionary(htmlAttributes));
+            return html.DropDownListFor(name, selectedValue, new RouteValueDictionary(htmlAttributes), null);
         }
 
         /// <summary>
@@ -134,29 +151,30 @@ namespace Framework.Mvc.Extensions
         /// <param name="name">The select element name.</param>
         /// <param name="selectedValue">The selected value.</param>
         /// <param name="htmlAttributes">The HTML attributes.</param>
+        /// <param name="optionLabel">The option label.</param>
         /// <returns>
         /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
         /// </returns>
-        public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum selectedValue, IDictionary<String, Object> htmlAttributes)
+        public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum selectedValue, IDictionary<String, Object> htmlAttributes, String optionLabel)
           where TEnum : struct
+        {
+            var items = new List<SelectListItem>();
+            foreach (var value in Enum.GetValues(typeof(TEnum)))
             {
-                var items = new List<SelectListItem>();
-                foreach (var value in Enum.GetValues(typeof(TEnum)))
+                var exclude = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(ExcludeItemAttribute), false).FirstOrDefault();
+                if (exclude == null)
                 {
-                    var exclude = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(ExcludeItemAttribute), false).FirstOrDefault();
-                    if (exclude == null)
-                    {
-                        var text = Enum.GetName(typeof(TEnum), value);
-                        var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
-                        text = description != null ?
-                        html.Translate(description.Description) :
-                        new HttpContextWrapper(HttpContext.Current).DisplayNameFor(typeof(TEnum), text);
-                        items.Add(new SelectListItem { Text = text, Value = value.ToString() });
-                    }
+                    var text = Enum.GetName(typeof(TEnum), value);
+                    var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
+                    text = description != null ?
+                    html.Translate(description.Description) :
+                    new HttpContextWrapper(HttpContext.Current).DisplayNameFor(typeof(TEnum), text);
+                    items.Add(new SelectListItem { Text = text, Value = value.ToString() });
                 }
-
-                return html.DropDownList(name, items, null, htmlAttributes);
             }
+
+            return html.DropDownList(name, items, optionLabel, htmlAttributes);
+        }
 
         /// <summary>
         /// Generate a select element for enum.
@@ -170,8 +188,8 @@ namespace Framework.Mvc.Extensions
         /// An HTML select element whose options reflects for enums for each property in the object that is represented by the expression.
         /// </returns>
         public static MvcHtmlString DropDownListFor<TEnum>(this HtmlHelper html, String name, TEnum? selectedValue, IDictionary<String, Object> htmlAttributes)
-            where TEnum : struct 
-        {          
+            where TEnum : struct
+        {
             var items = new List<SelectListItem>();
             foreach (var value in Enum.GetValues(typeof(TEnum)))
             {
@@ -180,7 +198,7 @@ namespace Framework.Mvc.Extensions
                 {
                     var text = Enum.GetName(typeof(TEnum), value);
                     var description = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault() as DescriptionAttribute;
-                    text = description != null ? 
+                    text = description != null ?
                         html.Translate(description.Description) :
                         new HttpContextWrapper(HttpContext.Current).DisplayNameFor(typeof(TEnum), text);
 
@@ -243,9 +261,9 @@ namespace Framework.Mvc.Extensions
 
                         if (isOptionSelected)
                         {
-                             writer.AddAttribute(HtmlTextWriterAttribute.Selected, "true");
+                            writer.AddAttribute(HtmlTextWriterAttribute.Selected, "true");
                         }
-                           
+
                         writer.AddAttribute(HtmlTextWriterAttribute.Value, optionValue);
                         writer.RenderBeginTag(HtmlTextWriterTag.Option);
                         writer.Write(optionText);
@@ -256,8 +274,8 @@ namespace Framework.Mvc.Extensions
 
                 writer.RenderEndTag();
 
-               return stringWriter.ToString();
+                return stringWriter.ToString();
             }
-        }  
+        }
     }
 }

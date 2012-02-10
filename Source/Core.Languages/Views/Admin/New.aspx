@@ -1,6 +1,4 @@
 ﻿<%@ Assembly Name="Core.Languages" %>
-<%@ Import Namespace="Core.Languages.Models" %>
-<%@ Import Namespace="System.Web.Mvc" %>
 
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="ViewPage<LanguageViewModel>" %>
 

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using Core.Framework.NHibernate.Models;
+﻿using Core.Framework.NHibernate.Models;
 using FluentNHibernate.Data;
+using Iesi.Collections.Generic;
 
 namespace Core.Profiles.NHibernate.Models
 {
@@ -8,7 +8,7 @@ namespace Core.Profiles.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<UserProfileElement> profileElements = new List<UserProfileElement>();
+        private readonly ISet<UserProfileElement> profileElements = new HashedSet<UserProfileElement>();
 
         #endregion
 
@@ -16,7 +16,7 @@ namespace Core.Profiles.NHibernate.Models
 
         public virtual ProfileType ProfileType { get; set; }
 
-        public virtual IList<UserProfileElement> ProfileElements
+        public virtual ISet<UserProfileElement> ProfileElements
         {
             get { return profileElements; }
         }

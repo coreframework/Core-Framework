@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Core.Framework.NHibernate.Contracts;
 using Core.Framework.NHibernate.Models;
 using Core.Framework.Permissions.Authentication;
-using Core.Framework.Permissions.Models;
 using Core.Web.Models;
 using Framework.Mvc.Controllers;
 using Microsoft.Practices.ServiceLocation;

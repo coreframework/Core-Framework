@@ -7,6 +7,7 @@ using Core.Framework.Permissions.Models;
 using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
+using Iesi.Collections.Generic;
 
 namespace Core.Web.NHibernate.Models
 {
@@ -15,8 +16,8 @@ namespace Core.Web.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<PageWidget> widgets = new List<PageWidget>();
-        private readonly IList<Page> children = new List<Page>();
+        private readonly Iesi.Collections.Generic.ISet<PageWidget> widgets = new HashedSet<PageWidget>();
+        private readonly Iesi.Collections.Generic.ISet<Page> children = new HashedSet<Page>();
 
         private String permissionTitle = "Pages";
         private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<PageOperations>();

@@ -7,19 +7,18 @@ namespace Core.Web.Areas.Navigation.Verbs
     {
         #region Singleton
 
-        private static BreadcrumbsEditorVerb instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<BreadcrumbsEditorVerb> instance = new Lazy<BreadcrumbsEditorVerb>(() => new BreadcrumbsEditorVerb());
 
         public static BreadcrumbsEditorVerb Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new BreadcrumbsEditorVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private BreadcrumbsEditorVerb()
+        {
         }
 
         #endregion

@@ -3,7 +3,7 @@ development:
   host: chernogrebela
   database: coreframework
   username: coreLite
-  password: coreLite
+  password: 111111
   properties:
     hibernate.cache.use_second_level_cache: true
     hibernate.cache.provider_class: NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache
@@ -13,7 +13,7 @@ test:
   host: localhost
   database: corev3_4
   username: coreLite
-  password: 123456
+  password: coreLite
   properties:
     hibernate.cache.use_second_level_cache: true
     hibernate.cache.provider_class: NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache

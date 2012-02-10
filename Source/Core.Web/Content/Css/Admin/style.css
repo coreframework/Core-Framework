@@ -540,7 +540,7 @@ ul, ol, ul li, ol li {list-style:none;margin:0;background:none;padding:0}
 	
 .noItemToDisplay{padding: 10px 8px;}	
 
-
+#nav_sub li a {display:inline-block; width:100%}
 	
 		
 		

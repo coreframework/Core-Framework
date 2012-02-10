@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using Framework.Core.Localization;
 using Framework.Facilities.NHibernate.Objects;
+using Iesi.Collections.Generic;
 
 namespace Core.Profiles.NHibernate.Models
 {
@@ -15,7 +15,7 @@ namespace Core.Profiles.NHibernate.Models
         private bool showOnMemberProfile = true;
         private bool showOnMemberPublicProfile = true;
         private bool showOnMemberRegistration = true;
-        private readonly IList<UserProfileElement> userProfileElements = new List<UserProfileElement>();
+        private readonly Iesi.Collections.Generic.ISet<UserProfileElement> userProfileElements = new HashedSet<UserProfileElement>();
 
         #endregion
 
@@ -58,7 +58,7 @@ namespace Core.Profiles.NHibernate.Models
             }
         }
 
-        public virtual IList<UserProfileElement> UserProfileElements
+        public virtual Iesi.Collections.Generic.ISet<UserProfileElement> UserProfileElements
         {
             get { return userProfileElements; }
         }

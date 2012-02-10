@@ -4,13 +4,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
 
 namespace Framework.Core.Services
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
     /// <summary>
     /// Provides a standard interface for data-access.
     /// </summary>

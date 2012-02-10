@@ -6,11 +6,8 @@
 
 using System;
 using System.Data;
-
 using ECM7.Migrator.Framework;
-
 using Framework.Core.Helpers;
-
 using ForeignKeyConstraint = ECM7.Migrator.Framework.ForeignKeyConstraint;
 
 namespace Framework.Migrator.Fluent

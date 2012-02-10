@@ -4,7 +4,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Castle.Windsor;
+using Castle.MicroKernel.Registration;
 
 namespace Framework.Core.Modules
 {

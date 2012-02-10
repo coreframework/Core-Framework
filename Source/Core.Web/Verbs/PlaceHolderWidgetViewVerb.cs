@@ -7,19 +7,18 @@ namespace Core.Web.Verbs
     {
         #region Singleton
 
-        private static PlaceHolderWidgetViewVerb instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<PlaceHolderWidgetViewVerb> instance = new Lazy<PlaceHolderWidgetViewVerb>(() => new PlaceHolderWidgetViewVerb());
 
         public static PlaceHolderWidgetViewVerb Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new PlaceHolderWidgetViewVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private PlaceHolderWidgetViewVerb()
+        {
         }
 
         #endregion

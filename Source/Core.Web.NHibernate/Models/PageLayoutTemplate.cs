@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using FluentNHibernate.Data;
+using Iesi.Collections.Generic;
 
 namespace Core.Web.NHibernate.Models
 {
     public class PageLayoutTemplate : Entity
     {
-        private readonly IList<PageLayoutRow> rows = new List<PageLayoutRow>();
+        private readonly Iesi.Collections.Generic.ISet<PageLayoutRow> rows = new HashedSet<PageLayoutRow>();
 
         public virtual String LayoutCssClass { get; set; }
 

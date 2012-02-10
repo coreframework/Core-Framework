@@ -11,7 +11,8 @@ namespace Core.Web.NHibernate.Services
 {
     public class NHibernateRoleLocaleService : NHibernateDataService<RoleLocale>, IRoleLocaleService
     {
-        public NHibernateRoleLocaleService(ISessionManager sessionManager) : base(sessionManager)
+        public NHibernateRoleLocaleService(ISessionManager sessionManager)
+            : base(sessionManager)
         {
 
         }
@@ -19,6 +20,7 @@ namespace Core.Web.NHibernate.Services
         public RoleLocale GetLocale(long roleId, String culture)
         {
             IQueryable<RoleLocale> query = CreateQuery();
+
             return query.Where(locale => locale.Role.Id == roleId && locale.Culture == culture).FirstOrDefault();
         }
 
@@ -29,6 +31,26 @@ namespace Core.Web.NHibernate.Services
             DetachedCriteria filter = DetachedCriteria.For<RoleLocale>("filteredLocale").CreateAlias("Role", "filteredRole")
                 .SetProjection(Projections.Id()).SetMaxResults(1).AddOrder(Order.Desc("filteredLocale.Priority")).Add(
                     Restrictions.EqProperty("filteredRole.Id", "role.Id"));
+
+
+            criteria.Add(Subqueries.PropertyIn("Id", filter));
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                criteria.Add(Restrictions.Like("Name", searchString, MatchMode.Anywhere));
+            }
+
+            return criteria.SetCacheable(true);
+        }
+
+        public ICriteria GetSearchCriteriaForAssign(String searchString)
+        {
+            ICriteria criteria = Session.CreateCriteria<RoleLocale>().CreateAlias("Role", "role");
+
+            DetachedCriteria filter = DetachedCriteria.For<RoleLocale>("filteredLocale").CreateAlias("Role", "filteredRole")
+                .SetProjection(Projections.Id()).SetMaxResults(1).AddOrder(Order.Desc("filteredLocale.Priority")).Add(
+                    Restrictions.EqProperty("filteredRole.Id", "role.Id")).Add(Restrictions.Eq("filteredRole.NotAssignableRole", false));
+
 
             criteria.Add(Subqueries.PropertyIn("Id", filter));
 

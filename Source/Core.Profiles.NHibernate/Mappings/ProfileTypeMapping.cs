@@ -15,14 +15,14 @@ namespace Core.Profiles.NHibernate.Mappings
             Map(profileType => profileType.CreateDate);
 
             HasMany(profileHeader => profileHeader.ProfileHeaders).KeyColumn("ProfileTypeId")
-             .Table("Profiles_ProfileHeaders")
+             .Table("Profiles_ProfileHeaders").AsSet()
              .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
              .Inverse()
              .LazyLoad()
              .Cascade.AllDeleteOrphan();
 
             HasMany(profileType => profileType.CurrentLocales).KeyColumn("ProfileTypeId")
-            .Table("ProfileTypeLocales").ApplyFilter<CultureFilter>()
+            .Table("ProfileTypeLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

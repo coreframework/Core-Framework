@@ -5,17 +5,14 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
-using System.Text.RegularExpressions;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
-
+using Castle.Core.Configuration;
 using Castle.Facilities.NHibernateIntegration;
 using Castle.MicroKernel;
-using Castle.Core.Configuration;
-
 using Framework.Core;
 using Framework.Core.Helpers;
-
 using Environment = Framework.Core.Configuration.Environment;
 
 namespace Framework.Facilities.NHibernate.Castle

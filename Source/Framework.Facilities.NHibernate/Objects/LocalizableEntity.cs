@@ -4,10 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System.Collections.Generic;
 using System.Linq;
 using FluentNHibernate.Data;
 using Framework.Core.Localization;
+using Iesi.Collections.Generic;
 
 namespace Framework.Facilities.NHibernate.Objects
 {
@@ -20,7 +20,7 @@ namespace Framework.Facilities.NHibernate.Objects
         #region Fields
 
         private ILocale currentLocale;
-        private IList<T> currentLocales = new List<T>();
+        private Iesi.Collections.Generic.ISet<T> currentLocales = new HashedSet<T>();
 
         #endregion
 
@@ -30,13 +30,13 @@ namespace Framework.Facilities.NHibernate.Objects
         /// Gets or sets the current locales.
         /// </summary>
         /// <value>The current locales.</value>
-        public virtual IList<T> CurrentLocales
+        public virtual Iesi.Collections.Generic.ISet<T> CurrentLocales
         {
             get
             {
                 return currentLocales;
             }
-            set
+            protected set
             {
                 currentLocales = value;
             }

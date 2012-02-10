@@ -125,13 +125,14 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\Castle\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.NHibernateIntegration, Version=1.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Castle.Facilities.AutoTx">
+      <HintPath>..\..\Libs\Castle\Castle.Facilities.AutoTx.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Facilities.NHibernateIntegration">
       <HintPath>..\..\Libs\Castle\Castle.Facilities.NHibernateIntegration.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.MicroKernel, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Libs\Castle\Castle.MicroKernel.dll</HintPath>
+    <Reference Include="Castle.Services.Transaction">
+      <HintPath>..\..\Libs\Castle\Castle.Services.Transaction.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=2.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -141,6 +142,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Libs\NHibernate\FluentNHibernate\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\..\Libs\NHibernate\NHibernate.dll</HintPath>
     </Reference>
@@ -149,9 +154,6 @@
     </Reference>
     <Reference Include="NHibernate.Caches.SysCache">
       <HintPath>..\..\Libs\NHibernate\Cache\NHibernate.Caches.SysCache\NHibernate.Caches.SysCache.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Linq">
-      <HintPath>..\..\Libs\NHibernate\NHibernate.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -173,6 +175,7 @@
     <Compile Include="Conventions\ForeignKeyConvention.cs" />
     <Compile Include="Conventions\TableConvention.cs" />
     <Compile Include="Filters\CultureFilter.cs" />
+    <Compile Include="Helpers\NHibernateLinqExtensions.cs" />
     <Compile Include="NHibernateDataService.cs" />
     <Compile Include="NHibernateInstaller.cs" />
     <Compile Include="Objects\LocalizableEntity.cs" />

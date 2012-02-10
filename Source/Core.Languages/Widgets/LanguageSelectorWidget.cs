@@ -15,18 +15,13 @@ namespace Core.Languages.Widgets
     {
         #region Singleton
 
-        private static LanguageSelectorWidget instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<LanguageSelectorWidget> instance = new Lazy<LanguageSelectorWidget>(() => new LanguageSelectorWidget());
 
         public static LanguageSelectorWidget Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new LanguageSelectorWidget());
-                }
+                return instance.Value;
             }
         }
 

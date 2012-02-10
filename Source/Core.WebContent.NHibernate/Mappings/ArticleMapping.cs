@@ -23,14 +23,14 @@ namespace Core.WebContent.NHibernate.Mappings
             Map(article => article.Url);
             References(article => article.Category);
             HasMany(article => article.CurrentLocales).KeyColumn("ArticleId")
-            .Table("ArticleLocales").ApplyFilter<CultureFilter>()
+            .Table("ArticleLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();
 
             HasMany(article => article.Files).KeyColumn("ArticleId")
-               .Table("WebContent_ArticleFiles")
+               .Table("WebContent_ArticleFiles").AsSet()
                .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
                .Inverse()
                .LazyLoad()

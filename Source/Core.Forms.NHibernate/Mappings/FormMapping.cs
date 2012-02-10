@@ -22,14 +22,14 @@ namespace Core.Forms.NHibernate.Mappings
             Map(form => form.UserId);
 
             HasMany(form => form.CurrentLocales).KeyColumn("FormId")
-            .Table("Forms_FormLocales").ApplyFilter<CultureFilter>()
+            .Table("Forms_FormLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()
             .Cascade.All();
 
             HasMany(form => form.FormElements).KeyColumn("FormId")
-           .Table("Forms_FormElements")
+           .Table("Forms_FormElements").AsSet()
            .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
            .Inverse()
            .LazyLoad()

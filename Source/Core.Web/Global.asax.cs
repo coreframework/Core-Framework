@@ -5,10 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Castle.Core.Logging;
 using Castle.Facilities.Logging;
-using Castle.Windsor;
-using CommonServiceLocator.WindsorAdapter;
 using Core.Framework.MEF.Composition;
-using Core.Framework.MEF.ServiceLocation;
 using Core.Framework.NHibernate.Contracts;
 using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
@@ -18,19 +15,17 @@ using Framework.Facilities.NHibernate;
 using Framework.Mvc.Metadata;
 using Framework.Mvc.Resources;
 using Microsoft.Practices.ServiceLocation;
-using Application = Framework.Core.Application;
+using Application = Core.Framework.MEF.Web.Application;
 
 namespace Core.Web
 {
-    public class MvcApplication : Framework.MEF.Web.Application
+    public class MvcApplication : Application
     {
         #region Fields
 
         private static IApplication application;
 
         private static ILogger logger = NullLogger.Instance;
-
-        private CSLExportProvider exportProvider;
 
         #endregion
 
@@ -72,11 +67,10 @@ namespace Core.Web
         /// </summary>
         protected override void PreCompose()
         {
-            Container = new WindsorContainer();
-            exportProvider = new CSLExportProvider(new WindsorServiceLocator(Container));
-         
+
+
             RegisterTypes();
-          
+
             InitializeLogger();
         }
 
@@ -86,10 +80,10 @@ namespace Core.Web
 
             foreach (var plugin in Plugins)
             {
-                plugin.Register(Container);
+                plugin.Register(Composer.Instance.WindsorContainer);
             }
 
-            Widgets = Composer.ResolveAll<ICoreWidget>();
+            Widgets = Composer.Instance.ResolveAll<ICoreWidget>();
 
             ConfigureApplication();
             ExecuteBootstrapperTasks();
@@ -104,11 +98,11 @@ namespace Core.Web
         /// </summary>
         private static void ExecuteBootstrapperTasks()
         {
-            foreach (var task in Container.ResolveAll<IBootstrapperTask>())
+            foreach (var task in Composer.Instance.WindsorContainer.ResolveAll<IBootstrapperTask>())
             {
-                task.Execute(application, Container.Kernel);
+                task.Execute(application, Composer.Instance.WindsorContainer.Kernel);
             }
-          
+
         }
 
         /// <summary>
@@ -116,8 +110,8 @@ namespace Core.Web
         /// </summary>
         private static void ConfigureApplication()
         {
-            application = new Application();
-            application.Configure(Container);
+            application = new global::Framework.Core.Application();
+            application.Configure(Composer.Instance.WindsorContainer);
 
         }
 
@@ -126,8 +120,8 @@ namespace Core.Web
         /// </summary>
         private static void InitializeLogger()
         {
-            Container.AddFacility("logging", new LoggingFacility(LoggerImplementation.Log4net, "Config/log4net.config"));
-            logger = Container.Resolve<ILogger>();
+            Composer.Instance.WindsorContainer.AddFacility("logging", new LoggingFacility(LoggerImplementation.Log4net, "Config/log4net.config"));
+            logger = Composer.Instance.WindsorContainer.Resolve<ILogger>();
         }
 
         /// <summary>
@@ -135,11 +129,11 @@ namespace Core.Web
         /// </summary>
         private static void RegisterTypes()
         {
-            Container.Install(new CoreInstaller());
-            Container.Install(new NHibernateInstaller());
-            Container.Install(new YamlResourcesInstaller());
-            Container.Install(new CoreWebNHibernateModule());
-            Container.Install(new CoreWebInstaller());
+            Composer.Instance.WindsorContainer.Install(new CoreInstaller());
+            Composer.Instance.WindsorContainer.Install(new NHibernateInstaller());
+            Composer.Instance.WindsorContainer.Install(new YamlResourcesInstaller());
+            Composer.Instance.WindsorContainer.Install(new CoreWebNHibernateModule());
+            Composer.Instance.WindsorContainer.Install(new CoreWebInstaller());
         }
 
         /// <summary>
@@ -155,7 +149,7 @@ namespace Core.Web
                 var userService = ServiceLocator.Current.GetInstance<IUserService>();
                 var user = userService.FindByUsername(context.User.Identity.Name);
 
-                if (user!=null)
+                if (user != null)
                     context.User = userService.FindByUsername(context.User.Identity.Name);
             }
         }
@@ -168,21 +162,9 @@ namespace Core.Web
             AreaRegistration.RegisterAllAreas();
         }
 
-        /// <summary>
-        /// Creates the composer used for composition.
-        /// </summary>
-        /// <returns></returns>
-        protected override Composer CreateComposer()
-        {
-            var composer = base.CreateComposer();
-            composer.AddExportProvider(exportProvider);
-
-            return composer;
-        }
-
         private static void RegisterPermissibleObjects()
         {
-            PermissibleObjects = Composer.ResolveAll<IPermissible>().ToList();
+            PermissibleObjects = Composer.Instance.ResolveAll<IPermissible>().ToList();
         }
 
         protected void Application_Error(object sender, EventArgs e)
@@ -190,15 +172,15 @@ namespace Core.Web
             Exception exc = Server.GetLastError();
             Logger.Error(exc.Message);
 
-            #if !DEBUG
+#if !DEBUG
            
             if (Request.RawUrl.Contains("admin") && !Request.RawUrl.Contains("administration"))
                 Response.Redirect("~/admin/error");
             else Response.Redirect("~/error");
 
-            #endif
+#endif
         }
-       
+
         #endregion
     }
 }

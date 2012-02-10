@@ -14,13 +14,13 @@ namespace Core.Languages.NHibernate
         public static void Install(IWindsorContainer container)
         {
             // Register nhibernate fluent mapper.
-            container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("languages_mapper").LifeStyle.Transient);
+            container.Register(Component.For<INHibernateMapper>().Instance(new StandardFluentMapper(Assembly.GetExecutingAssembly())).Named("languages_mapper").LifeStyle.Singleton);
 
             // Register data services.
-            container.Register(Component.For<ILanguageService>().ImplementedBy<NHibernateLanguageService>().LifeStyle.Transient);
+            container.Register(Component.For<ILanguageService>().ImplementedBy<NHibernateLanguageService>().LifeStyle.Singleton);
 
             //Register helpers.
-            container.Register(Component.For<ICultureProvider>().ImplementedBy<CultureProvider>().LifeStyle.Transient);
+            container.Register(Component.For<ICultureProvider>().ImplementedBy<CultureProvider>().LifeStyle.Singleton);
         }
     }
 }

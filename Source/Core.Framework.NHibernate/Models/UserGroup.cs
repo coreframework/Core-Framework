@@ -14,6 +14,8 @@ namespace Core.Framework.NHibernate.Models
 
         private IList<User> users = new List<User>();
 
+        private IList<Role> roles = new List<Role>();
+
         private String permissionTitle = "User Groups";
 
         private IEnumerable<IPermissionOperation> operations = OperationsHelper.GetOperations<BaseEntityOperations>();
@@ -37,7 +39,13 @@ namespace Core.Framework.NHibernate.Models
         public virtual IList<User> Users
         {
             get { return users; }
-            set { users = value; }
+            protected set { users = value; }
+        }
+
+        public virtual IList<Role> Roles
+        {
+            get { return roles; }
+            protected set { roles = value; }
         }
 
         #endregion

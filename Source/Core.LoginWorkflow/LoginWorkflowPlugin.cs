@@ -19,26 +19,21 @@ namespace Core.LoginWorkflow
 
         #region Singleton
 
-        private static LoginWorkflowPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<LoginWorkflowPlugin> instance = new Lazy<LoginWorkflowPlugin>(() => new LoginWorkflowPlugin());
 
         public static LoginWorkflowPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new LoginWorkflowPlugin());
-                }
+                return instance.Value;
             }
         }
-
-        #endregion
 
         private LoginWorkflowPlugin()
         {
         }
+
+        #endregion        
 
         /// <summary>
         /// Registers the specified container.

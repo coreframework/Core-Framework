@@ -53,7 +53,7 @@
 		// Use the following setting it you prefer to explicitely specify the
 		// absolute path. Examples: 'C:\\MySite\\userfiles\\' or '/root/mysite/userfiles/'.
 		// Attention: The above 'UserFilesPath' URL must point to the same directory.
-        UserFilesAbsolutePath = System.IO.Path.Combine(this.Request.PhysicalApplicationPath,"Content\\UserImages");
+        UserFilesAbsolutePath = System.IO.Path.Combine(Request.PhysicalApplicationPath,"Content\\UserImages");
 
 		// Due to security issues with Apache modules, it is recommended to leave the
 		// following setting enabled.

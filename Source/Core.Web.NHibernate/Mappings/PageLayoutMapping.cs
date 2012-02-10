@@ -13,7 +13,7 @@ namespace Core.Web.NHibernate.Mappings
             References(pageLayouts => pageLayouts.LayoutTemplate).Column("TemplateId");
             References(pageSettings => pageSettings.Page).Column("PageId");
             HasMany(pageSettings => pageSettings.ColumnWidths).KeyColumn("PageLayoutId")
-                .Table("PageLayoutColumnWidthValues")
+                .Table("PageLayoutColumnWidthValues").AsSet()
                 .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
                 .Inverse()
                 .LazyLoad()

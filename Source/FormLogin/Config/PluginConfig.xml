@@ -1,14 +1,23 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <PluginSetting xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-    <Identifier>Core.FormLogin</Identifier>
-    <Title>Form login</Title>
-    <ResourcesDirectory>Resources</ResourcesDirectory>
-    <Description>Allow user sign-in using login form.</Description>
-    <WidgetSettings>
-        <WidgetSetting>
-            <Key>Core.FormLogin.Widgets.LoginWidget</Key>
-            <Identifier>Core.FormLogin.Widgets.LoginWidget</Identifier>
-            <Title>Login</Title>
-        </WidgetSetting>
-    </WidgetSettings>
+  <Identifier>Core.FormLogin</Identifier>
+  <Title>Form login</Title>
+  <ResourcesDirectory>Resources</ResourcesDirectory>
+  <Description>
+    Allow user sign-in using login form.
+  </Description>
+  <CssJsConfigPath>
+    Config\asset_packages.yml
+  </CssJsConfigPath>
+  <CssPath>Content\Css\</CssPath>
+  <ImagesPath>Content\</ImagesPath>
+  <CssPack>base</CssPack>
+  <WidgetSettings>
+    <WidgetSetting>
+      <Key>Core.FormLogin.Widgets.LoginWidget</Key>
+      <Identifier>Core.FormLogin.Widgets.LoginWidget</Identifier>
+      <Title>Login</Title>
+    </WidgetSetting>
+  </WidgetSettings>
 </PluginSetting>

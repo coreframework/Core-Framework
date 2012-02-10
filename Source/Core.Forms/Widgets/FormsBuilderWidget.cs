@@ -2,7 +2,6 @@
 using System.ComponentModel.Composition;
 using Core.Forms.Helpers;
 using Core.Forms.Permissions.Operations;
-using Core.Forms.Verbs;
 using Core.Forms.Verbs.Widgets;
 using Core.Framework.Permissions.Helpers;
 using Core.Framework.Permissions.Models;
@@ -17,18 +16,13 @@ namespace Core.Forms.Widgets
     {
         #region Singleton
 
-        private static FormsBuilderWidget instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<FormsBuilderWidget> instance = new Lazy<FormsBuilderWidget>(() => new FormsBuilderWidget());
 
         public static FormsBuilderWidget Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new FormsBuilderWidget());
-                }
+                return instance.Value;
             }
         }
 

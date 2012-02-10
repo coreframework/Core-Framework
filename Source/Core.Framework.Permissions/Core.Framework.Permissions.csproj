@@ -77,6 +77,7 @@
     <Compile Include="Contracts\IPageCommonService.cs" />
     <Compile Include="Contracts\IPermissionCommonService.cs" />
     <Compile Include="Contracts\IPermissionsHelper.cs" />
+    <Compile Include="Contracts\ISignOutCommand.cs" />
     <Compile Include="Extensions\AuthenticationExtensions.cs" />
     <Compile Include="Helpers\OperationDescriptionAttribute.cs" />
     <Compile Include="Helpers\OperationsHelper.cs" />
@@ -90,12 +91,14 @@
     <Compile Include="Models\IPermissable.cs" />
     <Compile Include="Models\IPermissionModel.cs" />
     <Compile Include="Models\IPermissionOperation.cs" />
+    <Compile Include="Models\IPluginPermissable.cs" />
     <Compile Include="Models\IRole.cs" />
     <Compile Include="Models\PasswordMode.cs" />
     <Compile Include="Models\PermissionArea.cs" />
     <Compile Include="Models\PermissionOperationLevel.cs" />
     <Compile Include="Models\PermissionOperation.cs" />
     <Compile Include="Models\PermissionsModel.cs" />
+    <Compile Include="Models\PluginPermissionLevel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

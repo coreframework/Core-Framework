@@ -69,7 +69,7 @@ namespace Core.Web.Tests.Services
         [TearDown]
         public void Clean()
         {
-            Container.Resolve<TService>().DeleteAll();
+//            Container.Resolve<TService>().DeleteAll();
         }
 
         #endregion
@@ -82,6 +82,7 @@ namespace Core.Web.Tests.Services
             container.Install(new CoreInstaller());
             container.Install(new NHibernateInstaller());
             container.Install(new CoreWebNHibernateModule());
+            container.Install(new CoreWebInstaller());
         }
 
         private void ConfigureApplication()

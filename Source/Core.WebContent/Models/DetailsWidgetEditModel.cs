@@ -1,5 +1,4 @@
-﻿using Core.WebContent.NHibernate.Mappings;
-using Core.WebContent.NHibernate.Models;
+﻿using Core.WebContent.NHibernate.Models;
 using Framework.Core.DomainModel;
 
 namespace Core.WebContent.Models

@@ -7,19 +7,18 @@ namespace Core.Forms.Verbs.Widgets
     {
         #region Singleton
 
-        private static FormsBuilderWidgetEditorVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<FormsBuilderWidgetEditorVerb> instance = new Lazy<FormsBuilderWidgetEditorVerb>(() => new FormsBuilderWidgetEditorVerb());
 
         public static FormsBuilderWidgetEditorVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new FormsBuilderWidgetEditorVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private FormsBuilderWidgetEditorVerb()
+        {
         }
 
         #endregion

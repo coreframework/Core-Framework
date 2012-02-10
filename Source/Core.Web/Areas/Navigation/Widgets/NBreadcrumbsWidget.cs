@@ -14,19 +14,18 @@ namespace Core.Web.Areas.Navigation.Widgets
     {
         #region Singleton
 
-        private static NBreadcrumbsWidget instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<NBreadcrumbsWidget> instance = new Lazy<NBreadcrumbsWidget>(() => new NBreadcrumbsWidget());
 
         public static NBreadcrumbsWidget Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new NBreadcrumbsWidget());
-                }
+                return instance.Value;
             }
+        }
+
+        private NBreadcrumbsWidget()
+        {
         }
 
         #endregion

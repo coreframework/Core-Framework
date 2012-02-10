@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Core.Framework.MEF.Extensions;
 using Core.Framework.Permissions.Contracts;
 using Core.Framework.Permissions.Extensions;
 using Core.Framework.Permissions.Models;
@@ -15,7 +16,6 @@ using Core.Web.NHibernate.Models;
 using Core.Web.NHibernate.Permissions.Operations;
 using Framework.Core.DomainModel;
 using Microsoft.Practices.ServiceLocation;
-using Core.Framework.MEF.Extensions;
 
 namespace Core.Web.Models
 {
@@ -253,9 +253,24 @@ namespace Core.Web.Models
                 }
                 Widgets.Add(widgetModel);
 
-                if (coreWidget != null && coreWidget.Plugin != null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                if (coreWidget != null && coreWidget.Plugin != null)
                 {
-                    PagePlugins.Add(coreWidget.Plugin);
+                    if (!PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                    {
+                        PagePlugins.Add(coreWidget.Plugin);
+                    }
+                    if(coreWidget is BaseWorkflowWidget)
+                    {
+                        var workflowWidget = (BaseWorkflowWidget)coreWidget;
+                        foreach(var innerPlugin in workflowWidget.InnerPlugins)
+                        {
+                            ICorePlugin plugin = innerPlugin;
+                            if(!PagePlugins.Any(t => t.Identifier == plugin.Identifier))
+                            {
+                                PagePlugins.Add(plugin);
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -315,9 +330,24 @@ namespace Core.Web.Models
                 }
                 Widgets.Add(widgetModel);
 
-                if (coreWidget != null && coreWidget.Plugin != null && !PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                if (coreWidget != null && coreWidget.Plugin != null)
                 {
-                    PagePlugins.Add(coreWidget.Plugin);
+                    if (!PagePlugins.Any(t => t.PluginLocation == coreWidget.Plugin.PluginLocation))
+                    {
+                        PagePlugins.Add(coreWidget.Plugin);
+                    }
+                    if (coreWidget is BaseWorkflowWidget)
+                    {
+                        var workflowWidget = (BaseWorkflowWidget)coreWidget;
+                        foreach (var innerPlugin in workflowWidget.InnerPlugins)
+                        {
+                            ICorePlugin plugin = innerPlugin;
+                            if (!PagePlugins.Any(t => t.Identifier == plugin.Identifier))
+                            {
+                                PagePlugins.Add(plugin);
+                            }
+                        }
+                    }
                 }
             }
         }

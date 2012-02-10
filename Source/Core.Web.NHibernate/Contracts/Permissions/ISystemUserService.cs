@@ -1,6 +1,5 @@
 ﻿using System;
 using Core.Framework.Permissions.Models;
-using Core.Web.NHibernate.Models.Permissions;
 
 namespace Core.Web.NHibernate.Contracts.Permissions
 {

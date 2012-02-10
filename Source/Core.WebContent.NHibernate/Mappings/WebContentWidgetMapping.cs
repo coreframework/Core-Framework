@@ -17,7 +17,7 @@ namespace Core.WebContent.NHibernate.Mappings
             References(widget => widget.Article);
             References(widget => widget.Section);
             HasMany(widget => widget.Categories).KeyColumn("WebContentWidgetId")
-            .Table("WebContent_WebContentWidgetCategories")
+            .Table("WebContent_WebContentWidgetCategories").AsSet()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

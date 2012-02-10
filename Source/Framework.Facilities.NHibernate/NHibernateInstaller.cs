@@ -4,8 +4,10 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using Castle.MicroKernel;
+using Castle.Facilities.AutoTx;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.SubSystems.Configuration;
+using Castle.Services.Transaction;
 using Castle.Windsor;
 using FluentNHibernate.Conventions;
 using Framework.Core;
@@ -29,6 +31,8 @@ namespace Framework.Facilities.NHibernate
         {
             container.Register(AllTypes.FromAssemblyContaining<NHibernateInstaller>().BasedOn(typeof(IConvention)));
             container.Register(Component.For<IBootstrapperTask>().ImplementedBy<ConfigureNHibernateFacility>());
+            container.AddFacility<TransactionFacility>();
+            container.Register(Component.For<ITransactionManager>().ImplementedBy<DefaultTransactionManager>());
         }
 
         #endregion

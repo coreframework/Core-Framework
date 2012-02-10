@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using Core.Framework.NHibernate.Contracts;
 using Core.Framework.NHibernate.Models;
-using Core.Framework.Permissions.Models;
 using Core.Framework.Plugins.Web;
 using Core.Profiles.Models;
 using Core.Profiles.NHibernate.Contracts;

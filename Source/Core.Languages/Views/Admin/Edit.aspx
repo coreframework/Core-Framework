@@ -1,5 +1,4 @@
 ﻿<%@ Assembly Name="Core.Languages" %>
-<%@ Import Namespace="Core.Languages.Models" %>
 <%@ Page Title="" Language="C#" MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<LanguageViewModel>" %>
 
 <asp:Content runat="server" ID="Content" ContentPlaceHolderID="TitleContent"><%: String.Format(Html.Translate(".Title"), Model) %></asp:Content>

@@ -7,19 +7,18 @@ namespace Core.WebContent.Verbs.Widgets
     {
         #region Singleton
 
-        private static WebContentWidgetSaveSettingsVerb instance;
-
-        private static readonly Object syncRoot = new Object();
+        private static readonly Lazy<WebContentWidgetSaveSettingsVerb> instance = new Lazy<WebContentWidgetSaveSettingsVerb>(() => new WebContentWidgetSaveSettingsVerb());
 
         public static WebContentWidgetSaveSettingsVerb Instance
         {
             get
             {
-                lock (syncRoot)
-                {
-                    return instance ?? (instance = new WebContentWidgetSaveSettingsVerb());
-                }
+                return instance.Value;
             }
+        }
+
+        private WebContentWidgetSaveSettingsVerb()
+        {
         }
 
         #endregion

@@ -2,7 +2,6 @@
 <%@ Assembly Name="Core.Forms.NHibernate" %>
 <%@ Assembly Name="Core.Framework.Permissions" %>
 <%@ Page Title="" Language="C#"  MasterPageFile="~/Areas/Admin/Views/Shared/Admin.Master" Inherits="System.Web.Mvc.ViewPage<Core.Framework.Permissions.Models.PermissionsModel>" %>
-<%@ Import Namespace="System.Web.Mvc.Ajax" %>
 <asp:Content ID="Content4" ContentPlaceHolderID="PageTitleContent" runat="server">
     <h1> <%:Html.Translate(".FormPermissions") %></h1>
  <%Html.RenderAction(FormsMVC.Forms.FormTabs(Model.EntityId, false, false, true));%>

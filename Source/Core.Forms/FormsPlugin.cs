@@ -25,18 +25,13 @@ namespace Core.Forms
         
         #region Singleton
 
-        private static FormsPlugin instance;
-
-        private static readonly Object SyncRoot = new Object();
+        private static readonly Lazy<FormsPlugin> instance = new Lazy<FormsPlugin>(() => new FormsPlugin());
 
         public static FormsPlugin Instance
         {
             get
             {
-                lock (SyncRoot)
-                {
-                    return instance ?? (instance = new FormsPlugin());
-                }
+                return instance.Value;
             }
         }
 

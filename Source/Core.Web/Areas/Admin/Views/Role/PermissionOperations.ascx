@@ -3,10 +3,11 @@
 <% using (Html.BeginForm("ApplyPermissions", "Role"))
    { %>
         <div class="e_table_area">
+        <h2 style="margin-top:16px"><%=Model.Title %></h2>
         <table class="e_table">
             <tbody>
                 <tr>
-                    <th class="chbx" style="text-align: center; width: 60px;"><%: Html.CheckBox("checkAll")%></th>
+                    <th class="chbx" style="text-align: center; width: 60px;"><%: Html.CheckBox(".checkAll")%></th>
                     <th class="row"><span></span><%: Html.Translate(".Operation") %></th>
                 </tr>
             <%foreach (var operation in Model.Operations) {%>

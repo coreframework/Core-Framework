@@ -21,7 +21,7 @@ namespace Core.Web.NHibernate.Mappings
             Map(widget => widget.IsPlaceHolder);
 
             HasMany(widget => widget.CurrentLocales).KeyColumn("WidgetId")
-            .Table("WidgetLocales").ApplyFilter<CultureFilter>()
+            .Table("WidgetLocales").AsSet().ApplyFilter<CultureFilter>()
             .Access.ReadOnlyPropertyThroughCamelCaseField(Prefix.None)
             .Inverse()
             .LazyLoad()

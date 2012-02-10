@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.WebContent.NHibernate.Static;
 using FluentNHibernate.Data;
+using Iesi.Collections.Generic;
 
 namespace Core.WebContent.NHibernate.Models
 {
@@ -9,7 +10,7 @@ namespace Core.WebContent.NHibernate.Models
     {
         #region Fields
 
-        private readonly IList<WebContentWidgetCategory> categories;
+        private readonly Iesi.Collections.Generic.ISet<WebContentWidgetCategory> categories;
 
         #endregion
 
@@ -17,7 +18,7 @@ namespace Core.WebContent.NHibernate.Models
 
         public WebContentWidget()
         {
-            categories = new List<WebContentWidgetCategory>();
+            categories = new HashedSet<WebContentWidgetCategory>();
         }
 
         #endregion

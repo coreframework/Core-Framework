@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Castle.Facilities.NHibernateIntegration;
-using Core.Framework.Plugins.Plugins;
-using Core.Framework.Plugins.Web;
 using Core.Web.NHibernate.Contracts;
 using Core.Web.NHibernate.Models;
 using Framework.Facilities.NHibernate;
@@ -16,8 +14,9 @@ namespace Core.Web.NHibernate.Services
     {
         #region Constructors
 
-        public NHibernatePluginService(ISessionManager sessionManager) : base(sessionManager)
-        {}
+        public NHibernatePluginService(ISessionManager sessionManager)
+            : base(sessionManager)
+        { }
 
         #endregion
 
@@ -39,11 +38,6 @@ namespace Core.Web.NHibernate.Services
         public IEnumerable<Plugin> FindPluginsByIds(List<long> pluginIds)
         {
             return CreateQuery().Select(t => t).Where(t => pluginIds.Contains(t.Id)).ToList();
-        }
-
-        public int GetCount(IQueryable<Plugin> baseQuery)
-        {
-            return baseQuery.Count();
         }
 
         public ICriteria GetSearchCriteria(String searchString)
