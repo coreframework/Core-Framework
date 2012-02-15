@@ -4,12 +4,8 @@
   <Identifier>Core.WebContent</Identifier>
   <Title>Web Content</Title>
   <ResourcesDirectory>Resources</ResourcesDirectory>
-  <Description>
-    Allow managing web content.
-  </Description>
-  <CssJsConfigPath>
-    Config\asset_packages.yml
-  </CssJsConfigPath>
+  <Description>Allow managing web content.</Description>
+  <CssJsConfigPath>Config\asset_packages.yml</CssJsConfigPath>
   <CssPath>Content\Css\</CssPath>
   <ImagesPath>Content\</ImagesPath>
   <CssPack>base</CssPack>

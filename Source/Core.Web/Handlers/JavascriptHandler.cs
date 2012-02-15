@@ -47,7 +47,7 @@ namespace Core.Web.Handlers
 
                 if (activePage != null)
                 {
-                    if (activePage.Widgets.Where(widget=>widget.Widget.Plugin.Identifier==plugin).Count()==1)
+                    if (activePage.Widgets.Where(widget=>widget.Widget != null && widget.Widget.Plugin != null && widget.Widget.Plugin.Identifier==plugin).Count()==1)
                     {
                         ICorePlugin currentPlugin = Application.Plugins.FirstOrDefault(t => t.Identifier == plugin);
 

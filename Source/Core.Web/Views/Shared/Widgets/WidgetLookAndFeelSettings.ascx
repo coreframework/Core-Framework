@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<WidgetLookAndFeelModel>" %>
+﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<Core.Web.Models.WidgetLookAndFeelModel>" %>
 <div>
     <% Html.RenderPartial(MVC.Shared.Views.Widgets.WidgetLookAndFeelForm, Model); %>
 </div>
